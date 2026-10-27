@@ -28,17 +28,17 @@ using System.Collections.Generic;
 namespace InterviewPreperationGuide.Core.LeetCode.problem18 {
     public class Solution {
         public void Init () {
-            Console.WriteLine (FourSum (null, 0));
-            Console.WriteLine (FourSum (new int[] { 1, 0, -1 }, 0));
-            Console.WriteLine (FourSum (new int[] { 1, 0, -1, 0, -2, 2 }, 0));
+            Console.WriteLine (FourSum(null, 0));
+            Console.WriteLine (FourSum([1, 0, -1], 0));
+            Console.WriteLine (FourSum([1, 0, -1, 0, -2, 2], 0));
         }
 
-        public IList<IList<int>> FourSum (int[] nums, int target) {
-            IList<IList<int>> result = new List<IList<int>> ();
+        public static IList<IList<int>> FourSum (int[] nums, int target) {
+            IList<IList<int>> result = [];
 
             if (nums != null && nums.Length >= 4) {
                 Array.Sort (nums);
-                Dictionary<string, List<int>> dict = new Dictionary<string, List<int>> ();
+                Dictionary<string, List<int>> dict = [];
 
                 for (int i = 0; i < nums.Length - 3; i++) {
                     for (int j = i + 1; j < nums.Length - 2; j++) {
@@ -55,14 +55,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem18 {
                             } else {
                                 string key = string.Concat (nums[i], ",", nums[j], ",", nums[k], ",", nums[l]);
 
-                                List<int> val = new List<int> ();
-                                val.Add (nums[i]);
-                                val.Add (nums[j]);
-                                val.Add (nums[k]);
-                                val.Add (nums[l]);
+                                List<int> val = [nums[i], nums[j], nums[k], nums[l]];
 
-                                if (!dict.ContainsKey (key)) {
-                                    dict.Add (key, val);
+                                if (dict.TryAdd(key, val)) {
                                     result.Add (val);
                                 }
 
