@@ -38,36 +38,46 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace InterviewPreperationGuide.Core.LeetCode.problem1239 {
-    public class Solution {
-        public void Init () {
-
+namespace InterviewPreperationGuide.Core.LeetCode.problem1239
+{
+    public class Solution
+    {
+        public void Init()
+        {
+            Console.WriteLine(MaxLength(["un", "iq", "ue"]));
+            Console.WriteLine(MaxLength(["cha", "r", "act", "ers"]));
+            Console.WriteLine(MaxLength(["abcdefghijklmnopqrstuvwxyz"]));
         }
 
-        // Time: O (n^2)
-        // Space: O (n^2)
-        public int MaxLength (IList<string> arr) {
+        // Time: O (2^n)
+        // Space: O (2^n)
+        public static int MaxLength(IList<string> arr)
+        {
             var result = 0;
-            dfs (arr, ref result, 0, "");
+            Dfs(arr, ref result, 0, "");
             return result;
         }
 
-        private static void dfs (IList<string> array, ref int maxLength, int index, string path) {
-            if (!isUnique (path)) {
+        private static void Dfs(IList<string> array, ref int maxLength, int index, string path)
+        {
+            if (!IsUnique(path))
+            {
                 return;
             }
 
             var current = path.Length;
             maxLength = current > maxLength ? current : maxLength;
 
-            for (int i = index; i < array.Count; i++) {
-                dfs (array, ref maxLength, i + 1, path + array[i]);
+            for (int i = index; i < array.Count; i++)
+            {
+                Dfs(array, ref maxLength, i + 1, path + array[i]);
             }
         }
 
-        private static bool isUnique (string path) {
-            var hashSet = new HashSet<char> (path);
-            return path.Length == hashSet.Count ();
+        private static bool IsUnique(string path)
+        {
+            var hashSet = new HashSet<char>(path);
+            return path.Length == hashSet.Count;
         }
     }
 }

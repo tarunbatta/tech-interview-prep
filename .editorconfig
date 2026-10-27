@@ -1,0 +1,6 @@
+root = true
+
+[*.cs]
+# IDE0130: Namespace does not match folder structure
+# Disabled because problem files are kept flat in folders with custom per-problem namespaces to prevent class collisions
+dotnet_diagnostic.IDE0130.severity = none

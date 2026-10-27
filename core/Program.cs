@@ -1,4 +1,18 @@
-﻿using System;
+﻿/*
+You can now run it from either location:
+
+From repository root:
+
+bash
+dotnet run --project core
+From the core directory:
+
+bash
+cd core
+dotnet run
+*/
+
+using System;
 using InterviewPreperationGuide.Core;
 
 namespace InterviewPreperationGuide.Core {
@@ -7,7 +21,7 @@ namespace InterviewPreperationGuide.Core {
             //Algorithms.Search.Dijkstra.Init ();
             //Algorithms.Others.LongestCommonSubstring.Init();
 
-            var lc = new LeetCode.problem482.Solution ();
+            var lc = new LeetCode.problem2384.Solution ();
             lc.Init ();
         }
     }
