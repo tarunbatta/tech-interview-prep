@@ -1,5 +1,9 @@
 {
+  "config": {
+    "MD013": false
+  },
   "ignores": [
-    "LICENSE"
+    "LICENSE",
+    "src/java/ctci/**"
   ]
 }

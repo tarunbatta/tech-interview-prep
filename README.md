@@ -1,5 +1,54 @@
 # Interview Preperation Guide
 
+A multi-language monorepo containing comprehensive interview preparation resources, data structures, algorithms, problem solutions (LeetCode, Cracking the Coding Interview, HackerRank), and mini-applications.
+
+## Monorepo Structure
+
+* **`apps/`**: Standalone executable applications
+  * `chess-game/`: Interactive console Chess game (.NET 10)
+  * `expression-tree/`: Expression tree evaluator (.NET 10)
+* **`src/`**: Core libraries and problem solutions organized by ecosystem
+  * `dotnet/`
+    * `core/`: Core algorithms, data structures, LeetCode, and C# CTCI solutions (.NET 10)
+    * `practice/`: Practice questions (1–54) and Question of the Day (QOTD) problems (.NET 10)
+  * `javascript/`: JavaScript problem solutions (QOTD scripts)
+  * `java/`: Cracking the Coding Interview (6th edition) Java solutions and notes
+* **`docs/`**: Curated interview preparation notes and tracking
+  * `docs/interview-questions.md`: Real interview questions by company
+  * `docs/top100-leetcode.md`: Curated top 100 LeetCode list
+  * `docs/todo.md`: Study roadmap and problem tracker
+* **`shared/assets/`**: Shared dictionary files (`words.txt`, `words_scowl.txt`)
+
+## Running & Building
+
+### .NET Projects (.NET 10)
+
+```bash
+# Build .NET projects
+dotnet build src/dotnet/core
+dotnet build src/dotnet/practice
+dotnet build apps/chess-game
+dotnet build apps/expression-tree
+
+# Run Core entry point
+dotnet run --project src/dotnet/core
+
+# Run Chess Game
+dotnet run --project apps/chess-game
+
+# Run Expression Tree
+dotnet run --project apps/expression-tree
+```
+
+### JavaScript
+
+```bash
+cd src/javascript
+node qotd/SuperArray.js
+```
+
+---
+
 ## Snippet for Algo
 
 ```json

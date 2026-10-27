@@ -215,5 +215,13 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-#Custom
-core/obj/project.assets.json
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# General build artifacts
+**/bin/
+**/obj/
+

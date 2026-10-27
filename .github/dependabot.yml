@@ -9,8 +9,6 @@ updates:
       time: "09:00"
       timezone: "UTC"
     open-pull-requests-limit: 10
-    reviewers:
-      - "tarunbatta"
     assignees:
       - "tarunbatta"
     commit-message:
@@ -20,3 +18,22 @@ updates:
     labels:
       - "dependencies"
       - "dotnet"
+
+  # Enable version updates for JavaScript
+  - package-ecosystem: "npm"
+    directory: "/src/javascript"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    assignees:
+      - "tarunbatta"
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "javascript"

@@ -1,24 +1,44 @@
 {
-    // Use IntelliSense to find out which attributes exist for C# debugging
-    // Use hover for the description of the existing attributes
-    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
     "version": "0.2.0",
-    "configurations": [{
-            "name": ".NET Core Launch (console)",
+    "configurations": [
+        {
+            "name": ".NET Launch: Core",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/core/bin/Debug/netcoreapp2.0/core.dll",
+            "program": "${workspaceFolder}/src/dotnet/core/bin/Debug/net10.0/core.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/core",
-            // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
+            "cwd": "${workspaceFolder}/src/dotnet/core",
             "console": "internalConsole",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
-            "name": ".NET Core Attach",
+            "name": ".NET Launch: Chess Game",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-chess",
+            "program": "${workspaceFolder}/apps/chess-game/bin/Debug/net10.0/ChessGame.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/apps/chess-game",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": ".NET Launch: Expression Tree",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-expression-tree",
+            "program": "${workspaceFolder}/apps/expression-tree/bin/Debug/net10.0/ExpressionTree.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/apps/expression-tree",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": ".NET Attach",
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:pickProcess}"

@@ -1,0 +1,17 @@
+{
+  "name": "ipg-javascript",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interview Preparation Guide JavaScript Solutions",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"No tests specified yet\" && exit 0"
+  },
+  "keywords": [
+    "interview-preparation",
+    "algorithms",
+    "javascript"
+  ],
+  "author": "Tarun Batta",
+  "license": "MIT"
+}
