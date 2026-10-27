@@ -1,7 +1,8 @@
 # Tech Interview Preparation Guide
 
-A comprehensive, multi-language interview preparation monorepo covering **Data Structures & Algorithms**, **System Design & Distributed Architectures**, **Engineering Management & Leadership**, and **Interactive Applications**.
+A comprehensive, multi-language interview preparation monorepo covering **Data Structures & Algorithms**, **System Design & Distributed Architectures**, **Engineering Management & Leadership**, and **Interactive Applications** — by [Tarun Batta](https://battatech.com) ([battatech.com](https://battatech.com)).
 
+[![Website: battatech.com](https://img.shields.io/badge/Website-battatech.com-blue.svg)](https://battatech.com)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 [![.NET](https://img.shields.io/badge/.NET-10.0-purple.svg)](https://dotnet.microsoft.com/)
 [![Java](https://img.shields.io/badge/Java-CTCI%206th-orange.svg)](src/java/)
