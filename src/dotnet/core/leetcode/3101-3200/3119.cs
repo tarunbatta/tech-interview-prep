@@ -57,41 +57,42 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem3119
                 return 0;
             }
 
-            List<int> segments = [];
-            int currentLength = 0;
 
-            foreach (char c in road)
+            Dictionary<int, int> segments = new();
+            int currentSegmentLength = 0;
+            foreach (var c in road)
             {
                 if (c == 'x')
                 {
-                    currentLength++;
+                    currentSegmentLength++;
                 }
-                else if (currentLength > 0)
+                else if (currentSegmentLength > 0)
                 {
-                    segments.Add(currentLength);
-                    currentLength = 0;
+                    segments[currentSegmentLength] = segments.GetValueOrDefault(currentSegmentLength, 0) + 1;
+                    currentSegmentLength = 0;
                 }
             }
 
-            if (currentLength > 0)
+            if (currentSegmentLength > 0)
             {
-                segments.Add(currentLength);
+                segments[currentSegmentLength] = segments.GetValueOrDefault(currentSegmentLength, 0) + 1;
             }
-
-            segments.Sort((a, b) => b.CompareTo(a));
 
             int totalFixed = 0;
 
-            foreach (int len in segments)
+            foreach (var (len, count) in segments.OrderByDescending(x => x.Key))
             {
-                if (budget <= 1)
+                for (int i = 0; i < count; i++)
                 {
-                    break;
-                }
+                    if (budget <= 1)
+                    {
+                        return totalFixed;
+                    }
 
-                int canFix = Math.Min(len, budget - 1);
-                totalFixed += canFix;
-                budget -= canFix + 1;
+                    int canFix = Math.Min(len, budget - 1);
+                    totalFixed += canFix;
+                    budget -= canFix + 1;
+                }
             }
 
             return totalFixed;
