@@ -48,17 +48,60 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 */
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace InterviewPreperationGuide.Core.LeetCode.problem12 {
-    public class Solution {
-        public void Init () {
-            Console.WriteLine ();
+namespace InterviewPreperationGuide.Core.LeetCode.problem12
+{
+    public class Solution
+    {
+        public static void Init()
+        {
+            Console.WriteLine(IntToRoman(0));
+            Console.WriteLine(IntToRoman(3));
+            Console.WriteLine(IntToRoman(4));
+            Console.WriteLine(IntToRoman(9));
+            Console.WriteLine(IntToRoman(58));
+            Console.WriteLine(IntToRoman(1994));
         }
 
-        // Time: O ()
-        // Space: O ()
-        public string IntToRoman (int num) {
-            return null;
+        // Time: O (n)
+        // Space: O (n)
+        public static string IntToRoman(int num)
+        {
+            if (num <= 0)
+            {
+                return string.Empty;
+            }
+
+            var map = new Dictionary<int, string>() {
+                {1, "I"},
+                { 4, "IV"},
+                { 5, "V"},
+                { 9, "IX"},
+                { 10, "X"},
+                { 40, "XL"},
+                { 50, "L"},
+                { 90, "XC"},
+                { 100, "C"},
+                { 400, "CD"},
+                { 500, "D"},
+                { 900, "CM"},
+                { 1000, "M"}
+        };
+
+            var sb = new StringBuilder();
+
+            foreach (var (value, roman) in map)
+            {
+                while (num >= value)
+                {
+                    sb.Append(roman);
+                    num -= value;
+                }
+            }
+
+            return sb.ToString();
         }
     }
 }

@@ -1,19 +1,128 @@
-// Url:https://leetcode.com/problems/number-of-islands-ii
+// Url: https://leetcode.com/problems/number-of-islands-ii
 
 /*
 305. Number of Islands II
 Hard
 
-// {{ MISSING QUESTION }}
+You are given an empty 2D binary grid of size m x n. The grid represents a map where 0's represent water and 1's represent land. Initially, all the cells of the grid are water cells (i.e., all the cells are 0's).
+
+We may perform an add land operation which turns the water at position into a land. You are given an array positions where positions[i] = [ri, ci] is the position at which we should operate on the ith operation.
+
+Return an array of integers answer where answer[i] is the number of islands after turning the cell (ri, ci) into a land.
+
+An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+Example 1:
+Input: m = 3, n = 3, positions = [[0,0],[0,1],[1,2],[2,1]]
+Output: [1,1,2,3]
+Explanation:
+Initially, the 2d grid is filled with water.
+- Operation #1: addLand(0, 0) turns the water at grid[0][0] into a land. We have 1 island.
+- Operation #2: addLand(0, 1) turns the water at grid[0][1] into a land. We still have 1 island.
+- Operation #3: addLand(1, 2) turns the water at grid[1][2] into a land. We have 2 islands.
+- Operation #4: addLand(2, 1) turns the water at grid[2][1] into a land. We have 3 islands.
+
+Example 2:
+Input: m = 1, n = 1, positions = [[0,0]]
+Output: [1]
+
+Constraints:
+1 <= m, n, positions.length <= 10^4
+1 <= m * n <= 10^4
+positions[i].length == 2
+0 <= ri < m
+0 <= ci < n
+
+Follow up: Could you solve it in time complexity O(k log(mn)), where k == positions.length?
 */
 
 using System;
+using System.Collections.Generic;
 
-namespace InterviewPreperationGuide.Core.LeetCode.problem305 {
-    public class Solution {
-        public void Init () {
+namespace InterviewPreperationGuide.Core.LeetCode.problem305
+{
+    public class Solution
+    {
+        public void Init()
+        {
+            int[][] positions = new int[][]
+            {
+                new int[] { 0, 0 },
+                new int[] { 0, 1 },
+                new int[] { 1, 2 },
+                new int[] { 2, 1 }
+            };
 
+            var res = NumIslands2(3, 3, positions);
+            Console.WriteLine(string.Join(", ", res)); // 1, 1, 2, 3
         }
 
+        // Time: O(k * α(m * n)) where k is positions.Length
+        // Space: O(m * n) for the Disjoint Set Union array
+        public static IList<int> NumIslands2(int m, int n, int[][] positions)
+        {
+            List<int> result = new();
+
+            if (m <= 0 || n <= 0 || positions == null || positions.Length == 0)
+            {
+                return result;
+            }
+
+            int[] parent = new int[m * n];
+            Array.Fill(parent, -1);
+
+            int count = 0;
+            int[] dr = { -1, 1, 0, 0 };
+            int[] dc = { 0, 0, -1, 1 };
+
+            foreach (var pos in positions)
+            {
+                int r = pos[0];
+                int c = pos[1];
+                int idx = r * n + c;
+
+                if (parent[idx] != -1)
+                {
+                    result.Add(count);
+                    continue;
+                }
+
+                parent[idx] = idx;
+                count++;
+
+                for (int d = 0; d < 4; d++)
+                {
+                    int nr = r + dr[d];
+                    int nc = c + dc[d];
+                    int nIdx = nr * n + nc;
+
+                    if (nr >= 0 && nr < m && nc >= 0 && nc < n && parent[nIdx] != -1)
+                    {
+                        int rootCurrent = Find(parent, idx);
+                        int rootNeighbor = Find(parent, nIdx);
+
+                        if (rootCurrent != rootNeighbor)
+                        {
+                            parent[rootCurrent] = rootNeighbor;
+                            count--;
+                        }
+                    }
+                }
+
+                result.Add(count);
+            }
+
+            return result;
+        }
+
+        private static int Find(int[] parent, int i)
+        {
+            if (parent[i] != i)
+            {
+                parent[i] = Find(parent, parent[i]);
+            }
+
+            return parent[i];
+        }
     }
 }
