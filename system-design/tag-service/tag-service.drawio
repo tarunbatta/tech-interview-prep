@@ -1,0 +1,61 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
+  <diagram id="AsHtNMLsNTLCxXA9mggR" name="TagService">
+    <mxGraphModel dx="1185" dy="613" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_vKGNIz2_UrnPt1C7EBL-3" target="_vKGNIz2_UrnPt1C7EBL-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-3" value="Client" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="23" y="170" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_vKGNIz2_UrnPt1C7EBL-6" target="_vKGNIz2_UrnPt1C7EBL-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_vKGNIz2_UrnPt1C7EBL-6" target="_vKGNIz2_UrnPt1C7EBL-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-6" value="Load Balancer" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="173" y="170" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-7" value="Create Tag Service" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="353" y="170" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-8" value="Search Tag Service" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="233" y="420" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="_vKGNIz2_UrnPt1C7EBL-10" target="_vKGNIz2_UrnPt1C7EBL-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-10" value="Message Queue" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="583" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.025;entryY=0.617;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="_vKGNIz2_UrnPt1C7EBL-7" target="_vKGNIz2_UrnPt1C7EBL-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-12" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="458" y="280" width="370" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-13" value="DB Read" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="483" y="410" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-14" value="DB Read" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="573" y="410" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-15" value="DB Read" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="663" y="410" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-16" value="DB Read" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="753" y="410" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-17" value="DS Write" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="613" y="290" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_vKGNIz2_UrnPt1C7EBL-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=52.5;entryPerimeter=0;" edge="1" parent="1" source="_vKGNIz2_UrnPt1C7EBL-8" target="_vKGNIz2_UrnPt1C7EBL-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

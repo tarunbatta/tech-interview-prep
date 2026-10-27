@@ -1,0 +1,44 @@
+{
+  "name": "tech-interview-prep",
+  "version": "1.0.0",
+  "description": "Tech & Engineering Management Interview Preparation Guide — Data Structures, Algorithms, System Design, and Leadership",
+  "scripts": {
+    "build": "npm run build:dotnet",
+    "build:dotnet": "dotnet build src/dotnet/core && dotnet build src/dotnet/practice && dotnet build apps/chess-game && dotnet build apps/expression-tree",
+    "build:core": "dotnet build src/dotnet/core",
+    "build:practice": "dotnet build src/dotnet/practice",
+    "build:chess": "dotnet build apps/chess-game",
+    "build:expression-tree": "dotnet build apps/expression-tree",
+    "start:chess": "dotnet run --project apps/chess-game",
+    "start:expression-tree": "dotnet run --project apps/expression-tree",
+    "start:dotnet-core": "dotnet run --project src/dotnet/core",
+    "start:practice": "dotnet run --project src/dotnet/practice",
+    "start:js": "node src/javascript/qotd/SuperArray.js",
+    "convert-diagrams": "./scripts/convert-diagrams.sh",
+    "create-system-design": "./scripts/create-system-design.sh",
+    "lint:md": "npx markdownlint-cli2 '**/*.md'",
+    "lint:md:fix": "npx markdownlint-cli2 --fix '**/*.md'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tarunbatta/tech-interview-prep.git"
+  },
+  "keywords": [
+    "interview-preparation",
+    "algorithms",
+    "data-structures",
+    "system-design",
+    "engineering-management",
+    "behavioral-interview",
+    "dotnet",
+    "csharp",
+    "java",
+    "javascript"
+  ],
+  "author": "Tarun Batta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tarunbatta/tech-interview-prep/issues"
+  },
+  "homepage": "https://github.com/tarunbatta/tech-interview-prep#readme"
+}

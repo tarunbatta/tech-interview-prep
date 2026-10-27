@@ -1,0 +1,73 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
+  <diagram id="AsHtNMLsNTLCxXA9mggR" name="Email Archive">
+    <mxGraphModel dx="1185" dy="613" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NBRzxqssuzjyefBCx1Op-1" value="Client Apps&#xa;(Web, Mobile)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="325" y="150" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-2" value="Load Balancer" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="325" y="230" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-3" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-1" target="NBRzxqssuzjyefBCx1Op-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-4" value="API Gateway&#xa;(Auth, Rate Limit)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="325" y="310" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-5" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-2" target="NBRzxqssuzjyefBCx1Op-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-6" value="Real-time Comm.&#xa;(WebSocket Server)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="525" y="230" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-7" style="endArrow=block;dashed=1;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-4" target="NBRzxqssuzjyefBCx1Op-6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-8" value="API Servers&#xa;(Business Logic)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="325" y="390" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-9" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-4" target="NBRzxqssuzjyefBCx1Op-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-10" value="Message Queue&#xa;(e.g., Kafka)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="325" y="470" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-11" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-8" target="NBRzxqssuzjyefBCx1Op-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-12" value="Email Ingestion/MTA&#xa;(SMTP, Parse Mail)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="145" y="470" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-13" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-12" target="NBRzxqssuzjyefBCx1Op-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-14" value="Action Processor&#xa;Worker (Archives)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="145" y="570" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-15" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-14" target="NBRzxqssuzjyefBCx1Op-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-16" value="Email Processor&#xa;Worker (New Threads)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="505" y="570" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-17" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-16" target="NBRzxqssuzjyefBCx1Op-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-18" value="Database&#xa;(PostgreSQL, NoSQL)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="325" y="670" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-19" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-10" target="NBRzxqssuzjyefBCx1Op-18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-20" value="Cache&#xa;(e.g., Redis)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="325" y="750" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NBRzxqssuzjyefBCx1Op-21" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-18" target="NBRzxqssuzjyefBCx1Op-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
