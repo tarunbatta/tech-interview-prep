@@ -70,7 +70,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem139 {
         // Time: O (n^2)
         // Space: O (n)
         public static bool WordBreak_b (string s, IList<string> wordDict) {
-            List<bool?> memo = new List<bool?> (s.Length);
+            List<bool?> memo = new(s.Length);
 
             for (int i = 0; i < s.Length; i++) {
                 memo.Add (null);

@@ -41,7 +41,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1119 {
 
             HashSet<char> hash = ['a', 'e', 'i', 'o', 'u'];
 
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new();
 
             foreach (var item in S) {
                 if (!hash.Contains (item)) {

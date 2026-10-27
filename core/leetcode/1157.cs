@@ -44,7 +44,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem1157 {
     public class Solution {
         public static void Init () {
-            MajorityChecker obj = new MajorityChecker (null);
+            MajorityChecker obj = new(null);
             int param_1 = MajorityChecker.Query(0, 0, 0);
         }
     }

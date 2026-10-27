@@ -46,7 +46,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem105 {
                 return null;
             }
 
-            TreeNode root = new TreeNode (preorder[preStart]);
+            TreeNode root = new(preorder[preStart]);
             int inIndex = GetInOrderIndex(root, inStart, inEnd, inorder);
 
             root.left = Helper(preStart + 1, inStart, inIndex - 1, preorder, inorder);

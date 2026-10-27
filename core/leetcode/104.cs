@@ -28,9 +28,11 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem104 {
     public class Solution {
         public static void Init () {
-            TreeNode node = new TreeNode (2);
-            node.left = new TreeNode (3);
-            node.right = new TreeNode (4);
+            TreeNode node = new(2)
+            {
+                left = new TreeNode(3),
+                right = new TreeNode(4)
+            };
             node.left.left = new TreeNode (4);
             node.left.right = new TreeNode (5);
 

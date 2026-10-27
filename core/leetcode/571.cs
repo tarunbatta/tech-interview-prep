@@ -49,10 +49,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem571
         {
             List<NumberFreq> numbers =
             [
-                new NumberFreq { Num = 0, Frequency = 7 },
-                new NumberFreq { Num = 1, Frequency = 1 },
-                new NumberFreq { Num = 2, Frequency = 3 },
-                new NumberFreq { Num = 3, Frequency = 1 }
+                new() { Num = 0, Frequency = 7 },
+                new() { Num = 1, Frequency = 1 },
+                new() { Num = 2, Frequency = 3 },
+                new() { Num = 3, Frequency = 1 }
             ];
 
             Console.WriteLine(FindMedian(numbers)); // 0.0

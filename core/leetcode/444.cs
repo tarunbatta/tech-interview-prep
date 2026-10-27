@@ -58,9 +58,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem444
     {
         public static void Init()
         {
-            Console.WriteLine(SequenceReconstruction([1, 2, 3], new int[][] { [1, 2], [1, 3] }));                     // False
-            Console.WriteLine(SequenceReconstruction([1, 2, 3], new int[][] { [1, 2] }));                                         // False
-            Console.WriteLine(SequenceReconstruction([1, 2, 3], new int[][] { [1, 2], [1, 3], [2, 3] })); // True
+            Console.WriteLine(SequenceReconstruction([1, 2, 3], [[1, 2], [1, 3]]));                     // False
+            Console.WriteLine(SequenceReconstruction([1, 2, 3], [[1, 2]]));                             // False
+            Console.WriteLine(SequenceReconstruction([1, 2, 3], [[1, 2], [1, 3], [2, 3]]));             // True
         }
 
         // Time: O(V + E) where V is n and E is the total transitions in sequences

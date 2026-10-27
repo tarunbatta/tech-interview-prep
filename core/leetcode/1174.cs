@@ -40,16 +40,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1174
     {
         public static void Init()
         {
-            var deliveries = new List<Delivery>
-            {
-                new Delivery { DeliveryId = 1, CustomerId = 1, OrderDate = new DateTime(2019, 8, 1), CustomerPrefDeliveryDate = new DateTime(2019, 8, 2) },
-                new Delivery { DeliveryId = 2, CustomerId = 2, OrderDate = new DateTime(2019, 8, 2), CustomerPrefDeliveryDate = new DateTime(2019, 8, 2) },
-                new Delivery { DeliveryId = 3, CustomerId = 1, OrderDate = new DateTime(2019, 8, 11), CustomerPrefDeliveryDate = new DateTime(2019, 8, 12) },
-                new Delivery { DeliveryId = 4, CustomerId = 3, OrderDate = new DateTime(2019, 8, 24), CustomerPrefDeliveryDate = new DateTime(2019, 8, 24) },
-                new Delivery { DeliveryId = 5, CustomerId = 3, OrderDate = new DateTime(2019, 8, 21), CustomerPrefDeliveryDate = new DateTime(2019, 8, 22) },
-                new Delivery { DeliveryId = 6, CustomerId = 2, OrderDate = new DateTime(2019, 8, 11), CustomerPrefDeliveryDate = new DateTime(2019, 8, 13) },
-                new Delivery { DeliveryId = 7, CustomerId = 4, OrderDate = new DateTime(2019, 8, 9), CustomerPrefDeliveryDate = new DateTime(2019, 8, 9) }
-            };
+            List<Delivery> deliveries =
+            [
+                new() { DeliveryId = 1, CustomerId = 1, OrderDate = new DateTime(2019, 8, 1), CustomerPrefDeliveryDate = new DateTime(2019, 8, 2) },
+                new() { DeliveryId = 2, CustomerId = 2, OrderDate = new DateTime(2019, 8, 2), CustomerPrefDeliveryDate = new DateTime(2019, 8, 2) },
+                new() { DeliveryId = 3, CustomerId = 1, OrderDate = new DateTime(2019, 8, 11), CustomerPrefDeliveryDate = new DateTime(2019, 8, 12) },
+                new() { DeliveryId = 4, CustomerId = 3, OrderDate = new DateTime(2019, 8, 24), CustomerPrefDeliveryDate = new DateTime(2019, 8, 24) },
+                new() { DeliveryId = 5, CustomerId = 3, OrderDate = new DateTime(2019, 8, 21), CustomerPrefDeliveryDate = new DateTime(2019, 8, 22) },
+                new() { DeliveryId = 6, CustomerId = 2, OrderDate = new DateTime(2019, 8, 11), CustomerPrefDeliveryDate = new DateTime(2019, 8, 13) },
+                new() { DeliveryId = 7, CustomerId = 4, OrderDate = new DateTime(2019, 8, 9), CustomerPrefDeliveryDate = new DateTime(2019, 8, 9) }
+            ];
 
             Console.WriteLine(ImmediateFirstOrdersPercentage(deliveries)); // 50.00
         }

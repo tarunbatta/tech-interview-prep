@@ -4,3 +4,13 @@ root = true
 # IDE0130: Namespace does not match folder structure
 # Disabled because problem files are kept flat in folders with custom per-problem namespaces to prevent class collisions
 dotnet_diagnostic.IDE0130.severity = none
+
+# Prefer collection expressions and simplified initializations
+csharp_style_prefer_collection_expression = true:suggestion
+csharp_style_implicit_object_creation_when_type_is_apparent = true:suggestion
+dotnet_diagnostic.IDE0028.severity = suggestion
+dotnet_diagnostic.IDE0300.severity = suggestion
+dotnet_diagnostic.IDE0301.severity = suggestion
+dotnet_diagnostic.IDE0305.severity = suggestion
+dotnet_diagnostic.IDE0090.severity = suggestion
+dotnet_diagnostic.IDE0017.severity = suggestion

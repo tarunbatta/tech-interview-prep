@@ -37,7 +37,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem855 {
     public class Solution {
         public static void Init () {
-            ExamRoom obj = new ExamRoom (0);
+            ExamRoom obj = new(0);
             int param_1 = ExamRoom.Seat();
             ExamRoom.Leave(0);
         }

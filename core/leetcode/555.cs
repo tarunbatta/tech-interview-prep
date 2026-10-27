@@ -82,7 +82,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem555
                 string midStr = mid.ToString();
 
                 // Try cutting at each index of original and reversed
-                foreach (string candidate in new string[] { original, reversed })
+                foreach (string candidate in (string[])[original, reversed])
                 {
                     for (int k = 0; k < candidate.Length; k++)
                     {

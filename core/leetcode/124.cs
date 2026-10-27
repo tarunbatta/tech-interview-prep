@@ -37,14 +37,18 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem124 {
     public class Solution {
         public static void Init() {
-            TreeNode node = new TreeNode (10);
-            node.left = new TreeNode (2);
-            node.right = new TreeNode (10);
+            TreeNode node = new(10)
+            {
+                left = new TreeNode(2),
+                right = new TreeNode(10)
+            };
             node.left.left = new TreeNode (20);
             node.left.right = new TreeNode (1);
-            node.right.right = new TreeNode (-25);
-            node.right.right.left = new TreeNode (3);
-            node.right.right.right = new TreeNode (4);
+            node.right.right = new TreeNode(-25)
+            {
+                left = new TreeNode(3),
+                right = new TreeNode(4)
+            };
 
             Console.WriteLine (MaxPathSum (node));
         }

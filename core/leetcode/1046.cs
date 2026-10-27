@@ -48,7 +48,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1046 {
                 return 0;
             }
 
-            MaxHeap heap = new MaxHeap (stones.Length);
+            MaxHeap heap = new(stones.Length);
             for (int i = 0; i < stones.Length; i++) {
                 heap.Add (stones[i]);
             }

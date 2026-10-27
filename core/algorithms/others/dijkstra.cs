@@ -8,7 +8,7 @@ using System.Collections;
 namespace InterviewPreperationGuide.Core.Algorithms.Others.Dijkstra {
     public class ShortestPath {
         public static void Init () {
-            Graph theGraph = new Graph (7);
+            Graph theGraph = new(7);
             theGraph.AddVertex ("A");
             theGraph.AddVertex ("B");
             theGraph.AddVertex ("C");

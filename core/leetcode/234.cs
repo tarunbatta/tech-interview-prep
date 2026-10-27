@@ -26,13 +26,19 @@ using System.Collections;
 namespace InterviewPreperationGuide.Core.LeetCode.problem234 {
     public class Solution {
         public static void Init () {
-            ListNode l1 = new ListNode (1);
-            l1.next = new ListNode (2);
+            ListNode l1 = new(1)
+            {
+                next = new ListNode(2)
+            };
 
-            ListNode l2 = new ListNode (1);
-            l2.next = new ListNode (2);
-            l2.next.next = new ListNode (2);
-            l2.next.next.next = new ListNode (1);
+            ListNode l2 = new(1)
+            {
+                next = new ListNode(2)
+            };
+            l2.next.next = new ListNode(2)
+            {
+                next = new ListNode(1)
+            };
 
             Console.WriteLine (IsPalindrome (null));
             Console.WriteLine (IsPalindrome (new ListNode (0)));

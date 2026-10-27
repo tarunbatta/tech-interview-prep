@@ -30,7 +30,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem208 {
     public class Solution {
         public static void Init () {
-            Trie obj = new Trie ();
+            Trie obj = new();
             Trie.Insert("apple");
             bool param_2 = Trie.Search("apple");
             bool param_3 = Trie.StartsWith("apple");

@@ -26,7 +26,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem382 {
     public class Solution {
         public static void Init () {
-            Solution obj = new Solution (null);
+            Solution obj = new(null);
             int param_1 = GetRandom();
         }
 

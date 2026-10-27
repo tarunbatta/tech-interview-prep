@@ -76,7 +76,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem423 {
 
             res[9] = count['i' - 'a'];
 
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new();
 
             for (i = 0; i < 10; i++) {
                 for (int j = 0; j < res[i]; j++) {
@@ -134,7 +134,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem423 {
             count[3] = count[3] - count[2] - count[8];
             count[9] = count[9] - count[5] - count[6] - count[8];
 
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new();
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < count[i]; j++) {
                     sb.Append (i);

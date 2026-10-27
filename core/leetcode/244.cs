@@ -22,7 +22,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem244 {
     public class Solution {
         public static void Init () {
-            WordDistance obj = new WordDistance (["practice", "makes", "perfect", "coding", "makes"]);
+            WordDistance obj = new(["practice", "makes", "perfect", "coding", "makes"]);
             int param_1 = WordDistance.Shortest("“coding”", "“practice”");
         }
     }

@@ -68,7 +68,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem20 {
             }
 
             bool result = false;
-            Stack<char> stack = new Stack<char> ();
+            Stack<char> stack = new();
 
             for (int i = 0; i < s.Length; i++) {
                 if (stack.Count != 0 &&

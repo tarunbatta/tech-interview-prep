@@ -23,19 +23,46 @@ solution.pick(1);
 
 using System;
 
-namespace InterviewPreperationGuide.Core.LeetCode.problem398 {
-    public class Solution {
-        public static void Init () {
-            Solution obj = new Solution (null);
-            int param_1 = Pick(0);
+namespace InterviewPreperationGuide.Core.LeetCode.problem398
+{
+    public class Solution
+    {
+        private readonly int[] _nums;
+        private readonly Random _rand;
+
+        public static void Init()
+        {
+            Solution solution = new([1, 2, 3, 3, 3]);
+            Console.WriteLine(solution.Pick(3));
+            Console.WriteLine(solution.Pick(1));
         }
 
-        public Solution (int[] nums) {
-
+        public Solution(int[] nums)
+        {
+            _nums = nums;
+            _rand = new();
         }
 
-        public static int Pick (int target) {
-            return 0;
+        // Time: O(n)
+        // Space: O(1)
+        public int Pick(int target)
+        {
+            int result = -1;
+            int count = 0;
+
+            for (int i = 0; i < _nums.Length; i++)
+            {
+                if (_nums[i] == target)
+                {
+                    count++;
+                    if (_rand.Next(count) == 0)
+                    {
+                        result = i;
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }

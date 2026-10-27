@@ -37,7 +37,7 @@ using System.Collections.Generic;
 namespace InterviewPreperationGuide.Core.LeetCode.problem225 {
     public class Solution {
         public static void Init () {
-            MyStack obj = new MyStack ();
+            MyStack obj = new();
             obj.Push (1);
             int param_2 = obj.Pop ();
             int param_3 = obj.Top ();

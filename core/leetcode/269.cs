@@ -120,7 +120,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem269 {
                 }
             }
 
-            Queue<char> q = new Queue<char> ();
+            Queue<char> q = new();
 
             // put all starting node into queue, which means put all nodes that have inDegree = 0
             foreach (char c in inDegreeMap.Keys) {
@@ -129,7 +129,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem269 {
                 }
             }
 
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new();
 
             // BFS traversal to build result string
             while (q.Count != 0) {

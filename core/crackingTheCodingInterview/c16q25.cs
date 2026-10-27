@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c16q25 {
     public class Solution {
         public static void Init (string[] args) {
-            LRUCache obj = new LRUCache (5);
+            LRUCache obj = new(5);
             obj.Set (1, 1);
             Console.WriteLine (obj.Get (1));
             obj.Set (2, 2);

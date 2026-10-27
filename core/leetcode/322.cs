@@ -24,16 +24,47 @@ You may assume that you have an infinite number of each kind of coin.
 
 using System;
 
-namespace InterviewPreperationGuide.Core.LeetCode.problem322 {
-    public class Solution {
-        public static void Init () {
-            Console.WriteLine ();
+namespace InterviewPreperationGuide.Core.LeetCode.problem322
+{
+    public class Solution
+    {
+        public static void Init()
+        {
+            Console.WriteLine(CoinChange([1, 2, 5], 11)); // Expected: 3
+            Console.WriteLine(CoinChange([2], 3));        // Expected: -1
+            Console.WriteLine(CoinChange([1], 0));        // Expected: 0
         }
 
-        // Time: O ()
-        // Space: O ()
-        public static int CoinChange (int[] coins, int amount) {
-            return 0;
+        // Time: O(amount * n) where n is the number of coin denominations
+        // Space: O(amount)
+        public static int CoinChange(int[] coins, int amount)
+        {
+            if (amount < 0 || coins == null || coins.Length == 0)
+            {
+                return -1;
+            }
+
+            if (amount == 0)
+            {
+                return 0;
+            }
+
+            int[] dp = new int[amount + 1];
+            Array.Fill(dp, amount + 1);
+            dp[0] = 0;
+
+            for (int i = 1; i <= amount; i++)
+            {
+                foreach (int c in coins)
+                {
+                    if (i >= c)
+                    {
+                        dp[i] = Math.Min(dp[i], dp[i - c] + 1);
+                    }
+                }
+            }
+
+            return dp[amount] > amount ? -1 : dp[amount];
         }
     }
 }

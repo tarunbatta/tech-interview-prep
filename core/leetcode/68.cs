@@ -97,7 +97,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem68 {
                     currentWidth += end - start;
                     int additionalSpaces = (maxWidth - currentWidth) / numberOfItems;
                     int unevenSpaces = (maxWidth - currentWidth) % numberOfItems;
-                    StringBuilder line = new StringBuilder ();
+                    StringBuilder line = new();
 
                     for (int j = start; j <= end; j++) {
                         int spacesCount = additionalSpaces + (end == start ? 0 : 1);
@@ -126,7 +126,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem68 {
             }
 
             if (currentWidth > 0) {
-                StringBuilder line = new StringBuilder ();
+                StringBuilder line = new();
 
                 for (int j = start; j <= end; j++) {
                     line.Append (words[j]);

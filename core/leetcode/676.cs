@@ -36,7 +36,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem676 {
     public class Solution {
         public static void Init () {
-            MagicDictionary obj = new MagicDictionary ();
+            MagicDictionary obj = new();
             MagicDictionary.BuildDict(null);
             bool param_2 = MagicDictionary.Search(null);
         }

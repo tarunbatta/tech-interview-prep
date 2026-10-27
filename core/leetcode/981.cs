@@ -67,7 +67,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem981 {
             string key = "";
             string value = "";
             int timestamp = 0;
-            TimeMap obj = new TimeMap ();
+            TimeMap obj = new();
             TimeMap.Set(key, value, timestamp);
             string param_2 = TimeMap.Get(key, timestamp);
         }

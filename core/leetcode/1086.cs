@@ -48,10 +48,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1086 {
             return [.. items
                 .GroupBy(item => item[0])
                 .OrderBy(g => g.Key)
-                .Select(g => new int[] {
+                .Select(g => (int[])[
                     g.Key,
                     g.Select(x => x[1]).OrderByDescending(s => s).Take(5).Sum() / 5
-                })];
+                ])];
         }
     }
 }

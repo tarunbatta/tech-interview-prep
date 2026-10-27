@@ -42,7 +42,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem1146 {
     public class Solution {
         public static void Init () {
-            SnapshotArray obj = new SnapshotArray (0);
+            SnapshotArray obj = new(0);
             SnapshotArray.Set(0, 0);
             int param_2 = SnapshotArray.Snap();
             int param_3 = SnapshotArray.Get(0, 0);

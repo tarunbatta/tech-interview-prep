@@ -56,7 +56,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem482 {
                 return S;
             }
 
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new();
 
             for (int i = S.Length - 1; i >= 0; i--) {
                 if (S[i] != '-') {

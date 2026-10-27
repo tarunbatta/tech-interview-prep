@@ -75,7 +75,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem133 {
                 return visited[node];
             }
 
-            Node clone = new Node (node.val, []);
+            Node clone = new(node.val, []);
             visited.Add (node, clone);
 
             foreach (var neighbour in node.neighbors) {
@@ -90,7 +90,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem133 {
                 return node;
             }
 
-            Queue<Node> q = new Queue<Node> ();
+            Queue<Node> q = new();
             Dictionary<Node, Node> visited = [];
 
             q.Enqueue (node);

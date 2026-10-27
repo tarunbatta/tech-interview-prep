@@ -88,7 +88,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem212 {
         }
 
         public static TrieNode buildTrie (String[] words) {
-            TrieNode root = new TrieNode ();
+            TrieNode root = new();
 
             foreach (String w in words) {
                 TrieNode p = root;

@@ -62,7 +62,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem127 {
 
             int level = 0;
             int wordlen = beginWord.Length;
-            Queue<string> q = new Queue<string> ();
+            Queue<string> q = new();
             q.Enqueue (beginWord);
 
             while (q.Count > 0) {
@@ -79,7 +79,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem127 {
 
                         for (char c = 'a'; c <= 'z'; c++) {
                             wordArr[pos] = c;
-                            string newWord = new string (wordArr);
+                            string newWord = new(wordArr);
 
                             if (newWord == endWord) {
                                 return level + 1;

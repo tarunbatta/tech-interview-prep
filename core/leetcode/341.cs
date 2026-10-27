@@ -31,7 +31,7 @@ using System.Collections.Generic;
 namespace InterviewPreperationGuide.Core.LeetCode.problem341 {
     public class Solution {
         public static void Init () {
-            NestedIterator i = new NestedIterator (null);
+            NestedIterator i = new(null);
             // while (i.HasNext ()) v[f ()] = i.Next ();
         }
     }

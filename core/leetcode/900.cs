@@ -49,7 +49,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem900 {
     public class Solution {
         public static void Init () {
-            RLEIterator obj = new RLEIterator (null);
+            RLEIterator obj = new(null);
             int param_1 = RLEIterator.Next(0);
         }
     }

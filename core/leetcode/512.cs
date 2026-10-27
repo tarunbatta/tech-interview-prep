@@ -56,11 +56,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem512
         {
             List<Activity> activities =
             [
-                new Activity { PlayerId = 1, DeviceId = 2, EventDate = new DateTime(2016, 3, 1), GamesPlayed = 5 },
-                new Activity { PlayerId = 1, DeviceId = 3, EventDate = new DateTime(2016, 5, 2), GamesPlayed = 6 },
-                new Activity { PlayerId = 2, DeviceId = 3, EventDate = new DateTime(2017, 6, 25), GamesPlayed = 1 },
-                new Activity { PlayerId = 3, DeviceId = 1, EventDate = new DateTime(2016, 3, 2), GamesPlayed = 0 },
-                new Activity { PlayerId = 3, DeviceId = 4, EventDate = new DateTime(2018, 7, 3), GamesPlayed = 5 }
+                new() { PlayerId = 1, DeviceId = 2, EventDate = new(2016, 3, 1), GamesPlayed = 5 },
+                new() { PlayerId = 1, DeviceId = 3, EventDate = new(2016, 5, 2), GamesPlayed = 6 },
+                new() { PlayerId = 2, DeviceId = 3, EventDate = new(2017, 6, 25), GamesPlayed = 1 },
+                new() { PlayerId = 3, DeviceId = 1, EventDate = new(2016, 3, 2), GamesPlayed = 0 },
+                new() { PlayerId = 3, DeviceId = 4, EventDate = new(2018, 7, 3), GamesPlayed = 5 }
             ];
 
             var results = GetFirstLoginDevice(activities);

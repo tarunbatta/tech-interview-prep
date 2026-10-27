@@ -28,7 +28,7 @@ namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c1q3 {
         }
 
         private static string ReplaceSpaces_a (string input) {
-            StringBuilder result = new StringBuilder ();
+            StringBuilder result = new();
 
             if (!string.IsNullOrEmpty (input)) {
                 for (int i = 0; i < input.Length; i++) {

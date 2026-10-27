@@ -24,14 +24,20 @@ using System.Linq;
 namespace InterviewPreperationGuide.Core.LeetCode.problem23 {
     public class Solution {
         public static void Init() {
-            ListNode l1 = new ListNode (3);
-            l1.next = new ListNode (9);
+            ListNode l1 = new(3)
+            {
+                next = new ListNode(9)
+            };
 
-            ListNode l2 = new ListNode (2);
-            l2.next = new ListNode (5);
+            ListNode l2 = new(2)
+            {
+                next = new ListNode(5)
+            };
 
-            ListNode l3 = new ListNode (1);
-            l3.next = new ListNode (8);
+            ListNode l3 = new(1)
+            {
+                next = new ListNode(8)
+            };
 
             ListNode[] lists = [l1, l2, l3];
             ListNode result = MergeKLists (lists);
@@ -73,7 +79,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem23 {
                 return l1;
             }
 
-            ListNode head = new ListNode (0);
+            ListNode head = new(0);
             ListNode node = head;
 
             while (l1 != null && l2 != null) {

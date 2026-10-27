@@ -73,7 +73,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem1172 {
     public class Solution {
         public static void Init () {
-            DinnerPlates obj = new DinnerPlates (0);
+            DinnerPlates obj = new(0);
             DinnerPlates.Push(0);
             int param_2 = DinnerPlates.Pop();
             int param_3 = DinnerPlates.PopAtStack(0);

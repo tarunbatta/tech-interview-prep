@@ -44,15 +44,21 @@ using System.Collections;
 namespace InterviewPreperationGuide.Core.LeetCode.problem98 {
     public class Solution {
         public static void Init() {
-            TreeNode node = new TreeNode (2);
-            node.left = new TreeNode (1);
-            node.right = new TreeNode (3);
+            TreeNode node = new(2)
+            {
+                left = new TreeNode(1),
+                right = new TreeNode(3)
+            };
 
-            TreeNode node1 = new TreeNode (5);
-            node1.left = new TreeNode (1);
-            node1.right = new TreeNode (4);
-            node1.right.left = new TreeNode (3);
-            node1.right.right = new TreeNode (6);
+            TreeNode node1 = new(5)
+            {
+                left = new TreeNode(1),
+                right = new TreeNode(4)
+                {
+                    left = new TreeNode(3),
+                    right = new TreeNode(6)
+                }
+            };
 
             Console.WriteLine (IsValidBST_a(null));
             Console.WriteLine (IsValidBST_a(node));
@@ -84,7 +90,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem98 {
         // Time: O (n)
         // Space: O (n)
         public static bool IsValidBST_b (TreeNode root) {
-            Stack stack = new Stack ();
+            Stack stack = new();
             long inorder = long.MinValue;
 
             while (stack.Count != 0 || root != null) {

@@ -42,7 +42,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem705 {
     public class Solution {
         public static void Init () {
-            MyHashSet obj = new MyHashSet ();
+            MyHashSet obj = new();
             MyHashSet.Add(0);
             MyHashSet.Remove(0);
             bool param_3 = MyHashSet.Contains(0);

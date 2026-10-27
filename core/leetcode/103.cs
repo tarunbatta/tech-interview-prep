@@ -41,7 +41,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem103 {
                 return result;
             }
 
-            Queue<TreeNode> q = new Queue<TreeNode> ();
+            Queue<TreeNode> q = new();
             q.Enqueue (root);
             int size = 1;
             bool order = true;

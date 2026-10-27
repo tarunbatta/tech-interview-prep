@@ -27,11 +27,17 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem19 {
     public class Solution {
         public static void Init () {
-            ListNode node = new ListNode (1);
-            node.next = new ListNode (2);
-            node.next.next = new ListNode (3);
-            node.next.next.next = new ListNode (4);
-            node.next.next.next.next = new ListNode (5);
+            ListNode node = new(1)
+            {
+                next = new ListNode(2)
+                {
+                    next = new ListNode(3)
+                }
+            };
+            node.next.next.next = new ListNode(4)
+            {
+                next = new ListNode(5)
+            };
 
             Console.WriteLine (RemoveNthFromEnd_a(node, 2));
 
@@ -51,8 +57,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem19 {
                 current = current.next;
             }
 
-            ListNode dummy = new ListNode (0);
-            dummy.next = head;
+            ListNode dummy = new(0)
+            {
+                next = head
+            };
             current = dummy;
 
             for (int i = 0; i < len - n + 1; i++) {
@@ -71,8 +79,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem19 {
                 return head;
             }
 
-            ListNode dummy = new ListNode (0);
-            dummy.next = head;
+            ListNode dummy = new(0)
+            {
+                next = head
+            };
 
             ListNode first = dummy;
             ListNode second = dummy;

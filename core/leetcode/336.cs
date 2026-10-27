@@ -96,7 +96,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem336
         public static IList<IList<int>> PalindromePairs_b(string[] words)
         {
             IList<IList<int>> result = [];
-            PalindromePairsTrie trie = new PalindromePairsTrie();
+            PalindromePairsTrie trie = new();
 
             for (int i = 0; i < words.Length; i++)
             {

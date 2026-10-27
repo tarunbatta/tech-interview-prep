@@ -18,7 +18,7 @@ using System.Text;
 namespace InterviewPreperationGuide.Core.LeetCode.problem535 {
     public class Solution {
         public static void Init () {
-            Codec codec = new Codec ();
+            Codec codec = new();
             codec.decode (codec.encode ("https://leetcode.com/problems/design-tinyurl"));
         }
     }
@@ -27,11 +27,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem535 {
         string _chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const string _urlPrefix = "http://tinyurl.com/";
         const int _maxKeyLength = 6;
-        Random random = new Random ();
+        Random random = new();
         Dictionary<string, string> _dict = [];
 
         private string getRandomKey () {
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new();
 
             for (int i = 0; i < _maxKeyLength; i++) {
                 sb.Append (_chars[random.Next (_chars.Length)]);

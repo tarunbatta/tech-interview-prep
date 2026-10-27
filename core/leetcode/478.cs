@@ -43,7 +43,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem478 {
     public class Solution {
         public static void Init () {
-            Solution obj = new Solution (0, 0, 0);
+            Solution obj = new(0, 0, 0);
             double[] param_1 = RandPoint();
         }
 

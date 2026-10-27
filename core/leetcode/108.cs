@@ -47,9 +47,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem108 {
 
             int mid = low + (high - low) / 2;
 
-            TreeNode node = new TreeNode (nums[mid]);
-            node.left = SortedArrayToBSTHelper(nums, low, mid - 1);
-            node.right = SortedArrayToBSTHelper(nums, mid + 1, high);
+            TreeNode node = new(nums[mid])
+            {
+                left = SortedArrayToBSTHelper(nums, low, mid - 1),
+                right = SortedArrayToBSTHelper(nums, mid + 1, high)
+            };
 
             return node;
         }

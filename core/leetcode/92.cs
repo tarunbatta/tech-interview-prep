@@ -19,11 +19,17 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem92 {
     public class Solution {
         public static void Init () {
-            ListNode l = new ListNode (1);
-            l.next = new ListNode (2);
-            l.next.next = new ListNode (3);
-            l.next.next.next = new ListNode (4);
-            l.next.next.next.next = new ListNode (5);
+            ListNode l = new(1)
+            {
+                next = new ListNode(2)
+                {
+                    next = new ListNode(3)
+                }
+            };
+            l.next.next.next = new ListNode(4)
+            {
+                next = new ListNode(5)
+            };
 
             Console.WriteLine (ReverseBetween(null, 2, 4));
             Console.WriteLine (ReverseBetween(null, 3, 3));
@@ -39,8 +45,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem92 {
                 return head;
             }
 
-            ListNode result = new ListNode (0);
-            result.next = head;
+            ListNode result = new(0)
+            {
+                next = head
+            };
             ListNode node = result;
 
             while (m > 1) {

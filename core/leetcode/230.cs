@@ -71,7 +71,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem230 {
         // Time: O (log (n) + k)
         // Space: O (log (n) + k)
         public static int KthSmallest_b (TreeNode root, int k) {
-            Stack<TreeNode> stack = new Stack<TreeNode> ();
+            Stack<TreeNode> stack = new();
 
             while (true) {
                 while (root != null) {

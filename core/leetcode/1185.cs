@@ -42,7 +42,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1185 {
         // Time: O (1)
         // Space: O (1)
         public static string DayOfTheWeek (int day, int month, int year) {
-            DateTime dt = new DateTime (year, month, day);
+            DateTime dt = new(year, month, day);
             return dt.DayOfWeek.ToString ();
         }
     }

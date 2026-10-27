@@ -42,7 +42,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem519 {
     public class Solution {
         public static void Init () {
-            Solution obj = new Solution (0, 0);
+            Solution obj = new(0, 0);
             int[] param_1 = Flip();
             Reset();
         }

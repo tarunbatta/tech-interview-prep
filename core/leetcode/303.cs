@@ -26,7 +26,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem303 {
     public class Solution {
         public static void Init () {
-            NumArray obj = new NumArray (null);
+            NumArray obj = new(null);
             int param_1 = NumArray.SumRange(0, 0);
         }
     }

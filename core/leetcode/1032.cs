@@ -47,7 +47,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem1032 {
     public class Solution {
         public static void Init () {
-            StreamChecker obj = new StreamChecker (null);
+            StreamChecker obj = new(null);
             bool param_1 = StreamChecker.Query(' ');
         }
     }

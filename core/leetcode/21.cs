@@ -16,13 +16,21 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem21 {
     public class Solution {
         public static void Init () {
-            ListNode l1 = new ListNode (1);
-            l1.next = new ListNode (2);
-            l1.next.next = new ListNode (4);
+            ListNode l1 = new(1)
+            {
+                next = new ListNode(2)
+                {
+                    next = new ListNode(4)
+                }
+            };
 
-            ListNode l2 = new ListNode (1);
-            l2.next = new ListNode (3);
-            l2.next.next = new ListNode (4);
+            ListNode l2 = new(1)
+            {
+                next = new ListNode(3)
+                {
+                    next = new ListNode(4)
+                }
+            };
 
             Console.WriteLine (MergeTwoLists_a(null, null));
             Console.WriteLine (MergeTwoLists_a(l1, l2));
@@ -48,7 +56,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem21 {
                 return l1;
             }
 
-            ListNode head = new ListNode (0);
+            ListNode head = new(0);
             ListNode node = head;
 
             while (l1 != null && l2 != null) {

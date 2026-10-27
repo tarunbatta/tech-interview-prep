@@ -24,7 +24,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem432 {
     public class Solution {
         public static void Init () {
-            AllOne obj = new AllOne ();
+            AllOne obj = new();
             AllOne.Inc(null);
             AllOne.Dec(null);
             string param_3 = AllOne.GetMaxKey();

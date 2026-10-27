@@ -11,7 +11,7 @@ namespace InterviewPreperationGuide.Core.DesignPattern {
         private static volatile Singleton instance;
 
         // to avoid deadlocks
-        private static object syncRoot = new Object ();
+        private static object syncRoot = new();
 
         // private constructor to ensure that the instance of the class cannot be created
         private Singleton () { }

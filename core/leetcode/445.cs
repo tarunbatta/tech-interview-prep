@@ -83,15 +83,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem445 {
         }
 
         private static ListNode addToFront (int val, ListNode head) {
-            ListNode temp = new ListNode (val);
-            temp.next = head;
+            ListNode temp = new(val)
+            {
+                next = head
+            };
             return temp;
         }
 
         public static ListNode AddTwoNumbers_a (ListNode l1, ListNode l2) {
             ListNode a = ReverseList(l1);
             ListNode b = ReverseList(l2);
-            ListNode n = new ListNode (0);
+            ListNode n = new(0);
             ListNode current = n;
             int carry = 0;
 

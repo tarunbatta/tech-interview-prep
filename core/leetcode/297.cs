@@ -34,7 +34,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem297 {
         public static void Init () {
             TreeNode root = null;
 
-            Codec codec = new Codec ();
+            Codec codec = new();
             Codec.deserialize(Codec.serialize(root));
         }
     }
@@ -52,7 +52,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem297 {
 
         // Encodes a tree to a single string.
         public static String serialize (TreeNode root) {
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new();
             serializeHelper(root, sb);
             return sb.ToString ();
         }
@@ -80,9 +80,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem297 {
             if (val == _null) {
                 return null;
             } else {
-                TreeNode node = new TreeNode (Convert.ToInt32 (val));
-                node.left = deserializeHelper(nodes);
-                node.right = deserializeHelper(nodes);
+                TreeNode node = new(Convert.ToInt32(val))
+                {
+                    left = deserializeHelper(nodes),
+                    right = deserializeHelper(nodes)
+                };
                 return node;
             }
         }

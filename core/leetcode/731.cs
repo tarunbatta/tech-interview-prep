@@ -47,7 +47,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem731 {
     public class Solution {
         public static void Init () {
-            MyCalendarTwo obj = new MyCalendarTwo ();
+            MyCalendarTwo obj = new();
             bool param_1 = MyCalendarTwo.Book(0, 0);
         }
     }

@@ -38,8 +38,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem25 {
             }
 
             ListNode begin = null;
-            ListNode dummyhead = new ListNode (-1);
-            dummyhead.next = head;
+            ListNode dummyhead = new(-1)
+            {
+                next = head
+            };
             begin = dummyhead;
             int i = 0;
 

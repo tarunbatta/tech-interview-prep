@@ -62,7 +62,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem895 {
     public class Solution {
         public static void Init () {
-            FreqStack obj = new FreqStack ();
+            FreqStack obj = new();
             FreqStack.Push(0);
             int param_2 = FreqStack.Pop();
         }

@@ -56,17 +56,21 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem99 {
     public class Solution {
         public static void Init() {
-            TreeNode node = new TreeNode (3);
-            node.left = new TreeNode (1);
-            node.right = new TreeNode (4);
-            node.right.left = new TreeNode (2);
+            TreeNode node = new(3)
+            {
+                left = new TreeNode(1),
+                right = new TreeNode(4)
+                {
+                    left = new TreeNode(2)
+                }
+            };
 
             RecoverTree (node);
         }
 
         static TreeNode first = null;
         static TreeNode second = null;
-        static TreeNode prev = new TreeNode (Int32.MinValue);
+        static TreeNode prev = new(Int32.MinValue);
 
         // Time: O (n)
         // Space: O (n)

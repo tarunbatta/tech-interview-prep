@@ -27,7 +27,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem677 {
     public class Solution {
         public static void Init () {
-            MapSum obj = new MapSum ();
+            MapSum obj = new();
             MapSum.Insert(null, 0);
             int param_2 = MapSum.Sum(null);
         }

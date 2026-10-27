@@ -33,7 +33,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem295 {
     public class Solution {
         public static void Init () {
-            MedianFinder obj = new MedianFinder ();
+            MedianFinder obj = new();
             obj.AddNum (1);
             double param_2 = obj.FindMedian ();
         }

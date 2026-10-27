@@ -8,7 +8,7 @@ using System.Collections;
 namespace InterviewPreperationGuide.Core.Algorithms.Search.BFS {
     public class BreadthFirstSearch {
         public static void Init () {
-            Graph aGraph = new Graph (13);
+            Graph aGraph = new(13);
             aGraph.AddVertex ("A");
             aGraph.AddVertex ("B");
             aGraph.AddVertex ("C");
@@ -95,7 +95,7 @@ namespace InterviewPreperationGuide.Core.Algorithms.Search.BFS {
         }
 
         public void BreadthFirstSearch () {
-            Queue q = new Queue ();
+            Queue q = new();
             vertices[0].isVisited = true;
             ShowVertex (0);
             q.Enqueue (0);

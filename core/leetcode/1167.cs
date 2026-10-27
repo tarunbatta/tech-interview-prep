@@ -49,7 +49,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1167 {
                 return 0;
             }
 
-            MinHeap heap = new MinHeap (sticks.Length);
+            MinHeap heap = new(sticks.Length);
             foreach (var item in sticks) {
                 heap.Add (item);
             }

@@ -35,23 +35,23 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem469
     {
         public static void Init()
         {
-            var p1 = new List<IList<int>>
-            {
-                new List<int> { 0, 0 },
-                new List<int> { 0, 5 },
-                new List<int> { 5, 5 },
-                new List<int> { 5, 0 }
-            };
+            List<IList<int>> p1 =
+            [
+                [0, 0],
+                [0, 5],
+                [5, 5],
+                [5, 0]
+            ];
             Console.WriteLine(IsConvex(p1)); // True
 
-            var p2 = new List<IList<int>>
-            {
-                new List<int> { 0, 0 },
-                new List<int> { 0, 10 },
-                new List<int> { 10, 10 },
-                new List<int> { 10, 0 },
-                new List<int> { 5, 5 }
-            };
+            List<IList<int>> p2 =
+            [
+                [0, 0],
+                [0, 10],
+                [10, 10],
+                [10, 0],
+                [5, 5]
+            ];
             Console.WriteLine(IsConvex(p2)); // False
         }
 

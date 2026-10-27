@@ -52,7 +52,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem355 {
             int tweetId = 0;
             int followerId = 0;
             int followeeId = 0;
-            Twitter obj = new Twitter ();
+            Twitter obj = new();
             Twitter.PostTweet(userId, tweetId);
             IList<int> param_2 = Twitter.GetNewsFeed(userId);
             Twitter.Follow(followerId, followeeId);

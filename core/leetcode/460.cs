@@ -35,7 +35,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem460 {
     public class LFUCache {
         public LFUCache (int capacity) {
-            LFUCache obj = new LFUCache (capacity);
+            LFUCache obj = new(capacity);
             int param_1 = Get(0);
             Put(0, 0);
         }

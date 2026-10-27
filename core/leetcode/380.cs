@@ -44,7 +44,7 @@ using System.Collections.Generic;
 namespace InterviewPreperationGuide.Core.LeetCode.problem380 {
     public class Solution {
         public static void Init () {
-            RandomizedSet obj = new RandomizedSet ();
+            RandomizedSet obj = new();
             bool param_1 = obj.Insert (0);
             bool param_2 = obj.Remove (0);
             int param_3 = obj.GetRandom ();

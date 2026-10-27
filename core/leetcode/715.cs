@@ -38,7 +38,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem715 {
         public static void Init () {
             int left = 0;
             int right = 0;
-            RangeModule obj = new RangeModule ();
+            RangeModule obj = new();
             RangeModule.AddRange(left, right);
             bool param_2 = RangeModule.QueryRange(left, right);
             RangeModule.RemoveRange(left, right);

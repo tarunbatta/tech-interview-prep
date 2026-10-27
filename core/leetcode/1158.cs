@@ -53,23 +53,23 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1158
     {
         public static void Init()
         {
-            var users = new List<User>
-            {
-                new User { UserId = 1, JoinDate = new DateTime(2018, 1, 1), FavoriteBrand = "Lenovo" },
-                new User { UserId = 2, JoinDate = new DateTime(2018, 2, 9), FavoriteBrand = "Samsung" },
-                new User { UserId = 3, JoinDate = new DateTime(2018, 1, 19), FavoriteBrand = "LG" },
-                new User { UserId = 4, JoinDate = new DateTime(2018, 5, 21), FavoriteBrand = "HP" }
-            };
+            List<User> users =
+            [
+                new() { UserId = 1, JoinDate = new DateTime(2018, 1, 1), FavoriteBrand = "Lenovo" },
+                new() { UserId = 2, JoinDate = new DateTime(2018, 2, 9), FavoriteBrand = "Samsung" },
+                new() { UserId = 3, JoinDate = new DateTime(2018, 1, 19), FavoriteBrand = "LG" },
+                new() { UserId = 4, JoinDate = new DateTime(2018, 5, 21), FavoriteBrand = "HP" }
+            ];
 
-            var orders = new List<Order>
-            {
-                new Order { OrderId = 1, OrderDate = new DateTime(2019, 8, 1), ItemId = 4, BuyerId = 1, SellerId = 2 },
-                new Order { OrderId = 2, OrderDate = new DateTime(2018, 8, 2), ItemId = 2, BuyerId = 1, SellerId = 3 },
-                new Order { OrderId = 3, OrderDate = new DateTime(2019, 8, 3), ItemId = 3, BuyerId = 2, SellerId = 3 },
-                new Order { OrderId = 4, OrderDate = new DateTime(2018, 8, 4), ItemId = 1, BuyerId = 4, SellerId = 2 },
-                new Order { OrderId = 5, OrderDate = new DateTime(2018, 8, 4), ItemId = 1, BuyerId = 3, SellerId = 4 },
-                new Order { OrderId = 6, OrderDate = new DateTime(2019, 8, 5), ItemId = 2, BuyerId = 2, SellerId = 4 }
-            };
+            List<Order> orders =
+            [
+                new() { OrderId = 1, OrderDate = new DateTime(2019, 8, 1), ItemId = 4, BuyerId = 1, SellerId = 2 },
+                new() { OrderId = 2, OrderDate = new DateTime(2018, 8, 2), ItemId = 2, BuyerId = 1, SellerId = 3 },
+                new() { OrderId = 3, OrderDate = new DateTime(2019, 8, 3), ItemId = 3, BuyerId = 2, SellerId = 3 },
+                new() { OrderId = 4, OrderDate = new DateTime(2018, 8, 4), ItemId = 1, BuyerId = 4, SellerId = 2 },
+                new() { OrderId = 5, OrderDate = new DateTime(2018, 8, 4), ItemId = 1, BuyerId = 3, SellerId = 4 },
+                new() { OrderId = 6, OrderDate = new DateTime(2019, 8, 5), ItemId = 2, BuyerId = 2, SellerId = 4 }
+            ];
 
             var results = MarketAnalysis(users, orders);
             foreach (var r in results)

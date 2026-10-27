@@ -40,7 +40,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem707 {
     public class Solution {
         public static void Init () {
-            MyLinkedList obj = new MyLinkedList ();
+            MyLinkedList obj = new();
             int param_1 = MyLinkedList.Get(0);
             MyLinkedList.AddAtHead(0);
             MyLinkedList.AddAtTail(0);

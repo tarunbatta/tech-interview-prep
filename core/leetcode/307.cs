@@ -29,7 +29,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem307 {
     public class Solution {
         public static void Init () {
-            NumArray obj = new NumArray (null);
+            NumArray obj = new(null);
             NumArray.Update(0, 0);
             int param_2 = NumArray.SumRange(0, 0);
         }

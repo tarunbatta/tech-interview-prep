@@ -49,7 +49,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem402 {
             }
 
             string result = null;
-            Stack stack = new Stack ();
+            Stack stack = new();
             int i = 0;
 
             while (i < num.Length) {
@@ -68,7 +68,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem402 {
                 k--;
             }
 
-            StringBuilder stringBuilder = new StringBuilder ();
+            StringBuilder stringBuilder = new();
             while (stack.Count > 0) {
                 stringBuilder.Append (stack.Pop ());
             }

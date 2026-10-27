@@ -30,7 +30,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem703 {
     public class Solution {
         public static void Init () {
-            KthLargest obj = new KthLargest (0, null);
+            KthLargest obj = new(0, null);
             int param_1 = KthLargest.Add(0);
         }
     }

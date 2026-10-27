@@ -71,7 +71,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem272
         {
             Queue<int> queue = new(k);
             Inorder(root, target, k, queue);
-            return new List<int>(queue);
+            return [.. queue];
         }
 
         private static bool Inorder(TreeNode node, double target, int k, Queue<int> queue)

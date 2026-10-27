@@ -48,14 +48,18 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem235 {
 
     public class Solution {
         public static void Init () {
-            TreeNode root = new TreeNode (1);
-            root = new TreeNode (20);
-            root.left = new TreeNode (8);
-            root.right = new TreeNode (22);
+            TreeNode root = new(1);
+            root = new TreeNode(20)
+            {
+                left = new TreeNode(8),
+                right = new TreeNode(22)
+            };
             root.left.left = new TreeNode (4);
-            root.left.right = new TreeNode (12);
-            root.left.right.left = new TreeNode (10);
-            root.left.right.right = new TreeNode (14);
+            root.left.right = new TreeNode(12)
+            {
+                left = new TreeNode(10),
+                right = new TreeNode(14)
+            };
 
             TreeNode r1 = LowestCommonAncestor (root, new TreeNode (10), new TreeNode (14));
             r1.DisplayNode ();

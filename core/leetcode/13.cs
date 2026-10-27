@@ -70,7 +70,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem13 {
                 return result;
             }
 
-            Hashtable hash = new Hashtable
+            Hashtable hash = new()
             {
                 { 'I', 1 },
                 { 'V', 5 },

@@ -58,9 +58,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem654
             }
 
             int max_idx = GetMaxIndex(nums, l, r);
-            TreeNode root = new TreeNode(nums[max_idx]);
-            root.left = ConstructTree(nums, l, max_idx);
-            root.right = ConstructTree(nums, max_idx + 1, r);
+            TreeNode root = new(nums[max_idx])
+            {
+                left = ConstructTree(nums, l, max_idx),
+                right = ConstructTree(nums, max_idx + 1, r)
+            };
             return root;
         }
 

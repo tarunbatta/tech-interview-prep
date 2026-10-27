@@ -18,7 +18,7 @@ namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c1q6 {
         }
 
         private static string CompressString (string input) {
-            StringBuilder result = new StringBuilder ();
+            StringBuilder result = new();
 
             if (!string.IsNullOrEmpty (input)) {
                 char currentCharacter = char.MinValue;

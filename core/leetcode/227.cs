@@ -44,8 +44,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem227 {
             }
 
             int result = 0;
-            Stack<int> nums = new Stack<int> ();
-            Stack<char> op = new Stack<char> ();
+            Stack<int> nums = new();
+            Stack<char> op = new();
             int i = 0;
 
             while (i < s.Length) {

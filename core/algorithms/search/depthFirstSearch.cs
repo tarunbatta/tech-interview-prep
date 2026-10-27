@@ -8,7 +8,7 @@ using System.Collections;
 namespace InterviewPreperationGuide.Core.Algorithms.Search.DFS {
     public class DepthFirstSearch {
         public static void Init () {
-            Graph aGraph = new Graph (13);
+            Graph aGraph = new(13);
             aGraph.AddVertex ("A");
             aGraph.AddVertex ("B");
             aGraph.AddVertex ("C");
@@ -95,7 +95,7 @@ namespace InterviewPreperationGuide.Core.Algorithms.Search.DFS {
         }
 
         public void DepthFirstSearch () {
-            Stack gStack = new Stack ();
+            Stack gStack = new();
 
             vertices[0].isVisited = true;
             ShowVertex (0);

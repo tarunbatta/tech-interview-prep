@@ -30,7 +30,7 @@ using System.Collections;
 namespace InterviewPreperationGuide.Core.LeetCode.problem173 {
     public class Solution {
         public static void Init () {
-            BSTIterator obj = new BSTIterator (null);
+            BSTIterator obj = new(null);
             int param_1 = obj.Next ();
             bool param_2 = obj.HasNext ();
         }

@@ -68,7 +68,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem787 {
                 flightsList.Add (new Flight (flight[0], flight[1], flight[2]));
             }
 
-            Queue<Destination> destinations = new Queue<Destination> ();
+            Queue<Destination> destinations = new();
             destinations.Enqueue (new Destination (src, 0, 0));
 
             int[] tripCosts = new int[n];

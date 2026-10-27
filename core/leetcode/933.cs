@@ -40,7 +40,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem933 {
     public class Solution {
         public static void Init () {
-            RecentCounter obj = new RecentCounter ();
+            RecentCounter obj = new();
             int param_1 = RecentCounter.Ping(0);
         }
     }

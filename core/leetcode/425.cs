@@ -76,7 +76,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem425
         {
             if (currentSquare.Count == wordLen)
             {
-                result.Add(new List<string>(currentSquare));
+                result.Add([.. currentSquare]);
                 return;
             }
 

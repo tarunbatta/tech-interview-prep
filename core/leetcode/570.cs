@@ -49,12 +49,12 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem570
         {
             List<Employee> employees =
             [
-                new Employee { Id = 101, Name = "John", Department = "A", ManagerId = null },
-                new Employee { Id = 102, Name = "Dan", Department = "A", ManagerId = 101 },
-                new Employee { Id = 103, Name = "James", Department = "A", ManagerId = 101 },
-                new Employee { Id = 104, Name = "Amy", Department = "A", ManagerId = 101 },
-                new Employee { Id = 105, Name = "Anne", Department = "A", ManagerId = 101 },
-                new Employee { Id = 106, Name = "Ron", Department = "A", ManagerId = 101 }
+                new() { Id = 101, Name = "John", Department = "A", ManagerId = null },
+                new() { Id = 102, Name = "Dan", Department = "A", ManagerId = 101 },
+                new() { Id = 103, Name = "James", Department = "A", ManagerId = 101 },
+                new() { Id = 104, Name = "Amy", Department = "A", ManagerId = 101 },
+                new() { Id = 105, Name = "Anne", Department = "A", ManagerId = 101 },
+                new() { Id = 106, Name = "Ron", Department = "A", ManagerId = 101 }
             ];
 
             var managers = FindManagersWithAtLeast5DirectReports(employees);

@@ -27,7 +27,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem431 {
     public class Solution {
         public static void Init () {
             Node root = null;
-            Codec codec = new Codec ();
+            Codec codec = new();
             Codec.decode(Codec.encode(root));
         }
     }
@@ -40,7 +40,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem431 {
                 return null;
             }
 
-            TreeNode result = new TreeNode (root.val);
+            TreeNode result = new(root.val);
 
             if (root.children.Count > 0) {
                 result.left = encode(root.children[0]);
@@ -62,7 +62,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem431 {
                 return null;
             }
 
-            Node result = new Node (root.val, []);
+            Node result = new(root.val, []);
             TreeNode current = root.left;
 
             while (current != null) {

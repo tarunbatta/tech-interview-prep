@@ -35,7 +35,7 @@ namespace InterviewPreperationGuide.Core.DataStructure.BinarySearchTree {
         }
 
         public void Insert (int item) {
-            Node newNode = new Node (item);
+            Node newNode = new(item);
 
             if (root == null) {
                 root = newNode;

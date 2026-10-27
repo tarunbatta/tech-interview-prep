@@ -69,16 +69,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem577
         {
             List<Employee> employees =
             [
-                new Employee { EmpId = 3, Name = "Brad", Supervisor = null, Salary = 4000 },
-                new Employee { EmpId = 1, Name = "John", Supervisor = 3, Salary = 1000 },
-                new Employee { EmpId = 2, Name = "Dan", Supervisor = 3, Salary = 2000 },
-                new Employee { EmpId = 4, Name = "Thomas", Supervisor = 3, Salary = 4000 }
+                new() { EmpId = 3, Name = "Brad", Supervisor = null, Salary = 4000 },
+                new() { EmpId = 1, Name = "John", Supervisor = 3, Salary = 1000 },
+                new() { EmpId = 2, Name = "Dan", Supervisor = 3, Salary = 2000 },
+                new() { EmpId = 4, Name = "Thomas", Supervisor = 3, Salary = 4000 }
             ];
 
             List<Bonus> bonuses =
             [
-                new Bonus { EmpId = 2, Amount = 500 },
-                new Bonus { EmpId = 4, Amount = 2000 }
+                new() { EmpId = 2, Amount = 500 },
+                new() { EmpId = 4, Amount = 2000 }
             ];
 
             var results = GetEmployeeBonus(employees, bonuses);

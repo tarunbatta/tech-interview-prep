@@ -65,7 +65,7 @@ namespace InterviewPreperationGuide.Core.DataStructure.LinkedList {
         }
 
         public void Insert (object item, Node after) {
-            Node newNode = new Node (item);
+            Node newNode = new(item);
             Node current = Find (after.data);
 
             if (current != null) {

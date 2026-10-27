@@ -36,7 +36,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem745 {
     public class Solution {
         public static void Init () {
-            WordFilter obj = new WordFilter (null);
+            WordFilter obj = new(null);
             int param_1 = WordFilter.F(null, null);
         }
     }

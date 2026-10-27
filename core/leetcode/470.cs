@@ -56,7 +56,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem470 {
 
     public class SolBase {
         public static int Rand7 () {
-            Random rand = new Random ();
+            Random rand = new();
             return rand.Next (1, 7);
         }
     }

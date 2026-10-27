@@ -70,7 +70,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem254
                     // Add [path..., i, n / i]
                     path.Add(i);
                     path.Add(n / i);
-                    result.Add(new List<int>(path));
+                    result.Add([.. path]);
                     path.RemoveAt(path.Count - 1);
 
                     // Recurse on n / i with minimum factor i

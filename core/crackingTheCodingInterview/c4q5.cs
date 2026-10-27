@@ -9,17 +9,21 @@ namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c4q5 {
         public static BstNode previousNode = null;
 
         public static void Init (string[] args) {
-            BstNode root_a = new BstNode (20);
-            root_a.left = new BstNode (10);
-            root_a.right = new BstNode (30);
+            BstNode root_a = new(20)
+            {
+                left = new BstNode(10),
+                right = new BstNode(30)
+            };
             root_a.left.left = new BstNode (5);
             root_a.left.right = new BstNode (15);
             root_a.right.left = new BstNode (25);
             root_a.right.right = new BstNode (35);
 
-            BstNode root_b = new BstNode (20);
-            root_b.left = new BstNode (10);
-            root_b.right = new BstNode (30);
+            BstNode root_b = new(20)
+            {
+                left = new BstNode(10),
+                right = new BstNode(30)
+            };
             root_b.left.left = new BstNode (15);
             root_b.left.right = new BstNode (15);
             root_b.right.left = new BstNode (25);

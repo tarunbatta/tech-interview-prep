@@ -40,7 +40,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem138 {
                 return visited[head];
             }
 
-            Node node = new Node (head.val, null, null);
+            Node node = new(head.val, null, null);
             visited.Add (head, node);
 
             node.next = CopyRandomList_DFS (head.next);
@@ -54,7 +54,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem138 {
                 return head;
             }
 
-            Queue<Node> q = new Queue<Node> ();
+            Queue<Node> q = new();
             Dictionary<Node, Node> visited = [];
             q.Enqueue (head);
             visited.Add (head, new Node (head.val, null, null));

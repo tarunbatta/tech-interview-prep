@@ -40,16 +40,20 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem337 {
     public class Solution {
         public static void Init() {
-            TreeNode node_a = new TreeNode (3);
-            node_a.left = new TreeNode (2);
-            node_a.right = new TreeNode (3);
+            TreeNode node_a = new(3)
+            {
+                left = new TreeNode(2),
+                right = new TreeNode(3)
+            };
             node_a.left.right = new TreeNode (3);
             node_a.right.right = new TreeNode (1);
             Console.WriteLine (Rob(node_a));
 
-            TreeNode node_b = new TreeNode (3);
-            node_b.left = new TreeNode (4);
-            node_b.right = new TreeNode (5);
+            TreeNode node_b = new(3)
+            {
+                left = new TreeNode(4),
+                right = new TreeNode(5)
+            };
             node_b.left.left = new TreeNode (1);
             node_b.left.right = new TreeNode (3);
             node_b.right.right = new TreeNode (1);

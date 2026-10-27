@@ -86,7 +86,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem722 {
             }
 
             bool isComment = false;
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new();
 
             foreach (string line in source) {
                 if (string.IsNullOrEmpty (line)) {

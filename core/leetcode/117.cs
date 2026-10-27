@@ -46,7 +46,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem117 {
                 return root;
             }
 
-            Queue<Node> q = new Queue<Node> ();
+            Queue<Node> q = new();
             q.Enqueue (root);
 
             while (q.Count > 0) {

@@ -50,7 +50,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem43 {
                 }
             }
 
-            StringBuilder ret = new StringBuilder ();
+            StringBuilder ret = new();
             for (int i = 0; i < res.Length; i++) {
                 if (ret.Length == 0 && res[i] == 0) continue;
                 ret.Append (res[i]);

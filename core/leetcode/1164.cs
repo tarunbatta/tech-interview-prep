@@ -40,15 +40,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1164
     {
         public static void Init()
         {
-            var products = new List<ProductPriceChange>
-            {
-                new ProductPriceChange { ProductId = 1, NewPrice = 20, ChangeDate = new DateTime(2019, 8, 14) },
-                new ProductPriceChange { ProductId = 2, NewPrice = 50, ChangeDate = new DateTime(2019, 8, 14) },
-                new ProductPriceChange { ProductId = 1, NewPrice = 30, ChangeDate = new DateTime(2019, 8, 15) },
-                new ProductPriceChange { ProductId = 1, NewPrice = 35, ChangeDate = new DateTime(2019, 8, 16) },
-                new ProductPriceChange { ProductId = 2, NewPrice = 65, ChangeDate = new DateTime(2019, 8, 17) },
-                new ProductPriceChange { ProductId = 3, NewPrice = 20, ChangeDate = new DateTime(2019, 8, 18) }
-            };
+            List<ProductPriceChange> products =
+            [
+                new() { ProductId = 1, NewPrice = 20, ChangeDate = new DateTime(2019, 8, 14) },
+                new() { ProductId = 2, NewPrice = 50, ChangeDate = new DateTime(2019, 8, 14) },
+                new() { ProductId = 1, NewPrice = 30, ChangeDate = new DateTime(2019, 8, 15) },
+                new() { ProductId = 1, NewPrice = 35, ChangeDate = new DateTime(2019, 8, 16) },
+                new() { ProductId = 2, NewPrice = 65, ChangeDate = new DateTime(2019, 8, 17) },
+                new() { ProductId = 3, NewPrice = 20, ChangeDate = new DateTime(2019, 8, 18) }
+            ];
 
             var targetDate = new DateTime(2019, 8, 16);
             var results = GetProductPricesOnDate(products, targetDate);

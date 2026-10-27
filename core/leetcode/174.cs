@@ -86,10 +86,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem174 {
 
             List<Knight> reachedPrincess = [];
 
-            Knight k = new Knight (rowCounter, colCounter, dungeon[rowCounter][colCounter], null);
+            Knight k = new(rowCounter, colCounter, dungeon[rowCounter][colCounter], null);
             Knight first = null;
 
-            Queue q = new Queue ();
+            Queue q = new();
             q.Enqueue (k);
 
             while (q.Count > 0) {
@@ -102,13 +102,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem174 {
                 }
 
                 if ((rowCounter < height) && (colCounter + 1 < width)) {
-                    Knight moveRight = new Knight (first.position.row, first.position.col, first.affect, first.moves);
+                    Knight moveRight = new(first.position.row, first.position.col, first.affect, first.moves);
                     moveRight.MoveRight (dungeon[rowCounter][colCounter + 1]);
                     q.Enqueue (moveRight);
                 }
 
                 if ((rowCounter + 1 < height) && (colCounter < width)) {
-                    Knight moveDown = new Knight (first.position.row, first.position.col, first.affect, first.moves);
+                    Knight moveDown = new(first.position.row, first.position.col, first.affect, first.moves);
                     moveDown.MoveDown (dungeon[rowCounter + 1][colCounter]);
                     q.Enqueue (moveDown);
                 }

@@ -54,7 +54,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem497 {
     public class Solution {
         public static void Init () {
-            Solution obj = new Solution (null);
+            Solution obj = new(null);
             int[] param_1 = Pick();
         }
 

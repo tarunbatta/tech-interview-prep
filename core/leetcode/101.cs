@@ -60,7 +60,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem101 {
         }
 
         public static bool IsSymmetric_b (TreeNode root) {
-            Queue<TreeNode> q = new Queue<TreeNode> ();
+            Queue<TreeNode> q = new();
             q.Enqueue (root);
             q.Enqueue (root);
 

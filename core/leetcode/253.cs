@@ -69,7 +69,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem253 {
 
             Array.Sort (intervals, (a, b) => a[0] - b[0]);
 
-            MinHeap heap = new MinHeap (intervals.Length);
+            MinHeap heap = new(intervals.Length);
             heap.Add (intervals[0][1]);
             int result = 1;
 

@@ -44,7 +44,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem49 {
             foreach (var item in strs) {
                 char[] arr = item.ToCharArray ();
                 Array.Sort (arr);
-                string key = new string (arr);
+                string key = new(arr);
 
                 if (!dict.ContainsKey (key)) {
                     dict.Add (key, []);
@@ -53,7 +53,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem49 {
                 dict[key].Add (item);
             }
 
-            return new List<IList<string>> (dict.Values);
+            return [.. dict.Values];
         }
     }
 }

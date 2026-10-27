@@ -42,13 +42,13 @@ using System.Collections.Generic;
 namespace InterviewPreperationGuide.Core.LeetCode.problem528 {
     public class Solution {
         public static void Init () {
-            Solution obj = new Solution (null);
+            Solution obj = new(null);
             int param_1 = obj.PickIndex ();
         }
 
         List<int> psum = [];
         int total = 0;
-        Random rand = new Random ();
+        Random rand = new();
 
         public Solution (int[] w) {
             foreach (int x in w) {

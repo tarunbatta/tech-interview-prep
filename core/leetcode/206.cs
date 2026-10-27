@@ -22,11 +22,17 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem206 {
     public class Solution {
         public static void Init () {
-            ListNode node = new ListNode (1);
-            node.next = new ListNode (2);
-            node.next.next = new ListNode (3);
-            node.next.next.next = new ListNode (4);
-            node.next.next.next.next = new ListNode (5);
+            ListNode node = new(1)
+            {
+                next = new ListNode(2)
+                {
+                    next = new ListNode(3)
+                }
+            };
+            node.next.next.next = new ListNode(4)
+            {
+                next = new ListNode(5)
+            };
 
             Console.WriteLine (ReverseList_a(null));
             Console.WriteLine (ReverseList_a(node));

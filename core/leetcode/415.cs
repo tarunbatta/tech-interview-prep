@@ -34,7 +34,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem415 {
                 return num1;
             }
 
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new();
             int carry = 0;
             int i = num1.Length - 1;
             int j = num2.Length - 1;

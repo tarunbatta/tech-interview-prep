@@ -58,7 +58,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem200 {
                     if (grid[i][j] == '1') {
                         count++;
 
-                        Queue<Point> q = new Queue<Point> ();
+                        Queue<Point> q = new();
                         q.Enqueue (new Point (i, j));
                         grid[i][j] = '0';
 

@@ -55,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem218 {
 
             points.Sort ((x, y) => x.CompareTo (y));
 
-            Dictionary<int, int> queue = new Dictionary<int, int>
+            Dictionary<int, int> queue = new()
             {
                 { 0, 1 }
             };
@@ -80,7 +80,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem218 {
                 int currentMaxHeight = queue.Keys.Max ();
 
                 if (previousMaxHeight != currentMaxHeight) {
-                    result.Add (new int[] { point.x, currentMaxHeight });
+                    result.Add ([point.x, currentMaxHeight]);
                     previousMaxHeight = currentMaxHeight;
                 }
             }

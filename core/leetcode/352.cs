@@ -27,7 +27,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem352 {
     public class Solution {
         public static void Init () {
-            SummaryRanges obj = new SummaryRanges ();
+            SummaryRanges obj = new();
             SummaryRanges.AddNum(0);
             int[][] param_2 = SummaryRanges.GetIntervals();
         }

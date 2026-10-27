@@ -39,7 +39,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem17 {
             }
 
             string[] buttons = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"];
-            Queue<string> q = new Queue<string> ();
+            Queue<string> q = new();
             q.Enqueue ("");
 
             for (int i = 0; i < digits.ToCharArray ().Length; i++) {
@@ -57,7 +57,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem17 {
             return [.. q];
         }
 
-        Dictionary<string, string> phone = new Dictionary<string, string> () { { "2", "abc" }, { "3", "def" }, { "4", "ghi" }, { "5", "jkl" }, { "6", "mno" }, { "7", "pqrs" }, { "8", "tuv" }, { "9", "wxyz" }
+        Dictionary<string, string> phone = new() { { "2", "abc" }, { "3", "def" }, { "4", "ghi" }, { "5", "jkl" }, { "6", "mno" }, { "7", "pqrs" }, { "8", "tuv" }, { "9", "wxyz" }
         };
 
         List<string> output = [];

@@ -57,7 +57,7 @@ namespace InterviewPreperationGuide.Core.DataStructure.Trie {
                 return node.GetChild (c);
             } else {
                 int n = Convert.ToByte (c) - TrieNode.ASCIIA;
-                TrieNode t = new TrieNode ();
+                TrieNode t = new();
                 node.childrens[n] = t;
                 return t;
             }

@@ -30,19 +30,29 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem2
     {
         public static void Init()
         {
-            ListNode l1 = new ListNode(2);
-            l1.next = new ListNode(4);
-            l1.next.next = new ListNode(3);
+            ListNode l1 = new(2)
+            {
+                next = new ListNode(4)
+                {
+                    next = new ListNode(3)
+                }
+            };
 
-            ListNode l2 = new ListNode(5);
-            l2.next = new ListNode(6);
-            l2.next.next = new ListNode(4);
+            ListNode l2 = new(5)
+            {
+                next = new ListNode(6)
+                {
+                    next = new ListNode(4)
+                }
+            };
             Console.WriteLine(AddTwoNumbers(l1, l2));
 
-            ListNode l3 = new ListNode(1);
-            l3.next = new ListNode(8);
+            ListNode l3 = new(1)
+            {
+                next = new ListNode(8)
+            };
 
-            ListNode l4 = new ListNode(0);
+            ListNode l4 = new(0);
             Console.WriteLine(AddTwoNumbers(l3, l4));
         }
 
@@ -50,7 +60,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem2
         // Space: O(max(m, n))
         public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
-            ListNode result = new ListNode(0);
+            ListNode result = new(0);
 
             ListNode a = l1;
             ListNode b = l2;

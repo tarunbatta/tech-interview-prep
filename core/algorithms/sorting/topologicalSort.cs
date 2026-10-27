@@ -10,7 +10,7 @@ namespace InterviewPreperationGuide.Core.Algorithms.Sorting {
     // Space: O ()
     public class TopologicalSort {
         public static void Init () {
-            Graph theGraph = new Graph (6);
+            Graph theGraph = new(6);
             theGraph.AddVertex ("CS1");
             theGraph.AddVertex ("CS2");
             theGraph.AddVertex ("DS");
@@ -124,7 +124,7 @@ namespace InterviewPreperationGuide.Core.Algorithms.Sorting {
 
         public void TopSort () {
             int origVerts = numberOfVertices;
-            Stack gStack = new Stack ();
+            Stack gStack = new();
 
             while (numberOfVertices > 0) {
                 int currVertex = NoSuccessors ();

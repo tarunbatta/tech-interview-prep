@@ -50,7 +50,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem622 {
     public class Solution {
         public static void Init () {
-            MyCircularQueue obj = new MyCircularQueue (0);
+            MyCircularQueue obj = new(0);
             bool param_1 = MyCircularQueue.EnQueue(0);
             bool param_2 = MyCircularQueue.DeQueue();
             int param_3 = MyCircularQueue.Front();

@@ -8,7 +8,7 @@ using System.Collections;
 namespace InterviewPreperationGuide.Core.Algorithms.Others.MinimumSpanningTree {
     public class MinimumSpanningTree {
         public static void Init () {
-            Graph aGraph = new Graph (7);
+            Graph aGraph = new(7);
             aGraph.AddVertex ("A");
             aGraph.AddVertex ("B");
             aGraph.AddVertex ("C");
@@ -90,7 +90,7 @@ namespace InterviewPreperationGuide.Core.Algorithms.Others.MinimumSpanningTree {
         }
 
         public void MinimumSpanningTree () {
-            Stack gStack = new Stack ();
+            Stack gStack = new();
 
             vertices[0].isVisited = true;
             gStack.Push (0);

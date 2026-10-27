@@ -55,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem38 {
         }
 
         public static String countIdx (String s) {
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new();
             char c = s[0];
             int count = 1;
 

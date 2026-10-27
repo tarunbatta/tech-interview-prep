@@ -33,7 +33,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem211 {
     public class Solution {
         public static void Init () {
             string word = "";
-            WordDictionary obj = new WordDictionary ();
+            WordDictionary obj = new();
             WordDictionary.AddWord(word);
             bool param_2 = WordDictionary.Search(word);
         }

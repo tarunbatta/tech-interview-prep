@@ -28,7 +28,7 @@ using System.Collections.Generic;
 namespace InterviewPreperationGuide.Core.LeetCode.problem155 {
     public class Solution {
         public static void Init () {
-            MinStack obj = new MinStack ();
+            MinStack obj = new();
             obj.Push (1);
             obj.Pop ();
             int param_3 = obj.Top ();

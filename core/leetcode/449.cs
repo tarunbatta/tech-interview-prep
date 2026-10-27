@@ -18,7 +18,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem449 {
     public class Solution {
         public static void Init () {
-            Codec codec = new Codec ();
+            Codec codec = new();
             Codec.deserialize(Codec.serialize(null));
         }
     }

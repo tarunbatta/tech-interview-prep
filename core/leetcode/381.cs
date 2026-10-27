@@ -42,7 +42,7 @@ using System;
 namespace InterviewPreperationGuide.Core.LeetCode.problem381 {
     public class Solution {
         public static void Init () {
-            RandomizedCollection obj = new RandomizedCollection ();
+            RandomizedCollection obj = new();
             bool param_1 = RandomizedCollection.Insert(0);
             bool param_2 = RandomizedCollection.Remove(0);
             int param_3 = RandomizedCollection.GetRandom();

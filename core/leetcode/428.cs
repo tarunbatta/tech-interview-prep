@@ -38,7 +38,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem428 {
     public class Solution {
         public static void Init () {
             Node root = null;
-            Codec codec = new Codec ();
+            Codec codec = new();
             Codec.deserialize(Codec.serialize(root));
         }
 
@@ -72,7 +72,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem428 {
             }
 
             string[] strs = data.Split (",");
-            Queue<string> q = new Queue<string> ();
+            Queue<string> q = new();
 
             foreach (var item in strs) {
                 q.Enqueue (item);
@@ -86,9 +86,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem428 {
                 return null;
             }
 
-            Node root = new Node ();
-            root.val = Convert.ToInt32 (q.Dequeue ());
-            root.children = [];
+            Node root = new()
+            {
+                val = Convert.ToInt32(q.Dequeue()),
+                children = []
+            };
 
             int size = Convert.ToInt32 (q.Dequeue ());
 

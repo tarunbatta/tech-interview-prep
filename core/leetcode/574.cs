@@ -59,20 +59,20 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem574
         {
             List<Candidate> candidates =
             [
-                new Candidate { Id = 1, Name = "A" },
-                new Candidate { Id = 2, Name = "B" },
-                new Candidate { Id = 3, Name = "C" },
-                new Candidate { Id = 4, Name = "D" },
-                new Candidate { Id = 5, Name = "E" }
+                new() { Id = 1, Name = "A" },
+                new() { Id = 2, Name = "B" },
+                new() { Id = 3, Name = "C" },
+                new() { Id = 4, Name = "D" },
+                new() { Id = 5, Name = "E" }
             ];
 
             List<Vote> votes =
             [
-                new Vote { Id = 1, CandidateId = 2 },
-                new Vote { Id = 2, CandidateId = 4 },
-                new Vote { Id = 3, CandidateId = 3 },
-                new Vote { Id = 4, CandidateId = 2 },
-                new Vote { Id = 5, CandidateId = 5 }
+                new() { Id = 1, CandidateId = 2 },
+                new() { Id = 2, CandidateId = 4 },
+                new() { Id = 3, CandidateId = 3 },
+                new() { Id = 4, CandidateId = 2 },
+                new() { Id = 5, CandidateId = 5 }
             ];
 
             Console.WriteLine(FindWinningCandidate(candidates, votes)); // B

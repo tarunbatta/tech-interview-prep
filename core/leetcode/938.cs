@@ -43,7 +43,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem938 {
                 return result;
             }
 
-            Queue<TreeNode> q = new Queue<TreeNode> ();
+            Queue<TreeNode> q = new();
             q.Enqueue (root);
 
             while (q.Count > 0) {
