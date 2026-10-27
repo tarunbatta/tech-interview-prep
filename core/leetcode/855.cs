@@ -36,10 +36,10 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem855 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             ExamRoom obj = new ExamRoom (0);
-            int param_1 = obj.Seat ();
-            obj.Leave (0);
+            int param_1 = ExamRoom.Seat();
+            ExamRoom.Leave(0);
         }
     }
 
@@ -48,11 +48,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem855 {
 
         }
 
-        public int Seat () {
+        public static int Seat () {
             return 0;
         }
 
-        public void Leave (int p) {
+        public static void Leave (int p) {
 
         }
     }

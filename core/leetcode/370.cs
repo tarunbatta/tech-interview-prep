@@ -31,14 +31,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem370
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] updates = new int[][]
-            {
-                new int[] { 1, 3, 2 },
-                new int[] { 2, 4, 3 },
-                new int[] { 0, 2, -2 }
-            };
+            int[][] updates =
+            [
+                [1, 3, 2],
+                [2, 4, 3],
+                [0, 2, -2]
+            ];
 
             Console.WriteLine(string.Join(", ", GetModifiedArray(5, updates))); // -2, 0, 3, 5, 3
         }
@@ -49,7 +49,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem370
         {
             if (length <= 0)
             {
-                return Array.Empty<int>();
+                return [];
             }
 
             int[] result = new int[length];

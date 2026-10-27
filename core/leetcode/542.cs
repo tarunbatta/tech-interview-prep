@@ -50,13 +50,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem542 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[][] UpdateMatrix (int[][] matrix) {
+        public static int[][] UpdateMatrix (int[][] matrix) {
             return null;
         }
     }

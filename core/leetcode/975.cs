@@ -80,13 +80,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem975 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int OddEvenJumps (int[] A) {
+        public static int OddEvenJumps (int[] A) {
             return 0;
         }
     }

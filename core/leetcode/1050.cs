@@ -62,7 +62,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1050 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<ActorDirectorRecord> records = [
                 new() { ActorId = 1, DirectorId = 1, Timestamp = 0 },
                 new() { ActorId = 1, DirectorId = 1, Timestamp = 1 },
@@ -81,15 +81,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1050 {
 
         // Time: O(n) where n is the number of records
         // Space: O(n) for grouping and results
-        public List<ActorDirectorResult> FindCooperations(List<ActorDirectorRecord> records) {
-            return records
+        public static List<ActorDirectorResult> FindCooperations(List<ActorDirectorRecord> records) {
+            return [.. records
                 .GroupBy(r => (r.ActorId, r.DirectorId))
                 .Where(g => g.Count() >= 3)
                 .Select(g => new ActorDirectorResult {
                     ActorId = g.Key.ActorId,
                     DirectorId = g.Key.DirectorId
-                })
-                .ToList();
+                })];
         }
     }
 }

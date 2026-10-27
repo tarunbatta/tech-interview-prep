@@ -40,7 +40,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem582 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             IList<int> pid1 = [1, 3, 10, 5];
             IList<int> ppid1 = [3, 0, 5, 3];
             int kill1 = 5;
@@ -54,7 +54,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem582 {
 
         // Time: O(n) where n is the number of processes
         // Space: O(n) to store the tree and queue/result
-        public IList<int> KillProcess(IList<int> pid, IList<int> ppid, int kill) {
+        public static IList<int> KillProcess(IList<int> pid, IList<int> ppid, int kill) {
             Dictionary<int, List<int>> children = [];
             for (int i = 0; i < pid.Count; i++) {
                 int p = pid[i];

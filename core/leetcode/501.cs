@@ -39,13 +39,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem501 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] FindMode (TreeNode root) {
+        public static int[] FindMode (TreeNode root) {
             return null;
         }
     }

@@ -29,13 +29,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem399 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public double[] CalcEquation (IList<IList<string>> equations, double[] values, IList<IList<string>> queries) {
+        public static double[] CalcEquation (IList<IList<string>> equations, double[] values, IList<IList<string>> queries) {
             return null;
         }
     }

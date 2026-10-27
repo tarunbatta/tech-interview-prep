@@ -43,13 +43,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem849 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxDistToClosest (int[] seats) {
+        public static int MaxDistToClosest (int[] seats) {
             return 0;
         }
     }

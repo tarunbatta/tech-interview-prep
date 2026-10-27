@@ -63,13 +63,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem981 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             string key = "";
             string value = "";
             int timestamp = 0;
             TimeMap obj = new TimeMap ();
-            obj.Set (key, value, timestamp);
-            string param_2 = obj.Get (key, timestamp);
+            TimeMap.Set(key, value, timestamp);
+            string param_2 = TimeMap.Get(key, timestamp);
         }
     }
 
@@ -78,11 +78,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem981 {
 
         }
 
-        public void Set (string key, string value, int timestamp) {
+        public static void Set (string key, string value, int timestamp) {
 
         }
 
-        public string Get (string key, int timestamp) {
+        public static string Get (string key, int timestamp) {
             return null;
         }
     }

@@ -25,12 +25,12 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem66 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (PlusOne (new int[] { 1, 2, 3 }));
-            Console.WriteLine (PlusOne (new int[] { 4, 3, 2, 1 }));
+        public static void Init () {
+            Console.WriteLine (PlusOne([1, 2, 3]));
+            Console.WriteLine (PlusOne([4, 3, 2, 1]));
         }
 
-        public int[] PlusOne (int[] digits) {
+        public static int[] PlusOne (int[] digits) {
             int carry = 1;
 
             for (int i = digits.Length - 1; i >= 0; i--) {

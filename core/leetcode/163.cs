@@ -41,15 +41,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem163
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            var res1 = FindMissingRanges(new int[] { 0, 1, 3, 50, 75 }, 0, 99);
+            var res1 = FindMissingRanges([0, 1, 3, 50, 75], 0, 99);
             foreach (var r in res1)
             {
                 Console.WriteLine($"[{r[0]},{r[1]}]");
             }
 
-            var res2 = FindMissingRanges(new int[] { -1 }, -1, -1);
+            var res2 = FindMissingRanges([-1], -1, -1);
             Console.WriteLine(res2.Count); // 0
         }
 
@@ -57,7 +57,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem163
         // Space: O(1) auxiliary space (excluding result list)
         public static IList<IList<int>> FindMissingRanges(int[] nums, int lower, int upper)
         {
-            List<IList<int>> result = new();
+            List<IList<int>> result = [];
             long current = lower;
 
             if (nums != null)
@@ -66,7 +66,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem163
                 {
                     if (num > current)
                     {
-                        result.Add(new List<int> { (int)current, num - 1 });
+                        result.Add([(int)current, num - 1]);
                     }
 
                     current = (long)num + 1;
@@ -75,7 +75,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem163
 
             if (current <= upper)
             {
-                result.Add(new List<int> { (int)current, upper });
+                result.Add([(int)current, upper]);
             }
 
             return result;

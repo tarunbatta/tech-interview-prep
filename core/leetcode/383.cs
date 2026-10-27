@@ -24,13 +24,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem383 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool CanConstruct (string ransomNote, string magazine) {
+        public static bool CanConstruct (string ransomNote, string magazine) {
             return false;
         }
     }

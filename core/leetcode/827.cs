@@ -43,13 +43,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem827 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LargestIsland (int[][] grid) {
+        public static int LargestIsland (int[][] grid) {
             return 0;
         }
     }

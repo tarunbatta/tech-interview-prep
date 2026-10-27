@@ -49,13 +49,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1123 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public TreeNode LcaDeepestLeaves (TreeNode root) {
+        public static TreeNode LcaDeepestLeaves (TreeNode root) {
             return null;
         }
     }

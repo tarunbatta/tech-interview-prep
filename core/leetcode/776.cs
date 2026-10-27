@@ -56,7 +56,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem776 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             TreeNode root1 = new(4,
                 new TreeNode(2, new TreeNode(1), new TreeNode(3)),
                 new TreeNode(6, new TreeNode(5), new TreeNode(7))
@@ -71,7 +71,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem776 {
 
         // Time: O(h) where h is the height of the BST
         // Space: O(h) for call stack
-        public TreeNode[] SplitBST(TreeNode root, int target) {
+        public static TreeNode[] SplitBST(TreeNode root, int target) {
             if (root == null) {
                 return [null, null];
             }

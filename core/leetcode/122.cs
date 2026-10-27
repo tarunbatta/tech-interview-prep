@@ -34,14 +34,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem122 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (MaxProfit (null));
-            Console.WriteLine (MaxProfit (new int[] { 7, 1, 5, 3, 6, 4 }));
-            Console.WriteLine (MaxProfit (new int[] { 1, 2, 3, 4, 5 }));
-            Console.WriteLine (MaxProfit (new int[] { 7, 6, 4, 3, 1 }));
+        public static void Init () {
+            Console.WriteLine (MaxProfit(null));
+            Console.WriteLine (MaxProfit([7, 1, 5, 3, 6, 4]));
+            Console.WriteLine (MaxProfit([1, 2, 3, 4, 5]));
+            Console.WriteLine (MaxProfit([7, 6, 4, 3, 1]));
         }
 
-        public int MaxProfit (int[] prices) {
+        public static int MaxProfit (int[] prices) {
             int result = 0;
 
             if (prices == null || prices.Length == 0) {

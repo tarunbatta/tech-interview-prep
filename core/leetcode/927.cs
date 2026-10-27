@@ -51,13 +51,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem927 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] ThreeEqualParts (int[] A) {
+        public static int[] ThreeEqualParts (int[] A) {
             return null;
         }
     }

@@ -51,13 +51,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1081 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string SmallestSubsequence (string text) {
+        public static string SmallestSubsequence (string text) {
             return null;
         }
     }

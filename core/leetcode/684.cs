@@ -45,13 +45,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem684 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] FindRedundantConnection (int[][] edges) {
+        public static int[] FindRedundantConnection (int[][] edges) {
             return null;
         }
     }

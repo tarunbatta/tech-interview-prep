@@ -41,21 +41,21 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem519 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Solution obj = new Solution (0, 0);
-            int[] param_1 = obj.Flip ();
-            obj.Reset ();
+            int[] param_1 = Flip();
+            Reset();
         }
 
         public Solution (int n_rows, int n_cols) {
 
         }
 
-        public int[] Flip () {
+        public static int[] Flip () {
             return null;
         }
 
-        public void Reset () {
+        public static void Reset () {
 
         }
     }

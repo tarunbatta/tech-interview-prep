@@ -36,19 +36,19 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem937 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (ReorderLogFiles (null));
-            Console.WriteLine (ReorderLogFiles (new string[] { }));
-            Console.WriteLine (ReorderLogFiles (new string[] { "dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero" }));
+        public static void Init () {
+            Console.WriteLine (ReorderLogFiles(null));
+            Console.WriteLine (ReorderLogFiles([]));
+            Console.WriteLine (ReorderLogFiles(["dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero"]));
         }
 
-        public string[] ReorderLogFiles (string[] logs) {
+        public static string[] ReorderLogFiles (string[] logs) {
             if (logs == null || logs.Length == 0) {
                 return logs;
             }
 
-            List<string> letters = new List<string> ();
-            List<string> digits = new List<string> ();
+            List<string> letters = [];
+            List<string> digits = [];
 
             foreach (string log in logs) {
                 string[] words = log.Split (' ');
@@ -65,14 +65,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem937 {
 
             letters.AddRange (digits);
 
-            return letters.ToArray ();
+            return [.. letters];
         }
     }
 
     public class LetterLogComparer : IComparer<string> {
         public int Compare (string one, string two) {
-            var oneWithoutIdentifier = RemoveIdentifier (one);
-            var twoWithoutIdentifier = RemoveIdentifier (two);
+            var oneWithoutIdentifier = RemoveIdentifier(one);
+            var twoWithoutIdentifier = RemoveIdentifier(two);
 
             if (oneWithoutIdentifier.Equals (twoWithoutIdentifier)) {
                 // a match was found, so compare the original strings with the identifier included
@@ -82,7 +82,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem937 {
             return string.Compare (oneWithoutIdentifier, twoWithoutIdentifier);
         }
 
-        private string RemoveIdentifier (string str) {
+        private static string RemoveIdentifier (string str) {
             var firstSpace = str.IndexOf (" ");
             return str.Substring (firstSpace + 1, str.Length - firstSpace - 1);
         }

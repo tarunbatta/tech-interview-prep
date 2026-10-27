@@ -89,7 +89,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1077 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<ProjectAssignment> projects = [
                 new() { ProjectId = 1, EmployeeId = 1 },
                 new() { ProjectId = 1, EmployeeId = 2 },
@@ -113,7 +113,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1077 {
 
         // Time: O(P + E) where P is assignments count and E is employees count
         // Space: O(E + P)
-        public List<MostExperiencedResult> MostExperiencedEmployees(List<ProjectAssignment> projects, List<Employee> employees) {
+        public static List<MostExperiencedResult> MostExperiencedEmployees(List<ProjectAssignment> projects, List<Employee> employees) {
             var expMap = employees.ToDictionary(e => e.EmployeeId, e => e.ExperienceYears);
 
             var result = new List<MostExperiencedResult>();

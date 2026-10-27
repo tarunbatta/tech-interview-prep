@@ -27,7 +27,7 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem660 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(NewInteger(9)); // 10
             Console.WriteLine(NewInteger(8)); // 8
             Console.WriteLine(NewInteger(100)); // 121
@@ -35,7 +35,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem660 {
 
         // Time: O(log_9 n)
         // Space: O(1)
-        public int NewInteger(int n) {
+        public static int NewInteger(int n) {
             long result = 0;
             long multiplier = 1;
 

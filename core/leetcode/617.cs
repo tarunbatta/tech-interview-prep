@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem617 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public TreeNode MergeTrees (TreeNode t1, TreeNode t2) {
+        public static TreeNode MergeTrees (TreeNode t1, TreeNode t2) {
             return null;
         }
     }

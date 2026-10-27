@@ -41,11 +41,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem407 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public int TrapRainWater (int[][] heightMap) {
+        public static int TrapRainWater (int[][] heightMap) {
             return 0;
         }
     }

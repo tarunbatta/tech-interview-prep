@@ -34,13 +34,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem563 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindTilt (TreeNode root) {
+        public static int FindTilt (TreeNode root) {
             return 0;
         }
     }

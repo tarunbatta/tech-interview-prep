@@ -22,13 +22,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem148 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public ListNode SortList (ListNode head) {
+        public static ListNode SortList (ListNode head) {
             return null;
         }
     }

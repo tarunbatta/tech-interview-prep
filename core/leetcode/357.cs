@@ -19,13 +19,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem357 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int CountNumbersWithUniqueDigits (int n) {
+        public static int CountNumbersWithUniqueDigits (int n) {
             return 0;
         }
     }

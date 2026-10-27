@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem646 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindLongestChain (int[][] pairs) {
+        public static int FindLongestChain (int[][] pairs) {
             return 0;
         }
     }

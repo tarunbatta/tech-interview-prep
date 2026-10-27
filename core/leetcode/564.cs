@@ -24,13 +24,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem564 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string NearestPalindromic (string n) {
+        public static string NearestPalindromic (string n) {
             return null;
         }
     }

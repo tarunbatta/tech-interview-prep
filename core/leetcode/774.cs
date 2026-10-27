@@ -31,7 +31,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem774 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] stations1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
             int k1 = 9;
             Console.WriteLine($"{MinmaxGasDist(stations1, k1):F5}"); // 0.50000
@@ -43,7 +43,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem774 {
 
         // Time: O(n * log(maxDist / 1e-6)) where n is the number of stations
         // Space: O(1)
-        public double MinmaxGasDist(int[] stations, int k) {
+        public static double MinmaxGasDist(int[] stations, int k) {
             double low = 0;
             double high = stations[^1] - stations[0];
 

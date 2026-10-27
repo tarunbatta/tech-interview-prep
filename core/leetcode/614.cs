@@ -66,7 +66,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem614 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<FollowRecord> table = [
                 new() { Followee = "Alice", Follower = "Bob" },
                 new() { Followee = "Bob", Follower = "C" },
@@ -82,18 +82,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem614 {
 
         // Time: O(n log n) where n is the number of records
         // Space: O(n) to store follow relationships and results
-        public List<SecondDegreeResult> GetSecondDegreeFollowers(List<FollowRecord> follows) {
+        public static List<SecondDegreeResult> GetSecondDegreeFollowers(List<FollowRecord> follows) {
             var whoFollowsSomeone = follows.Select(f => f.Follower).ToHashSet();
 
-            return follows
+            return [.. follows
                 .Where(f => whoFollowsSomeone.Contains(f.Followee))
                 .GroupBy(f => f.Followee)
                 .Select(g => new SecondDegreeResult {
                     Follower = g.Key,
                     Num = g.Select(x => x.Follower).Distinct().Count()
                 })
-                .OrderBy(r => r.Follower, StringComparer.Ordinal)
-                .ToList();
+                .OrderBy(r => r.Follower, StringComparer.Ordinal)];
         }
     }
 }

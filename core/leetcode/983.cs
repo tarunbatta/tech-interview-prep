@@ -61,11 +61,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem983 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public int MincostTickets (int[] days, int[] costs) {
+        public static int MincostTickets (int[] days, int[] costs) {
             return 0;
         }
     }

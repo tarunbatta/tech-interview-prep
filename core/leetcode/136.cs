@@ -23,13 +23,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem136 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (SingleNumber (null));
-            Console.WriteLine (SingleNumber (new int[] { 2, 2, 1 }));
-            Console.WriteLine (SingleNumber (new int[] { 4, 1, 2, 1, 2 }));
+        public static void Init () {
+            Console.WriteLine (SingleNumber(null));
+            Console.WriteLine (SingleNumber([2, 2, 1]));
+            Console.WriteLine (SingleNumber([4, 1, 2, 1, 2]));
         }
 
-        public int SingleNumber (int[] nums) {
+        public static int SingleNumber (int[] nums) {
             int result = 0;
 
             for (int i = 0; i < nums.Length; i++) {

@@ -43,13 +43,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem554 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LeastBricks (IList<IList<int>> wall) {
+        public static int LeastBricks (IList<IList<int>> wall) {
             return 0;
         }
     }

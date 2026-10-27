@@ -39,7 +39,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1056 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(ConfusingNumber(6)); // True
             Console.WriteLine(ConfusingNumber(89)); // True
             Console.WriteLine(ConfusingNumber(11)); // False
@@ -48,7 +48,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1056 {
 
         // Time: O(log_10 n)
         // Space: O(1)
-        public bool ConfusingNumber(int n) {
+        public static bool ConfusingNumber(int n) {
             Dictionary<int, int> rotateMap = new() {
                 { 0, 0 },
                 { 1, 1 },

@@ -34,13 +34,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem205 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsIsomorphic (string s, string t) {
+        public static bool IsIsomorphic (string s, string t) {
             return false;
         }
     }

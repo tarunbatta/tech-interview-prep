@@ -37,19 +37,19 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem139 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (WordBreak_a ("leetcode", new List<string> () { "leet", "code" }));
-            Console.WriteLine (WordBreak_a ("applepenapple", new List<string> () { "apple", "pen" }));
-            Console.WriteLine (WordBreak_a ("catsandog", new List<string> () { "cats", "dog", "sand", "and", "cat" }));
+        public static void Init() {
+            Console.WriteLine (WordBreak_a("leetcode", ["leet", "code"]));
+            Console.WriteLine (WordBreak_a("applepenapple", ["apple", "pen"]));
+            Console.WriteLine (WordBreak_a("catsandog", ["cats", "dog", "sand", "and", "cat"]));
 
-            Console.WriteLine (WordBreak_b ("leetcode", new List<string> () { "leet", "code" }));
-            Console.WriteLine (WordBreak_b ("applepenapple", new List<string> () { "apple", "pen" }));
-            Console.WriteLine (WordBreak_b ("catsandog", new List<string> () { "cats", "dog", "sand", "and", "cat" }));
+            Console.WriteLine (WordBreak_b("leetcode", ["leet", "code"]));
+            Console.WriteLine (WordBreak_b("applepenapple", ["apple", "pen"]));
+            Console.WriteLine (WordBreak_b("catsandog", ["cats", "dog", "sand", "and", "cat"]));
         }
 
         // Time: O (n^2)
         // Space: O (n)
-        public bool WordBreak_a (String s, IList<String> wordDict) {
+        public static bool WordBreak_a (String s, IList<String> wordDict) {
             bool[] dp = new bool[s.Length + 1];
             dp[0] = true;
 
@@ -69,17 +69,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem139 {
 
         // Time: O (n^2)
         // Space: O (n)
-        public bool WordBreak_b (string s, IList<string> wordDict) {
+        public static bool WordBreak_b (string s, IList<string> wordDict) {
             List<bool?> memo = new List<bool?> (s.Length);
 
             for (int i = 0; i < s.Length; i++) {
                 memo.Add (null);
             }
 
-            return WordBreakHelper (s, wordDict, 0, memo);
+            return WordBreakHelper(s, wordDict, 0, memo);
         }
 
-        private bool WordBreakHelper (String s, IList<String> wordDict, int start, List<bool?> memo) {
+        private static bool WordBreakHelper (String s, IList<String> wordDict, int start, List<bool?> memo) {
             if (start == s.Length) {
                 return true;
             }
@@ -89,7 +89,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem139 {
             }
 
             for (int end = start + 1; end <= s.Length; end++) {
-                if (wordDict.Contains (s.Substring (start, end - start)) && WordBreakHelper (s, wordDict, end, memo)) {
+                if (wordDict.Contains (s.Substring (start, end - start)) && WordBreakHelper(s, wordDict, end, memo)) {
                     memo[start] = true;
                     return (bool) memo[start];
                 }

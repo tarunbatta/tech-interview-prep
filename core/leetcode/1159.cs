@@ -56,7 +56,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1159
     // LEFT JOIN Items i ON r.item_id = i.item_id;
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var users = new List<User>
             {
@@ -93,7 +93,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1159
 
         // Time: O(U + O log O) where U is users, O is orders (due to sorting sales per seller)
         // Space: O(U + O + I)
-        public IList<MarketAnalysisIIResult> MarketAnalysisII(List<User> users, List<Order> orders, List<Item> items)
+        public static IList<MarketAnalysisIIResult> MarketAnalysisII(List<User> users, List<Order> orders, List<Item> items)
         {
             var itemBrands = items.ToDictionary(i => i.ItemId, i => i.ItemBrand);
 

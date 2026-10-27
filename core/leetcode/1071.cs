@@ -42,13 +42,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1071 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string GcdOfStrings (string str1, string str2) {
+        public static string GcdOfStrings (string str1, string str2) {
             return null;
         }
     }

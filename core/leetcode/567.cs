@@ -34,13 +34,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem567 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool CheckInclusion (string s1, string s2) {
+        public static bool CheckInclusion (string s1, string s2) {
             return false;
         }
     }

@@ -65,26 +65,26 @@ namespace InterviewPreperationGuide.Core.DataStructure.BinarySearchTree {
             }
         }
 
-        public void InOrderTraversal (Node r) {
+        public static void InOrderTraversal (Node r) {
             if (r != null) {
-                InOrderTraversal (r.left);
+                InOrderTraversal(r.left);
                 r.DisplayNode ();
-                InOrderTraversal (r.right);
+                InOrderTraversal(r.right);
             }
         }
 
-        public void PreOrderTraversal (Node r) {
+        public static void PreOrderTraversal (Node r) {
             if (r != null) {
                 r.DisplayNode ();
-                PreOrderTraversal (r.left);
-                PreOrderTraversal (r.right);
+                PreOrderTraversal(r.left);
+                PreOrderTraversal(r.right);
             }
         }
 
-        public void PostOrderTraversal (Node r) {
+        public static void PostOrderTraversal (Node r) {
             if (r != null) {
-                PostOrderTraversal (r.left);
-                PostOrderTraversal (r.right);
+                PostOrderTraversal(r.left);
+                PostOrderTraversal(r.right);
                 r.DisplayNode ();
             }
         }
@@ -127,7 +127,7 @@ namespace InterviewPreperationGuide.Core.DataStructure.BinarySearchTree {
             return current;
         }
 
-        public Node GetSuccessor (Node delNode) {
+        public static Node GetSuccessor (Node delNode) {
             Node successorParent = delNode;
             Node successor = delNode;
             Node current = delNode.right;
@@ -192,7 +192,7 @@ namespace InterviewPreperationGuide.Core.DataStructure.BinarySearchTree {
                     parent.right = current.right;
                 }
             } else {
-                Node successor = GetSuccessor (current);
+                Node successor = GetSuccessor(current);
 
                 if (current == root) {
                     root = successor;

@@ -17,19 +17,19 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem449 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Codec codec = new Codec ();
-            codec.deserialize (codec.serialize (null));
+            Codec.deserialize(Codec.serialize(null));
         }
     }
     public class Codec {
         // Encodes a tree to a single string.    
-        public string serialize (TreeNode root) {
+        public static string serialize (TreeNode root) {
             return null;
         }
 
         // Decodes your encoded data to tree.    
-        public TreeNode deserialize (string data) {
+        public static TreeNode deserialize (string data) {
             return null;
         }
     }

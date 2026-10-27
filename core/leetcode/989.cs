@@ -60,13 +60,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem989 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> AddToArrayForm (int[] A, int K) {
+        public static IList<int> AddToArrayForm (int[] A, int K) {
             return null;
         }
     }

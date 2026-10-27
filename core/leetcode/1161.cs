@@ -36,13 +36,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1161 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxLevelSum (TreeNode root) {
+        public static int MaxLevelSum (TreeNode root) {
             return 0;
         }
     }

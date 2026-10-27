@@ -23,7 +23,7 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem5 {
     public class Solution {
-        public void Init () {
+        public static void Init() {
             Console.WriteLine (LongestPalindrome (null));
             Console.WriteLine (LongestPalindrome (""));
             Console.WriteLine (LongestPalindrome ("a"));
@@ -34,12 +34,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem5 {
             // TODO: Manacher's Algorithm
         }
 
-        private int start;
-        private int end;
+        private static int start;
+        private static int end;
 
         // Time: O (n^2)
         // Space: O (1)
-        public string LongestPalindrome (string s) {
+        public static string LongestPalindrome (string s) {
+            start = 0;
+            end = 0;
+
             int len = s.Length;
 
             if (len < 2) {
@@ -57,7 +60,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem5 {
             return s.Substring (start, end);
         }
 
-        private void expandAroundCenter (string s, int j, int k) {
+        private static void expandAroundCenter (string s, int j, int k) {
             while (j >= 0 && k < s.Length && s[j] == s[k]) {
                 j--;
                 k++;

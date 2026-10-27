@@ -28,29 +28,31 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem345 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (1)
-        public string ReverseVowels (string s) {
+        public static string ReverseVowels (string s) {
             if (string.IsNullOrEmpty (s)) {
                 return s;
             }
 
             char[] arr = s.ToCharArray ();
-            HashSet<char> hash = new HashSet<char> ();
-            hash.Add ('A');
-            hash.Add ('E');
-            hash.Add ('I');
-            hash.Add ('O');
-            hash.Add ('U');
-            hash.Add ('a');
-            hash.Add ('e');
-            hash.Add ('i');
-            hash.Add ('o');
-            hash.Add ('u');
+            HashSet<char> hash =
+            [
+                'A',
+                'E',
+                'I',
+                'O',
+                'U',
+                'a',
+                'e',
+                'i',
+                'o',
+                'u',
+            ];
 
             int i = 0;
             int j = arr.Length - 1;
@@ -59,7 +61,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem345 {
                 while (i < j && !hash.Contains (arr[i])) i++;
                 while (i < j && !hash.Contains (arr[j])) j--;
 
-                Swap (arr, i, j);
+                Swap(arr, i, j);
                 i++;
                 j--;
             }
@@ -67,7 +69,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem345 {
             return new string (arr);
         }
 
-        private void Swap (char[] arr, int i, int j) {
+        private static void Swap (char[] arr, int i, int j) {
             if (i < j) {
                 char temp = arr[i];
                 arr[i] = arr[j];

@@ -24,13 +24,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem485 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindMaxConsecutiveOnes (int[] nums) {
+        public static int FindMaxConsecutiveOnes (int[] nums) {
             return 0;
         }
     }

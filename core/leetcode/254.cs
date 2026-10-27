@@ -34,7 +34,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem254
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var res1 = GetFactors(12);
             foreach (var r in res1)
@@ -50,14 +50,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem254
         // Space: O(log n) recursion stack depth and current combination buffer
         public static IList<IList<int>> GetFactors(int n)
         {
-            List<IList<int>> result = new();
+            List<IList<int>> result = [];
 
             if (n <= 3)
             {
                 return result;
             }
 
-            Dfs(n, 2, new List<int>(), result);
+            Dfs(n, 2, [], result);
             return result;
         }
 

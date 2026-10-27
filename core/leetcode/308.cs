@@ -45,16 +45,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem308
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] matrix = new int[][]
-            {
-                new int[] { 3, 0, 1, 4, 2 },
-                new int[] { 5, 6, 3, 2, 1 },
-                new int[] { 1, 2, 0, 1, 5 },
-                new int[] { 4, 1, 0, 1, 7 },
-                new int[] { 1, 0, 3, 0, 5 }
-            };
+            int[][] matrix =
+            [
+                [3, 0, 1, 4, 2],
+                [5, 6, 3, 2, 1],
+                [1, 2, 0, 1, 5],
+                [4, 1, 0, 1, 7],
+                [1, 0, 3, 0, 5]
+            ];
 
             NumMatrix numMatrix = new(matrix);
             Console.WriteLine(numMatrix.SumRegion(2, 1, 4, 3)); // 8

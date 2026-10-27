@@ -28,25 +28,25 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem257 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (h), where h s the height of the tree
-        public IList<string> BinaryTreePaths (TreeNode root) {
-            IList<string> result = new List<string> ();
+        public static IList<string> BinaryTreePaths (TreeNode root) {
+            IList<string> result = [];
 
             if (root == null) {
                 return result;
             }
 
-            Dfs (root, result, "");
+            Dfs(root, result, "");
 
             return result;
         }
 
-        private void Dfs (TreeNode node, IList<string> result, string path) {
+        private static void Dfs (TreeNode node, IList<string> result, string path) {
             path += node.val;
 
             if (node.left == null && node.right == null) {
@@ -55,10 +55,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem257 {
             }
 
             if (node.left != null)
-                Dfs (node.left, result, path + "->");
+                Dfs(node.left, result, path + "->");
 
             if (node.right != null)
-                Dfs (node.right, result, path + "->");
+                Dfs(node.right, result, path + "->");
         }
     }
 

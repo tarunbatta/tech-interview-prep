@@ -7,7 +7,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c7q1 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
     }

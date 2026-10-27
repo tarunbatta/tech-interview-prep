@@ -32,7 +32,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem161
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(IsOneEditDistance("ab", "acb")); // True
             Console.WriteLine(IsOneEditDistance("", ""));      // False

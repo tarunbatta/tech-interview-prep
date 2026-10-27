@@ -34,13 +34,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem51 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<IList<string>> SolveNQueens (int n) {
+        public static IList<IList<string>> SolveNQueens (int n) {
             return null;
         }
     }

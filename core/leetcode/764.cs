@@ -65,13 +65,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem764 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int OrderOfLargestPlusSign (int N, int[][] mines) {
+        public static int OrderOfLargestPlusSign (int N, int[][] mines) {
             return 0;
         }
     }

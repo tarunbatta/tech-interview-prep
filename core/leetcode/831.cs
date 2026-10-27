@@ -81,13 +81,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem831 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string MaskPII (string S) {
+        public static string MaskPII (string S) {
             return null;
         }
     }

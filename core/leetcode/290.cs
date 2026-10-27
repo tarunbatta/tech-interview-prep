@@ -36,13 +36,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem290 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool WordPattern (string pattern, string str) {
+        public static bool WordPattern (string pattern, string str) {
             return false;
         }
     }

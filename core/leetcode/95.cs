@@ -32,13 +32,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem95 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<TreeNode> GenerateTrees (int n) {
+        public static IList<TreeNode> GenerateTrees (int n) {
             return null;
         }
     }

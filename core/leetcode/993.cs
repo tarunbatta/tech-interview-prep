@@ -57,13 +57,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem993 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsCousins (TreeNode root, int x, int y) {
+        public static bool IsCousins (TreeNode root, int x, int y) {
             return false;
         }
     }

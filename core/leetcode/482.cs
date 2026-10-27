@@ -43,15 +43,15 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem482 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (LicenseKeyFormatting (null, 0));
-            Console.WriteLine (LicenseKeyFormatting ("5F3Z-2e-9-w", 4));
-            Console.WriteLine (LicenseKeyFormatting ("2-5g-3-J", 2));
+        public static void Init () {
+            Console.WriteLine (LicenseKeyFormatting(null, 0));
+            Console.WriteLine (LicenseKeyFormatting("5F3Z-2e-9-w", 4));
+            Console.WriteLine (LicenseKeyFormatting("2-5g-3-J", 2));
         }
 
         // Time: O (n)
         // Space: O (n)
-        public string LicenseKeyFormatting (string S, int K) {
+        public static string LicenseKeyFormatting (string S, int K) {
             if (string.IsNullOrEmpty (S) || K == 0) {
                 return S;
             }

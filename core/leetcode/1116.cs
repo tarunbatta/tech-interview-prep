@@ -87,7 +87,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1116 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             StringBuilder sb = new();
             Action<int> print = val => sb.Append(val);
 

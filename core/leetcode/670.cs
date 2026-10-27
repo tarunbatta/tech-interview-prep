@@ -22,19 +22,19 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem670 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (MaximumSwap_a (0));
-            Console.WriteLine (MaximumSwap_a (2736));
-            Console.WriteLine (MaximumSwap_a (9973));
-            Console.WriteLine (MaximumSwap_a (98368));
+        public static void Init () {
+            Console.WriteLine (MaximumSwap_a(0));
+            Console.WriteLine (MaximumSwap_a(2736));
+            Console.WriteLine (MaximumSwap_a(9973));
+            Console.WriteLine (MaximumSwap_a(98368));
 
-            Console.WriteLine (MaximumSwap_b (0));
-            Console.WriteLine (MaximumSwap_b (2736));
-            Console.WriteLine (MaximumSwap_b (9973));
-            Console.WriteLine (MaximumSwap_b (98368));
+            Console.WriteLine (MaximumSwap_b(0));
+            Console.WriteLine (MaximumSwap_b(2736));
+            Console.WriteLine (MaximumSwap_b(9973));
+            Console.WriteLine (MaximumSwap_b(98368));
         }
 
-        public int MaximumSwap_a (int num) {
+        public static int MaximumSwap_a (int num) {
             int result = 0;
 
             if (num == 0) {
@@ -62,7 +62,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem670 {
 
         // At each digit of the input number in order, if there is a larger digit that occurs later, 
         // we know that the best swap must occur with the digit we are currently considering.
-        public int MaximumSwap_b (int num) {
+        public static int MaximumSwap_b (int num) {
             int result = 0;
 
             if (num == 0) {

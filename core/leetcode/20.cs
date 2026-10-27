@@ -50,19 +50,19 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem20 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (IsValid (null));
-            Console.WriteLine (IsValid (string.Empty));
-            Console.WriteLine (IsValid ("()"));
-            Console.WriteLine (IsValid ("()[]{}"));
-            Console.WriteLine (IsValid ("(]"));
-            Console.WriteLine (IsValid ("([)]"));
-            Console.WriteLine (IsValid ("{[]}"));
+        public static void Init () {
+            Console.WriteLine (IsValid(null));
+            Console.WriteLine (IsValid(string.Empty));
+            Console.WriteLine (IsValid("()"));
+            Console.WriteLine (IsValid("()[]{}"));
+            Console.WriteLine (IsValid("(]"));
+            Console.WriteLine (IsValid("([)]"));
+            Console.WriteLine (IsValid("{[]}"));
         }
 
         // Time: O (n)
         // Space: O (n)
-        public bool IsValid (string s) {
+        public static bool IsValid (string s) {
             if (string.IsNullOrEmpty (s)) {
                 return true;
             }

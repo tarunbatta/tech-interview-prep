@@ -52,13 +52,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1094 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool CarPooling (int[][] trips, int capacity) {
+        public static bool CarPooling (int[][] trips, int capacity) {
             return false;
         }
     }

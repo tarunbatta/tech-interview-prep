@@ -10,30 +10,30 @@ namespace InterviewPreperationGuide.Core.Algorithms.Sorting {
     public class QuickSort {
         public void Init () {
             _QuickSort (null);
-            _QuickSort (new int[0]);
-            _QuickSort (new int[] { 1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25 });
+            _QuickSort ([]);
+            _QuickSort ([1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25]);
         }
 
         public void _QuickSort (int[] arr) {
             if (arr != null && arr.Length > 0) {
-                Sort (arr, 0, arr.Length - 1);
+                Sort(arr, 0, arr.Length - 1);
             }
 
-            Display (arr);
+            Display(arr);
         }
 
-        public void Sort (int[] arr, int low, int high) {
+        public static void Sort (int[] arr, int low, int high) {
             if (low < high) {
                 //pi is partitioning index, arr[pi] is now at right place
-                int pi = Partition (arr, low, high);
+                int pi = Partition(arr, low, high);
 
                 // Recursively sort elements before partition and after partition
-                Sort (arr, low, pi - 1);
-                Sort (arr, pi + 1, high);
+                Sort(arr, low, pi - 1);
+                Sort(arr, pi + 1, high);
             }
         }
 
-        public int Partition (int[] arr, int low, int high) {
+        public static int Partition (int[] arr, int low, int high) {
             int pivot = arr[high];
             int i = (low - 1); // index of smaller element
 
@@ -43,17 +43,17 @@ namespace InterviewPreperationGuide.Core.Algorithms.Sorting {
                     i++;
 
                     // swap arr[i] and arr[j]
-                    Swap (arr, i, j);
+                    Swap(arr, i, j);
                 }
             }
 
             // swap arr[i+1] and arr[high] (or pivot)
-            Swap (arr, i + 1, high);
+            Swap(arr, i + 1, high);
 
             return i + 1;
         }
 
-        private void Swap (int[] arr, int i, int j) {
+        private static void Swap (int[] arr, int i, int j) {
             if (i < j && i >= 0 && j < arr.Length) {
                 int temp = arr[i];
                 arr[i] = arr[j];
@@ -61,7 +61,7 @@ namespace InterviewPreperationGuide.Core.Algorithms.Sorting {
             }
         }
 
-        public void Display (int[] arr) {
+        public static void Display (int[] arr) {
             if (arr != null) {
                 for (int x = 0; x < arr.Length; x++) {
                     Console.Write (arr[x] + " ");

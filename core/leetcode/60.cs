@@ -42,11 +42,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem60 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public string GetPermutation (int n, int k) {
+        public static string GetPermutation (int n, int k) {
             return null;
         }
     }

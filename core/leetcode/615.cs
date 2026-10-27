@@ -92,7 +92,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem615 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<SalaryRecord> salaries = [
                 new() { Id = 1, EmployeeId = 1, Amount = 9000, PayDate = new DateTime(2017, 3, 31) },
                 new() { Id = 2, EmployeeId = 2, Amount = 6000, PayDate = new DateTime(2017, 3, 31) },
@@ -116,7 +116,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem615 {
 
         // Time: O(S log S + E) where S is salaries count, E is employees count
         // Space: O(S + E)
-        public List<SalaryComparisonResult> CompareAverageSalaries(List<SalaryRecord> salaries, List<EmployeeDepartment> employees) {
+        public static List<SalaryComparisonResult> CompareAverageSalaries(List<SalaryRecord> salaries, List<EmployeeDepartment> employees) {
             var empDeptMap = employees.ToDictionary(e => e.EmployeeId, e => e.DepartmentId);
 
             var companyAvg = salaries
@@ -132,7 +132,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem615 {
                     Average = g.Average(s => s.Amount)
                 });
 
-            return deptAvg
+            return [.. deptAvg
                 .Select(d => {
                     double comp = companyAvg[d.Month];
                     string comparison = Math.Abs(d.Average - comp) < 1e-6
@@ -146,8 +146,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem615 {
                     };
                 })
                 .OrderByDescending(r => r.PayMonth)
-                .ThenBy(r => r.DepartmentId)
-                .ToList();
+                .ThenBy(r => r.DepartmentId)];
         }
     }
 }

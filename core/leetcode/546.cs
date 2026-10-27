@@ -33,13 +33,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem546 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int RemoveBoxes (int[] boxes) {
+        public static int RemoveBoxes (int[] boxes) {
             return 0;
         }
     }

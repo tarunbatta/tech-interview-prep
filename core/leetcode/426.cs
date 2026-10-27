@@ -45,10 +45,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem426
 
     public class Solution
     {
-        private Node _first;
-        private Node _last;
+        private static Node _first;
+        private static Node _last;
 
-        public void Init()
+        public static void Init()
         {
             Node root = new(4)
             {
@@ -76,7 +76,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem426
 
         // Time: O(n) where n is the number of nodes in the BST (standard inorder traversal)
         // Space: O(h) where h is tree height for the recursion call stack
-        public Node TreeToDoublyList(Node root)
+        public static Node TreeToDoublyList(Node root)
         {
             if (root == null)
             {
@@ -95,7 +95,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem426
             return _first;
         }
 
-        private void Inorder(Node node)
+        private static void Inorder(Node node)
         {
             if (node == null)
             {

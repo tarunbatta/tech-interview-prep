@@ -28,7 +28,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem159
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(LengthOfLongestSubstringTwoDistinct("eceba"));   // 3
             Console.WriteLine(LengthOfLongestSubstringTwoDistinct("ccaabbb")); // 5
@@ -45,7 +45,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem159
 
             int maxLength = 0;
             int left = 0;
-            Dictionary<char, int> charCounts = new();
+            Dictionary<char, int> charCounts = [];
 
             for (int right = 0; right < s.Length; right++)
             {

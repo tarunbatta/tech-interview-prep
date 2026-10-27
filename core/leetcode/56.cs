@@ -26,13 +26,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem56 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[][] Merge (int[][] intervals) {
+        public static int[][] Merge (int[][] intervals) {
             return null;
         }
     }

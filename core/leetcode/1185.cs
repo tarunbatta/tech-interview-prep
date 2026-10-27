@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1185 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
         // Time: O (1)
         // Space: O (1)
-        public string DayOfTheWeek (int day, int month, int year) {
+        public static string DayOfTheWeek (int day, int month, int year) {
             DateTime dt = new DateTime (year, month, day);
             return dt.DayOfWeek.ToString ();
         }

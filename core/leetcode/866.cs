@@ -52,13 +52,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem866 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int PrimePalindrome (int N) {
+        public static int PrimePalindrome (int N) {
             return 0;
         }
     }

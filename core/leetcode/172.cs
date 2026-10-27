@@ -25,13 +25,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem172 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int TrailingZeroes (int n) {
+        public static int TrailingZeroes (int n) {
             return 0;
         }
     }

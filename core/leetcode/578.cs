@@ -66,7 +66,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem578 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<SurveyLog> logs = [
                 new() { Id = 5, Action = "show", QuestionId = 285, AnswerId = null, QNum = 1, Timestamp = 123 },
                 new() { Id = 5, Action = "answer", QuestionId = 285, AnswerId = 124124, QNum = 1, Timestamp = 124 },
@@ -79,7 +79,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem578 {
 
         // Time: O(n log n) where n is the number of survey log rows
         // Space: O(k) where k is the number of distinct questions
-        public int GetHighestAnswerRateQuestion(List<SurveyLog> logs) {
+        public static int GetHighestAnswerRateQuestion(List<SurveyLog> logs) {
             return logs
                 .GroupBy(l => l.QuestionId)
                 .Select(g => new {

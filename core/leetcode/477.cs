@@ -30,12 +30,12 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem477 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (TotalHammingDistance (null));
-            Console.WriteLine (TotalHammingDistance (new int[] { 4, 14, 2 }));
+        public static void Init () {
+            Console.WriteLine (TotalHammingDistance(null));
+            Console.WriteLine (TotalHammingDistance([4, 14, 2]));
         }
 
-        public int TotalHammingDistance (int[] nums) {
+        public static int TotalHammingDistance (int[] nums) {
             int result = 0;
 
             if (nums != null && nums.Length > 0) {

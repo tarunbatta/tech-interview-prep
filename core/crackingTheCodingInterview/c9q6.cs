@@ -9,7 +9,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.chc9q6apter9 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
     }

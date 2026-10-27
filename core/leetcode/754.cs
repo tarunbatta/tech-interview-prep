@@ -38,13 +38,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem754 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ReachNumber (int target) {
+        public static int ReachNumber (int target) {
             return 0;
         }
     }

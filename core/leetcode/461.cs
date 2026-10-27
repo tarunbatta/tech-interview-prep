@@ -28,11 +28,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem461 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (HammingDistance (1, 4));
+        public static void Init () {
+            Console.WriteLine (HammingDistance(1, 4));
         }
 
-        public int HammingDistance (int x, int y) {
+        public static int HammingDistance (int x, int y) {
             int xor = x ^ y;
             int result = 0;
 

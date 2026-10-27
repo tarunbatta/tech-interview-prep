@@ -37,13 +37,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem455 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindContentChildren (int[] g, int[] s) {
+        public static int FindContentChildren (int[] g, int[] s) {
             return 0;
         }
     }

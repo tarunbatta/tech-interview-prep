@@ -46,13 +46,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem973 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[][] KClosest (int[][] points, int K) {
+        public static int[][] KClosest (int[][] points, int K) {
             return null;
         }
     }

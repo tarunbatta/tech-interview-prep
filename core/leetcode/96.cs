@@ -24,23 +24,23 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem96 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (NumTrees_a (0));
-            Console.WriteLine (NumTrees_a (1));
-            Console.WriteLine (NumTrees_a (2));
-            Console.WriteLine (NumTrees_a (3));
-            Console.WriteLine (NumTrees_a (4));
-            Console.WriteLine (NumTrees_a (5));
+        public static void Init () {
+            Console.WriteLine (NumTrees_a(0));
+            Console.WriteLine (NumTrees_a(1));
+            Console.WriteLine (NumTrees_a(2));
+            Console.WriteLine (NumTrees_a(3));
+            Console.WriteLine (NumTrees_a(4));
+            Console.WriteLine (NumTrees_a(5));
 
-            Console.WriteLine (NumTrees_b (0));
-            Console.WriteLine (NumTrees_b (1));
-            Console.WriteLine (NumTrees_b (2));
-            Console.WriteLine (NumTrees_b (3));
-            Console.WriteLine (NumTrees_b (4));
-            Console.WriteLine (NumTrees_b (5));
+            Console.WriteLine (NumTrees_b(0));
+            Console.WriteLine (NumTrees_b(1));
+            Console.WriteLine (NumTrees_b(2));
+            Console.WriteLine (NumTrees_b(3));
+            Console.WriteLine (NumTrees_b(4));
+            Console.WriteLine (NumTrees_b(5));
         }
 
-        public int NumTrees_a (int n) {
+        public static int NumTrees_a (int n) {
             if (n < 0) {
                 return 0;
             }
@@ -63,7 +63,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem96 {
         }
 
         // Catalan Number
-        public int NumTrees_b (int n) {
+        public static int NumTrees_b (int n) {
             long c = 1;
 
             for (int i = 0; i < n; ++i) {

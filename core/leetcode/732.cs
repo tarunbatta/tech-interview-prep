@@ -46,9 +46,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem732 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             MyCalendarThree obj = new MyCalendarThree ();
-            int param_1 = obj.Book (0, 0);
+            int param_1 = MyCalendarThree.Book(0, 0);
         }
     }
 
@@ -57,7 +57,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem732 {
 
         }
 
-        public int Book (int start, int end) {
+        public static int Book (int start, int end) {
             return 0;
         }
     }

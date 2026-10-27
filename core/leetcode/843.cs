@@ -37,13 +37,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem843 {
     public class Solution {
-        public void FindSecretWord (string[] wordlist, Master master) {
+        public static void FindSecretWord (string[] wordlist, Master master) {
 
         }
     }
 
     public class Master {
-        public int Guess (string word) {
+        public static int Guess (string word) {
             return 0;
         }
     }

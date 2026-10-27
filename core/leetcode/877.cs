@@ -41,13 +41,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem877 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool StoneGame (int[] piles) {
+        public static bool StoneGame (int[] piles) {
             return false;
         }
     }

@@ -40,9 +40,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem911 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             TopVotedCandidate obj = new TopVotedCandidate (null, null);
-            int param_1 = obj.Q (1);
+            int param_1 = TopVotedCandidate.Q(1);
         }
     }
 
@@ -51,7 +51,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem911 {
 
         }
 
-        public int Q (int t) {
+        public static int Q (int t) {
             return 0;
         }
     }

@@ -46,17 +46,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem569
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            List<Employee> employees = new()
-            {
+            List<Employee> employees =
+            [
                 new Employee { Id = 1, Company = "A", Salary = 2341 },
                 new Employee { Id = 2, Company = "A", Salary = 341 },
                 new Employee { Id = 3, Company = "A", Salary = 15 },
                 new Employee { Id = 4, Company = "A", Salary = 15314 },
                 new Employee { Id = 5, Company = "A", Salary = 451 },
                 new Employee { Id = 6, Company = "A", Salary = 513 }
-            };
+            ];
 
             var medians = GetMedianEmployeeSalaries(employees);
             foreach (var e in medians)
@@ -69,7 +69,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem569
         // Space: O(N) for grouping and filtered median results
         public static IList<Employee> GetMedianEmployeeSalaries(IList<Employee> employees)
         {
-            List<Employee> results = new();
+            List<Employee> results = [];
 
             if (employees == null || employees.Count == 0)
             {

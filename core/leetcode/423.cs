@@ -26,20 +26,20 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem423 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (OriginalDigits_a ("owoztneoer"));
-            Console.WriteLine (OriginalDigits_a ("fviefuro"));
-            Console.WriteLine (OriginalDigits_a ("zeroonetwothreefourfivesixseveneightnine"));
+        public static void Init () {
+            Console.WriteLine (OriginalDigits_a("owoztneoer"));
+            Console.WriteLine (OriginalDigits_a("fviefuro"));
+            Console.WriteLine (OriginalDigits_a("zeroonetwothreefourfivesixseveneightnine"));
 
-            Console.WriteLine (OriginalDigits_b ("owoztneoer"));
-            Console.WriteLine (OriginalDigits_b ("fviefuro"));
-            Console.WriteLine (OriginalDigits_b ("zeroonetwothreefourfivesixseveneightnine"));
+            Console.WriteLine (OriginalDigits_b("owoztneoer"));
+            Console.WriteLine (OriginalDigits_b("fviefuro"));
+            Console.WriteLine (OriginalDigits_b("zeroonetwothreefourfivesixseveneightnine"));
         }
 
-        public string OriginalDigits_a (string s) {
+        public static string OriginalDigits_a (string s) {
             string result = string.Empty;
 
-            string[] word = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+            string[] word = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
             int[] count = new int[26];
             foreach (char c in s) {
@@ -89,7 +89,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem423 {
             return result;
         }
 
-        public string OriginalDigits_b (string s) {
+        public static string OriginalDigits_b (string s) {
             char[] sc = s.ToCharArray ();
             int[] count = new int[10];
 

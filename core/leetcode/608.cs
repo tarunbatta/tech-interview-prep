@@ -88,7 +88,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem608 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<TreeNodeRecord> tree = [
                 new() { Id = 1, PId = null },
                 new() { Id = 2, PId = 1 },
@@ -105,20 +105,20 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem608 {
 
         // Time: O(n) where n is the number of nodes
         // Space: O(n) to store parent IDs and results
-        public List<TreeNodeTypeResult> ClassifyTreeNodes(List<TreeNodeRecord> nodes) {
+        public static List<TreeNodeTypeResult> ClassifyTreeNodes(List<TreeNodeRecord> nodes) {
             var parentIds = nodes
                 .Where(n => n.PId.HasValue)
                 .Select(n => n.PId!.Value)
                 .ToHashSet();
 
-            return nodes.Select(n => new TreeNodeTypeResult {
+            return [.. nodes.Select(n => new TreeNodeTypeResult {
                 Id = n.Id,
                 Type = !n.PId.HasValue
                     ? "Root"
                     : parentIds.Contains(n.Id)
                         ? "Inner"
                         : "Leaf"
-            }).ToList();
+            })];
         }
     }
 }

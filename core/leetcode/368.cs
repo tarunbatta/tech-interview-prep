@@ -29,13 +29,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem368 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> LargestDivisibleSubset (int[] nums) {
+        public static IList<int> LargestDivisibleSubset (int[] nums) {
             return null;
         }
     }

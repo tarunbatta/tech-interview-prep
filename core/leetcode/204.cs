@@ -17,14 +17,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem204 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (CountPrimes (0));
-            Console.WriteLine (CountPrimes (3));
-            Console.WriteLine (CountPrimes (4));
-            Console.WriteLine (CountPrimes (10));
+        public static void Init() {
+            Console.WriteLine (CountPrimes(0));
+            Console.WriteLine (CountPrimes(3));
+            Console.WriteLine (CountPrimes(4));
+            Console.WriteLine (CountPrimes(10));
         }
 
-        public int CountPrimes (int n) {
+        public static int CountPrimes (int n) {
             int result = 0;
 
             if (n < 2) {
@@ -32,7 +32,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem204 {
             }
 
             for (int i = 2; i < n; i++) {
-                if (IsPrime (i)) {
+                if (IsPrime(i)) {
                     result++;
                 }
             }
@@ -40,7 +40,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem204 {
             return result;
         }
 
-        private bool IsPrime (int n) {
+        private static bool IsPrime (int n) {
             if (n < 2) {
                 return false;
             }

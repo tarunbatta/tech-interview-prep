@@ -33,7 +33,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1135 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[][] conn1 = [[1, 2, 5], [1, 3, 6], [2, 3, 1]];
             Console.WriteLine(MinimumCost(3, conn1)); // 6
 
@@ -43,7 +43,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1135 {
 
         // Time: O(E log E) where E is connections length
         // Space: O(V) where V is n
-        public int MinimumCost(int n, int[][] connections) {
+        public static int MinimumCost(int n, int[][] connections) {
             Array.Sort(connections, (a, b) => a[2].CompareTo(b[2]));
 
             int[] parent = new int[n + 1];

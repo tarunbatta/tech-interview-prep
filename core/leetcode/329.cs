@@ -36,11 +36,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem329 {
   public class Solution {
-    public void Init () {
+    public static void Init () {
 
     }
 
-    public int LongestIncreasingPath (int[][] matrix) {
+    public static int LongestIncreasingPath (int[][] matrix) {
       return 0;
     }
   }

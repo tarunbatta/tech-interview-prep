@@ -31,13 +31,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem797 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<IList<int>> AllPathsSourceTarget (int[][] graph) {
+        public static IList<IList<int>> AllPathsSourceTarget (int[][] graph) {
             return null;
         }
     }

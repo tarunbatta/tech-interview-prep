@@ -25,13 +25,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem561 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ArrayPairSum (int[] nums) {
+        public static int ArrayPairSum (int[] nums) {
             return 0;
         }
     }

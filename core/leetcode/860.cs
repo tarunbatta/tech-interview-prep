@@ -67,13 +67,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem860 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool LemonadeChange (int[] bills) {
+        public static bool LemonadeChange (int[] bills) {
             return false;
         }
     }

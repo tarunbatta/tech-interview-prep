@@ -47,13 +47,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem982 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int CountTriplets (int[] A) {
+        public static int CountTriplets (int[] A) {
             return 0;
         }
     }

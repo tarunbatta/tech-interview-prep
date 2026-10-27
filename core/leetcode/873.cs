@@ -51,13 +51,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem873 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LenLongestFibSubseq (int[] A) {
+        public static int LenLongestFibSubseq (int[] A) {
             return 0;
         }
     }

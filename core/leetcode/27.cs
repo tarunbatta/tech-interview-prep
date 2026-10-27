@@ -51,13 +51,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem27 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int RemoveElement (int[] nums, int val) {
+        public static int RemoveElement (int[] nums, int val) {
             return 0;
         }
     }

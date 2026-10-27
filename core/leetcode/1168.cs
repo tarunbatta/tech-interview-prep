@@ -34,23 +34,23 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1168
     // house1_j != house2_j
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(MinCostToSupplyWater(3, new int[] { 1, 2, 2 }, new int[][]
-            {
-                new int[] { 1, 2, 1 },
-                new int[] { 2, 3, 1 }
-            })); // 3
+            Console.WriteLine(MinCostToSupplyWater(3, [1, 2, 2],
+            [
+                [1, 2, 1],
+                [2, 3, 1]
+            ])); // 3
 
-            Console.WriteLine(MinCostToSupplyWater(2, new int[] { 1, 1 }, new int[][]
-            {
-                new int[] { 1, 2, 1 }
-            })); // 2
+            Console.WriteLine(MinCostToSupplyWater(2, [1, 1],
+            [
+                [1, 2, 1]
+            ])); // 2
         }
 
         // Time: O((V + E) log(V + E)) where V = n + 1, E = pipes.length + n (Kruskal's MST)
         // Space: O(V + E) for edges list and Union-Find disjoint set
-        public int MinCostToSupplyWater(int n, int[] wells, int[][] pipes)
+        public static int MinCostToSupplyWater(int n, int[] wells, int[][] pipes)
         {
             var edges = new List<Edge>();
 

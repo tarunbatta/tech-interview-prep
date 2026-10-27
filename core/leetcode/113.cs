@@ -34,13 +34,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem113 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<IList<int>> PathSum (TreeNode root, int sum) {
+        public static IList<IList<int>> PathSum (TreeNode root, int sum) {
             return null;
         }
     }

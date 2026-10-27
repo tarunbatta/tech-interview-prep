@@ -29,10 +29,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem255
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(VerifyPreorder(new int[] { 5, 2, 1, 3, 6 })); // True
-            Console.WriteLine(VerifyPreorder(new int[] { 5, 2, 6, 1, 3 })); // False
+            Console.WriteLine(VerifyPreorder([5, 2, 1, 3, 6])); // True
+            Console.WriteLine(VerifyPreorder([5, 2, 6, 1, 3])); // False
         }
 
         // Time: O(n) where n is preorder.Length

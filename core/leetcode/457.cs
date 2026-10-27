@@ -47,13 +47,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem457 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (1)
-        public bool CircularArrayLoop (int[] nums) {
+        public static bool CircularArrayLoop (int[] nums) {
             bool result = false;
 
             if (nums == null || nums.Length < 2) {
@@ -69,20 +69,20 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem457 {
 
                 // slow/fast pointer
                 int slow = i;
-                int fast = getIndex (i, nums);
+                int fast = getIndex(i, nums);
 
-                while (nums[fast] * nums[i] > 0 && nums[getIndex (fast, nums)] * nums[i] > 0) {
+                while (nums[fast] * nums[i] > 0 && nums[getIndex(fast, nums)] * nums[i] > 0) {
                     if (slow == fast) {
                         // check for loop with only one element
-                        if (slow == getIndex (slow, nums)) {
+                        if (slow == getIndex(slow, nums)) {
                             break;
                         }
 
                         return true;
                     }
 
-                    slow = getIndex (slow, nums);
-                    fast = getIndex (getIndex (fast, nums), nums);
+                    slow = getIndex(slow, nums);
+                    fast = getIndex(getIndex(fast, nums), nums);
                 }
 
                 // loop not found, set all element along the way to 0
@@ -90,7 +90,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem457 {
                 int val = nums[i];
 
                 while (nums[slow] * val > 0) {
-                    int next = getIndex (slow, nums);
+                    int next = getIndex(slow, nums);
                     nums[slow] = 0;
                     slow = next;
                 }
@@ -99,7 +99,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem457 {
             return false;
         }
 
-        public int getIndex (int i, int[] nums) {
+        public static int getIndex (int i, int[] nums) {
             int n = nums.Length;
             int nexttIdx = i + nums[i];
 

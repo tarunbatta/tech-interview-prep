@@ -33,20 +33,20 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem356
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] points1 = new int[][]
-            {
-                new int[] { 1, 1 },
-                new int[] { -1, 1 }
-            };
+            int[][] points1 =
+            [
+                [1, 1],
+                [-1, 1]
+            ];
             Console.WriteLine(IsReflected(points1)); // True
 
-            int[][] points2 = new int[][]
-            {
-                new int[] { 1, 1 },
-                new int[] { -1, -1 }
-            };
+            int[][] points2 =
+            [
+                [1, 1],
+                [-1, -1]
+            ];
             Console.WriteLine(IsReflected(points2)); // False
         }
 
@@ -61,7 +61,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem356
 
             int minX = int.MaxValue;
             int maxX = int.MinValue;
-            HashSet<(int x, int y)> pointSet = new();
+            HashSet<(int x, int y)> pointSet = [];
 
             foreach (var point in points)
             {

@@ -48,9 +48,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem900 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             RLEIterator obj = new RLEIterator (null);
-            int param_1 = obj.Next (0);
+            int param_1 = RLEIterator.Next(0);
         }
     }
 
@@ -59,7 +59,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem900 {
 
         }
 
-        public int Next (int n) {
+        public static int Next (int n) {
             return 0;
         }
     }

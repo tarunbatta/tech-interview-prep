@@ -38,13 +38,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem141 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool HasCycle (ListNode head) {
+        public static bool HasCycle (ListNode head) {
             if (head == null || head.next == null) {
                 return false;
             }

@@ -35,7 +35,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1065 {
             public bool IsEnd { get; set; }
         }
 
-        public void Init() {
+        public static void Init() {
             string text1 = "thestoryofleetcodeandme";
             string[] words1 = ["story", "fleet", "leetcode"];
             var res1 = IndexPairs(text1, words1);
@@ -49,7 +49,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1065 {
 
         // Time: O(|text|^2 + Sum(word.Length))
         // Space: O(Sum(word.Length)) for Trie
-        public int[][] IndexPairs(string text, string[] words) {
+        public static int[][] IndexPairs(string text, string[] words) {
             TrieNode root = new();
             foreach (string word in words) {
                 TrieNode curr = root;

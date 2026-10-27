@@ -31,13 +31,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem516 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LongestPalindromeSubseq (string s) {
+        public static int LongestPalindromeSubseq (string s) {
             return 0;
         }
     }

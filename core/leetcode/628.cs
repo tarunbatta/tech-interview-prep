@@ -36,13 +36,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem628 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaximumProduct (int[] nums) {
+        public static int MaximumProduct (int[] nums) {
             return 0;
         }
     }

@@ -27,13 +27,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem590 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> Postorder (Node root) {
+        public static IList<int> Postorder (Node root) {
             return null;
         }
     }

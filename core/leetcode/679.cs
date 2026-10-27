@@ -31,20 +31,20 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem679 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (1)
         // Space: O (1)
-        public bool JudgePoint24 (int[] nums) {
+        public static bool JudgePoint24 (int[] nums) {
             double[] n = new double[4];
             for (int i = 0; i < 4; i++)
                 n[i] = nums[i];
-            return dfs (n);
+            return dfs(n);
         }
 
-        private bool dfs (double[] nums) {
+        private static bool dfs (double[] nums) {
             int n = nums.Length;
             if (n == 1)
                 return Math.Abs (nums[0] - 24) < 0.001;
@@ -63,27 +63,27 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem679 {
                     }
 
                     left[n - 2] = a + b;
-                    if (dfs (left))
+                    if (dfs(left))
                         return true;
 
                     left[n - 2] = a - b;
-                    if (dfs (left))
+                    if (dfs(left))
                         return true;
 
                     left[n - 2] = a * b;
-                    if (dfs (left))
+                    if (dfs(left))
                         return true;
 
                     left[n - 2] = a / b;
-                    if (dfs (left))
+                    if (dfs(left))
                         return true;
 
                     left[n - 2] = b - a;
-                    if (dfs (left))
+                    if (dfs(left))
                         return true;
 
                     left[n - 2] = b / a;
-                    if (dfs (left))
+                    if (dfs(left))
                         return true;
                 }
             }

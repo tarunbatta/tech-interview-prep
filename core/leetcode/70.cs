@@ -33,20 +33,20 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem70 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (ClimbStairs_a (0));
-            Console.WriteLine (ClimbStairs_a (1));
-            Console.WriteLine (ClimbStairs_a (2));
-            Console.WriteLine (ClimbStairs_a (3));
-            Console.WriteLine (ClimbStairs_a (4));
-            Console.WriteLine (ClimbStairs_a (5));
+        public static void Init() {
+            Console.WriteLine (ClimbStairs_a(0));
+            Console.WriteLine (ClimbStairs_a(1));
+            Console.WriteLine (ClimbStairs_a(2));
+            Console.WriteLine (ClimbStairs_a(3));
+            Console.WriteLine (ClimbStairs_a(4));
+            Console.WriteLine (ClimbStairs_a(5));
         }
 
-        public int ClimbStairs_a (int n) {
-            return ClimbStairsHelper_a (0, n);
+        public static int ClimbStairs_a (int n) {
+            return ClimbStairsHelper_a(0, n);
         }
 
-        private int ClimbStairsHelper_a (int i, int n) {
+        private static int ClimbStairsHelper_a (int i, int n) {
             if (i > n) {
                 return 0;
             }
@@ -55,15 +55,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem70 {
                 return 1;
             }
 
-            return ClimbStairsHelper_a (i + 1, n) + ClimbStairsHelper_a (i + 2, n);
+            return ClimbStairsHelper_a(i + 1, n) + ClimbStairsHelper_a(i + 2, n);
         }
 
-        public int ClimbStairs_b (int n) {
+        public static int ClimbStairs_b (int n) {
             int[] memo = new int[n + 1];
-            return ClimbStairsHelper_b (0, n, memo);
+            return ClimbStairsHelper_b(0, n, memo);
         }
 
-        private int ClimbStairsHelper_b (int i, int n, int[] memo) {
+        private static int ClimbStairsHelper_b (int i, int n, int[] memo) {
             if (i > n) {
                 return 0;
             }
@@ -76,12 +76,12 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem70 {
                 return memo[i];
             }
 
-            memo[i] = ClimbStairsHelper_b (i + 1, n, memo) + ClimbStairsHelper_b (i + 2, n, memo);
+            memo[i] = ClimbStairsHelper_b(i + 1, n, memo) + ClimbStairsHelper_b(i + 2, n, memo);
 
             return memo[i];
         }
 
-        public int ClimbStairs_c (int n) {
+        public static int ClimbStairs_c (int n) {
             if (n == 1) {
                 return 1;
             }
@@ -97,7 +97,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem70 {
             return dp[n];
         }
 
-        public int ClimbStairs_d (int n) {
+        public static int ClimbStairs_d (int n) {
             if (n == 1) {
                 return 1;
             }
@@ -114,7 +114,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem70 {
             return second;
         }
 
-        public int ClimbStairs_e (int n) {
+        public static int ClimbStairs_e (int n) {
             double sqrt5 = Math.Sqrt (5);
             double fibn = Math.Pow ((1 + sqrt5) / 2, n + 1) - Math.Pow ((1 - sqrt5) / 2, n + 1);
             return (int) (fibn / sqrt5);

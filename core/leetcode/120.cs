@@ -28,13 +28,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem120 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinimumTotal (IList<IList<int>> triangle) {
+        public static int MinimumTotal (IList<IList<int>> triangle) {
             return 0;
         }
     }

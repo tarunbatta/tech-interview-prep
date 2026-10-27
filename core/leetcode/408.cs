@@ -44,7 +44,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem408
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(ValidWordAbbreviation("internationalization", "i12iz4n")); // True
             Console.WriteLine(ValidWordAbbreviation("apple", "a2e"));                    // False

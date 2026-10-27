@@ -31,13 +31,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem280
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[] nums1 = { 3, 5, 2, 1, 6, 4 };
+            int[] nums1 = [3, 5, 2, 1, 6, 4];
             WiggleSort(nums1);
             Console.WriteLine(string.Join(", ", nums1)); // e.g. 3, 5, 1, 6, 2, 4
 
-            int[] nums2 = { 6, 6, 5, 6, 3, 8 };
+            int[] nums2 = [6, 6, 5, 6, 3, 8];
             WiggleSort(nums2);
             Console.WriteLine(string.Join(", ", nums2));
         }

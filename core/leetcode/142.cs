@@ -49,13 +49,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem142 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public ListNode DetectCycle (ListNode head) {
+        public static ListNode DetectCycle (ListNode head) {
             return null;
         }
     }

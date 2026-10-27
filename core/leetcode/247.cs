@@ -27,7 +27,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem247
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var res1 = FindStrobogrammatic(2);
             Console.WriteLine(string.Join(", ", res1)); // 11, 69, 88, 96
@@ -47,16 +47,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem247
         {
             if (n == 0)
             {
-                return new List<string> { "" };
+                return [""];
             }
 
             if (n == 1)
             {
-                return new List<string> { "0", "1", "8" };
+                return ["0", "1", "8"];
             }
 
             List<string> subList = Helper(n - 2, totalLength);
-            List<string> result = new();
+            List<string> result = [];
 
             foreach (string s in subList)
             {

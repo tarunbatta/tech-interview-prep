@@ -39,11 +39,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem74 {
   public class Solution {
-    public void Init () {
+    public static void Init () {
 
     }
 
-    public bool SearchMatrix (int[][] matrix, int target) {
+    public static bool SearchMatrix (int[][] matrix, int target) {
       return false;
     }
   }

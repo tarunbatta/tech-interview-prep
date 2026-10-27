@@ -36,10 +36,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem411
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(MinAbbreviation("apple", new string[] { "blade" }));                   // a4
-            Console.WriteLine(MinAbbreviation("apple", new string[] { "blade", "plain", "amber" })); // 1p3
+            Console.WriteLine(MinAbbreviation("apple", ["blade"]));                   // a4
+            Console.WriteLine(MinAbbreviation("apple", ["blade", "plain", "amber"])); // 1p3
         }
 
         // Time: O(2^m + D) where m is target.Length and D is dictionary.Length
@@ -52,7 +52,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem411
             }
 
             int n = target.Length;
-            List<int> diffMasks = new();
+            List<int> diffMasks = [];
 
             // Filter dictionary: only words of identical length can collide
             if (dictionary != null)

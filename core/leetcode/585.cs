@@ -70,7 +70,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem585 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Insurance> table = [
                 new() { Pid = 1, Tiv2015 = 10, Tiv2016 = 5, Lat = 10, Lon = 10 },
                 new() { Pid = 2, Tiv2015 = 20, Tiv2016 = 20, Lat = 20, Lon = 20 },
@@ -83,7 +83,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem585 {
 
         // Time: O(n) where n is the number of insurance policies
         // Space: O(n) to store frequencies of Tiv2015 and coordinates
-        public double CalculateInvestments(List<Insurance> policies) {
+        public static double CalculateInvestments(List<Insurance> policies) {
             var tiv2015Counts = policies
                 .GroupBy(p => p.Tiv2015)
                 .ToDictionary(g => g.Key, g => g.Count());

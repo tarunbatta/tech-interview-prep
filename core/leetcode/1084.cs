@@ -97,7 +97,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1084 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Product> products = [
                 new() { ProductId = 1, ProductName = "S8", UnitPrice = 1000 },
                 new() { ProductId = 2, ProductName = "G4", UnitPrice = 800 },
@@ -119,13 +119,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1084 {
 
         // Time: O(P + S) where P is products count and S is sales count
         // Space: O(P + S)
-        public List<ProductResult> ProductsOnlyInQ1_2019(List<Product> products, List<SaleRecord> sales) {
+        public static List<ProductResult> ProductsOnlyInQ1_2019(List<Product> products, List<SaleRecord> sales) {
             DateTime q1Start = new(2019, 1, 1);
             DateTime q1End = new(2019, 3, 31);
 
             var productMap = products.ToDictionary(p => p.ProductId, p => p.ProductName);
 
-            return sales
+            return [.. sales
                 .Where(s => productMap.ContainsKey(s.ProductId))
                 .GroupBy(s => s.ProductId)
                 .Where(g => g.Min(s => s.SaleDate) >= q1Start && g.Max(s => s.SaleDate) <= q1End)
@@ -133,8 +133,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1084 {
                     ProductId = g.Key,
                     ProductName = productMap[g.Key]
                 })
-                .OrderBy(r => r.ProductId)
-                .ToList();
+                .OrderBy(r => r.ProductId)];
         }
     }
 }

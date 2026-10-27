@@ -27,7 +27,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1118 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(NumberOfDays(1992, 7)); // 31
             Console.WriteLine(NumberOfDays(2000, 2)); // 29
             Console.WriteLine(NumberOfDays(1900, 2)); // 28
@@ -35,7 +35,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1118 {
 
         // Time: O(1)
         // Space: O(1)
-        public int NumberOfDays(int year, int month) {
+        public static int NumberOfDays(int year, int month) {
             return DateTime.DaysInMonth(year, month);
         }
     }

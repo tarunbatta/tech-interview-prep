@@ -43,20 +43,20 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem317
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] grid1 = new int[][]
-            {
-                new int[] { 1, 0, 2, 0, 1 },
-                new int[] { 0, 0, 0, 0, 0 },
-                new int[] { 0, 0, 1, 0, 0 }
-            };
+            int[][] grid1 =
+            [
+                [1, 0, 2, 0, 1],
+                [0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0]
+            ];
             Console.WriteLine(ShortestDistance(grid1)); // 7
 
-            int[][] grid2 = new int[][]
-            {
-                new int[] { 1, 0 }
-            };
+            int[][] grid2 =
+            [
+                [1, 0]
+            ];
             Console.WriteLine(ShortestDistance(grid2)); // 1
         }
 
@@ -113,8 +113,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem317
             visited[startR, startC] = true;
 
             int distance = 0;
-            int[] dr = { -1, 1, 0, 0 };
-            int[] dc = { 0, 0, -1, 1 };
+            int[] dr = [-1, 1, 0, 0];
+            int[] dc = [0, 0, -1, 1];
 
             while (queue.Count > 0)
             {

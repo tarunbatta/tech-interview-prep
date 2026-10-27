@@ -10,8 +10,8 @@ namespace InterviewPreperationGuide.Core.Algorithms.Sorting {
     public class SelectionSort {
         public static void Init () {
             Display (_SelectionSort (null));
-            Display (_SelectionSort (new int[0]));
-            Display (_SelectionSort (new int[] { 1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25 }));
+            Display (_SelectionSort ([]));
+            Display (_SelectionSort ([1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25]));
         }
 
         public static int[] _SelectionSort (int[] arr) {

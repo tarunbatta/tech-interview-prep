@@ -64,13 +64,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem468 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string ValidIPAddress (string IP) {
+        public static string ValidIPAddress (string IP) {
             return null;
         }
     }

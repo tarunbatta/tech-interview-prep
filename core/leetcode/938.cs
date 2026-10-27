@@ -30,13 +30,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem938 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (n)
-        public int RangeSumBST (TreeNode root, int L, int R) {
+        public static int RangeSumBST (TreeNode root, int L, int R) {
             int result = 0;
 
             if (root == null) {

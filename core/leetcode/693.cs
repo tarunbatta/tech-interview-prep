@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem693 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool HasAlternatingBits (int n) {
+        public static bool HasAlternatingBits (int n) {
             return false;
         }
     }

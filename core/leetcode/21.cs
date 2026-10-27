@@ -15,7 +15,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem21 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             ListNode l1 = new ListNode (1);
             l1.next = new ListNode (2);
             l1.next.next = new ListNode (4);
@@ -24,18 +24,18 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem21 {
             l2.next = new ListNode (3);
             l2.next.next = new ListNode (4);
 
-            Console.WriteLine (MergeTwoLists_a (null, null));
-            Console.WriteLine (MergeTwoLists_a (l1, l2));
-            Console.WriteLine (MergeTwoLists_a (new ListNode (2), new ListNode (1)));
-            Console.WriteLine (MergeTwoLists_a (null, new ListNode (0)));
+            Console.WriteLine (MergeTwoLists_a(null, null));
+            Console.WriteLine (MergeTwoLists_a(l1, l2));
+            Console.WriteLine (MergeTwoLists_a(new ListNode (2), new ListNode (1)));
+            Console.WriteLine (MergeTwoLists_a(null, new ListNode (0)));
 
-            Console.WriteLine (MergeTwoLists_b (null, null));
-            Console.WriteLine (MergeTwoLists_b (l1, l2));
-            Console.WriteLine (MergeTwoLists_b (new ListNode (2), new ListNode (1)));
-            Console.WriteLine (MergeTwoLists_b (null, new ListNode (0)));
+            Console.WriteLine (MergeTwoLists_b(null, null));
+            Console.WriteLine (MergeTwoLists_b(l1, l2));
+            Console.WriteLine (MergeTwoLists_b(new ListNode (2), new ListNode (1)));
+            Console.WriteLine (MergeTwoLists_b(null, new ListNode (0)));
         }
 
-        public ListNode MergeTwoLists_a (ListNode l1, ListNode l2) {
+        public static ListNode MergeTwoLists_a (ListNode l1, ListNode l2) {
             if (l1 == null && l2 == null) {
                 return null;
             }
@@ -74,7 +74,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem21 {
             return head.next;
         }
 
-        public ListNode MergeTwoLists_b (ListNode l1, ListNode l2) {
+        public static ListNode MergeTwoLists_b (ListNode l1, ListNode l2) {
             if (l1 == null) {
                 return l2;
             }
@@ -84,10 +84,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem21 {
             }
 
             if (l1.val < l2.val) {
-                l1.next = MergeTwoLists_b (l1.next, l2);
+                l1.next = MergeTwoLists_b(l1.next, l2);
                 return l1;
             } else {
-                l2.next = MergeTwoLists_b (l1, l2.next);
+                l2.next = MergeTwoLists_b(l1, l2.next);
                 return l2;
             }
         }

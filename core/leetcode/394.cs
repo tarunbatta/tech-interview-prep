@@ -26,13 +26,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem394 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string DecodeString (string s) {
+        public static string DecodeString (string s) {
             return null;
         }
     }

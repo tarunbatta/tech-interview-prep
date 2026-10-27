@@ -29,7 +29,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem751 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(string.Join(", ", IpToCIDR("255.0.0.7", 10)));
             // "255.0.0.7/32", "255.0.0.8/29", "255.0.0.16/32"
 
@@ -39,7 +39,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem751 {
 
         // Time: O(log n)
         // Space: O(log n)
-        public IList<string> IpToCIDR(string ip, int n) {
+        public static IList<string> IpToCIDR(string ip, int n) {
             long start = IpToLong(ip);
             List<string> result = [];
 

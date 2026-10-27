@@ -25,7 +25,7 @@ using System.Collections;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem234 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             ListNode l1 = new ListNode (1);
             l1.next = new ListNode (2);
 

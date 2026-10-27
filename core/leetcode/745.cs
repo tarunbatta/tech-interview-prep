@@ -35,9 +35,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem745 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             WordFilter obj = new WordFilter (null);
-            int param_1 = obj.F (null, null);
+            int param_1 = WordFilter.F(null, null);
         }
     }
 
@@ -46,7 +46,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem745 {
 
         }
 
-        public int F (string prefix, string suffix) {
+        public static int F (string prefix, string suffix) {
             return 0;
         }
     }

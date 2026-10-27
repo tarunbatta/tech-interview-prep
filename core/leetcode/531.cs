@@ -30,22 +30,22 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem531
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            char[][] pic1 = new char[][]
-            {
-                new char[] { 'W', 'W', 'B' },
-                new char[] { 'W', 'B', 'W' },
-                new char[] { 'B', 'W', 'W' }
-            };
+            char[][] pic1 =
+            [
+                ['W', 'W', 'B'],
+                ['W', 'B', 'W'],
+                ['B', 'W', 'W']
+            ];
             Console.WriteLine(FindLonelyPixel(pic1)); // 3
 
-            char[][] pic2 = new char[][]
-            {
-                new char[] { 'B', 'B', 'B' },
-                new char[] { 'B', 'B', 'W' },
-                new char[] { 'B', 'B', 'B' }
-            };
+            char[][] pic2 =
+            [
+                ['B', 'B', 'B'],
+                ['B', 'B', 'W'],
+                ['B', 'B', 'B']
+            ];
             Console.WriteLine(FindLonelyPixel(pic2)); // 0
         }
 

@@ -28,10 +28,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem360
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(string.Join(", ", SortTransformedArray(new int[] { -4, -2, 2, 4 }, 1, 3, 5)));  // 3, 9, 15, 33
-            Console.WriteLine(string.Join(", ", SortTransformedArray(new int[] { -4, -2, 2, 4 }, -1, 3, 5))); // -23, -5, 1, 7
+            Console.WriteLine(string.Join(", ", SortTransformedArray([-4, -2, 2, 4], 1, 3, 5)));  // 3, 9, 15, 33
+            Console.WriteLine(string.Join(", ", SortTransformedArray([-4, -2, 2, 4], -1, 3, 5))); // -23, -5, 1, 7
         }
 
         // Time: O(n) where n is nums.Length (two-pointer approach on parabolic curve)
@@ -40,7 +40,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem360
         {
             if (nums == null || nums.Length == 0)
             {
-                return Array.Empty<int>();
+                return [];
             }
 
             int n = nums.Length;

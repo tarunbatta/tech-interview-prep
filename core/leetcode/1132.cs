@@ -94,7 +94,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1132 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<ActionRecord> actions = [
                 new() { UserId = 1, PostId = 1, ActionDate = new DateTime(2019, 7, 1), Action = "view", Extra = "" },
                 new() { UserId = 2, PostId = 2, ActionDate = new DateTime(2019, 7, 4), Action = "report", Extra = "spam" },
@@ -114,7 +114,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1132 {
 
         // Time: O(A + R) where A is actions count and R is removals count
         // Space: O(A + R)
-        public double AverageDailyRemovalPercent(List<ActionRecord> actions, List<RemovalRecord> removals) {
+        public static double AverageDailyRemovalPercent(List<ActionRecord> actions, List<RemovalRecord> removals) {
             var removedPostIds = removals.Select(r => r.PostId).ToHashSet();
 
             var spamReports = actions

@@ -59,11 +59,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem882 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public int ReachableNodes (int[][] edges, int M, int N) {
+        public static int ReachableNodes (int[][] edges, int M, int N) {
             return 0;
         }
     }

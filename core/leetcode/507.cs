@@ -19,13 +19,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem507 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool CheckPerfectNumber (int num) {
+        public static bool CheckPerfectNumber (int num) {
             if (num < 0 || num % 2 != 0) {
                 return false;
             }

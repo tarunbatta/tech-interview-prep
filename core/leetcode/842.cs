@@ -49,27 +49,27 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem842 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (SplitIntoFibonacci (null));
-            Console.WriteLine (SplitIntoFibonacci ("123456579"));
-            Console.WriteLine (SplitIntoFibonacci ("11235813"));
-            Console.WriteLine (SplitIntoFibonacci ("112358130"));
-            Console.WriteLine (SplitIntoFibonacci ("0123"));
-            Console.WriteLine (SplitIntoFibonacci ("1101111"));
+        public static void Init() {
+            Console.WriteLine (SplitIntoFibonacci(null));
+            Console.WriteLine (SplitIntoFibonacci("123456579"));
+            Console.WriteLine (SplitIntoFibonacci("11235813"));
+            Console.WriteLine (SplitIntoFibonacci("112358130"));
+            Console.WriteLine (SplitIntoFibonacci("0123"));
+            Console.WriteLine (SplitIntoFibonacci("1101111"));
         }
 
-        public IList<int> SplitIntoFibonacci (string S) {
+        public static IList<int> SplitIntoFibonacci (string S) {
             if (string.IsNullOrEmpty (S)) {
                 return null;
             }
 
-            List<int> result = new List<int> ();
-            helper (result, S, 0);
+            List<int> result = [];
+            helper(result, S, 0);
 
             return result;
         }
 
-        public bool helper (List<int> result, String S, int start) {
+        public static bool helper (List<int> result, String S, int start) {
             // If we reached end of string & we have more than 2 elements in our sequence then return true
             if (start == S.Length && result.Count >= 3) {
                 return true;
@@ -97,7 +97,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem842 {
                 if (result.Count <= 1 || result[result.Count - 1] + result[result.Count - 2] == num) {
                     result.Add ((int) num);
 
-                    if (helper (result, S, i + 1)) {
+                    if (helper(result, S, i + 1)) {
                         return true;
                     }
 

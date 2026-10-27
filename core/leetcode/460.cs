@@ -36,15 +36,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem460 {
     public class LFUCache {
         public LFUCache (int capacity) {
             LFUCache obj = new LFUCache (capacity);
-            int param_1 = obj.Get (0);
-            obj.Put (0, 0);
+            int param_1 = Get(0);
+            Put(0, 0);
         }
 
-        public int Get (int key) {
+        public static int Get (int key) {
             return 0;
         }
 
-        public void Put (int key, int value) {
+        public static void Put (int key, int value) {
 
         }
     }

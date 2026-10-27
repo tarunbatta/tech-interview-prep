@@ -45,7 +45,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem666 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] nums1 = [113, 215, 221];
             Console.WriteLine(PathSum(nums1)); // 12
 
@@ -55,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem666 {
 
         // Time: O(n) where n is the number of nodes (at most 15)
         // Space: O(n) to store the tree map
-        public int PathSum(int[] nums) {
+        public static int PathSum(int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return 0;
             }

@@ -28,14 +28,14 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem103 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (n)
-        public IList<IList<int>> ZigzagLevelOrder (TreeNode root) {
-            IList<IList<int>> result = new List<IList<int>> ();
+        public static IList<IList<int>> ZigzagLevelOrder (TreeNode root) {
+            IList<IList<int>> result = [];
 
             if (root == null) {
                 return result;
@@ -47,7 +47,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem103 {
             bool order = true;
 
             while (q.Count > 0) {
-                List<int> l = new List<int> ();
+                List<int> l = [];
 
                 for (int i = 0; i < size; i++) {
                     TreeNode n = q.Dequeue ();

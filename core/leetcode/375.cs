@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem375 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int GetMoneyAmount (int n) {
+        public static int GetMoneyAmount (int n) {
             return 0;
         }
     }

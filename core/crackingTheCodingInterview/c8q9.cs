@@ -23,7 +23,7 @@ namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c8q9 {
 
         public static void GenerateParens (int count) {
             if (count > 0) {
-                ArrayList result = new ArrayList ();
+                ArrayList result = [];
                 char[] parens = new char[count * 2];
 
                 GenerateParens (result, count, count, parens, 0);

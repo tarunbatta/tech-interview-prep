@@ -23,19 +23,19 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem354 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (MaxEnvelopes (null));
-            Console.WriteLine (MaxEnvelopes (new int[][] {
-                new int[] { 5, 4 },
-                    new int[] { 6, 4 },
-                    new int[] { 6, 7 },
-                    new int[] { 2, 3 }
-            }));
+        public static void Init () {
+            Console.WriteLine (MaxEnvelopes(null));
+            Console.WriteLine (MaxEnvelopes([
+                [5, 4],
+                    [6, 4],
+                    [6, 7],
+                    [2, 3]
+            ]));
         }
 
         // Time: O (n log (n))
         // Space: O (n)
-        public int MaxEnvelopes (int[][] envelopes) {
+        public static int MaxEnvelopes (int[][] envelopes) {
             int result = 0;
 
             if (envelopes == null || envelopes.Length == 0 || envelopes[0].Length == 0) {

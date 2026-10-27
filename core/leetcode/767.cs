@@ -30,18 +30,18 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem767 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n log a), where n is length of string
         // Space: O (a), where a is size of alphabet
-        public string ReorganizeString (string S) {
+        public static string ReorganizeString (string S) {
             if (string.IsNullOrEmpty (S)) {
                 return "";
             }
 
-            Dictionary<char, int> dict = new Dictionary<char, int> ();
+            Dictionary<char, int> dict = [];
             for (int i = 0; i < S.Length; i++) {
                 if (!dict.ContainsKey (S[i]))
                     dict.Add (S[i], 0);
@@ -83,7 +83,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem767 {
     public class HeapDS {
         public List<charDetails> lstHeap;
         public HeapDS () {
-            lstHeap = new List<charDetails> ();
+            lstHeap = [];
         }
 
         public void add (charDetails node) {

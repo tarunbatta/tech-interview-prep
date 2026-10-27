@@ -43,13 +43,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem514 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindRotateSteps (string ring, string key) {
+        public static int FindRotateSteps (string ring, string key) {
             return 0;
         }
     }

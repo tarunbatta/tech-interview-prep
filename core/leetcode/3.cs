@@ -29,24 +29,24 @@ using System.Collections;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem3 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (LengthOfLongestSubstring (null));
-            Console.WriteLine (LengthOfLongestSubstring ("abcabcbb"));
-            Console.WriteLine (LengthOfLongestSubstring ("bbbbb"));
-            Console.WriteLine (LengthOfLongestSubstring ("pwwkew"));
-            Console.WriteLine (LengthOfLongestSubstring ("dvdf"));
+        public static void Init () {
+            Console.WriteLine (LengthOfLongestSubstring(null));
+            Console.WriteLine (LengthOfLongestSubstring("abcabcbb"));
+            Console.WriteLine (LengthOfLongestSubstring("bbbbb"));
+            Console.WriteLine (LengthOfLongestSubstring("pwwkew"));
+            Console.WriteLine (LengthOfLongestSubstring("dvdf"));
         }
 
         // Time: O (n)
         // Space: O (min (m,n))
-        public int LengthOfLongestSubstring (String s) {
+        public static int LengthOfLongestSubstring (String s) {
             int result = 0;
 
             if (string.IsNullOrEmpty (s)) {
                 return result;
             }
 
-            Hashtable hash = new Hashtable ();
+            Hashtable hash = [];
 
             for (int i = 0, j = 0; i < s.Length; i++) {
                 if (hash.ContainsKey (s[i])) {

@@ -33,7 +33,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1055 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(ShortestWay("abc", "abcbc")); // 2
             Console.WriteLine(ShortestWay("abc", "acdbc")); // -1
             Console.WriteLine(ShortestWay("xyz", "xzyxz")); // 3
@@ -41,7 +41,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1055 {
 
         // Time: O(|source| * |target|)
         // Space: O(1)
-        public int ShortestWay(string source, string target) {
+        public static int ShortestWay(string source, string target) {
             HashSet<char> sourceChars = [..source];
             foreach (char c in target) {
                 if (!sourceChars.Contains(c)) {

@@ -52,13 +52,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1042 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] GardenNoAdj (int N, int[][] paths) {
+        public static int[] GardenNoAdj (int N, int[][] paths) {
             return null;
         }
     }

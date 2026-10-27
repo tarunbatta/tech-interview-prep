@@ -56,13 +56,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem879 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ProfitableSchemes (int G, int P, int[] group, int[] profit) {
+        public static int ProfitableSchemes (int G, int P, int[] group, int[] profit) {
             return 0;
         }
     }

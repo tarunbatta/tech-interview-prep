@@ -35,13 +35,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem117 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (n)
-        public Node Connect_a (Node root) {
+        public static Node Connect_a (Node root) {
             if (root == null) {
                 return root;
             }
@@ -74,7 +74,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem117 {
 
         // Time: O (n)
         // Space: O (1)
-        public Node Connect_b (Node root) {
+        public static Node Connect_b (Node root) {
             if (root == null) {
                 return root;
             }

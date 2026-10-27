@@ -45,14 +45,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem403 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (CanCross (null));
-            Console.WriteLine (CanCross (new int[] { 0, 1, 3, 5, 6, 8, 12, 17 }));
-            Console.WriteLine (CanCross (new int[] { 0, 1, 2, 3, 4, 8, 9, 11 }));
-            Console.WriteLine (CanCross (new int[] { 0, 1, 3, 4, 5, 7, 9, 10, 12 }));
+        public static void Init() {
+            Console.WriteLine (CanCross(null));
+            Console.WriteLine (CanCross([0, 1, 3, 5, 6, 8, 12, 17]));
+            Console.WriteLine (CanCross([0, 1, 2, 3, 4, 8, 9, 11]));
+            Console.WriteLine (CanCross([0, 1, 3, 4, 5, 7, 9, 10, 12]));
         }
 
-        public bool CanCross (int[] stones) {
+        public static bool CanCross (int[] stones) {
             if (stones == null) {
                 return false;
             }
@@ -68,10 +68,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem403 {
 
             bool[, ] dp = new bool[n, n];
 
-            return RecursiveCall (stones, dp, 1, 0);
+            return RecursiveCall(stones, dp, 1, 0);
         }
 
-        public bool RecursiveCall (int[] stones, bool[, ] dp, int index, int last) {
+        public static bool RecursiveCall (int[] stones, bool[, ] dp, int index, int last) {
             if (index == stones.Length - 1) {
                 return true;
             }
@@ -109,7 +109,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem403 {
                     break;
                 }
 
-                if (RecursiveCall (stones, dp, i, index)) {
+                if (RecursiveCall(stones, dp, i, index)) {
                     return true;
                 }
             }

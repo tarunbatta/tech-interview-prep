@@ -8,12 +8,12 @@ namespace InterviewPreperationGuide.Core.Qotd.sumOfPositiveNumSeperately
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            SumArray(new int[] { 1, 2, 3, 4, -1, -2, -3 });
+            SumArray([1, 2, 3, 4, -1, -2, -3]);
         }
 
-        public void SumArray(int[] arr)
+        public static void SumArray(int[] arr)
         {
             int p = 0;
             int n = 0;

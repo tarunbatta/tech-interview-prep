@@ -43,12 +43,12 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem794 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
         // Time: O (1)
         // Space: O (1)
-        public bool ValidTicTacToe (string[] board) {
+        public static bool ValidTicTacToe (string[] board) {
             int turns = 0;
             bool xwin = false;
             bool owin = false;

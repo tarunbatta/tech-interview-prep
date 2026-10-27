@@ -48,13 +48,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem923 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ThreeSumMulti (int[] A, int target) {
+        public static int ThreeSumMulti (int[] A, int target) {
             return 0;
         }
     }

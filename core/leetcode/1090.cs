@@ -63,13 +63,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1090 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LargestValsFromLabels (int[] values, int[] labels, int num_wanted, int use_limit) {
+        public static int LargestValsFromLabels (int[] values, int[] labels, int num_wanted, int use_limit) {
             return 0;
         }
     }

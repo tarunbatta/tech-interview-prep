@@ -56,13 +56,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem638 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ShoppingOffers (IList<int> price, IList<IList<int>> special, IList<int> needs) {
+        public static int ShoppingOffers (IList<int> price, IList<IList<int>> special, IList<int> needs) {
             return 0;
         }
     }

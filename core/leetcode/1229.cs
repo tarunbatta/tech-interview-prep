@@ -40,14 +40,14 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1229 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
         // Time: O (n log n)
         // Space: O (n)
-        public IList<int> MinAvailableDuration (int[][] slots1, int[][] slots2, int duration) {
-            List<int> result = new List<int> ();
+        public static IList<int> MinAvailableDuration (int[][] slots1, int[][] slots2, int duration) {
+            List<int> result = [];
 
             if (slots1 == null || slots1.Length == 0 || slots1[0].Length == 0 ||
                 slots2 == null || slots2.Length == 0 || slots2[0].Length == 0 ||
@@ -68,14 +68,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1229 {
                 int intersectEnd = Math.Min (slots1[i][1], slots2[j][1]);
 
                 if (intersectStart + duration <= intersectEnd) // Found the result
-                    return new List<int> () { intersectStart, intersectStart + duration };
+                    return [intersectStart, intersectStart + duration];
                 else if (slots1[i][1] < slots2[j][1])
                     i++;
                 else
                     j++;
             }
 
-            return new List<int> ();
+            return [];
         }
     }
 }

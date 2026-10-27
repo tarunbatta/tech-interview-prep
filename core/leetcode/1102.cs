@@ -36,7 +36,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1102 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[][] g1 = [
                 [5, 4, 5],
                 [1, 2, 6],
@@ -53,7 +53,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1102 {
 
         // Time: O(m * n * log(m * n))
         // Space: O(m * n)
-        public int MaximumMinimumPath(int[][] grid) {
+        public static int MaximumMinimumPath(int[][] grid) {
             int m = grid.Length;
             int n = grid[0].Length;
 

@@ -29,16 +29,16 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem463 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (IslandPerimeter (new int[][] {
-                new int[] { 0, 1, 0, 0 },
-                    new int[] { 1, 1, 1, 0 },
-                    new int[] { 0, 1, 0, 0 },
-                    new int[] { 1, 1, 0, 0 }
-            }));
+        public static void Init () {
+            Console.WriteLine (IslandPerimeter([
+                [0, 1, 0, 0],
+                    [1, 1, 1, 0],
+                    [0, 1, 0, 0],
+                    [1, 1, 0, 0]
+            ]));
         }
 
-        public int IslandPerimeter (int[][] grid) {
+        public static int IslandPerimeter (int[][] grid) {
             int result = 0;
 
             if (grid != null) {

@@ -20,15 +20,15 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem445 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public ListNode AddTwoNumbers_b (ListNode l1, ListNode l2) {
-            int n1 = getListLength (l1);
-            int n2 = getListLength (l2);
+        public static ListNode AddTwoNumbers_b (ListNode l1, ListNode l2) {
+            int n1 = getListLength(l1);
+            int n2 = getListLength(l2);
 
             ListNode curr1 = l1;
             ListNode curr2 = l2;
@@ -49,7 +49,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem445 {
                     n2--;
                 }
 
-                result = addToFront (sum, result);
+                result = addToFront(sum, result);
             }
 
             curr1 = result;
@@ -59,18 +59,18 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem445 {
             while (curr1 != null) {
                 curr1.val += carry;
                 carry = curr1.val / 10;
-                result = addToFront (curr1.val % 10, result);
+                result = addToFront(curr1.val % 10, result);
                 curr1 = curr1.next;
             }
 
             if (carry > 0) {
-                result = addToFront (1, result);
+                result = addToFront(1, result);
             }
 
             return result;
         }
 
-        private int getListLength (ListNode head) {
+        private static int getListLength (ListNode head) {
             int result = 0;
 
             ListNode current = head;
@@ -82,15 +82,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem445 {
             return result;
         }
 
-        private ListNode addToFront (int val, ListNode head) {
+        private static ListNode addToFront (int val, ListNode head) {
             ListNode temp = new ListNode (val);
             temp.next = head;
             return temp;
         }
 
-        public ListNode AddTwoNumbers_a (ListNode l1, ListNode l2) {
-            ListNode a = ReverseList (l1);
-            ListNode b = ReverseList (l2);
+        public static ListNode AddTwoNumbers_a (ListNode l1, ListNode l2) {
+            ListNode a = ReverseList(l1);
+            ListNode b = ReverseList(l2);
             ListNode n = new ListNode (0);
             ListNode current = n;
             int carry = 0;
@@ -119,10 +119,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem445 {
                 current.next = new ListNode (carry);
             }
 
-            return ReverseList (n.next);
+            return ReverseList(n.next);
         }
 
-        private ListNode ReverseList (ListNode head) {
+        private static ListNode ReverseList (ListNode head) {
             ListNode current = head;
             ListNode prev = null;
 

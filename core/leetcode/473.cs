@@ -34,13 +34,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem473 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool Makesquare (int[] nums) {
+        public static bool Makesquare (int[] nums) {
             return false;
         }
     }

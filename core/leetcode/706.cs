@@ -35,7 +35,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem706 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             MyHashMap hashMap = new MyHashMap ();
             hashMap.Put (1, 1);
             hashMap.Put (2, 2);

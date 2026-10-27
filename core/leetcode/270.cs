@@ -40,7 +40,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem270
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             TreeNode root = new(4)
             {

@@ -26,7 +26,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1121 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] nums1 = [1, 2, 2, 3, 3, 4, 4];
             Console.WriteLine(CanDivideIntoSubsequences(nums1, 3)); // True
 
@@ -36,7 +36,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1121 {
 
         // Time: O(n) where n is the length of nums
         // Space: O(1)
-        public bool CanDivideIntoSubsequences(int[] nums, int k) {
+        public static bool CanDivideIntoSubsequences(int[] nums, int k) {
             int maxFreq = 1;
             int currentFreq = 1;
 

@@ -10,8 +10,8 @@ namespace InterviewPreperationGuide.Core.Algorithms.Sorting {
     public class ShellSort {
         public static void Init () {
             Display (_ShellSort (null));
-            Display (_ShellSort (new int[0]));
-            Display (_ShellSort (new int[] { 1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25 }));
+            Display (_ShellSort ([]));
+            Display (_ShellSort ([1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25]));
         }
 
         public static int[] _ShellSort (int[] arr) {

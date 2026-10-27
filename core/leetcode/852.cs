@@ -38,13 +38,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem852 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int PeakIndexInMountainArray (int[] A) {
+        public static int PeakIndexInMountainArray (int[] A) {
             return 0;
         }
     }

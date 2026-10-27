@@ -24,13 +24,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem179 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string LargestNumber (int[] nums) {
+        public static string LargestNumber (int[] nums) {
             return null;
         }
     }

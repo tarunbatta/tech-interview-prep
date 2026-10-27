@@ -47,13 +47,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem740 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int DeleteAndEarn (int[] nums) {
+        public static int DeleteAndEarn (int[] nums) {
             return 0;
         }
     }

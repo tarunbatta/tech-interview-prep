@@ -19,13 +19,13 @@ namespace InterviewPreperationGuide.Core.geeksForGeeks.kThMinInSorted2dArray
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(kThSmallest(new int[4, 4] { { 10, 20, 30, 40 }, { 15, 25, 35, 45 }, { 25, 29, 37, 48 }, { 32, 33, 39, 50 },
             }, 7));
         }
 
-        public int kThSmallest(int[,] arr, int k)
+        public static int kThSmallest(int[,] arr, int k)
         {
             return 0;
         }

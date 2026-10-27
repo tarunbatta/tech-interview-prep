@@ -28,13 +28,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem645 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] FindErrorNums (int[] nums) {
+        public static int[] FindErrorNums (int[] nums) {
             return null;
         }
     }

@@ -105,11 +105,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem959 {
   public class Solution {
-    public void Init () {
+    public static void Init () {
 
     }
 
-    public int RegionsBySlashes (string[] grid) {
+    public static int RegionsBySlashes (string[] grid) {
       return 0;
     }
   }

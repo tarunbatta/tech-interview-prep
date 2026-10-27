@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem164 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaximumGap (int[] nums) {
+        public static int MaximumGap (int[] nums) {
             return 0;
         }
     }

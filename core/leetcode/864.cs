@@ -44,13 +44,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem864 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ShortestPathAllKeys (string[] grid) {
+        public static int ShortestPathAllKeys (string[] grid) {
             return 0;
         }
     }

@@ -66,13 +66,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem921 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinAddToMakeValid (string S) {
+        public static int MinAddToMakeValid (string S) {
             return 0;
         }
     }

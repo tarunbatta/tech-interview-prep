@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1145 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool BtreeGameWinningMove (TreeNode root, int n, int x) {
+        public static bool BtreeGameWinningMove (TreeNode root, int n, int x) {
             return false;
         }
     }

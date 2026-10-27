@@ -31,10 +31,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem976
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(LargestPerimeter(new int[] { 2, 1, 2 })); // 5
-            Console.WriteLine(LargestPerimeter(new int[] { 1, 2, 1, 10 })); // 0
+            Console.WriteLine(LargestPerimeter([2, 1, 2])); // 5
+            Console.WriteLine(LargestPerimeter([1, 2, 1, 10])); // 0
         }
 
         // Time: O(n log n) where n is nums.Length (dominated by sorting)

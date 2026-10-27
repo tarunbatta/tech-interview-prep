@@ -25,13 +25,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem581 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindUnsortedSubarray (int[] nums) {
+        public static int FindUnsortedSubarray (int[] nums) {
             return 0;
         }
     }

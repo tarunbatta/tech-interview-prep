@@ -35,7 +35,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem656 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] coins1 = [1, 2, 4, -1, 2];
             int maxJump1 = 2;
             Console.WriteLine(string.Join(", ", CheapestJump(coins1, maxJump1))); // 1, 3, 5
@@ -47,7 +47,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem656 {
 
         // Time: O(n * maxJump) where n is length of coins
         // Space: O(n) for dp array and next pointers
-        public IList<int> CheapestJump(int[] coins, int maxJump) {
+        public static IList<int> CheapestJump(int[] coins, int maxJump) {
             int n = coins.Length;
             if (coins[n - 1] == -1 || coins[0] == -1) {
                 return [];

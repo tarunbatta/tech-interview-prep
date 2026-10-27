@@ -67,13 +67,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem655 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<IList<string>> PrintTree (TreeNode root) {
+        public static IList<IList<string>> PrintTree (TreeNode root) {
             return null;
         }
     }

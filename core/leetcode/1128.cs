@@ -25,13 +25,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1128 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int NumEquivDominoPairs (int[][] dominoes) {
+        public static int NumEquivDominoPairs (int[][] dominoes) {
             return 0;
         }
     }

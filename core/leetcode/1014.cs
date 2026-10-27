@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1014 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxScoreSightseeingPair (int[] A) {
+        public static int MaxScoreSightseeingPair (int[] A) {
             return 0;
         }
     }

@@ -41,12 +41,12 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem528 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Solution obj = new Solution (null);
             int param_1 = obj.PickIndex ();
         }
 
-        List<int> psum = new List<int> ();
+        List<int> psum = [];
         int total = 0;
         Random rand = new Random ();
 

@@ -56,13 +56,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem935 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int KnightDialer (int N) {
+        public static int KnightDialer (int N) {
             return 0;
         }
     }

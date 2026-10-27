@@ -48,9 +48,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem288
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            string[] dict = { "deer", "door", "cake", "card" };
+            string[] dict = ["deer", "door", "cake", "card"];
             ValidWordAbbr vwa = new(dict);
 
             Console.WriteLine(vwa.IsUnique("dear")); // False
@@ -71,7 +71,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem288
 
         public ValidWordAbbr(string[] dictionary)
         {
-            _abbrMap = new Dictionary<string, HashSet<string>>();
+            _abbrMap = [];
 
             if (dictionary == null)
             {
@@ -84,7 +84,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem288
 
                 if (!_abbrMap.TryGetValue(abbr, out HashSet<string> set))
                 {
-                    set = new HashSet<string>();
+                    set = [];
                     _abbrMap[abbr] = set;
                 }
 

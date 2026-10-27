@@ -73,11 +73,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem997 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public int FindJudge (int N, int[][] trust) {
+        public static int FindJudge (int N, int[][] trust) {
             return 0;
         }
     }

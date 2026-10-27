@@ -61,7 +61,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem618 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<StudentGeography> students = [
                 new() { Name = "Jane", Continent = "America" },
                 new() { Name = "Pascal", Continent = "Europe" },
@@ -77,7 +77,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem618 {
 
         // Time: O(n log n) where n is the number of students
         // Space: O(n) to store sorted continent lists and results
-        public List<GeographyPivotResult> PivotGeography(List<StudentGeography> students) {
+        public static List<GeographyPivotResult> PivotGeography(List<StudentGeography> students) {
             var america = students.Where(s => s.Continent == "America").Select(s => s.Name).OrderBy(n => n, StringComparer.Ordinal).ToList();
             var asia = students.Where(s => s.Continent == "Asia").Select(s => s.Name).OrderBy(n => n, StringComparer.Ordinal).ToList();
             var europe = students.Where(s => s.Continent == "Europe").Select(s => s.Name).OrderBy(n => n, StringComparer.Ordinal).ToList();

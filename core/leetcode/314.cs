@@ -42,7 +42,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem314
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             TreeNode root = new(3)
             {
@@ -65,14 +65,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem314
         // Space: O(n) for BFS queue and column hash map
         public static IList<IList<int>> VerticalOrder(TreeNode root)
         {
-            List<IList<int>> result = new();
+            List<IList<int>> result = [];
 
             if (root == null)
             {
                 return result;
             }
 
-            Dictionary<int, List<int>> colMap = new();
+            Dictionary<int, List<int>> colMap = [];
             Queue<(TreeNode node, int col)> queue = new();
             queue.Enqueue((root, 0));
 
@@ -85,7 +85,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem314
 
                 if (!colMap.TryGetValue(col, out List<int> list))
                 {
-                    list = new List<int>();
+                    list = [];
                     colMap[col] = list;
                 }
 

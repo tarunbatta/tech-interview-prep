@@ -63,13 +63,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem385 {
     }
 
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public NestedInteger Deserialize (string s) {
+        public static NestedInteger Deserialize (string s) {
             return null;
         }
     }

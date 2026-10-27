@@ -12,11 +12,11 @@ namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c8q4 {
         public static void Init (string[] args) {
             PrintSubsets (Subsets (null));
 
-            PrintSubsets (Subsets (new int[] { 1, 2, 3 }));
+            PrintSubsets (Subsets ([1, 2, 3]));
         }
 
         public static IList<IList<int>> Subsets (int[] nums) {
-            IList<IList<int>> result = new List<IList<int>> ();
+            IList<IList<int>> result = [];
 
             if (nums != null && nums.Length > 0) {
                 result = GetSubsets (nums, 0);
@@ -29,21 +29,14 @@ namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c8q4 {
             IList<IList<int>> result;
 
             if (nums.Length == index) {
-                result = new List<IList<int>> ();
-                result.Add (new List<int> ());
+                result = [[]];
             } else {
                 result = GetSubsets (nums, index + 1);
                 int item = nums[index];
-                IList<IList<int>> moresubsets = new List<IList<int>> ();
+                IList<IList<int>> moresubsets = [];
 
                 foreach (var subset in result) {
-                    IList<int> newsubset = new List<int> ();
-
-                    foreach (var sub in subset) {
-                        newsubset.Add (sub);
-                    }
-
-                    newsubset.Add (item);
+                    IList<int> newsubset = [.. subset, item];
                     moresubsets.Add (newsubset);
                 }
 

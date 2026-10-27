@@ -49,13 +49,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1103 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] DistributeCandies (int candies, int num_people) {
+        public static int[] DistributeCandies (int candies, int num_people) {
             return null;
         }
     }

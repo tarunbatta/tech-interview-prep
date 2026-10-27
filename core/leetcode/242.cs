@@ -25,19 +25,19 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem242 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (IsAnagram_a (null, null));
-            Console.WriteLine (IsAnagram_a (null, "nagaram"));
-            Console.WriteLine (IsAnagram_a ("anagram", null));
-            Console.WriteLine (IsAnagram_a ("anagram", "nagaram"));
-            Console.WriteLine (IsAnagram_a ("rat", "car"));
+        public static void Init () {
+            Console.WriteLine (IsAnagram_a(null, null));
+            Console.WriteLine (IsAnagram_a(null, "nagaram"));
+            Console.WriteLine (IsAnagram_a("anagram", null));
+            Console.WriteLine (IsAnagram_a("anagram", "nagaram"));
+            Console.WriteLine (IsAnagram_a("rat", "car"));
 
-            Console.WriteLine (IsAnagram_b (null, null));
-            Console.WriteLine (IsAnagram_b ("anagram", "nagaram"));
-            Console.WriteLine (IsAnagram_b ("rat", "car"));
+            Console.WriteLine (IsAnagram_b(null, null));
+            Console.WriteLine (IsAnagram_b("anagram", "nagaram"));
+            Console.WriteLine (IsAnagram_b("rat", "car"));
         }
 
-        public bool IsAnagram_a (string s, string t) {
+        public static bool IsAnagram_a (string s, string t) {
             if ((s == null && t != null) || (s != null && t == null) || (s != null && t != null && s.Length != t.Length)) {
                 return false;
             }
@@ -58,7 +58,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem242 {
             return result;
         }
 
-        public bool IsAnagram_b (string s, string t) {
+        public static bool IsAnagram_b (string s, string t) {
             if ((s == null && t != null) || (s != null && t == null) || (s != null && t != null && s.Length != t.Length)) {
                 return false;
             }

@@ -25,13 +25,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem34 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] SearchRange (int[] nums, int target) {
+        public static int[] SearchRange (int[] nums, int target) {
             return null;
         }
     }

@@ -30,13 +30,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem815 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int NumBusesToDestination (int[][] routes, int S, int T) {
+        public static int NumBusesToDestination (int[][] routes, int S, int T) {
             return 0;
         }
     }

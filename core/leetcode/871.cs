@@ -61,13 +61,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem871 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinRefuelStops (int target, int startFuel, int[][] stations) {
+        public static int MinRefuelStops (int target, int startFuel, int[][] stations) {
             return 0;
         }
     }

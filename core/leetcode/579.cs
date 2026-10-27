@@ -73,7 +73,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem579 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<EmployeeRecord> employees = [
                 new() { Id = 1, Month = 1, Salary = 20 },
                 new() { Id = 1, Month = 2, Salary = 30 },
@@ -93,7 +93,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem579 {
 
         // Time: O(n log n) where n is the number of records
         // Space: O(n) to store results and groupings
-        public List<CumulativeSalaryResult> FindCumulativeSalary(List<EmployeeRecord> records) {
+        public static List<CumulativeSalaryResult> FindCumulativeSalary(List<EmployeeRecord> records) {
             var maxMonths = records
                 .GroupBy(r => r.Id)
                 .ToDictionary(g => g.Key, g => g.Max(r => r.Month));
@@ -121,10 +121,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem579 {
                 });
             }
 
-            return result
+            return [.. result
                 .OrderBy(r => r.Id)
-                .ThenByDescending(r => r.Month)
-                .ToList();
+                .ThenByDescending(r => r.Month)];
         }
     }
 }

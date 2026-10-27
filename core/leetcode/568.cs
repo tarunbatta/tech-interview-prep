@@ -47,21 +47,21 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem568
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] flights = new int[][]
-            {
-                new int[] { 0, 1, 1 },
-                new int[] { 1, 0, 1 },
-                new int[] { 1, 1, 0 }
-            };
+            int[][] flights =
+            [
+                [0, 1, 1],
+                [1, 0, 1],
+                [1, 1, 0]
+            ];
 
-            int[][] days = new int[][]
-            {
-                new int[] { 1, 3, 1 },
-                new int[] { 6, 0, 3 },
-                new int[] { 3, 3, 3 }
-            };
+            int[][] days =
+            [
+                [1, 3, 1],
+                [6, 0, 3],
+                [3, 3, 3]
+            ];
 
             Console.WriteLine(MaxVacationDays(flights, days)); // 12
         }

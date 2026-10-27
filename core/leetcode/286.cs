@@ -35,15 +35,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem286
     {
         public const int INF = 2147483647;
 
-        public void Init()
+        public static void Init()
         {
-            int[][] rooms = new int[][]
-            {
-                new int[] { INF, -1, 0, INF },
-                new int[] { INF, INF, INF, -1 },
-                new int[] { INF, -1, INF, -1 },
-                new int[] { 0, -1, INF, INF }
-            };
+            int[][] rooms =
+            [
+                [INF, -1, 0, INF],
+                [INF, INF, INF, -1],
+                [INF, -1, INF, -1],
+                [0, -1, INF, INF]
+            ];
 
             WallsAndGates(rooms);
 
@@ -78,8 +78,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem286
                 }
             }
 
-            int[] dr = { -1, 1, 0, 0 };
-            int[] dc = { 0, 0, -1, 1 };
+            int[] dr = [-1, 1, 0, 0];
+            int[] dc = [0, 0, -1, 1];
 
             while (queue.Count > 0)
             {

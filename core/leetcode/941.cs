@@ -42,13 +42,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem941 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool ValidMountainArray (int[] A) {
+        public static bool ValidMountainArray (int[] A) {
             if (A == null || A.Length < 3) {
                 return false;
             }

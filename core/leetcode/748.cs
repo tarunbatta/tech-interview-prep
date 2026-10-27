@@ -42,13 +42,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem748 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string ShortestCompletingWord (string licensePlate, string[] words) {
+        public static string ShortestCompletingWord (string licensePlate, string[] words) {
             return null;
         }
     }

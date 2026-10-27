@@ -25,12 +25,12 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem621 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (LeastInterval (null, 2));
-            Console.WriteLine (LeastInterval (new char[] { 'A', 'A', 'A', 'B', 'B', 'B' }, 2));
+        public static void Init () {
+            Console.WriteLine (LeastInterval(null, 2));
+            Console.WriteLine (LeastInterval(['A', 'A', 'A', 'B', 'B', 'B'], 2));
         }
 
-        public int LeastInterval (char[] tasks, int n) {
+        public static int LeastInterval (char[] tasks, int n) {
             return 0;
         }
     }

@@ -53,13 +53,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem952 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LargestComponentSize (int[] A) {
+        public static int LargestComponentSize (int[] A) {
             return 0;
         }
     }

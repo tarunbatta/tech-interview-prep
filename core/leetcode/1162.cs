@@ -45,13 +45,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1162 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxDistance (int[][] grid) {
+        public static int MaxDistance (int[][] grid) {
             return 0;
         }
     }

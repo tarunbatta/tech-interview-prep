@@ -20,13 +20,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem557 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string ReverseWords (string s) {
+        public static string ReverseWords (string s) {
             if (string.IsNullOrEmpty (s)) {
                 return s;
             }
@@ -37,7 +37,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem557 {
 
             while (j < arr.Length) {
                 if (arr[j] == ' ') {
-                    Reverse (arr, i, j - 1);
+                    Reverse(arr, i, j - 1);
                     i = j + 1;
                 }
 
@@ -45,13 +45,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem557 {
             }
 
             if (j == arr.Length) {
-                Reverse (arr, i, j - 1);
+                Reverse(arr, i, j - 1);
             }
 
             return new string (arr);
         }
 
-        private void Reverse (char[] arr, int i, int j) {
+        private static void Reverse (char[] arr, int i, int j) {
             while (i < j) {
                 char temp = arr[i];
                 arr[i] = arr[j];

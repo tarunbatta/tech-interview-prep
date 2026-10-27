@@ -48,13 +48,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem806 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] NumberOfLines (int[] widths, string S) {
+        public static int[] NumberOfLines (int[] widths, string S) {
             return null;
         }
     }

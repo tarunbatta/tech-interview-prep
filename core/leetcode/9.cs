@@ -29,13 +29,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem9 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsPalindrome (int x) {
+        public static bool IsPalindrome (int x) {
             return false;
         }
     }

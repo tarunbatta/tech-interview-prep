@@ -26,13 +26,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem872 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool LeafSimilar (TreeNode root1, TreeNode root2) {
+        public static bool LeafSimilar (TreeNode root1, TreeNode root2) {
             return false;
         }
     }

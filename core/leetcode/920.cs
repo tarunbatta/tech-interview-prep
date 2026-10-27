@@ -55,13 +55,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem920 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int NumMusicPlaylists (int N, int L, int K) {
+        public static int NumMusicPlaylists (int N, int L, int K) {
             return 0;
         }
     }

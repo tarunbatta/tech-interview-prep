@@ -35,10 +35,10 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem676 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             MagicDictionary obj = new MagicDictionary ();
-            obj.BuildDict (null);
-            bool param_2 = obj.Search (null);
+            MagicDictionary.BuildDict(null);
+            bool param_2 = MagicDictionary.Search(null);
         }
     }
 
@@ -46,10 +46,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem676 {
         public MagicDictionary () { }
 
         // Build a dictionary through a list of words
-        public void BuildDict (string[] dict) { }
+        public static void BuildDict (string[] dict) { }
 
         // Returns if there is any word in the trie that equals to the given word after modifying exactly one character  
-        public bool Search (string word) {
+        public static bool Search (string word) {
             return false;
         }
     }

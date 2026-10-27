@@ -40,7 +40,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1088 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(ConfusingNumberII(20)); // 6
             Console.WriteLine(ConfusingNumberII(100)); // 19
         }
@@ -55,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1088 {
 
         // Time: O(5^(log_10 n))
         // Space: O(log_10 n) for recursion stack
-        public int ConfusingNumberII(int n) {
+        public static int ConfusingNumberII(int n) {
             int count = 0;
 
             // First digit must be non-zero (1, 6, 8, 9)

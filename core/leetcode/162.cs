@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem162 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindPeakElement (int[] nums) {
+        public static int FindPeakElement (int[] nums) {
             return 0;
         }
     }

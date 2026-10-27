@@ -37,13 +37,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem427 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public Node Construct (int[][] grid) {
+        public static Node Construct (int[][] grid) {
             return null;
         }
     }

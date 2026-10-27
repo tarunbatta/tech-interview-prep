@@ -35,7 +35,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem750 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[][] grid1 = [
                 [1, 0, 0, 1, 0],
                 [0, 0, 1, 0, 1],
@@ -54,7 +54,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem750 {
 
         // Time: O(m^2 * n) where m is rows count and n is columns count
         // Space: O(1)
-        public int CountCornerRectangles(int[][] grid) {
+        public static int CountCornerRectangles(int[][] grid) {
             int m = grid.Length;
             int n = grid[0].Length;
             int total = 0;

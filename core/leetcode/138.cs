@@ -25,11 +25,11 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem138 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
-        Dictionary<Node, Node> visited = new Dictionary<Node, Node> ();
+        Dictionary<Node, Node> visited = [];
 
         public Node CopyRandomList_DFS (Node head) {
             if (head == null) {
@@ -49,13 +49,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem138 {
             return node;
         }
 
-        public Node CopyRandomList_BFS (Node head) {
+        public static Node CopyRandomList_BFS (Node head) {
             if (head == null) {
                 return head;
             }
 
             Queue<Node> q = new Queue<Node> ();
-            Dictionary<Node, Node> visited = new Dictionary<Node, Node> ();
+            Dictionary<Node, Node> visited = [];
             q.Enqueue (head);
             visited.Add (head, new Node (head.val, null, null));
 

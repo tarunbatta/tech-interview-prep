@@ -44,9 +44,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem284
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            List<int> list = new() { 1, 2, 3 };
+            List<int> list = [1, 2, 3];
             PeekingIterator peekingIterator = new(list.GetEnumerator());
             Console.WriteLine(peekingIterator.Next());    // 1
             Console.WriteLine(peekingIterator.Peek());    // 2

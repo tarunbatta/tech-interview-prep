@@ -50,10 +50,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem393
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(ValidUtf8(new int[] { 197, 130, 1 })); // True
-            Console.WriteLine(ValidUtf8(new int[] { 235, 140, 4 })); // False
+            Console.WriteLine(ValidUtf8([197, 130, 1])); // True
+            Console.WriteLine(ValidUtf8([235, 140, 4])); // False
         }
 
         // Time: O(n) where n is data.Length

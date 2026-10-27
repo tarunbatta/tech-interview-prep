@@ -33,7 +33,7 @@ using System.Globalization;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1058 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             string[] prices1 = ["0.700", "2.800", "4.900"];
             Console.WriteLine(MinimizeError(prices1, 8)); // "1.000"
 
@@ -43,7 +43,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1058 {
 
         // Time: O(n log n) where n is the number of prices
         // Space: O(n) to store fractional parts
-        public string MinimizeError(string[] prices, int target) {
+        public static string MinimizeError(string[] prices, int target) {
             int minSum = 0;
             int maxSum = 0;
             double baseError = 0;

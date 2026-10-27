@@ -22,13 +22,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem238 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (1)
-        public int[] ProductExceptSelf (int[] nums) {
+        public static int[] ProductExceptSelf (int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return nums;
             }

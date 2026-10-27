@@ -33,13 +33,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1047 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string RemoveDuplicates (string S) {
+        public static string RemoveDuplicates (string S) {
             return null;
         }
     }

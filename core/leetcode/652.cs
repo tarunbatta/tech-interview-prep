@@ -38,13 +38,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem652 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<TreeNode> FindDuplicateSubtrees (TreeNode root) {
+        public static IList<TreeNode> FindDuplicateSubtrees (TreeNode root) {
             return null;
         }
     }

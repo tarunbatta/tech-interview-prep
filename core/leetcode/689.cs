@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem689 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] MaxSumOfThreeSubarrays (int[] nums, int k) {
+        public static int[] MaxSumOfThreeSubarrays (int[] nums, int k) {
             return null;
         }
     }

@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem358 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
         // Time: O ()
         // Space: O ()
-        public string RearrangeString (string s, int k) {
+        public static string RearrangeString (string s, int k) {
             return null;
         }
     }

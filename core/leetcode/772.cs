@@ -33,7 +33,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem772 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(Calculate("1+1")); // 2
             Console.WriteLine(Calculate("6-4/2")); // 4
             Console.WriteLine(Calculate("2*(5+5*2)/3+(6/2+8)")); // 21
@@ -41,7 +41,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem772 {
 
         // Time: O(n) where n is the length of expression s
         // Space: O(n) for stack and recursion call frames
-        public int Calculate(string s) {
+        public static int Calculate(string s) {
             int i = 0;
             return (int)Evaluate(s, ref i);
         }

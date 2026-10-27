@@ -38,12 +38,12 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem377 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (CombinationSum4 (null, 4));
-            Console.WriteLine (CombinationSum4 (new int[] { 1, 2, 3 }, 4));
+        public static void Init () {
+            Console.WriteLine (CombinationSum4(null, 4));
+            Console.WriteLine (CombinationSum4([1, 2, 3], 4));
         }
 
-        public int CombinationSum4 (int[] nums, int target) {
+        public static int CombinationSum4 (int[] nums, int target) {
             if (nums == null || nums.Length == 0 || target < 0) {
                 return 0;
             }
@@ -56,14 +56,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem377 {
 
             for (int i = 0; i < nums.Length; i++) {
                 if (target >= nums[i]) {
-                    result += CombinationSum4 (nums, target - nums[i]);
+                    result += CombinationSum4(nums, target - nums[i]);
                 }
             }
 
             return result;
         }
 
-        public int CombinationSumTopDown (int[] nums, int target) {
+        public static int CombinationSumTopDown (int[] nums, int target) {
             if (nums == null || nums.Length == 0 || target < 0) {
                 return 0;
             }
@@ -80,10 +80,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem377 {
 
             dp[0] = 1;
 
-            return CombinationSumTopDownHelper (nums, dp, target);
+            return CombinationSumTopDownHelper(nums, dp, target);
         }
 
-        private int CombinationSumTopDownHelper (int[] nums, int[] dp, int target) {
+        private static int CombinationSumTopDownHelper (int[] nums, int[] dp, int target) {
             if (dp[target] != -1) {
                 return dp[target];
             }
@@ -92,7 +92,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem377 {
 
             for (int i = 0; i < nums.Length; i++) {
                 if (target >= nums[i]) {
-                    result += CombinationSumTopDownHelper (nums, dp, target - nums[i]);
+                    result += CombinationSumTopDownHelper(nums, dp, target - nums[i]);
                 }
             }
 
@@ -100,7 +100,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem377 {
             return result;
         }
 
-        public int CombinationSumBottomUp (int[] nums, int target) {
+        public static int CombinationSumBottomUp (int[] nums, int target) {
             if (nums == null || nums.Length == 0 || target < 0) {
                 return 0;
             }

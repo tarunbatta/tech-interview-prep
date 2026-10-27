@@ -16,13 +16,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem203 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public ListNode RemoveElements (ListNode head, int val) {
+        public static ListNode RemoveElements (ListNode head, int val) {
 
             return null;
         }

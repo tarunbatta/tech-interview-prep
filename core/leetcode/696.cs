@@ -33,13 +33,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem696 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int CountBinarySubstrings (string s) {
+        public static int CountBinarySubstrings (string s) {
             return 0;
         }
     }

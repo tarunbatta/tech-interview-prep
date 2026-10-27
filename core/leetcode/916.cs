@@ -68,13 +68,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem916 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<string> WordSubsets (string[] A, string[] B) {
+        public static IList<string> WordSubsets (string[] A, string[] B) {
             return null;
         }
     }

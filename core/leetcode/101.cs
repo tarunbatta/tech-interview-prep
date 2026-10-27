@@ -37,17 +37,17 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem101 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsSymmetric_a (TreeNode root) {
-            return IsSymmetricHelper (root, root);
+        public static bool IsSymmetric_a (TreeNode root) {
+            return IsSymmetricHelper(root, root);
         }
 
-        private bool IsSymmetricHelper (TreeNode t1, TreeNode t2) {
+        private static bool IsSymmetricHelper (TreeNode t1, TreeNode t2) {
             if (t1 == null && t2 == null) {
                 return true;
             }
@@ -56,10 +56,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem101 {
                 return false;
             }
 
-            return (t1.val == t2.val) && IsSymmetricHelper (t1.right, t2.left) && IsSymmetricHelper (t1.left, t2.right);
+            return (t1.val == t2.val) && IsSymmetricHelper(t1.right, t2.left) && IsSymmetricHelper(t1.left, t2.right);
         }
 
-        public bool IsSymmetric_b (TreeNode root) {
+        public static bool IsSymmetric_b (TreeNode root) {
             Queue<TreeNode> q = new Queue<TreeNode> ();
             q.Enqueue (root);
             q.Enqueue (root);

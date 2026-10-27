@@ -19,17 +19,17 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem42 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (Trap_a (null));
-            Console.WriteLine (Trap_a (new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }));
+        public static void Init () {
+            Console.WriteLine (Trap_a(null));
+            Console.WriteLine (Trap_a([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]));
 
-            Console.WriteLine (Trap_b (null));
-            Console.WriteLine (Trap_b (new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }));
+            Console.WriteLine (Trap_b(null));
+            Console.WriteLine (Trap_b([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]));
         }
 
         // Time: O (n)
         // Space: O (n)
-        public int Trap_a (int[] height) {
+        public static int Trap_a (int[] height) {
             int result = 0;
 
             if (height == null || height.Length < 2) {
@@ -57,7 +57,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem42 {
 
         // Time: O (n)
         // Space: O (1)
-        public int Trap_b (int[] heights) {
+        public static int Trap_b (int[] heights) {
             var n = heights.Length;
             if (n == 0) return 0;
 

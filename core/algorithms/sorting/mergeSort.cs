@@ -10,8 +10,8 @@ namespace InterviewPreperationGuide.Core.Algorithms.Sorting {
     public class MergeSort {
         public static void Init () {
             _MergeSort (null);
-            _MergeSort (new int[0]);
-            _MergeSort (new int[] { 1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25 });
+            _MergeSort ([]);
+            _MergeSort ([1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25]);
         }
 
         public static void _MergeSort (int[] arr) {

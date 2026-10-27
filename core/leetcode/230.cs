@@ -41,36 +41,36 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem230 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (n)
-        public int KthSmallest_a (TreeNode root, int k) {
+        public static int KthSmallest_a (TreeNode root, int k) {
             if (root == null || k == 0) {
                 return 0;
             }
 
-            List<int> l = new List<int> ();
-            InOrder (root, l);
+            List<int> l = [];
+            InOrder(root, l);
 
             return k > l.Count ? 0 : l[k - 1];
         }
 
-        private void InOrder (TreeNode root, List<int> l) {
+        private static void InOrder (TreeNode root, List<int> l) {
             if (root == null) {
                 return;
             }
 
-            InOrder (root.left, l);
+            InOrder(root.left, l);
             l.Add (root.val);
-            InOrder (root.right, l);
+            InOrder(root.right, l);
         }
 
         // Time: O (log (n) + k)
         // Space: O (log (n) + k)
-        public int KthSmallest_b (TreeNode root, int k) {
+        public static int KthSmallest_b (TreeNode root, int k) {
             Stack<TreeNode> stack = new Stack<TreeNode> ();
 
             while (true) {
@@ -90,29 +90,29 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem230 {
 
         // Time: O (log (n))
         // Space: O (1)
-        public int KthSmallest_c (TreeNode root, int k) {
+        public static int KthSmallest_c (TreeNode root, int k) {
             if (root == null) {
                 return 0;
             }
 
             int[] result = new int[2];
-            InOrder (root, result, k);
+            InOrder(root, result, k);
             return result[1];
         }
 
-        private void InOrder (TreeNode root, int[] nums, int k) {
+        private static void InOrder (TreeNode root, int[] nums, int k) {
             if (root == null) {
                 return;
             }
 
-            InOrder (root.left, nums, k);
+            InOrder(root.left, nums, k);
 
             if (++nums[0] == k) {
                 nums[1] = root.val;
                 return;
             }
 
-            InOrder (root.right, nums, k);
+            InOrder(root.right, nums, k);
         }
     }
 

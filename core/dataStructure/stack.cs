@@ -11,7 +11,7 @@ namespace InterviewPreperationGuide.Core.DataStructure.CustomStack {
         private ArrayList _list;
 
         public CStack () {
-            _list = new ArrayList ();
+            _list = [];
             _index = -1;
         }
 

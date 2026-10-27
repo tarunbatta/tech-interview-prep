@@ -22,13 +22,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem560 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int SubarraySum (int[] nums, int k) {
+        public static int SubarraySum (int[] nums, int k) {
             return 0;
         }
     }

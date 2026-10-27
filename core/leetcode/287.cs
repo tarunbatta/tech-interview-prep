@@ -30,13 +30,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem287 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindDuplicate (int[] nums) {
+        public static int FindDuplicate (int[] nums) {
             return 0;
         }
     }

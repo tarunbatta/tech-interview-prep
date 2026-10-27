@@ -38,13 +38,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1125 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] SmallestSufficientTeam (string[] req_skills, IList<IList<string>> people) {
+        public static int[] SmallestSufficientTeam (string[] req_skills, IList<IList<string>> people) {
             return null;
         }
     }

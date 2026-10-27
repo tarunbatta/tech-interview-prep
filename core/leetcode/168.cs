@@ -40,13 +40,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem168 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string ConvertToTitle (int n) {
+        public static string ConvertToTitle (int n) {
             return null;
         }
     }

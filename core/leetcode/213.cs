@@ -28,13 +28,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem213 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int Rob (int[] nums) {
+        public static int Rob (int[] nums) {
             return 0;
         }
     }

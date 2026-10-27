@@ -43,11 +43,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem470 {
     // public int Rand7(); 
     // @return a random integer in the range 1 to 7
     public class Solution : SolBase {
-        public int Rand10 () {
+        public static int Rand10 () {
             int result = 40;
 
             while (result >= 40) {
-                result = (7 * (Rand7 () - 1)) + (Rand7 () - 1);
+                result = (7 * (Rand7() - 1)) + (Rand7() - 1);
             }
 
             return (result % 10) + 1;
@@ -55,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem470 {
     }
 
     public class SolBase {
-        public int Rand7 () {
+        public static int Rand7 () {
             Random rand = new Random ();
             return rand.Next (1, 7);
         }

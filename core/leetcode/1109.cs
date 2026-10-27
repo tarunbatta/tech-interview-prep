@@ -30,13 +30,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1109 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] CorpFlightBookings (int[][] bookings, int n) {
+        public static int[] CorpFlightBookings (int[][] bookings, int n) {
             return null;
         }
     }

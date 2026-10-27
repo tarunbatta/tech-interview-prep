@@ -28,20 +28,20 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem311
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] mat1 = new int[][]
-            {
-                new int[] { 1, 0, 0 },
-                new int[] { -1, 0, 3 }
-            };
+            int[][] mat1 =
+            [
+                [1, 0, 0],
+                [-1, 0, 3]
+            ];
 
-            int[][] mat2 = new int[][]
-            {
-                new int[] { 7, 0, 0 },
-                new int[] { 0, 0, 0 },
-                new int[] { 0, 0, 1 }
-            };
+            int[][] mat2 =
+            [
+                [7, 0, 0],
+                [0, 0, 0],
+                [0, 0, 1]
+            ];
 
             int[][] res = Multiply(mat1, mat2);
             for (int i = 0; i < res.Length; i++)
@@ -56,7 +56,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem311
         {
             if (mat1 == null || mat2 == null || mat1.Length == 0 || mat2.Length == 0)
             {
-                return Array.Empty<int[]>();
+                return [];
             }
 
             int m = mat1.Length;

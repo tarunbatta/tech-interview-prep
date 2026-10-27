@@ -45,15 +45,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem571
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            List<NumberFreq> numbers = new()
-            {
+            List<NumberFreq> numbers =
+            [
                 new NumberFreq { Num = 0, Frequency = 7 },
                 new NumberFreq { Num = 1, Frequency = 1 },
                 new NumberFreq { Num = 2, Frequency = 3 },
                 new NumberFreq { Num = 3, Frequency = 1 }
-            };
+            ];
 
             Console.WriteLine(FindMedian(numbers)); // 0.0
         }

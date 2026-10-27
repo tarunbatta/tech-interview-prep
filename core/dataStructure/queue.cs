@@ -10,7 +10,7 @@ namespace InterviewPreperationGuide.Core.DataStructure.CustomQueue {
         private ArrayList _list;
 
         public CQueue () {
-            _list = new ArrayList ();
+            _list = [];
         }
 
         public void EnQueue (object item) {

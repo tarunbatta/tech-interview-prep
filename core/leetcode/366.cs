@@ -45,7 +45,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem366
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             TreeNode root = new(1)
             {
@@ -68,7 +68,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem366
         // Space: O(h) where h is the tree height (recursion stack)
         public static IList<IList<int>> FindLeaves(TreeNode root)
         {
-            List<IList<int>> result = new();
+            List<IList<int>> result = [];
             GetHeight(root, result);
             return result;
         }
@@ -84,7 +84,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem366
 
             if (result.Count == height)
             {
-                result.Add(new List<int>());
+                result.Add([]);
             }
 
             result[height].Add(node.val);

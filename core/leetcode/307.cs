@@ -28,10 +28,10 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem307 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             NumArray obj = new NumArray (null);
-            obj.Update (0, 0);
-            int param_2 = obj.SumRange (0, 0);
+            NumArray.Update(0, 0);
+            int param_2 = NumArray.SumRange(0, 0);
         }
     }
 
@@ -40,11 +40,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem307 {
 
         }
 
-        public void Update (int i, int val) {
+        public static void Update (int i, int val) {
 
         }
 
-        public int SumRange (int i, int j) {
+        public static int SumRange (int i, int j) {
             return 0;
         }
     }

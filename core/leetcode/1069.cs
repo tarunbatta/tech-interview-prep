@@ -65,7 +65,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1069 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Sale> sales = [
                 new() { SaleId = 1, ProductId = 100, Year = 2008, Quantity = 10, Price = 5000 },
                 new() { SaleId = 2, ProductId = 100, Year = 2009, Quantity = 12, Price = 5000 },
@@ -80,14 +80,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1069 {
 
         // Time: O(n) where n is the number of sales rows
         // Space: O(k) where k is the number of distinct products
-        public List<ProductQuantityResult> TotalQuantityPerProduct(List<Sale> sales) {
-            return sales
+        public static List<ProductQuantityResult> TotalQuantityPerProduct(List<Sale> sales) {
+            return [.. sales
                 .GroupBy(s => s.ProductId)
                 .Select(g => new ProductQuantityResult {
                     ProductId = g.Key,
                     TotalQuantity = g.Sum(s => s.Quantity)
-                })
-                .ToList();
+                })];
         }
     }
 }

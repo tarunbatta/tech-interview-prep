@@ -51,20 +51,20 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem8 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (MyAtoi (null));
-            Console.WriteLine (MyAtoi (""));
-            Console.WriteLine (MyAtoi (" "));
-            Console.WriteLine (MyAtoi ("42"));
-            Console.WriteLine (MyAtoi ("   -42"));
-            Console.WriteLine (MyAtoi ("4193 with words"));
-            Console.WriteLine (MyAtoi ("words and 987"));
-            Console.WriteLine (MyAtoi ("-91283472332"));
+        public static void Init () {
+            Console.WriteLine (MyAtoi(null));
+            Console.WriteLine (MyAtoi(""));
+            Console.WriteLine (MyAtoi(" "));
+            Console.WriteLine (MyAtoi("42"));
+            Console.WriteLine (MyAtoi("   -42"));
+            Console.WriteLine (MyAtoi("4193 with words"));
+            Console.WriteLine (MyAtoi("words and 987"));
+            Console.WriteLine (MyAtoi("-91283472332"));
         }
 
         // Time: O (n)
         // Space: O (1)
-        public int MyAtoi (string str) {
+        public static int MyAtoi (string str) {
             if (str == null || str.Length == 0) {
                 return 0;
             }

@@ -10,8 +10,8 @@ namespace InterviewPreperationGuide.Core.Algorithms.Sorting {
     public class BubbleSort {
         public static void Init () {
             Display (_BubbleSort (null));
-            Display (_BubbleSort (new int[0]));
-            Display (_BubbleSort (new int[] { 1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25 }));
+            Display (_BubbleSort ([]));
+            Display (_BubbleSort ([1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25]));
         }
 
         public static int[] _BubbleSort (int[] arr) {

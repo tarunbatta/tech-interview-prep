@@ -44,13 +44,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1012 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int NumDupDigitsAtMostN (int N) {
+        public static int NumDupDigitsAtMostN (int N) {
             return 0;
         }
     }

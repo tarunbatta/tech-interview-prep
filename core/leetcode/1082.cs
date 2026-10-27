@@ -83,7 +83,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1082 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<SaleRecord> sales = [
                 new() { SellerId = 1, ProductId = 1, BuyerId = 1, SaleDate = new DateTime(2019, 1, 21), Quantity = 2, Price = 2000 },
                 new() { SellerId = 1, ProductId = 2, BuyerId = 2, SaleDate = new DateTime(2019, 2, 17), Quantity = 1, Price = 800 },
@@ -97,7 +97,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1082 {
 
         // Time: O(n) where n is the number of sales rows
         // Space: O(k) where k is the number of distinct sellers
-        public List<int> BestSellers(List<SaleRecord> sales) {
+        public static List<int> BestSellers(List<SaleRecord> sales) {
             var sellerTotals = sales
                 .GroupBy(s => s.SellerId)
                 .Select(g => new { SellerId = g.Key, Total = g.Sum(s => s.Price) })
@@ -108,11 +108,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1082 {
             }
 
             int maxTotal = sellerTotals.Max(s => s.Total);
-            return sellerTotals
+            return [.. sellerTotals
                 .Where(s => s.Total == maxTotal)
                 .Select(s => s.SellerId)
-                .OrderBy(id => id)
-                .ToList();
+                .OrderBy(id => id)];
         }
     }
 }

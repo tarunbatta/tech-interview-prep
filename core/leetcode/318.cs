@@ -29,13 +29,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem318 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxProduct (string[] words) {
+        public static int MaxProduct (string[] words) {
             return 0;
         }
     }

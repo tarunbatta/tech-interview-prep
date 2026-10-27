@@ -77,7 +77,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1113 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<ActionRecord> actions = [
                 new() { UserId = 1, PostId = 1, ActionDate = new DateTime(2019, 7, 1), Action = "view", Extra = "" },
                 new() { UserId = 2, PostId = 4, ActionDate = new DateTime(2019, 7, 4), Action = "report", Extra = "spam" },
@@ -95,17 +95,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1113 {
 
         // Time: O(n) where n is the number of action records
         // Space: O(k) where k is the number of distinct report reasons
-        public List<ReportCountResult> ReportedPosts(List<ActionRecord> actions) {
+        public static List<ReportCountResult> ReportedPosts(List<ActionRecord> actions) {
             DateTime yesterday = new(2019, 7, 4);
 
-            return actions
+            return [.. actions
                 .Where(a => a.ActionDate == yesterday && a.Action == "report" && !string.IsNullOrEmpty(a.Extra))
                 .GroupBy(a => a.Extra)
                 .Select(g => new ReportCountResult {
                     ReportReason = g.Key,
                     ReportCount = g.Select(a => a.PostId).Distinct().Count()
-                })
-                .ToList();
+                })];
         }
     }
 }

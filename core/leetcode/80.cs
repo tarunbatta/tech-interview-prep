@@ -47,13 +47,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem80 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int RemoveDuplicates (int[] nums) {
+        public static int RemoveDuplicates (int[] nums) {
             return 0;
         }
     }

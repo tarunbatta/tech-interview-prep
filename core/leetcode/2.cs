@@ -46,6 +46,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem2
             Console.WriteLine(AddTwoNumbers(l3, l4));
         }
 
+        // Time: O(max(m, n))
+        // Space: O(max(m, n))
         public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
             ListNode result = new ListNode(0);

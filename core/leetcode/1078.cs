@@ -38,13 +38,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1078 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string[] FindOcurrences (string text, string first, string second) {
+        public static string[] FindOcurrences (string text, string first, string second) {
             return null;
         }
     }

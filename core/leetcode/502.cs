@@ -39,13 +39,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem502 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindMaximizedCapital (int k, int W, int[] Profits, int[] Capital) {
+        public static int FindMaximizedCapital (int k, int W, int[] Profits, int[] Capital) {
             return 0;
         }
     }

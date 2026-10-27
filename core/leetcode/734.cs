@@ -44,7 +44,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem734 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             string[] s1 = ["great", "acting", "skills"];
             string[] s2 = ["fine", "drama", "talent"];
             IList<IList<string>> pairs = [
@@ -57,7 +57,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem734 {
 
         // Time: O(N + P) where N is words count and P is pairs count
         // Space: O(P) to store similar pairs
-        public bool AreSentencesSimilar(string[] sentence1, string[] sentence2, IList<IList<string>> similarPairs) {
+        public static bool AreSentencesSimilar(string[] sentence1, string[] sentence2, IList<IList<string>> similarPairs) {
             if (sentence1.Length != sentence2.Length) {
                 return false;
             }

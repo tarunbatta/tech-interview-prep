@@ -124,7 +124,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem607 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<SalesPerson> salesPersons = [
                 new() { SalesId = 1, Name = "John", Salary = 100000, CommissionRate = 6, HireDate = new DateTime(2006, 4, 1) },
                 new() { SalesId = 2, Name = "Amy", Salary = 12000, CommissionRate = 5, HireDate = new DateTime(2010, 5, 1) },
@@ -153,7 +153,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem607 {
 
         // Time: O(S + C + O) where S, C, O are the counts of salespersons, companies, orders
         // Space: O(C + O) to store RED com IDs and sales IDs who sold to RED
-        public List<string> SalesPersonsWithoutRedOrders(List<SalesPerson> salesPersons, List<Company> companies, List<Order> orders) {
+        public static List<string> SalesPersonsWithoutRedOrders(List<SalesPerson> salesPersons, List<Company> companies, List<Order> orders) {
             var redComIds = companies
                 .Where(c => c.Name == "RED")
                 .Select(c => c.ComId)
@@ -164,10 +164,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem607 {
                 .Select(o => o.SalesId)
                 .ToHashSet();
 
-            return salesPersons
+            return [.. salesPersons
                 .Where(s => !redSalesIds.Contains(s.SalesId))
-                .Select(s => s.Name)
-                .ToList();
+                .Select(s => s.Name)];
         }
     }
 }

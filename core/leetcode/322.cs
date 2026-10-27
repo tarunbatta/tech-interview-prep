@@ -26,13 +26,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem322 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int CoinChange (int[] coins, int amount) {
+        public static int CoinChange (int[] coins, int amount) {
             return 0;
         }
     }

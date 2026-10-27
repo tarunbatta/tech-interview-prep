@@ -40,13 +40,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem532 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindPairs (int[] nums, int k) {
+        public static int FindPairs (int[] nums, int k) {
             return 0;
         }
     }

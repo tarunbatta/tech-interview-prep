@@ -22,13 +22,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem252 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
         // Time: O (n log n)
         // Space: O (1)
-        public bool CanAttendMeetings (int[][] intervals) {
+        public static bool CanAttendMeetings (int[][] intervals) {
             if (intervals == null || intervals.Length == 0 || intervals[0].Length == 0) {
                 return true;
             }

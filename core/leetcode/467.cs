@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem467 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindSubstringInWraproundString (string p) {
+        public static int FindSubstringInWraproundString (string p) {
             return 0;
         }
     }

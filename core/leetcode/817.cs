@@ -43,13 +43,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem817 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int NumComponents (ListNode head, int[] G) {
+        public static int NumComponents (ListNode head, int[] G) {
             return 0;
         }
     }

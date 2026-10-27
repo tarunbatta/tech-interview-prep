@@ -68,13 +68,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1003 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsValid (string S) {
+        public static bool IsValid (string S) {
             return false;
         }
     }

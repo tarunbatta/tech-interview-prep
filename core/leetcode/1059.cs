@@ -39,7 +39,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1059 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[][] edges1 = [[0, 1], [0, 2]];
             Console.WriteLine(LeadsToDestination(3, edges1, 0, 2)); // False
 
@@ -52,7 +52,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1059 {
 
         // Time: O(V + E) where V is the number of nodes n and E is the number of edges
         // Space: O(V + E) to store adjacency list and recursion stack
-        public bool LeadsToDestination(int n, int[][] edges, int source, int destination) {
+        public static bool LeadsToDestination(int n, int[][] edges, int source, int destination) {
             List<int>[] graph = new List<int>[n];
             for (int i = 0; i < n; i++) {
                 graph[i] = [];

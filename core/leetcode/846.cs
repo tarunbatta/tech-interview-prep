@@ -41,13 +41,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem846 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsNStraightHand (int[] hand, int W) {
+        public static bool IsNStraightHand (int[] hand, int W) {
             return false;
         }
     }

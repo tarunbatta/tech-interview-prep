@@ -40,7 +40,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1101 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[][] logs1 = [
                 [20190101, 0, 1], [20190104, 3, 4], [20190107, 2, 3],
                 [20190211, 1, 5], [20190224, 2, 4], [20190301, 0, 3],
@@ -56,7 +56,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1101 {
 
         // Time: O(L log L + L * alpha(n)) where L is logs length and n is number of people
         // Space: O(n) for DSU parent array
-        public int EarliestAcq(int[][] logs, int n) {
+        public static int EarliestAcq(int[][] logs, int n) {
             Array.Sort(logs, (a, b) => a[0].CompareTo(b[0]));
 
             int[] parent = new int[n];

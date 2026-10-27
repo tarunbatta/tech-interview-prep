@@ -40,13 +40,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem876 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (1)
-        public ListNode MiddleNode (ListNode head) {
+        public static ListNode MiddleNode (ListNode head) {
             ListNode slow = head;
             ListNode fast = head;
 

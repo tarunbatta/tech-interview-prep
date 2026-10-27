@@ -25,16 +25,16 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem398 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Solution obj = new Solution (null);
-            int param_1 = obj.Pick (0);
+            int param_1 = Pick(0);
         }
 
         public Solution (int[] nums) {
 
         }
 
-        public int Pick (int target) {
+        public static int Pick (int target) {
             return 0;
         }
     }

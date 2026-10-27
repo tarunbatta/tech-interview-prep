@@ -88,7 +88,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem597 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<FriendRequest> requests = [
                 new() { SenderId = 1, SendToId = 2, RequestDate = new DateTime(2016, 6, 1) },
                 new() { SenderId = 1, SendToId = 3, RequestDate = new DateTime(2016, 6, 1) },
@@ -110,7 +110,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem597 {
 
         // Time: O(R + A) where R is number of requests and A is number of accepts
         // Space: O(R + A) to store distinct pairs
-        public double FindAcceptanceRate(List<FriendRequest> requests, List<RequestAccepted> accepts) {
+        public static double FindAcceptanceRate(List<FriendRequest> requests, List<RequestAccepted> accepts) {
             int totalRequests = requests
                 .Select(r => (r.SenderId, r.SendToId))
                 .Distinct()

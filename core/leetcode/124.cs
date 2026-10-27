@@ -36,7 +36,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem124 {
     public class Solution {
-        public void Init () {
+        public static void Init() {
             TreeNode node = new TreeNode (10);
             node.left = new TreeNode (2);
             node.right = new TreeNode (10);
@@ -49,16 +49,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem124 {
             Console.WriteLine (MaxPathSum (node));
         }
 
-        private int result = int.MinValue;
+        private static int result = int.MinValue;
 
         // Time: O (n)
         // Space: O (log n)
-        public int MaxPathSum (TreeNode root) {
+        public static int MaxPathSum (TreeNode root) {
+            result = int.MinValue;
             MaxPathSumUtility (root);
             return result;
         }
 
-        private int MaxPathSumUtility (TreeNode root) {
+        private static int MaxPathSumUtility (TreeNode root) {
             if (root == null) {
                 return 0;
             }

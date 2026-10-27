@@ -45,7 +45,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem663 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             TreeNode root1 = new(5,
                 new TreeNode(10),
                 new TreeNode(10, new TreeNode(2), new TreeNode(3))
@@ -61,7 +61,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem663 {
 
         // Time: O(n) where n is number of nodes in tree
         // Space: O(n) for subtree sums stack/list and recursion
-        public bool CheckEqualTree(TreeNode root) {
+        public static bool CheckEqualTree(TreeNode root) {
             if (root == null) {
                 return false;
             }

@@ -55,13 +55,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem756 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool PyramidTransition (string bottom, IList<string> allowed) {
+        public static bool PyramidTransition (string bottom, IList<string> allowed) {
             return false;
         }
     }

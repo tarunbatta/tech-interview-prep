@@ -42,13 +42,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem865 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public TreeNode SubtreeWithAllDeepest (TreeNode root) {
+        public static TreeNode SubtreeWithAllDeepest (TreeNode root) {
             return null;
         }
     }

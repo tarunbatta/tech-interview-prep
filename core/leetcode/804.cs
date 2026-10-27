@@ -39,13 +39,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem804 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int UniqueMorseRepresentations (string[] words) {
+        public static int UniqueMorseRepresentations (string[] words) {
             return 0;
         }
     }

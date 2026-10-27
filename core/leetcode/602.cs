@@ -61,7 +61,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem602 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<RequestAccepted> requests = [
                 new() { RequesterId = 1, AccepterId = 2, AcceptDate = new DateTime(2016, 6, 3) },
                 new() { RequesterId = 1, AccepterId = 3, AcceptDate = new DateTime(2016, 6, 8) },
@@ -75,7 +75,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem602 {
 
         // Time: O(n log n) where n is the number of friendship records
         // Space: O(n) to store combined friend relations
-        public MostFriendsResult FindMostFriends(List<RequestAccepted> requests) {
+        public static MostFriendsResult FindMostFriends(List<RequestAccepted> requests) {
             var allFriends = requests.Select(r => r.RequesterId)
                 .Concat(requests.Select(r => r.AccepterId));
 

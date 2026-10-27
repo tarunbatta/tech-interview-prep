@@ -61,13 +61,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1024 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int VideoStitching (int[][] clips, int T) {
+        public static int VideoStitching (int[][] clips, int T) {
             return 0;
         }
     }

@@ -27,13 +27,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem763 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> PartitionLabels (string S) {
+        public static IList<int> PartitionLabels (string S) {
             return null;
         }
     }

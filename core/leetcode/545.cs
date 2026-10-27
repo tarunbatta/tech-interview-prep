@@ -50,7 +50,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem545
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             TreeNode root = new(1)
             {
@@ -68,7 +68,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem545
         // Space: O(h) where h is the tree height for the call stack
         public static IList<int> BoundaryOfBinaryTree(TreeNode root)
         {
-            List<int> result = new();
+            List<int> result = [];
 
             if (root == null)
             {

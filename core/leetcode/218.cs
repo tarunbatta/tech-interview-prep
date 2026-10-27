@@ -29,21 +29,21 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem218 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (GetSkyline (null));
-            Console.WriteLine (GetSkyline (new int[][] { new int[] { 2, 9, 10 }, new int[] { 3, 7, 15 }, new int[] { 5, 12, 12 }, new int[] { 15, 20, 10 }, new int[] { 19, 24, 8 } }));
+        public static void Init () {
+            Console.WriteLine (GetSkyline(null));
+            Console.WriteLine (GetSkyline([[2, 9, 10], [3, 7, 15], [5, 12, 12], [15, 20, 10], [19, 24, 8]]));
         }
 
         // Time: O (n log (n))
         // Space: O (n)
-        public IList<IList<int>> GetSkyline (int[][] buildings) {
-            IList<IList<int>> result = new List<IList<int>> ();
+        public static IList<IList<int>> GetSkyline (int[][] buildings) {
+            IList<IList<int>> result = [];
 
             if (buildings == null || buildings.Length == 0 || buildings[0].Length == 0) {
                 return null;
             }
 
-            List<Point> points = new List<Point> ();
+            List<Point> points = [];
 
             foreach (var item in buildings) {
                 int start = item[0];
@@ -55,8 +55,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem218 {
 
             points.Sort ((x, y) => x.CompareTo (y));
 
-            Dictionary<int, int> queue = new Dictionary<int, int> ();
-            queue.Add (0, 1);
+            Dictionary<int, int> queue = new Dictionary<int, int>
+            {
+                { 0, 1 }
+            };
 
             int previousMaxHeight = 0;
 

@@ -21,9 +21,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem244 {
     public class Solution {
-        public void Init () {
-            WordDistance obj = new WordDistance (new string[] { "practice", "makes", "perfect", "coding", "makes" });
-            int param_1 = obj.Shortest ("“coding”", "“practice”");
+        public static void Init () {
+            WordDistance obj = new WordDistance (["practice", "makes", "perfect", "coding", "makes"]);
+            int param_1 = WordDistance.Shortest("“coding”", "“practice”");
         }
     }
 
@@ -33,7 +33,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem244 {
 
         }
 
-        public int Shortest (string word1, string word2) {
+        public static int Shortest (string word1, string word2) {
             return 0;
         }
     }

@@ -55,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem157
 
     public class Solution : Reader4
     {
-        public void Init()
+        public static void Init()
         {
             SetFileContent("leetcode");
             char[] buf = new char[10];

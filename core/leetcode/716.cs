@@ -112,7 +112,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem716 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             MaxStack stk = new();
             stk.Push(5);
             stk.Push(1);

@@ -22,13 +22,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem83 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public ListNode DeleteDuplicates (ListNode head) {
+        public static ListNode DeleteDuplicates (ListNode head) {
             return null;
         }
     }

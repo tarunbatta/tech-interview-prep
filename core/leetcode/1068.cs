@@ -95,7 +95,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1068 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Sale> sales = [
                 new() { SaleId = 1, ProductId = 100, Year = 2008, Quantity = 10, Price = 5000 },
                 new() { SaleId = 2, ProductId = 100, Year = 2009, Quantity = 12, Price = 5000 },
@@ -116,17 +116,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1068 {
 
         // Time: O(S + P) where S is count of sales and P is count of products
         // Space: O(P) to store product lookup map
-        public List<ProductSaleResult> ProductSalesAnalysis(List<Sale> sales, List<Product> products) {
+        public static List<ProductSaleResult> ProductSalesAnalysis(List<Sale> sales, List<Product> products) {
             var productMap = products.ToDictionary(p => p.ProductId, p => p.ProductName);
 
-            return sales
+            return [.. sales
                 .Where(s => productMap.ContainsKey(s.ProductId))
                 .Select(s => new ProductSaleResult {
                     ProductName = productMap[s.ProductId],
                     Year = s.Year,
                     Price = s.Price
-                })
-                .ToList();
+                })];
         }
     }
 }

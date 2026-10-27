@@ -49,14 +49,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem622 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             MyCircularQueue obj = new MyCircularQueue (0);
-            bool param_1 = obj.EnQueue (0);
-            bool param_2 = obj.DeQueue ();
-            int param_3 = obj.Front ();
-            int param_4 = obj.Rear ();
-            bool param_5 = obj.IsEmpty ();
-            bool param_6 = obj.IsFull ();
+            bool param_1 = MyCircularQueue.EnQueue(0);
+            bool param_2 = MyCircularQueue.DeQueue();
+            int param_3 = MyCircularQueue.Front();
+            int param_4 = MyCircularQueue.Rear();
+            bool param_5 = MyCircularQueue.IsEmpty();
+            bool param_6 = MyCircularQueue.IsFull();
         }
     }
 
@@ -66,32 +66,32 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem622 {
         }
 
         // Insert an element into the circular queue. Return true if the operation is successful
-        public bool EnQueue (int value) {
+        public static bool EnQueue (int value) {
             return false;
         }
 
         // Delete an element from the circular queue. Return true if the operation is successful
-        public bool DeQueue () {
+        public static bool DeQueue () {
             return false;
         }
 
         // Get the front item from the queue
-        public int Front () {
+        public static int Front () {
             return 0;
         }
 
         // Get the last item from the queue
-        public int Rear () {
+        public static int Rear () {
             return 0;
         }
 
         // Checks whether the circular queue is empty or not
-        public bool IsEmpty () {
+        public static bool IsEmpty () {
             return false;
         }
 
         // Checks whether the circular queue is full or not
-        public bool IsFull () {
+        public static bool IsFull () {
             return false;
         }
     }

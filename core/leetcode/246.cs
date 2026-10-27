@@ -32,7 +32,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem246
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(IsStrobogrammatic("69"));  // True
             Console.WriteLine(IsStrobogrammatic("88"));  // True

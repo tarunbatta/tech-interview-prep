@@ -65,13 +65,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem925 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsLongPressedName (string name, string typed) {
+        public static bool IsLongPressedName (string name, string typed) {
             return false;
         }
     }

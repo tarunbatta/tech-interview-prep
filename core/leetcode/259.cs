@@ -34,10 +34,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem259
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(ThreeSumSmaller(new int[] { -2, 0, 1, 3 }, 2)); // 2
-            Console.WriteLine(ThreeSumSmaller(Array.Empty<int>(), 0));         // 0
+            Console.WriteLine(ThreeSumSmaller([-2, 0, 1, 3], 2)); // 2
+            Console.WriteLine(ThreeSumSmaller([], 0));         // 0
         }
 
         // Time: O(n^2) where n is nums.Length

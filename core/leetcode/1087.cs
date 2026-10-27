@@ -33,14 +33,14 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1087 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(string.Join(", ", Expand("{a,b}c{d,e}f"))); // "acdf", "acef", "bcdf", "bcef"
             Console.WriteLine(string.Join(", ", Expand("abcd"))); // "abcd"
         }
 
         // Time: O(K * L) where K is number of formed words and L is word length
         // Space: O(K * L) to store words and groups
-        public string[] Expand(string s) {
+        public static string[] Expand(string s) {
             List<List<char>> groups = [];
             int i = 0;
 

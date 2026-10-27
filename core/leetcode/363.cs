@@ -25,20 +25,20 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem363 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (MaxSumSubmatrix (new int[][] {
-                new int[] { 1, 0, 1 },
-                    new int[] { 0, -2, 3 }
-            }, 2));
-            Console.WriteLine (MaxSumSubmatrix (new int[][] {
-                new int[] { 2, 2, -1 }
-            }, 3));
-            Console.WriteLine (MaxSumSubmatrix (new int[][] {
-                new int[] { 2, 2, -1 }
-            }, 0));
+        public static void Init() {
+            Console.WriteLine (MaxSumSubmatrix([
+                [1, 0, 1],
+                    [0, -2, 3]
+            ], 2));
+            Console.WriteLine (MaxSumSubmatrix([
+                [2, 2, -1]
+            ], 3));
+            Console.WriteLine (MaxSumSubmatrix([
+                [2, 2, -1]
+            ], 0));
         }
 
-        public int MaxSumSubmatrix (int[][] matrix, int k) {
+        public static int MaxSumSubmatrix (int[][] matrix, int k) {
             if (matrix == null || matrix.GetLength (0) == 0 || matrix.GetLength (1) == 0)
                 return 0;
 
@@ -63,17 +63,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem363 {
                         each[r] += isRowLarger ? matrix[r][c2] : matrix[c2][r];
                     }
 
-                    result = Math.Max (result, getLargestSumCloseToK (each, k));
+                    result = Math.Max (result, getLargestSumCloseToK(each, k));
                 }
             }
 
             return result;
         }
 
-        private int getLargestSumCloseToK (int[] arr, int k) {
+        private static int getLargestSumCloseToK (int[] arr, int k) {
             int result = Int32.MinValue;
 
-            SortedList<int, int> set = new SortedList<int, int> ();
+            SortedList<int, int> set = [];
             int sum = 0;
 
             for (int i = 0; i < arr.Length; i++) {

@@ -26,13 +26,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem714 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxProfit (int[] prices, int fee) {
+        public static int MaxProfit (int[] prices, int fee) {
             return 0;
         }
     }

@@ -35,20 +35,20 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem256
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] costs1 = new int[][]
-            {
-                new int[] { 17, 2, 17 },
-                new int[] { 16, 16, 5 },
-                new int[] { 14, 3, 19 }
-            };
+            int[][] costs1 =
+            [
+                [17, 2, 17],
+                [16, 16, 5],
+                [14, 3, 19]
+            ];
             Console.WriteLine(MinCost(costs1)); // 10
 
-            int[][] costs2 = new int[][]
-            {
-                new int[] { 7, 6, 2 }
-            };
+            int[][] costs2 =
+            [
+                [7, 6, 2]
+            ];
             Console.WriteLine(MinCost(costs2)); // 2
         }
 

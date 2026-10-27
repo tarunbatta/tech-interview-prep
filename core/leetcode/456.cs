@@ -39,13 +39,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem456 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool Find132pattern (int[] nums) {
+        public static bool Find132pattern (int[] nums) {
             return false;
         }
     }

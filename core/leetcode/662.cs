@@ -74,13 +74,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem662 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int WidthOfBinaryTree (TreeNode root) {
+        public static int WidthOfBinaryTree (TreeNode root) {
             return 0;
         }
     }

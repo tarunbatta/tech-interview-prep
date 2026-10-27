@@ -23,12 +23,12 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem432 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             AllOne obj = new AllOne ();
-            obj.Inc (null);
-            obj.Dec (null);
-            string param_3 = obj.GetMaxKey ();
-            string param_4 = obj.GetMinKey ();
+            AllOne.Inc(null);
+            AllOne.Dec(null);
+            string param_3 = AllOne.GetMaxKey();
+            string param_4 = AllOne.GetMinKey();
         }
     }
 
@@ -38,22 +38,22 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem432 {
         }
 
         // Inserts a new key <Key> with value 1. Or increments an existing key by 1
-        public void Inc (string key) {
+        public static void Inc (string key) {
 
         }
 
         // Decrements an existing key by 1. If Key's value is 1, remove it from the data structure
-        public void Dec (string key) {
+        public static void Dec (string key) {
 
         }
 
         //  Returns one of the keys with maximal value
-        public string GetMaxKey () {
+        public static string GetMaxKey () {
             return null;
         }
 
         //  Returns one of the keys with Minimal value
-        public string GetMinKey () {
+        public static string GetMinKey () {
             return null;
         }
     }

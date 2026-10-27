@@ -71,7 +71,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1127 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<SpendingRecord> spending = [
                 new() { UserId = 1, SpendDate = new DateTime(2019, 7, 1), Platform = "mobile", Amount = 100 },
                 new() { UserId = 1, SpendDate = new DateTime(2019, 7, 1), Platform = "desktop", Amount = 100 },
@@ -89,7 +89,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1127 {
 
         // Time: O(n log n) where n is the number of spending records
         // Space: O(n)
-        public List<PlatformSpendingResult> UserPurchasePlatform(List<SpendingRecord> records) {
+        public static List<PlatformSpendingResult> UserPurchasePlatform(List<SpendingRecord> records) {
             var distinctDates = records.Select(r => r.SpendDate).Distinct().OrderBy(d => d).ToList();
             string[] platforms = ["desktop", "mobile", "both"];
 

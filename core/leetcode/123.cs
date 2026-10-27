@@ -37,15 +37,15 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem123 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (MaxProfit_a (new int[] { 3, 3, 5, 0, 0, 3, 1, 4 }));
-            Console.WriteLine (MaxProfit_a (new int[] { 1, 2, 3, 4, 5 }));
+        public static void Init () {
+            Console.WriteLine (MaxProfit_a([3, 3, 5, 0, 0, 3, 1, 4]));
+            Console.WriteLine (MaxProfit_a([1, 2, 3, 4, 5]));
 
-            Console.WriteLine (MaxProfit_b (new int[] { 3, 3, 5, 0, 0, 3, 1, 4 }));
-            Console.WriteLine (MaxProfit_b (new int[] { 1, 2, 3, 4, 5 }));
+            Console.WriteLine (MaxProfit_b([3, 3, 5, 0, 0, 3, 1, 4]));
+            Console.WriteLine (MaxProfit_b([1, 2, 3, 4, 5]));
         }
 
-        public int MaxProfit_a (int[] prices) {
+        public static int MaxProfit_a (int[] prices) {
             int result = 0;
 
             if (prices != null && prices.Length > 1) {
@@ -74,7 +74,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem123 {
             return result;
         }
 
-        public int MaxProfit_b (int[] prices) {
+        public static int MaxProfit_b (int[] prices) {
             int oneBuyOneSell = 0;
             int twoBuyTwoSell = 0;
             int oneBuy = Int32.MaxValue;

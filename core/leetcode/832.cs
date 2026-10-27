@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem832 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (FlipAndInvertImage (null));
-            Console.WriteLine (FlipAndInvertImage (new int[][] { new int[] { 1, 1, 0 }, new int[] { 1, 0, 1 }, new int[] { 0, 0, 0 } }));
-            Console.WriteLine (FlipAndInvertImage (new int[][] { new int[] { 1, 1, 0, 0 }, new int[] { 1, 0, 0, 1 }, new int[] { 0, 1, 1, 1 }, new int[] { 1, 0, 1, 0 } }));
+        public static void Init () {
+            Console.WriteLine (FlipAndInvertImage(null));
+            Console.WriteLine (FlipAndInvertImage([[1, 1, 0], [1, 0, 1], [0, 0, 0]]));
+            Console.WriteLine (FlipAndInvertImage([[1, 1, 0, 0], [1, 0, 0, 1], [0, 1, 1, 1], [1, 0, 1, 0]]));
         }
 
-        public int[][] FlipAndInvertImage (int[][] A) {
+        public static int[][] FlipAndInvertImage (int[][] A) {
             if (A == null) {
                 return null;
             }

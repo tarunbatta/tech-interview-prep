@@ -61,10 +61,10 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem895 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             FreqStack obj = new FreqStack ();
-            obj.Push (0);
-            int param_2 = obj.Pop ();
+            FreqStack.Push(0);
+            int param_2 = FreqStack.Pop();
         }
     }
 
@@ -73,11 +73,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem895 {
 
         }
 
-        public void Push (int x) {
+        public static void Push (int x) {
 
         }
 
-        public int Pop () {
+        public static int Pop () {
             return 0;
         }
     }

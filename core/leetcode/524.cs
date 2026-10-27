@@ -37,13 +37,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem524 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string FindLongestWord (string s, IList<string> d) {
+        public static string FindLongestWord (string s, IList<string> d) {
             return null;
         }
     }

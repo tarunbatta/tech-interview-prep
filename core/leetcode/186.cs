@@ -23,27 +23,27 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem186 {
     public class Solution {
-        public void Init () {
+        public static void Init() {
             ReverseWords (null);
-            ReverseWords (new char[] { });
-            ReverseWords (new char[] { 't', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e' });
+            ReverseWords ([]);
+            ReverseWords (['t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e']);
         }
 
         // Time: O (n)
         // Space: O (1)
-        public void ReverseWords (char[] s) {
+        public static void ReverseWords (char[] s) {
             if (s == null || s.Length == 0) {
                 return;
             }
 
             int n = s.Length;
 
-            ReverseString (s, 0, n - 1);
-            ReverseWords (s, n);
-            int end = CleanSpaces (s, n);
+            ReverseString(s, 0, n - 1);
+            ReverseWords(s, n);
+            int end = CleanSpaces(s, n);
         }
 
-        private void ReverseWords (char[] c, int n) {
+        private static void ReverseWords (char[] c, int n) {
             int i = 0;
             int j = 0;
 
@@ -51,11 +51,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem186 {
                 while (i < j || i < n && c[i] == ' ') i++;
                 while (j < i || j < n && c[j] != ' ') j++;
 
-                ReverseString (c, i, j - 1);
+                ReverseString(c, i, j - 1);
             }
         }
 
-        private int CleanSpaces (char[] c, int n) {
+        private static int CleanSpaces (char[] c, int n) {
             int i = 0;
             int j = 0;
 
@@ -72,7 +72,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem186 {
             return i;
         }
 
-        private void ReverseString (char[] c, int i, int j) {
+        private static void ReverseString (char[] c, int i, int j) {
             while (i < j) {
                 char t = c[i];
                 c[i++] = c[j];

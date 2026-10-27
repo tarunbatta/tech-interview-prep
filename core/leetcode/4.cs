@@ -28,18 +28,18 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem4 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (log(min(m,n)))
         // Space: O (1)
-        public double FindMedianSortedArrays (int[] nums1, int[] nums2) {
+        public static double FindMedianSortedArrays (int[] nums1, int[] nums2) {
             int x = (nums1 == null) ? 0 : nums1.Length;
             int y = (nums2 == null) ? 0 : nums2.Length;
 
             if (x > y) {
-                return FindMedianSortedArrays (nums2, nums1);
+                return FindMedianSortedArrays(nums2, nums1);
             }
 
             int low = 0;

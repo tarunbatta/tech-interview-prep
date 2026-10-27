@@ -25,16 +25,16 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem303 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             NumArray obj = new NumArray (null);
-            int param_1 = obj.SumRange (0, 0);
+            int param_1 = NumArray.SumRange(0, 0);
         }
     }
 
     public class NumArray {
         public NumArray (int[] nums) { }
 
-        public int SumRange (int i, int j) {
+        public static int SumRange (int i, int j) {
             return 0;
         }
     }

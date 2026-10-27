@@ -30,13 +30,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem61 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public ListNode RotateRight (ListNode head, int k) {
+        public static ListNode RotateRight (ListNode head, int k) {
             return null;
         }
     }

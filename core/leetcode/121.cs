@@ -29,19 +29,19 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem121 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (MaxProfit_a (null));
-            Console.WriteLine (MaxProfit_a (new int[] { }));
-            Console.WriteLine (MaxProfit_a (new int[] { 7, 1, 5, 3, 6, 4 }));
-            Console.WriteLine (MaxProfit_a (new int[] { 7, 6, 4, 3, 1 }));
+        public static void Init () {
+            Console.WriteLine (MaxProfit_a(null));
+            Console.WriteLine (MaxProfit_a([]));
+            Console.WriteLine (MaxProfit_a([7, 1, 5, 3, 6, 4]));
+            Console.WriteLine (MaxProfit_a([7, 6, 4, 3, 1]));
 
-            Console.WriteLine (MaxProfit_b (null));
-            Console.WriteLine (MaxProfit_b (new int[] { }));
-            Console.WriteLine (MaxProfit_b (new int[] { 7, 1, 5, 3, 6, 4 }));
-            Console.WriteLine (MaxProfit_b (new int[] { 7, 6, 4, 3, 1 }));
+            Console.WriteLine (MaxProfit_b(null));
+            Console.WriteLine (MaxProfit_b([]));
+            Console.WriteLine (MaxProfit_b([7, 1, 5, 3, 6, 4]));
+            Console.WriteLine (MaxProfit_b([7, 6, 4, 3, 1]));
         }
 
-        public int MaxProfit_a (int[] prices) {
+        public static int MaxProfit_a (int[] prices) {
             int result = 0;
 
             if (prices == null || prices.Length == 0) {
@@ -60,7 +60,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem121 {
             return result;
         }
 
-        public int MaxProfit_b (int[] prices) {
+        public static int MaxProfit_b (int[] prices) {
             if (prices == null || prices.Length == 0) {
                 return 0;
             }

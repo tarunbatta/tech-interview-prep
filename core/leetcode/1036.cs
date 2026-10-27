@@ -45,13 +45,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1036 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsEscapePossible (int[][] blocked, int[] source, int[] target) {
+        public static bool IsEscapePossible (int[][] blocked, int[] source, int[] target) {
             return false;
         }
     }

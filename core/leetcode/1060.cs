@@ -32,7 +32,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1060 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] nums1 = [4, 7, 9, 10];
             Console.WriteLine(MissingElement(nums1, 1)); // 5
             Console.WriteLine(MissingElement(nums1, 3)); // 8
@@ -43,7 +43,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1060 {
 
         // Time: O(log n) where n is the length of nums
         // Space: O(1)
-        public int MissingElement(int[] nums, int k) {
+        public static int MissingElement(int[] nums, int k) {
             int n = nums.Length;
 
             int MissingCount(int idx) => nums[idx] - nums[0] - idx;

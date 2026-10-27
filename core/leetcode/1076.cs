@@ -76,7 +76,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1076 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<ProjectAssignment> projects = [
                 new() { ProjectId = 1, EmployeeId = 1 },
                 new() { ProjectId = 1, EmployeeId = 2 },
@@ -91,7 +91,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1076 {
 
         // Time: O(n) where n is the number of project assignments
         // Space: O(k) where k is the number of distinct projects
-        public List<int> ProjectsWithMostEmployees(List<ProjectAssignment> projects) {
+        public static List<int> ProjectsWithMostEmployees(List<ProjectAssignment> projects) {
             var counts = projects
                 .GroupBy(p => p.ProjectId)
                 .Select(g => new { ProjectId = g.Key, Count = g.Count() })
@@ -102,10 +102,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1076 {
             }
 
             int maxCount = counts.Max(c => c.Count);
-            return counts
+            return [.. counts
                 .Where(c => c.Count == maxCount)
-                .Select(c => c.ProjectId)
-                .ToList();
+                .Select(c => c.ProjectId)];
         }
     }
 }

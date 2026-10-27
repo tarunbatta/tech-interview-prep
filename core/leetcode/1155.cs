@@ -62,13 +62,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1155 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int NumRollsToTarget (int d, int f, int target) {
+        public static int NumRollsToTarget (int d, int f, int target) {
             return 0;
         }
     }

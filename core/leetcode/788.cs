@@ -28,13 +28,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem788 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int RotatedDigits (int N) {
+        public static int RotatedDigits (int N) {
             return 0;
         }
     }

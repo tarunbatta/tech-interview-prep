@@ -26,13 +26,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem406 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[][] ReconstructQueue (int[][] people) {
+        public static int[][] ReconstructQueue (int[][] people) {
             return null;
         }
     }

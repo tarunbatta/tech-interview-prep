@@ -56,13 +56,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem699 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> FallingSquares (int[][] positions) {
+        public static IList<int> FallingSquares (int[][] positions) {
             return null;
         }
     }

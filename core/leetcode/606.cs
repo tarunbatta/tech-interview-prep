@@ -37,13 +37,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem606 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string Tree2str (TreeNode t) {
+        public static string Tree2str (TreeNode t) {
             return null;
         }
     }

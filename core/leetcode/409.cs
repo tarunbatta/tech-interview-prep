@@ -27,13 +27,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem409 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LongestPalindrome (string s) {
+        public static int LongestPalindrome (string s) {
             return 0;
         }
     }

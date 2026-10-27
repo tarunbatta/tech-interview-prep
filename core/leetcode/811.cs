@@ -45,13 +45,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem811 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<string> SubdomainVisits (string[] cpdomains) {
+        public static IList<string> SubdomainVisits (string[] cpdomains) {
             return null;
         }
     }

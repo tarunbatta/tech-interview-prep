@@ -30,13 +30,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem777 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool CanTransform (string start, string end) {
+        public static bool CanTransform (string start, string end) {
             return false;
         }
     }

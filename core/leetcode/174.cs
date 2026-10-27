@@ -64,27 +64,27 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem174 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (CalculateMinimumHP (new int[][] {
-                new int[] {-2, -3, 3 },
-                    new int[] {-5, -10, 1 },
-                    new int[] { 10, 30, -5 }
-            }));
-            Console.WriteLine (CalculateMinimumHP (new int[][] {
-                new int[] {-2, -3, 3, 1 },
-                    new int[] {-5, -10, 1, -1 },
-                    new int[] { 10, 30, -5, -1 }
-            }));
+        public static void Init () {
+            Console.WriteLine (CalculateMinimumHP([
+                [-2, -3, 3],
+                    [-5, -10, 1],
+                    [10, 30, -5]
+            ]));
+            Console.WriteLine (CalculateMinimumHP([
+                [-2, -3, 3, 1],
+                    [-5, -10, 1, -1],
+                    [10, 30, -5, -1]
+            ]));
         }
 
-        public int CalculateMinimumHP (int[][] dungeon) {
+        public static int CalculateMinimumHP (int[][] dungeon) {
             int height = dungeon.GetLength (0);
             int width = dungeon.GetLength (1);
 
             int rowCounter = 0;
             int colCounter = 0;
 
-            List<Knight> reachedPrincess = new List<Knight> ();
+            List<Knight> reachedPrincess = [];
 
             Knight k = new Knight (rowCounter, colCounter, dungeon[rowCounter][colCounter], null);
             Knight first = null;
@@ -150,14 +150,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem174 {
             this.position = new Position (row, col);
 
             if (moves == null || moves.Count == 0) {
-                this.moves = new List<string> ();
-                this.moves.Add ("START");
+                this.moves = ["START"];
             } else {
-                this.moves = new List<string> ();
-
-                foreach (var item in moves) {
-                    this.moves.Add (item);
-                }
+                this.moves = [.. moves];
             }
         }
 

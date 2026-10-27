@@ -16,7 +16,7 @@ namespace InterviewPreperationGuide.Core.DataStructure.Trie {
             this.childrens = new TrieNode[26];
         }
 
-        public bool Contains (char c) {
+        public static bool Contains (char c) {
             bool result = false;
             int n = Convert.ToByte (c) - ASCIIA;
 
@@ -45,15 +45,15 @@ namespace InterviewPreperationGuide.Core.DataStructure.Trie {
                 TrieNode node = root;
 
                 foreach (var item in word.ToCharArray ()) {
-                    node = _Insert (item, node);
+                    node = _Insert(item, node);
                 }
 
                 node.isWord = true;
             }
         }
 
-        private TrieNode _Insert (char c, TrieNode node) {
-            if (node.Contains (c)) {
+        private static TrieNode _Insert (char c, TrieNode node) {
+            if (TrieNode.Contains(c)) {
                 return node.GetChild (c);
             } else {
                 int n = Convert.ToByte (c) - TrieNode.ASCIIA;
@@ -70,7 +70,7 @@ namespace InterviewPreperationGuide.Core.DataStructure.Trie {
                 TrieNode node = root;
 
                 foreach (var item in word.ToCharArray ()) {
-                    node = _Contains (item, node);
+                    node = _Contains(item, node);
 
                     if (node == null) {
                         result = false;
@@ -86,8 +86,8 @@ namespace InterviewPreperationGuide.Core.DataStructure.Trie {
             return result;
         }
 
-        private TrieNode _Contains (char c, TrieNode node) {
-            if (node.Contains (c)) {
+        private static TrieNode _Contains (char c, TrieNode node) {
+            if (TrieNode.Contains(c)) {
                 return node.GetChild (c);
             } else {
                 return null;

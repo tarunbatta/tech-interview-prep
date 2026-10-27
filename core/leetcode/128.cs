@@ -20,20 +20,20 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem128 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (n)
-        public int LongestConsecutive (int[] nums) {
+        public static int LongestConsecutive (int[] nums) {
             int result = 0;
 
             if (nums == null || nums.Length == 0) {
                 return result;
             }
 
-            HashSet<int> hash = new HashSet<int> ();
+            HashSet<int> hash = [];
             foreach (var item in nums) {
                 if (!hash.Contains (item)) {
                     hash.Add (item);

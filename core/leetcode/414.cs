@@ -37,13 +37,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem414 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ThirdMax (int[] nums) {
+        public static int ThirdMax (int[] nums) {
             return 0;
         }
     }

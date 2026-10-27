@@ -19,13 +19,13 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem415 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string AddStrings (string num1, string num2) {
+        public static string AddStrings (string num1, string num2) {
             if (string.IsNullOrEmpty (num1)) {
                 return num2;
             }

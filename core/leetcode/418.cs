@@ -48,11 +48,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem418
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(WordsTyping(new string[] { "hello", "world" }, 2, 8));           // 1
-            Console.WriteLine(WordsTyping(new string[] { "a", "bcd", "e" }, 3, 6));           // 2
-            Console.WriteLine(WordsTyping(new string[] { "i", "had", "apple", "pie" }, 4, 5)); // 1
+            Console.WriteLine(WordsTyping(["hello", "world"], 2, 8));           // 1
+            Console.WriteLine(WordsTyping(["a", "bcd", "e"], 3, 6));           // 2
+            Console.WriteLine(WordsTyping(["i", "had", "apple", "pie"], 4, 5)); // 1
         }
 
         // Time: O(n * cols / avg_word_len + rows) where n is sentence.Length

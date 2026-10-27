@@ -60,13 +60,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem649 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string PredictPartyVictory (string senate) {
+        public static string PredictPartyVictory (string senate) {
             return null;
         }
     }

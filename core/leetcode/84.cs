@@ -28,13 +28,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem84 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LargestRectangleArea (int[] heights) {
+        public static int LargestRectangleArea (int[] heights) {
             return 0;
         }
     }

@@ -34,13 +34,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem480 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public double[] MedianSlidingWindow (int[] nums, int k) {
+        public static double[] MedianSlidingWindow (int[] nums, int k) {
             return null;
         }
     }

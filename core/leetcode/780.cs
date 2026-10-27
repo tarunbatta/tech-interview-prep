@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem780 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool ReachingPoints (int sx, int sy, int tx, int ty) {
+        public static bool ReachingPoints (int sx, int sy, int tx, int ty) {
             return false;
         }
     }

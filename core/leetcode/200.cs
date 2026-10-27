@@ -33,13 +33,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem200 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (m*n)
         // Space: O (min(m,n))
-        public int NumIslands (char[][] grid) {
+        public static int NumIslands (char[][] grid) {
             int count = 0;
 
             if (grid == null || grid.GetUpperBound (0) < 0 || grid[0] == null) {

@@ -48,7 +48,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem613 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Point> points = [
                 new() { X = -1 },
                 new() { X = 0 },
@@ -60,7 +60,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem613 {
 
         // Time: O(n log n) where n is the number of points (due to sorting)
         // Space: O(n) to store sorted values
-        public int ShortestDistance(List<Point> points) {
+        public static int ShortestDistance(List<Point> points) {
             if (points.Count < 2) {
                 return 0;
             }

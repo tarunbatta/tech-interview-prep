@@ -65,7 +65,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem577
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             List<Employee> employees =
             [
@@ -94,19 +94,18 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem577
         {
             if (employees == null)
             {
-                return new List<EmployeeBonusResult>();
+                return [];
             }
 
-            Dictionary<int, int> bonusMap = bonuses?.ToDictionary(b => b.EmpId, b => b.Amount) ?? new();
+            Dictionary<int, int> bonusMap = bonuses?.ToDictionary(b => b.EmpId, b => b.Amount) ?? [];
 
-            return employees
+            return [.. employees
                 .Where(e => !bonusMap.ContainsKey(e.EmpId) || bonusMap[e.EmpId] < 1000)
                 .Select(e => new EmployeeBonusResult
                 {
                     Name = e.Name,
                     Bonus = bonusMap.TryGetValue(e.EmpId, out int b) ? b : null
-                })
-                .ToList();
+                })];
         }
     }
 }

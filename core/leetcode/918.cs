@@ -64,13 +64,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem918 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxSubarraySumCircular (int[] A) {
+        public static int MaxSubarraySumCircular (int[] A) {
             return 0;
         }
     }

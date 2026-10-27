@@ -41,7 +41,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1166
 
         public FileSystem()
         {
-            paths = new Dictionary<string, int>();
+            paths = [];
         }
 
         // Time: O(L) where L is path length
@@ -79,7 +79,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1166
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var fs1 = new FileSystem();
             Console.WriteLine(fs1.CreatePath("/a", 1)); // true

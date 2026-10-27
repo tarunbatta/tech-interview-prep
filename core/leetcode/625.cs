@@ -24,7 +24,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem625 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(SmallestFactorization(48)); // 68
             Console.WriteLine(SmallestFactorization(15)); // 35
             Console.WriteLine(SmallestFactorization(1)); // 1
@@ -33,7 +33,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem625 {
 
         // Time: O(log a)
         // Space: O(1)
-        public int SmallestFactorization(int num) {
+        public static int SmallestFactorization(int num) {
             if (num < 2) {
                 return num;
             }

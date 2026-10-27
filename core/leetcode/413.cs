@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem413 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int NumberOfArithmeticSlices (int[] A) {
+        public static int NumberOfArithmeticSlices (int[] A) {
             return 0;
         }
     }

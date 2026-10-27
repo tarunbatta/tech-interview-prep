@@ -33,13 +33,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem349 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] Intersection (int[] nums1, int[] nums2) {
+        public static int[] Intersection (int[] nums1, int[] nums2) {
             return null;
         }
     }

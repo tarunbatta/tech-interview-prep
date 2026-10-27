@@ -40,13 +40,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem968 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinCameraCover (TreeNode root) {
+        public static int MinCameraCover (TreeNode root) {
             return 0;
         }
     }

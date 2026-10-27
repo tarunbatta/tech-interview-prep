@@ -24,15 +24,15 @@ namespace InterviewPreperationGuide.Core.geeksForGeeks.boggleBoard
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(FindWords(new char[,] {
                 { 'G', 'I', 'Z' },
                 { 'U', 'E', 'K' },
-                { 'Q', 'S', 'E' }}, new string[] { "GEEKS", "FOR", "QUIZ", "GUQ", "EE" }));
+                { 'Q', 'S', 'E' }}, ["GEEKS", "FOR", "QUIZ", "GUQ", "EE"]));
         }
 
-        public string[] FindWords(char[,] boggle, string[] dict)
+        public static string[] FindWords(char[,] boggle, string[] dict)
         {
             return null;
         }

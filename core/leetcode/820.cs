@@ -33,13 +33,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem820 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinimumLengthEncoding (string[] words) {
+        public static int MinimumLengthEncoding (string[] words) {
             return 0;
         }
     }

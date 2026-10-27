@@ -84,7 +84,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem635 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             LogSystem logSystem = new();
             logSystem.Put(1, "2017:01:01:23:59:59");
             logSystem.Put(2, "2017:01:01:22:59:59");

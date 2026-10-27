@@ -42,13 +42,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem149 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxPoints (int[][] points) {
+        public static int MaxPoints (int[][] points) {
             return 0;
         }
     }

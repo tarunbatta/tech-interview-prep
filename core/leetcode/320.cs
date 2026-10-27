@@ -35,7 +35,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem320
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var res = GenerateAbbreviations("word");
             Console.WriteLine(string.Join(", ", res));
@@ -48,7 +48,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem320
         // Space: O(n) for recursion stack and current StringBuilder
         public static IList<string> GenerateAbbreviations(string word)
         {
-            List<string> result = new();
+            List<string> result = [];
             word ??= string.Empty;
 
             Backtrack(word, 0, new StringBuilder(), 0, result);

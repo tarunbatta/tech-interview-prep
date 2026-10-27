@@ -50,7 +50,7 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1061 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(SmallestEquivalentString("parker", "morris", "parser")); // "makkek"
             Console.WriteLine(SmallestEquivalentString("hello", "world", "hold")); // "hdld"
             Console.WriteLine(SmallestEquivalentString("leetcode", "programs", "sourcecode")); // "aauaaaaada"
@@ -58,7 +58,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1061 {
 
         // Time: O(N * alpha(26)) = O(N) where N is the length of strings
         // Space: O(1) fixed 26 letters parent array
-        public string SmallestEquivalentString(string s1, string s2, string baseStr) {
+        public static string SmallestEquivalentString(string s1, string s2, string baseStr) {
             int[] parent = new int[26];
             for (int i = 0; i < 26; i++) {
                 parent[i] = i;

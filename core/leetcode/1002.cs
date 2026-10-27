@@ -39,13 +39,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1002 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<string> CommonChars (string[] A) {
+        public static IList<string> CommonChars (string[] A) {
             return null;
         }
     }

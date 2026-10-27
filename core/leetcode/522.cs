@@ -31,13 +31,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem522 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindLUSlength (string[] strs) {
+        public static int FindLUSlength (string[] strs) {
             return 0;
         }
     }

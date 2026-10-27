@@ -23,13 +23,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem466 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int GetMaxRepetitions (string s1, int n1, string s2, int n2) {
+        public static int GetMaxRepetitions (string s1, int n1, string s2, int n2) {
             return 0;
         }
     }

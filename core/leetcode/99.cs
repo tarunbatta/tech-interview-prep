@@ -55,7 +55,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem99 {
     public class Solution {
-        public void Init () {
+        public static void Init() {
             TreeNode node = new TreeNode (3);
             node.left = new TreeNode (1);
             node.right = new TreeNode (4);
@@ -64,13 +64,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem99 {
             RecoverTree (node);
         }
 
-        TreeNode first = null;
-        TreeNode second = null;
-        TreeNode prev = new TreeNode (Int32.MinValue);
+        static TreeNode first = null;
+        static TreeNode second = null;
+        static TreeNode prev = new TreeNode (Int32.MinValue);
 
         // Time: O (n)
         // Space: O (n)
-        public void RecoverTree (TreeNode root) {
+        public static void RecoverTree (TreeNode root) {
+            first = null;
+            second = null;
+            prev = new TreeNode (Int32.MinValue);
+
             traverse (root);
 
             // Swap the values of the two nodes
@@ -79,7 +83,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem99 {
             second.val = temp;
         }
 
-        private void traverse (TreeNode node) {
+        private static void traverse (TreeNode node) {
             if (node == null)
                 return;
 

@@ -23,21 +23,23 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(TwoSum_a(null, 9));
-            Console.WriteLine(TwoSum_a(new int[] { 2, 7, 11, 15 }, 9));
-            Console.WriteLine(TwoSum_a(new int[] { 3, 3 }, 6));
+            Console.WriteLine(TwoSum_a([2, 7, 11, 15], 9));
+            Console.WriteLine(TwoSum_a([3, 3], 6));
 
             Console.WriteLine(TwoSum_b(null, 9));
-            Console.WriteLine(TwoSum_b(new int[] { 2, 7, 11, 15 }, 9));
-            Console.WriteLine(TwoSum_b(new int[] { 3, 3 }, 6));
+            Console.WriteLine(TwoSum_b([2, 7, 11, 15], 9));
+            Console.WriteLine(TwoSum_b([3, 3], 6));
 
             Console.WriteLine(TwoSum_c(null, 9));
-            Console.WriteLine(TwoSum_c(new int[] { 2, 7, 11, 15 }, 9));
-            Console.WriteLine(TwoSum_c(new int[] { 3, 3 }, 6));
+            Console.WriteLine(TwoSum_c([2, 7, 11, 15], 9));
+            Console.WriteLine(TwoSum_c([3, 3], 6));
         }
 
+        // Time: O(n^2)
+        // Space: O(1)
         public static int[] TwoSum_a(int[] nums, int target)
         {
             int[] result = null;
@@ -53,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1
                 {
                     if (nums[i] + nums[j] == target)
                     {
-                        return new int[2] { i, j };
+                        return [i, j];
                     }
                 }
             }
@@ -61,6 +63,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1
             return result;
         }
 
+        // Time: O(n)
+        // Space: O(n)
         public static int[] TwoSum_b(int[] nums, int target)
         {
             int[] result = null;
@@ -70,7 +74,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1
                 return null;
             }
 
-            Hashtable hash = new Hashtable();
+            Hashtable hash = [];
 
             for (int i = 0; i < nums.Length; i++)
             {
@@ -86,15 +90,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1
 
                 if (hash.ContainsKey(complement) && (int)hash[complement] != i)
                 {
-                    return new int[2] {
+                    return [
                     (int) hash[complement], i
-                    };
+                    ];
                 }
             }
 
             return result;
         }
 
+        // Time: O(n)
+        // Space: O(n)
         public static int[] TwoSum_c(int[] nums, int target)
         {
             int[] result = null;
@@ -104,7 +110,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1
                 return null;
             }
 
-            Hashtable hash = new Hashtable();
+            Hashtable hash = [];
 
             for (int i = 0; i < nums.Length; i++)
             {
@@ -117,9 +123,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1
 
                 if (hash.ContainsKey(complement) && (int)hash[complement] != i)
                 {
-                    return new int[2] {
+                    return [
                     (int) hash[complement], i
-                    };
+                    ];
                 }
             }
 

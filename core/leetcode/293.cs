@@ -30,7 +30,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem293
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var res1 = GeneratePossibleNextMoves("++++");
             Console.WriteLine(string.Join(", ", res1)); // --++, +--+, ++--
@@ -43,7 +43,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem293
         // Space: O(n) auxiliary space per generated state
         public static IList<string> GeneratePossibleNextMoves(string currentState)
         {
-            List<string> result = new();
+            List<string> result = [];
 
             if (string.IsNullOrEmpty(currentState) || currentState.Length < 2)
             {

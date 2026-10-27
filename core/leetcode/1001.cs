@@ -52,13 +52,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1001 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] GridIllumination (int N, int[][] lamps, int[][] queries) {
+        public static int[] GridIllumination (int N, int[][] lamps, int[][] queries) {
             return null;
         }
     }

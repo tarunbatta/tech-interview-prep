@@ -31,15 +31,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem248
     public class Solution
     {
         private static readonly char[][] Pairs =
-        {
-            new char[] { '0', '0' },
-            new char[] { '1', '1' },
-            new char[] { '6', '9' },
-            new char[] { '8', '8' },
-            new char[] { '9', '6' }
-        };
+        [
+            ['0', '0'],
+            ['1', '1'],
+            ['6', '9'],
+            ['8', '8'],
+            ['9', '6']
+        ];
 
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(StrobogrammaticInRange("50", "100")); // 3
             Console.WriteLine(StrobogrammaticInRange("0", "0"));     // 1

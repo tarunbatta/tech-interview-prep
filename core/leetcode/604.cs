@@ -87,7 +87,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem604 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             StringIterator iterator = new("L1e2t1C1o1d1e1");
             Console.WriteLine(iterator.Next()); // 'L'
             Console.WriteLine(iterator.Next()); // 'e'

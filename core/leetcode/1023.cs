@@ -52,13 +52,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1023 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<bool> CamelMatch (string[] queries, string pattern) {
+        public static IList<bool> CamelMatch (string[] queries, string pattern) {
             return null;
         }
     }

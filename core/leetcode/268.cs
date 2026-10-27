@@ -26,19 +26,19 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem268 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (MissingNumber_a (null));
-            Console.WriteLine (MissingNumber_a (new int[] { }));
-            Console.WriteLine (MissingNumber_a (new int[] { 3, 0, 1 }));
-            Console.WriteLine (MissingNumber_a (new int[] { 9, 6, 4, 2, 3, 5, 7, 0, 1 }));
+        public static void Init () {
+            Console.WriteLine (MissingNumber_a(null));
+            Console.WriteLine (MissingNumber_a([]));
+            Console.WriteLine (MissingNumber_a([3, 0, 1]));
+            Console.WriteLine (MissingNumber_a([9, 6, 4, 2, 3, 5, 7, 0, 1]));
 
-            Console.WriteLine (MissingNumber_b (null));
-            Console.WriteLine (MissingNumber_b (new int[] { }));
-            Console.WriteLine (MissingNumber_b (new int[] { 3, 0, 1 }));
-            Console.WriteLine (MissingNumber_b (new int[] { 9, 6, 4, 2, 3, 5, 7, 0, 1 }));
+            Console.WriteLine (MissingNumber_b(null));
+            Console.WriteLine (MissingNumber_b([]));
+            Console.WriteLine (MissingNumber_b([3, 0, 1]));
+            Console.WriteLine (MissingNumber_b([9, 6, 4, 2, 3, 5, 7, 0, 1]));
         }
 
-        public int MissingNumber_a (int[] nums) {
+        public static int MissingNumber_a (int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return 0;
             }
@@ -54,7 +54,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem268 {
             return result;
         }
 
-        public int MissingNumber_b (int[] nums) {
+        public static int MissingNumber_b (int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return 0;
             }

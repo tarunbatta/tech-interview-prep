@@ -42,13 +42,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1160 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int CountCharacters (string[] words, string chars) {
+        public static int CountCharacters (string[] words, string chars) {
             return 0;
         }
     }

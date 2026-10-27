@@ -58,15 +58,15 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem133 {
     public class Solution {
-        public void Init () {
+        public static void Init() {
             Console.WriteLine (CloneGraph_DFS (null));
 
-            Console.WriteLine (CloneGraph_BFS (null));
+            Console.WriteLine (CloneGraph_BFS(null));
         }
 
-        Dictionary<Node, Node> visited = new Dictionary<Node, Node> ();
+        static Dictionary<Node, Node> visited = [];
 
-        public Node CloneGraph_DFS (Node node) {
+        public static Node CloneGraph_DFS (Node node) {
             if (node == null) {
                 return node;
             }
@@ -75,7 +75,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem133 {
                 return visited[node];
             }
 
-            Node clone = new Node (node.val, new List<Node> ());
+            Node clone = new Node (node.val, []);
             visited.Add (node, clone);
 
             foreach (var neighbour in node.neighbors) {
@@ -85,16 +85,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem133 {
             return clone;
         }
 
-        public Node CloneGraph_BFS (Node node) {
+        public static Node CloneGraph_BFS (Node node) {
             if (node == null) {
                 return node;
             }
 
             Queue<Node> q = new Queue<Node> ();
-            Dictionary<Node, Node> visited = new Dictionary<Node, Node> ();
+            Dictionary<Node, Node> visited = [];
 
             q.Enqueue (node);
-            visited.Add (node, new Node (node.val, new List<Node> ()));
+            visited.Add (node, new Node (node.val, []));
 
             while (q.Count > 0) {
                 Node t = q.Dequeue ();
@@ -102,7 +102,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem133 {
                 foreach (var item in t.neighbors) {
                     if (!visited.ContainsKey (item)) {
                         q.Enqueue (item);
-                        visited.Add (item, new Node (item.val, new List<Node> ()));
+                        visited.Add (item, new Node (item.val, []));
                     }
 
                     visited[t].neighbors.Add (visited[item]);

@@ -28,7 +28,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1153
     // str1 and str2 consist of only lowercase English letters.
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(CanConvert("aabcc", "ccdee")); // true
             Console.WriteLine(CanConvert("leetcode", "codeleet")); // false
@@ -39,7 +39,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1153
 
         // Time: O(n) where n is the length of str1
         // Space: O(1) since the alphabet size is at most 26
-        public bool CanConvert(string str1, string str2)
+        public static bool CanConvert(string str1, string str2)
         {
             if (str1 == str2)
             {

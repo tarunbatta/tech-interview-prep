@@ -28,13 +28,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem390 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LastRemaining (int n) {
+        public static int LastRemaining (int n) {
             return 0;
         }
     }

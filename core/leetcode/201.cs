@@ -22,13 +22,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem201 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int RangeBitwiseAnd (int m, int n) {
+        public static int RangeBitwiseAnd (int m, int n) {
             return 0;
         }
     }

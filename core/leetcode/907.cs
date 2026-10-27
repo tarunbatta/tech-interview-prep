@@ -34,13 +34,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem907 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int SumSubarrayMins (int[] A) {
+        public static int SumSubarrayMins (int[] A) {
             return 0;
         }
     }

@@ -59,33 +59,33 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem36 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (IsValidSudoku (null));
-            Console.WriteLine (IsValidSudoku (new char[][] {
-                new char[] { '5', '3', '.', '.', '7', '.', '.', '.', '.' },
-                    new char[] { '6', '.', '.', '1', '9', '5', '.', '.', '.' },
-                    new char[] { '.', '9', '8', '.', '.', '.', '.', '6', '.' },
-                    new char[] { '8', '.', '.', '.', '6', '.', '.', '.', '3' },
-                    new char[] { '4', '.', '.', '8', '.', '3', '.', '.', '1' },
-                    new char[] { '7', '.', '.', '.', '2', '.', '.', '.', '6' },
-                    new char[] { '.', '6', '.', '.', '.', '.', '2', '8', '.' },
-                    new char[] { '.', '.', '.', '4', '1', '9', '.', '.', '5' },
-                    new char[] { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
-            }));
-            Console.WriteLine (IsValidSudoku (new char[][] {
-                new char[] { '8', '3', '.', '.', '7', '.', '.', '.', '.' },
-                    new char[] { '6', '.', '.', '1', '9', '5', '.', '.', '.' },
-                    new char[] { '.', '9', '8', '.', '.', '.', '.', '6', '.' },
-                    new char[] { '8', '.', '.', '.', '6', '.', '.', '.', '3' },
-                    new char[] { '4', '.', '.', '8', '.', '3', '.', '.', '1' },
-                    new char[] { '7', '.', '.', '.', '2', '.', '.', '.', '6' },
-                    new char[] { '.', '6', '.', '.', '.', '.', '2', '8', '.' },
-                    new char[] { '.', '.', '.', '4', '1', '9', '.', '.', '5' },
-                    new char[] { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
-            }));
+        public static void Init () {
+            Console.WriteLine (IsValidSudoku(null));
+            Console.WriteLine (IsValidSudoku([
+                ['5', '3', '.', '.', '7', '.', '.', '.', '.'],
+                    ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+                    ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+                    ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+                    ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+                    ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+                    ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+                    ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+                    ['.', '.', '.', '.', '8', '.', '.', '7', '9']
+            ]));
+            Console.WriteLine (IsValidSudoku([
+                ['8', '3', '.', '.', '7', '.', '.', '.', '.'],
+                    ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+                    ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+                    ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+                    ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+                    ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+                    ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+                    ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+                    ['.', '.', '.', '.', '8', '.', '.', '7', '9']
+            ]));
         }
 
-        public bool IsValidSudoku (char[][] board) {
+        public static bool IsValidSudoku (char[][] board) {
             if (board == null || board.Length != 9 || board[0].Length != 9) {
                 return false;
             }
@@ -94,9 +94,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem36 {
 
             // row check
             for (int i = 0; i < board.Length; i++) {
-                HashSet<char> rows = new HashSet<char> ();
-                HashSet<char> cols = new HashSet<char> ();
-                HashSet<char> cube = new HashSet<char> ();
+                HashSet<char> rows = [];
+                HashSet<char> cols = [];
+                HashSet<char> cube = [];
 
                 for (int j = 0; j < board[0].Length; j++) {
                     if (board[i][j] != '.' && !rows.Add (board[i][j])) {

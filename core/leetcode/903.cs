@@ -47,13 +47,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem903 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int NumPermsDISequence (string S) {
+        public static int NumPermsDISequence (string S) {
             return 0;
         }
     }

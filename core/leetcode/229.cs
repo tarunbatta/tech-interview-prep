@@ -24,13 +24,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem229 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> MajorityElement (int[] nums) {
+        public static IList<int> MajorityElement (int[] nums) {
             return null;
         }
     }

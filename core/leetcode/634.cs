@@ -25,7 +25,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem634 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(FindDerangement(3)); // 2
             Console.WriteLine(FindDerangement(2)); // 1
             Console.WriteLine(FindDerangement(1)); // 0
@@ -33,7 +33,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem634 {
 
         // Time: O(n)
         // Space: O(1)
-        public int FindDerangement(int n) {
+        public static int FindDerangement(int n) {
             if (n <= 1) {
                 return 0;
             }

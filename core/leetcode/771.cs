@@ -27,22 +27,22 @@ using System.Collections;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem771 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (NumJewelsInStones (null, null));
-            Console.WriteLine (NumJewelsInStones (null, "aAAbbbb"));
-            Console.WriteLine (NumJewelsInStones ("aA", null));
-            Console.WriteLine (NumJewelsInStones ("aA", "aAAbbbb"));
-            Console.WriteLine (NumJewelsInStones ("z", "ZZ"));
+        public static void Init () {
+            Console.WriteLine (NumJewelsInStones(null, null));
+            Console.WriteLine (NumJewelsInStones(null, "aAAbbbb"));
+            Console.WriteLine (NumJewelsInStones("aA", null));
+            Console.WriteLine (NumJewelsInStones("aA", "aAAbbbb"));
+            Console.WriteLine (NumJewelsInStones("z", "ZZ"));
         }
 
-        public int NumJewelsInStones (string J, string S) {
+        public static int NumJewelsInStones (string J, string S) {
             int result = 0;
 
             if (string.IsNullOrEmpty (S) || string.IsNullOrEmpty (J)) {
                 return result;
             }
 
-            Hashtable hash = new Hashtable ();
+            Hashtable hash = [];
 
             for (int i = 0; i < S.Length; i++) {
                 if (!hash.ContainsKey (S[i])) {

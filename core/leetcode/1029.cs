@@ -37,13 +37,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1029 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int TwoCitySchedCost (int[][] costs) {
+        public static int TwoCitySchedCost (int[][] costs) {
             return 0;
         }
     }

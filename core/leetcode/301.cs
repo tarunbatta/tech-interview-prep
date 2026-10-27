@@ -31,13 +31,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem301 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<string> RemoveInvalidParentheses (string s) {
+        public static IList<string> RemoveInvalidParentheses (string s) {
             return null;
         }
     }

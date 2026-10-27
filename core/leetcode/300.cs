@@ -23,13 +23,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem300 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n^2)
         // Space: O (n)
-        public int LengthOfLIS_a (int[] nums) {
+        public static int LengthOfLIS_a (int[] nums) {
             if (nums.Length == 0) {
                 return 0;
             }
@@ -56,7 +56,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem300 {
 
         // Time: O (n log (n))
         // Space: O (n)
-        public int LengthOfLIS_b (int[] nums) {
+        public static int LengthOfLIS_b (int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return 0;
             }

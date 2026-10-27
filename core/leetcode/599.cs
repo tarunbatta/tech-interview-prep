@@ -42,13 +42,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem599 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string[] FindRestaurant (string[] list1, string[] list2) {
+        public static string[] FindRestaurant (string[] list1, string[] list2) {
             return null;
         }
     }

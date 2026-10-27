@@ -30,22 +30,22 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem562
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] mat1 = new int[][]
-            {
-                new int[] { 0, 1, 1, 0 },
-                new int[] { 0, 1, 1, 0 },
-                new int[] { 0, 0, 0, 1 }
-            };
+            int[][] mat1 =
+            [
+                [0, 1, 1, 0],
+                [0, 1, 1, 0],
+                [0, 0, 0, 1]
+            ];
             Console.WriteLine(LongestLine(mat1)); // 3
 
-            int[][] mat2 = new int[][]
-            {
-                new int[] { 1, 1, 1, 1 },
-                new int[] { 0, 1, 1, 0 },
-                new int[] { 0, 0, 0, 1 }
-            };
+            int[][] mat2 =
+            [
+                [1, 1, 1, 1],
+                [0, 1, 1, 0],
+                [0, 0, 0, 1]
+            ];
             Console.WriteLine(LongestLine(mat2)); // 4
         }
 

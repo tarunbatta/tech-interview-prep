@@ -88,7 +88,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1075 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<ProjectAssignment> projects = [
                 new() { ProjectId = 1, EmployeeId = 1 },
                 new() { ProjectId = 1, EmployeeId = 2 },
@@ -112,18 +112,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1075 {
 
         // Time: O(P + E) where P is assignments count and E is employees count
         // Space: O(E) for employee dictionary lookup
-        public List<ProjectAverageResult> CalculateAverageExperience(List<ProjectAssignment> projects, List<Employee> employees) {
+        public static List<ProjectAverageResult> CalculateAverageExperience(List<ProjectAssignment> projects, List<Employee> employees) {
             var expMap = employees.ToDictionary(e => e.EmployeeId, e => e.ExperienceYears);
 
-            return projects
+            return [.. projects
                 .Where(p => expMap.ContainsKey(p.EmployeeId))
                 .GroupBy(p => p.ProjectId)
                 .Select(g => new ProjectAverageResult {
                     ProjectId = g.Key,
                     AverageYears = Math.Round(g.Average(p => expMap[p.EmployeeId]), 2)
                 })
-                .OrderBy(r => r.ProjectId)
-                .ToList();
+                .OrderBy(r => r.ProjectId)];
         }
     }
 }

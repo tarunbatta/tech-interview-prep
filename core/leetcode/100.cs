@@ -45,13 +45,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem100 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsSameTree (TreeNode p, TreeNode q) {
+        public static bool IsSameTree (TreeNode p, TreeNode q) {
             return false;
         }
     }

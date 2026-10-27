@@ -48,16 +48,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem511
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            List<Activity> activities = new()
-            {
+            List<Activity> activities =
+            [
                 new Activity { PlayerId = 1, DeviceId = 2, EventDate = new DateTime(2016, 3, 1), GamesPlayed = 5 },
                 new Activity { PlayerId = 1, DeviceId = 2, EventDate = new DateTime(2016, 5, 2), GamesPlayed = 6 },
                 new Activity { PlayerId = 2, DeviceId = 3, EventDate = new DateTime(2017, 6, 25), GamesPlayed = 1 },
                 new Activity { PlayerId = 3, DeviceId = 1, EventDate = new DateTime(2016, 3, 2), GamesPlayed = 0 },
                 new Activity { PlayerId = 3, DeviceId = 4, EventDate = new DateTime(2018, 7, 3), GamesPlayed = 5 }
-            };
+            ];
 
             var results = GetFirstLogin(activities);
             foreach (var r in results)
@@ -72,17 +72,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem511
         {
             if (activities == null || activities.Count == 0)
             {
-                return new List<FirstLoginResult>();
+                return [];
             }
 
-            return activities
+            return [.. activities
                 .GroupBy(a => a.PlayerId)
                 .Select(g => new FirstLoginResult
                 {
                     PlayerId = g.Key,
                     FirstLogin = g.Min(a => a.EventDate).ToString("yyyy-MM-dd")
-                })
-                .ToList();
+                })];
         }
     }
 }

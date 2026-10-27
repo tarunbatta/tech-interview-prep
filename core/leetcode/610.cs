@@ -60,7 +60,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem610 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<TriangleRecord> records = [
                 new() { X = 13, Y = 15, Z = 30 },
                 new() { X = 10, Y = 20, Z = 15 }
@@ -74,13 +74,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem610 {
 
         // Time: O(n) where n is the number of rows
         // Space: O(n) to store results
-        public List<TriangleJudgementResult> JudgeTriangle(List<TriangleRecord> records) {
-            return records.Select(r => new TriangleJudgementResult {
+        public static List<TriangleJudgementResult> JudgeTriangle(List<TriangleRecord> records) {
+            return [.. records.Select(r => new TriangleJudgementResult {
                 X = r.X,
                 Y = r.Y,
                 Z = r.Z,
                 Triangle = (r.X + r.Y > r.Z && r.X + r.Z > r.Y && r.Y + r.Z > r.X) ? "Yes" : "No"
-            }).ToList();
+            })];
         }
     }
 }

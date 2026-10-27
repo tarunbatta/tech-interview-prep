@@ -26,13 +26,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem167 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] TwoSum (int[] numbers, int target) {
+        public static int[] TwoSum (int[] numbers, int target) {
             return null;
         }
     }

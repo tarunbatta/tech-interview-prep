@@ -60,13 +60,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem954 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool CanReorderDoubled (int[] A) {
+        public static bool CanReorderDoubled (int[] A) {
             return false;
         }
     }

@@ -17,13 +17,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem233 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int CountDigitOne (int n) {
+        public static int CountDigitOne (int n) {
             return 0;
         }
     }

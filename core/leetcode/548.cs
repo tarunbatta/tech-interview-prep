@@ -36,10 +36,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem548
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(SplitArray(new int[] { 1, 2, 1, 2, 1, 2, 1 }));    // True
-            Console.WriteLine(SplitArray(new int[] { 1, 2, 1, 2, 1, 2, 1, 2 })); // False
+            Console.WriteLine(SplitArray([1, 2, 1, 2, 1, 2, 1]));    // True
+            Console.WriteLine(SplitArray([1, 2, 1, 2, 1, 2, 1, 2])); // False
         }
 
         // Time: O(n^2) fixing middle cut j and matching prefix halves
@@ -62,7 +62,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem548
 
             for (int j = 3; j < n - 3; j++)
             {
-                HashSet<int> seenSums = new();
+                HashSet<int> seenSums = [];
 
                 // Check left half around cut i
                 for (int i = 1; i < j - 1; i++)

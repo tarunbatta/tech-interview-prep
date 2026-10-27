@@ -18,13 +18,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem686 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int RepeatedStringMatch (string A, string B) {
+        public static int RepeatedStringMatch (string A, string B) {
             return 0;
         }
     }

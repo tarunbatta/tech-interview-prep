@@ -26,13 +26,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem25 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (1)
-        public ListNode ReverseKGroup (ListNode head, int k) {
+        public static ListNode ReverseKGroup (ListNode head, int k) {
             if (head == null || head.next == null || k == 1) {
                 return head;
             }
@@ -47,7 +47,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem25 {
                 i++;
 
                 if (i % k == 0) {
-                    begin = reverse (begin, head.next);
+                    begin = reverse(begin, head.next);
                     head = begin.next;
                 } else {
                     head = head.next;
@@ -57,7 +57,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem25 {
             return dummyhead.next;
         }
 
-        private ListNode reverse (ListNode begin, ListNode end) {
+        private static ListNode reverse (ListNode begin, ListNode end) {
             ListNode curr = begin.next;
             ListNode next, first;
             ListNode prev = begin;

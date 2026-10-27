@@ -39,13 +39,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem967 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] NumsSameConsecDiff (int N, int K) {
+        public static int[] NumsSameConsecDiff (int N, int K) {
             return null;
         }
     }

@@ -31,13 +31,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1051 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int HeightChecker (int[] heights) {
+        public static int HeightChecker (int[] heights) {
             return 0;
         }
     }

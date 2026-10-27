@@ -16,13 +16,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem386 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> LexicalOrder (int n) {
+        public static IList<int> LexicalOrder (int n) {
             return null;
         }
     }

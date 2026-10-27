@@ -29,10 +29,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem325
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(MaxSubArrayLen(new int[] { 1, -1, 5, -2, 3 }, 3)); // 4
-            Console.WriteLine(MaxSubArrayLen(new int[] { -2, -1, 2, 1 }, 1));   // 2
+            Console.WriteLine(MaxSubArrayLen([1, -1, 5, -2, 3], 3)); // 4
+            Console.WriteLine(MaxSubArrayLen([-2, -1, 2, 1], 1));   // 2
         }
 
         // Time: O(n) where n is nums.Length
@@ -44,8 +44,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem325
                 return 0;
             }
 
-            Dictionary<long, int> prefixMap = new();
-            prefixMap[0] = -1;
+            Dictionary<long, int> prefixMap = new()
+            {
+                [0] = -1
+            };
 
             long prefixSum = 0;
             int maxLen = 0;

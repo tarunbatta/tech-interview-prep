@@ -52,11 +52,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem851 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public int[] LoudAndRich (int[][] richer, int[] quiet) {
+        public static int[] LoudAndRich (int[][] richer, int[] quiet) {
             return null;
         }
     }

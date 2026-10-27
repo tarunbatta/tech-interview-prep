@@ -27,13 +27,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem119 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> GetRow (int rowIndex) {
+        public static IList<int> GetRow (int rowIndex) {
             return null;
         }
     }

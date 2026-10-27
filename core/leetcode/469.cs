@@ -33,7 +33,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem469
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var p1 = new List<IList<int>>
             {

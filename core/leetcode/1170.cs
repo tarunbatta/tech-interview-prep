@@ -37,13 +37,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1170 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] NumSmallerByFrequency (string[] queries, string[] words) {
+        public static int[] NumSmallerByFrequency (string[] queries, string[] words) {
             return null;
         }
     }

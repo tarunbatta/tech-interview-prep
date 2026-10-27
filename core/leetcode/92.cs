@@ -18,23 +18,23 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem92 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             ListNode l = new ListNode (1);
             l.next = new ListNode (2);
             l.next.next = new ListNode (3);
             l.next.next.next = new ListNode (4);
             l.next.next.next.next = new ListNode (5);
 
-            Console.WriteLine (ReverseBetween (null, 2, 4));
-            Console.WriteLine (ReverseBetween (null, 3, 3));
-            Console.WriteLine (ReverseBetween (null, 4, 3));
-            Console.WriteLine (ReverseBetween (l, 2, 4));
-            Console.WriteLine (ReverseBetween (l, 3, 3));
+            Console.WriteLine (ReverseBetween(null, 2, 4));
+            Console.WriteLine (ReverseBetween(null, 3, 3));
+            Console.WriteLine (ReverseBetween(null, 4, 3));
+            Console.WriteLine (ReverseBetween(l, 2, 4));
+            Console.WriteLine (ReverseBetween(l, 3, 3));
         }
 
         // Time: O (n)
         // Space: O (1)
-        public ListNode ReverseBetween (ListNode head, int m, int n) {
+        public static ListNode ReverseBetween (ListNode head, int m, int n) {
             if (head == null || m >= n) {
                 return head;
             }

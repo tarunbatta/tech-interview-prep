@@ -36,13 +36,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem63 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int UniquePathsWithObstacles (int[][] obstacleGrid) {
+        public static int UniquePathsWithObstacles (int[][] obstacleGrid) {
             return 0;
         }
     }

@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem346 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             MovingAverage obj = new MovingAverage (3);
             double param_1 = obj.Next (1);
         }

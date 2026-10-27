@@ -57,7 +57,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem603 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Cinema> seats = [
                 new() { SeatId = 1, Free = true },
                 new() { SeatId = 2, Free = false },
@@ -72,16 +72,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem603 {
 
         // Time: O(n log n) where n is the number of seats
         // Space: O(n) to store seat availability lookup and results
-        public List<int> ConsecutiveAvailableSeats(List<Cinema> seats) {
+        public static List<int> ConsecutiveAvailableSeats(List<Cinema> seats) {
             var freeSet = seats
                 .Where(s => s.Free)
                 .Select(s => s.SeatId)
                 .ToHashSet();
 
-            return freeSet
+            return [.. freeSet
                 .Where(id => freeSet.Contains(id - 1) || freeSet.Contains(id + 1))
-                .OrderBy(id => id)
-                .ToList();
+                .OrderBy(id => id)];
         }
     }
 }

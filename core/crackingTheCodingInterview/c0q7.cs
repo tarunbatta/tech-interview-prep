@@ -10,8 +10,8 @@ namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c0q7 {
     public class Solution {
         public static void Init (string[] args) {
             Console.WriteLine (GetPairs (null, 2));
-            Console.WriteLine (GetPairs (new int[] { 1, 7, 5, 9, 2, 12, 3 }, 2));
-            Console.WriteLine (GetPairs (new int[] { 1, 7, 5, 9, 2, 12, 3 }, 0));
+            Console.WriteLine (GetPairs ([1, 7, 5, 9, 2, 12, 3], 2));
+            Console.WriteLine (GetPairs ([1, 7, 5, 9, 2, 12, 3], 0));
         }
 
         private static string GetPairs (int[] arr, int diff) {

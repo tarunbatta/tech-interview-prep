@@ -27,13 +27,13 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem43 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string Multiply (string num1, string num2) {
+        public static string Multiply (string num1, string num2) {
             int[] res = new int[num1.Length + num2.Length];
 
             for (int i = num1.Length - 1; i >= 0; i--) {

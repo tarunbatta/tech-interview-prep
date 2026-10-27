@@ -42,16 +42,16 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem478 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Solution obj = new Solution (0, 0, 0);
-            double[] param_1 = obj.RandPoint ();
+            double[] param_1 = RandPoint();
         }
 
         public Solution (double radius, double x_center, double y_center) {
 
         }
 
-        public double[] RandPoint () {
+        public static double[] RandPoint () {
             return null;
         }
     }

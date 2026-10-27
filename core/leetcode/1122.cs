@@ -27,13 +27,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1122 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] RelativeSortArray (int[] arr1, int[] arr2) {
+        public static int[] RelativeSortArray (int[] arr1, int[] arr2) {
             return null;
         }
     }

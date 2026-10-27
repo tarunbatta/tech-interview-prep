@@ -42,13 +42,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1177 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<bool> CanMakePaliQueries (string s, int[][] queries) {
+        public static IList<bool> CanMakePaliQueries (string s, int[][] queries) {
             return null;
         }
     }

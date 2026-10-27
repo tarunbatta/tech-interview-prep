@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem743 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int NetworkDelayTime (int[][] times, int N, int K) {
+        public static int NetworkDelayTime (int[][] times, int N, int K) {
             return 0;
         }
     }

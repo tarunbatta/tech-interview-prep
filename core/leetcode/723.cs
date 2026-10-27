@@ -29,7 +29,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem723 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[][] board = [
                 [110, 5, 112, 113, 114],
                 [210, 211, 5, 213, 214],
@@ -49,7 +49,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem723 {
 
         // Time: O((m * n)^2)
         // Space: O(1) in-place
-        public int[][] CandyCrush(int[][] board) {
+        public static int[][] CandyCrush(int[][] board) {
             int m = board.Length;
             int n = board[0].Length;
             bool shouldContinue = true;

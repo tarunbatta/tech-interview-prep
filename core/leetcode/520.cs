@@ -40,13 +40,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem520 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool DetectCapitalUse (string word) {
+        public static bool DetectCapitalUse (string word) {
             return false;
         }
     }

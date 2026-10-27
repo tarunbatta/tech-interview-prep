@@ -43,13 +43,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem671 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindSecondMinimumValue (TreeNode root) {
+        public static int FindSecondMinimumValue (TreeNode root) {
             return 0;
         }
     }

@@ -39,9 +39,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem933 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             RecentCounter obj = new RecentCounter ();
-            int param_1 = obj.Ping (0);
+            int param_1 = RecentCounter.Ping(0);
         }
     }
 
@@ -50,7 +50,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem933 {
 
         }
 
-        public int Ping (int t) {
+        public static int Ping (int t) {
             return 0;
         }
     }

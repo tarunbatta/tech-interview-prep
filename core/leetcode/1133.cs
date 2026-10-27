@@ -26,7 +26,7 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1133 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] nums1 = [5, 7, 3, 9, 4, 9, 8, 3, 1];
             Console.WriteLine(LargestUniqueNumber(nums1)); // 8
 
@@ -36,7 +36,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1133 {
 
         // Time: O(n) where n is the length of nums
         // Space: O(n) to store frequencies
-        public int LargestUniqueNumber(int[] nums) {
+        public static int LargestUniqueNumber(int[] nums) {
             var unique = nums
                 .GroupBy(n => n)
                 .Where(g => g.Count() == 1)

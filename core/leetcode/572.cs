@@ -47,13 +47,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem572 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsSubtree (TreeNode s, TreeNode t) {
+        public static bool IsSubtree (TreeNode s, TreeNode t) {
             return false;
         }
     }

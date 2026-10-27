@@ -26,14 +26,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem198 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (Rob (null));
-            Console.WriteLine (Rob (new int[] { }));
-            Console.WriteLine (Rob (new int[] { 1, 2, 3, 1 }));
-            Console.WriteLine (Rob (new int[] { 2, 7, 9, 3, 1 }));
+        public static void Init () {
+            Console.WriteLine (Rob(null));
+            Console.WriteLine (Rob([]));
+            Console.WriteLine (Rob([1, 2, 3, 1]));
+            Console.WriteLine (Rob([2, 7, 9, 3, 1]));
         }
 
-        public int Rob (int[] nums) {
+        public static int Rob (int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return 0;
             }

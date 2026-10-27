@@ -50,13 +50,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem481 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MagicalString (int n) {
+        public static int MagicalString (int n) {
             return 0;
         }
     }

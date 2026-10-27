@@ -38,7 +38,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1164
     // );
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var products = new List<ProductPriceChange>
             {
@@ -60,7 +60,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1164
 
         // Time: O(N log N) where N is number of price change entries (grouping and ordering)
         // Space: O(N)
-        public IList<ProductPriceResult> GetProductPricesOnDate(List<ProductPriceChange> products, DateTime targetDate)
+        public static IList<ProductPriceResult> GetProductPricesOnDate(List<ProductPriceChange> products, DateTime targetDate)
         {
             var result = new List<ProductPriceResult>();
             var grouped = products.GroupBy(p => p.ProductId);

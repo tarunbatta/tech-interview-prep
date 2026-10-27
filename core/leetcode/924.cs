@@ -43,7 +43,7 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem924 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[][] g1 = [
                 [1, 1, 0],
                 [1, 1, 0],
@@ -71,7 +71,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem924 {
 
         // Time: O(n^2) where n is the number of nodes
         // Space: O(n) for DSU structures
-        public int MinMalwareSpread(int[][] graph, int[] initial) {
+        public static int MinMalwareSpread(int[][] graph, int[] initial) {
             int n = graph.Length;
             int[] parent = new int[n];
             int[] size = new int[n];

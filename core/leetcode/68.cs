@@ -71,14 +71,14 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem68 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (FullJustify_a (new string[] { "This", "is", "an", "example", "of", "text", "justification." }, 16));
-            Console.WriteLine (FullJustify_a (new string[] { "What", "must", "be", "acknowledgment", "shall", "be" }, 16));
-            Console.WriteLine (FullJustify_a (new string[] { "Science", "is", "what", "we", "understand", "well", "enough", "to", "explain", "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do" }, 20));
+        public static void Init () {
+            Console.WriteLine (FullJustify_a(["This", "is", "an", "example", "of", "text", "justification."], 16));
+            Console.WriteLine (FullJustify_a(["What", "must", "be", "acknowledgment", "shall", "be"], 16));
+            Console.WriteLine (FullJustify_a(["Science", "is", "what", "we", "understand", "well", "enough", "to", "explain", "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"], 20));
         }
 
-        public IList<string> FullJustify_a (string[] words, int maxWidth) {
-            IList<string> result = new List<string> ();
+        public static IList<string> FullJustify_a (string[] words, int maxWidth) {
+            IList<string> result = [];
 
             if (words == null || words.Length == 0) {
                 return result;
@@ -146,7 +146,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem68 {
             return result;
         }
 
-        public IList<string> FullJustify_b (string[] words, int maxWidth) {
+        public static IList<string> FullJustify_b (string[] words, int maxWidth) {
             var result = new List<string> ();
 
             var left = 0;
@@ -159,7 +159,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem68 {
                 if (curLength > maxWidth) {
                     right--;
 
-                    result.Add (FillLine (words, left, right, maxWidth));
+                    result.Add (FillLine(words, left, right, maxWidth));
 
                     left = right + 1;
 
@@ -171,12 +171,12 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem68 {
                 right++;
             }
 
-            result.Add (FillLastLine (words, left, maxWidth));
+            result.Add (FillLastLine(words, left, maxWidth));
 
             return result;
         }
 
-        private string FillLine (string[] words, int startIndex, int endIndex, int maxWidth) {
+        private static string FillLine (string[] words, int startIndex, int endIndex, int maxWidth) {
             if (endIndex - startIndex == 0) {
                 return $"{words[startIndex]}{new string(' ', maxWidth - words[startIndex].Length)}";
             }
@@ -205,7 +205,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem68 {
             return string.Join ("", oneResult);
         }
 
-        private string FillLastLine (string[] words, int startIndex, int maxWidth) {
+        private static string FillLastLine (string[] words, int startIndex, int maxWidth) {
             var restSpace = maxWidth;
             var result = new List<string> ();
             for (int i = startIndex; i < words.Length - 1; i++) {

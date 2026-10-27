@@ -52,13 +52,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem725 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public ListNode[] SplitListToParts (ListNode root, int k) {
+        public static ListNode[] SplitListToParts (ListNode root, int k) {
             return null;
         }
     }

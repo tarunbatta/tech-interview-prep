@@ -43,13 +43,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem799 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public double ChampagneTower (int poured, int query_row, int query_glass) {
+        public static double ChampagneTower (int poured, int query_row, int query_glass) {
             return 0;
         }
     }

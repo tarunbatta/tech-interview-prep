@@ -46,9 +46,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem901 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             StockSpanner obj = new StockSpanner ();
-            int param_1 = obj.Next (1);
+            int param_1 = StockSpanner.Next(1);
         }
     }
 
@@ -57,7 +57,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem901 {
 
         }
 
-        public int Next (int price) {
+        public static int Next (int price) {
             return 0;
         }
     }

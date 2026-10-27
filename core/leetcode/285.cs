@@ -27,11 +27,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem285 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public TreeNode InorderSuccessor (TreeNode root, TreeNode p) {
+        public static TreeNode InorderSuccessor (TreeNode root, TreeNode p) {
             if (root == null)
                 return null;
 
@@ -47,7 +47,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem285 {
                     c = c.left;
                 } else if (c.val == p.val) {
                     if (c.right != null) {
-                        return GetMin (c.right);
+                        return GetMin(c.right);
                     } else {
                         return temp;
                     }
@@ -57,11 +57,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem285 {
             return null;
         }
 
-        private TreeNode GetMin (TreeNode root) {
+        private static TreeNode GetMin (TreeNode root) {
             if (root.left == null) {
                 return root;
             } else {
-                return GetMin (root.left);
+                return GetMin(root.left);
             }
 
         }

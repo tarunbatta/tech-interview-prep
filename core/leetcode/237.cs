@@ -34,17 +34,17 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem237 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             ListNode node = new ListNode (4);
             node.next = new ListNode (5);
             node.next.next = new ListNode (1);
             node.next.next.next = new ListNode (9);
 
-            DeleteNode (null);
-            DeleteNode (node);
+            DeleteNode(null);
+            DeleteNode(node);
         }
 
-        public void DeleteNode (ListNode node) {
+        public static void DeleteNode (ListNode node) {
             if (node != null) {
                 node.val = node.next.val;
                 node.next = node.next.next;

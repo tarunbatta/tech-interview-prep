@@ -40,19 +40,19 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem490
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] maze = new int[][]
-            {
-                new int[] { 0, 0, 1, 0, 0 },
-                new int[] { 0, 0, 0, 0, 0 },
-                new int[] { 0, 0, 0, 1, 0 },
-                new int[] { 1, 1, 0, 1, 1 },
-                new int[] { 0, 0, 0, 0, 0 }
-            };
+            int[][] maze =
+            [
+                [0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 1, 0],
+                [1, 1, 0, 1, 1],
+                [0, 0, 0, 0, 0]
+            ];
 
-            Console.WriteLine(HasPath(maze, new int[] { 0, 4 }, new int[] { 4, 4 })); // True
-            Console.WriteLine(HasPath(maze, new int[] { 0, 4 }, new int[] { 3, 2 })); // False
+            Console.WriteLine(HasPath(maze, [0, 4], [4, 4])); // True
+            Console.WriteLine(HasPath(maze, [0, 4], [3, 2])); // False
         }
 
         // Time: O(m * n * max(m, n)) where ball rolls across the grid in each direction until hitting walls
@@ -73,8 +73,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem490
             queue.Enqueue((start[0], start[1]));
             visited[start[0], start[1]] = true;
 
-            int[] dr = { -1, 1, 0, 0 };
-            int[] dc = { 0, 0, -1, 1 };
+            int[] dr = [-1, 1, 0, 0];
+            int[] dc = [0, 0, -1, 1];
 
             while (queue.Count > 0)
             {

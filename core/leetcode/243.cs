@@ -21,11 +21,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem243 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public int ShortestDistance (string[] words, string word1, string word2) {
+        public static int ShortestDistance (string[] words, string word1, string word2) {
             return 0;
         }
     }

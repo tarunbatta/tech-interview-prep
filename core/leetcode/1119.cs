@@ -28,23 +28,18 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1119 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
         // Time: O (n)
         // Space: O (1)
-        public string RemoveVowels (string S) {
+        public static string RemoveVowels (string S) {
             if (string.IsNullOrEmpty (S)) {
                 return S;
             }
 
-            HashSet<char> hash = new HashSet<char> ();
-            hash.Add ('a');
-            hash.Add ('e');
-            hash.Add ('i');
-            hash.Add ('o');
-            hash.Add ('u');
+            HashSet<char> hash = ['a', 'e', 'i', 'o', 'u'];
 
             StringBuilder sb = new StringBuilder ();
 

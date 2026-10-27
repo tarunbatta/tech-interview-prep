@@ -51,7 +51,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem612 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Point2D> points = [
                 new() { X = -1, Y = -1 },
                 new() { X = 0, Y = 0 },
@@ -63,7 +63,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem612 {
 
         // Time: O(n^2) where n is the number of points
         // Space: O(1)
-        public double ShortestDistance(List<Point2D> points) {
+        public static double ShortestDistance(List<Point2D> points) {
             if (points.Count < 2) {
                 return 0.0;
             }

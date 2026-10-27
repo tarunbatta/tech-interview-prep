@@ -52,16 +52,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem512
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            List<Activity> activities = new()
-            {
+            List<Activity> activities =
+            [
                 new Activity { PlayerId = 1, DeviceId = 2, EventDate = new DateTime(2016, 3, 1), GamesPlayed = 5 },
                 new Activity { PlayerId = 1, DeviceId = 3, EventDate = new DateTime(2016, 5, 2), GamesPlayed = 6 },
                 new Activity { PlayerId = 2, DeviceId = 3, EventDate = new DateTime(2017, 6, 25), GamesPlayed = 1 },
                 new Activity { PlayerId = 3, DeviceId = 1, EventDate = new DateTime(2016, 3, 2), GamesPlayed = 0 },
                 new Activity { PlayerId = 3, DeviceId = 4, EventDate = new DateTime(2018, 7, 3), GamesPlayed = 5 }
-            };
+            ];
 
             var results = GetFirstLoginDevice(activities);
             foreach (var r in results)
@@ -76,10 +76,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem512
         {
             if (activities == null || activities.Count == 0)
             {
-                return new List<PlayerDeviceResult>();
+                return [];
             }
 
-            return activities
+            return [.. activities
                 .GroupBy(a => a.PlayerId)
                 .Select(g =>
                 {
@@ -89,8 +89,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem512
                         PlayerId = earliest.PlayerId,
                         DeviceId = earliest.DeviceId
                     };
-                })
-                .ToList();
+                })];
         }
     }
 }

@@ -26,21 +26,21 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem108 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public TreeNode SortedArrayToBST (int[] nums) {
+        public static TreeNode SortedArrayToBST (int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return null;
             }
 
-            return SortedArrayToBSTHelper (nums, 0, nums.Length - 1);
+            return SortedArrayToBSTHelper(nums, 0, nums.Length - 1);
         }
 
-        private TreeNode SortedArrayToBSTHelper (int[] nums, int low, int high) {
+        private static TreeNode SortedArrayToBSTHelper (int[] nums, int low, int high) {
             if (low > high) {
                 return null;
             }
@@ -48,8 +48,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem108 {
             int mid = low + (high - low) / 2;
 
             TreeNode node = new TreeNode (nums[mid]);
-            node.left = SortedArrayToBSTHelper (nums, low, mid - 1);
-            node.right = SortedArrayToBSTHelper (nums, mid + 1, high);
+            node.left = SortedArrayToBSTHelper(nums, low, mid - 1);
+            node.right = SortedArrayToBSTHelper(nums, mid + 1, high);
 
             return node;
         }

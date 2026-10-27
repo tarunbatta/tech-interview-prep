@@ -44,13 +44,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem475 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindRadius (int[] houses, int[] heaters) {
+        public static int FindRadius (int[] houses, int[] heaters) {
             return 0;
         }
     }

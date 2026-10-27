@@ -27,12 +27,14 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem18 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine (FourSum(null, 0));
             Console.WriteLine (FourSum([1, 0, -1], 0));
             Console.WriteLine (FourSum([1, 0, -1, 0, -2, 2], 0));
         }
 
+        // Time: O(n^3)
+        // Space: O(n)
         public static IList<IList<int>> FourSum (int[] nums, int target) {
             IList<IList<int>> result = [];
 

@@ -40,13 +40,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem692 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<string> TopKFrequent (string[] words, int k) {
+        public static IList<string> TopKFrequent (string[] words, int k) {
             return null;
         }
     }

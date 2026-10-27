@@ -37,7 +37,7 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem616 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             string s1 = "abcxyz123";
             string[] words1 = ["abc", "123"];
             Console.WriteLine(AddBoldTag(s1, words1)); // "<b>abc</b>xyz<b>123</b>"
@@ -49,7 +49,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem616 {
 
         // Time: O(N * Sum(W)) where N is length of s and W is word lengths
         // Space: O(N) for bold mask and string builder
-        public string AddBoldTag(string s, string[] words) {
+        public static string AddBoldTag(string s, string[] words) {
             int n = s.Length;
             bool[] isBold = new bool[n];
 

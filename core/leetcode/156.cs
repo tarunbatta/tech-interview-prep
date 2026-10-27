@@ -52,7 +52,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem156
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             TreeNode root = new(1)
             {

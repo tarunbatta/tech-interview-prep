@@ -21,13 +21,13 @@ using System.Collections;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem387 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (FirstUniqChar (null));
-            Console.WriteLine (FirstUniqChar ("leetcode"));
-            Console.WriteLine (FirstUniqChar ("loveleetcode"));
+        public static void Init () {
+            Console.WriteLine (FirstUniqChar(null));
+            Console.WriteLine (FirstUniqChar("leetcode"));
+            Console.WriteLine (FirstUniqChar("loveleetcode"));
         }
 
-        public int FirstUniqChar (string s) {
+        public static int FirstUniqChar (string s) {
             int result = -1;
 
             if (s == null || s.Length == 0) {
@@ -38,7 +38,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem387 {
                 return 0;
             }
 
-            Hashtable hash = new Hashtable ();
+            Hashtable hash = [];
             for (int i = 0; i < s.Length; i++) {
                 if (!hash.ContainsKey (s[i])) {
                     hash.Add (s[i], 0);

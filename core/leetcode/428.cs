@@ -36,23 +36,23 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem428 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Node root = null;
             Codec codec = new Codec ();
-            codec.deserialize (codec.serialize (root));
+            Codec.deserialize(Codec.serialize(root));
         }
 
     }
 
     public class Codec {
         // Encodes a tree to a single string.
-        public string serialize (Node root) {
-            List<int> list = new List<int> ();
-            serializeHelper (root, list);
+        public static string serialize (Node root) {
+            List<int> list = [];
+            serializeHelper(root, list);
             return string.Join (",", list);
         }
 
-        private void serializeHelper (Node root, List<int> list) {
+        private static void serializeHelper (Node root, List<int> list) {
             if (root == null) {
                 return;
             }
@@ -61,12 +61,12 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem428 {
             list.Add (root.children.Count);
 
             foreach (var item in root.children) {
-                serializeHelper (item, list);
+                serializeHelper(item, list);
             }
         }
 
         // Decodes your encoded data to tree.
-        public Node deserialize (string data) {
+        public static Node deserialize (string data) {
             if (string.IsNullOrEmpty (data)) {
                 return null;
             }
@@ -78,22 +78,22 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem428 {
                 q.Enqueue (item);
             }
 
-            return deserializeHelper (q);
+            return deserializeHelper(q);
         }
 
-        private Node deserializeHelper (Queue<string> q) {
+        private static Node deserializeHelper (Queue<string> q) {
             if (q.Count == 0) {
                 return null;
             }
 
             Node root = new Node ();
             root.val = Convert.ToInt32 (q.Dequeue ());
-            root.children = new List<Node> ();
+            root.children = [];
 
             int size = Convert.ToInt32 (q.Dequeue ());
 
             for (int i = 0; i < size; i++) {
-                root.children.Add (deserializeHelper (q));
+                root.children.Add (deserializeHelper(q));
             }
 
             return root;

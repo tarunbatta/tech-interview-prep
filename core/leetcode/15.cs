@@ -26,17 +26,19 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem15 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (ThreeSum (null));
-            Console.WriteLine (ThreeSum (new int[] {-1, 0, 1, 2, -1, -4 }));
-            Console.WriteLine (ThreeSum (new int[] {-1, 0, 1 }));
-            Console.WriteLine (ThreeSum (new int[] {-1, 0, 2 }));
-            Console.WriteLine (ThreeSum (new int[] {-1, 0 }));
-            Console.WriteLine (ThreeSum (new int[] {-1, 0, 1, 2, -1, -2 }));
+        public static void Init () {
+            Console.WriteLine (ThreeSum(null));
+            Console.WriteLine (ThreeSum([-1, 0, 1, 2, -1, -4]));
+            Console.WriteLine (ThreeSum([-1, 0, 1]));
+            Console.WriteLine (ThreeSum([-1, 0, 2]));
+            Console.WriteLine (ThreeSum([-1, 0]));
+            Console.WriteLine (ThreeSum([-1, 0, 1, 2, -1, -2]));
         }
 
-        public IList<IList<int>> ThreeSum (int[] nums) {
-            IList<IList<int>> result = new List<IList<int>> ();
+        // Time: O(n^2)
+        // Space: O(1)
+        public static IList<IList<int>> ThreeSum (int[] nums) {
+            IList<IList<int>> result = [];
 
             if (nums != null && nums.Length >= 3) {
                 Array.Sort (nums);
@@ -50,7 +52,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem15 {
                         int sumLeft = nums[j] + nums[k];
 
                         if (sumLeft == sumRight) {
-                            result.Add (new List<int> () { nums[i], nums[j], nums[k] });
+                            result.Add ([nums[i], nums[j], nums[k]]);
 
                             int x = nums[j];
                             while (nums[j] == x && j < k) {

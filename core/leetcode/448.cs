@@ -23,13 +23,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem448 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> FindDisappearedNumbers (int[] nums) {
+        public static IList<int> FindDisappearedNumbers (int[] nums) {
             return null;
         }
     }

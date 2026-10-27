@@ -61,11 +61,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem741 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public int CherryPickup (int[][] grid) {
+        public static int CherryPickup (int[][] grid) {
             return 0;
         }
     }

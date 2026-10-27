@@ -23,7 +23,7 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem23 {
     public class Solution {
-        public void Init () {
+        public static void Init() {
             ListNode l1 = new ListNode (3);
             l1.next = new ListNode (9);
 
@@ -33,38 +33,34 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem23 {
             ListNode l3 = new ListNode (1);
             l3.next = new ListNode (8);
 
-            ListNode[] lists = new ListNode[3];
-            lists[0] = l1;
-            lists[1] = l2;
-            lists[2] = l3;
-
+            ListNode[] lists = [l1, l2, l3];
             ListNode result = MergeKLists (lists);
         }
 
         // Time: O (n log (k))
         // Space: O (1)
-        public ListNode MergeKLists (ListNode[] lists) {
+        public static ListNode MergeKLists (ListNode[] lists) {
             if (lists == null || lists.Length == 0) {
                 return null;
             }
 
-            return Helper (lists, 0, lists.Length - 1);
+            return Helper(lists, 0, lists.Length - 1);
         }
 
-        private ListNode Helper (ListNode[] lists, int left, int right) {
+        private static ListNode Helper (ListNode[] lists, int left, int right) {
             if (left == right) {
                 return lists[left];
             }
 
             int mid = left + (right - left) / 2;
 
-            var leftListNode = Helper (lists, left, mid);
-            var rightListNode = Helper (lists, mid + 1, right);
+            var leftListNode = Helper(lists, left, mid);
+            var rightListNode = Helper(lists, mid + 1, right);
 
-            return MergeTwoLists (leftListNode, rightListNode);
+            return MergeTwoLists(leftListNode, rightListNode);
         }
 
-        private ListNode MergeTwoLists (ListNode l1, ListNode l2) {
+        private static ListNode MergeTwoLists (ListNode l1, ListNode l2) {
             if (l1 == null && l2 == null) {
                 return null;
             }

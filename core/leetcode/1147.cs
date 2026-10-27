@@ -53,13 +53,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1147 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LongestDecomposition (string text) {
+        public static int LongestDecomposition (string text) {
             return 0;
         }
     }

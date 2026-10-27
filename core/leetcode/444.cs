@@ -56,11 +56,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem444
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(SequenceReconstruction(new int[] { 1, 2, 3 }, new int[][] { new int[] { 1, 2 }, new int[] { 1, 3 } }));                     // False
-            Console.WriteLine(SequenceReconstruction(new int[] { 1, 2, 3 }, new int[][] { new int[] { 1, 2 } }));                                         // False
-            Console.WriteLine(SequenceReconstruction(new int[] { 1, 2, 3 }, new int[][] { new int[] { 1, 2 }, new int[] { 1, 3 }, new int[] { 2, 3 } })); // True
+            Console.WriteLine(SequenceReconstruction([1, 2, 3], new int[][] { [1, 2], [1, 3] }));                     // False
+            Console.WriteLine(SequenceReconstruction([1, 2, 3], new int[][] { [1, 2] }));                                         // False
+            Console.WriteLine(SequenceReconstruction([1, 2, 3], new int[][] { [1, 2], [1, 3], [2, 3] })); // True
         }
 
         // Time: O(V + E) where V is n and E is the total transitions in sequences
@@ -73,12 +73,12 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem444
             }
 
             int n = nums.Length;
-            Dictionary<int, HashSet<int>> graph = new();
+            Dictionary<int, HashSet<int>> graph = [];
             int[] inDegree = new int[n + 1];
 
             for (int i = 1; i <= n; i++)
             {
-                graph[i] = new HashSet<int>();
+                graph[i] = [];
             }
 
             foreach (var seq in sequences)

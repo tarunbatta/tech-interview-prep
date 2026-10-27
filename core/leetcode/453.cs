@@ -33,8 +33,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem453
     {
         public static void Init()
         {
-            Console.WriteLine(MinMoves(new int[] { 1, 2, 3 })); // 3
-            Console.WriteLine(MinMoves(new int[] { 1, 1, 1 })); // 0
+            Console.WriteLine(MinMoves([1, 2, 3])); // 3
+            Console.WriteLine(MinMoves([1, 1, 1])); // 0
         }
 
         // Time: O(n) single pass to find minimum and sum differences

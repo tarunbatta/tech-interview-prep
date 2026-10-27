@@ -43,9 +43,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1157 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             MajorityChecker obj = new MajorityChecker (null);
-            int param_1 = obj.Query (0, 0, 0);
+            int param_1 = MajorityChecker.Query(0, 0, 0);
         }
     }
 
@@ -54,7 +54,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1157 {
 
         }
 
-        public int Query (int left, int right, int threshold) {
+        public static int Query (int left, int right, int threshold) {
             return 0;
         }
     }

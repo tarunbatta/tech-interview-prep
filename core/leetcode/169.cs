@@ -23,13 +23,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem169 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MajorityElement (int[] nums) {
+        public static int MajorityElement (int[] nums) {
             return 0;
         }
     }

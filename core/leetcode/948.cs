@@ -55,13 +55,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem948 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int BagOfTokensScore (int[] tokens, int P) {
+        public static int BagOfTokensScore (int[] tokens, int P) {
             return 0;
         }
     }

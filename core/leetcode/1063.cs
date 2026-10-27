@@ -33,7 +33,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1063 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] nums1 = [1, 4, 2, 5, 3];
             Console.WriteLine(ValidSubarrays(nums1)); // 11
 
@@ -46,7 +46,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1063 {
 
         // Time: O(n) where n is the length of nums
         // Space: O(n) for monotonic stack
-        public int ValidSubarrays(int[] nums) {
+        public static int ValidSubarrays(int[] nums) {
             int n = nums.Length;
             int count = 0;
             Stack<int> stack = [];

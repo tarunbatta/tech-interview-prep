@@ -65,17 +65,17 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem44 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (IsMatch ("aa", "a"));
-            Console.WriteLine (IsMatch ("aa", "*"));
-            Console.WriteLine (IsMatch ("cb", "?a"));
-            Console.WriteLine (IsMatch ("adceb", "*a*b"));
-            Console.WriteLine (IsMatch ("acdcb", "a*c?b"));
+        public static void Init () {
+            Console.WriteLine (IsMatch("aa", "a"));
+            Console.WriteLine (IsMatch("aa", "*"));
+            Console.WriteLine (IsMatch("cb", "?a"));
+            Console.WriteLine (IsMatch("adceb", "*a*b"));
+            Console.WriteLine (IsMatch("acdcb", "a*c?b"));
         }
 
         // Time: O (n)
         // Space: O (1)
-        public bool IsMatch (string s, string p) {
+        public static bool IsMatch (string s, string p) {
             int i = 0;
             int j = 0;
             int match = 0;

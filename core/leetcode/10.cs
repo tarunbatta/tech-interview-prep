@@ -54,13 +54,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem10 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (sp)
         // Space: O (sp)
-        public bool IsMatch (string s, string p) {
+        public static bool IsMatch (string s, string p) {
             bool[, ] dp = new bool[s.Length + 1, p.Length + 1];
             dp[0, 0] = true;
 

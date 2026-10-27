@@ -26,7 +26,7 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1085 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] nums1 = [34, 23, 1, 24, 75, 33, 54, 8];
             Console.WriteLine(SumOfDigits(nums1)); // 0
 
@@ -36,7 +36,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1085 {
 
         // Time: O(n) where n is the length of nums
         // Space: O(1)
-        public int SumOfDigits(int[] nums) {
+        public static int SumOfDigits(int[] nums) {
             int min = nums[0];
             for (int i = 1; i < nums.Length; i++) {
                 if (nums[i] < min) {

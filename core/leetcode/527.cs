@@ -33,9 +33,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem527
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            string[] words = { "like", "god", "internal", "me", "internet", "interval", "intension", "face", "intrusion" };
+            string[] words = ["like", "god", "internal", "me", "internet", "interval", "intension", "face", "intrusion"];
             var res = WordsAbbreviation(words);
             Console.WriteLine(string.Join(", ", res)); // l2e, god, internal, me, i6t, interval, inte4n, f2e, intr4n
         }
@@ -46,7 +46,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem527
         {
             if (words == null || words.Count == 0)
             {
-                return new List<string>();
+                return [];
             }
 
             int n = words.Count;
@@ -63,7 +63,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem527
             {
                 while (true)
                 {
-                    List<int> conflicts = new();
+                    List<int> conflicts = [];
 
                     for (int j = i + 1; j < n; j++)
                     {

@@ -17,7 +17,7 @@ namespace InterviewPreperationGuide.Core.DataStructure.Tree {
 
         public Node (object item) {
             this.data = item;
-            this.childrens = new List<Node> ();
+            this.childrens = [];
         }
 
         public void DisplayNode () {

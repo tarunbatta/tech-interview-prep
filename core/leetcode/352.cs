@@ -26,10 +26,10 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem352 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             SummaryRanges obj = new SummaryRanges ();
-            obj.AddNum (0);
-            int[][] param_2 = obj.GetIntervals ();
+            SummaryRanges.AddNum(0);
+            int[][] param_2 = SummaryRanges.GetIntervals();
         }
     }
 
@@ -38,11 +38,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem352 {
 
         }
 
-        public void AddNum (int val) {
+        public static void AddNum (int val) {
 
         }
 
-        public int[][] GetIntervals () {
+        public static int[][] GetIntervals () {
             return null;
         }
     }

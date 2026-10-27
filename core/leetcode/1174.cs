@@ -38,7 +38,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1174
     // );
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var deliveries = new List<Delivery>
             {
@@ -56,7 +56,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1174
 
         // Time: O(N log N) where N is the number of deliveries (grouping and ordering per customer)
         // Space: O(N) for groupings
-        public double ImmediateFirstOrdersPercentage(List<Delivery> deliveries)
+        public static double ImmediateFirstOrdersPercentage(List<Delivery> deliveries)
         {
             if (deliveries == null || deliveries.Count == 0)
             {

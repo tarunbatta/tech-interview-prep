@@ -22,13 +22,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem143 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (1)
-        public void ReorderList (ListNode head) {
+        public static void ReorderList (ListNode head) {
             if (head == null) {
                 return;
             }
@@ -42,7 +42,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem143 {
             }
 
             ListNode middle = slow;
-            ListNode head2 = Reverse (slow.next);
+            ListNode head2 = Reverse(slow.next);
             slow.next = null;
 
             while (head != null && head2 != null) {
@@ -57,7 +57,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem143 {
             }
         }
 
-        private ListNode Reverse (ListNode head) {
+        private static ListNode Reverse (ListNode head) {
             if (head == null) {
                 return null;
             }

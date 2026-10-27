@@ -47,13 +47,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1013 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool CanThreePartsEqualSum (int[] A) {
+        public static bool CanThreePartsEqualSum (int[] A) {
             return false;
         }
     }

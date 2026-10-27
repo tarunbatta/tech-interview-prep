@@ -34,14 +34,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem271
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Codec codec = new();
-            List<string> input = new() { "lint", "code", "love", "you" };
-            string encoded = codec.Encode(input);
+            List<string> input = ["lint", "code", "love", "you"];
+            string encoded = Codec.Encode(input);
             Console.WriteLine(encoded); // 4#lint4#code4#love3#you
 
-            IList<string> decoded = codec.Decode(encoded);
+            IList<string> decoded = Codec.Decode(encoded);
             Console.WriteLine(string.Join(", ", decoded)); // lint, code, love, you
         }
     }
@@ -53,7 +53,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem271
     public class Codec
     {
         // Encodes a list of strings to a single string using length-prefix encoding.
-        public string Encode(IList<string> strs)
+        public static string Encode(IList<string> strs)
         {
             if (strs == null || strs.Count == 0)
             {
@@ -73,9 +73,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem271
         }
 
         // Decodes a single string to a list of strings.
-        public IList<string> Decode(string s)
+        public static IList<string> Decode(string s)
         {
-            List<string> result = new();
+            List<string> result = [];
 
             if (string.IsNullOrEmpty(s))
             {

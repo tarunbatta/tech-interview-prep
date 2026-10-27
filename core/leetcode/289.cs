@@ -46,13 +46,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem289 {
   public class Solution {
-    public void Init () {
+    public static void Init () {
       Console.WriteLine ();
     }
 
     // Time: O ()
     // Space: O ()
-    public void GameOfLife (int[][] board) {
+    public static void GameOfLife (int[][] board) {
 
     }
   }

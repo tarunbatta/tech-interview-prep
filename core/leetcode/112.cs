@@ -28,13 +28,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem112 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool HasPathSum (TreeNode root, int sum) {
+        public static bool HasPathSum (TreeNode root, int sum) {
 
             return false;
         }

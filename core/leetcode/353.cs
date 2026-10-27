@@ -42,13 +42,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem353
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] food = new int[][]
-            {
-                new int[] { 1, 2 },
-                new int[] { 0, 1 }
-            };
+            int[][] food =
+            [
+                [1, 2],
+                [0, 1]
+            ];
 
             SnakeGame snake = new(3, 2, food);
             Console.WriteLine(snake.Move("R")); // 0
@@ -75,11 +75,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem353
         {
             _width = width;
             _height = height;
-            _food = food ?? Array.Empty<int[]>();
+            _food = food ?? [];
             _foodIndex = 0;
 
             _body = new LinkedList<(int r, int c)>();
-            _bodySet = new HashSet<(int r, int c)>();
+            _bodySet = [];
 
             _body.AddFirst((0, 0));
             _bodySet.Add((0, 0));

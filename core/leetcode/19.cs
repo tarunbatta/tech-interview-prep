@@ -26,19 +26,19 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem19 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             ListNode node = new ListNode (1);
             node.next = new ListNode (2);
             node.next.next = new ListNode (3);
             node.next.next.next = new ListNode (4);
             node.next.next.next.next = new ListNode (5);
 
-            Console.WriteLine (RemoveNthFromEnd_a (node, 2));
+            Console.WriteLine (RemoveNthFromEnd_a(node, 2));
 
-            Console.WriteLine (RemoveNthFromEnd_b (node, 2));
+            Console.WriteLine (RemoveNthFromEnd_b(node, 2));
         }
 
-        public ListNode RemoveNthFromEnd_a (ListNode head, int n) {
+        public static ListNode RemoveNthFromEnd_a (ListNode head, int n) {
             if (n <= 0) {
                 return head;
             }
@@ -66,7 +66,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem19 {
             return dummy.next;
         }
 
-        public ListNode RemoveNthFromEnd_b (ListNode head, int n) {
+        public static ListNode RemoveNthFromEnd_b (ListNode head, int n) {
             if (n <= 0) {
                 return head;
             }

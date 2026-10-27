@@ -36,7 +36,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1136 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[][] rel1 = [[1, 3], [2, 3]];
             Console.WriteLine(MinimumSemesters(3, rel1)); // 2
 
@@ -46,7 +46,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1136 {
 
         // Time: O(V + E) where V is n and E is relations length
         // Space: O(V + E) for graph adjacency list and queue
-        public int MinimumSemesters(int n, int[][] relations) {
+        public static int MinimumSemesters(int n, int[][] relations) {
             List<int>[] graph = new List<int>[n + 1];
             int[] inDegree = new int[n + 1];
 

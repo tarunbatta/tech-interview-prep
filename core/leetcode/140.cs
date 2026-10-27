@@ -47,15 +47,15 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem140 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (WordBreak (null, null));
-            Console.WriteLine (WordBreak (null, new List<string> { "cats", "and", "sand", "dog" }));
-            Console.WriteLine (WordBreak ("catsanddog", new List<string> { "cats", "and", "sand", "dog" }));
-            Console.WriteLine (WordBreak ("pineapplepenapple", new List<string> { "apple", "pen", "applepen", "pine", "pineapple" }));
-            Console.WriteLine (WordBreak ("catsandog", new List<string> { "cats", "dog", "sand", "and", "cat" }));
+        public static void Init() {
+            Console.WriteLine (WordBreak(null, null));
+            Console.WriteLine (WordBreak(null, ["cats", "and", "sand", "dog"]));
+            Console.WriteLine (WordBreak("catsanddog", ["cats", "and", "sand", "dog"]));
+            Console.WriteLine (WordBreak("pineapplepenapple", ["apple", "pen", "applepen", "pine", "pineapple"]));
+            Console.WriteLine (WordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"]));
         }
 
-        public IList<string> WordBreak (string s, IList<string> wordDict) {
+        public static IList<string> WordBreak (string s, IList<string> wordDict) {
             if (string.IsNullOrEmpty (s) || wordDict == null) {
                 return null;
             }
@@ -64,16 +64,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem140 {
                 return wordDict;
             }
 
-            List<string> result = new List<string> ();
-            result = DFS (s, wordDict, new Dictionary<string, LinkedList<string>> ());
+            List<string> result = [];
+            result = DFS(s, wordDict, []);
 
             return result;
         }
 
-        public List<string> DFS (string s, IList<string> wordDict, Dictionary<string, LinkedList<String>> map) {
+        public static List<string> DFS (string s, IList<string> wordDict, Dictionary<string, LinkedList<String>> map) {
             // Look up cache 
             if (map.ContainsKey (s)) {
-                return map[s].ToList ();
+                return [.. map[s]];
             }
 
             var list = new LinkedList<String> ();
@@ -81,13 +81,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem140 {
             // base case 
             if (s.Length == 0) {
                 list.AddLast ("");
-                return list.ToList ();
+                return [.. list];
             }
 
             // go over each word in dictionary
             foreach (string word in wordDict) {
                 if (s.StartsWith (word)) {
-                    var sublist = DFS (s.Substring (word.Length), wordDict, map);
+                    var sublist = DFS(s.Substring (word.Length), wordDict, map);
 
                     foreach (string sub in sublist) {
                         list.AddLast (word + (string.IsNullOrEmpty (sub) ? "" : " ") + sub);
@@ -98,7 +98,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem140 {
             // memoization
             map.Add (s, list);
 
-            return list.ToList ();
+            return [.. list];
         }
     }
 }

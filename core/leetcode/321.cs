@@ -40,13 +40,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem321 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] MaxNumber (int[] nums1, int[] nums2, int k) {
+        public static int[] MaxNumber (int[] nums1, int[] nums2, int k) {
             return null;
         }
     }

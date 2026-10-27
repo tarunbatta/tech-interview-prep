@@ -36,12 +36,12 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem62 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (UniquePaths_BottomUp (3, 2));
-            Console.WriteLine (UniquePaths_BottomUp (7, 3));
+        public static void Init () {
+            Console.WriteLine (UniquePaths_BottomUp(3, 2));
+            Console.WriteLine (UniquePaths_BottomUp(7, 3));
         }
 
-        public int UniquePaths_BottomUp (int m, int n) {
+        public static int UniquePaths_BottomUp (int m, int n) {
             if (m <= 0 || n <= 0) {
                 return 0;
             }
@@ -61,7 +61,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem62 {
             return grid[m - 1, n - 1];
         }
 
-        public int UniquePaths_Recursive (int m, int n) {
+        public static int UniquePaths_Recursive (int m, int n) {
             if (m <= 0 || n <= 0) {
                 return 0;
             }
@@ -70,10 +70,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem62 {
                 return 1;
             }
 
-            return UniquePaths_Recursive (m - 1, n) + UniquePaths_Recursive (m, n - 1);
+            return UniquePaths_Recursive(m - 1, n) + UniquePaths_Recursive(m, n - 1);
         }
 
-        public int UniquePaths_TopDown (int m, int n) {
+        public static int UniquePaths_TopDown (int m, int n) {
             if (m <= 0 || n <= 0) {
                 return 0;
             }
@@ -86,16 +86,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem62 {
                 }
             }
 
-            return UniquePaths_TopDownHelper (grid, m - 1, n - 1);
+            return UniquePaths_TopDownHelper(grid, m - 1, n - 1);
         }
 
-        public int UniquePaths_TopDownHelper (int[, ] grid, int i, int j) {
+        public static int UniquePaths_TopDownHelper (int[, ] grid, int i, int j) {
             if (i == 0 || j == 0) {
                 return 1;
             }
 
             if (grid[i, j] == -1) {
-                grid[i, j] = UniquePaths_TopDownHelper (grid, i - 1, j) + UniquePaths_TopDownHelper (grid, i, j - 1);
+                grid[i, j] = UniquePaths_TopDownHelper(grid, i - 1, j) + UniquePaths_TopDownHelper(grid, i, j - 1);
             }
 
             return grid[i, j];

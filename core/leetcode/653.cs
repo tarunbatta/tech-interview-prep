@@ -43,13 +43,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem653 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool FindTarget (TreeNode root, int k) {
+        public static bool FindTarget (TreeNode root, int k) {
             return false;
         }
     }

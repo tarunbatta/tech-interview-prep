@@ -44,15 +44,15 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem26 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (RemoveDuplicates (null));
-            Console.WriteLine (RemoveDuplicates (new int[] { 0 }));
-            Console.WriteLine (RemoveDuplicates (new int[] { 1, 1, 2 }));
-            Console.WriteLine (RemoveDuplicates (new int[] { 1, 2, 3 }));
-            Console.WriteLine (RemoveDuplicates (new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 }));
+        public static void Init () {
+            Console.WriteLine (RemoveDuplicates(null));
+            Console.WriteLine (RemoveDuplicates([0]));
+            Console.WriteLine (RemoveDuplicates([1, 1, 2]));
+            Console.WriteLine (RemoveDuplicates([1, 2, 3]));
+            Console.WriteLine (RemoveDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
         }
 
-        public int RemoveDuplicates (int[] nums) {
+        public static int RemoveDuplicates (int[] nums) {
             int result = 0;
 
             if (nums == null || nums.Length == 0) {

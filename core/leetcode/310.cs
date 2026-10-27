@@ -48,13 +48,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem310 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> FindMinHeightTrees (int n, int[][] edges) {
+        public static IList<int> FindMinHeightTrees (int n, int[][] edges) {
             return null;
         }
     }

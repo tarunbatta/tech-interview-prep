@@ -60,13 +60,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem510 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
         // Time: O (n)
         // Space: O (1)
-        public Node InorderSuccessor (Node x) {
+        public static Node InorderSuccessor (Node x) {
             if (x == null) {
                 return null;
             }

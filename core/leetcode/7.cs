@@ -26,14 +26,16 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem7 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (Reverse (0));
-            Console.WriteLine (Reverse (123));
-            Console.WriteLine (Reverse (-321));
-            Console.WriteLine (Reverse (120));
+        public static void Init () {
+            Console.WriteLine (Reverse(0));
+            Console.WriteLine (Reverse(123));
+            Console.WriteLine (Reverse(-321));
+            Console.WriteLine (Reverse(120));
         }
 
-        public int Reverse (int x) {
+        // Time: O(log(x))
+        // Space: O(1)
+        public static int Reverse (int x) {
             int result = 0;
 
             while (x != 0) {

@@ -30,7 +30,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1173
     // FROM Delivery;
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var deliveries = new List<Delivery>
             {
@@ -47,7 +47,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1173
 
         // Time: O(N) where N is the number of deliveries
         // Space: O(1)
-        public double ImmediatePercentage(List<Delivery> deliveries)
+        public static double ImmediatePercentage(List<Delivery> deliveries)
         {
             if (deliveries == null || deliveries.Count == 0)
             {

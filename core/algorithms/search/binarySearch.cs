@@ -8,10 +8,10 @@ namespace InterviewPreperationGuide.Core.Algorithms.Search {
     public class BinarySearch {
         public static void Init () {
             Console.WriteLine (_BinarySearch (9, null));
-            Console.WriteLine (_BinarySearch (9, new int[0]));
-            Console.WriteLine (_BinarySearch (9, new int[] { 1, 3, 5, 7, 9, 13, 15, 17, 21 }));
+            Console.WriteLine (_BinarySearch (9, []));
+            Console.WriteLine (_BinarySearch (9, [1, 3, 5, 7, 9, 13, 15, 17, 21]));
 
-            int[] arr = new int[] { 1, 3, 5, 7, 9, 13, 15, 17, 21 };
+            int[] arr = [1, 3, 5, 7, 9, 13, 15, 17, 21];
             Console.WriteLine (_RBinarySearch (9, arr, 0, arr.Length - 1));
         }
 

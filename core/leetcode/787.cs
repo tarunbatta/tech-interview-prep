@@ -43,27 +43,27 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem787 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (FindCheapestPrice (3, null, 0, 2, 1));
-            Console.WriteLine (FindCheapestPrice (3, new int[][] { }, 0, 2, 1));
-            Console.WriteLine (FindCheapestPrice (3, new int[][] {
-                new int[] { 0, 1, 100 },
-                    new int[] { 1, 2, 100 },
-                    new int[] { 0, 2, 500 }
-            }, 0, 2, 1));
-            Console.WriteLine (FindCheapestPrice (3, new int[][] {
-                new int[] { 0, 1, 100 },
-                    new int[] { 1, 2, 100 },
-                    new int[] { 0, 2, 500 }
-            }, 0, 2, 0));
+        public static void Init () {
+            Console.WriteLine (FindCheapestPrice(3, null, 0, 2, 1));
+            Console.WriteLine (FindCheapestPrice(3, [], 0, 2, 1));
+            Console.WriteLine (FindCheapestPrice(3, [
+                [0, 1, 100],
+                    [1, 2, 100],
+                    [0, 2, 500]
+            ], 0, 2, 1));
+            Console.WriteLine (FindCheapestPrice(3, [
+                [0, 1, 100],
+                    [1, 2, 100],
+                    [0, 2, 500]
+            ], 0, 2, 0));
         }
 
-        public int FindCheapestPrice (int n, int[][] flights, int src, int dst, int K) {
+        public static int FindCheapestPrice (int n, int[][] flights, int src, int dst, int K) {
             if (flights == null) {
                 return -1;
             }
 
-            List<Flight> flightsList = new List<Flight> ();
+            List<Flight> flightsList = [];
             foreach (int[] flight in flights) {
                 flightsList.Add (new Flight (flight[0], flight[1], flight[2]));
             }

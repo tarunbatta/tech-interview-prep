@@ -72,14 +72,14 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem722 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (s), where s is the total length of the source code
         // Space: O (s)
-        public IList<string> RemoveComments (string[] source) {
-            IList<string> result = new List<string> ();
+        public static IList<string> RemoveComments (string[] source) {
+            IList<string> result = [];
 
             if (source == null || source.Length == 0) {
                 return result;

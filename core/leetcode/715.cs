@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem715 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             int left = 0;
             int right = 0;
             RangeModule obj = new RangeModule ();
-            obj.AddRange (left, right);
-            bool param_2 = obj.QueryRange (left, right);
-            obj.RemoveRange (left, right);
+            RangeModule.AddRange(left, right);
+            bool param_2 = RangeModule.QueryRange(left, right);
+            RangeModule.RemoveRange(left, right);
         }
     }
 
@@ -49,15 +49,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem715 {
         public RangeModule () {
 
         }
-        public void AddRange (int left, int right) {
+        public static void AddRange (int left, int right) {
 
         }
 
-        public bool QueryRange (int left, int right) {
+        public static bool QueryRange (int left, int right) {
             return false;
         }
 
-        public void RemoveRange (int left, int right) {
+        public static void RemoveRange (int left, int right) {
 
         }
     }

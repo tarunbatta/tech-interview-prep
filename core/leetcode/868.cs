@@ -75,13 +75,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem868 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int BinaryGap (int N) {
+        public static int BinaryGap (int N) {
             return 0;
         }
     }

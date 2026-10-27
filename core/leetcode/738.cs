@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem738 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MonotoneIncreasingDigits (int N) {
+        public static int MonotoneIncreasingDigits (int N) {
             return 0;
         }
     }

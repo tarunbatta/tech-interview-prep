@@ -28,25 +28,24 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1110 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (h + n), where h is height of tree
-        public IList<TreeNode> DelNodes (TreeNode root, int[] to_delete) {
-            IList<TreeNode> result = new List<TreeNode> ();
+        public static IList<TreeNode> DelNodes (TreeNode root, int[] to_delete) {
+            IList<TreeNode> result = [];
 
-            List<int> toBeDeleted = new List<int> ();
-            toBeDeleted.AddRange (to_delete);
+            List<int> toBeDeleted = [.. to_delete];
 
-            Helper (root, result, toBeDeleted, true);
+            Helper(root, result, toBeDeleted, true);
 
             return result;
         }
 
         // If a node is root (has no parent) and isn't deleted, when will we add it to the result.
-        private TreeNode Helper (TreeNode node, IList<TreeNode> result, List<int> toBeDeleted, bool isRoot) {
+        private static TreeNode Helper (TreeNode node, IList<TreeNode> result, List<int> toBeDeleted, bool isRoot) {
             if (node == null) {
                 return null;
             }
@@ -57,8 +56,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1110 {
                 result.Add (node);
             }
 
-            node.left = Helper (node.left, result, toBeDeleted, deleted);
-            node.right = Helper (node.right, result, toBeDeleted, deleted);
+            node.left = Helper(node.left, result, toBeDeleted, deleted);
+            node.right = Helper(node.right, result, toBeDeleted, deleted);
 
             return deleted ? null : node;
         }

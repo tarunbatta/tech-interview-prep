@@ -21,13 +21,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem59 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[][] GenerateMatrix (int n) {
+        public static int[][] GenerateMatrix (int n) {
             return null;
         }
     }

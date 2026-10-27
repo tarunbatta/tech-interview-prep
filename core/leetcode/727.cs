@@ -29,14 +29,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem727 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(MinWindow("abcdebdde", "bde")); // "bcde"
             Console.WriteLine(MinWindow("jmeqqafrmVk", "u")); // ""
         }
 
         // Time: O(|s1| * |s2|)
         // Space: O(1)
-        public string MinWindow(string s1, string s2) {
+        public static string MinWindow(string s1, string s2) {
             int m = s1.Length;
             int n = s2.Length;
 

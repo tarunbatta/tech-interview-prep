@@ -45,17 +45,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem570
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            List<Employee> employees = new()
-            {
+            List<Employee> employees =
+            [
                 new Employee { Id = 101, Name = "John", Department = "A", ManagerId = null },
                 new Employee { Id = 102, Name = "Dan", Department = "A", ManagerId = 101 },
                 new Employee { Id = 103, Name = "James", Department = "A", ManagerId = 101 },
                 new Employee { Id = 104, Name = "Amy", Department = "A", ManagerId = 101 },
                 new Employee { Id = 105, Name = "Anne", Department = "A", ManagerId = 101 },
                 new Employee { Id = 106, Name = "Ron", Department = "A", ManagerId = 101 }
-            };
+            ];
 
             var managers = FindManagersWithAtLeast5DirectReports(employees);
             foreach (var m in managers)
@@ -70,7 +70,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem570
         {
             if (employees == null || employees.Count == 0)
             {
-                return new List<string>();
+                return [];
             }
 
             var managerCounts = employees
@@ -80,10 +80,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem570
                 .Select(g => g.Key)
                 .ToHashSet();
 
-            return employees
+            return [.. employees
                 .Where(e => managerCounts.Contains(e.Id))
-                .Select(e => e.Name)
-                .ToList();
+                .Select(e => e.Name)];
         }
     }
 }

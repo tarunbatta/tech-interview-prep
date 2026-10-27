@@ -67,7 +67,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1126 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<EventRecord> events = [
                 new() { BusinessId = 1, EventType = "reviews", Occurences = 7 },
                 new() { BusinessId = 3, EventType = "reviews", Occurences = 3 },
@@ -84,18 +84,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1126 {
 
         // Time: O(n) where n is the number of event records
         // Space: O(E) where E is distinct event types
-        public List<int> FindActiveBusinesses(List<EventRecord> events) {
+        public static List<int> FindActiveBusinesses(List<EventRecord> events) {
             var eventAvg = events
                 .GroupBy(e => e.EventType)
                 .ToDictionary(g => g.Key, g => g.Average(e => e.Occurences));
 
-            return events
+            return [.. events
                 .Where(e => e.Occurences > eventAvg[e.EventType])
                 .GroupBy(e => e.BusinessId)
                 .Where(g => g.Count() > 1)
                 .Select(g => g.Key)
-                .OrderBy(id => id)
-                .ToList();
+                .OrderBy(id => id)];
         }
     }
 }

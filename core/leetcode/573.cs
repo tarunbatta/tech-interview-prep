@@ -39,7 +39,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem573
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(MinDistance(5, 7, [2, 2], [4, 4], [[3, 0], [2, 5]])); // 12
             Console.WriteLine(MinDistance(1, 3, [0, 1], [0, 0], [[0, 2]]));         // 3

@@ -35,14 +35,14 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem800 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(SimilarRGB("#09f166")); // "#11ee66"
             Console.WriteLine(SimilarRGB("#4e3fe1")); // "#5544dd"
         }
 
         // Time: O(1)
         // Space: O(1)
-        public string SimilarRGB(string color) {
+        public static string SimilarRGB(string color) {
             StringBuilder sb = new("#");
             for (int i = 1; i < 7; i += 2) {
                 int val = Convert.ToInt32(color.Substring(i, 2), 16);

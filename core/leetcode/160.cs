@@ -45,14 +45,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem160
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine();
         }
 
         // Time: O (n)
         // Space: O (1)
-        public ListNode GetIntersectionNode(ListNode headA, ListNode headB)
+        public static ListNode GetIntersectionNode(ListNode headA, ListNode headB)
         {
             if (headA == null || headB == null)
             {
@@ -85,7 +85,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem160
             return nodeA;
         }
 
-        private int getLength(ListNode node)
+        private static int getLength(ListNode node)
         {
             int result = 0;
 

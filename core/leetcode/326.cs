@@ -35,14 +35,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem326 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (IsPowerOfThree (27));
-            Console.WriteLine (IsPowerOfThree (0));
-            Console.WriteLine (IsPowerOfThree (9));
-            Console.WriteLine (IsPowerOfThree (45));
+        public static void Init () {
+            Console.WriteLine (IsPowerOfThree(27));
+            Console.WriteLine (IsPowerOfThree(0));
+            Console.WriteLine (IsPowerOfThree(9));
+            Console.WriteLine (IsPowerOfThree(45));
         }
 
-        public bool IsPowerOfThree (int n) {
+        public static bool IsPowerOfThree (int n) {
             if (n < 1) {
                 return false;
             }

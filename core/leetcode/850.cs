@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem850 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int RectangleArea (int[][] rectangles) {
+        public static int RectangleArea (int[][] rectangles) {
             return 0;
         }
     }

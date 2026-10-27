@@ -27,16 +27,16 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem118 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (Generate (0));
-            Console.WriteLine (Generate (5));
+        public static void Init () {
+            Console.WriteLine (Generate(0));
+            Console.WriteLine (Generate(5));
         }
 
-        public IList<IList<int>> Generate (int numRows) {
-            IList<IList<int>> result = new List<IList<int>> ();
+        public static IList<IList<int>> Generate (int numRows) {
+            IList<IList<int>> result = [];
 
             for (int i = 1; i <= numRows; i++) {
-                List<int> temp = new List<int> ();
+                List<int> temp = [];
 
                 for (int j = 1; j <= i; j++) {
                     if (j == 1 || j == i) {

@@ -77,7 +77,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1045 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<CustomerPurchase> purchases = [
                 new() { CustomerId = 1, ProductKey = 5 },
                 new() { CustomerId = 2, ProductKey = 6 },
@@ -97,15 +97,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1045 {
 
         // Time: O(C + P) where C is customer purchases count and P is products count
         // Space: O(C + P)
-        public List<int> FindCustomersWithAllProducts(List<CustomerPurchase> purchases, List<ProductRecord> products) {
+        public static List<int> FindCustomersWithAllProducts(List<CustomerPurchase> purchases, List<ProductRecord> products) {
             int totalProducts = products.Select(p => p.ProductKey).Distinct().Count();
 
-            return purchases
+            return [.. purchases
                 .GroupBy(p => p.CustomerId)
                 .Where(g => g.Select(x => x.ProductKey).Distinct().Count() == totalProducts)
                 .Select(g => g.Key)
-                .OrderBy(id => id)
-                .ToList();
+                .OrderBy(id => id)];
         }
     }
 }

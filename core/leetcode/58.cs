@@ -23,13 +23,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem58 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LengthOfLastWord (string s) {
+        public static int LengthOfLastWord (string s) {
             return 0;
         }
     }

@@ -37,10 +37,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem555
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(SplitLoopedString(new string[] { "abc", "xyz" })); // zyxcba
-            Console.WriteLine(SplitLoopedString(new string[] { "abc" }));        // cba
+            Console.WriteLine(SplitLoopedString(["abc", "xyz"])); // zyxcba
+            Console.WriteLine(SplitLoopedString(["abc"]));        // cba
         }
 
         // Time: O(N * L^2) where N is strs.Length and L is the average string length

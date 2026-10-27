@@ -26,14 +26,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1134 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(IsArmstrong(153)); // True
             Console.WriteLine(IsArmstrong(123)); // False
         }
 
         // Time: O(log_10 n)
         // Space: O(1)
-        public bool IsArmstrong(int n) {
+        public static bool IsArmstrong(int n) {
             int k = 0;
             int temp = n;
             while (temp > 0) {

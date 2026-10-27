@@ -32,11 +32,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem839 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public int NumSimilarGroups (string[] A) {
+        public static int NumSimilarGroups (string[] A) {
             return 0;
         }
     }

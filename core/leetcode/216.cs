@@ -30,13 +30,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem216 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<IList<int>> CombinationSum3 (int k, int n) {
+        public static IList<IList<int>> CombinationSum3 (int k, int n) {
             return null;
         }
     }

@@ -31,13 +31,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem829 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ConsecutiveNumbersSum (int N) {
+        public static int ConsecutiveNumbersSum (int N) {
             return 0;
         }
     }

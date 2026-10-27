@@ -21,14 +21,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem31 {
     public class Solution {
-        public void Init () {
+        public static void Init() {
             NextPermutation (null);
-            NextPermutation (new int[] { 1, 2, 3 });
-            NextPermutation (new int[] { 3, 2, 1 });
-            NextPermutation (new int[] { 1, 1, 5 });
+            NextPermutation ([1, 2, 3]);
+            NextPermutation ([3, 2, 1]);
+            NextPermutation ([1, 1, 5]);
         }
 
-        public void NextPermutation (int[] nums) {
+        public static void NextPermutation (int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return;
             };
@@ -46,23 +46,23 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem31 {
                     j--;
                 }
 
-                Swap (nums, i, j);
+                Swap(nums, i, j);
             }
 
-            Reverse (nums, i + 1);
+            Reverse(nums, i + 1);
         }
 
-        private void Reverse (int[] nums, int start) {
+        private static void Reverse (int[] nums, int start) {
             int i = start;
             int j = nums.Length - 1;
 
             while (i < j) {
-                Swap (nums, i, j);
+                Swap(nums, i, j);
                 i++;
                 j--;
             }
         }
-        private void Swap (int[] nums, int i, int j) {
+        private static void Swap (int[] nums, int i, int j) {
             int temp = nums[i];
             nums[i] = nums[j];
             nums[j] = temp;

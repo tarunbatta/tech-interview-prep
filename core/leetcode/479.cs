@@ -29,13 +29,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem479 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LargestPalindrome (int n) {
+        public static int LargestPalindrome (int n) {
             return 0;
         }
     }

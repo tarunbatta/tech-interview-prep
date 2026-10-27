@@ -26,7 +26,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1099 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] nums1 = [34, 23, 1, 24, 75, 33, 54, 8];
             Console.WriteLine(TwoSumLessThanK(nums1, 60)); // 58
 
@@ -36,7 +36,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1099 {
 
         // Time: O(n log n) where n is the length of nums
         // Space: O(1)
-        public int TwoSumLessThanK(int[] nums, int k) {
+        public static int TwoSumLessThanK(int[] nums, int k) {
             Array.Sort(nums);
             int left = 0;
             int right = nums.Length - 1;

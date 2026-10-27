@@ -62,13 +62,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem980 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int UniquePathsIII (int[][] grid) {
+        public static int UniquePathsIII (int[][] grid) {
             return 0;
         }
     }

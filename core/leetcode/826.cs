@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem826 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxProfitAssignment (int[] difficulty, int[] profit, int[] worker) {
+        public static int MaxProfitAssignment (int[] difficulty, int[] profit, int[] worker) {
             return 0;
         }
     }

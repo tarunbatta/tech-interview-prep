@@ -47,7 +47,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem333
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             TreeNode root = new(10)
             {

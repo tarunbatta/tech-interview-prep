@@ -53,13 +53,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem744 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public char NextGreatestLetter (char[] letters, char target) {
+        public static char NextGreatestLetter (char[] letters, char target) {
             return ' ';
         }
     }

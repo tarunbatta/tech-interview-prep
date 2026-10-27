@@ -36,13 +36,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem412 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (FizzBuzz (0));
-            Console.WriteLine (FizzBuzz (15));
+        public static void Init () {
+            Console.WriteLine (FizzBuzz(0));
+            Console.WriteLine (FizzBuzz(15));
         }
 
-        public IList<string> FizzBuzz (int n) {
-            List<string> result = new List<string> ();
+        public static IList<string> FizzBuzz (int n) {
+            List<string> result = [];
 
             if (n > 0) {
                 for (int i = 1; i <= n; i++) {

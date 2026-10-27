@@ -26,14 +26,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1100 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(NumKLenSubstrNoRepeats("havefunonleetcode", 5)); // 6
             Console.WriteLine(NumKLenSubstrNoRepeats("home", 5)); // 0
         }
 
         // Time: O(n) where n is the length of string s
         // Space: O(1) fixed 26 lowercase English letters frequency table
-        public int NumKLenSubstrNoRepeats(string s, int k) {
+        public static int NumKLenSubstrNoRepeats(string s, int k) {
             if (k > 26 || k > s.Length) {
                 return 0;
             }

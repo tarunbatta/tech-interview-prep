@@ -31,7 +31,7 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1086 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[][] items = [
                 [1, 91], [1, 92], [2, 93], [2, 2], [1, 60], [2, 77], [1, 65], [1, 87], [1, 100], [2, 100], [2, 76]
             ];
@@ -44,15 +44,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1086 {
 
         // Time: O(n log n) where n is the number of score items
         // Space: O(n) for grouping and sorting
-        public int[][] HighFive(int[][] items) {
-            return items
+        public static int[][] HighFive(int[][] items) {
+            return [.. items
                 .GroupBy(item => item[0])
                 .OrderBy(g => g.Key)
                 .Select(g => new int[] {
                     g.Key,
                     g.Select(x => x[1]).OrderByDescending(s => s).Take(5).Sum() / 5
-                })
-                .ToArray();
+                })];
         }
     }
 }

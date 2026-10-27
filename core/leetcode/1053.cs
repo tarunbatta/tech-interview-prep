@@ -49,13 +49,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1053 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] PrevPermOpt1 (int[] A) {
+        public static int[] PrevPermOpt1 (int[] A) {
             return null;
         }
     }

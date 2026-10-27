@@ -60,13 +60,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem971 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> FlipMatchVoyage (TreeNode root, int[] voyage) {
+        public static IList<int> FlipMatchVoyage (TreeNode root, int[] voyage) {
             return null;
         }
     }

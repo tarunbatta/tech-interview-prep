@@ -49,13 +49,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1005 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LargestSumAfterKNegations (int[] A, int K) {
+        public static int LargestSumAfterKNegations (int[] A, int K) {
             return 0;
         }
     }

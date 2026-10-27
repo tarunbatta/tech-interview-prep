@@ -28,7 +28,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1150 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] nums1 = [2, 4, 5, 5, 5, 5, 5, 6, 6];
             Console.WriteLine(IsMajorityElement(nums1, 5)); // True
 
@@ -38,7 +38,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1150 {
 
         // Time: O(log n) where n is length of nums
         // Space: O(1)
-        public bool IsMajorityElement(int[] nums, int target) {
+        public static bool IsMajorityElement(int[] nums, int target) {
             int n = nums.Length;
             int firstIdx = FirstOccurrence(nums, target);
 

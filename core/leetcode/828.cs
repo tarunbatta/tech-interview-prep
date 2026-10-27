@@ -44,13 +44,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem828 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int UniqueLetterString (string S) {
+        public static int UniqueLetterString (string S) {
             return 0;
         }
     }

@@ -48,13 +48,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1019 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] NextLargerNodes (ListNode head) {
+        public static int[] NextLargerNodes (ListNode head) {
             return null;
         }
     }

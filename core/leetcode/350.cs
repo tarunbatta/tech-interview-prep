@@ -29,15 +29,15 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem350 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (Intersect (null, null));
-            Console.WriteLine (Intersect (null, new int[] { 2, 2 }));
-            Console.WriteLine (Intersect (new int[] { 1, 2, 2, 1 }, null));
-            Console.WriteLine (Intersect (new int[] { 1, 2, 2, 1 }, new int[] { 2, 2 }));
-            Console.WriteLine (Intersect (new int[] { 4, 9, 5 }, new int[] { 9, 4, 9, 8, 4 }));
+        public static void Init () {
+            Console.WriteLine (Intersect(null, null));
+            Console.WriteLine (Intersect(null, [2, 2]));
+            Console.WriteLine (Intersect([1, 2, 2, 1], null));
+            Console.WriteLine (Intersect([1, 2, 2, 1], [2, 2]));
+            Console.WriteLine (Intersect([4, 9, 5], [9, 4, 9, 8, 4]));
         }
 
-        public int[] Intersect (int[] nums1, int[] nums2) {
+        public static int[] Intersect (int[] nums1, int[] nums2) {
             var dict = new Dictionary<int, int> ();
             Array.Sort (nums1);
             Array.Sort (nums2);

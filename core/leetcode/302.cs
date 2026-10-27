@@ -37,14 +37,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem302
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            char[][] image = new char[][]
-            {
-                new char[] { '0', '0', '1', '0' },
-                new char[] { '0', '1', '1', '0' },
-                new char[] { '0', '1', '0', '0' }
-            };
+            char[][] image =
+            [
+                ['0', '0', '1', '0'],
+                ['0', '1', '1', '0'],
+                ['0', '1', '0', '0']
+            ];
 
             Console.WriteLine(MinArea(image, 0, 2)); // 6
         }

@@ -37,13 +37,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem648 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string ReplaceWords (IList<string> dict, string sentence) {
+        public static string ReplaceWords (IList<string> dict, string sentence) {
             return null;
         }
     }

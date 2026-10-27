@@ -36,13 +36,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1052 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxSatisfied (int[] customers, int[] grumpy, int X) {
+        public static int MaxSatisfied (int[] customers, int[] grumpy, int X) {
             return 0;
         }
     }

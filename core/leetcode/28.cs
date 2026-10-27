@@ -26,26 +26,26 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem28 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (StrStr_a (null, null));
-            Console.WriteLine (StrStr_a ("", ""));
-            Console.WriteLine (StrStr_a ("hello", null));
-            Console.WriteLine (StrStr_a (null, "ll"));
-            Console.WriteLine (StrStr_a ("a", "a"));
-            Console.WriteLine (StrStr_a ("hello", "ll"));
-            Console.WriteLine (StrStr_a ("aaaaa", "bba"));
+        public static void Init () {
+            Console.WriteLine (StrStr_a(null, null));
+            Console.WriteLine (StrStr_a("", ""));
+            Console.WriteLine (StrStr_a("hello", null));
+            Console.WriteLine (StrStr_a(null, "ll"));
+            Console.WriteLine (StrStr_a("a", "a"));
+            Console.WriteLine (StrStr_a("hello", "ll"));
+            Console.WriteLine (StrStr_a("aaaaa", "bba"));
 
-            Console.WriteLine (StrStr_b (null, null));
-            Console.WriteLine (StrStr_b ("", ""));
-            Console.WriteLine (StrStr_b ("hello", null));
-            Console.WriteLine (StrStr_b (null, "ll"));
-            Console.WriteLine (StrStr_b ("hello", "ll"));
-            Console.WriteLine (StrStr_b ("aaaaa", "bba"));
+            Console.WriteLine (StrStr_b(null, null));
+            Console.WriteLine (StrStr_b("", ""));
+            Console.WriteLine (StrStr_b("hello", null));
+            Console.WriteLine (StrStr_b(null, "ll"));
+            Console.WriteLine (StrStr_b("hello", "ll"));
+            Console.WriteLine (StrStr_b("aaaaa", "bba"));
         }
 
         // Time: O ((n-l)l), where n is length of haystack, and l is length of needle
         // Space: O (1)
-        public int StrStr_a (string haystack, string needle) {
+        public static int StrStr_a (string haystack, string needle) {
             if (needle == null) {
                 return -1;
             }
@@ -84,7 +84,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem28 {
 
         // Time: O ()
         // Space: O ()
-        public int StrStr_b (string haystack, string needle) {
+        public static int StrStr_b (string haystack, string needle) {
             if ((haystack == null && needle != null) || (haystack != null && needle == null) || (haystack != null && needle != null && haystack.Length < needle.Length)) {
                 return -1;
             }

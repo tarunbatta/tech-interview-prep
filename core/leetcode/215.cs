@@ -25,13 +25,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem215 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindKthLargest (int[] nums, int k) {
+        public static int FindKthLargest (int[] nums, int k) {
             return 0;
         }
     }

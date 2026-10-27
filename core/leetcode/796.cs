@@ -24,17 +24,17 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem796 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (RotateString (null, null));
-            Console.WriteLine (RotateString ("", ""));
-            Console.WriteLine (RotateString ("abcde", ""));
-            Console.WriteLine (RotateString ("", "cdeab"));
-            Console.WriteLine (RotateString ("abcde", "cdeab"));
-            Console.WriteLine (RotateString ("abcde", "abced"));
-            Console.WriteLine (RotateString ("aa", "a"));
+        public static void Init () {
+            Console.WriteLine (RotateString(null, null));
+            Console.WriteLine (RotateString("", ""));
+            Console.WriteLine (RotateString("abcde", ""));
+            Console.WriteLine (RotateString("", "cdeab"));
+            Console.WriteLine (RotateString("abcde", "cdeab"));
+            Console.WriteLine (RotateString("abcde", "abced"));
+            Console.WriteLine (RotateString("aa", "a"));
         }
 
-        public bool RotateString (string A, string B) {
+        public static bool RotateString (string A, string B) {
             return A.Length == B.Length && (B + B).Contains (A);
         }
     }

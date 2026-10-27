@@ -25,13 +25,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem228 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<string> SummaryRanges (int[] nums) {
+        public static IList<string> SummaryRanges (int[] nums) {
             return null;
         }
     }

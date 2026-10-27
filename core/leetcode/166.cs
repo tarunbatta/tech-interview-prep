@@ -29,13 +29,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem166 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string FractionToDecimal (int numerator, int denominator) {
+        public static string FractionToDecimal (int numerator, int denominator) {
             return null;
         }
     }

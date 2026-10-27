@@ -21,13 +21,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem292 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool CanWinNim (int n) {
+        public static bool CanWinNim (int n) {
             return false;
         }
     }

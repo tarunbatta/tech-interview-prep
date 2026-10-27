@@ -43,15 +43,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem305
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] positions = new int[][]
-            {
-                new int[] { 0, 0 },
-                new int[] { 0, 1 },
-                new int[] { 1, 2 },
-                new int[] { 2, 1 }
-            };
+            int[][] positions =
+            [
+                [0, 0],
+                [0, 1],
+                [1, 2],
+                [2, 1]
+            ];
 
             var res = NumIslands2(3, 3, positions);
             Console.WriteLine(string.Join(", ", res)); // 1, 1, 2, 3
@@ -61,7 +61,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem305
         // Space: O(m * n) for the Disjoint Set Union array
         public static IList<int> NumIslands2(int m, int n, int[][] positions)
         {
-            List<int> result = new();
+            List<int> result = [];
 
             if (m <= 0 || n <= 0 || positions == null || positions.Length == 0)
             {
@@ -72,8 +72,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem305
             Array.Fill(parent, -1);
 
             int count = 0;
-            int[] dr = { -1, 1, 0, 0 };
-            int[] dc = { 0, 0, -1, 1 };
+            int[] dr = [-1, 1, 0, 0];
+            int[] dc = [0, 0, -1, 1];
 
             foreach (var pos in positions)
             {

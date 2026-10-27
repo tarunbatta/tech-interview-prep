@@ -41,13 +41,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem438 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> FindAnagrams (string s, string p) {
+        public static IList<int> FindAnagrams (string s, string p) {
             return null;
         }
     }

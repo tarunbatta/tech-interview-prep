@@ -34,13 +34,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem697 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindShortestSubArray (int[] nums) {
+        public static int FindShortestSubArray (int[] nums) {
             return 0;
         }
     }

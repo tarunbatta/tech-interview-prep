@@ -49,14 +49,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem483 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (SmallestGoodBase (null));
-            Console.WriteLine (SmallestGoodBase ("13"));
-            Console.WriteLine (SmallestGoodBase ("4681"));
-            Console.WriteLine (SmallestGoodBase ("1000000000000000000"));
+        public static void Init () {
+            Console.WriteLine (SmallestGoodBase(null));
+            Console.WriteLine (SmallestGoodBase("13"));
+            Console.WriteLine (SmallestGoodBase("4681"));
+            Console.WriteLine (SmallestGoodBase("1000000000000000000"));
         }
 
-        public string SmallestGoodBase (string n) {
+        public static string SmallestGoodBase (string n) {
             string result = null;
 
             if (!string.IsNullOrEmpty (n)) {

@@ -45,13 +45,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1038 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public TreeNode BstToGst (TreeNode root) {
+        public static TreeNode BstToGst (TreeNode root) {
             return null;
         }
     }

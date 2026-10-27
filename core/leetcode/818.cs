@@ -46,13 +46,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem818 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int Racecar (int target) {
+        public static int Racecar (int target) {
             return 0;
         }
     }

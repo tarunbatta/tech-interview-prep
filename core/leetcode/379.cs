@@ -42,7 +42,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem379
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             PhoneDirectory directory = new(3);
             Console.WriteLine(directory.Get());      // 0

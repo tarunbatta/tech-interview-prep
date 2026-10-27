@@ -38,13 +38,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1026 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxAncestorDiff (TreeNode root) {
+        public static int MaxAncestorDiff (TreeNode root) {
             return 0;
         }
     }

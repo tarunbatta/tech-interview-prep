@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem834 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] SumOfDistancesInTree (int N, int[][] edges) {
+        public static int[] SumOfDistancesInTree (int N, int[][] edges) {
             return null;
         }
     }

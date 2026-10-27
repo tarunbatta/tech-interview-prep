@@ -24,13 +24,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem64 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (m*n)
         // Space: O (1)
-        public int MinPathSum (int[][] grid) {
+        public static int MinPathSum (int[][] grid) {
             if (grid == null || grid.Length == 0 || grid[0].Length == 0) {
                 return 0;
             }

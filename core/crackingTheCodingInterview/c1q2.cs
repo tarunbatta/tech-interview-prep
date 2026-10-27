@@ -77,7 +77,7 @@ namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c1q2 {
             }
 
             int[] letters = new int[256];
-            char[] charactersinStringA = inputA.ToArray ();
+            char[] charactersinStringA = [.. inputA];
 
             for (int i = 0; i < inputA.Length; i++) {
                 int characterValue = Convert.ToInt32 (inputA[i]);

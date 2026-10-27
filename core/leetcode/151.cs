@@ -39,7 +39,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem151 {
     public class Solution {
-        public void Init () {
+        public static void Init() {
             Console.WriteLine (ReverseWords (null));
             Console.WriteLine (ReverseWords (""));
             Console.WriteLine (ReverseWords ("the sky is blue"));
@@ -49,7 +49,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem151 {
 
         // Time: O (n)
         // Space: O (n)
-        public string ReverseWords (string s) {
+        public static string ReverseWords (string s) {
             if (string.IsNullOrEmpty (s)) {
                 return s;
             }
@@ -57,14 +57,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem151 {
             char[] c = s.ToCharArray ();
             int n = s.Length;
 
-            ReverseString (c, 0, n - 1);
-            ReverseWords (c, n);
-            int end = CleanSpaces (c, n);
+            ReverseString(c, 0, n - 1);
+            ReverseWords(c, n);
+            int end = CleanSpaces(c, n);
 
             return new string (c, 0, end);
         }
 
-        private void ReverseWords (char[] c, int n) {
+        private static void ReverseWords (char[] c, int n) {
             int i = 0;
             int j = 0;
 
@@ -72,11 +72,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem151 {
                 while (i < j || i < n && c[i] == ' ') i++;
                 while (j < i || j < n && c[j] != ' ') j++;
 
-                ReverseString (c, i, j - 1);
+                ReverseString(c, i, j - 1);
             }
         }
 
-        private int CleanSpaces (char[] c, int n) {
+        private static int CleanSpaces (char[] c, int n) {
             int i = 0;
             int j = 0;
 
@@ -93,7 +93,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem151 {
             return i;
         }
 
-        private void ReverseString (char[] c, int i, int j) {
+        private static void ReverseString (char[] c, int i, int j) {
             while (i < j) {
                 char t = c[i];
                 c[i++] = c[j];

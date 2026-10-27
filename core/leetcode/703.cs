@@ -29,9 +29,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem703 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             KthLargest obj = new KthLargest (0, null);
-            int param_1 = obj.Add (0);
+            int param_1 = KthLargest.Add(0);
         }
     }
 
@@ -40,7 +40,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem703 {
 
         }
 
-        public int Add (int val) {
+        public static int Add (int val) {
             return 0;
         }
     }

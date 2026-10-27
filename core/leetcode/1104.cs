@@ -37,13 +37,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1104 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> PathInZigZagTree (int label) {
+        public static IList<int> PathInZigZagTree (int label) {
             return null;
         }
     }

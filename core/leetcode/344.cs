@@ -26,13 +26,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem344 {
     public class Solution {
-        public void Init () {
-            ReverseString (null);
-            ReverseString (new char[] { 'h', 'e', 'l', 'l', 'o' });
-            ReverseString (new char[] { 'H', 'a', 'n', 'n', 'a', 'h' });
+        public static void Init () {
+            ReverseString(null);
+            ReverseString(['h', 'e', 'l', 'l', 'o']);
+            ReverseString(['H', 'a', 'n', 'n', 'a', 'h']);
         }
 
-        public void ReverseString (char[] s) {
+        public static void ReverseString (char[] s) {
             if (s == null || s.Length <= 1) {
                 return;
             }

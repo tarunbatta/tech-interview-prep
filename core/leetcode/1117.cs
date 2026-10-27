@@ -52,7 +52,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1117 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
     }
@@ -62,7 +62,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1117 {
 
         }
 
-        public void Hydrogen (Action releaseHydrogen) {
+        public static void Hydrogen (Action releaseHydrogen) {
             // releaseHydrogen() outputs "H". Do not change or remove this line.        releaseHydrogen();    }​    public void Oxygen(Action releaseOxygen) {                // releaseOxygen() outputs "O". Do not change or remove this line.        releaseOxygen();    }}
         }
     }

@@ -62,13 +62,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem433 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinMutation (string start, string end, string[] bank) {
+        public static int MinMutation (string start, string end, string[] bank) {
             return 0;
         }
     }

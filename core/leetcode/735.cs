@@ -57,13 +57,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem735 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] AsteroidCollision (int[] asteroids) {
+        public static int[] AsteroidCollision (int[] asteroids) {
             return null;
         }
     }

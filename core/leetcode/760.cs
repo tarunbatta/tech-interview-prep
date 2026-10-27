@@ -31,7 +31,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem760 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] nums1 = [12, 28, 46, 32, 50];
             int[] nums2 = [50, 12, 32, 46, 28];
             Console.WriteLine(string.Join(", ", AnagramMappings(nums1, nums2))); // 1, 4, 3, 2, 0
@@ -39,7 +39,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem760 {
 
         // Time: O(n) where n is the length of nums1 and nums2
         // Space: O(n) to store index mappings
-        public int[] AnagramMappings(int[] nums1, int[] nums2) {
+        public static int[] AnagramMappings(int[] nums1, int[] nums2) {
             Dictionary<int, List<int>> map = [];
             for (int j = 0; j < nums2.Length; j++) {
                 if (!map.TryGetValue(nums2[j], out var list)) {

@@ -61,7 +61,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1148 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<ArticleView> views = [
                 new() { ArticleId = 1, AuthorId = 3, ViewerId = 5, ViewDate = new DateTime(2019, 8, 1) },
                 new() { ArticleId = 1, AuthorId = 3, ViewerId = 6, ViewDate = new DateTime(2019, 8, 2) },
@@ -78,13 +78,12 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1148 {
 
         // Time: O(n log n) where n is the number of views
         // Space: O(n) for distinct authors
-        public List<int> AuthorsWhoViewedOwnArticles(List<ArticleView> views) {
-            return views
+        public static List<int> AuthorsWhoViewedOwnArticles(List<ArticleView> views) {
+            return [.. views
                 .Where(v => v.AuthorId == v.ViewerId)
                 .Select(v => v.AuthorId)
                 .Distinct()
-                .OrderBy(id => id)
-                .ToList();
+                .OrderBy(id => id)];
         }
     }
 }

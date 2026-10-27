@@ -30,35 +30,35 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem102 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<IList<int>> LevelOrder_a (TreeNode root) {
+        public static IList<IList<int>> LevelOrder_a (TreeNode root) {
             var result = new List<IList<int>> ();
-            LevelOrderHelper (root, result, 0);
+            LevelOrderHelper(root, result, 0);
 
             return result;
         }
 
-        private void LevelOrderHelper (TreeNode root, List<IList<int>> result, int height) {
+        private static void LevelOrderHelper (TreeNode root, List<IList<int>> result, int height) {
             if (root == null) {
                 return;
             }
 
             if (height >= result.Count) {
-                result.Add (new List<int> ());
+                result.Add ([]);
             }
 
             result[height].Add (root.val);
 
-            LevelOrderHelper (root.left, result, height + 1);
-            LevelOrderHelper (root.right, result, height + 1);
+            LevelOrderHelper(root.left, result, height + 1);
+            LevelOrderHelper(root.right, result, height + 1);
         }
 
-        public IList<IList<int>> LevelOrder_b (TreeNode root) {
+        public static IList<IList<int>> LevelOrder_b (TreeNode root) {
             var result = new List<IList<int>> ();
 
             if (root == null) {
@@ -71,7 +71,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem102 {
             while (queue.Count != 0) {
                 int height = queue.Count;
 
-                List<int> sublist = new List<int> ();
+                List<int> sublist = [];
 
                 for (int i = 0; i < height; i++) {
                     if (queue.Peek ().left != null) {

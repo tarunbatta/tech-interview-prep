@@ -56,7 +56,7 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1152 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             string[] u1 = ["joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary"];
             int[] t1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
             string[] w1 = ["home", "about", "career", "home", "cart", "maps", "home", "home", "about", "career"];
@@ -70,7 +70,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1152 {
 
         // Time: O(U * L^3 + P log P) where U is users, L is websites per user
         // Space: O(U * L^3) for storing 3-sequences
-        public IList<string> MostVisitedPattern(string[] username, int[] timestamp, string[] website) {
+        public static IList<string> MostVisitedPattern(string[] username, int[] timestamp, string[] website) {
             int n = username.Length;
             var visits = new List<(string User, int Time, string Site)>(n);
 

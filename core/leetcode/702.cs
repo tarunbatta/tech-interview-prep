@@ -55,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem702 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             SecretArrayReader reader1 = new([-1, 0, 3, 5, 9, 12]);
             Console.WriteLine(Search(reader1, 9)); // 4
             Console.WriteLine(Search(reader1, 2)); // -1
@@ -63,7 +63,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem702 {
 
         // Time: O(log T) where T is the target index
         // Space: O(1)
-        public int Search(ArrayReader reader, int target) {
+        public static int Search(ArrayReader reader, int target) {
             int right = 1;
             while (reader.Get(right) < target) {
                 right <<= 1;

@@ -69,7 +69,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1142 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<ActivityRecord> activities = [
                 new() { UserId = 1, SessionId = 1, ActivityDate = new DateTime(2019, 7, 20), ActivityType = "open_session" },
                 new() { UserId = 1, SessionId = 1, ActivityDate = new DateTime(2019, 7, 20), ActivityType = "scroll_down" },
@@ -92,7 +92,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1142 {
 
         // Time: O(n) where n is the number of activity records
         // Space: O(u) where u is distinct users
-        public double AverageSessionsPerUser(List<ActivityRecord> activities) {
+        public static double AverageSessionsPerUser(List<ActivityRecord> activities) {
             DateTime endDate = new(2019, 7, 27);
             DateTime startDate = endDate.AddDays(-29);
 

@@ -32,14 +32,14 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem681 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(NextClosestTime("19:34")); // "19:39"
             Console.WriteLine(NextClosestTime("23:59")); // "22:22"
         }
 
         // Time: O(1) at most 1440 iterations
         // Space: O(1)
-        public string NextClosestTime(string time) {
+        public static string NextClosestTime(string time) {
             int currentMinutes = int.Parse(time[..2]) * 60 + int.Parse(time[3..]);
             HashSet<char> allowed = [time[0], time[1], time[3], time[4]];
 

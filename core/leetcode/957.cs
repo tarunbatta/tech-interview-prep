@@ -65,13 +65,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem957 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] PrisonAfterNDays (int[] cells, int N) {
+        public static int[] PrisonAfterNDays (int[] cells, int N) {
             return null;
         }
     }

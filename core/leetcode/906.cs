@@ -36,13 +36,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem906 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int SuperpalindromesInRange (string L, string R) {
+        public static int SuperpalindromesInRange (string L, string R) {
             return 0;
         }
     }

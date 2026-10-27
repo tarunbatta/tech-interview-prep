@@ -57,13 +57,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1028 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public TreeNode RecoverFromPreorder (string S) {
+        public static TreeNode RecoverFromPreorder (string S) {
             return null;
         }
     }

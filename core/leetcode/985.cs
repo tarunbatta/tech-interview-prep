@@ -42,13 +42,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem985 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] SumEvenAfterQueries (int[] A, int[][] queries) {
+        public static int[] SumEvenAfterQueries (int[] A, int[][] queries) {
             return null;
         }
     }

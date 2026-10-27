@@ -35,7 +35,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem683 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] bulbs1 = [1, 3, 2];
             int k1 = 1;
             Console.WriteLine(KEmptySlots(bulbs1, k1)); // 2
@@ -47,7 +47,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem683 {
 
         // Time: O(n) where n is the number of bulbs
         // Space: O(n) to store days array
-        public int KEmptySlots(int[] bulbs, int k) {
+        public static int KEmptySlots(int[] bulbs, int k) {
             int n = bulbs.Length;
             int[] days = new int[n + 1];
             for (int i = 0; i < n; i++) {

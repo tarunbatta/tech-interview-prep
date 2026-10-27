@@ -44,7 +44,7 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem966 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             string[] wordlist = ["KiTe", "kite", "hare", "Hare"];
             string[] queries = ["kite", "Kite", "KiTe", "Hare", "HARE", "Hear", "hear", "keti", "keet", "keto"];
             Console.WriteLine(string.Join(", ", Spellchecker(wordlist, queries)));
@@ -53,7 +53,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem966 {
 
         // Time: O(W * L + Q * L) where W is wordlist size, Q is queries size, L is word length
         // Space: O(W * L)
-        public string[] Spellchecker(string[] wordlist, string[] queries) {
+        public static string[] Spellchecker(string[] wordlist, string[] queries) {
             HashSet<string> exact = [];
             Dictionary<string, string> cap = [];
             Dictionary<string, string> vowel = [];

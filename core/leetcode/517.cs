@@ -53,13 +53,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem517 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindMinMoves (int[] machines) {
+        public static int FindMinMoves (int[] machines) {
             return 0;
         }
     }

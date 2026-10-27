@@ -47,16 +47,16 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem355 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             int userId = 0;
             int tweetId = 0;
             int followerId = 0;
             int followeeId = 0;
             Twitter obj = new Twitter ();
-            obj.PostTweet (userId, tweetId);
-            IList<int> param_2 = obj.GetNewsFeed (userId);
-            obj.Follow (followerId, followeeId);
-            obj.Unfollow (followerId, followeeId);
+            Twitter.PostTweet(userId, tweetId);
+            IList<int> param_2 = Twitter.GetNewsFeed(userId);
+            Twitter.Follow(followerId, followeeId);
+            Twitter.Unfollow(followerId, followeeId);
         }
 
         public class Twitter {
@@ -65,24 +65,24 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem355 {
             }
 
             // Compose a new tweet
-            public void PostTweet (int userId, int tweetId) {
+            public static void PostTweet (int userId, int tweetId) {
 
             }
 
             // Retrieve the 10 most recent tweet ids in the user's news feed. 
             // Each item in the news feed must be posted by users who the user followed or by the user herself. 
             // Tweets must be ordered from most recent to least recent.
-            public IList<int> GetNewsFeed (int userId) {
+            public static IList<int> GetNewsFeed (int userId) {
                 return null;
             }
 
             // Follower follows a followee. If the operation is invalid, it should be a no-op.  
-            public void Follow (int followerId, int followeeId) {
+            public static void Follow (int followerId, int followeeId) {
 
             }
 
             // Follower unfollows a followee. If the operation is invalid, it should be a no-op.
-            public void Unfollow (int followerId, int followeeId) {
+            public static void Unfollow (int followerId, int followeeId) {
 
             }
         }

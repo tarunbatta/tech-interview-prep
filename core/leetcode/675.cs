@@ -68,13 +68,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem675 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int CutOffTree (IList<IList<int>> forest) {
+        public static int CutOffTree (IList<IList<int>> forest) {
             return 0;
         }
     }

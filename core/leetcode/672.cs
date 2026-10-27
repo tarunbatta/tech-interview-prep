@@ -51,13 +51,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem672 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FlipLights (int n, int m) {
+        public static int FlipLights (int n, int m) {
             return 0;
         }
     }

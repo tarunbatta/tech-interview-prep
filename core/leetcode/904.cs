@@ -71,13 +71,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem904 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int TotalFruit (int[] tree) {
+        public static int TotalFruit (int[] tree) {
             return 0;
         }
     }

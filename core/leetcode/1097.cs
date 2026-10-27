@@ -72,7 +72,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1097 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<ActivityRecord> activity = [
                 new() { PlayerId = 1, DeviceId = 2, EventDate = new DateTime(2016, 3, 1), GamesPlayed = 5 },
                 new() { PlayerId = 1, DeviceId = 2, EventDate = new DateTime(2016, 3, 2), GamesPlayed = 6 },
@@ -89,7 +89,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1097 {
 
         // Time: O(n log n) where n is the number of activity records
         // Space: O(n) to store login dates and groupings
-        public List<RetentionResult> CalculateDay1Retention(List<ActivityRecord> activities) {
+        public static List<RetentionResult> CalculateDay1Retention(List<ActivityRecord> activities) {
             var firstLogin = activities
                 .GroupBy(a => a.PlayerId)
                 .ToDictionary(g => g.Key, g => g.Min(a => a.EventDate));
@@ -98,7 +98,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1097 {
                 .Select(a => (a.PlayerId, a.EventDate))
                 .ToHashSet();
 
-            return firstLogin
+            return [.. firstLogin
                 .GroupBy(kvp => kvp.Value)
                 .Select(g => {
                     int totalInstalls = g.Count();
@@ -109,8 +109,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1097 {
                         Day1Retention = Math.Round((double)retained / totalInstalls, 2)
                     };
                 })
-                .OrderBy(r => r.InstallDt)
-                .ToList();
+                .OrderBy(r => r.InstallDt)];
         }
     }
 }

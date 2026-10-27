@@ -38,19 +38,19 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem654
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine();
         }
 
         // Time: O (n^2)
         // Space: O (n)
-        public TreeNode ConstructMaximumBinaryTree(int[] nums)
+        public static TreeNode ConstructMaximumBinaryTree(int[] nums)
         {
             return ConstructTree(nums, 0, nums.Length);
         }
 
-        private TreeNode ConstructTree(int[] nums, int l, int r)
+        private static TreeNode ConstructTree(int[] nums, int l, int r)
         {
             if (l == r)
             {
@@ -64,7 +64,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem654
             return root;
         }
 
-        private int GetMaxIndex(int[] nums, int l, int r)
+        private static int GetMaxIndex(int[] nums, int l, int r)
         {
             int result = l;
 

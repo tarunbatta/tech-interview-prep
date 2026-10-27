@@ -51,13 +51,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem636 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] ExclusiveTime (int n, IList<string> logs) {
+        public static int[] ExclusiveTime (int n, IList<string> logs) {
             return null;
         }
     }

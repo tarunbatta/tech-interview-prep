@@ -22,15 +22,15 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem125 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (IsPalindrome (null));
-            Console.WriteLine (IsPalindrome (""));
-            Console.WriteLine (IsPalindrome ("madam"));
-            Console.WriteLine (IsPalindrome ("A man, a plan, a canal: Panama"));
-            Console.WriteLine (IsPalindrome ("race a car"));
+        public static void Init () {
+            Console.WriteLine (IsPalindrome(null));
+            Console.WriteLine (IsPalindrome(""));
+            Console.WriteLine (IsPalindrome("madam"));
+            Console.WriteLine (IsPalindrome("A man, a plan, a canal: Panama"));
+            Console.WriteLine (IsPalindrome("race a car"));
         }
 
-        public bool IsPalindrome (string s) {
+        public static bool IsPalindrome (string s) {
             if (s == null || s.Length <= 1) {
                 return true;
             }

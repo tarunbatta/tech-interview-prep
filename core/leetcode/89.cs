@@ -41,13 +41,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem89 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> GrayCode (int n) {
+        public static IList<int> GrayCode (int n) {
             return null;
         }
     }

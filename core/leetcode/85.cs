@@ -22,17 +22,17 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem85 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (MaximalRectangle (null));
-            Console.WriteLine (MaximalRectangle (new char[][] {
-                new char[] { '1', '0', '1', '0', '0' },
-                    new char[] { '1', '0', '1', '1', '1' },
-                    new char[] { '1', '1', '1', '1', '1' },
-                    new char[] { '1', '0', '0', '1', '0' }
-            }));
+        public static void Init () {
+            Console.WriteLine (MaximalRectangle(null));
+            Console.WriteLine (MaximalRectangle([
+                ['1', '0', '1', '0', '0'],
+                    ['1', '0', '1', '1', '1'],
+                    ['1', '1', '1', '1', '1'],
+                    ['1', '0', '0', '1', '0']
+            ]));
         }
 
-        public int MaximalRectangle (char[][] matrix) {
+        public static int MaximalRectangle (char[][] matrix) {
             return 0;
         }
     }

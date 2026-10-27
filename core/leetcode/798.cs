@@ -44,13 +44,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem798 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int BestRotation (int[] A) {
+        public static int BestRotation (int[] A) {
             return 0;
         }
     }

@@ -26,20 +26,20 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem49 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (nk)
         // Space: O (nk)
-        public IList<IList<string>> GroupAnagrams (string[] strs) {
-            IList<IList<string>> result = new List<IList<string>> ();
+        public static IList<IList<string>> GroupAnagrams (string[] strs) {
+            IList<IList<string>> result = [];
 
             if (strs == null || strs.Length == 0) {
                 return result;
             }
 
-            Dictionary<string, List<string>> dict = new Dictionary<string, List<string>> ();
+            Dictionary<string, List<string>> dict = [];
 
             foreach (var item in strs) {
                 char[] arr = item.ToCharArray ();
@@ -47,7 +47,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem49 {
                 string key = new string (arr);
 
                 if (!dict.ContainsKey (key)) {
-                    dict.Add (key, new List<string> ());
+                    dict.Add (key, []);
                 }
 
                 dict[key].Add (item);

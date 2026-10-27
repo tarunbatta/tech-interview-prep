@@ -64,11 +64,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem972 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public bool IsRationalEqual (string S, string T) {
+        public static bool IsRationalEqual (string S, string T) {
             return false;
         }
     }

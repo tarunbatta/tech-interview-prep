@@ -74,7 +74,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1107 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<TrafficRecord> traffic = [
                 new() { UserId = 1, Activity = "login", ActivityDate = new DateTime(2019, 5, 1) },
                 new() { UserId = 1, Activity = "homepage", ActivityDate = new DateTime(2019, 5, 1) },
@@ -101,7 +101,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1107 {
 
         // Time: O(n log n) where n is the number of traffic records
         // Space: O(n) to store first login dates and grouping
-        public List<NewUserResult> NewUsersDailyCount(List<TrafficRecord> traffic) {
+        public static List<NewUserResult> NewUsersDailyCount(List<TrafficRecord> traffic) {
             DateTime today = new(2019, 6, 30);
             DateTime ninetyDaysAgo = today.AddDays(-90);
 
@@ -111,14 +111,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1107 {
                 .Select(g => g.Min(t => t.ActivityDate))
                 .Where(d => d >= ninetyDaysAgo && d <= today);
 
-            return firstLogins
+            return [.. firstLogins
                 .GroupBy(d => d)
                 .Select(g => new NewUserResult {
                     LoginDate = g.Key.ToString("yyyy-MM-dd"),
                     UserCount = g.Count()
                 })
-                .OrderBy(r => r.LoginDate)
-                .ToList();
+                .OrderBy(r => r.LoginDate)];
         }
     }
 }

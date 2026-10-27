@@ -41,13 +41,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem488 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindMinStep (string board, string hand) {
+        public static int FindMinStep (string board, string hand) {
             return 0;
         }
     }

@@ -22,13 +22,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem221 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaximalSquare (char[][] matrix) {
+        public static int MaximalSquare (char[][] matrix) {
             return 0;
         }
     }

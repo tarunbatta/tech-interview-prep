@@ -19,13 +19,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem132 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinCut (string s) {
+        public static int MinCut (string s) {
             return 0;
         }
     }

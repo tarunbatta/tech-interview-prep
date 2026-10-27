@@ -22,13 +22,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem53 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (MaxSubArray (null));
-            Console.WriteLine (MaxSubArray (new int[] { }));
-            Console.WriteLine (MaxSubArray (new int[] {-2, 1, -3, 4, -1, 2, 1, -5, 4 }));
+        public static void Init () {
+            Console.WriteLine (MaxSubArray(null));
+            Console.WriteLine (MaxSubArray([]));
+            Console.WriteLine (MaxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
         }
 
-        public int MaxSubArray (int[] nums) {
+        public static int MaxSubArray (int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return 0;
             }

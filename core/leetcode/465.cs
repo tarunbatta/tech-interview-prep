@@ -41,22 +41,22 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem465
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] trans1 = new int[][]
-            {
-                new int[] { 0, 1, 10 },
-                new int[] { 2, 0, 5 }
-            };
+            int[][] trans1 =
+            [
+                [0, 1, 10],
+                [2, 0, 5]
+            ];
             Console.WriteLine(MinTransfers(trans1)); // 2
 
-            int[][] trans2 = new int[][]
-            {
-                new int[] { 0, 1, 10 },
-                new int[] { 1, 0, 1 },
-                new int[] { 1, 2, 5 },
-                new int[] { 2, 0, 5 }
-            };
+            int[][] trans2 =
+            [
+                [0, 1, 10],
+                [1, 0, 1],
+                [1, 2, 5],
+                [2, 0, 5]
+            ];
             Console.WriteLine(MinTransfers(trans2)); // 1
         }
 
@@ -69,7 +69,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem465
                 return 0;
             }
 
-            Dictionary<int, long> balanceMap = new();
+            Dictionary<int, long> balanceMap = [];
 
             foreach (var trans in transactions)
             {
@@ -81,7 +81,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem465
                 balanceMap[to] = balanceMap.GetValueOrDefault(to, 0) + amount;
             }
 
-            List<long> debts = new();
+            List<long> debts = [];
             foreach (var balance in balanceMap.Values)
             {
                 if (balance != 0)

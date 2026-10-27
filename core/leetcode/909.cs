@@ -60,13 +60,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem909 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n ^ 2)
         // Space: O (1)
-        public int SnakesAndLadders (int[][] board) {
+        public static int SnakesAndLadders (int[][] board) {
             if (board == null) { return 0; }
 
             var moves = -1;

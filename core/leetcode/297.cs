@@ -31,11 +31,11 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem297 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             TreeNode root = null;
 
             Codec codec = new Codec ();
-            codec.deserialize (codec.serialize (root));
+            Codec.deserialize(Codec.serialize(root));
         }
     }
 
@@ -51,30 +51,29 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem297 {
         private const string _null = "X";
 
         // Encodes a tree to a single string.
-        public String serialize (TreeNode root) {
+        public static String serialize (TreeNode root) {
             StringBuilder sb = new StringBuilder ();
-            serializeHelper (root, sb);
+            serializeHelper(root, sb);
             return sb.ToString ();
         }
 
-        private void serializeHelper (TreeNode node, StringBuilder sb) {
+        private static void serializeHelper (TreeNode node, StringBuilder sb) {
             if (node == null) {
                 sb.Append (_null).Append (_spliter);
             } else {
                 sb.Append (node.val).Append (_spliter);
-                serializeHelper (node.left, sb);
-                serializeHelper (node.right, sb);
+                serializeHelper(node.left, sb);
+                serializeHelper(node.right, sb);
             }
         }
 
         // Decodes your encoded data to tree.
-        public TreeNode deserialize (String data) {
-            List<String> nodes = new List<String> ();
-            nodes.AddRange (data.Split (_spliter));
-            return deserializeHelper (nodes);
+        public static TreeNode deserialize (String data) {
+            List<String> nodes = [.. data.Split (_spliter)];
+            return deserializeHelper(nodes);
         }
 
-        private TreeNode deserializeHelper (List<String> nodes) {
+        private static TreeNode deserializeHelper (List<String> nodes) {
             string val = nodes[0];
             nodes.RemoveAt (0);
 
@@ -82,8 +81,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem297 {
                 return null;
             } else {
                 TreeNode node = new TreeNode (Convert.ToInt32 (val));
-                node.left = deserializeHelper (nodes);
-                node.right = deserializeHelper (nodes);
+                node.left = deserializeHelper(nodes);
+                node.right = deserializeHelper(nodes);
                 return node;
             }
         }

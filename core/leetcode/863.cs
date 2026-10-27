@@ -36,13 +36,13 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem863 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (n)
-        public IList<int> DistanceK (TreeNode root, TreeNode target, int K) {
+        public static IList<int> DistanceK (TreeNode root, TreeNode target, int K) {
             var stack = new Stack<TreeNode> ();
             var graph = new Dictionary<int, IList<int>> ();
 
@@ -51,10 +51,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem863 {
             while (stack.Count > 0) {
                 var node = stack.Pop ();
 
-                if (!graph.ContainsKey (node.val)) { graph[node.val] = new List<int> (); }
+                if (!graph.ContainsKey (node.val)) { graph[node.val] = []; }
 
                 if (node.left != null) {
-                    if (!graph.ContainsKey (node.left.val)) { graph[node.left.val] = new List<int> (); }
+                    if (!graph.ContainsKey (node.left.val)) { graph[node.left.val] = []; }
 
                     graph[node.left.val].Add (node.val);
                     graph[node.val].Add (node.left.val);
@@ -63,7 +63,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem863 {
                 }
 
                 if (node.right != null) {
-                    if (!graph.ContainsKey (node.right.val)) { graph[node.right.val] = new List<int> (); }
+                    if (!graph.ContainsKey (node.right.val)) { graph[node.right.val] = []; }
 
                     graph[node.right.val].Add (node.val);
                     graph[node.val].Add (node.right.val);
@@ -92,7 +92,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem863 {
                 }
             }
 
-            return queue.ToList ();
+            return [.. queue];
         }
     }
 

@@ -114,13 +114,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem883 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ProjectionArea (int[][] grid) {
+        public static int ProjectionArea (int[][] grid) {
             return 0;
         }
     }

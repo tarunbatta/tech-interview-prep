@@ -40,7 +40,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem170
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             TwoSum twoSum = new();
             twoSum.Add(1);
@@ -58,7 +58,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem170
     // Space: O(N) where N is the number of distinct elements stored
     public class TwoSum
     {
-        private readonly Dictionary<int, int> _counts = new();
+        private readonly Dictionary<int, int> _counts = [];
 
         public void Add(int number)
         {

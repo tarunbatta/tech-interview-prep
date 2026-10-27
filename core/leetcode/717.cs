@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem717 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsOneBitCharacter (int[] bits) {
+        public static bool IsOneBitCharacter (int[] bits) {
             return false;
         }
     }

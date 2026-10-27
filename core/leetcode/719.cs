@@ -27,12 +27,12 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem719 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (SmallestDistancePair (null, 0));
-            Console.WriteLine (SmallestDistancePair (new int[] { 1, 3, 1 }, 1));
+        public static void Init () {
+            Console.WriteLine (SmallestDistancePair(null, 0));
+            Console.WriteLine (SmallestDistancePair([1, 3, 1], 1));
         }
 
-        public int SmallestDistancePair (int[] nums, int k) {
+        public static int SmallestDistancePair (int[] nums, int k) {
             return 0;
         }
     }

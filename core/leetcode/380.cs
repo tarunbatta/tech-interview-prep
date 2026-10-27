@@ -43,7 +43,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem380 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             RandomizedSet obj = new RandomizedSet ();
             bool param_1 = obj.Insert (0);
             bool param_2 = obj.Remove (0);
@@ -57,8 +57,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem380 {
         Random _random;
 
         public RandomizedSet () {
-            _list = new List<int> ();
-            _dict = new Dictionary<int, int> ();
+            _list = [];
+            _dict = [];
             _random = new Random ();
         }
 

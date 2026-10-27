@@ -25,17 +25,17 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem431 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Node root = null;
             Codec codec = new Codec ();
-            codec.decode (codec.encode (root));
+            Codec.decode(Codec.encode(root));
         }
     }
 
     // (Next Level -> left, Same Level -> right)
     public class Codec {
         // Encodes an n-ary tree to a binary tree.
-        public TreeNode encode (Node root) {
+        public static TreeNode encode (Node root) {
             if (root == null) {
                 return null;
             }
@@ -43,13 +43,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem431 {
             TreeNode result = new TreeNode (root.val);
 
             if (root.children.Count > 0) {
-                result.left = encode (root.children[0]);
+                result.left = encode(root.children[0]);
             }
 
             TreeNode current = result.left;
 
             for (int i = 1; i < root.children.Count; i++) {
-                current.right = encode (root.children[i]);
+                current.right = encode(root.children[i]);
                 current = current.right;
             }
 
@@ -57,16 +57,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem431 {
         }
 
         // Decodes your binary tree to an n-ary tree.
-        public Node decode (TreeNode root) {
+        public static Node decode (TreeNode root) {
             if (root == null) {
                 return null;
             }
 
-            Node result = new Node (root.val, new List<Node> ());
+            Node result = new Node (root.val, []);
             TreeNode current = root.left;
 
             while (current != null) {
-                result.children.Add (decode (current));
+                result.children.Add (decode(current));
                 current = current.right;
             }
 

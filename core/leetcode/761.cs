@@ -29,25 +29,25 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem761 {
     public class Solution {
-        public void Init () {
+        public static void Init() {
             Console.WriteLine (MakeLargestSpecial (null));
             Console.WriteLine (MakeLargestSpecial ("11011000"));
         }
 
-        public string MakeLargestSpecial (string S) {
+        public static string MakeLargestSpecial (string S) {
             string result = string.Empty;
 
             if (string.IsNullOrEmpty (S)) {
                 return result;
             }
 
-            Dictionary<string, string> visited = new Dictionary<string, string> ();
-            result = GetLargest (S, visited);
+            Dictionary<string, string> visited = [];
+            result = GetLargest(S, visited);
 
             return result;
         }
 
-        private string GetLargest (string s, Dictionary<string, string> visited) {
+        private static string GetLargest (string s, Dictionary<string, string> visited) {
             if (visited.ContainsKey (s)) {
                 return visited[s];
             }
@@ -58,7 +58,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem761 {
                 for (int j = i + 1; j < s.Length; j++) {
                     string first = s.Substring (i, j - i);
 
-                    if (!CheckSpecial (first)) {
+                    if (!CheckSpecial(first)) {
                         continue;
                     }
 
@@ -66,7 +66,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem761 {
                         string second = s.Substring (j, k - j + 1);
                         string check1 = second + first, check2 = first + second;
 
-                        if (!CheckSpecial (second) || check1.CompareTo (check2) <= 0) {
+                        if (!CheckSpecial(second) || check1.CompareTo (check2) <= 0) {
                             continue;
                         }
 
@@ -78,10 +78,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem761 {
                 }
             }
             visited.Add (s, result);
-            return GetLargest (result, visited);
+            return GetLargest(result, visited);
         }
 
-        private bool CheckSpecial (string first) {
+        private static bool CheckSpecial (string first) {
             int check = 0;
 
             for (int i = 0; i < first.Length; i++) {

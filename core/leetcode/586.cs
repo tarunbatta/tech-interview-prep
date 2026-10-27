@@ -55,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem586 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Order> orders = [
                 new() { OrderNumber = 1, CustomerNumber = 1 },
                 new() { OrderNumber = 2, CustomerNumber = 2 },
@@ -68,7 +68,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem586 {
 
         // Time: O(n log n) where n is the number of orders
         // Space: O(k) where k is the number of distinct customers
-        public int LargestOrdersCustomer(List<Order> orders) {
+        public static int LargestOrdersCustomer(List<Order> orders) {
             return orders
                 .GroupBy(o => o.CustomerNumber)
                 .OrderByDescending(g => g.Count())

@@ -46,27 +46,27 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem874 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (RobotSim (new int[] { 4, -1, 3 }, null));
-            Console.WriteLine (RobotSim (new int[] { 4, -1, 4, -2, 4 }, new int[][] { new int[] { 2, 4 } }));
+        public static void Init () {
+            Console.WriteLine (RobotSim([4, -1, 3], null));
+            Console.WriteLine (RobotSim([4, -1, 4, -2, 4], [[2, 4]]));
         }
 
         // Time: O (m*x), where m is number of commands
         // Space: O (n), where n is number of obstacles
-        public int RobotSim (int[] commands, int[][] obstacles) {
+        public static int RobotSim (int[] commands, int[][] obstacles) {
             int result = 0;
 
             if (commands == null || commands.Length == 0) {
                 return result;
             }
 
-            int[] dx = new int[] { 0, 1, 0, -1 };
-            int[] dy = new int[] { 1, 0, -1, 0 };
+            int[] dx = [0, 1, 0, -1];
+            int[] dy = [1, 0, -1, 0];
             int x = 0;
             int y = 0;
             int direction = 0;
 
-            HashSet<string> set = new HashSet<string> ();
+            HashSet<string> set = [];
             if (obstacles != null) {
                 for (int i = 0; i < obstacles.Length; i++) {
                     set.Add (obstacles[i][0] + " " + obstacles[i][1]);

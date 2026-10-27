@@ -33,13 +33,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem508 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] FindFrequentTreeSum (TreeNode root) {
+        public static int[] FindFrequentTreeSum (TreeNode root) {
             return null;
         }
     }

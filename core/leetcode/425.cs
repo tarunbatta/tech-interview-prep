@@ -36,9 +36,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem425
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            string[] words1 = { "area", "lead", "wall", "lady", "ball" };
+            string[] words1 = ["area", "lead", "wall", "lady", "ball"];
             var res1 = WordSquares(words1);
             foreach (var sq in res1)
             {
@@ -50,7 +50,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem425
         // Space: O(N * L) for the Prefix Trie and recursion call stack
         public static IList<IList<string>> WordSquares(string[] words)
         {
-            List<IList<string>> result = new();
+            List<IList<string>> result = [];
 
             if (words == null || words.Length == 0)
             {
@@ -60,7 +60,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem425
             int wordLen = words[0].Length;
             TrieNode root = BuildTrie(words);
 
-            List<string> currentSquare = new();
+            List<string> currentSquare = [];
 
             foreach (string word in words)
             {
@@ -129,7 +129,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem425
 
                 if (curr.Children[idx] == null)
                 {
-                    return new List<string>();
+                    return [];
                 }
 
                 curr = curr.Children[idx];
@@ -141,7 +141,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem425
         private class TrieNode
         {
             public TrieNode[] Children = new TrieNode[26];
-            public List<string> Words = new();
+            public List<string> Words = [];
         }
     }
 }

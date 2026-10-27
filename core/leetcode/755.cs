@@ -37,7 +37,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem755 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] h1 = [2, 1, 1, 2, 1, 2, 2];
             Console.WriteLine(string.Join(", ", PourWater(h1, 4, 3))); // 2, 2, 2, 3, 2, 2, 2
 
@@ -50,7 +50,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem755 {
 
         // Time: O(volume * n) where n is length of heights
         // Space: O(1) in-place
-        public int[] PourWater(int[] heights, int volume, int k) {
+        public static int[] PourWater(int[] heights, int volume, int k) {
             int n = heights.Length;
 
             for (int v = 0; v < volume; v++) {

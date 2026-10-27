@@ -125,7 +125,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem631 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Excel excel = new(3, 'C');
             excel.Set(1, 'A', 2);
             Console.WriteLine(excel.Sum(3, 'C', ["A1", "A1:B2"])); // 4

@@ -47,17 +47,14 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem127 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (LadderLength ("hit", "cog", new List<string> () { "hot", "dot", "dog", "lot", "log", "cog" }));
+        public static void Init () {
+            Console.WriteLine (LadderLength("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]));
         }
 
         // Time: O (m * n), where m is length of words
         // Space: O (m * n), where n is total number of words in input list
-        public int LadderLength (string beginWord, string endWord, IList<string> wordList) {
-            HashSet<string> hash = new HashSet<string> ();
-            foreach (string item in wordList) {
-                hash.Add (item);
-            }
+        public static int LadderLength (string beginWord, string endWord, IList<string> wordList) {
+            HashSet<string> hash = [.. wordList];
 
             if (!hash.Contains (endWord)) {
                 return 0;

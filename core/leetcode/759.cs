@@ -46,7 +46,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem759 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             IList<IList<Interval>> schedule1 = [
                 [new(1, 2), new(5, 6)],
                 [new(1, 3)],
@@ -66,7 +66,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem759 {
 
         // Time: O(N log N) where N is the total number of intervals
         // Space: O(N) to store flattened intervals and results
-        public IList<Interval> EmployeeFreeTime(IList<IList<Interval>> schedule) {
+        public static IList<Interval> EmployeeFreeTime(IList<IList<Interval>> schedule) {
             List<Interval> allIntervals = [];
             foreach (var emp in schedule) {
                 foreach (var interval in emp) {

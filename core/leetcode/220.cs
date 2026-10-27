@@ -31,13 +31,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem220 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool ContainsNearbyAlmostDuplicate (int[] nums, int k, int t) {
+        public static bool ContainsNearbyAlmostDuplicate (int[] nums, int k, int t) {
             return false;
         }
     }

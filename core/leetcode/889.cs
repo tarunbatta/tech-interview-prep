@@ -31,13 +31,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem889 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public TreeNode ConstructFromPrePost (int[] pre, int[] post) {
+        public static TreeNode ConstructFromPrePost (int[] pre, int[] post) {
             return null;
         }
     }

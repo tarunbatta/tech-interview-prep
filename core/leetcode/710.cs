@@ -57,16 +57,16 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem710 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Solution obj = new Solution (1, null);
-            int param_1 = obj.Pick ();
+            int param_1 = Pick();
         }
 
         public Solution (int N, int[] blacklist) {
 
         }
 
-        public int Pick () {
+        public static int Pick () {
             return 0;
         }
     }

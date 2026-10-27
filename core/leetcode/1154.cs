@@ -38,14 +38,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1154 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (DayOfYear (null));
-            Console.WriteLine (DayOfYear ("2019-01-09"));
-            Console.WriteLine (DayOfYear ("2003-03-01"));
-            Console.WriteLine (DayOfYear ("2004-03-01"));
+        public static void Init() {
+            Console.WriteLine (DayOfYear(null));
+            Console.WriteLine (DayOfYear("2019-01-09"));
+            Console.WriteLine (DayOfYear("2003-03-01"));
+            Console.WriteLine (DayOfYear("2004-03-01"));
         }
 
-        public int DayOfYear (string date) {
+        public static int DayOfYear (string date) {
             int result = 0;
 
             if (string.IsNullOrEmpty (date)) {
@@ -57,8 +57,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1154 {
             int year = Convert.ToInt32 (strs[0]);
             int month = Convert.ToInt32 (strs[1]);
             int day = Convert.ToInt32 (strs[2]);
-            bool isLeapYear = IsLeapYear (year);
-            int[] daysInMonth = new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+            bool isLeapYear = IsLeapYear(year);
+            int[] daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
             result += day;
 
@@ -73,7 +73,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1154 {
             return result;
         }
 
-        public bool IsLeapYear (int year) {
+        public static bool IsLeapYear (int year) {
             bool result = false;
 
             if (year % 400 == 0)

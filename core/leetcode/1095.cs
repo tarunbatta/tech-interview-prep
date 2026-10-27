@@ -59,17 +59,17 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1095 {
     public class Solution {
-        public int FindInMountainArray (int target, MountainArray mountainArr) {
+        public static int FindInMountainArray (int target, MountainArray mountainArr) {
             return 0;
         }
     }
 
     public class MountainArray {
-        public int Get (int index) {
+        public static int Get (int index) {
             return 0;
         }
 
-        public int Length () {
+        public static int Length () {
             return 0;
         }
     }

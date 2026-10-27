@@ -36,7 +36,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1062 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(LongestRepeatingSubstring("abcd")); // 0
             Console.WriteLine(LongestRepeatingSubstring("abbaba")); // 2
             Console.WriteLine(LongestRepeatingSubstring("aabcaabdaab")); // 3
@@ -45,7 +45,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1062 {
 
         // Time: O(n log n) with binary search and rolling hash
         // Space: O(n) for rolling hash set
-        public int LongestRepeatingSubstring(string s) {
+        public static int LongestRepeatingSubstring(string s) {
             int n = s.Length;
             int low = 1;
             int high = n - 1;

@@ -46,13 +46,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem902 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int AtMostNGivenDigitSet (string[] D, int N) {
+        public static int AtMostNGivenDigitSet (string[] D, int N) {
             return 0;
         }
     }

@@ -54,11 +54,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1106 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public bool ParseBoolExpr (string expression) {
+        public static bool ParseBoolExpr (string expression) {
             return false;
         }
     }

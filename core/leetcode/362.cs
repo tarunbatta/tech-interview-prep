@@ -44,7 +44,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem362
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             HitCounter hitCounter = new();
             hitCounter.Hit(1);

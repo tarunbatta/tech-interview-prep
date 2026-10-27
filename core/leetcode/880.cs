@@ -59,13 +59,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem880 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string DecodeAtIndex (string S, int K) {
+        public static string DecodeAtIndex (string S, int K) {
             return null;
         }
     }

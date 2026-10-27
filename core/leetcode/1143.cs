@@ -47,13 +47,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1143 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LongestCommonSubsequence (string text1, string text2) {
+        public static int LongestCommonSubsequence (string text1, string text2) {
             return 0;
         }
     }

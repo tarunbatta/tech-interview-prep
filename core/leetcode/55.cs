@@ -29,13 +29,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem55 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool CanJump (int[] nums) {
+        public static bool CanJump (int[] nums) {
             return false;
         }
     }

@@ -27,13 +27,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem452 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindMinArrowShots (int[][] points) {
+        public static int FindMinArrowShots (int[][] points) {
             return 0;
         }
     }

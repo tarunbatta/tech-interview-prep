@@ -42,13 +42,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1171 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public ListNode RemoveZeroSumSublists (ListNode head) {
+        public static ListNode RemoveZeroSumSublists (ListNode head) {
             return null;
         }
     }

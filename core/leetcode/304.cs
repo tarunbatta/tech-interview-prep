@@ -37,9 +37,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem304 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             NumMatrix obj = new NumMatrix (null);
-            int param_1 = obj.SumRegion (0, 0, 0, 0);
+            int param_1 = NumMatrix.SumRegion(0, 0, 0, 0);
         }
     }
 
@@ -48,7 +48,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem304 {
 
         }
 
-        public int SumRegion (int row1, int col1, int row2, int col2) {
+        public static int SumRegion (int row1, int col1, int row2, int col2) {
             return 0;
         }
     }

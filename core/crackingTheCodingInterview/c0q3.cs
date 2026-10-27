@@ -9,8 +9,8 @@ using System;
 namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c0q3 {
     public class Solution {
         public static void Init (string[] args) {
-            Console.WriteLine (GetMinimumInSortedArray (new int[] { 3, 4, 5, 6, 1, 2 }));
-            Console.WriteLine (GetMinimumInSortedArray (new int[] { 9, 12, 14, 4, 6, 7, 8 }));
+            Console.WriteLine (GetMinimumInSortedArray ([3, 4, 5, 6, 1, 2]));
+            Console.WriteLine (GetMinimumInSortedArray ([9, 12, 14, 4, 6, 7, 8]));
         }
 
         private static int GetMinimumInSortedArray (int[] arr) {

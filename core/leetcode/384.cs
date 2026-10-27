@@ -27,8 +27,8 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem384 {
     public class Solution {
-        public void Init () {
-            Solution obj = new Solution (new int[] { 1, 2, 3 });
+        public static void Init () {
+            Solution obj = new Solution ([1, 2, 3]);
             int[] param_1 = obj.Shuffle ();
             int[] param_2 = obj.Reset ();
             int[] param_3 = obj.Shuffle ();
@@ -39,7 +39,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem384 {
         private Random rand = new Random ();
 
         private List<int> getArrayCopy () {
-            List<int> asList = new List<int> ();
+            List<int> asList = [];
 
             for (int i = 0; i < array.Length; i++) {
                 asList.Add (array[i]);

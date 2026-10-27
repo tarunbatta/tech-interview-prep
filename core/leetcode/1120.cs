@@ -43,7 +43,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1120 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             TreeNode root1 = new(5, new TreeNode(6), new TreeNode(1));
             Console.WriteLine($"{MaximumAverageSubtree(root1):F5}"); // 6.00000
 
@@ -53,7 +53,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1120 {
 
         // Time: O(n) where n is the number of nodes in the tree
         // Space: O(h) where h is the tree height for recursion stack
-        public double MaximumAverageSubtree(TreeNode root) {
+        public static double MaximumAverageSubtree(TreeNode root) {
             double maxAvg = 0.0;
             PostOrder(root, ref maxAvg);
             return maxAvg;

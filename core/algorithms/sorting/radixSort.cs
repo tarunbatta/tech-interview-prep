@@ -15,7 +15,7 @@ namespace InterviewPreperationGuide.Core.Algorithms.Sorting {
         }
 
         public static void Init () {
-            int[] n = new int[] { 91, 46, 85, 15, 92, 35, 31, 22 };
+            int[] n = [91, 46, 85, 15, 92, 35, 31, 22];
             Queue[] q = new Queue[10];
             for (int i = 0; i < 10; i++) {
                 q[i] = new Queue ();

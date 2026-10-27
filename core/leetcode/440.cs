@@ -24,11 +24,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem440 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (FindKthNumber (13, 2));
+        public static void Init() {
+            Console.WriteLine (FindKthNumber(13, 2));
         }
 
-        public int FindKthNumber (int n, int k) {
+        public static int FindKthNumber (int n, int k) {
             if (n == 0 || k == 0 || k > n) {
                 return 0;
             }
@@ -37,7 +37,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem440 {
             k = k - 1;
 
             while (k > 0) {
-                int steps = CallSteps (n, result, result + 1);
+                int steps = CallSteps(n, result, result + 1);
                 if (steps <= k) {
                     result += 1;
                     k -= steps;
@@ -50,7 +50,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem440 {
             return result;
         }
 
-        public int CallSteps (int n, int n1, int n2) {
+        public static int CallSteps (int n, int n1, int n2) {
             int result = 0;
 
             while (n1 <= n) {

@@ -34,13 +34,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem712 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinimumDeleteSum (string s1, string s2) {
+        public static int MinimumDeleteSum (string s1, string s2) {
             return 0;
         }
     }

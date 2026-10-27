@@ -58,7 +58,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem348 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
     }

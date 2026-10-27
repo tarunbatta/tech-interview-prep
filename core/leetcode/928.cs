@@ -56,13 +56,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem928 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinMalwareSpread (int[][] graph, int[] initial) {
+        public static int MinMalwareSpread (int[][] graph, int[] initial) {
             return 0;
         }
     }

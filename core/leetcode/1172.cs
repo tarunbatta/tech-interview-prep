@@ -72,11 +72,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1172 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             DinnerPlates obj = new DinnerPlates (0);
-            obj.Push (0);
-            int param_2 = obj.Pop ();
-            int param_3 = obj.PopAtStack (0);
+            DinnerPlates.Push(0);
+            int param_2 = DinnerPlates.Pop();
+            int param_3 = DinnerPlates.PopAtStack(0);
         }
     }
 
@@ -85,15 +85,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1172 {
 
         }
 
-        public void Push (int val) {
+        public static void Push (int val) {
 
         }
 
-        public int Pop () {
+        public static int Pop () {
             return 0;
         }
 
-        public int PopAtStack (int index) {
+        public static int PopAtStack (int index) {
             return 0;
         }
     }

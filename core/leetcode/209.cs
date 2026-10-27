@@ -21,13 +21,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem209 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinSubArrayLen (int s, int[] nums) {
+        public static int MinSubArrayLen (int s, int[] nums) {
             return 0;
         }
     }

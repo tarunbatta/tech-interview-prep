@@ -43,7 +43,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1115 {
   public class Solution {
-    public void Init () {
+    public static void Init () {
 
     }
   }

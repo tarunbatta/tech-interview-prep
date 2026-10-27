@@ -23,13 +23,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem442 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> FindDuplicates (int[] nums) {
+        public static IList<int> FindDuplicates (int[] nums) {
             return null;
         }
     }

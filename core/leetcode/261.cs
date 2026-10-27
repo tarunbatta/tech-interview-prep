@@ -31,25 +31,25 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem261
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] edges1 = new int[][]
-            {
-                new int[] { 0, 1 },
-                new int[] { 0, 2 },
-                new int[] { 0, 3 },
-                new int[] { 1, 4 }
-            };
+            int[][] edges1 =
+            [
+                [0, 1],
+                [0, 2],
+                [0, 3],
+                [1, 4]
+            ];
             Console.WriteLine(ValidTree(5, edges1)); // True
 
-            int[][] edges2 = new int[][]
-            {
-                new int[] { 0, 1 },
-                new int[] { 1, 2 },
-                new int[] { 2, 3 },
-                new int[] { 1, 3 },
-                new int[] { 1, 4 }
-            };
+            int[][] edges2 =
+            [
+                [0, 1],
+                [1, 2],
+                [2, 3],
+                [1, 3],
+                [1, 4]
+            ];
             Console.WriteLine(ValidTree(5, edges2)); // False
         }
 

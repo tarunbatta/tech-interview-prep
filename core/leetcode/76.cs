@@ -24,26 +24,26 @@ using System.Collections;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem76 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (MinWindow ("ADOBECODEBANC", null));
-            Console.WriteLine (MinWindow (null, "ABC"));
-            Console.WriteLine (MinWindow ("ADOBECODEBANC", "ABC"));
-            Console.WriteLine (MinWindow ("dabceabcg", "deg"));
-            Console.WriteLine (MinWindow ("abcdedefg", "deg"));
-            Console.WriteLine (MinWindow ("abcdedefg", "xyz"));
-            Console.WriteLine (MinWindow ("eaebeccdeefeggh", "eee"));
+        public static void Init () {
+            Console.WriteLine (MinWindow("ADOBECODEBANC", null));
+            Console.WriteLine (MinWindow(null, "ABC"));
+            Console.WriteLine (MinWindow("ADOBECODEBANC", "ABC"));
+            Console.WriteLine (MinWindow("dabceabcg", "deg"));
+            Console.WriteLine (MinWindow("abcdedefg", "deg"));
+            Console.WriteLine (MinWindow("abcdedefg", "xyz"));
+            Console.WriteLine (MinWindow("eaebeccdeefeggh", "eee"));
         }
 
         // Time: O (s+t)
         // Space: O (s+t)
-        public string MinWindow (string s, string t) {
+        public static string MinWindow (string s, string t) {
             string result = string.Empty;
 
             if (!string.IsNullOrEmpty (s) && !string.IsNullOrEmpty (t)) {
                 char[] arrS = s.ToCharArray ();
                 char[] arrT = t.ToCharArray ();
 
-                Hashtable hashT = new Hashtable ();
+                Hashtable hashT = [];
 
                 for (int i = 0; i < arrT.Length; i++) {
                     if (!hashT.ContainsKey (arrT[i])) {
@@ -57,7 +57,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem76 {
                 int minlen = arrS.Length + 1;
                 int match = 0;
 
-                Hashtable hashS = new Hashtable ();
+                Hashtable hashS = [];
 
                 for (int i = 0; i < arrS.Length; i++) {
                     if (hashT.ContainsKey (arrS[i])) {

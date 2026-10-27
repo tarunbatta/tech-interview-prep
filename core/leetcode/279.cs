@@ -23,17 +23,17 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem279 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (NumSquares (-1));
-            Console.WriteLine (NumSquares (0));
-            Console.WriteLine (NumSquares (1));
-            Console.WriteLine (NumSquares (5));
-            Console.WriteLine (NumSquares (12));
-            Console.WriteLine (NumSquares (13));
-            Console.WriteLine (NumSquares (16));
+        public static void Init () {
+            Console.WriteLine (NumSquares(-1));
+            Console.WriteLine (NumSquares(0));
+            Console.WriteLine (NumSquares(1));
+            Console.WriteLine (NumSquares(5));
+            Console.WriteLine (NumSquares(12));
+            Console.WriteLine (NumSquares(13));
+            Console.WriteLine (NumSquares(16));
         }
 
-        public int NumSquares (int n) {
+        public static int NumSquares (int n) {
             if (n <= 0) {
                 return 0;
             }

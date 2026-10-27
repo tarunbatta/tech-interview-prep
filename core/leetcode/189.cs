@@ -34,27 +34,27 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem189 {
     public class Solution {
-        public void Init () {
-            Rotate (null, 0);
-            Rotate (new int[] { 1, 2, 3, 4, 5, 6, 7 }, 3);
-            Rotate (new int[] {-1, -100, 3, 99 }, 2);
+        public static void Init() {
+            Rotate(null, 0);
+            Rotate([1, 2, 3, 4, 5, 6, 7], 3);
+            Rotate([-1, -100, 3, 99], 2);
         }
 
         // Time: O (n)
         // Space: O (1)
-        public void Rotate (int[] nums, int k) {
+        public static void Rotate (int[] nums, int k) {
             if (nums == null || nums.Length == 0 || k <= 0 || k == nums.Length) {
                 return;
             }
 
             k = k % nums.Length;
 
-            Reverse (nums, 0, nums.Length - 1);
-            Reverse (nums, 0, k - 1);
-            Reverse (nums, k, nums.Length - 1);
+            Reverse(nums, 0, nums.Length - 1);
+            Reverse(nums, 0, k - 1);
+            Reverse(nums, k, nums.Length - 1);
         }
 
-        private void Reverse (int[] nums, int start, int end) {
+        private static void Reverse (int[] nums, int start, int end) {
             while (start < end) {
                 int temp = nums[start];
 

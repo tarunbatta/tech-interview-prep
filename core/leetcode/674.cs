@@ -30,13 +30,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem674 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindLengthOfLCIS (int[] nums) {
+        public static int FindLengthOfLCIS (int[] nums) {
             return 0;
         }
     }

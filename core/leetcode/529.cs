@@ -78,11 +78,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem529 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
-        public char[][] UpdateBoard (char[][] board, int[] click) {
+        public static char[][] UpdateBoard (char[][] board, int[] click) {
             return null;
         }
     }

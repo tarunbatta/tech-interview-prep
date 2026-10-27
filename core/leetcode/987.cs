@@ -47,13 +47,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem987 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<IList<int>> VerticalTraversal (TreeNode root) {
+        public static IList<IList<int>> VerticalTraversal (TreeNode root) {
             return null;
         }
     }

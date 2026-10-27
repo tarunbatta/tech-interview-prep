@@ -56,13 +56,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1041 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsRobotBounded (string instructions) {
+        public static bool IsRobotBounded (string instructions) {
             return false;
         }
     }

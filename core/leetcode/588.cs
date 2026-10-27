@@ -64,7 +64,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem588 {
                 }
             }
 
-            return curr.Children.Keys.ToList();
+            return [.. curr.Children.Keys];
         }
 
         // Time: O(k) where k is path depth
@@ -116,7 +116,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem588 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             FileSystem fs = new();
             Console.WriteLine(string.Join(", ", fs.Ls("/"))); // []
             fs.Mkdir("/a/b/c");

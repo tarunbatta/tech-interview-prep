@@ -68,36 +68,36 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem391 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (IsRectangleCover (null));
-            Console.WriteLine (IsRectangleCover (new int[][] {
-                new int[] { 1, 1, 3, 3 },
-                    new int[] { 3, 1, 4, 2 },
-                    new int[] { 3, 2, 4, 4 },
-                    new int[] { 1, 3, 2, 4 },
-                    new int[] { 2, 3, 3, 4 }
-            }));
-            Console.WriteLine (IsRectangleCover (new int[][] {
-                new int[] { 1, 1, 2, 3 },
-                    new int[] { 1, 3, 2, 4 },
-                    new int[] { 3, 1, 4, 2 },
-                    new int[] { 3, 2, 4, 4 }
-            }));
-            Console.WriteLine (IsRectangleCover (new int[][] {
-                new int[] { 1, 1, 3, 3 },
-                    new int[] { 3, 1, 4, 2 },
-                    new int[] { 1, 3, 2, 4 },
-                    new int[] { 3, 2, 4, 4 }
-            }));
-            Console.WriteLine (IsRectangleCover (new int[][] {
-                new int[] { 1, 1, 3, 3 },
-                    new int[] { 3, 1, 4, 2 },
-                    new int[] { 1, 3, 2, 4 },
-                    new int[] { 2, 2, 4, 4 }
-            }));
+        public static void Init () {
+            Console.WriteLine (IsRectangleCover(null));
+            Console.WriteLine (IsRectangleCover([
+                [1, 1, 3, 3],
+                    [3, 1, 4, 2],
+                    [3, 2, 4, 4],
+                    [1, 3, 2, 4],
+                    [2, 3, 3, 4]
+            ]));
+            Console.WriteLine (IsRectangleCover([
+                [1, 1, 2, 3],
+                    [1, 3, 2, 4],
+                    [3, 1, 4, 2],
+                    [3, 2, 4, 4]
+            ]));
+            Console.WriteLine (IsRectangleCover([
+                [1, 1, 3, 3],
+                    [3, 1, 4, 2],
+                    [1, 3, 2, 4],
+                    [3, 2, 4, 4]
+            ]));
+            Console.WriteLine (IsRectangleCover([
+                [1, 1, 3, 3],
+                    [3, 1, 4, 2],
+                    [1, 3, 2, 4],
+                    [2, 2, 4, 4]
+            ]));
         }
 
-        public bool IsRectangleCover (int[][] rectangles) {
+        public static bool IsRectangleCover (int[][] rectangles) {
             if (rectangles == null || rectangles.Length == 0 || rectangles[0].Length == 0) {
                 return false;
             }
@@ -107,7 +107,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem391 {
             int x2 = Int32.MinValue;
             int y2 = Int32.MinValue;
 
-            HashSet<String> set = new HashSet<String> ();
+            HashSet<String> set = [];
             int area = 0;
 
             foreach (var rect in rectangles) {

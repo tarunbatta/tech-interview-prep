@@ -44,13 +44,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem598 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxCount (int m, int n, int[][] ops) {
+        public static int MaxCount (int m, int n, int[][] ops) {
             return 0;
         }
     }

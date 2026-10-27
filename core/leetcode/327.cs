@@ -21,13 +21,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem327 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int CountRangeSum (int[] nums, int lower, int upper) {
+        public static int CountRangeSum (int[] nums, int lower, int upper) {
             return 0;
         }
     }

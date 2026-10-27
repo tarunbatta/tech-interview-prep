@@ -26,13 +26,15 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem14 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (LongestCommonPrefix (null));
-            Console.WriteLine (LongestCommonPrefix (new string[] { "flower", "flow", "flight" }));
-            Console.WriteLine (LongestCommonPrefix (new string[] { "dog", "racecar", "car" }));
+        public static void Init () {
+            Console.WriteLine (LongestCommonPrefix(null));
+            Console.WriteLine (LongestCommonPrefix(["flower", "flow", "flight"]));
+            Console.WriteLine (LongestCommonPrefix(["dog", "racecar", "car"]));
         }
 
-        public string LongestCommonPrefix (string[] strs) {
+        // Time: O(S) where S is the sum of all characters in all strings
+        // Space: O(1)
+        public static string LongestCommonPrefix (string[] strs) {
             if (strs == null || strs.Length == 0) {
                 return string.Empty;
             }

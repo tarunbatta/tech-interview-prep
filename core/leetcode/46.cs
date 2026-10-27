@@ -25,28 +25,28 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem46 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (Permute (null));
-            Console.WriteLine (Permute (new int[] { 1 }));
-            Console.WriteLine (Permute (new int[] { 1, 2 }));
-            Console.WriteLine (Permute (new int[] { 1, 2, 3 }));
+        public static void Init() {
+            Console.WriteLine (Permute(null));
+            Console.WriteLine (Permute([1]));
+            Console.WriteLine (Permute([1, 2]));
+            Console.WriteLine (Permute([1, 2, 3]));
         }
 
-        public IList<IList<int>> Permute (int[] nums) {
+        public static IList<IList<int>> Permute (int[] nums) {
             IList<IList<int>> result = null;
 
             if (nums == null || nums.Length == 0) {
                 return result;
             }
 
-            result = new List<IList<int>> ();
+            result = [];
 
-            DFS (nums, result, new List<int> ());
+            DFS(nums, result, []);
 
             return result;
         }
 
-        public void DFS (int[] nums, IList<IList<int>> result, List<int> current) {
+        public static void DFS (int[] nums, IList<IList<int>> result, List<int> current) {
             if (current.Count == nums.Length) {
                 result.Add (current);
                 return;
@@ -54,14 +54,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem46 {
 
             for (int i = 0; i < nums.Length; i++) {
                 if (!current.Contains (nums[i])) {
-                    List<int> newList = new List<int> ();
-
-                    foreach (var item in current) {
-                        newList.Add (item);
-                    }
-
-                    newList.Add (nums[i]);
-                    DFS (nums, result, newList);
+                    List<int> newList = [.. current, nums[i]];
+                    DFS(nums, result, newList);
                 }
             }
         }

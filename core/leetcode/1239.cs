@@ -42,7 +42,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1239
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(MaxLength(["un", "iq", "ue"]));
             Console.WriteLine(MaxLength(["cha", "r", "act", "ers"]));

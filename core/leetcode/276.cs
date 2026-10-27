@@ -39,7 +39,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem276
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(NumWays(3, 2)); // 6
             Console.WriteLine(NumWays(1, 1)); // 1

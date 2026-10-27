@@ -33,7 +33,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem624 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             IList<IList<int>> arrays1 = [
                 [1, 2, 3],
                 [4, 5],
@@ -50,7 +50,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem624 {
 
         // Time: O(m) where m is the number of arrays
         // Space: O(1)
-        public int MaxDistance(IList<IList<int>> arrays) {
+        public static int MaxDistance(IList<IList<int>> arrays) {
             int maxDist = 0;
             int minVal = arrays[0][0];
             int maxVal = arrays[0][arrays[0].Count - 1];

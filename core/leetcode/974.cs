@@ -31,13 +31,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem974 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int SubarraysDivByK (int[] A, int K) {
+        public static int SubarraysDivByK (int[] A, int K) {
             return 0;
         }
     }

@@ -62,13 +62,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1011 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ShipWithinDays (int[] weights, int D) {
+        public static int ShipWithinDays (int[] weights, int D) {
             return 0;
         }
     }

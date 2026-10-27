@@ -56,13 +56,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem999 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int NumRookCaptures (char[][] board) {
+        public static int NumRookCaptures (char[][] board) {
             return 0;
         }
     }

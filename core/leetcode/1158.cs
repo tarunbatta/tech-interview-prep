@@ -51,7 +51,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1158
     // GROUP BY u.user_id, u.join_date;
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var users = new List<User>
             {
@@ -80,7 +80,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1158
 
         // Time: O(U + O) where U is number of users and O is number of orders
         // Space: O(U) for grouping and output records
-        public IList<MarketAnalysisResult> MarketAnalysis(List<User> users, List<Order> orders)
+        public static IList<MarketAnalysisResult> MarketAnalysis(List<User> users, List<Order> orders)
         {
             var orders2019Count = orders
                 .Where(o => o.OrderDate.Year == 2019)

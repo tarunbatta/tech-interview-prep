@@ -40,13 +40,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem769 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxChunksToSorted (int[] arr) {
+        public static int MaxChunksToSorted (int[] arr) {
             return 0;
         }
     }

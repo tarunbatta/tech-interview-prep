@@ -87,7 +87,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem580 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Student> students = [
                 new() { StudentId = 1, StudentName = "Jack", Gender = "M", DeptId = 1 },
                 new() { StudentId = 2, StudentName = "Jane", Gender = "F", DeptId = 1 },
@@ -108,19 +108,18 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem580 {
 
         // Time: O(D log D + S) where D is number of departments, S is number of students
         // Space: O(D + S)
-        public List<DepartmentStudentCount> CountStudentNumber(List<Student> students, List<Department> departments) {
+        public static List<DepartmentStudentCount> CountStudentNumber(List<Student> students, List<Department> departments) {
             var studentCounts = students
                 .GroupBy(s => s.DeptId)
                 .ToDictionary(g => g.Key, g => g.Count());
 
-            return departments
+            return [.. departments
                 .Select(d => new DepartmentStudentCount {
                     DeptName = d.DeptName,
                     StudentNumber = studentCounts.GetValueOrDefault(d.DeptId, 0)
                 })
                 .OrderByDescending(r => r.StudentNumber)
-                .ThenBy(r => r.DeptName, StringComparer.Ordinal)
-                .ToList();
+                .ThenBy(r => r.DeptName, StringComparer.Ordinal)];
         }
     }
 }

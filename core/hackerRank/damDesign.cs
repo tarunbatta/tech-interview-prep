@@ -38,13 +38,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.HackerRank.DamDesign {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxHeight (List<int> wallPositions, List<int> wallHeights) {
+        public static int MaxHeight (List<int> wallPositions, List<int> wallHeights) {
             int result = 0;
 
             if (wallPositions == null || wallPositions.Count == 0 || wallHeights == null || wallHeights.Count == 0 || wallPositions.Count != wallHeights.Count) {

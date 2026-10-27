@@ -36,13 +36,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem373 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<IList<int>> KSmallestPairs (int[] nums1, int[] nums2, int k) {
+        public static IList<IList<int>> KSmallestPairs (int[] nums1, int[] nums2, int k) {
             return null;
         }
     }

@@ -40,13 +40,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem685 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] FindRedundantDirectedConnection (int[][] edges) {
+        public static int[] FindRedundantDirectedConnection (int[][] edges) {
             return null;
         }
     }

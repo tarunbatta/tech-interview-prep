@@ -69,13 +69,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem892 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int SurfaceArea (int[][] grid) {
+        public static int SurfaceArea (int[][] grid) {
             return 0;
         }
     }

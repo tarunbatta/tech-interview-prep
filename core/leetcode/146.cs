@@ -34,7 +34,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem146 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             // LRUCache obj = new LRUCache(capacity);
             // int param_1 = obj.Get(key);
             // obj.Put(key, value);

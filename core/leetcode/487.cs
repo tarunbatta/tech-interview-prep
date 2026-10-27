@@ -37,8 +37,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem487
     {
         public static void Init()
         {
-            Console.WriteLine(FindMaxConsecutiveOnes(new int[] { 1, 0, 1, 1, 0 }));    // 4
-            Console.WriteLine(FindMaxConsecutiveOnes(new int[] { 1, 0, 1, 1, 0, 1 })); // 4
+            Console.WriteLine(FindMaxConsecutiveOnes([1, 0, 1, 1, 0]));    // 4
+            Console.WriteLine(FindMaxConsecutiveOnes([1, 0, 1, 1, 0, 1])); // 4
         }
 
         // Time: O(n) where n is nums.Length (sliding window)

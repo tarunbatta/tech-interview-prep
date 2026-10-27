@@ -35,13 +35,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem894 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<TreeNode> AllPossibleFBT (int N) {
+        public static IList<TreeNode> AllPossibleFBT (int N) {
             return null;
         }
     }

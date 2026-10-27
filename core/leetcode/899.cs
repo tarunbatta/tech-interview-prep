@@ -45,13 +45,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem899 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string OrderlyQueue (string S, int K) {
+        public static string OrderlyQueue (string S, int K) {
             return null;
         }
     }

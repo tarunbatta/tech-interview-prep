@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem530 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int GetMinimumDifference (TreeNode root) {
+        public static int GetMinimumDifference (TreeNode root) {
             return 0;
         }
     }

@@ -33,13 +33,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem332 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<string> FindItinerary (IList<IList<string>> tickets) {
+        public static IList<string> FindItinerary (IList<IList<string>> tickets) {
             return null;
         }
     }

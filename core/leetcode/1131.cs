@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1131 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxAbsValExpr (int[] arr1, int[] arr2) {
+        public static int MaxAbsValExpr (int[] arr1, int[] arr2) {
             return 0;
         }
     }

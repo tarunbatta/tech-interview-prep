@@ -29,14 +29,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem392 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (IsSubsequence ("abc", "ahbgdc"));
-            Console.WriteLine (IsSubsequence ("axc", "ahbgdc"));
+        public static void Init () {
+            Console.WriteLine (IsSubsequence("abc", "ahbgdc"));
+            Console.WriteLine (IsSubsequence("axc", "ahbgdc"));
         }
 
         // Time: O (n)
         // Space: O (1)
-        public bool IsSubsequence (string s, string t) {
+        public static bool IsSubsequence (string s, string t) {
             if (string.IsNullOrEmpty (s)) {
                 return true;
             }

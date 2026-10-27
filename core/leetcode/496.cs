@@ -41,13 +41,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem496 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] NextGreaterElement (int[] nums1, int[] nums2) {
+        public static int[] NextGreaterElement (int[] nums1, int[] nums2) {
             return null;
         }
     }

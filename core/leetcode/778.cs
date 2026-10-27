@@ -48,13 +48,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem778 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int SwimInWater (int[][] grid) {
+        public static int SwimInWater (int[][] grid) {
             return 0;
         }
     }

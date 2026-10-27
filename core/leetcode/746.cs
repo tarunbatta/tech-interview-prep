@@ -33,13 +33,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem746 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinCostClimbingStairs (int[] cost) {
+        public static int MinCostClimbingStairs (int[] cost) {
             return 0;
         }
     }

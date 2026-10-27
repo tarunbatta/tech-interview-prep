@@ -52,13 +52,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem566 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[][] MatrixReshape (int[][] nums, int r, int c) {
+        public static int[][] MatrixReshape (int[][] nums, int r, int c) {
             return null;
         }
     }

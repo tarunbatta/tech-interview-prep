@@ -48,13 +48,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem854 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int KSimilarity (string A, string B) {
+        public static int KSimilarity (string A, string B) {
             return 0;
         }
     }

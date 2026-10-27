@@ -51,8 +51,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem489
         private int _dir; // 0: Up, 1: Right, 2: Down, 3: Left
         private readonly HashSet<(int, int)> _cleaned;
 
-        private static readonly int[] dr = { -1, 0, 1, 0 };
-        private static readonly int[] dc = { 0, 1, 0, -1 };
+        private static readonly int[] dr = [-1, 0, 1, 0];
+        private static readonly int[] dc = [0, 1, 0, -1];
 
         public MockRobot(int[][] room, int startR, int startC)
         {
@@ -60,7 +60,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem489
             _r = startR;
             _c = startC;
             _dir = 0;
-            _cleaned = new HashSet<(int, int)>();
+            _cleaned = [];
         }
 
         public bool Move()
@@ -86,19 +86,19 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem489
 
     public class Solution
     {
-        private static readonly int[] dr = { -1, 0, 1, 0 };
-        private static readonly int[] dc = { 0, 1, 0, -1 };
+        private static readonly int[] dr = [-1, 0, 1, 0];
+        private static readonly int[] dc = [0, 1, 0, -1];
 
-        public void Init()
+        public static void Init()
         {
-            int[][] room = new int[][]
-            {
-                new int[] { 1, 1, 1, 1, 1, 0, 1, 1 },
-                new int[] { 1, 1, 1, 1, 1, 0, 1, 1 },
-                new int[] { 1, 0, 1, 1, 1, 1, 1, 1 },
-                new int[] { 0, 0, 0, 1, 0, 0, 0, 0 },
-                new int[] { 1, 1, 1, 1, 1, 1, 1, 1 }
-            };
+            int[][] room =
+            [
+                [1, 1, 1, 1, 1, 0, 1, 1],
+                [1, 1, 1, 1, 1, 0, 1, 1],
+                [1, 0, 1, 1, 1, 1, 1, 1],
+                [0, 0, 0, 1, 0, 0, 0, 0],
+                [1, 1, 1, 1, 1, 1, 1, 1]
+            ];
 
             MockRobot robot = new(room, 1, 3);
             CleanRoom(robot);
@@ -114,7 +114,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem489
                 return;
             }
 
-            HashSet<(int r, int c)> visited = new();
+            HashSet<(int r, int c)> visited = [];
             Dfs(robot, 0, 0, 0, visited);
         }
 

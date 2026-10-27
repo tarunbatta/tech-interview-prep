@@ -36,19 +36,19 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem191 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (HammingWeight_a (0));
-            Console.WriteLine (HammingWeight_a (11));
-            Console.WriteLine (HammingWeight_a (128));
-            Console.WriteLine (HammingWeight_a (4294967293));
+        public static void Init () {
+            Console.WriteLine (HammingWeight_a(0));
+            Console.WriteLine (HammingWeight_a(11));
+            Console.WriteLine (HammingWeight_a(128));
+            Console.WriteLine (HammingWeight_a(4294967293));
 
-            Console.WriteLine (HammingWeight_b (0));
-            Console.WriteLine (HammingWeight_b (11));
-            Console.WriteLine (HammingWeight_b (128));
-            Console.WriteLine (HammingWeight_b (4294967293));
+            Console.WriteLine (HammingWeight_b(0));
+            Console.WriteLine (HammingWeight_b(11));
+            Console.WriteLine (HammingWeight_b(128));
+            Console.WriteLine (HammingWeight_b(4294967293));
         }
 
-        public int HammingWeight_a (uint n) {
+        public static int HammingWeight_a (uint n) {
             int bits = 0;
             int mask = 1;
 
@@ -62,7 +62,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem191 {
             return bits;
         }
 
-        public int HammingWeight_b (uint n) {
+        public static int HammingWeight_b (uint n) {
             int sum = 0;
 
             while (n != 0) {

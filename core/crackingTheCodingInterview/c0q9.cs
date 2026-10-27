@@ -7,7 +7,7 @@ using System;
 namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c0q9 {
     public class Solution {
         public static void Init (string[] args) {
-            Console.WriteLine (SwapMinMax (new int[] { 4, 9, 5, 2, 3, 1, 7 }));
+            Console.WriteLine (SwapMinMax ([4, 9, 5, 2, 3, 1, 7]));
         }
 
         private static string SwapMinMax (int[] arr) {

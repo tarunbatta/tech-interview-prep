@@ -30,7 +30,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem341 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             NestedIterator i = new NestedIterator (null);
             // while (i.HasNext ()) v[f ()] = i.Next ();
         }
@@ -55,11 +55,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem341 {
 
         }
 
-        public bool HasNext () {
+        public static bool HasNext () {
             return false;
         }
 
-        public int Next () {
+        public static int Next () {
             return 0;
         }
     }

@@ -23,13 +23,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem281
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            List<int> v1 = new() { 1, 2 };
-            List<int> v2 = new() { 3, 4, 5, 6 };
+            List<int> v1 = [1, 2];
+            List<int> v2 = [3, 4, 5, 6];
             ZigzagIterator it = new(v1, v2);
 
-            List<int> res = new();
+            List<int> res = [];
             while (it.HasNext())
             {
                 res.Add(it.Next());

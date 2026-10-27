@@ -29,13 +29,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem328 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (n)
         // Space: O (1)
-        public ListNode OddEvenList (ListNode head) {
+        public static ListNode OddEvenList (ListNode head) {
             if (head == null) {
                 return head;
             }

@@ -37,7 +37,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem544
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(FindContestMatch(4)); // ((1,4),(2,3))
             Console.WriteLine(FindContestMatch(8)); // (((1,8),(4,5)),((2,7),(3,6)))

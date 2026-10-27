@@ -45,7 +45,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem737 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             string[] s1 = ["great", "acting", "skills"];
             string[] s2 = ["fine", "drama", "talent"];
             IList<IList<string>> pairs = [
@@ -59,7 +59,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem737 {
 
         // Time: O(N + P * alpha(P))
         // Space: O(P) to store disjoint set parent map
-        public bool AreSentencesSimilarTwo(string[] sentence1, string[] sentence2, IList<IList<string>> similarPairs) {
+        public static bool AreSentencesSimilarTwo(string[] sentence1, string[] sentence2, IList<IList<string>> similarPairs) {
             if (sentence1.Length != sentence2.Length) {
                 return false;
             }

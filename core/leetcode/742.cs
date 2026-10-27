@@ -46,7 +46,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem742 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             TreeNode root1 = new(1, new TreeNode(3), new TreeNode(2));
             Console.WriteLine(FindClosestLeaf(root1, 1)); // 2 or 3
 
@@ -56,7 +56,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem742 {
 
         // Time: O(n) where n is the number of nodes
         // Space: O(n) to store the undirected graph and visited set
-        public int FindClosestLeaf(TreeNode root, int k) {
+        public static int FindClosestLeaf(TreeNode root, int k) {
             Dictionary<int, List<int>> graph = [];
             HashSet<int> leaves = [];
 

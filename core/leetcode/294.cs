@@ -33,7 +33,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem294
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(CanWin("++++")); // True
             Console.WriteLine(CanWin("+"));    // False
@@ -48,7 +48,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem294
                 return false;
             }
 
-            Dictionary<string, bool> memo = new();
+            Dictionary<string, bool> memo = [];
             return CanWinHelper(currentState, memo);
         }
 

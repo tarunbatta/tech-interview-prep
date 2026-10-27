@@ -8,12 +8,12 @@ namespace InterviewPreperationGuide.Core.Algorithms.Search {
     public class SequentialSearch {
         public static void Init () {
             Console.WriteLine (_SequentialSearch (9, null));
-            Console.WriteLine (_SequentialSearch (9, new int[0]));
-            Console.WriteLine (_SequentialSearch (9, new int[] { 1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25 }));
+            Console.WriteLine (_SequentialSearch (9, []));
+            Console.WriteLine (_SequentialSearch (9, [1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25]));
 
             Console.WriteLine (_SelfOrganizingSequentialSearch (9, null));
-            Console.WriteLine (_SelfOrganizingSequentialSearch (9, new int[0]));
-            Console.WriteLine (_SelfOrganizingSequentialSearch (9, new int[] { 1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25 }));
+            Console.WriteLine (_SelfOrganizingSequentialSearch (9, []));
+            Console.WriteLine (_SelfOrganizingSequentialSearch (9, [1, 7, 5, 23, 9, 34, 12, 100, 2, 6, 0, -5, 25]));
         }
 
         public static int _SequentialSearch (int value, int[] arr) {

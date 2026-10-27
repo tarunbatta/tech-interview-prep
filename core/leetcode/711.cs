@@ -34,7 +34,7 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem711 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[][] grid1 = [
                 [1, 1, 0, 0, 0],
                 [1, 0, 0, 0, 0],
@@ -54,7 +54,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem711 {
 
         // Time: O(m * n * log(m * n))
         // Space: O(m * n)
-        public int NumDistinctIslands2(int[][] grid) {
+        public static int NumDistinctIslands2(int[][] grid) {
             int m = grid.Length;
             int n = grid[0].Length;
             bool[][] visited = new bool[m][];

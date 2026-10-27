@@ -45,13 +45,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem435 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int EraseOverlapIntervals (int[][] intervals) {
+        public static int EraseOverlapIntervals (int[][] intervals) {
             return 0;
         }
     }

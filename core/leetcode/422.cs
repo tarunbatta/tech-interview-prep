@@ -48,11 +48,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem422
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            Console.WriteLine(ValidWordSquare(new List<string> { "abcd", "bnrt", "crmy", "dtye" })); // True
-            Console.WriteLine(ValidWordSquare(new List<string> { "abcd", "bnrt", "crm", "dt" }));     // True
-            Console.WriteLine(ValidWordSquare(new List<string> { "ball", "area", "read", "lady" })); // False
+            Console.WriteLine(ValidWordSquare(["abcd", "bnrt", "crmy", "dtye"])); // True
+            Console.WriteLine(ValidWordSquare(["abcd", "bnrt", "crm", "dt"]));     // True
+            Console.WriteLine(ValidWordSquare(["ball", "area", "read", "lady"])); // False
         }
 
         // Time: O(N * L) where N is words.Count and L is average word length

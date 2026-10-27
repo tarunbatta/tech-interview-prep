@@ -75,7 +75,7 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem619 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<int> numbers1 = [8, 8, 3, 3, 1, 4, 5, 6];
             Console.WriteLine(BiggestSingleNumber(numbers1)?.ToString() ?? "null"); // 6
 
@@ -85,7 +85,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem619 {
 
         // Time: O(n) where n is the number of integers
         // Space: O(n) to store frequencies of numbers
-        public int? BiggestSingleNumber(List<int> numbers) {
+        public static int? BiggestSingleNumber(List<int> numbers) {
             var singleNumbers = numbers
                 .GroupBy(n => n)
                 .Where(g => g.Count() == 1)

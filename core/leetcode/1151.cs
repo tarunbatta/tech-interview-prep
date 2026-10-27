@@ -35,7 +35,7 @@ using System.Linq;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1151 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] d1 = [1, 0, 1, 0, 1];
             Console.WriteLine(MinSwaps(d1)); // 1
 
@@ -48,7 +48,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1151 {
 
         // Time: O(n) where n is the length of data
         // Space: O(1)
-        public int MinSwaps(int[] data) {
+        public static int MinSwaps(int[] data) {
             int totalOnes = 0;
             foreach (int x in data) {
                 if (x == 1) {

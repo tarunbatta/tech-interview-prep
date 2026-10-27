@@ -40,7 +40,7 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1057 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[][] workers1 = [[0, 0], [2, 1]];
             int[][] bikes1 = [[1, 2], [3, 3]];
             Console.WriteLine(string.Join(", ", AssignBikes(workers1, bikes1))); // 1, 0
@@ -52,7 +52,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1057 {
 
         // Time: O(n * m) using bucket sort since maximum Manhattan distance is 2000
         // Space: O(n * m) to store all worker-bike pairs in buckets
-        public int[] AssignBikes(int[][] workers, int[][] bikes) {
+        public static int[] AssignBikes(int[][] workers, int[][] bikes) {
             int n = workers.Length;
             int m = bikes.Length;
 

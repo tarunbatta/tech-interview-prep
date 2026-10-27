@@ -67,7 +67,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1070 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Sale> sales = [
                 new() { SaleId = 1, ProductId = 100, Year = 2008, Quantity = 10, Price = 5000 },
                 new() { SaleId = 2, ProductId = 100, Year = 2009, Quantity = 12, Price = 5000 },
@@ -82,20 +82,19 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1070 {
 
         // Time: O(n) where n is the number of sales rows
         // Space: O(k) where k is the number of distinct products
-        public List<ProductFirstYearResult> ProductFirstYearSales(List<Sale> sales) {
+        public static List<ProductFirstYearResult> ProductFirstYearSales(List<Sale> sales) {
             var minYears = sales
                 .GroupBy(s => s.ProductId)
                 .ToDictionary(g => g.Key, g => g.Min(s => s.Year));
 
-            return sales
+            return [.. sales
                 .Where(s => s.Year == minYears[s.ProductId])
                 .Select(s => new ProductFirstYearResult {
                     ProductId = s.ProductId,
                     FirstYear = s.Year,
                     Quantity = s.Quantity,
                     Price = s.Price
-                })
-                .ToList();
+                })];
         }
     }
 }

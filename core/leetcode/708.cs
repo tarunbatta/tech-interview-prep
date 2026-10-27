@@ -47,7 +47,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem708 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Node n1 = new(3);
             Node n2 = new(4);
             Node n3 = new(1);
@@ -61,7 +61,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem708 {
 
         // Time: O(n) where n is the number of nodes in the circular list
         // Space: O(1)
-        public Node Insert(Node head, int insertVal) {
+        public static Node Insert(Node head, int insertVal) {
             if (head == null) {
                 Node single = new(insertVal);
                 single.next = single;

@@ -48,16 +48,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem550
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            List<Activity> activities = new()
-            {
+            List<Activity> activities =
+            [
                 new Activity { PlayerId = 1, DeviceId = 2, EventDate = new DateTime(2016, 3, 1), GamesPlayed = 5 },
                 new Activity { PlayerId = 1, DeviceId = 2, EventDate = new DateTime(2016, 3, 2), GamesPlayed = 6 },
                 new Activity { PlayerId = 2, DeviceId = 3, EventDate = new DateTime(2017, 6, 25), GamesPlayed = 1 },
                 new Activity { PlayerId = 3, DeviceId = 1, EventDate = new DateTime(2016, 3, 2), GamesPlayed = 0 },
                 new Activity { PlayerId = 3, DeviceId = 4, EventDate = new DateTime(2018, 7, 3), GamesPlayed = 5 }
-            };
+            ];
 
             Console.WriteLine(FractionConsecutiveLogins(activities)); // 0.33
         }

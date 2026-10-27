@@ -14,9 +14,9 @@ using System;
 namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c16q17 {
     public class Solution {
         public static void Init (string[] args) {
-            Console.WriteLine (GetLargesttSum (new int[] { 2, -8, 3, -2, 4, -10 }));
+            Console.WriteLine (GetLargesttSum ([2, -8, 3, -2, 4, -10]));
 
-            Console.WriteLine (GetLargesttSum (new int[] {-2, -3, 4, -1, -2, 1, 5, -3 }));
+            Console.WriteLine (GetLargesttSum ([-2, -3, 4, -1, -2, 1, 5, -3]));
         }
 
         // Kadane's algorithm

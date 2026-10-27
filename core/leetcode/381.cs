@@ -41,11 +41,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem381 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             RandomizedCollection obj = new RandomizedCollection ();
-            bool param_1 = obj.Insert (0);
-            bool param_2 = obj.Remove (0);
-            int param_3 = obj.GetRandom ();
+            bool param_1 = RandomizedCollection.Insert(0);
+            bool param_2 = RandomizedCollection.Remove(0);
+            int param_3 = RandomizedCollection.GetRandom();
         }
     }
 
@@ -55,17 +55,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem381 {
         }
 
         // Inserts a value to the collection. Returns true if the collection did not already contain the specified element
-        public bool Insert (int val) {
+        public static bool Insert (int val) {
             return false;
         }
 
         // Removes a value from the collection. Returns true if the collection contained the specified element
-        public bool Remove (int val) {
+        public static bool Remove (int val) {
             return false;
         }
 
         // Get a random element from the collection
-        public int GetRandom () {
+        public static int GetRandom () {
             return 0;
         }
     }

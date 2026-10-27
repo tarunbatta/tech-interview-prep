@@ -20,21 +20,21 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem187 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ((n-l)l)
         // Space: O ((n-l)l)
-        public IList<string> FindRepeatedDnaSequences (string s) {
-            IList<string> result = new List<string> ();
+        public static IList<string> FindRepeatedDnaSequences (string s) {
+            IList<string> result = [];
 
             if (string.IsNullOrEmpty (s)) {
                 return result;
             }
 
             int len = 10;
-            Dictionary<string, int> hash = new Dictionary<string, int> ();
+            Dictionary<string, int> hash = [];
             for (int i = 0; i < s.Length - len + 1; i++) {
                 string str = s.Substring (i, len);
 

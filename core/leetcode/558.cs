@@ -74,13 +74,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem558 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public Node Intersect (Node quadTree1, Node quadTree2) {
+        public static Node Intersect (Node quadTree1, Node quadTree2) {
             return null;
         }
     }

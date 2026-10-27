@@ -44,13 +44,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem807 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxIncreaseKeepingSkyline (int[][] grid) {
+        public static int MaxIncreaseKeepingSkyline (int[][] grid) {
             return 0;
         }
     }

@@ -30,7 +30,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1165
     // word[i] is an English lowercase letter.
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(CalculateTime("abcdefghijklmnopqrstuvwxyz", "cba")); // 4
             Console.WriteLine(CalculateTime("pqrstuvwxyzabcdefghijklmno", "leetcode")); // 73
@@ -38,7 +38,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1165
 
         // Time: O(N) where N is the length of word (building keyboard index map is O(26) = O(1))
         // Space: O(1) for index array of size 26
-        public int CalculateTime(string keyboard, string word)
+        public static int CalculateTime(string keyboard, string word)
         {
             int[] pos = new int[26];
             for (int i = 0; i < keyboard.Length; i++)

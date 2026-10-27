@@ -36,13 +36,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem630 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ScheduleCourse (int[][] courses) {
+        public static int ScheduleCourse (int[][] courses) {
             return 0;
         }
     }

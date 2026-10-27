@@ -63,13 +63,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem964 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int LeastOpsExpressTarget (int x, int target) {
+        public static int LeastOpsExpressTarget (int x, int target) {
             return 0;
         }
     }

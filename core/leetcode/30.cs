@@ -29,13 +29,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem30 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
         // Time: O (n * m), where m is word length
         // Space: O (1)
-        public IList<int> FindSubstring (string s, string[] words) {
+        public static IList<int> FindSubstring (string s, string[] words) {
             var result = new List<int> ();
 
             if (string.IsNullOrEmpty (s) || words == null || words.Length == 0) {

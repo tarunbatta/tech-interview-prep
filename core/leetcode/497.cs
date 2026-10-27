@@ -53,16 +53,16 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem497 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Solution obj = new Solution (null);
-            int[] param_1 = obj.Pick ();
+            int[] param_1 = Pick();
         }
 
         public Solution (int[][] rects) {
 
         }
 
-        public int[] Pick () {
+        public static int[] Pick () {
             return null;
         }
     }

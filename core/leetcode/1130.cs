@@ -42,13 +42,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1130 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MctFromLeafValues (int[] arr) {
+        public static int MctFromLeafValues (int[] arr) {
             return 0;
         }
     }

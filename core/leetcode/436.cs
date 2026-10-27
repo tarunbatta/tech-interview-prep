@@ -54,13 +54,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem436 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int[] FindRightInterval (int[][] intervals) {
+        public static int[] FindRightInterval (int[][] intervals) {
             return null;
         }
     }

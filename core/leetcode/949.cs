@@ -39,13 +39,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem949 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string LargestTimeFromDigits (int[] A) {
+        public static string LargestTimeFromDigits (int[] A) {
             return null;
         }
     }

@@ -50,13 +50,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem640 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string SolveEquation (string equation) {
+        public static string SolveEquation (string equation) {
             return null;
         }
     }

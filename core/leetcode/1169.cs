@@ -50,13 +50,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1169 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<string> InvalidTransactions (string[] transactions) {
+        public static IList<string> InvalidTransactions (string[] transactions) {
             return null;
         }
     }

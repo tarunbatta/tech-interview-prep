@@ -17,13 +17,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem16 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int ThreeSumClosest (int[] nums, int target) {
+        public static int ThreeSumClosest (int[] nums, int target) {
             return 0;
         }
     }

@@ -60,13 +60,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem869 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool ReorderedPowerOf2 (int N) {
+        public static bool ReorderedPowerOf2 (int N) {
             return false;
         }
     }

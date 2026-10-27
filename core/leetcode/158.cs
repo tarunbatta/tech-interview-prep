@@ -56,11 +56,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem158
 
     public class Solution : Reader4
     {
-        private readonly char[] _internalBuffer = new char[4];
-        private int _bufferHead = 0;
-        private int _bufferTail = 0;
+        private static readonly char[] _internalBuffer = new char[4];
+        private static int _bufferHead = 0;
+        private static int _bufferTail = 0;
 
-        public void Init()
+        public static void Init()
         {
             SetFileContent("abcde");
             char[] buf = new char[10];
@@ -77,7 +77,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem158
 
         // Time: O(n) where n is the number of characters to read across calls
         // Space: O(1) auxiliary space (4-byte internal state buffer)
-        public int Read(char[] buf, int n)
+        public static int Read(char[] buf, int n)
         {
             int totalRead = 0;
 

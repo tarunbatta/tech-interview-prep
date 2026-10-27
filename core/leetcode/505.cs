@@ -42,19 +42,19 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem505
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] maze = new int[][]
-            {
-                new int[] { 0, 0, 1, 0, 0 },
-                new int[] { 0, 0, 0, 0, 0 },
-                new int[] { 0, 0, 0, 1, 0 },
-                new int[] { 1, 1, 0, 1, 1 },
-                new int[] { 0, 0, 0, 0, 0 }
-            };
+            int[][] maze =
+            [
+                [0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 1, 0],
+                [1, 1, 0, 1, 1],
+                [0, 0, 0, 0, 0]
+            ];
 
-            Console.WriteLine(ShortestDistance(maze, new int[] { 0, 4 }, new int[] { 4, 4 })); // 12
-            Console.WriteLine(ShortestDistance(maze, new int[] { 0, 4 }, new int[] { 3, 2 })); // -1
+            Console.WriteLine(ShortestDistance(maze, [0, 4], [4, 4])); // 12
+            Console.WriteLine(ShortestDistance(maze, [0, 4], [3, 2])); // -1
         }
 
         // Time: O(m * n * max(m, n) * log(m * n)) using Dijkstra's algorithm
@@ -83,8 +83,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem505
             PriorityQueue<(int r, int c), int> pq = new();
             pq.Enqueue((start[0], start[1]), 0);
 
-            int[] dr = { -1, 1, 0, 0 };
-            int[] dc = { 0, 0, -1, 1 };
+            int[] dr = [-1, 1, 0, 0];
+            int[] dc = [0, 0, -1, 1];
 
             while (pq.Count > 0)
             {

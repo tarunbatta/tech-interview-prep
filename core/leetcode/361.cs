@@ -30,22 +30,22 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem361
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            char[][] grid1 = new char[][]
-            {
-                new char[] { '0', 'E', '0', '0' },
-                new char[] { 'E', '0', 'W', 'E' },
-                new char[] { '0', 'E', '0', '0' }
-            };
+            char[][] grid1 =
+            [
+                ['0', 'E', '0', '0'],
+                ['E', '0', 'W', 'E'],
+                ['0', 'E', '0', '0']
+            ];
             Console.WriteLine(MaxKilledEnemies(grid1)); // 3
 
-            char[][] grid2 = new char[][]
-            {
-                new char[] { 'W', 'W', 'W' },
-                new char[] { '0', '0', '0' },
-                new char[] { 'E', 'E', 'E' }
-            };
+            char[][] grid2 =
+            [
+                ['W', 'W', 'W'],
+                ['0', '0', '0'],
+                ['E', 'E', 'E']
+            ];
             Console.WriteLine(MaxKilledEnemies(grid2)); // 1
         }
 

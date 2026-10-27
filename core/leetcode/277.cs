@@ -48,25 +48,25 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem277 {
     */
 
     public class Solution {
-        public void Init () {
+        public static void Init () {
 
         }
 
         // Time: O (n)
         // Space: O (1)
-        public int FindCelebrity (int n) {
+        public static int FindCelebrity (int n) {
             int result = 0;
 
             // if candidate knows i, then switch candidate
             for (int i = 1; i < n; i++) {
-                if (Knows (result, i)) {
+                if (Knows(result, i)) {
                     result = i;
                 }
             }
 
             // check whether the candidate is real
             for (int i = 0; i < n; i++) {
-                if (i != result && (Knows (result, i) || !Knows (i, result))) {
+                if (i != result && (Knows(result, i) || !Knows(i, result))) {
                     return -1;
                 }
             }
@@ -74,7 +74,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem277 {
             return result;
         }
 
-        private bool Knows (int a, int b) {
+        private static bool Knows (int a, int b) {
             return false;
         }
     }

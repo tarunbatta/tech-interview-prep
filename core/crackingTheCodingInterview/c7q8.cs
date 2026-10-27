@@ -10,7 +10,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c7q8 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
     }

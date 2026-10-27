@@ -32,21 +32,21 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem54 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (SpiralOrder (new int[][] {
-                new int[] { 1, 2, 3, 4 },
-                    new int[] { 5, 6, 7, 8 },
-                    new int[] { 9, 10, 11, 12 },
-                    new int[] { 13, 14, 15, 16 }
-            }));
-            Console.WriteLine (SpiralOrder (new int[][] {
-                new int[] { 1, 2, 3, 4, 5, 6 },
-                    new int[] { 7, 8, 9, 10, 11, 12 },
-                    new int[] { 13, 14, 15, 16, 17, 18 }
-            }));
+        public static void Init () {
+            Console.WriteLine (SpiralOrder([
+                [1, 2, 3, 4],
+                    [5, 6, 7, 8],
+                    [9, 10, 11, 12],
+                    [13, 14, 15, 16]
+            ]));
+            Console.WriteLine (SpiralOrder([
+                [1, 2, 3, 4, 5, 6],
+                    [7, 8, 9, 10, 11, 12],
+                    [13, 14, 15, 16, 17, 18]
+            ]));
         }
 
-        public IList<int> SpiralOrder (int[][] matrix) {
+        public static IList<int> SpiralOrder (int[][] matrix) {
             var result = new List<int> ();
 
             if (matrix == null || matrix.Length == 0 || matrix[0].Length == 0) {

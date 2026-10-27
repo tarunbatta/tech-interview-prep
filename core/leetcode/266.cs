@@ -30,7 +30,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem266
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(CanPermutePalindrome("code"));    // False
             Console.WriteLine(CanPermutePalindrome("aab"));     // True
@@ -46,7 +46,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem266
                 return true;
             }
 
-            HashSet<char> oddChars = new();
+            HashSet<char> oddChars = [];
 
             foreach (char c in s)
             {

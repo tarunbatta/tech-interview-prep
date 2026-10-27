@@ -44,7 +44,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem369
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             ListNode head1 = new(1, new(2, new(3)));
             PrintList(PlusOne(head1)); // 1 -> 2 -> 4

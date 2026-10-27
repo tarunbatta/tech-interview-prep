@@ -36,14 +36,14 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1046 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (LastStoneWeight (null));
-            Console.WriteLine (LastStoneWeight (new int[] { 2, 7, 4, 1, 8, 1 }));
+        public static void Init () {
+            Console.WriteLine (LastStoneWeight(null));
+            Console.WriteLine (LastStoneWeight([2, 7, 4, 1, 8, 1]));
         }
 
         // Time: O (n logn (n))
         // Space: O (n)
-        public int LastStoneWeight (int[] stones) {
+        public static int LastStoneWeight (int[] stones) {
             if (stones == null || stones.Length == 0) {
                 return 0;
             }
@@ -75,17 +75,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1046 {
             _elements = new int[size];
         }
 
-        private int GetLeftChildIndex (int elementIndex) => 2 * elementIndex + 1;
-        private int GetRightChildIndex (int elementIndex) => 2 * elementIndex + 2;
-        private int GetParentIndex (int elementIndex) => (elementIndex - 1) / 2;
+        private static int GetLeftChildIndex (int elementIndex) => 2 * elementIndex + 1;
+        private static int GetRightChildIndex (int elementIndex) => 2 * elementIndex + 2;
+        private static int GetParentIndex (int elementIndex) => (elementIndex - 1) / 2;
 
-        private bool HasLeftChild (int elementIndex) => GetLeftChildIndex (elementIndex) < _size;
-        private bool HasRightChild (int elementIndex) => GetRightChildIndex (elementIndex) < _size;
-        private bool IsRoot (int elementIndex) => elementIndex == 0;
+        private bool HasLeftChild (int elementIndex) => GetLeftChildIndex(elementIndex) < _size;
+        private bool HasRightChild (int elementIndex) => GetRightChildIndex(elementIndex) < _size;
+        private static bool IsRoot (int elementIndex) => elementIndex == 0;
 
-        private int GetLeftChild (int elementIndex) => _elements[GetLeftChildIndex (elementIndex)];
-        private int GetRightChild (int elementIndex) => _elements[GetRightChildIndex (elementIndex)];
-        private int GetParent (int elementIndex) => _elements[GetParentIndex (elementIndex)];
+        private int GetLeftChild (int elementIndex) => _elements[GetLeftChildIndex(elementIndex)];
+        private int GetRightChild (int elementIndex) => _elements[GetRightChildIndex(elementIndex)];
+        private int GetParent (int elementIndex) => _elements[GetParentIndex(elementIndex)];
 
         private void Swap (int firstIndex, int secondIndex) {
             var temp = _elements[firstIndex];
@@ -134,9 +134,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1046 {
         private void ReCalculateDown () {
             int index = 0;
             while (HasLeftChild (index)) {
-                var biggerIndex = GetLeftChildIndex (index);
+                var biggerIndex = GetLeftChildIndex(index);
                 if (HasRightChild (index) && GetRightChild (index) > GetLeftChild (index)) {
-                    biggerIndex = GetRightChildIndex (index);
+                    biggerIndex = GetRightChildIndex(index);
                 }
 
                 if (_elements[biggerIndex] < _elements[index]) {
@@ -150,8 +150,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1046 {
 
         private void ReCalculateUp () {
             var index = _size - 1;
-            while (!IsRoot (index) && _elements[index] > GetParent (index)) {
-                var parentIndex = GetParentIndex (index);
+            while (!IsRoot(index) && _elements[index] > GetParent (index)) {
+                var parentIndex = GetParentIndex(index);
                 Swap (parentIndex, index);
                 index = parentIndex;
             }

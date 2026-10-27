@@ -21,13 +21,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem420 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int StrongPasswordChecker (string s) {
+        public static int StrongPasswordChecker (string s) {
             return 0;
         }
     }

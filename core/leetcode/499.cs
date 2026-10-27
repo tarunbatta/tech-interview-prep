@@ -44,19 +44,19 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem499
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] maze = new int[][]
-            {
-                new int[] { 0, 0, 0, 0, 0 },
-                new int[] { 1, 1, 0, 0, 1 },
-                new int[] { 0, 0, 0, 0, 0 },
-                new int[] { 0, 1, 0, 0, 1 },
-                new int[] { 0, 1, 0, 0, 0 }
-            };
+            int[][] maze =
+            [
+                [0, 0, 0, 0, 0],
+                [1, 1, 0, 0, 1],
+                [0, 0, 0, 0, 0],
+                [0, 1, 0, 0, 1],
+                [0, 1, 0, 0, 0]
+            ];
 
-            Console.WriteLine(FindShortestWay(maze, new int[] { 4, 3 }, new int[] { 0, 1 })); // lul
-            Console.WriteLine(FindShortestWay(maze, new int[] { 4, 3 }, new int[] { 3, 0 })); // impossible
+            Console.WriteLine(FindShortestWay(maze, [4, 3], [0, 1])); // lul
+            Console.WriteLine(FindShortestWay(maze, [4, 3], [3, 0])); // impossible
         }
 
         // Time: O(m * n * max(m, n) * log(m * n)) using Dijkstra with priority queue
@@ -86,9 +86,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem499
             dist[ball[0], ball[1]] = 0;
 
             // Directions in lexicographical order: 'd', 'l', 'r', 'u'
-            int[] dr = { 1, 0, 0, -1 };
-            int[] dc = { 0, -1, 1, 0 };
-            char[] dirChars = { 'd', 'l', 'r', 'u' };
+            int[] dr = [1, 0, 0, -1];
+            int[] dc = [0, -1, 1, 0];
+            char[] dirChars = ['d', 'l', 'r', 'u'];
 
             PriorityQueue<(int r, int c, int d, string p), (int dist, string path)> pq =
                 new(Comparer<(int dist, string path)>.Create((a, b) =>

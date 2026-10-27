@@ -37,13 +37,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem757 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int IntersectionSizeTwo (int[][] intervals) {
+        public static int IntersectionSizeTwo (int[][] intervals) {
             return 0;
         }
     }

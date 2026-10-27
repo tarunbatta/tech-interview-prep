@@ -22,13 +22,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem97 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsInterleave (string s1, string s2, string s3) {
+        public static bool IsInterleave (string s1, string s2, string s3) {
             return false;
         }
     }

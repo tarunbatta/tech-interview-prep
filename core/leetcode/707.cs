@@ -39,13 +39,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem707 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             MyLinkedList obj = new MyLinkedList ();
-            int param_1 = obj.Get (0);
-            obj.AddAtHead (0);
-            obj.AddAtTail (0);
-            obj.AddAtIndex (0, 0);
-            obj.DeleteAtIndex (0);
+            int param_1 = MyLinkedList.Get(0);
+            MyLinkedList.AddAtHead(0);
+            MyLinkedList.AddAtTail(0);
+            MyLinkedList.AddAtIndex(0, 0);
+            MyLinkedList.DeleteAtIndex(0);
         }
     }
 
@@ -56,31 +56,31 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem707 {
 
         /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
 
-        public int Get (int index) {
+        public static int Get (int index) {
             return 0;
         }
 
         /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
 
-        public void AddAtHead (int val) {
+        public static void AddAtHead (int val) {
 
         }
 
         /** Append a node of value val to the last element of the linked list. */
 
-        public void AddAtTail (int val) {
+        public static void AddAtTail (int val) {
 
         }
 
         /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
 
-        public void AddAtIndex (int index, int val) {
+        public static void AddAtIndex (int index, int val) {
 
         }
 
         /** Delete the index-th node in the linked list, if the index is valid. */
 
-        public void DeleteAtIndex (int index) {
+        public static void DeleteAtIndex (int index) {
 
         }
     }

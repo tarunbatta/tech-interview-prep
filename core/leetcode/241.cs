@@ -31,13 +31,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem241 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> DiffWaysToCompute (string input) {
+        public static IList<int> DiffWaysToCompute (string input) {
             return null;
         }
     }

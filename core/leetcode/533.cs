@@ -38,15 +38,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem533
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            char[][] pic = new char[][]
-            {
-                new char[] { 'W', 'B', 'W', 'B', 'B', 'W' },
-                new char[] { 'W', 'B', 'W', 'B', 'B', 'W' },
-                new char[] { 'W', 'B', 'W', 'B', 'B', 'W' },
-                new char[] { 'W', 'W', 'B', 'W', 'B', 'W' }
-            };
+            char[][] pic =
+            [
+                ['W', 'B', 'W', 'B', 'B', 'W'],
+                ['W', 'B', 'W', 'B', 'B', 'W'],
+                ['W', 'B', 'W', 'B', 'B', 'W'],
+                ['W', 'W', 'B', 'W', 'B', 'W']
+            ];
 
             Console.WriteLine(FindBlackPixel(pic, 3)); // 6
         }
@@ -64,7 +64,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem533
             int n = picture[0].Length;
 
             int[] colCount = new int[n];
-            Dictionary<string, int> rowFreq = new();
+            Dictionary<string, int> rowFreq = [];
             string[] rowStrings = new string[m];
 
             for (int r = 0; r < m; r++)

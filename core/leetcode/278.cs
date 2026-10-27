@@ -25,14 +25,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem278 {
     public class Solution : VersionControl {
-        public int FirstBadVersion (int n) {
+        public static int FirstBadVersion (int n) {
             int low = 1;
             int high = n;
 
             while (low < high) {
                 int mid = low + (high - low) / 2;
 
-                if (IsBadVersion (mid)) {
+                if (IsBadVersion(mid)) {
                     high = mid;
                 } else {
                     low = mid + 1;
@@ -44,7 +44,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem278 {
     }
 
     public class VersionControl {
-        public bool IsBadVersion (int version) {
+        public static bool IsBadVersion (int version) {
             return false;
         }
     }

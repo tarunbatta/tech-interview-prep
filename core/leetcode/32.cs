@@ -32,7 +32,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem32
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(LongestValidParentheses("(()"));    // 2
             Console.WriteLine(LongestValidParentheses(")()())")); // 4

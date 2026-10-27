@@ -43,13 +43,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem513 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindBottomLeftValue (TreeNode root) {
+        public static int FindBottomLeftValue (TreeNode root) {
             return 0;
         }
     }

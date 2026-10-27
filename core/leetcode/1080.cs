@@ -56,13 +56,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1080 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public TreeNode SufficientSubset (TreeNode root, int limit) {
+        public static TreeNode SufficientSubset (TreeNode root, int limit) {
             return null;
         }
     }

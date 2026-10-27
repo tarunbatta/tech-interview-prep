@@ -50,13 +50,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1025 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool DivisorGame (int N) {
+        public static bool DivisorGame (int N) {
             return false;
         }
     }

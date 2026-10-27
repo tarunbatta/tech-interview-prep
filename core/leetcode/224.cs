@@ -30,17 +30,17 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem224 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (Calculate (null));
-            Console.WriteLine (Calculate ("42"));
-            Console.WriteLine (Calculate ("3+2*2"));
-            Console.WriteLine (Calculate ("3/2 "));
-            Console.WriteLine (Calculate (" 3+5 / 2 "));
-            Console.WriteLine (Calculate ("(1+(4+5+2)-3)+(6+8)"));
-            Console.WriteLine (Calculate (" 2-1 + 2 "));
+        public static void Init() {
+            Console.WriteLine (Calculate(null));
+            Console.WriteLine (Calculate("42"));
+            Console.WriteLine (Calculate("3+2*2"));
+            Console.WriteLine (Calculate("3/2 "));
+            Console.WriteLine (Calculate(" 3+5 / 2 "));
+            Console.WriteLine (Calculate("(1+(4+5+2)-3)+(6+8)"));
+            Console.WriteLine (Calculate(" 2-1 + 2 "));
         }
 
-        public int Calculate (string s) {
+        public static int Calculate (string s) {
             if (string.IsNullOrEmpty (s) || string.IsNullOrWhiteSpace (s)) {
                 return 0;
             }
@@ -67,14 +67,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem224 {
                 } else if (c == '(') {
                     op.Push (c);
                 } else if (c == ')') {
-                    while (op.Count != 0 && op.Peek () != '(' && GetPresidence (c) <= GetPresidence (op.Peek ())) {
-                        nums.Push (Compute (nums, op));
+                    while (op.Count != 0 && op.Peek () != '(' && GetPresidence(c) <= GetPresidence(op.Peek ())) {
+                        nums.Push (Compute(nums, op));
                     }
 
                     op.Pop ();
                 } else if (c != ' ') {
-                    while (op.Count != 0 && GetPresidence (c) < GetPresidence (op.Peek ())) {
-                        nums.Push (Compute (nums, op));
+                    while (op.Count != 0 && GetPresidence(c) < GetPresidence(op.Peek ())) {
+                        nums.Push (Compute(nums, op));
                     }
 
                     op.Push (c);
@@ -82,7 +82,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem224 {
             }
 
             while (op.Count != 0) {
-                nums.Push (Compute (nums, op));
+                nums.Push (Compute(nums, op));
             }
 
             result = nums.Pop ();
@@ -90,7 +90,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem224 {
             return result;
         }
 
-        private int Compute (Stack<int> nums, Stack<char> op) {
+        private static int Compute (Stack<int> nums, Stack<char> op) {
             int result = 0;
 
             int num2 = nums.Pop ();
@@ -116,7 +116,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem224 {
             return result;
         }
 
-        private int GetPresidence (char operand) {
+        private static int GetPresidence (char operand) {
             int result = 0;
 
             switch (operand) {

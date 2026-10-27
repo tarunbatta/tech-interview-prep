@@ -30,7 +30,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem644 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             int[] nums1 = [1, 12, -5, -6, 50, 3];
             int k1 = 4;
             Console.WriteLine($"{FindMaxAverage(nums1, k1):F5}"); // 12.75000
@@ -42,7 +42,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem644 {
 
         // Time: O(n * log((max - min) / eps))
         // Space: O(1)
-        public double FindMaxAverage(int[] nums, int k) {
+        public static double FindMaxAverage(int[] nums, int k) {
             double low = nums[0];
             double high = nums[0];
 

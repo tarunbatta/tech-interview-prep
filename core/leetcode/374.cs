@@ -64,7 +64,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem374
 
     public class Solution : GuessGame
     {
-        public void Init()
+        public static void Init()
         {
             SetPick(6);
             Console.WriteLine(GuessNumber(10)); // 6

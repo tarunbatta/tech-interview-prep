@@ -59,13 +59,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1176 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int DietPlanPerformance (int[] calories, int k, int lower, int upper) {
+        public static int DietPlanPerformance (int[] calories, int k, int lower, int upper) {
             return 0;
         }
     }

@@ -36,13 +36,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem474 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int FindMaxForm (string[] strs, int m, int n) {
+        public static int FindMaxForm (string[] strs, int m, int n) {
             return 0;
         }
     }

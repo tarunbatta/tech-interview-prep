@@ -35,13 +35,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem437 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int PathSum (TreeNode root, int sum) {
+        public static int PathSum (TreeNode root, int sum) {
             return 0;
         }
     }

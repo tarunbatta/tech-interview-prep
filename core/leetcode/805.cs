@@ -25,13 +25,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem805 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool SplitArraySameAverage (int[] A) {
+        public static bool SplitArraySameAverage (int[] A) {
             int N = A.Length;
 
             if (N < 2) {
@@ -53,11 +53,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem805 {
             }
 
             // first half
-            HashSet<int> left = new HashSet<int> ();
-            left.Add (A[0]);
+            HashSet<int> left = [A[0]];
 
             for (int i = 1; i < N / 2; ++i) {
-                HashSet<int> left2 = new HashSet<int> ();
+                HashSet<int> left2 = [];
                 int z = A[i];
                 left2.Add (z);
 
@@ -75,11 +74,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem805 {
             }
 
             // second half
-            HashSet<int> right = new HashSet<int> ();
-            right.Add (A[N - 1]);
+            HashSet<int> right = [A[N - 1]];
 
             for (int i = N / 2; i < N - 1; ++i) {
-                HashSet<int> right2 = new HashSet<int> ();
+                HashSet<int> right2 = [];
                 int z = A[i];
                 right2.Add (z);
 

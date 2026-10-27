@@ -100,7 +100,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem919 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             TreeNode root = new(1, new TreeNode(2));
             CBTInserter inserter = new(root);
             Console.WriteLine(inserter.Insert(3)); // 1

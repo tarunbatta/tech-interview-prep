@@ -23,13 +23,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem515 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> LargestValues (TreeNode root) {
+        public static IList<int> LargestValues (TreeNode root) {
             return null;
         }
     }

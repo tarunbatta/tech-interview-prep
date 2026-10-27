@@ -37,7 +37,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem291
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(WordPatternMatch("abab", "redblueredblue")); // True
             Console.WriteLine(WordPatternMatch("aaaa", "asdasdasdasd"));   // True
@@ -53,8 +53,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem291
                 return false;
             }
 
-            Dictionary<char, string> p2s = new();
-            HashSet<string> sSet = new();
+            Dictionary<char, string> p2s = [];
+            HashSet<string> sSet = [];
 
             return Backtrack(pattern, 0, s, 0, p2s, sSet);
         }

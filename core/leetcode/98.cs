@@ -43,7 +43,7 @@ using System.Collections;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem98 {
     public class Solution {
-        public void Init () {
+        public static void Init() {
             TreeNode node = new TreeNode (2);
             node.left = new TreeNode (1);
             node.right = new TreeNode (3);
@@ -54,22 +54,22 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem98 {
             node1.right.left = new TreeNode (3);
             node1.right.right = new TreeNode (6);
 
-            Console.WriteLine (IsValidBST_a (null));
-            Console.WriteLine (IsValidBST_a (node));
-            Console.WriteLine (IsValidBST_a (node1));
+            Console.WriteLine (IsValidBST_a(null));
+            Console.WriteLine (IsValidBST_a(node));
+            Console.WriteLine (IsValidBST_a(node1));
 
-            Console.WriteLine (IsValidBST_b (null));
-            Console.WriteLine (IsValidBST_b (node));
-            Console.WriteLine (IsValidBST_b (node1));
+            Console.WriteLine (IsValidBST_b(null));
+            Console.WriteLine (IsValidBST_b(node));
+            Console.WriteLine (IsValidBST_b(node1));
         }
 
         // Time: O (n)
         // Space: O (n)
-        public bool IsValidBST_a (TreeNode root) {
-            return IsValidBSTHelper (root, long.MinValue, long.MaxValue);
+        public static bool IsValidBST_a (TreeNode root) {
+            return IsValidBSTHelper(root, long.MinValue, long.MaxValue);
         }
 
-        private bool IsValidBSTHelper (TreeNode node, long min, long max) {
+        private static bool IsValidBSTHelper (TreeNode node, long min, long max) {
             if (node == null) {
                 return true;
             }
@@ -78,12 +78,12 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem98 {
                 return false;
             }
 
-            return IsValidBSTHelper (node.left, min, node.val) && IsValidBSTHelper (node.right, node.val, max);
+            return IsValidBSTHelper(node.left, min, node.val) && IsValidBSTHelper(node.right, node.val, max);
         }
 
         // Time: O (n)
         // Space: O (n)
-        public bool IsValidBST_b (TreeNode root) {
+        public static bool IsValidBST_b (TreeNode root) {
             Stack stack = new Stack ();
             long inorder = long.MinValue;
 

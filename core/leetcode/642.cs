@@ -86,11 +86,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem642 {
                 return [];
             }
 
-            return _currentNode.Sentences
+            return [.. _currentNode.Sentences
                 .OrderByDescending(s => _counts[s])
                 .ThenBy(s => s, StringComparer.Ordinal)
-                .Take(3)
-                .ToList();
+                .Take(3)];
         }
 
         private void InsertSentence(string sentence) {
@@ -109,7 +108,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem642 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             string[] sentences = ["i love you", "island", "iroman", "i love leetcode"];
             int[] times = [5, 3, 2, 2];
 

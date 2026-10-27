@@ -31,7 +31,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem351
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(NumberOfPatterns(1, 1)); // 9
             Console.WriteLine(NumberOfPatterns(1, 2)); // 65

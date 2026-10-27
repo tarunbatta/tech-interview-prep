@@ -19,17 +19,17 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem283 {
     public class Solution {
-        public void Init () {
-            MoveZeroes_a (null);
-            MoveZeroes_a (new int[] { 0, 1, 0, 3, 12 });
-            MoveZeroes_a (new int[] { 1, 3, 12 });
+        public static void Init() {
+            MoveZeroes_a(null);
+            MoveZeroes_a([0, 1, 0, 3, 12]);
+            MoveZeroes_a([1, 3, 12]);
 
-            MoveZeroes_b (null);
-            MoveZeroes_b (new int[] { 0, 1, 0, 3, 12 });
-            MoveZeroes_b (new int[] { 1, 3, 12 });
+            MoveZeroes_b(null);
+            MoveZeroes_b([0, 1, 0, 3, 12]);
+            MoveZeroes_b([1, 3, 12]);
         }
 
-        public void MoveZeroes_a (int[] nums) {
+        public static void MoveZeroes_a (int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return;
             }
@@ -46,19 +46,19 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem283 {
             }
         }
 
-        public void MoveZeroes_b (int[] nums) {
+        public static void MoveZeroes_b (int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return;
             }
 
             for (int x = 0, i = 0; i < nums.Length; i++) {
                 if (nums[i] != 0) {
-                    Swap (nums, x++, i);
+                    Swap(nums, x++, i);
                 }
             }
         }
 
-        private void Swap (int[] nums, int i, int j) {
+        private static void Swap (int[] nums, int i, int j) {
             int temp = nums[i];
             nums[i] = nums[j];
             nums[j] = temp;

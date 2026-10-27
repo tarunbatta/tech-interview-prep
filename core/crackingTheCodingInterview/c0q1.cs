@@ -7,10 +7,10 @@ using System;
 namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c0q1 {
     public class Solution {
         public static void Init (string[] args) {
-            DisplaySortedCustomerAge (SortCustomersAge (new int[] { 40, 23, 11, 56, 98 }));
-            DisplaySortedCustomerAge (SortCustomersAge (new int[] { }));
+            DisplaySortedCustomerAge (SortCustomersAge ([40, 23, 11, 56, 98]));
+            DisplaySortedCustomerAge (SortCustomersAge ([]));
             DisplaySortedCustomerAge (SortCustomersAge (null));
-            DisplaySortedCustomerAge (SortCustomersAge (new int[] { 40, 0, -10, 10, 63, 10 }));
+            DisplaySortedCustomerAge (SortCustomersAge ([40, 0, -10, 10, 63, 10]));
         }
 
         private static int[] SortCustomersAge (int[] customerAge) {

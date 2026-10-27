@@ -27,13 +27,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem111 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinDepth (TreeNode root) {
+        public static int MinDepth (TreeNode root) {
             return 0;
         }
     }

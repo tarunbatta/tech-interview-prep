@@ -65,13 +65,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem998 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public TreeNode InsertIntoMaxTree (TreeNode root, int val) {
+        public static TreeNode InsertIntoMaxTree (TreeNode root, int val) {
             return null;
         }
     }

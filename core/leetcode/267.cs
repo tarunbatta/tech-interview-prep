@@ -28,7 +28,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem267
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             var res1 = GeneratePalindromes("aabb");
             Console.WriteLine(string.Join(", ", res1)); // abba, baab
@@ -41,7 +41,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem267
         // Space: O(n) for recursion stack and character buffers
         public static IList<string> GeneratePalindromes(string s)
         {
-            List<string> result = new();
+            List<string> result = [];
 
             if (string.IsNullOrEmpty(s))
             {
@@ -55,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem267
             }
 
             string middle = string.Empty;
-            List<char> half = new();
+            List<char> half = [];
 
             for (int i = 0; i < 26; i++)
             {
@@ -75,7 +75,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem267
                 }
             }
 
-            char[] halfArr = half.ToArray();
+            char[] halfArr = [.. half];
             bool[] used = new bool[halfArr.Length];
             char[] current = new char[halfArr.Length];
 

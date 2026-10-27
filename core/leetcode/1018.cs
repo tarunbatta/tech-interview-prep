@@ -48,13 +48,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1018 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<bool> PrefixesDivBy5 (int[] A) {
+        public static IList<bool> PrefixesDivBy5 (int[] A) {
             return null;
         }
     }

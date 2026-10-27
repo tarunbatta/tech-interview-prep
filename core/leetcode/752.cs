@@ -56,13 +56,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem752 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int OpenLock (string[] deadends, string target) {
+        public static int OpenLock (string[] deadends, string target) {
             return 0;
         }
     }

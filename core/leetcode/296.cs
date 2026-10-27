@@ -34,20 +34,20 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem296
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] grid1 = new int[][]
-            {
-                new int[] { 1, 0, 0, 0, 1 },
-                new int[] { 0, 0, 0, 0, 0 },
-                new int[] { 0, 0, 1, 0, 0 }
-            };
+            int[][] grid1 =
+            [
+                [1, 0, 0, 0, 1],
+                [0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0]
+            ];
             Console.WriteLine(MinTotalDistance(grid1)); // 6
 
-            int[][] grid2 = new int[][]
-            {
-                new int[] { 1, 1 }
-            };
+            int[][] grid2 =
+            [
+                [1, 1]
+            ];
             Console.WriteLine(MinTotalDistance(grid2)); // 1
         }
 
@@ -64,7 +64,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem296
             int n = grid[0].Length;
 
             // Collect rows in ascending order
-            List<int> rows = new();
+            List<int> rows = [];
             for (int r = 0; r < m; r++)
             {
                 for (int c = 0; c < n; c++)
@@ -77,7 +77,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem296
             }
 
             // Collect columns in ascending order
-            List<int> cols = new();
+            List<int> cols = [];
             for (int c = 0; c < n; c++)
             {
                 for (int r = 0; r < m; r++)

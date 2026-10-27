@@ -34,13 +34,13 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem38 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (CountAndSay (0));
-            Console.WriteLine (CountAndSay (1));
-            Console.WriteLine (CountAndSay (4));
+        public static void Init() {
+            Console.WriteLine (CountAndSay(0));
+            Console.WriteLine (CountAndSay(1));
+            Console.WriteLine (CountAndSay(4));
         }
 
-        public string CountAndSay (int n) {
+        public static string CountAndSay (int n) {
             if (n <= 0 || n > 30) {
                 return null;
             }
@@ -48,13 +48,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem38 {
             string result = "1";
 
             for (int i = 1; i < n; i++) {
-                result = countIdx (result);
+                result = countIdx(result);
             }
 
             return result;
         }
 
-        public String countIdx (String s) {
+        public static String countIdx (String s) {
             StringBuilder sb = new StringBuilder ();
             char c = s[0];
             int count = 1;

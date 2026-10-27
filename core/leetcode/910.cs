@@ -53,13 +53,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem910 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int SmallestRangeII (int[] A, int K) {
+        public static int SmallestRangeII (int[] A, int K) {
             return 0;
         }
     }

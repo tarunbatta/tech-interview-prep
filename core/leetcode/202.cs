@@ -24,19 +24,19 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem202 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (log n)
         // Space: O (log n)
-        public bool IsHappy (int n) {
-            HashSet<int> found = new HashSet<int> ();
-            int ss = GetSquareSum (n);
+        public static bool IsHappy (int n) {
+            HashSet<int> found = [];
+            int ss = GetSquareSum(n);
 
             while (ss != 1 && !found.Contains (ss)) {
                 found.Add (ss);
-                ss = GetSquareSum (ss);
+                ss = GetSquareSum(ss);
             }
 
             if (ss == 1) return true;
@@ -44,7 +44,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem202 {
             return false;
         }
 
-        public int GetSquareSum (int n) {
+        public static int GetSquareSum (int n) {
             if (0 == n) return 0;
             int squareSum = 0;
 

@@ -28,13 +28,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem153 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (log (n))
         // Space: O (1)
-        public int FindMin (int[] nums) {
+        public static int FindMin (int[] nums) {
             if (nums == null || nums.Length == 0) {
                 return 0;
             }

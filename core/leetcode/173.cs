@@ -29,7 +29,7 @@ using System.Collections;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem173 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             BSTIterator obj = new BSTIterator (null);
             int param_1 = obj.Next ();
             bool param_2 = obj.HasNext ();
@@ -40,7 +40,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem173 {
         int _index;
 
         public BSTIterator (TreeNode root) {
-            this._sortedNodes = new ArrayList ();
+            this._sortedNodes = [];
             this._index = -1;
             InOrder (root);
         }

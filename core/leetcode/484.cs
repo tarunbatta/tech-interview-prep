@@ -44,7 +44,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem484
         {
             if (string.IsNullOrEmpty(s))
             {
-                return new int[] { 1 };
+                return [1];
             }
 
             int n = s.Length + 1;

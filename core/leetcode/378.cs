@@ -30,13 +30,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem378 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int KthSmallest (int[][] matrix, int k) {
+        public static int KthSmallest (int[][] matrix, int k) {
             return 0;
         }
     }

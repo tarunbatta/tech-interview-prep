@@ -59,7 +59,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem584 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Customer> customers = [
                 new() { Id = 1, Name = "Will", RefereeId = null },
                 new() { Id = 2, Name = "Jane", RefereeId = null },
@@ -75,11 +75,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem584 {
 
         // Time: O(n) where n is the number of customers
         // Space: O(n) to store the result list
-        public List<string> FindCustomerReferee(List<Customer> customers) {
-            return customers
+        public static List<string> FindCustomerReferee(List<Customer> customers) {
+            return [.. customers
                 .Where(c => c.RefereeId == null || c.RefereeId != 2)
-                .Select(c => c.Name)
-                .ToList();
+                .Select(c => c.Name)];
         }
     }
 }

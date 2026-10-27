@@ -11,7 +11,7 @@ using System;
 
 namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c10q3 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
     }

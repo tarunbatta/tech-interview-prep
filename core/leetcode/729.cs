@@ -40,9 +40,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem729 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             MyCalendar obj = new MyCalendar ();
-            bool param_1 = obj.Book (0, 0);
+            bool param_1 = MyCalendar.Book(0, 0);
         }
     }
 
@@ -51,7 +51,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem729 {
 
         }
 
-        public bool Book (int start, int end) {
+        public static bool Book (int start, int end) {
             return false;
         }
     }

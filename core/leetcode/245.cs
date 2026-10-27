@@ -29,9 +29,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem245
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            string[] words = { "practice", "makes", "perfect", "coding", "makes" };
+            string[] words = ["practice", "makes", "perfect", "coding", "makes"];
             Console.WriteLine(ShortestWordDistance(words, "makes", "coding")); // 1
             Console.WriteLine(ShortestWordDistance(words, "makes", "makes"));  // 3
         }

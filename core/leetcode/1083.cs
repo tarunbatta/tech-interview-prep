@@ -88,7 +88,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1083 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Product> products = [
                 new() { ProductId = 1, ProductName = "S8", UnitPrice = 1000 },
                 new() { ProductId = 2, ProductName = "G4", UnitPrice = 800 },
@@ -108,7 +108,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1083 {
 
         // Time: O(S + P) where S is sales count and P is products count
         // Space: O(S + P)
-        public List<int> BuyersOfS8NotIphone(List<Product> products, List<SaleRecord> sales) {
+        public static List<int> BuyersOfS8NotIphone(List<Product> products, List<SaleRecord> sales) {
             int s8Id = products.FirstOrDefault(p => p.ProductName == "S8")?.ProductId ?? -1;
             int iphoneId = products.FirstOrDefault(p => p.ProductName == "iPhone")?.ProductId ?? -1;
 
@@ -117,12 +117,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1083 {
                 .Select(s => s.BuyerId)
                 .ToHashSet();
 
-            return sales
+            return [.. sales
                 .Where(s => s.ProductId == s8Id && !iphoneBuyers.Contains(s.BuyerId))
                 .Select(s => s.BuyerId)
                 .Distinct()
-                .OrderBy(id => id)
-                .ToList();
+                .OrderBy(id => id)];
         }
     }
 }

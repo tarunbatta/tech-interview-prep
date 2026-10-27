@@ -55,14 +55,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem134 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (CanCompleteCircuit (new int[] { 1, 2, 3, 4, 5 }, new int[] { 3, 4, 5, 1, 2 }));
-            Console.WriteLine (CanCompleteCircuit (new int[] { 5, 1, 2, 3, 4 }, new int[] { 4, 4, 1, 5, 1 }));
+        public static void Init () {
+            Console.WriteLine (CanCompleteCircuit([1, 2, 3, 4, 5], [3, 4, 5, 1, 2]));
+            Console.WriteLine (CanCompleteCircuit([5, 1, 2, 3, 4], [4, 4, 1, 5, 1]));
         }
 
         // Time: O (n)
         // Space: O (1)
-        public int CanCompleteCircuit (int[] gas, int[] cost) {
+        public static int CanCompleteCircuit (int[] gas, int[] cost) {
             if (gas == null || cost == null || gas.Length == 0 || cost.Length == 0) {
                 return -1;
             }

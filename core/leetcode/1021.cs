@@ -46,7 +46,7 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1021 {
     public class Solution {
-        public void Init() {
+        public static void Init() {
             Console.WriteLine(RemoveOuterParentheses("(()())(())")); // "()()()"
             Console.WriteLine(RemoveOuterParentheses("(()())(())(()(()))")); // "()()()()(())"
             Console.WriteLine(RemoveOuterParentheses("()()")); // ""
@@ -54,7 +54,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1021 {
 
         // Time: O(n) where n is the length of string s
         // Space: O(n) for string builder output
-        public string RemoveOuterParentheses(string s) {
+        public static string RemoveOuterParentheses(string s) {
             StringBuilder sb = new();
             int depth = 0;
 

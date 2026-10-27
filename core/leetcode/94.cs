@@ -24,13 +24,13 @@ using System;
 using System.Collections.Generic;
 namespace InterviewPreperationGuide.Core.LeetCode.problem94 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> InorderTraversal (TreeNode root) {
+        public static IList<int> InorderTraversal (TreeNode root) {
             return null;
         }
     }

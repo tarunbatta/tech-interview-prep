@@ -34,7 +34,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem897 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             TreeNode root1 = new(5,
                 new TreeNode(3, new TreeNode(2, new TreeNode(1)), new TreeNode(4)),
                 new TreeNode(6, null, new TreeNode(8, new TreeNode(7), new TreeNode(9)))
@@ -49,7 +49,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem897 {
 
         // Time: O(n) where n is the number of nodes in the BST
         // Space: O(h) where h is the tree height for recursion stack
-        public TreeNode IncreasingBST(TreeNode root) {
+        public static TreeNode IncreasingBST(TreeNode root) {
             TreeNode dummy = new(0);
             TreeNode curr = dummy;
             InOrder(root, ref curr);

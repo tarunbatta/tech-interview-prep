@@ -42,14 +42,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem251
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            int[][] vec = new int[][]
-            {
-                new int[] { 1, 2 },
-                new int[] { 3 },
-                new int[] { 4 }
-            };
+            int[][] vec =
+            [
+                [1, 2],
+                [3],
+                [4]
+            ];
 
             Vector2D vector2D = new(vec);
             Console.WriteLine(vector2D.Next());    // 1
@@ -73,7 +73,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem251
 
         public Vector2D(int[][] vec)
         {
-            _vec = vec ?? Array.Empty<int[]>();
+            _vec = vec ?? [];
             _row = 0;
             _col = 0;
         }

@@ -46,13 +46,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem509 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int Fib (int N) {
+        public static int Fib (int N) {
             return 0;
         }
     }

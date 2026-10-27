@@ -95,7 +95,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1098 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Book> books = [
                 new() { BookId = 1, Name = "Kalila And Demna", AvailableFrom = new DateTime(2010, 1, 1) },
                 new() { BookId = 2, Name = "28 Letters", AvailableFrom = new DateTime(2012, 5, 12) },
@@ -122,7 +122,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1098 {
 
         // Time: O(B + O) where B is count of books and O is count of orders
         // Space: O(B + O)
-        public List<BookResult> FindUnpopularBooks(List<Book> books, List<Order> orders) {
+        public static List<BookResult> FindUnpopularBooks(List<Book> books, List<Order> orders) {
             DateTime today = new(2019, 6, 23);
             DateTime oneMonthBefore = today.AddDays(-30); // 2019-05-24 or AddMonths(-1)
             DateTime oneYearBefore = today.AddYears(-1);
@@ -132,15 +132,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1098 {
                 .GroupBy(o => o.BookId)
                 .ToDictionary(g => g.Key, g => g.Sum(o => o.Quantity));
 
-            return books
+            return [.. books
                 .Where(b => b.AvailableFrom < oneMonthBefore)
                 .Where(b => recentSales.GetValueOrDefault(b.BookId, 0) < 10)
                 .Select(b => new BookResult {
                     BookId = b.BookId,
                     Name = b.Name
                 })
-                .OrderBy(r => r.BookId)
-                .ToList();
+                .OrderBy(r => r.BookId)];
         }
     }
 }

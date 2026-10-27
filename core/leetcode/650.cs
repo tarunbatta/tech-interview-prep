@@ -41,13 +41,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem650 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinSteps (int n) {
+        public static int MinSteps (int n) {
             return 0;
         }
     }

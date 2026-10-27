@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem459 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool RepeatedSubstringPattern (string s) {
+        public static bool RepeatedSubstringPattern (string s) {
             return false;
         }
     }

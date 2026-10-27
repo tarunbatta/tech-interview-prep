@@ -31,13 +31,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem605 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool CanPlaceFlowers (int[] flowerbed, int n) {
+        public static bool CanPlaceFlowers (int[] flowerbed, int n) {
             return false;
         }
     }

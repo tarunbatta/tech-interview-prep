@@ -65,7 +65,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1112 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<Enrollment> enrollments = [
                 new() { StudentId = 2, CourseId = 2, Grade = 95 },
                 new() { StudentId = 2, CourseId = 3, Grade = 95 },
@@ -84,8 +84,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1112 {
 
         // Time: O(n log n) where n is the number of enrollments
         // Space: O(n) for grouping and sorting
-        public List<HighestGradeResult> HighestGradeForEachStudent(List<Enrollment> enrollments) {
-            return enrollments
+        public static List<HighestGradeResult> HighestGradeForEachStudent(List<Enrollment> enrollments) {
+            return [.. enrollments
                 .GroupBy(e => e.StudentId)
                 .Select(g => g
                     .OrderByDescending(e => e.Grade)
@@ -96,8 +96,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1112 {
                     CourseId = e.CourseId,
                     Grade = e.Grade
                 })
-                .OrderBy(r => r.StudentId)
-                .ToList();
+                .OrderBy(r => r.StudentId)];
         }
     }
 }

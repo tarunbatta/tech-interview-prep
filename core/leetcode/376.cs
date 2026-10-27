@@ -37,13 +37,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem376 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int WiggleMaxLength (int[] nums) {
+        public static int WiggleMaxLength (int[] nums) {
             return 0;
         }
     }

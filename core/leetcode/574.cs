@@ -55,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem574
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             List<Candidate> candidates =
             [

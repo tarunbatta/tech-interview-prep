@@ -36,13 +36,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem848 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public string ShiftingLetters (string S, int[] shifts) {
+        public static string ShiftingLetters (string S, int[] shifts) {
             return null;
         }
     }

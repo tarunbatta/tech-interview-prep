@@ -26,10 +26,10 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem677 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             MapSum obj = new MapSum ();
-            obj.Insert (null, 0);
-            int param_2 = obj.Sum (null);
+            MapSum.Insert(null, 0);
+            int param_2 = MapSum.Sum(null);
         }
     }
 
@@ -38,11 +38,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem677 {
 
         }
 
-        public void Insert (string key, int val) {
+        public static void Insert (string key, int val) {
 
         }
 
-        public int Sum (string prefix) {
+        public static int Sum (string prefix) {
             return 0;
         }
     }

@@ -63,13 +63,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem896 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public bool IsMonotonic (int[] A) {
+        public static bool IsMonotonic (int[] A) {
             return false;
         }
     }

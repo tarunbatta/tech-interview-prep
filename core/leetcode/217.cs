@@ -25,14 +25,14 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem217 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (ContainsDuplicate (null));
-            Console.WriteLine (ContainsDuplicate (new int[] { 1, 2, 3, 1 }));
-            Console.WriteLine (ContainsDuplicate (new int[] { 1, 2, 3, 4 }));
-            Console.WriteLine (ContainsDuplicate (new int[] { 1, 1, 1, 3, 3, 4, 3, 2, 4, 2 }));
+        public static void Init () {
+            Console.WriteLine (ContainsDuplicate(null));
+            Console.WriteLine (ContainsDuplicate([1, 2, 3, 1]));
+            Console.WriteLine (ContainsDuplicate([1, 2, 3, 4]));
+            Console.WriteLine (ContainsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2]));
         }
 
-        public bool ContainsDuplicate (int[] nums) {
+        public static bool ContainsDuplicate (int[] nums) {
             bool result = false;
             if (nums == null || nums.Length <= 1) {
                 return result;

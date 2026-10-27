@@ -62,7 +62,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1149 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<ArticleView> views = [
                 new() { ArticleId = 1, AuthorId = 3, ViewerId = 5, ViewDate = new DateTime(2019, 8, 1) },
                 new() { ArticleId = 3, AuthorId = 4, ViewerId = 5, ViewDate = new DateTime(2019, 8, 1) },
@@ -80,14 +80,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1149 {
 
         // Time: O(n log n) where n is the number of views
         // Space: O(n) for grouping
-        public List<int> ViewersWithMultipleArticlesPerDay(List<ArticleView> views) {
-            return views
+        public static List<int> ViewersWithMultipleArticlesPerDay(List<ArticleView> views) {
+            return [.. views
                 .GroupBy(v => (v.ViewDate, v.ViewerId))
                 .Where(g => g.Select(x => x.ArticleId).Distinct().Count() > 1)
                 .Select(g => g.Key.ViewerId)
                 .Distinct()
-                .OrderBy(id => id)
-                .ToList();
+                .OrderBy(id => id)];
         }
     }
 }

@@ -33,15 +33,15 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem402 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (RemoveKdigits (null, 1));
-            Console.WriteLine (RemoveKdigits ("1234567890", 9));
-            Console.WriteLine (RemoveKdigits ("10200", 1));
-            Console.WriteLine (RemoveKdigits ("1432219", 3));
-            Console.WriteLine (RemoveKdigits ("10", 2));
+        public static void Init () {
+            Console.WriteLine (RemoveKdigits(null, 1));
+            Console.WriteLine (RemoveKdigits("1234567890", 9));
+            Console.WriteLine (RemoveKdigits("10200", 1));
+            Console.WriteLine (RemoveKdigits("1432219", 3));
+            Console.WriteLine (RemoveKdigits("10", 2));
         }
 
-        public string RemoveKdigits (string num, int k) {
+        public static string RemoveKdigits (string num, int k) {
             if (string.IsNullOrEmpty (num)) {
                 return null;
             } else if (k == 0) {
@@ -73,7 +73,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem402 {
                 stringBuilder.Append (stack.Pop ());
             }
 
-            result = new string (stringBuilder.ToString ().Reverse ().ToArray ());
+            result = new string ([.. stringBuilder.ToString ().Reverse ()]);
             stringBuilder = new StringBuilder (result);
 
             for (int j = 0; j < stringBuilder.Length; j++) {

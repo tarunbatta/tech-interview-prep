@@ -54,24 +54,24 @@ using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem269 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (AlienOrder (new string[] { "wrt", "wrf", "er", "ett", "rftt" }));
-            Console.WriteLine (AlienOrder (new string[] { "z", "x" }));
-            Console.WriteLine (AlienOrder (new string[] { "z", "x", "z" }));
-            Console.WriteLine (AlienOrder (new string[] { "a", "b", "ca", "cc" }));
+        public static void Init () {
+            Console.WriteLine (AlienOrder(["wrt", "wrf", "er", "ett", "rftt"]));
+            Console.WriteLine (AlienOrder(["z", "x"]));
+            Console.WriteLine (AlienOrder(["z", "x", "z"]));
+            Console.WriteLine (AlienOrder(["a", "b", "ca", "cc"]));
         }
 
         // Time: O (n + m), where n represents all vertices, m represents all edges
         // Space: O (n + m)
-        public string AlienOrder (string[] words) {
+        public static string AlienOrder (string[] words) {
             string result = "";
 
             if (words == null || words.Length == 0) {
                 return result;
             }
 
-            Dictionary<char, HashSet<char>> graph = new Dictionary<char, HashSet<char>> ();
-            Dictionary<char, int> inDegreeMap = new Dictionary<char, int> ();
+            Dictionary<char, HashSet<char>> graph = [];
+            Dictionary<char, int> inDegreeMap = [];
 
             // MUST initialize the map, to avoid null exception for those character that will have zero inDegrees 
             // (i.e. starting characters)
@@ -99,7 +99,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem269 {
                     char c2 = next[j];
 
                     if (c1 != c2) {
-                        HashSet<char> set = new HashSet<char> ();
+                        HashSet<char> set = [];
 
                         if (graph.ContainsKey (c1)) {
                             set = graph[c1];

@@ -37,13 +37,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem996 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int NumSquarefulPerms (int[] A) {
+        public static int NumSquarefulPerms (int[] A) {
             return 0;
         }
     }

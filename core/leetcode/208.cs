@@ -29,11 +29,11 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem208 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Trie obj = new Trie ();
-            obj.Insert ("apple");
-            bool param_2 = obj.Search ("apple");
-            bool param_3 = obj.StartsWith ("apple");
+            Trie.Insert("apple");
+            bool param_2 = Trie.Search("apple");
+            bool param_3 = Trie.StartsWith("apple");
         }
     }
 
@@ -44,17 +44,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem208 {
         }
 
         // Inserts a word into the trie.
-        public void Insert (string word) {
+        public static void Insert (string word) {
 
         }
 
         // Returns if the word is in the trie.
-        public bool Search (string word) {
+        public static bool Search (string word) {
             return false;
         }
 
         // Returns if there is any word in the trie that starts with the given prefix.
-        public bool StartsWith (string prefix) {
+        public static bool StartsWith (string prefix) {
             return false;
         }
     }

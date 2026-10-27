@@ -33,7 +33,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem359
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Logger logger = new();
             Console.WriteLine(logger.ShouldPrintMessage(1, "foo"));  // True
@@ -53,7 +53,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem359
 
         public Logger()
         {
-            _messageNextAllowedTime = new Dictionary<string, int>();
+            _messageNextAllowedTime = [];
         }
 
         public bool ShouldPrintMessage(int timestamp, string message)

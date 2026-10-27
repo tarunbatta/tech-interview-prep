@@ -56,13 +56,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1035 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MaxUncrossedLines (int[] A, int[] B) {
+        public static int MaxUncrossedLines (int[] A, int[] B) {
             return 0;
         }
     }

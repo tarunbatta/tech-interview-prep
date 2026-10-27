@@ -20,13 +20,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem404 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int SumOfLeftLeaves (TreeNode root) {
+        public static int SumOfLeftLeaves (TreeNode root) {
             return 0;
         }
     }

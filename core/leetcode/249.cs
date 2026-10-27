@@ -31,9 +31,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem249
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
-            string[] strings = { "abc", "bcd", "acef", "xyz", "az", "ba", "a", "z" };
+            string[] strings = ["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"];
             var grouped = GroupStrings(strings);
 
             foreach (var group in grouped)
@@ -48,10 +48,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem249
         {
             if (strings == null || strings.Length == 0)
             {
-                return new List<IList<string>>();
+                return [];
             }
 
-            Dictionary<string, List<string>> map = new();
+            Dictionary<string, List<string>> map = [];
 
             foreach (string s in strings)
             {
@@ -59,14 +59,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem249
 
                 if (!map.TryGetValue(key, out List<string> list))
                 {
-                    list = new List<string>();
+                    list = [];
                     map[key] = list;
                 }
 
                 list.Add(s);
             }
 
-            return map.Values.Cast<IList<string>>().ToList();
+            return [.. map.Values.Cast<IList<string>>()];
         }
 
         private static string GetKey(string s)

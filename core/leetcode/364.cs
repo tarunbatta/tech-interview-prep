@@ -58,7 +58,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem364
         public NestedIntegerImpl()
         {
             _value = null;
-            _list = new List<NestedInteger>();
+            _list = [];
         }
 
         public bool IsInteger() => _value.HasValue;
@@ -70,7 +70,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem364
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             // [[1,1],2,[1,1]]
             NestedInteger l1 = new NestedIntegerImpl();
@@ -83,7 +83,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem364
             l2.Add(new NestedIntegerImpl(1));
             l2.Add(new NestedIntegerImpl(1));
 
-            List<NestedInteger> list = new() { l1, n2, l2 };
+            List<NestedInteger> list = [l1, n2, l2];
             Console.WriteLine(DepthSumInverse(list)); // 8
         }
 

@@ -49,35 +49,35 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem48 {
     public class Solution {
-        public void Init () {
-            Rotate_a (null);
-            Rotate_a (new int[][] {
-                new int[] { 1, 2, 3 },
-                    new int[] { 4, 5, 6 },
-                    new int[] { 7, 8, 9 }
-            });
-            Rotate_a (new int[][] {
-                new int[] { 5, 1, 9, 11 },
-                    new int[] { 2, 4, 8, 10 },
-                    new int[] { 13, 3, 6, 7 },
-                    new int[] { 15, 14, 12, 16 }
-            });
+        public static void Init () {
+            Rotate_a(null);
+            Rotate_a([
+                [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
+            ]);
+            Rotate_a([
+                [5, 1, 9, 11],
+                    [2, 4, 8, 10],
+                    [13, 3, 6, 7],
+                    [15, 14, 12, 16]
+            ]);
 
-            Rotate_b (null);
-            Rotate_b (new int[][] {
-                new int[] { 1, 2, 3 },
-                    new int[] { 4, 5, 6 },
-                    new int[] { 7, 8, 9 }
-            });
-            Rotate_b (new int[][] {
-                new int[] { 5, 1, 9, 11 },
-                    new int[] { 2, 4, 8, 10 },
-                    new int[] { 13, 3, 6, 7 },
-                    new int[] { 15, 14, 12, 16 }
-            });
+            Rotate_b(null);
+            Rotate_b([
+                [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
+            ]);
+            Rotate_b([
+                [5, 1, 9, 11],
+                    [2, 4, 8, 10],
+                    [13, 3, 6, 7],
+                    [15, 14, 12, 16]
+            ]);
         }
 
-        public void Rotate_a (int[][] matrix) {
+        public static void Rotate_a (int[][] matrix) {
             int n = matrix.Length;
             if (matrix == null || n == 0) {
                 return;
@@ -99,7 +99,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem48 {
             }
         }
 
-        public void Rotate_b (int[][] matrix) {
+        public static void Rotate_b (int[][] matrix) {
             int n = matrix.Length;
 
             // transpose the matrix

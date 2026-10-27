@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1139 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int Largest1BorderedSquare (int[][] grid) {
+        public static int Largest1BorderedSquare (int[][] grid) {
             return 0;
         }
     }

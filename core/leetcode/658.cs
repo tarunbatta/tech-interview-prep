@@ -41,13 +41,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem658 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<int> FindClosestElements (int[] arr, int k, int x) {
+        public static IList<int> FindClosestElements (int[] arr, int k, int x) {
             return null;
         }
     }

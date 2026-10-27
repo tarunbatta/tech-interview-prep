@@ -47,13 +47,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem691 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinStickers (string[] stickers, string target) {
+        public static int MinStickers (string[] stickers, string target) {
             return 0;
         }
     }

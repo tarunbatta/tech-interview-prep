@@ -37,13 +37,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem429 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<IList<int>> LevelOrder (Node root) {
+        public static IList<IList<int>> LevelOrder (Node root) {
             return null;
         }
     }

@@ -53,29 +53,33 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem13 {
     public class Solution {
-        public void Init () {
-            Console.WriteLine (RomanToInt (null));
-            Console.WriteLine (RomanToInt ("IX"));
-            Console.WriteLine (RomanToInt ("VI"));
-            Console.WriteLine (RomanToInt ("MDCLIX"));
-            Console.WriteLine (RomanToInt ("MDCIL"));
+        public static void Init () {
+            Console.WriteLine (RomanToInt(null));
+            Console.WriteLine (RomanToInt("IX"));
+            Console.WriteLine (RomanToInt("VI"));
+            Console.WriteLine (RomanToInt("MDCLIX"));
+            Console.WriteLine (RomanToInt("MDCIL"));
         }
 
-        public int RomanToInt (string s) {
+        // Time: O(n)
+        // Space: O(1)
+        public static int RomanToInt (string s) {
             int result = 0;
 
             if (string.IsNullOrEmpty (s)) {
                 return result;
             }
 
-            Hashtable hash = new Hashtable ();
-            hash.Add ('I', 1);
-            hash.Add ('V', 5);
-            hash.Add ('X', 10);
-            hash.Add ('L', 50);
-            hash.Add ('C', 100);
-            hash.Add ('D', 500);
-            hash.Add ('M', 1000);
+            Hashtable hash = new Hashtable
+            {
+                { 'I', 1 },
+                { 'V', 5 },
+                { 'X', 10 },
+                { 'L', 50 },
+                { 'C', 100 },
+                { 'D', 500 },
+                { 'M', 1000 }
+            };
 
             for (int i = 0; i < s.Length; i++) {
                 if (!hash.ContainsKey ((char) s[i])) {

@@ -30,13 +30,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1008 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public TreeNode BstFromPreorder (int[] preorder) {
+        public static TreeNode BstFromPreorder (int[] preorder) {
             return null;
         }
     }

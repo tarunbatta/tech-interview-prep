@@ -54,13 +54,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1039 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinScoreTriangulation (int[] A) {
+        public static int MinScoreTriangulation (int[] A) {
             return 0;
         }
     }

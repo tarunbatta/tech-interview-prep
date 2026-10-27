@@ -72,7 +72,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1141 {
     }
 
     public class Solution {
-        public void Init() {
+        public static void Init() {
             List<ActivityRecord> activities = [
                 new() { UserId = 1, SessionId = 1, ActivityDate = new DateTime(2019, 7, 20), ActivityType = "open_session" },
                 new() { UserId = 1, SessionId = 1, ActivityDate = new DateTime(2019, 7, 20), ActivityType = "scroll_down" },
@@ -95,19 +95,18 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1141 {
 
         // Time: O(n log n) where n is the number of activity records
         // Space: O(n) for grouping and distinct user counts
-        public List<DailyActiveUsersResult> DailyActiveUsers(List<ActivityRecord> activities) {
+        public static List<DailyActiveUsersResult> DailyActiveUsers(List<ActivityRecord> activities) {
             DateTime endDate = new(2019, 7, 27);
             DateTime startDate = endDate.AddDays(-29); // 30 days inclusive (2019-06-28)
 
-            return activities
+            return [.. activities
                 .Where(a => a.ActivityDate >= startDate && a.ActivityDate <= endDate)
                 .GroupBy(a => a.ActivityDate)
                 .Select(g => new DailyActiveUsersResult {
                     Day = g.Key.ToString("yyyy-MM-dd"),
                     ActiveUsers = g.Select(a => a.UserId).Distinct().Count()
                 })
-                .OrderBy(r => r.Day)
-                .ToList();
+                .OrderBy(r => r.Day)];
         }
     }
 }

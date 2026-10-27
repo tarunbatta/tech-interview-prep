@@ -27,13 +27,13 @@ using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem401 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public IList<string> ReadBinaryWatch (int num) {
+        public static IList<string> ReadBinaryWatch (int num) {
             return null;
         }
     }

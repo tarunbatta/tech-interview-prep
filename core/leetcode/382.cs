@@ -25,9 +25,9 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem382 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Solution obj = new Solution (null);
-            int param_1 = obj.GetRandom ();
+            int param_1 = GetRandom();
         }
 
         // @param head The linked list's head. Note that the head is guaranteed to be not null, so it contains at least one node.
@@ -36,7 +36,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem382 {
         }
 
         // Returns a random node's value.
-        public int GetRandom () {
+        public static int GetRandom () {
             return 0;
         }
     }

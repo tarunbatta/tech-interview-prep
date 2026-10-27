@@ -45,7 +45,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem549
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             TreeNode root1 = new(1, new(2), new(3));
             Console.WriteLine(LongestConsecutive(root1)); // 2

@@ -32,13 +32,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem801 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public int MinSwap (int[] A, int[] B) {
+        public static int MinSwap (int[] A, int[] B) {
             return 0;
         }
     }

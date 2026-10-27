@@ -47,7 +47,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem536
 
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             TreeNode root = Str2tree("4(2(3)(1))(6(5))");
             Console.WriteLine(root?.val); // 4

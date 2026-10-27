@@ -18,13 +18,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem86 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O ()
         // Space: O ()
-        public ListNode Partition (ListNode head, int x) {
+        public static ListNode Partition (ListNode head, int x) {
             return null;
         }
     }

@@ -33,13 +33,13 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem419 {
     public class Solution {
-        public void Init () {
+        public static void Init () {
             Console.WriteLine ();
         }
 
         // Time: O (m*n)
         // Space: O (1)
-        public int CountBattleships (char[][] board) {
+        public static int CountBattleships (char[][] board) {
             int result = 0;
 
             int m = board.Length;
