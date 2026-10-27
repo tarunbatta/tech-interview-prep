@@ -1,4 +1,4 @@
-﻿/*
+/*
 You can now run it from either location:
 
 From repository root:
@@ -21,8 +21,7 @@ namespace InterviewPreperationGuide.Core {
             //Algorithms.Search.Dijkstra.Init ();
             //Algorithms.Others.LongestCommonSubstring.Init();
 
-            var lc = new LeetCode.problem2384.Solution ();
-            lc.Init ();
+            LeetCode.problem2384.Solution.Init();
         }
     }
 }

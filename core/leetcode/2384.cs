@@ -40,14 +40,13 @@ num consists of digits.
 */
 
 using System;
-using System.IO.Pipelines;
 using System.Text;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem2384
 {
     public class Solution
     {
-        public void Init()
+        public static void Init()
         {
             Console.WriteLine(LargestPalindromic(null));
             Console.WriteLine(LargestPalindromic(string.Empty));
@@ -55,8 +54,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem2384
             Console.WriteLine(LargestPalindromic("00009"));
         }
 
-        // Time: O(n)
-        // Space: O(n)
+        // Time: O(n) where n is the length of num
+        // Space: O(n) for the output palindrome string and character buffers (O(1) auxiliary space beyond the output)
         public static string LargestPalindromic(string num)
         {
             if (string.IsNullOrEmpty(num))
@@ -107,7 +106,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem2384
 
             char[] leftArr = left.ToString().ToCharArray();
             Array.Reverse(leftArr);
-            return new string(left.ToString() + middle + new string(leftArr));
+            return left.ToString() + middle + new string(leftArr);
         }
     }
 }
