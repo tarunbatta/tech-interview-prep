@@ -63,19 +63,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem348 {
         }
     }
 
-    public class TicTacToe_a {
+    public class TicTacToe_a(int n)
+    {
         int diagonal = 0;
         int antidiagonal = 0;
-        int[] rows;
-        int[] cols;
-        int n;
-
-        /** Initialize your data structure here. */
-        public TicTacToe_a (int n) {
-            this.n = n;
-            rows = new int[n];
-            cols = new int[n];
-        }
+        int[] rows = new int[n];
+        int[] cols = new int[n];
+        int n = n;
 
         /** Player {player} makes a move at ({row}, {col}).
             @param row The row of the board.
@@ -111,15 +105,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem348 {
         }
     }
 
-    public class TicTacToe_b {
-        private int[, ] board;
-        private int n;
-
-        /** Initialize your data structure here. */
-        public TicTacToe_b (int n) {
-            board = new int[n, n];
-            this.n = n;
-        }
+    public class TicTacToe_b(int n)
+    {
+        private int[, ] board = new int[n, n];
+        private int n = n;
 
         /** Player {player} makes a move at ({row}, {col}).
             @param row The row of the board.

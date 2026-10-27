@@ -65,12 +65,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem141 {
         }
     }
 
-    public class ListNode {
-        public int val;
+    public class ListNode(int x)
+    {
+        public int val = x;
         public ListNode next;
-
-        public ListNode (int x) {
-            val = x;
-        }
     }
 }

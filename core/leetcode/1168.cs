@@ -89,18 +89,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1168
             return totalCost;
         }
 
-        private class Edge
+        private class Edge(int u, int v, int cost)
         {
-            public int U { get; }
-            public int V { get; }
-            public int Cost { get; }
-
-            public Edge(int u, int v, int cost)
-            {
-                U = u;
-                V = v;
-                Cost = cost;
-            }
+            public int U { get; } = u;
+            public int V { get; } = v;
+            public int Cost { get; } = cost;
         }
 
         private class UnionFind

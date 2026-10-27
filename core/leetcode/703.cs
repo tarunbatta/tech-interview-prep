@@ -35,11 +35,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem703 {
         }
     }
 
-    public class KthLargest {
-        public KthLargest (int k, int[] nums) {
-
-        }
-
+    public class KthLargest(int k, int[] nums)
+    {
         public static int Add (int val) {
             return 0;
         }

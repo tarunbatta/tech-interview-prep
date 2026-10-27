@@ -43,25 +43,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem489
         void Clean();
     }
 
-    public class MockRobot : Robot
+    public class MockRobot(int[][] room, int startR, int startC) : Robot
     {
-        private readonly int[][] _room;
-        private int _r;
-        private int _c;
-        private int _dir; // 0: Up, 1: Right, 2: Down, 3: Left
-        private readonly HashSet<(int, int)> _cleaned;
+        private readonly int[][] _room = room;
+        private int _r = startR;
+        private int _c = startC;
+        private int _dir = 0; // 0: Up, 1: Right, 2: Down, 3: Left
+        private readonly HashSet<(int, int)> _cleaned = [];
 
         private static readonly int[] dr = [-1, 0, 1, 0];
         private static readonly int[] dc = [0, 1, 0, -1];
-
-        public MockRobot(int[][] room, int startR, int startC)
-        {
-            _room = room;
-            _r = startR;
-            _c = startC;
-            _dir = 0;
-            _cleaned = [];
-        }
 
         public bool Move()
         {

@@ -52,14 +52,11 @@ The input is two lists: the subroutines called and their arguments. Solution's c
 using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem497 {
-    public class Solution {
+    public class Solution(int[][] rects)
+    {
         public static void Init () {
             Solution obj = new(null);
             int[] param_1 = Pick();
-        }
-
-        public Solution (int[][] rects) {
-
         }
 
         public static int[] Pick () {

@@ -13,8 +13,8 @@ What if the linked list is extremely large and its length is unknown to you? Cou
 Example:
 // Init a singly linked list [1,2,3].
 ListNode head = new ListNode(1);
-head.next = new ListNode(2);
-head.next.next = new ListNode(3);
+head.next = new(2);
+head.next.next = new(3);
 Solution solution = new Solution(head);
 
 // getRandom() should return either 1, 2, or 3 randomly. Each element should have equal probability of returning.
@@ -24,15 +24,11 @@ solution.getRandom();
 using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem382 {
-    public class Solution {
+    public class Solution(ListNode head)
+    {
         public static void Init () {
             Solution obj = new(null);
             int param_1 = GetRandom();
-        }
-
-        // @param head The linked list's head. Note that the head is guaranteed to be not null, so it contains at least one node.
-        public Solution (ListNode head) {
-
         }
 
         // Returns a random node's value.
@@ -41,12 +37,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem382 {
         }
     }
 
-    public class ListNode {
-        public int val;
+    public class ListNode(int x)
+    {
+        public int val = x;
         public ListNode next;
-
-        public ListNode (int x) {
-            val = x;
-        }
     }
 }

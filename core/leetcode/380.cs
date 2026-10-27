@@ -81,7 +81,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem380 {
             }
 
             int index = _dict[val];
-            _list[index] = _list[_list.Count - 1];
+            _list[index] = _list[^1];
             _dict[_list[index]] = index;
 
             _list.RemoveAt (_list.Count - 1);

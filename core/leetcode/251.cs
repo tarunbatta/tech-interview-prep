@@ -65,18 +65,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem251
     //   Next: O(1) amortized
     //   HasNext: O(1) amortized
     // Space: O(1) auxiliary space (operates directly on input references)
-    public class Vector2D
+    public class Vector2D(int[][] vec)
     {
-        private readonly int[][] _vec;
-        private int _row;
-        private int _col;
-
-        public Vector2D(int[][] vec)
-        {
-            _vec = vec ?? [];
-            _row = 0;
-            _col = 0;
-        }
+        private readonly int[][] _vec = vec ?? [];
+        private int _row = 0;
+        private int _col = 0;
 
         public int Next()
         {

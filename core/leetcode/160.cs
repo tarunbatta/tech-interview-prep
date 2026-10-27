@@ -99,14 +99,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem160
         }
     }
 
-    public class ListNode
+    public class ListNode(int x)
     {
-        public int val;
+        public int val = x;
         public ListNode next;
-
-        public ListNode(int x)
-        {
-            val = x;
-        }
     }
 }

@@ -39,14 +39,10 @@ namespace InterviewPreperationGuide.Core.Algorithms.Search.BFS {
         }
     }
 
-    public class Vertex {
-        public bool isVisited;
-        public string data;
-
-        public Vertex (string item) {
-            this.isVisited = false;
-            this.data = item;
-        }
+    public class Vertex(string item)
+    {
+        public bool isVisited = false;
+        public string data = item;
     }
 
     public class Graph {

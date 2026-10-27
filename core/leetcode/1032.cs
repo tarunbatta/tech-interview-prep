@@ -52,11 +52,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1032 {
         }
     }
 
-    public class StreamChecker {
-        public StreamChecker (string[] words) {
-
-        }
-
+    public class StreamChecker(string[] words)
+    {
         public static bool Query (char letter) {
             return false;
         }

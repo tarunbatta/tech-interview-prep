@@ -46,9 +46,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem670 {
 
             for (int i = 0; i < n.Length - 1; i++) {
                 for (int j = i + 1; j < n.Length; j++) {
-                    string start = (i != 0 ? n.Substring (0, i) : "");
+                    string start = (i != 0 ? n[..i] : "");
                     string mid = n.Substring (i + 1, j - i - 1);
-                    string end = (j == n.Length ? "" : n.Substring (j + 1));
+                    string end = (j == n.Length ? "" : n[(j + 1)..]);
                     string temp = start + n[j] + mid + n[i] + end;
 
                     if (!string.IsNullOrEmpty (temp) && Convert.ToInt32 (temp) > result) {

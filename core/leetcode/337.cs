@@ -42,21 +42,21 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem337 {
         public static void Init() {
             TreeNode node_a = new(3)
             {
-                left = new TreeNode(2),
-                right = new TreeNode(3)
+                left = new(2),
+                right = new(3)
             };
-            node_a.left.right = new TreeNode (3);
-            node_a.right.right = new TreeNode (1);
+            node_a.left.right = new(3);
+            node_a.right.right = new(1);
             Console.WriteLine (Rob(node_a));
 
             TreeNode node_b = new(3)
             {
-                left = new TreeNode(4),
-                right = new TreeNode(5)
+                left = new(4),
+                right = new(5)
             };
-            node_b.left.left = new TreeNode (1);
-            node_b.left.right = new TreeNode (3);
-            node_b.right.right = new TreeNode (1);
+            node_b.left.left = new(1);
+            node_b.left.right = new(3);
+            node_b.right.right = new(1);
             Console.WriteLine (Rob(node_b));
         }
 
@@ -86,13 +86,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem337 {
         }
     }
 
-    public class TreeNode {
-        public int val;
+    public class TreeNode(int x)
+    {
+        public int val = x;
         public TreeNode left;
         public TreeNode right;
-
-        public TreeNode (int x) {
-            val = x;
-        }
     }
 }

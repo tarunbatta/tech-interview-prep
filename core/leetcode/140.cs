@@ -87,7 +87,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem140 {
             // go over each word in dictionary
             foreach (string word in wordDict) {
                 if (s.StartsWith (word)) {
-                    var sublist = DFS(s.Substring (word.Length), wordDict, map);
+                    var sublist = DFS(s[word.Length..], wordDict, map);
 
                     foreach (string sub in sublist) {
                         list.AddLast (word + (string.IsNullOrEmpty (sub) ? "" : " ") + sub);

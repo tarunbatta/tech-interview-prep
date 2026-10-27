@@ -33,11 +33,11 @@ p and q are different and both values will exist in the BST.
 using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem235 {
-    public class TreeNode {
-        public int val;
+    public class TreeNode(int x)
+    {
+        public int val = x;
         public TreeNode left;
         public TreeNode right;
-        public TreeNode (int x) { val = x; }
 
         public void DisplayNode () {
             if (this != null) {
@@ -51,14 +51,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem235 {
             TreeNode root = new(1);
             root = new TreeNode(20)
             {
-                left = new TreeNode(8),
-                right = new TreeNode(22)
+                left = new(8),
+                right = new(22)
             };
-            root.left.left = new TreeNode (4);
-            root.left.right = new TreeNode(12)
+            root.left.left = new(4);
+            root.left.right = new(12)
             {
-                left = new TreeNode(10),
-                right = new TreeNode(14)
+                left = new(10),
+                right = new(14)
             };
 
             TreeNode r1 = LowestCommonAncestor (root, new TreeNode (10), new TreeNode (14));

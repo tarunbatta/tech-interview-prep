@@ -65,13 +65,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem173 {
             return this._index + 1 < this._sortedNodes.Count;
         }
     }
-    public class TreeNode {
-        public int val;
+    public class TreeNode(int x)
+    {
+        public int val = x;
         public TreeNode left;
         public TreeNode right;
-
-        public TreeNode (int x) {
-            val = x;
-        }
     }
 }

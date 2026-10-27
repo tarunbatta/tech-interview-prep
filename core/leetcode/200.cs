@@ -93,13 +93,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem200 {
         }
     }
 
-    public class Point {
-        public int x;
-        public int y;
-
-        public Point (int _x, int _y) {
-            x = _x;
-            y = _y;
-        }
+    public class Point(int _x, int _y)
+    {
+        public int x = _x;
+        public int y = _y;
     }
 }

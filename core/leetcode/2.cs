@@ -19,11 +19,10 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem2
 {
-    public class ListNode
+    public class ListNode(int x)
     {
-        public int val;
+        public int val = x;
         public ListNode next;
-        public ListNode(int x) { val = x; }
     }
 
     public class Solution
@@ -32,24 +31,24 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem2
         {
             ListNode l1 = new(2)
             {
-                next = new ListNode(4)
+                next = new(4)
                 {
-                    next = new ListNode(3)
+                    next = new(3)
                 }
             };
 
             ListNode l2 = new(5)
             {
-                next = new ListNode(6)
+                next = new(6)
                 {
-                    next = new ListNode(4)
+                    next = new(4)
                 }
             };
             Console.WriteLine(AddTwoNumbers(l1, l2));
 
             ListNode l3 = new(1)
             {
-                next = new ListNode(8)
+                next = new(8)
             };
 
             ListNode l4 = new(0);
@@ -74,7 +73,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem2
                 int sum = carry + x + y;
                 carry = sum / 10;
 
-                current.next = new ListNode(sum % 10);
+                current.next = new(sum % 10);
                 current = current.next;
 
                 if (a != null)
@@ -90,7 +89,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem2
 
             if (carry > 0)
             {
-                current.next = new ListNode(carry);
+                current.next = new(carry);
             }
 
             return result.next;

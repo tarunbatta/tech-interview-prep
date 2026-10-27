@@ -41,11 +41,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem745 {
         }
     }
 
-    public class WordFilter {
-        public WordFilter (string[] words) {
-
-        }
-
+    public class WordFilter(string[] words)
+    {
         public static int F (string prefix, string suffix) {
             return 0;
         }

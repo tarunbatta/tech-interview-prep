@@ -46,17 +46,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem98 {
         public static void Init() {
             TreeNode node = new(2)
             {
-                left = new TreeNode(1),
-                right = new TreeNode(3)
+                left = new(1),
+                right = new(3)
             };
 
             TreeNode node1 = new(5)
             {
-                left = new TreeNode(1),
-                right = new TreeNode(4)
+                left = new(1),
+                right = new(4)
                 {
-                    left = new TreeNode(3),
-                    right = new TreeNode(6)
+                    left = new(3),
+                    right = new(6)
                 }
             };
 
@@ -113,13 +113,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem98 {
         }
     }
 
-    public class TreeNode {
-        public int val;
+    public class TreeNode(int x)
+    {
+        public int val = x;
         public TreeNode left;
         public TreeNode right;
-
-        public TreeNode (int x) {
-            val = x;
-        }
     }
 }

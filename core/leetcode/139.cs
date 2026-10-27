@@ -55,7 +55,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem139 {
 
             for (int i = 1; i <= s.Length; i++) {
                 for (int j = 0; j < i; j++) {
-                    string str = s.Substring (j, i - j);
+                    string str = s[j..i];
 
                     if (dp[j] && wordDict.Contains (str)) {
                         dp[i] = true;
@@ -89,7 +89,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem139 {
             }
 
             for (int end = start + 1; end <= s.Length; end++) {
-                if (wordDict.Contains (s.Substring (start, end - start)) && WordBreakHelper(s, wordDict, end, memo)) {
+                if (wordDict.Contains (s[start..end]) && WordBreakHelper(s, wordDict, end, memo)) {
                     memo[start] = true;
                     return (bool) memo[start];
                 }

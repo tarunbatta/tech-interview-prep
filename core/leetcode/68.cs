@@ -216,9 +216,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem68 {
                 restSpace -= 1;
             }
 
-            result.Add (words[words.Length - 1]);
+            result.Add (words[^1]);
 
-            restSpace -= words[words.Length - 1].Length;
+            restSpace -= words[^1].Length;
 
             result.Add (new string (' ', restSpace));
 

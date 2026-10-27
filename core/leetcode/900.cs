@@ -54,11 +54,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem900 {
         }
     }
 
-    public class RLEIterator {
-        public RLEIterator (int[] A) {
-
-        }
-
+    public class RLEIterator(int[] A)
+    {
         public static int Next (int n) {
             return 0;
         }

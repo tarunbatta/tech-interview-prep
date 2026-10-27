@@ -71,14 +71,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem354 {
         }
     }
 
-    public class Envelope : IComparable<Envelope> {
-        public int width { get; set; }
-        public int height { get; set; }
-
-        public Envelope (int width, int height) {
-            this.width = width;
-            this.height = height;
-        }
+    public class Envelope(int width, int height) : IComparable<Envelope> {
+        public int width { get; set; } = width;
+        public int height { get; set; } = height;
 
         public int CompareTo (Envelope y) {
             if (this.width == y.width) {

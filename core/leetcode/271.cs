@@ -93,7 +93,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem271
                     break;
                 }
 
-                int length = int.Parse(s.Substring(i, delimiterIndex - i));
+                int length = int.Parse(s[i..delimiterIndex]);
                 string str = s.Substring(delimiterIndex + 1, length);
                 result.Add(str);
 

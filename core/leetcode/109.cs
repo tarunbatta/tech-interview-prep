@@ -36,22 +36,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem109 {
         }
     }
 
-    public class ListNode {
-        public int val;
+    public class ListNode(int x)
+    {
+        public int val = x;
         public ListNode next;
-
-        public ListNode (int x) {
-            val = x;
-        }
     }
 
-    public class TreeNode {
-        public int val;
+    public class TreeNode(int x)
+    {
+        public int val = x;
         public TreeNode left;
         public TreeNode right;
-
-        public TreeNode (int x) {
-            val = x;
-        }
     }
 }

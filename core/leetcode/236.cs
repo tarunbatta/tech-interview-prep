@@ -36,13 +36,13 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem236 {
         public static void Init () {
             TreeNode root = new(1)
             {
-                left = new TreeNode(2),
-                right = new TreeNode(3)
+                left = new(2),
+                right = new(3)
             };
-            root.left.left = new TreeNode (4);
-            root.left.right = new TreeNode (5);
-            root.right.left = new TreeNode (6);
-            root.right.right = new TreeNode (7);
+            root.left.left = new(4);
+            root.left.right = new(5);
+            root.right.left = new(6);
+            root.right.right = new(7);
 
             TreeNode r1 = LowestCommonAncestor (root, new TreeNode (4), new TreeNode (5));
             r1.DisplayNode ();
@@ -73,11 +73,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem236 {
         }
     }
 
-    public class TreeNode {
-        public int val;
+    public class TreeNode(int x)
+    {
+        public int val = x;
         public TreeNode left;
         public TreeNode right;
-        public TreeNode (int x) { val = x; }
 
         public void DisplayNode () {
             if (this != null) {

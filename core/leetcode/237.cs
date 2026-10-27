@@ -37,11 +37,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem237 {
         public static void Init () {
             ListNode node = new(4)
             {
-                next = new ListNode(5)
+                next = new(5)
             };
-            node.next.next = new ListNode(1)
+            node.next.next = new(1)
             {
-                next = new ListNode(9)
+                next = new(9)
             };
 
             DeleteNode(null);
@@ -56,12 +56,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem237 {
         }
     }
 
-    public class ListNode {
-        public int val;
+    public class ListNode(int x)
+    {
+        public int val = x;
         public ListNode next;
-
-        public ListNode (int x) {
-            val = x;
-        }
     }
 }

@@ -35,11 +35,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem307 {
         }
     }
 
-    public class NumArray {
-        public NumArray (int[] nums) {
-
-        }
-
+    public class NumArray(int[] nums)
+    {
         public static void Update (int i, int val) {
 
         }

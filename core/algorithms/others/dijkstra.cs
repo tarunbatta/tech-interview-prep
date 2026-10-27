@@ -36,24 +36,16 @@ namespace InterviewPreperationGuide.Core.Algorithms.Others.Dijkstra {
         }
     }
 
-    public class DistOriginal {
-        public int distance;
-        public int parentVert;
-
-        public DistOriginal (int pv, int d) {
-            distance = d;
-            parentVert = pv;
-        }
+    public class DistOriginal(int pv, int d)
+    {
+        public int distance = d;
+        public int parentVert = pv;
     }
 
-    public class Vertex {
-        public bool isInTree;
-        public string data;
-
-        public Vertex (string item) {
-            this.isInTree = false;
-            this.data = item;
-        }
+    public class Vertex(string item)
+    {
+        public bool isInTree = false;
+        public string data = item;
     }
 
     public class Graph {

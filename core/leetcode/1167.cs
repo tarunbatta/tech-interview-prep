@@ -69,13 +69,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1167 {
         }
     }
 
-    public class MinHeap {
-        private readonly int[] _elements;
+    public class MinHeap(int size)
+    {
+        private readonly int[] _elements = new int[size];
         private int _size;
-
-        public MinHeap (int size) {
-            _elements = new int[size];
-        }
 
         private static int GetLeftChildIndex (int elementIndex) => 2 * elementIndex + 1;
         private static int GetRightChildIndex (int elementIndex) => 2 * elementIndex + 2;

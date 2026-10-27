@@ -26,17 +26,17 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem23 {
         public static void Init() {
             ListNode l1 = new(3)
             {
-                next = new ListNode(9)
+                next = new(9)
             };
 
             ListNode l2 = new(2)
             {
-                next = new ListNode(5)
+                next = new(5)
             };
 
             ListNode l3 = new(1)
             {
-                next = new ListNode(8)
+                next = new(8)
             };
 
             ListNode[] lists = [l1, l2, l3];
@@ -106,12 +106,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem23 {
         }
     }
 
-    public class ListNode {
-        public int val;
+    public class ListNode(int x)
+    {
+        public int val = x;
         public ListNode next;
-
-        public ListNode (int x) {
-            val = x;
-        }
     }
 }

@@ -60,7 +60,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem123 {
                 }
 
                 right[prices.Length - 1] = 0;
-                int max = prices[prices.Length - 1];
+                int max = prices[^1];
                 for (int i = prices.Length - 2; i >= 0; i--) {
                     max = Math.Max (max, prices[i]);
                     right[i] = Math.Max (right[i + 1], max - prices[i]);

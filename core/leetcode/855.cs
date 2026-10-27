@@ -43,11 +43,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem855 {
         }
     }
 
-    public class ExamRoom {
-        public ExamRoom (int N) {
-
-        }
-
+    public class ExamRoom(int N)
+    {
         public static int Seat () {
             return 0;
         }

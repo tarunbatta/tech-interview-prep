@@ -85,38 +85,49 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem36 {
             ]));
         }
 
-        public static bool IsValidSudoku (char[][] board) {
-            if (board == null || board.Length != 9 || board[0].Length != 9) {
+        // Time: O(1) - exactly 81 cells examined
+        // Space: O(1) - fixed 9x9 boolean arrays
+        public static bool IsValidSudoku(char[][] board)
+        {
+            if (board == null || board.Length != 9 || board[0].Length != 9)
+            {
                 return false;
             }
 
-            bool result = true;
+            bool[,] rows = new bool[9, 9];
+            bool[,] cols = new bool[9, 9];
+            bool[,] boxes = new bool[9, 9];
 
-            // row check
-            for (int i = 0; i < board.Length; i++) {
-                HashSet<char> rows = [];
-                HashSet<char> cols = [];
-                HashSet<char> cube = [];
+            for (int r = 0; r < 9; r++)
+            {
+                for (int c = 0; c < 9; c++)
+                {
+                    char ch = board[r][c];
+                    if (ch == '.')
+                    {
+                        continue;
+                    }
 
-                for (int j = 0; j < board[0].Length; j++) {
-                    if (board[i][j] != '.' && !rows.Add (board[i][j])) {
+                    int digit = ch - '1';
+                    if (digit < 0 || digit > 8)
+                    {
                         return false;
                     }
 
-                    if (board[j][i] != '.' && !cols.Add (board[j][i])) {
+                    int boxIdx = (r / 3) * 3 + (c / 3);
+
+                    if (rows[r, digit] || cols[c, digit] || boxes[boxIdx, digit])
+                    {
                         return false;
                     }
 
-                    int rowIndex = 3 * (i / 3);
-                    int colIndex = 3 * (i % 3);
-
-                    if (board[rowIndex + j / 3][colIndex + j % 3] != '.' && !cube.Add (board[rowIndex + j / 3][colIndex + j % 3])) {
-                        return false;
-                    }
+                    rows[r, digit] = true;
+                    cols[c, digit] = true;
+                    boxes[boxIdx, digit] = true;
                 }
             }
 
-            return result;
+            return true;
         }
     }
 }

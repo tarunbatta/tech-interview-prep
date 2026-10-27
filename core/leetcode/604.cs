@@ -37,20 +37,12 @@ Constraints:
 using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem604 {
-    public class StringIterator {
-        private readonly string _compressed;
-        private int _index;
-        private char _currentChar;
-        private long _currentCount;
-
-        // Time: O(1)
-        // Space: O(1)
-        public StringIterator(string compressedString) {
-            _compressed = compressedString;
-            _index = 0;
-            _currentChar = ' ';
-            _currentCount = 0;
-        }
+    public class StringIterator(string compressedString)
+    {
+        private readonly string _compressed = compressedString;
+        private int _index = 0;
+        private char _currentChar = ' ';
+        private long _currentCount = 0;
 
         // Time: O(L) where L is the length of digits for one chunk (at most 10 chars)
         // Space: O(1)

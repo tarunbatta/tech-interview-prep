@@ -41,14 +41,11 @@ The input is two lists: the subroutines called and their arguments. Solution's c
 using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem478 {
-    public class Solution {
+    public class Solution(double radius, double x_center, double y_center)
+    {
         public static void Init () {
             Solution obj = new(0, 0, 0);
             double[] param_1 = RandPoint();
-        }
-
-        public Solution (double radius, double x_center, double y_center) {
-
         }
 
         public static double[] RandPoint () {

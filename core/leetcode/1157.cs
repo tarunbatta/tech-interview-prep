@@ -49,11 +49,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1157 {
         }
     }
 
-    public class MajorityChecker {
-        public MajorityChecker (int[] arr) {
-
-        }
-
+    public class MajorityChecker(int[] arr)
+    {
         public static int Query (int left, int right, int threshold) {
             return 0;
         }

@@ -31,9 +31,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem303 {
         }
     }
 
-    public class NumArray {
-        public NumArray (int[] nums) { }
-
+    public class NumArray(int[] nums)
+    {
         public static int SumRange (int i, int j) {
             return 0;
         }

@@ -60,10 +60,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem622 {
         }
     }
 
-    public class MyCircularQueue {
-        public MyCircularQueue (int k) {
-
-        }
+    public class MyCircularQueue(int k)
+    {
 
         // Insert an element into the circular queue. Return true if the operation is successful
         public static bool EnQueue (int value) {

@@ -5,14 +5,10 @@
 using System;
 
 namespace InterviewPreperationGuide.Core.DesignPattern {
-    public class FacadePattern {
-        private Customer customer;
-        private Order order;
-
-        public FacadePattern (Customer c, Order o) {
-            customer = c;
-            order = o;
-        }
+    public class FacadePattern(Customer c, Order o)
+    {
+        private Customer customer = c;
+        private Order order = o;
 
         public string PurchaseOrder () {
             string result = string.Empty;

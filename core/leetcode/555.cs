@@ -86,7 +86,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem555
                 {
                     for (int k = 0; k < candidate.Length; k++)
                     {
-                        string current = candidate.Substring(k) + midStr + candidate.Substring(0, k);
+                        string current = candidate[k..] + midStr + candidate[..k];
 
                         if (string.CompareOrdinal(current, result) > 0)
                         {

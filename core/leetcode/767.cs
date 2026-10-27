@@ -95,7 +95,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem767 {
         }
         public charDetails poll () {
             var item = lstHeap[0];
-            lstHeap[0] = lstHeap[lstHeap.Count - 1];
+            lstHeap[0] = lstHeap[^1];
             lstHeap.RemoveAt (lstHeap.Count - 1);
             heapifyDown ();
             return item;
@@ -150,12 +150,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem767 {
         }
     }
 
-    public class charDetails {
-        public char value;
-        public int count;
-        public charDetails (char value, int count) {
-            this.value = value;
-            this.count = count;
-        }
+    public class charDetails(char value, int count)
+    {
+        public char value = value;
+        public int count = count;
     }
 }

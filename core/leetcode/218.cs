@@ -89,17 +89,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem218 {
         }
     }
 
-    public class Point : IComparer<Point> {
-        public int x;
-        public int height;
+    public class Point(int x, int height, bool isStart) : IComparer<Point> {
+        public int x = x;
+        public int height = height;
 
-        public bool isStart;
-
-        public Point (int x, int height, bool isStart) {
-            this.x = x;
-            this.height = height;
-            this.isStart = isStart;
-        }
+        public bool isStart = isStart;
 
         public int Compare (Point x, Point y) {
             if (x == null || y == null) {

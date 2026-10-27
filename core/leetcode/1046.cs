@@ -67,13 +67,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1046 {
         }
     }
 
-    public class MaxHeap {
-        private readonly int[] _elements;
+    public class MaxHeap(int size)
+    {
+        private readonly int[] _elements = new int[size];
         private int _size;
-
-        public MaxHeap (int size) {
-            _elements = new int[size];
-        }
 
         private static int GetLeftChildIndex (int elementIndex) => 2 * elementIndex + 1;
         private static int GetRightChildIndex (int elementIndex) => 2 * elementIndex + 2;

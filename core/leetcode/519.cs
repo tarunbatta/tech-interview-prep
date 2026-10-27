@@ -40,15 +40,12 @@ The input is two lists: the subroutines called and their arguments. Solution's c
 using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem519 {
-    public class Solution {
+    public class Solution(int n_rows, int n_cols)
+    {
         public static void Init () {
             Solution obj = new(0, 0);
             int[] param_1 = Flip();
             Reset();
-        }
-
-        public Solution (int n_rows, int n_cols) {
-
         }
 
         public static int[] Flip () {

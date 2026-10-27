@@ -25,22 +25,16 @@ using System;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem398
 {
-    public class Solution
+    public class Solution(int[] nums)
     {
-        private readonly int[] _nums;
-        private readonly Random _rand;
+        private readonly int[] _nums = nums;
+        private readonly Random _rand = new();
 
         public static void Init()
         {
             Solution solution = new([1, 2, 3, 3, 3]);
             Console.WriteLine(solution.Pick(3));
             Console.WriteLine(solution.Pick(1));
-        }
-
-        public Solution(int[] nums)
-        {
-            _nums = nums;
-            _rand = new();
         }
 
         // Time: O(n)

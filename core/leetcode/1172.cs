@@ -80,11 +80,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1172 {
         }
     }
 
-    public class DinnerPlates {
-        public DinnerPlates (int capacity) {
-
-        }
-
+    public class DinnerPlates(int capacity)
+    {
         public static void Push (int val) {
 
         }

@@ -26,14 +26,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem346 {
         }
     }
 
-    public class MovingAverage {
-        Queue<int> _queue;
-        int _size;
-
-        public MovingAverage (int size) {
-            this._size = size;
-            this._queue = new Queue<int> (size);
-        }
+    public class MovingAverage(int size)
+    {
+        Queue<int> _queue = new(size);
+        int _size = size;
 
         public double Next (int val) {
             if (_queue.Count >= _size) {

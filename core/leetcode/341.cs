@@ -50,11 +50,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem341 {
         // Return null if this NestedInteger holds a single integer 
         IList<NestedInteger> GetList ();
     }
-    public class NestedIterator {
-        public NestedIterator (IList<NestedInteger> nestedList) {
-
-        }
-
+    public class NestedIterator(IList<NestedInteger> nestedList)
+    {
         public static bool HasNext () {
             return false;
         }

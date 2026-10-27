@@ -56,7 +56,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem761 {
 
             for (int i = 0; i < s.Length; i++) {
                 for (int j = i + 1; j < s.Length; j++) {
-                    string first = s.Substring (i, j - i);
+                    string first = s[i..j];
 
                     if (!CheckSpecial(first)) {
                         continue;
@@ -70,7 +70,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem761 {
                             continue;
                         }
 
-                        string answer = s.Substring (0, i) + second + first + s.Substring (k + 1, s.Length - k - 1);
+                        string answer = s[..i] + second + first + s.Substring (k + 1, s.Length - k - 1);
                         if (answer.CompareTo (result) > 0) {
                             result = answer;
                         }

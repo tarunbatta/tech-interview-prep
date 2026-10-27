@@ -90,11 +90,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem842 {
                 }
 
                 // If fibonacci property is not satisfied then we cannot get a solution
-                if (result.Count >= 2 && result[result.Count - 1] + result[result.Count - 2] < num) {
+                if (result.Count >= 2 && result[^1] + result[^2] < num) {
                     break;
                 }
 
-                if (result.Count <= 1 || result[result.Count - 1] + result[result.Count - 2] == num) {
+                if (result.Count <= 1 || result[^1] + result[^2] == num) {
                     result.Add ((int) num);
 
                     if (helper(result, S, i + 1)) {

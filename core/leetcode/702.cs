@@ -39,12 +39,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem702 {
         int Get(int index);
     }
 
-    public class SecretArrayReader : ArrayReader {
-        private readonly int[] _secret;
-
-        public SecretArrayReader(int[] secret) {
-            _secret = secret;
-        }
+    public class SecretArrayReader(int[] secret) : ArrayReader {
+        private readonly int[] _secret = secret;
 
         public int Get(int index) {
             if (index < 0 || index >= _secret.Length) {

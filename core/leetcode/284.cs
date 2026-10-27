@@ -62,18 +62,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem284
     //   Next: O(1)
     //   HasNext: O(1)
     // Space: O(1) auxiliary space
-    public class PeekingIterator
+    public class PeekingIterator(IEnumerator<int> iterator)
     {
-        private readonly IEnumerator<int> _iterator;
-        private bool _hasPeeked;
+        private readonly IEnumerator<int> _iterator = iterator;
+        private bool _hasPeeked = false;
         private int _peekedValue;
-
-        // iter is an IEnumerator<int>
-        public PeekingIterator(IEnumerator<int> iterator)
-        {
-            _iterator = iterator;
-            _hasPeeked = false;
-        }
 
         // Returns the next element in the iteration without advancing the iterator.
         public int Peek()

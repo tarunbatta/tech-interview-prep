@@ -41,15 +41,12 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem1116 {
-    public class ZeroEvenOdd {
-        private readonly int _n;
+    public class ZeroEvenOdd(int n)
+    {
+        private readonly int _n = n;
         private readonly SemaphoreSlim _zeroSem = new(1, 1);
         private readonly SemaphoreSlim _evenSem = new(0, 1);
         private readonly SemaphoreSlim _oddSem = new(0, 1);
-
-        public ZeroEvenOdd(int n) {
-            _n = n;
-        }
 
         // Time: O(n)
         // Space: O(1)

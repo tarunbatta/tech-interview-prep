@@ -90,13 +90,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem110 {
         }
     }
 
-    public class TreeNode {
-        public int val;
+    public class TreeNode(int x)
+    {
+        public int val = x;
         public TreeNode left;
         public TreeNode right;
-
-        public TreeNode (int x) {
-            val = x;
-        }
     }
 }

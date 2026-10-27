@@ -46,12 +46,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem641 {
         }
     }
 
-    public class MyCircularDeque {
-        /** Initialize your data structure here. Set the size of the deque to be k. */
-
-        public MyCircularDeque (int k) {
-
-        }
+    public class MyCircularDeque(int k)
+    {
 
         /** Adds an item at the front of Deque. Return true if the operation is successful. */
         public static bool InsertFront (int value) {

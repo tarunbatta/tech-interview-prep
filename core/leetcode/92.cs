@@ -21,14 +21,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem92 {
         public static void Init () {
             ListNode l = new(1)
             {
-                next = new ListNode(2)
+                next = new(2)
                 {
-                    next = new ListNode(3)
+                    next = new(3)
                 }
             };
-            l.next.next.next = new ListNode(4)
+            l.next.next.next = new(4)
             {
-                next = new ListNode(5)
+                next = new(5)
             };
 
             Console.WriteLine (ReverseBetween(null, 2, 4));
@@ -82,9 +82,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem92 {
         }
     }
 
-    public class ListNode {
-        public int val;
+    public class ListNode(int x)
+    {
+        public int val = x;
         public ListNode next;
-        public ListNode (int x) { val = x; }
     }
 }

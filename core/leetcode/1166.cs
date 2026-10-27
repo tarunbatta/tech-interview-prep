@@ -59,7 +59,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1166
                 return false;
             }
 
-            string parent = path.Substring(0, lastSlash);
+            string parent = path[..lastSlash];
             if (parent.Length > 0 && !paths.ContainsKey(parent))
             {
                 return false;

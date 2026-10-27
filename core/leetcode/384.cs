@@ -26,7 +26,8 @@ using System;
 using System.Collections.Generic;
 
 namespace InterviewPreperationGuide.Core.LeetCode.problem384 {
-    public class Solution {
+    public class Solution(int[] nums)
+    {
         public static void Init () {
             Solution obj = new([1, 2, 3]);
             int[] param_1 = obj.Shuffle ();
@@ -34,8 +35,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem384 {
             int[] param_3 = obj.Shuffle ();
         }
 
-        private int[] array;
-        private int[] original;
+        private int[] array = nums;
+        private int[] original = (int[])nums.Clone();
         private Random rand = new();
 
         private List<int> getArrayCopy () {
@@ -46,11 +47,6 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem384 {
             }
 
             return asList;
-        }
-
-        public Solution (int[] nums) {
-            array = nums;
-            original = (int[]) nums.Clone ();
         }
 
         // Resets the array to its original configuration and return it

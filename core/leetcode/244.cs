@@ -27,12 +27,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem244 {
         }
     }
 
-    public class WordDistance {
-
-        public WordDistance (string[] words) {
-
-        }
-
+    public class WordDistance(string[] words)
+    {
         public static int Shortest (string word1, string word2) {
             return 0;
         }

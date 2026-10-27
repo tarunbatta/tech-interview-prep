@@ -46,11 +46,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem911 {
         }
     }
 
-    public class TopVotedCandidate {
-        public TopVotedCandidate (int[] persons, int[] times) {
-
-        }
-
+    public class TopVotedCandidate(int[] persons, int[] times)
+    {
         public static int Q (int t) {
             return 0;
         }

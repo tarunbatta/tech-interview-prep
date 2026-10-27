@@ -122,14 +122,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem174 {
         }
     }
 
-    public class Position {
-        public int row { get; set; }
-        public int col { get; set; }
-
-        public Position (int row, int col) {
-            this.row = row;
-            this.col = col;
-        }
+    public class Position(int row, int col)
+    {
+        public int row { get; set; } = row;
+        public int col { get; set; } = col;
     }
 
     public class Knight {

@@ -27,7 +27,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem93 {
             List<string> result = [];
 
             for (int i = 1; i < 4 && i < s.Length; i++) {
-                string a = s.Substring (0, i);
+                string a = s[..i];
 
                 if (ValidateIpPart(a)) {
                     for (int j = 1; j < 4 && i + j < s.Length; j++) {
@@ -36,7 +36,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem93 {
                         if (ValidateIpPart(b)) {
                             for (int k = 1; k < 4 && i + j + k < s.Length; k++) {
                                 string c = s.Substring (i + j, k);
-                                string d = s.Substring (i + j + k);
+                                string d = s[(i + j + k)..];
 
                                 if (ValidateIpPart(c) && ValidateIpPart(d)) {
                                     result.Add (string.Concat (a, ".", b, ".", c, ".", d));

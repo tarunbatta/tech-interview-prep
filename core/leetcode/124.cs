@@ -39,15 +39,15 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem124 {
         public static void Init() {
             TreeNode node = new(10)
             {
-                left = new TreeNode(2),
-                right = new TreeNode(10)
+                left = new(2),
+                right = new(10)
             };
-            node.left.left = new TreeNode (20);
-            node.left.right = new TreeNode (1);
-            node.right.right = new TreeNode(-25)
+            node.left.left = new(20);
+            node.left.right = new(1);
+            node.right.right = new(-25)
             {
-                left = new TreeNode(3),
-                right = new TreeNode(4)
+                left = new(3),
+                right = new(4)
             };
 
             Console.WriteLine (MaxPathSum (node));
@@ -77,13 +77,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem124 {
         }
     }
 
-    public class TreeNode {
-        public int val;
+    public class TreeNode(int x)
+    {
+        public int val = x;
         public TreeNode left;
         public TreeNode right;
-
-        public TreeNode (int x) {
-            val = x;
-        }
     }
 }

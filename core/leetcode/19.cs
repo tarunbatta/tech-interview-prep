@@ -29,14 +29,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem19 {
         public static void Init () {
             ListNode node = new(1)
             {
-                next = new ListNode(2)
+                next = new(2)
                 {
-                    next = new ListNode(3)
+                    next = new(3)
                 }
             };
-            node.next.next.next = new ListNode(4)
+            node.next.next.next = new(4)
             {
-                next = new ListNode(5)
+                next = new(5)
             };
 
             Console.WriteLine (RemoveNthFromEnd_a(node, 2));
@@ -102,12 +102,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem19 {
         }
     }
 
-    public class ListNode {
-        public int val;
+    public class ListNode(int x)
+    {
+        public int val = x;
         public ListNode next;
-
-        public ListNode (int x) {
-            val = x;
-        }
     }
 }

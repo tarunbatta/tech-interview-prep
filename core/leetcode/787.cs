@@ -96,28 +96,18 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem787 {
             return tripCosts[dst];
         }
 
-        public class Flight {
-            public int source;
-            public int destination;
-            public int cost;
-
-            public Flight (int source, int destination, int cost) {
-                this.source = source;
-                this.destination = destination;
-                this.cost = cost;
-            }
+        public class Flight(int source, int destination, int cost)
+        {
+            public int source = source;
+            public int destination = destination;
+            public int cost = cost;
         }
 
-        public class Destination {
-            public int city;
-            public int cost;
-            public int stops;
-
-            public Destination (int city, int cost, int stops) {
-                this.city = city;
-                this.cost = cost;
-                this.stops = stops;
-            }
+        public class Destination(int city, int cost, int stops)
+        {
+            public int city = city;
+            public int cost = cost;
+            public int stops = stops;
         }
     }
 }

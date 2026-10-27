@@ -41,16 +41,12 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem146 {
         }
     }
 }
-public class Node {
-    public int key;
-    public int val;
+public class Node(int key, int val)
+{
+    public int key = key;
+    public int val = val;
     public Node prev;
     public Node next;
-
-    public Node (int key, int val) {
-        this.key = key;
-        this.val = val;
-    }
 }
 
 public class LRUCache {

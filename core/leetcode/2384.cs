@@ -52,6 +52,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem2384
             Console.WriteLine(LargestPalindromic(string.Empty));
             Console.WriteLine(LargestPalindromic("444947137"));
             Console.WriteLine(LargestPalindromic("00009"));
+            Console.WriteLine(LargestPalindromic("00000")); // Expected: "0"
         }
 
         // Time: O(n) where n is the length of num

@@ -98,7 +98,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem527
                 return word;
             }
 
-            return $"{word.Substring(0, k)}{word.Length - 1 - k}{word[^1]}";
+            return $"{word[..k]}{word.Length - 1 - k}{word[^1]}";
         }
     }
 }

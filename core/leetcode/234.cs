@@ -28,16 +28,16 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem234 {
         public static void Init () {
             ListNode l1 = new(1)
             {
-                next = new ListNode(2)
+                next = new(2)
             };
 
             ListNode l2 = new(1)
             {
-                next = new ListNode(2)
+                next = new(2)
             };
-            l2.next.next = new ListNode(2)
+            l2.next.next = new(2)
             {
-                next = new ListNode(1)
+                next = new(1)
             };
 
             Console.WriteLine (IsPalindrome (null));
@@ -96,12 +96,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem234 {
         }
     }
 
-    public class ListNode {
-        public int val;
+    public class ListNode(int x)
+    {
+        public int val = x;
         public ListNode next;
-
-        public ListNode (int x) {
-            val = x;
-        }
     }
 }

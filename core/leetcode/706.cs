@@ -63,7 +63,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem706 {
             ListNode prev = FindElement (index, key);
 
             if (prev.next == null) {
-                prev.next = new ListNode (key, value);
+                prev.next = new(key, value);
             } else {
                 prev.next.value = value;
             }
@@ -106,15 +106,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem706 {
         }
     }
 
-    public class ListNode {
-        public int key;
-        public int value;
-        public ListNode next;
-
-        public ListNode (int key, int value) {
-            this.key = key;
-            this.value = value;
-            this.next = null;
-        }
+    public class ListNode(int key, int value)
+    {
+        public int key = key;
+        public int value = value;
+        public ListNode next = null;
     }
 }

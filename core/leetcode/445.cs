@@ -105,7 +105,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem445 {
                 carry = sum / 10;
                 sum = sum % 10;
 
-                current.next = new ListNode (sum);
+                current.next = new(sum);
                 current = current.next;
 
                 if (a != null) {
@@ -118,7 +118,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem445 {
             }
 
             if (carry > 0) {
-                current.next = new ListNode (carry);
+                current.next = new(carry);
             }
 
             return ReverseList(n.next);
@@ -139,12 +139,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem445 {
         }
     }
 
-    public class ListNode {
-        public int val;
+    public class ListNode(int x)
+    {
+        public int val = x;
         public ListNode next;
-
-        public ListNode (int x) {
-            val = x;
-        }
     }
 }

@@ -82,14 +82,14 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem17 {
             else {
                 // iterate over all letters which map 
                 // the next available digit
-                String digit = next_digits.Substring (0, 1);
+                String digit = next_digits[..1];
                 String letters = phone[digit];
 
                 for (int i = 0; i < letters.Length; i++) {
                     String letter = letters.Substring (i, 1);
                     // append the current letter to the combination
                     // and proceed to the next digits
-                    backtrack (combination + letter, next_digits.Substring (1));
+                    backtrack (combination + letter, next_digits[1..]);
                 }
             }
         }

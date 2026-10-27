@@ -30,11 +30,11 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem104 {
         public static void Init () {
             TreeNode node = new(2)
             {
-                left = new TreeNode(3),
-                right = new TreeNode(4)
+                left = new(3),
+                right = new(4)
             };
-            node.left.left = new TreeNode (4);
-            node.left.right = new TreeNode (5);
+            node.left.left = new(4);
+            node.left.right = new(5);
 
             Console.WriteLine (MaxDepth(node));
         }
@@ -51,13 +51,10 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem104 {
         }
     }
 
-    public class TreeNode {
-        public int val;
+    public class TreeNode(int x)
+    {
+        public int val = x;
         public TreeNode left;
         public TreeNode right;
-
-        public TreeNode (int x) {
-            val = x;
-        }
     }
 }

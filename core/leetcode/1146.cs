@@ -49,11 +49,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem1146 {
         }
     }
 
-    public class SnapshotArray {
-        public SnapshotArray (int length) {
-
-        }
-
+    public class SnapshotArray(int length)
+    {
         public static void Set (int index, int val) {
 
         }

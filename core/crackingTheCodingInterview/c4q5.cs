@@ -70,15 +70,10 @@ namespace InterviewPreperationGuide.Core.CrackingTheCodingInterview.c4q5 {
         }
     }
 
-    public class BstNode {
-        public int data { get; set; }
-        public BstNode left { get; set; }
-        public BstNode right { get; set; }
-
-        public BstNode (int data) {
-            this.data = data;
-            this.left = null;
-            this.right = null;
-        }
+    public class BstNode(int data)
+    {
+        public int data { get; set; } = data;
+        public BstNode left { get; set; } = null;
+        public BstNode right { get; set; } = null;
     }
 }

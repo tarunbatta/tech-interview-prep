@@ -43,7 +43,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem42 {
             }
 
             int[] right = new int[height.Length];
-            right[height.Length - 1] = height[height.Length - 1];
+            right[height.Length - 1] = height[^1];
             for (int i = height.Length - 2; i >= 0; i--) {
                 right[i] = Math.Max (right[i + 1], height[i]);
             }

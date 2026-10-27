@@ -87,7 +87,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem13 {
                 }
             }
 
-            result = (int) hash[s[s.Length - 1]];
+            result = (int) hash[s[^1]];
 
             for (int i = s.Length - 2; i >= 0; i--) {
                 if ((int) hash[s[i + 1]] > (int) hash[s[i]]) {
