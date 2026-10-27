@@ -87,7 +87,7 @@ tech-interview-prep/
 ├── docs/                          # Guides, roadmaps, and interview question trackers
 │   ├── interview-questions.md     # Real interview questions organized by company
 │   ├── top100-leetcode.md         # Curated top 100 LeetCode problems
-│   └── todo.md                    # Study roadmap and problem tracker
+│   └── study-topics.md            # Concurrency, networking, and algorithm references
 ├── scripts/                       # Monorepo maintenance and generation tools
 │   ├── convert-diagrams.sh        # Automated Draw.io to SVG diagram exporter
 │   ├── create-system-design.sh    # Scaffold a new system design case study
@@ -174,7 +174,7 @@ node src/javascript/qotd/SuperArray.js
 - **Curated Problem Lists**:
   - [Curated Top 100 LeetCode](docs/top100-leetcode.md)
   - [Company Interview Questions](docs/interview-questions.md)
-  - [Study Roadmap & Tracker](docs/todo.md)
+  - [Study Topics & References](docs/study-topics.md)
 
 ### C# Solution Snippet Template
 

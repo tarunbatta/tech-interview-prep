@@ -40,7 +40,7 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem3119
     {
         public static void Init()
         {
-            Console.WriteLine(MaxPotholes(null, 7));                     // Expected: 0
+            Console.WriteLine(MaxPotholes(null, 7));                    // Expected: 0
             Console.WriteLine(MaxPotholes("..xxx..x....xxx.", 7));      // Expected: 5
             Console.WriteLine(MaxPotholes("x.x.xxx...x", 14));          // Expected: 6
             Console.WriteLine(MaxPotholes("..", 5));                    // Expected: 0
