@@ -68,17 +68,66 @@ At its core, the architecture solves a massive distributed geospatial coordinati
 ## System Architecture
 
 ```mermaid
-flowchart TD
-    Rider["Rider App"] -->|"REST / WS"| Gateway["API Gateway / Envoy Proxy (TLS Termination, Auth, Rate Limiting)"]
-    Driver["Driver App"] -->|"WS / gRPC (GPS Pings)"| Gateway
-    Gateway --> TripSvc["Trip & Booking Service (Trip State Machine, REST)"]
-    Gateway --> LocIngest["Location Ingestion Service (High-Throughput Go)"]
-    LocIngest --> KafkaLoc["Kafka Location Topic (Partitioned by H3 Index)"]
-    KafkaLoc --> GeoStore[("Geospatial Driver Store (Redis / H3)")]
-    KafkaLoc --> SurgeEngine["Surge Engine (Flink / Spark Supply/Demand)"]
-    TripSvc --> Dispatch["Dispatch & Matching Engine (Batched Optimization)"]
-    GeoStore -->|"Queries Radius"| Dispatch
-    Dispatch --> PushNotif["Push Notification Service (WebSockets / APNs / FCM)"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Rider["Rider App (iOS / Android)"]
+        Driver["Driver App (4s GPS Stream)"]
+    end
+    subgraph EdgeTier["Edge & Ingress"]
+        Gateway["API Gateway / Envoy Proxy"]
+        PushNotif["Push & WS Gateway"]
+    end
+    subgraph AppBackend["Application & Stream Services"]
+        TripSvc["Trip & Booking Service"]
+        LocIngest["Location Ingestion (Go)"]
+        Dispatch["Dispatch & Matching Engine"]
+        SurgeEngine["Surge Engine (Flink)"]
+    end
+    subgraph DataLayer["Storage, Cache & Event Bus"]
+        KafkaLoc[["Kafka Location Topic (H3)"]]
+        GeoStore[("Redis Geospatial (H3)")]
+    end
+    Rider e1@-->|"REST / WS"| Gateway
+    Driver e2@-->|"gRPC GPS"| Gateway
+    Gateway e3@-->|"Book Trip"| TripSvc
+    Gateway e4@-->|"GPS Stream"| LocIngest
+    LocIngest e5@-->|"Publish H3"| KafkaLoc
+    KafkaLoc e6@-->|"GEOADD"| GeoStore
+    KafkaLoc e7@-->|"Supply/Demand"| SurgeEngine
+    TripSvc e8@-->|"Match"| Dispatch
+    Dispatch e9@-->|"Query k-ring"| GeoStore
+    Dispatch e10@-->|"Ride Offer"| PushNotif
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Rider,Driver client
+    class Gateway,PushNotif edge
+    class TripSvc,LocIngest,Dispatch service
+    class SurgeEngine worker
+    class GeoStore cache
+    class KafkaLoc queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppBackend fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -98,14 +147,28 @@ Traditional SQL indexing (`B-Trees`) cannot efficiently query two-dimensional co
   * Hierarchical: 16 resolution levels (Resolution 7 $\approx 1.2\text{ km}$ edge length; Resolution 8 $\approx 460\text{ meters}$, ideal for neighborhood dispatch).
 
 ```mermaid
-flowchart TD
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
     subgraph H3_Hierarchy["Uber H3 Hexagonal Cell Hierarchies"]
-        H8["Resolution 8 Cell (~460m) - Micro Dispatch"]
-        H7["Resolution 7 Cell (~1.2km) - Surge Pricing Aggregation"]
-        H6["Resolution 6 Cell (~3.2km) - City Sector Supply/Demand"]
-        H8 --> H7
-        H7 --> H6
+        H8["Resolution 8 (~460m): Micro Dispatch"]
+        H7["Resolution 7 (~1.2km): Surge Pricing"]
+        H6["Resolution 6 (~3.2km): City Sector"]
     end
+    H8 e1@-->|"7 Hexagons Rollup"| H7
+    H7 e2@-->|"7 Hexagons Rollup"| H6
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+
+    class H8 client
+    class H7 service
+    class H6 edge
+
+    style H3_Hierarchy fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ### 2. Location Ingestion Pipeline
@@ -287,41 +350,78 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph Clients_And_Gateway["Mobile Clients & Gateway Layer"]
-        RiderApp["Rider App (iOS / Android: Request Ride, Live WS Map Track)"]
-        DriverApp["Driver App (iOS / Android: 4s GPS Telemetry, Accept/Decline Offer)"]
-        Gateway{"API Gateway / Envoy Proxy (TLS, Auth, Rate Limiting, WebSocket Pool)"}
-        NotifSvc["Push Notification Service (Apple APNs / FCM / WebSockets)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        RiderApp["Rider App (Request & Live Map)"]
+        DriverApp["Driver App (4s GPS & Offers)"]
     end
-    subgraph Location_And_Geospatial["Location Ingestion & Geospatial Pipeline"]
-        LocIngest["Location Ingestion Service (High-Throughput Go Workers: Lat/Lon to H3 Cell & HMM Map Matching)"]
-        Kafka["Apache Kafka (Topic: driver-locations, Partitioned by H3Index)"]
-        GeoCache[("Geospatial Cache (Redis / H3: Active Drivers per H3 Cell, 15s TTL Auto-Expire)")]
-        ColdTelemetry[("Trajectory Cold Store (Cassandra / AWS S3: Route Reconstruction & Billing Audit)")]
+    subgraph EdgeTier["Edge & API Gateway"]
+        Gateway{"API Gateway / Envoy (WS Pool)"}
+        NotifSvc["Push Notification Svc (APNs/FCM)"]
     end
-    subgraph Trip_And_Dispatch["Trip Lifecycle & Batched Dispatch Layer"]
-        TripSvc["Trip & Booking Service (Trip State Machine: Requested -> Dispatched -> Accepted -> Completed)"]
-        TripDB[("Trip Database (PostgreSQL: Optimistic Locking via Version Column, Prevents Double-Dispatch)")]
-        DispatchEngine["Dispatch & Matching Engine (Batched Bipartite Matching, Hungarian Algorithm / MCMF)"]
+    subgraph CoreServices["Core Microservices & Workers"]
+        LocIngest["Location Ingestion (Go + HMM)"]
+        TripSvc["Trip & Booking Svc (State Machine)"]
+        DispatchEngine["Dispatch Engine (Hungarian MCMF)"]
+        SurgeEngine["Dynamic Surge Engine (Flink H3)"]
     end
-    subgraph Surge_And_Pricing["Dynamic Surge Pricing Engine"]
-        SurgeEngine["Dynamic Surge Engine (Apache Flink: Supply/Demand per H3 Cell, Gaussian k-ring Smoothing)"]
+    subgraph DataAndEventTier["Data Stores, Caches & Event Bus"]
+        Kafka[["Kafka Bus (driver-locations)"]]
+        GeoCache[("Redis Geospatial (H3 15s TTL)")]
+        ColdTelemetry[("Cassandra / S3 Trajectory Store")]
+        TripDB[("PostgreSQL Trip DB (ACID)")]
     end
-    RiderApp -->|"REST / WebSocket"| Gateway
-    DriverApp -->|"gRPC / WebSocket (4s GPS Pings)"| Gateway
-    Gateway -->|"GPS Stream"| LocIngest
-    Gateway -->|"Request / Accept Trip"| TripSvc
-    LocIngest -->|"Publish by H3Index"| Kafka
-    Kafka -->|"Update Driver Coords (GEOADD)"| GeoCache
-    Kafka -->|"Archive Trajectory"| ColdTelemetry
-    Kafka -->|"Real-Time Supply/Demand"| SurgeEngine
-    SurgeEngine -.->|"Dynamic Multiplier"| TripSvc
-    TripSvc -->|"ACID State & Version Check"| TripDB
-    TripSvc -->|"Trigger Match"| DispatchEngine
-    DispatchEngine -->|"Query H3 k-ring Available Drivers"| GeoCache
-    DispatchEngine -->|"Send Offer (15s Countdown)"| NotifSvc
-    NotifSvc -->|"Deliver Push / WS Frame"| Gateway
+    RiderApp e1@-->|"REST / WS"| Gateway
+    DriverApp e2@-->|"4s GPS Pings"| Gateway
+    Gateway e3@-->|"GPS Stream"| LocIngest
+    Gateway e4@-->|"Book / Accept"| TripSvc
+    LocIngest e5@-->|"By H3Index"| Kafka
+    Kafka e6@-->|"GEOADD"| GeoCache
+    Kafka e7@-->|"Archive Route"| ColdTelemetry
+    Kafka e8@-->|"Supply/Demand"| SurgeEngine
+    SurgeEngine e9@-.->|"Multiplier"| TripSvc
+    TripSvc e10@-->|"Optimistic Lock"| TripDB
+    TripSvc e11@-->|"Match Request"| DispatchEngine
+    DispatchEngine e12@-->|"Query H3 k-ring"| GeoCache
+    DispatchEngine e13@-->|"15s Offer"| NotifSvc
+    NotifSvc e14@-->|"Push / WS"| DriverApp
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class RiderApp,DriverApp client
+    class Gateway,NotifSvc edge
+    class LocIngest,TripSvc,DispatchEngine service
+    class SurgeEngine worker
+    class GeoCache cache
+    class ColdTelemetry,TripDB storage
+    class Kafka queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

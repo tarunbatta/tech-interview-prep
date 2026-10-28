@@ -69,32 +69,59 @@ A comprehensive system design for Airbnb centers around three core distributed s
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
     Client["Client Apps (iOS / Android / Web)"]
-    subgraph MediaPipeline["Media Pipeline & CDN"]
-        CDN["Global Edge CDN (Photos / Reviews)"]
-        S3["AWS S3 (Master Photos)"]
-    end
-    subgraph AppBackend["Application Backend"]
+    subgraph EdgeTier["Edge & Ingress"]
+        CDN["Global Edge CDN"]
         GW["API Gateway / Envoy"]
+    end
+    subgraph AppBackend["Application Services"]
         SearchSvc["Search Service"]
         AvailSvc["Availability Service"]
         BookingSvc["Booking Service"]
     end
-    subgraph DataLayer["Storage & Caching Layer"]
-        ES[("Elasticsearch Cluster")]
-        Redis[("Redis Calendar Bitmaps")]
-        Aurora[("MySQL / Aurora (ACID)")]
+    subgraph DataLayer["Storage & Caching"]
+        S3[("AWS S3 (Photos)")]
+        ES[("Elasticsearch")]
+        Redis[("Redis Bitmaps")]
+        Aurora[("MySQL / Aurora")]
     end
-    Client -->|"1. Fetch Media (Edge CDN)"| CDN
-    S3 -->|"Origin Pull"| CDN
-    Client -->|"2. Dynamic APIs (REST / GraphQL)"| GW
-    GW -->|"Search Queries"| SearchSvc
-    GW -->|"Calendar Checks"| AvailSvc
-    GW -->|"Reservations"| BookingSvc
-    SearchSvc -->|"Geo & Filter Query"| ES
-    AvailSvc -->|"Bitwise Operations"| Redis
-    BookingSvc -->|"ACID Transactions"| Aurora
+    Client e1@-->|"1. Fetch Media"| CDN
+    CDN e2@-->|"Origin Pull"| S3
+    Client e3@-->|"2. REST / GraphQL"| GW
+    GW e4@-->|"Search"| SearchSvc
+    GW e5@-->|"Calendar"| AvailSvc
+    GW e6@-->|"Reserve"| BookingSvc
+    SearchSvc e7@-->|"Geo Query"| ES
+    AvailSvc e8@-->|"Bitwise Ops"| Redis
+    BookingSvc e9@-->|"ACID Tx"| Aurora
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDN,GW edge
+    class SearchSvc,AvailSvc,BookingSvc service
+    class Redis cache
+    class S3,ES,Aurora storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppBackend fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -271,45 +298,86 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientTier["Client & Edge Media Tier"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
         Client["Guest & Host Apps (iOS / Android / Web)"]
-        CDN["Global Edge CDN (Listing Photos, Floor Plans & Reviews)"]
-        S3[("AWS S3 Object Store (Master Photos & Proofs)")]
     end
-    subgraph GatewayTier["API Gateway & Routing Tier"]
-        GW{"API Gateway / Envoy (Auth, Rate Limiting, SSL, Idempotency Key Check)"}
+    subgraph EdgeTier["Edge & API Gateway"]
+        CDN["Global Edge CDN (Photos & Reviews)"]
+        GW{"API Gateway / Envoy (Auth, Rate Limit, SSL)"}
     end
-    subgraph CoreServices["Core Application Microservices"]
-        SearchSvc["Search Service (Geospatial Bounding Box, Date Range & Amenity Filter)"]
-        AvailSvc["Availability Service (Listing Date Bitmaps: 365 bits/year)"]
-        BookingSvc["Booking & Reservation Svc (Saga Orchestrator, 15-min Distributed Lock & Lease)"]
-        PaymentSvc["Payment Service (Stripe / Bank: 2PC, Escrow Hold, 24h Post-Checkin Payout)"]
-        PricingSvc["Dynamic Smart Pricing Engine (Nightly ML Hydration & Supply Adjustment)"]
-        ICalSync["iCal Sync Worker Pool (Two-Way RFC 5545 OTA Polling)"]
+    subgraph CoreServices["Core Microservices & Workers"]
+        SearchSvc["Search Service (Geo-Box & Filters)"]
+        AvailSvc["Availability Svc (365-Bit Calendar)"]
+        BookingSvc["Booking Service (Saga & 15m Hold)"]
+        PaymentSvc["Payment Service (Stripe Escrow & 2PC)"]
+        PricingSvc["Smart Pricing (Nightly ML Rates)"]
+        ICalSync["iCal Sync Pool (Two-Way OTA Poll)"]
     end
     subgraph DataAndEventTier["Data Stores, Caches & Event Bus"]
-        ES[("Elasticsearch Cluster (Geo-Point Index, Price, Room Type, Ratings)")]
-        RedisCal[("Redis Calendar Cache (Bitmaps: 0=Avail, 1=Booked, Sub-ms Intersection)")]
-        BookingDB[("Booking DB (MySQL / Aurora ACID, Unique Index: listing_id + stay_date)")]
-        Kafka[["Kafka Event Bus (Topics: booking-confirmed, listing-updated, reviews)"]]
+        S3[("AWS S3 Store (Master Media)")]
+        ES[("Elasticsearch (Geo & Listings)")]
+        RedisCal[("Redis Cache (Calendar Bitmaps)")]
+        BookingDB[("Aurora MySQL (ACID Ledger)")]
+        Kafka[["Kafka Event Bus (Domain Events)"]]
     end
-    Client -->|"Static Media Fetch"| CDN
-    CDN -->|"Origin Pull"| S3
-    Client -->|"REST / GraphQL"| GW
-    GW -->|"GET /api/v1/listings/search"| SearchSvc
-    GW -->|"POST /api/v1/bookings/reserve"| BookingSvc
-    SearchSvc -->|"Geo-Distance & Attribute Query"| ES
-    SearchSvc -->|"Filter Open Dates"| AvailSvc
-    AvailSvc -->|"Bitfield GET & Bitwise AND"| RedisCal
-    BookingSvc -->|"Acquire 15-min Lock (SETNX) & Update Bitmap"| RedisCal
-    BookingSvc -->|"Commit Hold & ACID Constraint Check"| BookingDB
-    BookingSvc -->|"Execute Charge & Escrow Hold"| PaymentSvc
-    BookingSvc -->|"Publish Booking & Listing Events"| Kafka
-    Kafka -.->|"Async Index Sync"| ES
-    PricingSvc -->|"Hydrate Daily Rates"| RedisCal
-    ICalSync -->|"Sync External OTA Blocks"| BookingDB
-    ICalSync -->|"Update Availability Bits"| RedisCal
+    Client e1@-->|"Static Media"| CDN
+    CDN e2@-->|"Origin Pull"| S3
+    Client e3@-->|"REST / GraphQL"| GW
+    GW e4@-->|"GET /search"| SearchSvc
+    GW e5@-->|"GET /calendar"| AvailSvc
+    GW e6@-->|"POST /reserve"| BookingSvc
+    GW e7@-->|"POST /pay"| PaymentSvc
+    SearchSvc e8@-->|"Geo & Filter"| ES
+    SearchSvc e9@-->|"Date Mask"| RedisCal
+    AvailSvc e10@-->|"Bitwise AND"| RedisCal
+    BookingSvc e11@-->|"15m Lock (SETNX)"| RedisCal
+    BookingSvc e12@-->|"ACID Commit"| BookingDB
+    BookingSvc e13@-->|"Publish Event"| Kafka
+    PaymentSvc e14@-->|"Escrow Ledger"| BookingDB
+    PricingSvc e15@-->|"Hydrate Rates"| RedisCal
+    ICalSync e16@-->|"Sync Blocks"| BookingDB
+    ICalSync e17@-->|"Update Bits"| RedisCal
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+    e16@{ animate: true }
+    e17@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDN,GW edge
+    class SearchSvc,AvailSvc,BookingSvc,PaymentSvc service
+    class PricingSvc,ICalSync worker
+    class RedisCal cache
+    class S3,ES,BookingDB storage
+    class Kafka queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -345,27 +413,51 @@ flowchart TD
 ### 5. Instant Book vs Request-to-Book Workflow
 
 ```mermaid
-flowchart TD
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
     Start["Guest Initiates Booking"]
     Hold15["Acquire 15-min Hold"]
     Pay["Execute Payment"]
     Confirmed["Booking Confirmed"]
-    HoldNotif["Place Hold & Send Host Notification"]
+    HoldNotif["Place Hold & Notify Host"]
     Decision{"Host 24-hr Decision"}
     Accept["Host Accepts"]
     Reject["Host Rejects / Expires"]
-    AuthPay["Trigger Payment Authorization"]
+    AuthPay["Capture Payment"]
     Release["Release Calendar Hold"]
-    Start -->|"Instant Book"| Hold15
-    Hold15 -->|"Proceed to Checkout"| Pay
-    Pay -->|"Charge Success"| Confirmed
-    Start -->|"Request to Book"| HoldNotif
-    HoldNotif -->|"Await Response"| Decision
-    Decision -->|"Approved"| Accept
-    Decision -->|"Declined or Timeout"| Reject
-    Accept -->|"Capture Funds"| AuthPay
-    AuthPay -->|"Settled"| Confirmed
-    Reject -->|"Free Dates"| Release
+    Start e1@-->|"Instant Book"| Hold15
+    Hold15 e2@-->|"Checkout"| Pay
+    Pay e3@-->|"Settled"| Confirmed
+    Start e4@-->|"Request to Book"| HoldNotif
+    HoldNotif e5@-->|"Await"| Decision
+    Decision e6@-->|"Approved"| Accept
+    Decision e7@-->|"Declined"| Reject
+    Accept e8@-->|"Authorize"| AuthPay
+    AuthPay e9@-->|"Settled"| Confirmed
+    Reject e10@-->|"Free Dates"| Release
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+
+    classDef start fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef step fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef decision fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef success fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef danger fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+
+    class Start start
+    class Hold15,Pay,HoldNotif,Accept,AuthPay step
+    class Decision decision
+    class Confirmed success
+    class Reject,Release danger
 ```
 
 ---

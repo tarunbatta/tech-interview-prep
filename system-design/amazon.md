@@ -66,32 +66,59 @@ In a system design interview, designing Amazon focuses on:
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
     Client["Client Apps (Web / Mobile App)"]
-    subgraph MediaPipeline["Media Pipeline & CDN"]
+    subgraph EdgeTier["Edge & Ingress"]
         CDN["CloudFront CDN (Product Images)"]
-        S3["AWS S3 (Asset Masters)"]
-    end
-    subgraph AppBackend["Application Backend"]
         GW["API Gateway / Envoy"]
+    end
+    subgraph AppBackend["Application Services"]
         CatalogSvc["Catalog Service"]
         CartSvc["Cart Service"]
         CheckoutSaga["Checkout Saga"]
     end
-    subgraph StorageLayer["Storage & Reservation Layer"]
+    subgraph StorageLayer["Storage & Reservation"]
+        S3[("AWS S3 (Asset Masters)")]
         ES[("Elasticsearch Cluster")]
         DynamoCart[("DynamoDB (Carts)")]
-        InvSvc["Inventory Service (Locks)"]
+        InvSvc[("Redis / Inventory Locks")]
     end
-    Client -->|"1. Fetch Media (CloudFront)"| CDN
-    S3 -->|"Origin Pull"| CDN
-    Client -->|"2. Dynamic APIs (REST / GraphQL)"| GW
-    GW -->|"Browse / Search"| CatalogSvc
-    GW -->|"Cart Operations"| CartSvc
-    GW -->|"Place Order"| CheckoutSaga
-    CatalogSvc -->|"Full-Text Query"| ES
-    CartSvc -->|"Read / Write Cart"| DynamoCart
-    CheckoutSaga -->|"Reserve Stock"| InvSvc
+    Client e1@-->|"1. Fetch Media"| CDN
+    CDN e2@-->|"Origin Pull"| S3
+    Client e3@-->|"2. REST / GraphQL"| GW
+    GW e4@-->|"Browse / Search"| CatalogSvc
+    GW e5@-->|"Cart Ops"| CartSvc
+    GW e6@-->|"Place Order"| CheckoutSaga
+    CatalogSvc e7@-->|"Full-Text Query"| ES
+    CartSvc e8@-->|"Read / Write"| DynamoCart
+    CheckoutSaga e9@-->|"Reserve Stock"| InvSvc
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDN,GW edge
+    class CatalogSvc,CartSvc,CheckoutSaga service
+    class InvSvc cache
+    class S3,ES,DynamoCart storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppBackend fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style StorageLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -264,42 +291,80 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientEdge["Client & Edge Delivery Tier"]
-        Client["Customer Client (Web / Mobile App: Search, Cart & 1-Click Checkout)"]
-        CDN["Global Edge CDN (CloudFront: Product Images, Reviews & Static Assets)"]
-        S3[("AWS S3 Asset Store (Product Media Masters)")]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Client["Customer Client (Web / Mobile App)"]
     end
-    subgraph GatewayTier["API Gateway Tier"]
-        GW{"API Gateway / Envoy (Auth, Rate Limiting, SSL, Idempotency Key Check)"}
+    subgraph EdgeTier["Edge & API Gateway"]
+        CDN["CloudFront CDN (Images & Reviews)"]
+        GW{"API Gateway / Envoy (Auth, Rate Limit)"}
     end
-    subgraph BrowsingAndCart["Catalog & Cart Services"]
-        CatalogSvc["Product Catalog Service (100M+ SKUs, Categories, Attributes, Buy Box ML)"]
-        ES[("Elasticsearch Cluster (Full-Text Search, Faceted Filtering & Autocomplete)")]
-        CartSvc["Shopping Cart Service (Session & Cross-Device User Carts)"]
-        DynamoCart[("DynamoDB / Redis (Shopping Cart KV Store, Partition Key: CustomerId)")]
+    subgraph CoreServices["Core Microservices & Orchestration"]
+        CatalogSvc["Catalog Service (100M+ SKUs & Buy Box)"]
+        CartSvc["Shopping Cart Svc (Cross-Device Sync)"]
+        OrderSaga["Checkout Orchestrator (Distributed Saga)"]
+        InvSvc["Inventory Service (15m Hold & Lua)"]
+        PaySvc["Payment Service (1-Click & Idempotency)"]
     end
-    subgraph CheckoutAndFulfillment["Checkout Saga, Inventory & Fulfillment"]
-        OrderSaga["Order & Checkout Orchestrator (Distributed Saga: Reserve -> Charge -> Create Order)"]
-        InvSvc["Inventory Service (Two-Phase Reservation with 15-min TTL, Atomic Redis Lua Decr)"]
-        RedisInv[("Redis Inventory Cache (Flash Sale Atomic Counters & Lease Holds)")]
-        PaySvc["Payment Service (Credit Cards, 1-Click Pay, Strict Idempotency Tokens)"]
-        OrderDB[("Order DB (Aurora MySQL: Immutable Order Records & Financial Audit Ledger)")]
-        WMS["Fulfillment & Warehouse Management (WMS: Package Dispatch & Tracking)"]
+    subgraph DataAndFulfillment["Data Stores, Caches & Fulfillment"]
+        S3[("AWS S3 Store (Product Media)")]
+        ES[("Elasticsearch (Faceted Search)")]
+        DynamoCart[("DynamoDB / Redis (Cart KV Store)")]
+        RedisInv[("Redis Cache (Flash Sale Counters)")]
+        OrderDB[("Aurora MySQL (Immutable Orders)")]
+        WMS[["Warehouse WMS (Fulfillment Queue)"]]
     end
-    Client -->|"Fetch Static Media"| CDN
-    CDN -->|"Origin Pull"| S3
-    Client -->|"REST / GraphQL"| GW
-    GW -->|"Browse / Search"| CatalogSvc
-    CatalogSvc -->|"Query Index"| ES
-    GW -->|"Cart CRUD"| CartSvc
-    CartSvc -->|"Sub-ms Read/Write"| DynamoCart
-    GW -->|"POST /api/v1/checkout"| OrderSaga
-    OrderSaga -->|"1. Reserve Hold"| InvSvc
-    InvSvc -->|"Execute Lua Script (DECRBY + SETEX)"| RedisInv
-    OrderSaga -->|"2. Charge Card (Idempotent)"| PaySvc
-    OrderSaga -->|"3. Commit Order"| OrderDB
-    OrderDB -->|"Dispatch Event"| WMS
+    Client e1@-->|"Static Media"| CDN
+    CDN e2@-->|"Origin Pull"| S3
+    Client e3@-->|"REST / GraphQL"| GW
+    GW e4@-->|"Browse / Search"| CatalogSvc
+    GW e5@-->|"Cart CRUD"| CartSvc
+    GW e6@-->|"POST /checkout"| OrderSaga
+    CatalogSvc e7@-->|"Query Index"| ES
+    CartSvc e8@-->|"Sub-ms R/W"| DynamoCart
+    OrderSaga e9@-->|"1. Reserve Hold"| InvSvc
+    OrderSaga e10@-->|"2. Charge Card"| PaySvc
+    OrderSaga e11@-->|"3. Commit Order"| OrderDB
+    OrderSaga e12@-->|"4. Dispatch"| WMS
+    InvSvc e13@-->|"Lua DECRBY"| RedisInv
+    PaySvc e14@-->|"Audit Ledger"| OrderDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDN,GW edge
+    class CatalogSvc,CartSvc,OrderSaga service
+    class InvSvc,PaySvc worker
+    class RedisInv cache
+    class S3,ES,DynamoCart,OrderDB storage
+    class WMS queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndFulfillment fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

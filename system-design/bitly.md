@@ -74,31 +74,67 @@ Designing Bitly involves solving foundational web-scale distributed systems chal
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
     Client["Client Apps (Browser / Mobile)"]
-    CDN["Global Edge CDN (Cloudflare: Caches Viral Hot Links)"]
-    GW["API Gateway / Load Balancer (Rate Limiting, WAF, SSL)"]
-    subgraph ReadPath["Read Path (Redirect)"]
-        RedirSvc["Redirection Service (Bloom Filter, Redis Lookup, HTTP 302/307)"]
+    subgraph EdgeTier["Edge & Ingress"]
+        CDN["Global Edge CDN (Cloudflare)"]
+        GW["API Gateway / Load Balancer"]
     end
-    subgraph WritePath["Write Path (Shorten)"]
-        ShortenSvc["URL Shortening Service (Validate URL, Fetch Key, Persist)"]
-        KGS["Key Generation Service (Pre-generated Base62)"]
-    end
-    subgraph AnalyticsPipeline["Clickstream Analytics Pipeline"]
-        Kafka[["Apache Kafka (Click Logs)"]]
+    subgraph AppServices["Read, Write & Stream Services"]
+        RedirSvc["Redirection Service (HTTP 302)"]
+        ShortenSvc["URL Shortening Service"]
         Flink["Apache Flink (Aggregator)"]
+    end
+    subgraph DataLayer["Key Gen, Storage & Analytics"]
+        Redis[("Redis & NoSQL DB")]
+        KGS[("Key Generation Service (KGS)")]
+        Kafka[["Apache Kafka (Click Logs)"]]
         ClickHouse[("ClickHouse (OLAP)")]
     end
-    Client -->|"1. GET /{shortCode} (Fast Redirect)"| CDN
-    CDN -->|"Cache Miss"| GW
-    Client -->|"2. POST /api/v1/shorten (Write Path)"| GW
-    GW -->|"Read Path"| RedirSvc
-    GW -->|"Write Path"| ShortenSvc
-    ShortenSvc -->|"Fetch Next Key"| KGS
-    RedirSvc -->|"Emit Click Event"| Kafka
-    Kafka -->|"Stream Events"| Flink
-    Flink -->|"Store Metrics"| ClickHouse
+    Client e1@-->|"1. GET /{code}"| CDN
+    CDN e2@-->|"Cache Miss"| GW
+    Client e3@-->|"2. POST /shorten"| GW
+    GW e4@-->|"Read Path"| RedirSvc
+    GW e5@-->|"Write Path"| ShortenSvc
+    RedirSvc e6@-->|"Lookup URL"| Redis
+    RedirSvc e7@-->|"Click Event"| Kafka
+    ShortenSvc e8@-->|"Fetch Key"| KGS
+    ShortenSvc e9@-->|"Save Mapping"| Redis
+    Flink e10@-->|"Consume Logs"| Kafka
+    Flink e11@-->|"Store Metrics"| ClickHouse
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDN,GW edge
+    class RedirSvc,ShortenSvc service
+    class Flink worker
+    class Redis cache
+    class KGS,ClickHouse storage
+    class Kafka queue
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -214,42 +250,79 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientAndEdge["Clients & Edge Caching Tier"]
-        Clients["Clients & API Consumers (Web, Mobile, Tweet, SMS)"]
-        CDN["Global Edge CDN (Cloudflare: Caches Top 10,000 Viral Links)"]
-        GW{"API Gateway / Load Balancer (Rate Limiting, WAF, SSL, Read/Write Router)"}
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Clients["Clients & API Consumers (Web / Mobile)"]
     end
-    subgraph WriteServices["Write Path & Key Generation"]
-        WriteSvc["URL Shortening Service (Base62 Encoding, Vanity Alias, Phishing Scan)"]
-        KGS["Key Generation Service (KGS: Pre-generates 7-char Base62 Keys in Memory Buffer)"]
-        KGSDB[("KGS Key DB (available_keys & used_keys Tables)")]
+    subgraph EdgeTier["Edge & API Gateway"]
+        CDN["Global Edge CDN (Top 10K Viral Links)"]
+        GW{"API Gateway / Envoy (Rate Limit & WAF)"}
     end
-    subgraph ReadAndStorage["Read Path, Caching & Persistence"]
-        ReadSvc["Redirection Service (Fast Lookup, HTTP 302/307, Async Telemetry)"]
-        Bloom["Bloom Filter Cluster (Instant 404 Rejection of Non-Existent Keys)"]
-        Redis[("Redis Cache Cluster (LRU Eviction, Top 20% Hot Keys, Sub-ms Read)")]
-        NoSQL[("Distributed NoSQL DB (Cassandra / DynamoDB: Partition Key short_url_hash)")]
+    subgraph CoreServices["Core Services & Stream Workers"]
+        WriteSvc["URL Shortening Svc (Base62 & Alias)"]
+        KGS["Key Generation Svc (In-Memory Buffer)"]
+        ReadSvc["Redirection Service (HTTP 302 / 307)"]
+        Flink["Apache Flink (GeoIP & Aggregation)"]
     end
-    subgraph AnalyticsStream["Real-Time Clickstream Analytics Pipeline"]
-        Kafka[["Click Stream (Apache Kafka: IP, Referrer, UserAgent, Timestamp)"]]
-        Flink["Apache Flink / Spark Streaming (GeoIP Enrichment & Hourly/Daily Aggregations)"]
-        ClickHouse[("OLAP Store (ClickHouse: Click Metrics, Geolocation, Device Breakdown)")]
+    subgraph DataAndEventTier["Caches, Databases & Event Bus"]
+        KGSDB[("KGS Key DB (Available & Used Keys)")]
+        Bloom[("Bloom Filter (Fast 404 Reject)")]
+        Redis[("Redis Cache (Top 20% Hot URLs)")]
+        NoSQL[("Cassandra / DynamoDB (URL Mappings)")]
+        Kafka[["Apache Kafka (Click Telemetry)"]]
+        ClickHouse[("ClickHouse OLAP (Click Analytics)")]
     end
-    Clients -->|"GET /{shortCode}"| CDN
-    CDN -->|"Cache Miss / Origin Redirect"| GW
-    Clients -->|"POST /api/v1/shorten"| GW
-    GW -->|"POST /shorten"| WriteSvc
-    WriteSvc -->|"Fetch Next Batch Key"| KGS
-    KGS -->|"Load 100K Key Ranges"| KGSDB
-    WriteSvc -->|"Persist Short URL Mapping"| NoSQL
-    GW -->|"GET /{shortCode}"| ReadSvc
-    ReadSvc -->|"1. Check Key Exists"| Bloom
-    ReadSvc -->|"2. Cache Lookup"| Redis
-    Redis -->|"3. DB Fallback on Miss"| NoSQL
-    ReadSvc -.->|"Async Fire-and-Forget Telemetry"| Kafka
-    Kafka -->|"Consume Click Events"| Flink
-    Flink -->|"Write Enriched OLAP Rows"| ClickHouse
+    Clients e1@-->|"GET /{shortCode}"| CDN
+    CDN e2@-->|"Cache Miss"| GW
+    Clients e3@-->|"POST /shorten"| GW
+    GW e4@-->|"Create Link"| WriteSvc
+    GW e5@-->|"Resolve Link"| ReadSvc
+    WriteSvc e6@-->|"Claim Key"| KGS
+    WriteSvc e7@-->|"Persist URL"| NoSQL
+    KGS e8@-->|"Load 100K Batch"| KGSDB
+    ReadSvc e9@-->|"1. Check Exists"| Bloom
+    ReadSvc e10@-->|"2. Read Cache"| Redis
+    ReadSvc e11@-->|"3. DB Fallback"| NoSQL
+    ReadSvc e12@-.->|"Async Event"| Kafka
+    Flink e13@-->|"Consume Stream"| Kafka
+    Flink e14@-->|"Write Metrics"| ClickHouse
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Clients client
+    class CDN,GW edge
+    class WriteSvc,ReadSvc service
+    class KGS,Flink worker
+    class Bloom,Redis cache
+    class KGSDB,NoSQL,ClickHouse storage
+    class Kafka queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

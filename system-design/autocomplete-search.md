@@ -60,27 +60,57 @@ The fundamental architectural challenge is delivering responses with **ultra-low
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Client["Client Apps (50ms Debounced Keystroke, Local Browser Cache)"]
-    subgraph RealtimePath["Real-Time Query Path"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Client["Client Apps (50ms Debounce & Cache)"]
+    subgraph EdgeTier["Gateway & Ingestion"]
         GW["API Gateway / Envoy"]
-        SuggestSvc["Suggestion Service"]
-        TrieCluster[("In-Memory Trie Cluster (Precomputed Top-5 Nodes)")]
-    end
-    subgraph DataPipeline["Data Collection Pipeline"]
         LogCollector["Search Log Collector"]
-        Kafka[["Apache Kafka Logs"]]
-        Spark["Apache Spark Aggregation (Weekly Frequency Counts)"]
-        TrieBuilder["Trie Builder Worker Fleet (Serializes Snapshot)"]
     end
-    Client -->|"1. GET /suggest?q=sys"| GW
-    GW -->|"Route Query"| SuggestSvc
-    SuggestSvc -->|"Lookup Prefix"| TrieCluster
-    Client -->|"2. Submit Search"| LogCollector
-    LogCollector -->|"Append Query Event"| Kafka
-    Kafka -->|"Stream Logs"| Spark
-    Spark -->|"Aggregated Frequencies"| TrieBuilder
-    TrieBuilder -.->|"Swap Snapshot"| TrieCluster
+    subgraph AppServices["Serving & Aggregation"]
+        SuggestSvc["Suggestion Service"]
+        Kafka[["Apache Kafka Logs"]]
+        Spark["Spark Aggregation"]
+    end
+    subgraph StorageTier["Trie & Builders"]
+        TrieCluster[("In-Memory Trie (Top-5)")]
+        TrieBuilder["Trie Builder Fleet"]
+    end
+    Client e1@-->|"1. GET /suggest"| GW
+    GW e2@-->|"Route Query"| SuggestSvc
+    SuggestSvc e3@-->|"Lookup Prefix"| TrieCluster
+    Client e4@-->|"2. Submit Search"| LogCollector
+    LogCollector e5@-->|"Query Event"| Kafka
+    Kafka e6@-->|"Stream Logs"| Spark
+    Spark e7@-->|"Frequencies"| TrieBuilder
+    TrieBuilder e8@-.->|"Swap Snapshot"| TrieCluster
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class GW,LogCollector edge
+    class SuggestSvc service
+    class Spark,TrieBuilder worker
+    class TrieCluster cache
+    class Kafka queue
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style StorageTier fill:transparent,stroke:#fb7185,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -97,20 +127,38 @@ A naive Trie traverses from the root down to the last character of the prefix, t
   * Finding the top suggestions becomes an $O(L)$ operation, where $L$ is the prefix length (e.g., $L \le 20$ operations), completely independent of the total number of words in the dictionary!
 
 ```mermaid
-flowchart TD
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
     Root(("Root"))
-    NodeT["'t'"]
-    NodeE["'e'"]
-    NodeC["'c'"]
-    NodeS["'s' (Top-5: system design, sql, spotify...)"]
-    NodeY["'y' (Top-5: system design, systemctl, sysadmin...)"]
-    NodeSys["'s' (Top-5: system design, sysadmin, systemctl)"]
-    Root -->|"t"| NodeT
-    NodeT -->|"e"| NodeE
-    NodeE -->|"c"| NodeC
-    Root -->|"s"| NodeS
-    NodeS -->|"y"| NodeY
-    NodeY -->|"s"| NodeSys
+    NodeT["'t' (Top-5: twitter, tesla...)"]
+    NodeE["'e' (Top-5: tech, telegram...)"]
+    NodeC["'c' (Top-5: tech interview...)"]
+    NodeS["'s' (Top-5: system design, sql...)"]
+    NodeY["'y' (Top-5: system design, sys...)"]
+    NodeSys["'s' (Top-5: system design, sysadmin)"]
+    Root e1@-->|"t"| NodeT
+    NodeT e2@-->|"e"| NodeE
+    NodeE e3@-->|"c"| NodeC
+    Root e4@-->|"s"| NodeS
+    NodeS e5@-->|"y"| NodeY
+    NodeY e6@-->|"s"| NodeSys
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+
+    classDef root fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef branchT fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef branchS fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef target fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+
+    class Root root
+    class NodeT,NodeE,NodeC branchT
+    class NodeS,NodeY branchS
+    class NodeSys target
 ```
 
 ### 2. Trie Sharding Strategy
@@ -185,43 +233,78 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientAndEdge["Client & Edge Caching Tier"]
-        Client["Client Browser / App (50ms Debounced Keystroke & Local LRU Cache)"]
-        CDN["Global Edge CDN / PoP (Caches Top Popular Prefixes: 'a', 'b', 'c', 'fac', 'you')"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Client["Client Browser / App (50ms Debounce)"]
     end
-    subgraph GatewayTier["Gateway & Routing Tier"]
-        GW{"API Gateway / Load Balancer (SSL Termination, Rate Limiting, Prefix Routing)"}
+    subgraph EdgeTier["Edge & API Gateway"]
+        CDN["Global Edge CDN (Top Prefixes Cache)"]
+        GW{"API Gateway / Envoy (Rate Limit & SSL)"}
     end
-    subgraph RealtimeServing["Real-Time Serving Path (< 20ms Latency)"]
-        SuggestSvc["Suggestion Service (Queries In-Memory Shards by Consistent Hash of Prefix)"]
-        TrieCache[("In-Memory Trie Cluster (Precomputed Top-K at Each Node, O(L) Traversal)")]
-        TrendingCache[("Auxiliary Redis Cache (Fast-Trending Breaking News Overlay)")]
-        FilterSvc["Filter & Personalization Svc (Profanity / DMCA Blocklist & Geo/User Context)"]
+    subgraph CoreServices["Real-Time Serving & Workers"]
+        SuggestSvc["Suggestion Service (Consistent Hash)"]
+        FilterSvc["Filter & Context Svc (DMCA & Geo)"]
+        LogSvc["Search Log Service (Async Ingestion)"]
+        Flink["Apache Flink (5m Trending Window)"]
+        Spark["Spark & Trie Builder (Weekly Decay)"]
     end
-    subgraph OfflinePipeline["Data Collection & Trie Rebuild Pipeline (Batch & Streaming)"]
-        LogSvc["Search Log Service (Appends User Search Queries)"]
-        Kafka[["Kafka Logs Topic"]]
-        Flink["Apache Flink Stream Processor (5-min Sliding Window Trending Spikes)"]
-        Spark["Apache Spark / MapReduce (Weekly Query Frequency Counts & Exponential Decay)"]
-        TrieBuilder["Trie Builder Worker (Compiles Static Trie Snapshots)"]
-        S3Snap[("AWS S3 Snapshot Store (Immutable Serialized Trie Images)")]
+    subgraph DataAndEventTier["Caches, Event Bus & Snapshots"]
+        TrieCache[("In-Memory Trie (O(L) Top-K Nodes)")]
+        TrendingCache[("Redis Cache (Breaking News Overlay)")]
+        Kafka[["Kafka Logs Topic (Query Events)"]]
+        S3Snap[("AWS S3 Store (Trie Snapshots)")]
     end
-    Client -->|"Fetch Cached Top Prefix"| CDN
-    Client -->|"GET /api/v1/search/suggest?q=sys"| GW
-    GW -->|"Forward Query"| SuggestSvc
-    SuggestSvc -->|"O(L) Prefix Lookup"| TrieCache
-    SuggestSvc -->|"Merge Real-Time Spikes"| TrendingCache
-    TrieCache -->|"Raw Top-K Candidates"| FilterSvc
-    TrendingCache -->|"Trending Candidates"| FilterSvc
-    GW -->|"Async Search Event"| LogSvc
-    LogSvc -->|"Publish Search Event"| Kafka
-    Kafka -->|"Real-Time Stream"| Flink
-    Flink -->|"Inject High-Velocity Terms"| TrendingCache
-    Kafka -->|"Batch Ingestion"| Spark
-    Spark -->|"Time-Decayed Frequencies"| TrieBuilder
-    TrieBuilder -->|"Upload Compiled Snapshot"| S3Snap
-    S3Snap -.->|"Weekly Zero-Downtime Pointer Swap"| TrieCache
+    Client e1@-->|"Top Prefixes"| CDN
+    Client e2@-->|"GET /suggest"| GW
+    GW e3@-->|"Lookup Prefix"| SuggestSvc
+    GW e4@-->|"Post-Filter"| FilterSvc
+    GW e5@-->|"Async Log"| LogSvc
+    SuggestSvc e6@-->|"O(L) Read"| TrieCache
+    SuggestSvc e7@-->|"Merge Spikes"| TrendingCache
+    FilterSvc e8@-->|"Blocklist"| TrendingCache
+    LogSvc e9@-->|"Publish Event"| Kafka
+    Flink e10@-->|"Consume Stream"| Kafka
+    Flink e11@-->|"Inject Spikes"| TrendingCache
+    Spark e12@-->|"Batch Read"| Kafka
+    Spark e13@-->|"Write Image"| S3Snap
+    S3Snap e14@-.->|"Zero-Downtime Swap"| TrieCache
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDN,GW edge
+    class SuggestSvc,FilterSvc,LogSvc service
+    class Flink,Spark worker
+    class TrieCache,TrendingCache cache
+    class S3Snap storage
+    class Kafka queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

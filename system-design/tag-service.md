@@ -67,16 +67,63 @@ Designing a modern Tag Service requires solving key distributed systems challeng
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Clients["Client Apps (Web / Mobile Search)"] -->|"1. GET /tags/suggest?q=re"| Gateway["API Gateway / Envoy Proxy"]
-    Clients -->|"2. GET /items?tags=py+ml"| Gateway
-    Gateway -->|"Autocomplete"| AutoSvc["Tag Autocomplete Service (In-Memory Prefix Trie)"]
-    Gateway -->|"Search Query"| CoreSvc["Tag Core Service (Boolean Expression Solver)"]
-    Gateway -->|"Trending"| TrendSvc["Trending Aggregator (Count-Min Sketch + Flink)"]
-    CoreSvc --> InvertedIdx[("Inverted Index Cluster (Elasticsearch / Lucene)")]
-    CoreSvc --> Redis[("Redis Cache Cluster")]
-    TrendSvc --> Redis
-    InvertedIdx <-->|"Change Data Capture (CDC)"| RelDB[("Primary Relational DB (PostgreSQL / Aurora)")]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Clients["Client Apps (Web / Mobile Search)"]
+    subgraph EdgeTier["Edge & Gateway"]
+        Gateway["API Gateway / Envoy Proxy"]
+    end
+    subgraph AppTier["Tag Services & Streaming"]
+        AutoSvc["Autocomplete Svc (Prefix Trie)"]
+        CoreSvc["Tag Core Svc (Boolean Solver)"]
+        TrendSvc["Trending Svc (Count-Min + Flink)"]
+    end
+    subgraph DataTier["Index, Cache & Storage"]
+        Redis[("Redis Cache Cluster")]
+        InvertedIdx[("Elasticsearch / Lucene")]
+        RelDB[("PostgreSQL / Aurora")]
+    end
+    Clients e1@-->|"1. GET /suggest"| Gateway
+    Clients e2@-->|"2. GET /items"| Gateway
+    Gateway e3@-->|"Autocomplete"| AutoSvc
+    Gateway e4@-->|"Boolean Search"| CoreSvc
+    Gateway e5@-->|"Trending"| TrendSvc
+    AutoSvc e6@-->|"Trie Snapshot"| Redis
+    CoreSvc e7@-->|"Bitmap Intersect"| InvertedIdx
+    CoreSvc e8@-->|"Hot Sets"| Redis
+    CoreSvc e9@-->|"ACID Write"| RelDB
+    TrendSvc e10@-->|"Top-K ZSet"| Redis
+    RelDB e11@-.->|"CDC Stream"| InvertedIdx
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Clients client
+    class Gateway edge
+    class AutoSvc,CoreSvc service
+    class TrendSvc worker
+    class Redis cache
+    class InvertedIdx,RelDB storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppTier fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -195,32 +242,66 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientTier["Client & Edge Gateway Layer"]
-        Clients["Clients & Apps (Web, Mobile, CMS: Tag Autocomplete & Boolean Filtering)"]
-        Gateway["API Gateway / Envoy (Auth, Rate Limiting, SSL, Query Route Aggregation)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Clients["Clients & Apps (Web, Mobile, CMS)"]
     end
-    subgraph ServiceTier["Tag Processing, Search & Streaming Services"]
-        AutoSvc["Tag Autocomplete Service (In-Memory Prefix Trie Node Cluster: O(L) Top-K Weighted Lookup)"]
-        TagSvc["Tag Core Service (Tag CRUD, Canonical Synonym Rewriter, Boolean Expression Solver)"]
-        TrendSvc["Trending Tags Aggregator (Apache Flink + Count-Min Sketch: Real-Time Z-Score Velocity)"]
+    subgraph EdgeTier["Edge & API Gateway"]
+        Gateway{"API Gateway / Envoy (Auth & Route)"}
     end
-    subgraph StorageIndexTier["Indexing, Caching & Relational Persistence Layer"]
-        InvertedIdx[("Inverted Index (Elasticsearch / Lucene: Roaring Bitmap Postings tag_id -> [item_ids])")]
-        RelDB[("Relational Storage (PostgreSQL / Aurora: tags & item_tags Tables, ACID Merges & Renames)")]
-        Redis[("Redis Cluster (Hot Tag Item Sets SINTER, Trending ZSets ZREVRANGE, Trie Snapshots)")]
+    subgraph ServiceTier["Tag Services & Streaming"]
+        AutoSvc["Autocomplete Svc (In-Memory Trie)"]
+        TagSvc["Tag Core Svc (Synonyms & Solver)"]
+        TrendSvc["Trending Aggregator (Flink + CMS)"]
     end
-    Clients -->|"REST / GraphQL"| Gateway
-    Gateway -->|"GET /tags/suggest?prefix=py"| AutoSvc
-    Gateway -->|"Tag CRUD & Boolean Search"| TagSvc
-    Gateway -->|"GET /tags/trending"| TrendSvc
-    AutoSvc <-->|"Load / Sync Trie Snapshot"| Redis
-    TagSvc <-->|"Sub-10ms Multi-Tag Bitmap Intersect (AND/OR/NOT)"| InvertedIdx
-    TagSvc <-->|"Commit Tag Links & Canonical Pointer Updates"| RelDB
-    TagSvc <-->|"Hot Postings Cache"| Redis
-    RelDB -.->|"CDC Stream (Kafka / Debezium)"| InvertedIdx
-    RelDB -.->|"Tag Event Stream"| TrendSvc
-    TrendSvc <-->|"Update & Query Top-50 Hourly Leaderboard"| Redis
+    subgraph StorageIndexTier["Indexes, Caches & Persistence"]
+        Redis[("Redis Cluster (ZSets & Trie Sync)")]
+        InvertedIdx[("Elasticsearch (Roaring Bitmaps)")]
+        RelDB[("PostgreSQL / Aurora (ACID Tags)")]
+    end
+    Clients e1@-->|"REST / GraphQL"| Gateway
+    Gateway e2@-->|"GET /suggest"| AutoSvc
+    Gateway e3@-->|"CRUD & Search"| TagSvc
+    Gateway e4@-->|"GET /trending"| TrendSvc
+    AutoSvc e5@-->|"Sync Snapshot"| Redis
+    TagSvc e6@-->|"Bitmap AND/OR"| InvertedIdx
+    TagSvc e7@-->|"Commit Links"| RelDB
+    TagSvc e8@-->|"Hot Postings"| Redis
+    RelDB e9@-.->|"CDC (Debezium)"| InvertedIdx
+    RelDB e10@-.->|"Tag Events"| TrendSvc
+    TrendSvc e11@-->|"Top-50 ZSet"| Redis
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Clients client
+    class Gateway edge
+    class AutoSvc,TagSvc service
+    class TrendSvc worker
+    class Redis cache
+    class InvertedIdx,RelDB storage
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style ServiceTier fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style StorageIndexTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

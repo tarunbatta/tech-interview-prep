@@ -69,39 +69,77 @@ Designing Instagram requires an architecture optimized for massive media storage
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
     Client["Instagram Mobile (iOS / Android)"]
-    subgraph MediaPipeline["Media Pipeline & CDN"]
-        CDN["Global Edge CDN (Cloudflare / Akamai)"]
-        S3[("AWS S3 / Blob Store (Master Assets)")]
-        Transcode["Transcode Fleet (WebP / Resizing)"]
-        S3 -->|"S3 Event Notifications"| Transcode
-        Transcode -->|"Write WebP Variants"| S3
-        S3 -->|"Origin Pull"| CDN
-    end
-    subgraph AppBackend["Application Backend"]
+    subgraph EdgeTier["Edge & Ingress"]
+        CDN["Global Edge CDN (Cloudflare)"]
         GW["API Gateway / Envoy"]
+    end
+    subgraph AppBackend["Services & Workers"]
         PostSvc["Post Service"]
         GraphSvc["User Graph Service"]
         FeedSvc["Feed Service"]
-        GW -->|"Publish / Metadata"| PostSvc
-        GW -->|"Follow / Unfollow"| GraphSvc
-        GW -->|"Fetch Feed"| FeedSvc
+        Fanout["Fanout Workers (Push / Pull)"]
+        Transcode["Transcode Fleet (WebP)"]
     end
-    Kafka["Apache Kafka Bus"]
-    Fanout["Fanout Workers Engine (Push / Pull Hybrid)"]
-    RedisFeed[("Redis Feed Cache (ZSet)")]
-    DB[("PostgreSQL / Cassandra DB")]
-    Client -->|"1. Direct Media PUT (Pre-Signed S3)"| S3
-    Client -->|"Fetch Cached Media"| CDN
-    Client -->|"2. Dynamic APIs (GraphQL / REST)"| GW
-    PostSvc -->|"Emit PostCreated"| Kafka
-    GraphSvc -->|"Emit FollowEvent"| Kafka
-    Kafka -->|"Consume Events"| Fanout
-    Fanout -->|"Push Regular Posts"| RedisFeed
-    Fanout -->|"Persist Records"| DB
-    FeedSvc -->|"Read Precomputed Feed"| RedisFeed
-    FeedSvc -->|"Hydrate & Pull Celebrity Posts"| DB
+    subgraph DataLayer["Storage, Cache & Bus"]
+        S3[("AWS S3 Master Assets")]
+        Kafka[["Apache Kafka Bus"]]
+        RedisFeed[("Redis Feed Cache (ZSet)")]
+        DB[("PostgreSQL / Cassandra")]
+    end
+    Client e1@-->|"1. Pre-Signed PUT"| S3
+    Client e2@-->|"Fetch Media"| CDN
+    CDN e3@-->|"Origin Pull"| S3
+    Transcode e4@<-->|"WebP Variants"| S3
+    Client e5@-->|"2. REST / GraphQL"| GW
+    GW e6@-->|"Publish"| PostSvc
+    GW e7@-->|"Follow"| GraphSvc
+    GW e8@-->|"Fetch Feed"| FeedSvc
+    PostSvc e9@-->|"PostCreated"| Kafka
+    GraphSvc e10@-->|"FollowEvent"| Kafka
+    Fanout e11@-->|"Consume"| Kafka
+    Fanout e12@-->|"Push ZSet"| RedisFeed
+    Fanout e13@-->|"Persist"| DB
+    FeedSvc e14@-->|"Read Feed"| RedisFeed
+    FeedSvc e15@-->|"Pull Celebs"| DB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDN,GW edge
+    class PostSvc,GraphSvc,FeedSvc service
+    class Fanout,Transcode worker
+    class RedisFeed cache
+    class S3,DB storage
+    class Kafka queue
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppBackend fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -272,58 +310,87 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientAndEdge["Client & Global Edge Delivery Tier"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
         Client["Instagram Client (iOS, Android, Web)"]
-        CDN["Global Edge CDN (Cloudflare / Akamai PoPs - WebP / AVIF Media Caching)"]
-        Gateway["API Gateway (Auth, TLS Termination, Rate Limiting)"]
-        LB{"Load Balancer (L7 Request Routing)"}
     end
-    subgraph MediaStorageAndTranscode["Direct-to-S3 Media Pipeline"]
-        S3[("Object Storage (AWS S3 Master & Multi-Res Buckets)")]
-        SQS["S3 Event Queue (SQS ObjectCreated Notifications)"]
-        TranscodeWorkers["Media Transcoding Fleet (150px, 640px, 1080px WebP & Video Segments)"]
-        S3 -->|"ObjectCreated Event"| SQS
-        SQS -->|"Trigger Resize"| TranscodeWorkers
-        TranscodeWorkers -->|"Write Processed Variants"| S3
+    subgraph EdgeTier["Edge & API Gateway"]
+        CDN["Global Edge CDN (WebP / AVIF)"]
+        Gateway{"API Gateway & L7 Load Balancer"}
     end
-    subgraph CoreServices["Core Application Microservices"]
-        PostSvc["Post Service (Pre-Signed URLs, 64-Bit ID Routing, Post Creation)"]
-        UserFeedSvc["User Feed Service (Hybrid Push/Pull Timeline Merger & Story Ring Tray)"]
-        StoriesCache[("Stories Ephemeral Store (Redis / DynamoDB with 24h TTL & Viewed Bitset)")]
+    subgraph CoreServices["Core Microservices & Workers"]
+        PostSvc["Post Service (64-Bit ID & Pre-Sign)"]
+        UserFeedSvc["User Feed Svc (Hybrid Push/Pull)"]
+        TranscodeWorkers["Media Transcode Fleet (WebP)"]
     end
-    subgraph PostStorageCluster["Sharded Post Persistence Cluster (8,192 Logical Shards)"]
-        PostCache[("Post Cache (Redis / Memcached Hot Metadata)")]
-        PostDB[("Sharded Post DB (PostgreSQL - 64-Bit Custom PL/pgSQL IDs)")]
+    subgraph DataAndEventTier["Data Stores, Caches & Event Bus"]
+        S3[("AWS S3 (Master & Multi-Res)")]
+        PostCache[("Post Cache (Redis / Memcached)")]
+        PostDB[("Sharded Post DB (PostgreSQL)")]
+        StoriesCache[("Stories Store (Redis 24h TTL)")]
+        FeedCache[("Feed Cache (Redis ZSet Top 500)")]
+        FeedDB[("User Feed DB (Cassandra)")]
+        GraphDB[("Social Graph DB (Tao / Neo4j)")]
+        SearchIndex[("Elasticsearch (Explore & Tags)")]
+        Kafka[["Apache Kafka Event Bus"]]
     end
-    subgraph EventAndGraphTier["Event Streaming, Search & Social Graph Tier"]
-        Kafka["Apache Kafka Event Bus (Post, Like, Comment & Follow Streams)"]
-        SearchIndex[("Search & Explore Index (Elasticsearch - Captions, Hashtags, Users)")]
-        GraphDB[("Social Graph DB (Neo4j / Tao / Cassandra - Follower & Followee Edges)")]
-    end
-    subgraph UserFeedCluster["User Feed Persistence & Cache Cluster"]
-        FeedCache[("User Feed Cache (Redis ZSet - Top 500 Post IDs per Active User)")]
-        FeedDB[("User Feed DB (Cassandra Timeline Store)")]
-    end
-    Client -->|"1. Request API / Feed"| Gateway
-    Gateway -->|"Forward Traffic"| LB
-    Client -->|"2. Direct HTTP PUT (Pre-Signed URL)"| S3
-    S3 -->|"Origin Pull"| CDN
-    CDN -->|"3. Serve Low-Latency Media"| Client
-    LB -->|"Write / Read Post"| PostSvc
-    LB -->|"Get Home Feed & Stories"| UserFeedSvc
-    PostSvc -->|"Store Media Reference"| S3
-    PostSvc -->|"Write-Through / Read"| PostCache
-    PostCache <-->|"Cache Miss / Sync"| PostDB
-    PostSvc -->|"Publish Post Event"| Kafka
-    Kafka -->|"Index Hashtags & Captions"| SearchIndex
-    Kafka -->|"Update Follower Graph"| GraphDB
-    Kafka -->|"Fanout Event"| UserFeedSvc
-    UserFeedSvc -->|"Fetch Follower List"| GraphDB
-    UserFeedSvc -->|"Push (Regular Users < 25K Followers)"| FeedCache
-    UserFeedSvc -->|"Persist Timeline"| FeedDB
-    UserFeedSvc -->|"Pull (Celebrity Posts > 25K Followers)"| PostCache
-    UserFeedSvc <-->|"Read/Update 24h Stories"| StoriesCache
+    Client e1@-->|"1. API / Feed"| Gateway
+    Client e2@-->|"2. Pre-Signed PUT"| S3
+    CDN e3@-->|"Origin Pull"| S3
+    Client e4@-->|"3. Fetch Media"| CDN
+    Gateway e5@-->|"Read / Write"| PostSvc
+    Gateway e6@-->|"Feed & Stories"| UserFeedSvc
+    TranscodeWorkers e7@<-->|"Resize Variants"| S3
+    PostSvc e8@-->|"Write-Through"| PostCache
+    PostSvc e9@-->|"Persist Shards"| PostDB
+    PostSvc e10@-->|"Publish Event"| Kafka
+    Kafka e11@-->|"Index Tags"| SearchIndex
+    Kafka e12@-->|"Update Edges"| GraphDB
+    UserFeedSvc e13@-->|"Fetch Followers"| GraphDB
+    UserFeedSvc e14@-->|"Push (<25K)"| FeedCache
+    UserFeedSvc e15@-->|"Persist Timeline"| FeedDB
+    UserFeedSvc e16@-->|"Pull (>25K Celeb)"| PostCache
+    UserFeedSvc e17@<-->|"24h Stories"| StoriesCache
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+    e16@{ animate: true }
+    e17@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDN,Gateway edge
+    class PostSvc,UserFeedSvc service
+    class TranscodeWorkers worker
+    class PostCache,StoriesCache,FeedCache cache
+    class S3,PostDB,FeedDB,GraphDB,SearchIndex storage
+    class Kafka queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -342,13 +409,28 @@ To scale beyond a single database, Instagram shards its PostgreSQL databases acr
   * **10 bits**: Auto-incrementing sequence number within the microsecond ($2^{10} = 1,024\text{ IDs per millisecond per shard}$).
 
 ```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
 flowchart LR
     subgraph ID64["64-Bit Instagram ID Layout"]
-        B1["Bits 63..23 (41 bits): Millisecond Epoch Timestamp (~69 Years)"]
-        B2["Bits 22..10 (13 bits): Logical Shard ID (8,192 Shards)"]
-        B3["Bits 9..0 (10 bits): Per-Shard Sequence (1,024 IDs/ms)"]
-        B1 --- B2 --- B3
+        B1["Bits 63..23 (41b): Epoch ms (~69 Yrs)"]
+        B2["Bits 22..10 (13b): Shard ID (8,192)"]
+        B3["Bits 9..0 (10b): Sequence (1,024/ms)"]
+        B1 e1@-->|"Next"| B2
+        B2 e2@-->|"Next"| B3
     end
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class B1 client
+    class B2 service
+    class B3 storage
+
+    style ID64 fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 * **Routing Benefit**: Given any `postId`, the application extracts the 13-bit Shard ID using a simple bitmask (`(postId >> 10) & 0x1FFF`), allowing the system to route the query directly to the responsible database shard without querying a centralized coordinator.

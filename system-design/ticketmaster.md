@@ -54,15 +54,56 @@ Designing TicketMaster requires solving critical distributed systems challenges:
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Clients["Fan Clients (1M+ Concurrent Users at 10:00 AM)"] -->|"1. Ingress Request"| WaitingRoom["Virtual Waiting Room (Edge / Redis Queue & Anti-Bot)"]
-    WaitingRoom -->|"2. Admitted with Signed JWT Token (500 Users/s)"| Gateway["API Gateway / Envoy (Validates Token, TLS, Rate Limit)"]
-    Gateway --> SeatMapSvc["Seat Map Service (SVG / Vector Tiles)"]
-    Gateway --> SeatHoldSvc["Seat Hold Service (10-Min Lease Lock)"]
-    Gateway --> CheckoutSaga["Checkout Saga Orchestrator (Payment + Ledger)"]
-    SeatMapSvc --> RedisBitset[("Redis Seat Bitsets (0=Avail, 1=Held/Sold)")]
-    SeatHoldSvc --> RedisLock[("Redis Distributed Lock (Redlock / Atomic Lua)")]
-    CheckoutSaga --> TicketDB[("CockroachDB / Aurora (ACID Seat Ledger)")]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Clients["Fan Clients (1M+ Users)"]
+    subgraph EdgeTier["Edge & Ingress"]
+        WaitingRoom["Virtual Waiting Room (Edge)"]
+        Gateway["API Gateway / Envoy"]
+    end
+    subgraph AppBackend["Application Services"]
+        SeatMapSvc["Seat Map Service (SVG)"]
+        SeatHoldSvc["Seat Hold Svc (10m Lease)"]
+        CheckoutSaga["Checkout Saga Orchestrator"]
+    end
+    subgraph DataLayer["Storage & Caching"]
+        RedisBitset[("Redis Seat Bitsets")]
+        RedisLock[("Redis Redlock (Lua)")]
+        TicketDB[("CockroachDB / Aurora")]
+    end
+    Clients e1@-->|"1. Ingress"| WaitingRoom
+    WaitingRoom e2@-->|"2. Signed JWT"| Gateway
+    Gateway e3@-->|"Map Query"| SeatMapSvc
+    Gateway e4@-->|"Hold Seats"| SeatHoldSvc
+    Gateway e5@-->|"Checkout"| CheckoutSaga
+    SeatMapSvc e6@-->|"Read Bits"| RedisBitset
+    SeatHoldSvc e7@-->|"10m Lock"| RedisLock
+    CheckoutSaga e8@-->|"ACID Tx"| TicketDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Clients client
+    class WaitingRoom,Gateway edge
+    class SeatMapSvc,SeatHoldSvc,CheckoutSaga service
+    class RedisBitset,RedisLock cache
+    class TicketDB storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppBackend fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -190,35 +231,71 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph Client_Edge_Layer["Client & Edge Ingress Layer"]
-        Client["Fan Clients (Web & Mobile - 1M+ Flash Sale Users)"]
-        WaitingRoom{"Virtual Waiting Room (Edge - Cloudflare / Redis FIFO Queue, Bot Defense & CAPTCHA)"}
-        Gateway{"API Gateway (Validates Admission Token, TLS, Rate Limiting)"}
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Client["Fan Clients (Web & Mobile)"]
+        WaitingRoom{"Virtual Waiting Room (FIFO)"}
     end
-    subgraph Core_Ticketing_Services["Core Ticketing & Reservation Services"]
-        SeatMapSvc["Seat Map Service (Real-Time Venue Availability: Available, Held, Sold)"]
-        HoldSvc["Seat Reservation Service (10-Min Distributed Lease Lock, Prevents Double-Selling)"]
-        CheckoutSaga["Checkout Saga Orchestrator (Payment Capture -> Commit Seat -> Release Waiting Room Slot)"]
-        BarcodeSvc["Dynamic Barcode & Turnstile Service (15s Rotating TOTP Token Verification)"]
+    subgraph EdgeTier["Edge & API Gateway"]
+        Gateway{"API Gateway (JWT & Rate Limit)"}
     end
-    subgraph Cache_And_Storage["Distributed Cache & ACID Persistence Layer"]
-        SeatCache[("Redis Seat Cache & Redlock (Bitsets per Venue Section, Atomic SETNX 10m TTL)")]
-        PaymentGW["External Payment Gateway (Stripe / Adyen Authorization & Capture)"]
-        TicketDB[("Ticket DB (CockroachDB / Aurora ACID Seat Ledger - Unique: showId + seatNumber)")]
+    subgraph CoreServices["Core Microservices & Workers"]
+        SeatMapSvc["Seat Map Svc (Venue Status)"]
+        HoldSvc["Seat Hold Svc (10m Lease Lock)"]
+        CheckoutSaga["Checkout Saga Orchestrator"]
+        BarcodeSvc["Dynamic Barcode Svc (15s TOTP)"]
     end
-    Client -->|"1. Flash Sale Ingress"| WaitingRoom
-    WaitingRoom -->|"2. Admitted with Signed JWT Token (500 Users/s)"| Gateway
-    Gateway -->|"GET /seats"| SeatMapSvc
-    Gateway -->|"POST /hold-seats"| HoldSvc
-    Gateway -->|"POST /checkout"| CheckoutSaga
-    Gateway -->|"Verify / Transfer Ticket"| BarcodeSvc
-    SeatMapSvc -->|"Sub-ms Bitset Query"| SeatCache
-    HoldSvc -->|"Atomic Lua SETNX Lock (10m TTL)"| SeatCache
-    CheckoutSaga -->|"1. Authorize & Capture"| PaymentGW
-    CheckoutSaga -->|"2. Commit Order & Seat Ownership"| TicketDB
-    CheckoutSaga -->|"3. Mark Permanently Sold & Release Slot"| SeatCache
-    BarcodeSvc -->|"Read Cryptographic Secret & Ownership"| TicketDB
+    subgraph DataAndEventTier["Data Stores, Caches & Gateways"]
+        SeatCache[("Redis Seat Cache & Redlock")]
+        PaymentGW["Payment Gateway (Stripe / Adyen)"]
+        TicketDB[("Ticket DB (CockroachDB ACID)")]
+    end
+    Client e1@-->|"1. Flash Ingress"| WaitingRoom
+    WaitingRoom e2@-->|"2. Admit (500/s)"| Gateway
+    Gateway e3@-->|"GET /seats"| SeatMapSvc
+    Gateway e4@-->|"POST /hold"| HoldSvc
+    Gateway e5@-->|"POST /checkout"| CheckoutSaga
+    Gateway e6@-->|"Verify Ticket"| BarcodeSvc
+    SeatMapSvc e7@-->|"Bitset Query"| SeatCache
+    HoldSvc e8@-->|"Lua SETNX (10m)"| SeatCache
+    CheckoutSaga e9@-->|"1. Auth & Capture"| PaymentGW
+    CheckoutSaga e10@-->|"2. Commit Order"| TicketDB
+    CheckoutSaga e11@-->|"3. Mark Sold"| SeatCache
+    BarcodeSvc e12@-->|"Read TOTP Secret"| TicketDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class WaitingRoom,Gateway edge
+    class SeatMapSvc,HoldSvc,CheckoutSaga,BarcodeSvc service
+    class PaymentGW worker
+    class SeatCache cache
+    class TicketDB storage
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

@@ -63,17 +63,60 @@ Designing TikTok requires solving complex multimodal machine learning and multim
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    App["TikTok Mobile App (Client Prefetch Buffer)"] -->|"1. Stream 2s Chunks (Edge CDN)"| CDN["Global Video CDN (Edge PoPs Caching Viral Videos)"]
-    App -->|"2. GET /fyp & Telemetry (gRPC / HTTP3)"| Gateway["API Gateway & Load Balancer (OAuth, Telemetry Ingestion, Routing)"]
-    Gateway --> CandRetrieval["1. Candidate Retrieval (Milvus / Faiss Vector DB: 100M+ to 5,000)"]
-    Gateway --> KafkaTelem["Kafka Telemetry Topic (Watch Time ms, Loops)"]
-    CandRetrieval --> HeavyRank["2. Heavy ML Scoring & Ranking (Deep Neural Net: P_Watch, P_Finish, P_Like, P_Share)"]
-    KafkaTelem --> FlinkEngine["Apache Flink Stream Engine (Computes User Vectors)"]
-    FlinkEngine --> FeatureStore[("Real-Time Features (Redis / Feast Feature Store)")]
-    FeatureStore --> HeavyRank
-    HeavyRank --> ReRank["3. Re-Ranking & Diversity Layer (Author Deduplication, Music Variety, Exploration)"]
-    ReRank --> BatchOut["Returns Top 10 Video Batch"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    App["TikTok Mobile App (Prefetch)"]
+    subgraph EdgeTier["Edge & Ingress"]
+        CDN["Global Video CDN (2s Chunks)"]
+        Gateway["API Gateway & Load Balancer"]
+    end
+    subgraph AppBackend["Recommendation & Stream Services"]
+        CandRetrieval["1. Candidate Retrieval (Milvus)"]
+        HeavyRank["2. Heavy ML Ranking (DNN)"]
+        ReRank["3. Re-Ranking & Diversity"]
+        FlinkEngine["Apache Flink Stream Engine"]
+    end
+    subgraph DataLayer["Storage, Cache & Event Bus"]
+        KafkaTelem[["Kafka Telemetry Topic"]]
+        FeatureStore[("Redis / Feast Feature Store")]
+    end
+    App e1@-->|"1. Stream Chunks"| CDN
+    App e2@-->|"2. FYP & Events"| Gateway
+    Gateway e3@-->|"Retrieve 5K"| CandRetrieval
+    Gateway e4@-->|"Watch Events"| KafkaTelem
+    CandRetrieval e5@-->|"Score Top 100"| HeavyRank
+    HeavyRank e6@-->|"Filter Top 10"| ReRank
+    KafkaTelem e7@-->|"Stream"| FlinkEngine
+    FlinkEngine e8@-->|"Update Vectors"| FeatureStore
+    FeatureStore e9@-->|"User Features"| HeavyRank
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class App client
+    class CDN,Gateway edge
+    class CandRetrieval,HeavyRank,ReRank service
+    class FlinkEngine worker
+    class FeatureStore cache
+    class KafkaTelem queue
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppBackend fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -83,29 +126,64 @@ flowchart TD
 The "For You" Page relies on a 3-stage funnel:
 
 ```mermaid
-flowchart TD
-    All["All Videos: 100M+ Items"] -->|"Stage 1: Candidate Generation"| Cand["5,000 Candidates"]
-    Cand -->|"Stage 2: Heavy Neural Ranking"| Ranked["Top 100 Ranked Videos"]
-    Ranked -->|"Stage 3: Re-Ranking & Diversity"| Final["10 Videos to Client"]
-    subgraph Stage1["Candidate Generation"]
-        V1["Vector Annoy / Milvus Search"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    All["All Videos (100M+ Pool)"]
+    subgraph Stage1["Stage 1: Candidate Generation (5K)"]
+        V1["Milvus Vector Search"]
         V2["Collaborative Filtering"]
-        V3["Trending Audio & Hashtag Clusters"]
+        V3["Trending Audio & Hashtags"]
     end
-    All -.-> Stage1 -.-> Cand
-    subgraph Stage2["Heavy Multi-Task Neural Net"]
-        M1["P_Finish: Probability of full watch"]
-        M2["P_Like: Probability of heart"]
-        M3["P_Share: Probability of external share"]
-        Score["Score = w1*P_Finish + w2*P_Share + w3*P_Like - w4*P_Skip"]
+    subgraph Stage2["Stage 2: Heavy Neural Net (Top 100)"]
+        M1["Predict P_Finish & P_Watch"]
+        M2["Predict P_Like & P_Share"]
+        Score["Weighted Multi-Task Score"]
     end
-    Cand -.-> Stage2 -.-> Ranked
-    subgraph Stage3["Re-Ranking & Diversity"]
-        D1["Filter: Max 1 video per creator"]
-        D2["Filter: Varied audio tracks"]
-        D3["Exploration Bandit: 10% new videos"]
+    subgraph Stage3["Stage 3: Re-Ranking & Diversity"]
+        D1["Creator & Audio Dedupe"]
+        D2["10% Exploration Bandit"]
     end
-    Ranked -.-> Stage3 -.-> Final
+    Final["Top 10 FYP Videos"]
+
+    All e1@-->|"Retrieve"| V1
+    All e2@-->|"Retrieve"| V2
+    All e3@-->|"Retrieve"| V3
+    V1 e4@-->|"5K Pool"| M1
+    V2 e5@-->|"5K Pool"| M2
+    V3 e6@-->|"5K Pool"| Score
+    M1 e7@-->|"Top 100"| D1
+    M2 e8@-->|"Top 100"| D1
+    Score e9@-->|"Top 100"| D2
+    D1 e10@-->|"Emit"| Final
+    D2 e11@-->|"Emit"| Final
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class All storage
+    class V1,V2,V3 worker
+    class M1,M2,Score service
+    class D1,D2 edge
+    class Final client
+
+    style Stage1 fill:transparent,stroke:#22d3ee,stroke-width:1.5px,stroke-dasharray: 5 5
+    style Stage2 fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style Stage3 fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ### Multi-Task Scoring Formulation
@@ -237,40 +315,76 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph Client_And_Edge["Client & Global Edge Delivery"]
-        Client["TikTok Mobile Client (iOS / Android - Instant Swipe, Prefetch Buffer N+1/N+2)"]
-        CDN["Global Video CDN & PoPs (Short-Form HLS/DASH Segments, Low-Latency 2s Chunks)"]
-        Gateway{"API Gateway / Envoy (Auth, Route FYP Feed, Ingest Telemetry Events)"}
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Client["TikTok App (Prefetch N+1/N+2)"]
     end
-    subgraph FYP_Recommendation_Pipeline["For You Page (FYP) Recommendation Pipeline"]
-        FeedSvc["FYP Feed Service (Orchestrates Retrieve -> Rank -> Re-rank)"]
-        CandidateGen["Candidate Retrieval Engine (Milvus / Faiss Vector Search, Collaborative Filtering, Audio Clusters: 100M+ to 5,000)"]
-        DLRanker["Heavy ML Ranking Engine (Two-Tower / Transformer: Predicts P_WatchTime, P_Finish, P_Like, P_Share)"]
-        ReRanker["Re-Ranking & Diversity Layer (Author Deduplication, Music Variety, Exploration/Exploitation Bandit)"]
+    subgraph EdgeTier["Edge & API Gateway"]
+        CDN["Global Video CDN (2s HLS Chunks)"]
+        Gateway{"API Gateway / Envoy (Auth & Route)"}
     end
-    subgraph Telemetry_And_Features["Real-Time Telemetry & Feature Pipeline"]
-        TelemetryPipe["Real-Time Telemetry Stream (Apache Kafka + Apache Flink: Watch Duration ms, <1s Swipes, Loops)"]
-        FeatureStore[("Real-Time Feature Store (Redis / Feast: Instant Interaction History, Creator Viral Velocity Score)")]
+    subgraph CoreServices["Core Microservices & Workers"]
+        FeedSvc["FYP Feed Orchestrator"]
+        CandidateGen["Candidate Gen (Milvus 100M->5K)"]
+        DLRanker["Heavy ML Ranker (Two-Tower DNN)"]
+        ReRanker["Diversity & Bandit Re-Ranker"]
+        VideoPipe["Video GPU Transcode DAG (AV1)"]
     end
-    subgraph Video_Ingestion_And_Storage["Video Ingestion, Transcoding & Storage Layer"]
-        VideoPipe["Video Ingestion & GPU DAG (Resumable Upload, Auto-Caption, HEVC/AV1 9:16 Adaptive Transcode)"]
-        S3Store[("Video Blob Store (AWS S3: Master Video & HLS Segments)")]
-        CassandraAudio[("Cassandra Audio Index (Sharded by music_id, Clustered by view_count DESC)")]
+    subgraph DataAndEventTier["Data Stores, Caches & Event Bus"]
+        TelemetryPipe[["Kafka + Flink Telemetry Stream"]]
+        FeatureStore[("Redis / Feast Feature Store")]
+        S3Store[("AWS S3 Video Blob Store")]
+        CassandraAudio[("Cassandra Audio Index")]
     end
-    Client -->|"Stream Video Chunks"| CDN
-    Client -->|"GET /fyp & Telemetry"| Gateway
-    Client -->|"Upload Raw Video"| VideoPipe
-    Gateway -->|"Fetch FYP Feed"| FeedSvc
-    FeedSvc -->|"1. Retrieve Candidates"| CandidateGen
-    FeedSvc -->|"2. Rank Candidates"| DLRanker
-    FeedSvc -->|"3. Filter & Top 10"| ReRanker
-    Gateway -->|"Ingest Telemetry"| TelemetryPipe
-    TelemetryPipe -->|"Update Features (<500ms)"| FeatureStore
-    FeatureStore -.->|"Hydrate Real-Time Features"| DLRanker
-    VideoPipe -->|"Store Transcoded Segments"| S3Store
-    VideoPipe -->|"Index Sound Attribution"| CassandraAudio
-    S3Store -->|"Origin Pull"| CDN
+    Client e1@-->|"Stream 2s Chunks"| CDN
+    CDN e2@-->|"Origin Pull"| S3Store
+    Client e3@-->|"GET /fyp & Events"| Gateway
+    Client e4@-->|"Upload Video"| VideoPipe
+    Gateway e5@-->|"Fetch Feed"| FeedSvc
+    Gateway e6@-->|"Ingest Events"| TelemetryPipe
+    FeedSvc e7@-->|"1. Retrieve 5K"| CandidateGen
+    FeedSvc e8@-->|"2. Score Top 100"| DLRanker
+    FeedSvc e9@-->|"3. Filter Top 10"| ReRanker
+    TelemetryPipe e10@-->|"Update (<500ms)"| FeatureStore
+    FeatureStore e11@-.->|"Hydrate Vectors"| DLRanker
+    VideoPipe e12@-->|"Store Segments"| S3Store
+    VideoPipe e13@-->|"Index Sound"| CassandraAudio
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDN,Gateway edge
+    class FeedSvc,CandidateGen,DLRanker,ReRanker service
+    class VideoPipe worker
+    class FeatureStore cache
+    class S3Store,CassandraAudio storage
+    class TelemetryPipe queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

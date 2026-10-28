@@ -63,16 +63,64 @@ The system is famously known for pioneering large-scale real-time timeline fan-o
 ## System Architecture
 
 ```mermaid
-flowchart TD
-    Client["Client App"] -->|"1. POST /api/tweets"| Gateway["API Gateway / Envoy"]
-    Client -->|"2. GET /api/timeline/home"| TimelineSvc["Timeline Service"]
-    Gateway --> WriteSvc["Tweet Write Service"]
-    WriteSvc -->|"Saves"| Manhattan[("Manhattan (Key-Value)")]
-    WriteSvc -->|"Publishes"| Kafka["Kafka Event Bus"]
-    Kafka --> Fanout["Fanout Workers (Hybrid Model)"]
-    Fanout -->|"Writes to Followers"| RedisTimeline[("Redis Timeline Cluster (List of Tweet IDs)")]
-    Fanout --> Earlybird["Earlybird Index (Real-Time Search)"]
-    TimelineSvc -->|"Reads ZSet"| RedisTimeline
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Client["Client App (iOS / Android / Web)"]
+    subgraph EdgeTier["Edge & Ingress"]
+        Gateway["API Gateway / Envoy"]
+    end
+    subgraph AppBackend["Application Services & Workers"]
+        WriteSvc["Tweet Write Service"]
+        TimelineSvc["Timeline Read Service"]
+        Fanout["Fanout Workers (Hybrid)"]
+    end
+    subgraph DataLayer["Storage, Cache & Search"]
+        Manhattan[("Manhattan DB (KV)")]
+        Kafka[["Kafka Event Bus"]]
+        RedisTimeline[("Redis Timeline ZSet")]
+        Earlybird[("Earlybird RAM Index")]
+    end
+    Client e1@-->|"1. POST /tweets"| Gateway
+    Client e2@-->|"2. GET /timeline"| Gateway
+    Gateway e3@-->|"Write"| WriteSvc
+    Gateway e4@-->|"Read"| TimelineSvc
+    WriteSvc e5@-->|"Persist"| Manhattan
+    WriteSvc e6@-->|"Publish"| Kafka
+    Kafka e7@-->|"Consume"| Fanout
+    Fanout e8@-->|"Push IDs"| RedisTimeline
+    Fanout e9@-->|"Index"| Earlybird
+    TimelineSvc e10@-->|"Read ZSet"| RedisTimeline
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class Gateway edge
+    class WriteSvc,TimelineSvc service
+    class Fanout worker
+    class RedisTimeline,Earlybird cache
+    class Manhattan storage
+    class Kafka queue
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppBackend fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -93,13 +141,33 @@ flowchart TD
 Database auto-increment IDs fail in distributed systems because they require a centralized coordination lock. Twitter designed **Snowflake** to generate 64-bit, time-sortable unique IDs across hundreds of distributed machines without coordination.
 
 ```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
 flowchart LR
     subgraph Snowflake_64Bit_ID["Twitter Snowflake 64-Bit ID Structure"]
-        direction LR
-        Sign["1 bit: Sign (Always 0)"] --> Timestamp["41 bits: Timestamp in ms (Since Custom Epoch)"]
-        Timestamp --> Machine["10 bits: Machine ID (5b Datacenter + 5b Worker)"]
-        Machine --> Sequence["12 bits: Sequence (Per-Worker Counter: 4,096 IDs/ms)"]
+        Sign["1 Bit: Sign (0)"]
+        Timestamp["41 Bits: Timestamp (ms)"]
+        Machine["10 Bits: Machine ID (DC+Worker)"]
+        Sequence["12 Bits: Sequence (4,096/ms)"]
     end
+    Sign e1@-->|"MSB"| Timestamp
+    Timestamp e2@-->|"Bits 22..62"| Machine
+    Machine e3@-->|"LSB 0..11"| Sequence
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+
+    class Sign client
+    class Timestamp edge
+    class Machine service
+    class Sequence worker
+
+    style Snowflake_64Bit_ID fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 * **Sign bit (1 bit)**: Always 0 (keeps integer positive).
@@ -217,41 +285,78 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph Client_And_Gateway["Client & API Gateway Layer"]
-        Client["Client App (iOS / Android / Web: Post Tweet 280 Chars, Home Timeline <100ms)"]
-        Gateway{"API Gateway / Envoy (Auth, Rate Limiting, Snowflake ID Allocator)"}
-        Snowflake["Snowflake Generator (64-bit Time-Sortable ID: 41b Time + 10b Node + 12b Seq)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Client["Client App (iOS / Android / Web)"]
     end
-    subgraph Write_And_Fanout_Pipeline["Tweet Write & Hybrid Fanout Pipeline"]
-        TweetWriteSvc["Tweet Write Service (Creates Tweet with ID, Extracts #hashtags & @mentions)"]
-        Kafka["Apache Kafka Event Bus (Topic: tweets-created)"]
-        FanoutSvc["Fanout Service (Hybrid: Queries FlockDB, Pushes tweetId to Followers, Skips Celebrities >25K)"]
-        FlockDB[("FlockDB Graph DB (Followers & Followees)")]
+    subgraph EdgeTier["Edge & ID Generation"]
+        Gateway{"API Gateway / Envoy (Auth & Limit)"}
+        Snowflake["Snowflake 64-Bit ID Generator"]
     end
-    subgraph Search_And_Trends["Real-Time Search & Trending Pipeline"]
-        Earlybird["Earlybird Search Cluster (In-Memory Inverted Index, Real-Time Full-Text Search)"]
-        TrendingSvc["Trending Engine (Flink / Heron: Sliding Window Count-Min Sketch & Z-Score Spike Detection)"]
+    subgraph CoreServices["Core Microservices & Workers"]
+        TweetWriteSvc["Tweet Write Service"]
+        TimelineReadSvc["Timeline Read Svc (Hybrid Merge)"]
+        FanoutSvc["Fanout Service (Skips >25K)"]
+        Earlybird["Earlybird Search (RAM Index)"]
+        TrendingSvc["Trending Engine (Flink + Sketch)"]
     end
-    subgraph Read_And_Storage_Layer["Timeline Read & Storage Layer"]
-        ManhattanDB[("Manhattan DB Key-Value (User Timelines: authorId -> tweets, Cassandra / MySQL Shards)")]
-        RedisTimeline[("Redis Timeline Cluster (Home Timelines: ZSet per User, Max 800 Tweet IDs)")]
-        TimelineReadSvc["Timeline Read Service (Reads User Redis Cache, Pulls Celebrity Tweets On-the-fly, Merges Top 20 <100ms)"]
+    subgraph DataAndEventTier["Data Stores, Caches & Event Bus"]
+        ManhattanDB[("Manhattan DB (User Timelines)")]
+        RedisTimeline[("Redis Timeline ZSet (800 IDs)")]
+        FlockDB[("FlockDB Social Graph")]
+        Kafka[["Kafka Event Bus (tweets)"]]
     end
-    Client -->|"REST / GraphQL"| Gateway
-    Gateway -->|"Allocate 64-bit ID"| Snowflake
-    Gateway -->|"POST /tweets"| TweetWriteSvc
-    Gateway -->|"GET /timeline"| TimelineReadSvc
-    Gateway -->|"GET /search & /trends"| Earlybird
-    TweetWriteSvc -->|"Save User Tweet"| ManhattanDB
-    TweetWriteSvc -->|"Publish Event"| Kafka
-    Kafka -->|"Consume Tweet Event"| FanoutSvc
-    Kafka -->|"Stream to RAM Index"| Earlybird
-    Kafka -->|"Stream Hashtags"| TrendingSvc
-    FanoutSvc -->|"Query Follower Graph"| FlockDB
-    FanoutSvc -->|"Push tweetId (Regular Users)"| RedisTimeline
-    TimelineReadSvc -->|"1. Read Follower ZSet"| RedisTimeline
-    TimelineReadSvc -->|"2. Fetch Followed Celebrity Tweets & Hydrate"| ManhattanDB
+    Client e1@-->|"REST / GraphQL"| Gateway
+    Gateway e2@-->|"Next 64b ID"| Snowflake
+    Gateway e3@-->|"POST /tweets"| TweetWriteSvc
+    Gateway e4@-->|"GET /timeline"| TimelineReadSvc
+    Gateway e5@-->|"GET /search"| Earlybird
+    TweetWriteSvc e6@-->|"Save Tweet"| ManhattanDB
+    TweetWriteSvc e7@-->|"Publish Event"| Kafka
+    Kafka e8@-->|"Consume"| FanoutSvc
+    Kafka e9@-->|"Index RAM"| Earlybird
+    Kafka e10@-->|"Count Tags"| TrendingSvc
+    FanoutSvc e11@-->|"Query Graph"| FlockDB
+    FanoutSvc e12@-->|"Push ZSet"| RedisTimeline
+    TimelineReadSvc e13@-->|"1. Read ZSet"| RedisTimeline
+    TimelineReadSvc e14@-->|"2. Merge Celebs"| ManhattanDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class Gateway,Snowflake edge
+    class TweetWriteSvc,TimelineReadSvc,Earlybird service
+    class FanoutSvc,TrendingSvc worker
+    class RedisTimeline cache
+    class ManhattanDB,FlockDB storage
+    class Kafka queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

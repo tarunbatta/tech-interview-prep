@@ -67,27 +67,68 @@ Designing an enterprise parking garage system requires bridging physical-world h
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    EntryGate["Entry Gate Hardware (ALPR Camera, Induction Loop, Ticket Printer, Barrier Arm)"] -->|"Local Relay (RS-485 / IP)"| BarrierCtrl["Barrier Controller Service"]
-    ExitGate["Exit Gate Hardware (ALPR Camera, Barcode Kiosk, EMV Reader, Barrier Arm)"] -->|"Local Relay (RS-485 / IP)"| BarrierCtrl
-    subgraph EdgeController["Local Garage Edge Controller (On-Premises Industrial PC)"]
-        BarrierCtrl --> AllocEngine["Local Allocation Engine (Closest Stall Match)"]
-        DisplayMgr["Floor Display Manager (Ramp LED Signs)"] -->|"Spot Updates"| BarrierCtrl
-        DisplayMgr --> EdgeDB[("Local Edge Database (SQLite / Edge Postgres)")]
-        AllocEngine <--> EdgeDB
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    subgraph HardwareTier["Gate & Floor Hardware"]
+        EntryGate["Entry Gate (ALPR & Barrier)"]
+        ExitGate["Exit Gate (Kiosk & EMV)"]
+        DisplayMgr["Ramp LED Signboards"]
     end
-    subgraph CloudPlatform["Central Cloud Reservation Platform"]
-        BookingSvc["Mobile Booking Service (Driver App Pre-book)"]
-        TariffSvc["Tariff & Billing Service (Dynamic Pricing)"]
-        TelemetrySvc["Fleet Telemetry & Monitoring"]
-        CloudDB[("Cloud Database Cluster (Aurora PostgreSQL: Multi-Garage Inventory)")]
-        BookingSvc --> CloudDB
-        TariffSvc --> CloudDB
-        TelemetrySvc --> CloudDB
+    subgraph EdgeController["Local Edge Controller"]
+        BarrierCtrl["Barrier Controller Svc"]
+        AllocEngine["Spot Allocation Engine"]
+        EdgeDB[("Local Edge DB (SQLite)")]
     end
-    EdgeDB <-->|"MQTT over TLS (Bi-directional)"| BookingSvc
-    EdgeDB <-->|"MQTT over TLS (Bi-directional)"| TariffSvc
-    EdgeDB -->|"MQTT over TLS"| TelemetrySvc
+    subgraph CloudServices["Cloud Fleet Services"]
+        BookingSvc["Mobile Booking Service"]
+        TariffSvc["Tariff & Billing Svc"]
+        TelemetrySvc["Fleet Telemetry Svc"]
+    end
+    subgraph CloudStorage["Cloud Data Layer"]
+        CloudDB[("Aurora PostgreSQL")]
+    end
+    EntryGate e1@-->|"RS-485 Relay"| BarrierCtrl
+    ExitGate e2@-->|"RS-485 Relay"| BarrierCtrl
+    BarrierCtrl e3@-->|"Spot Updates"| DisplayMgr
+    BarrierCtrl e4@-->|"Match Stall"| AllocEngine
+    DisplayMgr e5@-->|"Read Counts"| EdgeDB
+    AllocEngine e6@-->|"Local ACID"| EdgeDB
+    EdgeDB e7@-->|"MQTT Sync"| BookingSvc
+    EdgeDB e8@-->|"MQTT Sync"| TariffSvc
+    EdgeDB e9@-->|"Telemetry"| TelemetrySvc
+    BookingSvc e10@-->|"Reservations"| CloudDB
+    TariffSvc e11@-->|"Rate Cards"| CloudDB
+    TelemetrySvc e12@-->|"Metrics"| CloudDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class EntryGate,ExitGate,DisplayMgr client
+    class BarrierCtrl,AllocEngine edge
+    class BookingSvc,TariffSvc service
+    class TelemetrySvc worker
+    class EdgeDB,CloudDB storage
+
+    style HardwareTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeController fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CloudServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CloudStorage fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -220,44 +261,80 @@ Content-Type: application/json
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph PhysicalGarage["Physical Garage Hardware & IoT Layer"]
-        EntryHW["Physical Entry Gate (ALPR Camera, Ground Induction Loop, Barcode Dispenser, Motorized Barrier Arm)"]
-        ExitHW["Physical Exit Gate (ALPR Camera, Barcode/Ticket Scanner, Contactless EMV Reader, Motorized Exit Barrier)"]
-        FloorHW["Floor Displays & Spot Sensors (Ultrasonic Overhead Sensors, EV Charger Status Monitor, Real-Time LED Display Signs)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph PhysicalGarage["Hardware & Clients"]
+        EntryHW["Entry Gate (ALPR & Barrier)"]
+        ExitHW["Exit Gate (Scanner & EMV)"]
+        FloorHW["Ultrasonic Sensors & Signs"]
+        MobileApp["Driver Mobile App (Pre-Book)"]
     end
-    subgraph EdgeCluster["Local Garage Edge Controller (On-Premises Industrial PC)"]
-        BarrierRelay["Barrier Controller Relay (Sub-second Local Actuation & Safety Interlock)"]
-        SpotEngine["Spot Allocation Engine (Greedy Closest-Stall Match & Dual Quota Guard)"]
-        SignBroker["Floor Sign MQTT Broker (Real-Time Wayfinding Updates)"]
-        EdgeDB[("Local Offline Database (SQLite / Edge PostgreSQL: Active Tickets, Stall Inventory, Tariff Cards)")]
+    subgraph EdgeCluster["Local Garage Edge Controller"]
+        BarrierRelay["Barrier Controller Relay"]
+        SpotEngine["Spot Allocation Engine"]
+        SignBroker["Floor Sign MQTT Broker"]
+        SyncBridge{"IoT Sync Gateway (MQTT/TLS)"}
     end
-    subgraph SyncLayer["Edge-to-Cloud Synchronization Tier"]
-        SyncBridge["IoT Sync Gateway (MQTT over TLS / WebSockets Broker: Bidirectional Sync & Offline Queue Reconciliation)"]
+    subgraph CloudBackend["Cloud Fleet Microservices"]
+        BookingSvc["Booking Svc (40% Quota)"]
+        BillingSvc["Dynamic Tariff & Billing"]
+        PayGateway["Payment Gateway (Stripe)"]
+        Telemetry["Fleet Telemetry & Health"]
     end
-    subgraph CloudBackend["Central Cloud Services (Multi-Garage Fleet Platform)"]
-        MobileApp["Driver Mobile App (iOS / Android: Pre-book Space, QR Pass, Auto-Exit via Plate)"]
-        BookingSvc["Mobile App Booking Service (40% Pre-Booking Quota & 30-Min Virtual Holds)"]
-        BillingSvc["Dynamic Tariff & Billing Service (Peak Pricing & Duration Calculation)"]
-        PayGateway["Payment Gateway Integration (Stripe / EMV Settlement)"]
-        Telemetry["Fleet Telemetry & Analytics (Occupancy Heatmaps & Hardware Health)"]
-        CloudDB[("Cloud Database Cluster (Aurora PostgreSQL / DynamoDB: Multi-Garage Inventory, Reservations, Billing Ledger)")]
+    subgraph DataTier["Edge & Cloud Persistence"]
+        EdgeDB[("Local Edge DB (SQLite)")]
+        CloudDB[("Aurora PostgreSQL Cluster")]
     end
-    EntryHW -->|"Vehicle Arrived (RS-485 / IP)"| BarrierRelay
-    ExitHW -->|"Vehicle Exit / Checkout Scan"| BarrierRelay
-    FloorHW <-->|"Spot Occupied/Free & LED Count"| SignBroker
-    BarrierRelay <-->|"Allocate / Validate Ticket"| SpotEngine
-    SpotEngine <-->|"ACID Local Read/Write"| EdgeDB
-    SignBroker <-->|"Read Available Counts"| EdgeDB
-    EdgeDB <-->|"MQTT over TLS (Idempotent Batch Sync)"| SyncBridge
-    MobileApp -->|"REST / GraphQL"| BookingSvc
-    SyncBridge <-->|"gRPC / Kafka"| BookingSvc
-    SyncBridge <-->|"gRPC / Kafka"| BillingSvc
-    SyncBridge -->|"Stream Metrics"| Telemetry
-    BillingSvc <-->|"Authorize & Capture"| PayGateway
-    BookingSvc <-->|"Reserve & Sync Inventory (5% Contingency Pool)"| CloudDB
-    BillingSvc <-->|"Record Invoices & Ledger"| CloudDB
-    Telemetry -->|"Persist Fleet Logs"| CloudDB
+    EntryHW e1@-->|"Vehicle Arrived"| BarrierRelay
+    ExitHW e2@-->|"Checkout Scan"| BarrierRelay
+    FloorHW e3@-->|"Stall Status"| SignBroker
+    BarrierRelay e4@-->|"Allocate Stall"| SpotEngine
+    SpotEngine e5@-->|"ACID Read/Write"| EdgeDB
+    SignBroker e6@-->|"Open Counts"| EdgeDB
+    SpotEngine e7@-->|"Batch Sync"| SyncBridge
+    MobileApp e8@-->|"REST / GraphQL"| BookingSvc
+    SyncBridge e9@-->|"gRPC Sync"| BookingSvc
+    SyncBridge e10@-->|"gRPC Sync"| BillingSvc
+    SyncBridge e11@-->|"Stream Metrics"| Telemetry
+    BillingSvc e12@-->|"Auth & Capture"| PayGateway
+    BookingSvc e13@-->|"Reserve Spot"| CloudDB
+    BillingSvc e14@-->|"Write Ledger"| CloudDB
+    Telemetry e15@-->|"Persist Logs"| CloudDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class EntryHW,ExitHW,FloorHW,MobileApp client
+    class BarrierRelay,SpotEngine,SyncBridge edge
+    class SignBroker queue
+    class BookingSvc,BillingSvc,PayGateway service
+    class Telemetry worker
+    class EdgeDB,CloudDB storage
+
+    style PhysicalGarage fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeCluster fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CloudBackend fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

@@ -75,32 +75,64 @@ Because real money is physically dispensed, the system demands **zero-loss finan
 ## System Architecture
 
 ```mermaid
-flowchart TD
-    subgraph ATMTerminal["ATM Terminal"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    subgraph Peripherals["ATM Hardware Peripherals"]
         CardReader["Card Reader (EMV / NFC)"]
         EPP["Encrypted PIN Pad (EPP)"]
-        Dispenser["Cash Dispenser / Sensors (Double-detect, Reject bin)"]
-        XFS["XFS / CEN Layer (Device Drivers)"]
-        StateMachine["ATM Local Terminal State Machine"]
+        Dispenser["Cash Dispenser & Sensors"]
     end
-    subgraph BankBackend["Bank Backend & Switch Layer"]
-        Switch["ATM Gateway / Switch (ISO 8583 / REST Proxy)"]
-        HSM["Hardware Security Module (HSM: DUKPT / PIN Translation)"]
-        Telemetry["ATM Management & Telemetry Service (Cash, Health)"]
-        Coordinator["Transaction Coordinator (Saga / 2PC)"]
-        CBS[("Core Banking System (CBS Account Ledger)")]
-        Interbank["Interbank Network (Visa / Mastercard / Cirrus Switch)"]
+    subgraph ControllerTier["Terminal & Switch"]
+        XFS["CEN / XFS Local State Machine"]
+        Switch["ATM Gateway / Switch (ISO 8583)"]
     end
-    CardReader -->|"Hardware Events"| XFS
-    EPP -->|"Encrypted PIN Block"| XFS
-    Dispenser -->|"Sensor Telemetry"| XFS
-    XFS -->|"State Transitions"| StateMachine
-    StateMachine -->|"Encrypted TLS / ISO 8583 / AS 2805"| Switch
-    Switch -->|"PIN Block Validation"| HSM
-    Switch -->|"Health & Inventory"| Telemetry
-    HSM -->|"Verified Auth"| Coordinator
-    Coordinator -->|"On-Us Card"| CBS
-    Coordinator -->|"Off-Us Card"| Interbank
+    subgraph CoreServices["Security & Coordinator"]
+        HSM["Hardware Security Module (HSM)"]
+        Telemetry["ATM Telemetry Service"]
+        Coordinator["Transaction Coordinator (Saga)"]
+    end
+    subgraph LedgerTier["Core Banking & Networks"]
+        CBS[("Core Banking Ledger (CBS)")]
+        Interbank["Interbank Network (Visa / Plus)"]
+    end
+    CardReader e1@-->|"EMV Event"| XFS
+    EPP e2@-->|"PIN Block"| XFS
+    Dispenser e3@-->|"Sensor Data"| XFS
+    XFS e4@-->|"TLS / ISO 8583"| Switch
+    Switch e5@-->|"Verify PIN"| HSM
+    Switch e6@-->|"Health Sync"| Telemetry
+    Switch e7@-->|"Orchestrate"| Coordinator
+    Coordinator e8@-->|"On-Us Card"| CBS
+    Coordinator e9@-->|"Off-Us Card"| Interbank
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class CardReader,EPP,Dispenser client
+    class XFS,Switch edge
+    class Coordinator,Telemetry service
+    class HSM worker
+    class CBS storage
+    class Interbank queue
+
+    style Peripherals fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style ControllerTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style LedgerTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ### Key Architectural Layers
@@ -318,42 +350,78 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ATMTerminal["ATM Physical Terminal (Client Hardware)"]
-        CardReader["Motorized Card Reader (EMV Chip / NFC)"]
-        EPP["Encrypted PIN Pad (EPP - 3DES / DUKPT)"]
-        XFS["CEN / XFS Device Drivers & Local State Machine (Hardware Abstraction Layer)"]
-        Dispenser["Cash Dispenser System (Optical Double-Detect & Shutter Sensors)"]
-        Cassettes[("Cash Cassettes 1-4 ($10, $20, $50, $100)")]
-        RejectBin[("Reject / Purge Bin (Defective / Retracted Bills)")]
-        Printer["Thermal Receipt Printer & Camera Sensor"]
-        LocalWAL[("Local Encrypted NVRAM Journal (Write-Ahead Log for Power Cuts)")]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph HardwareTier["ATM Peripherals & Cassettes"]
+        CardReader["Motorized Card Reader (EMV / NFC)"]
+        EPP["Encrypted PIN Pad (3DES / DUKPT)"]
+        Dispenser["Cash Dispenser & Optical Sensors"]
+        Cassettes[("Cash Cassettes 1-4 ($10-$100)")]
+        RejectBin[("Reject / Retract Bin")]
+        LocalWAL[("Local NVRAM WAL (Power-Cut Log)")]
     end
-    subgraph SwitchAndSecurity["Network Switch, HSM & Telemetry"]
-        SwitchGW{"ATM Gateway / Switch (ISO 8583 / AS 2805 Parser, TLS)"}
-        HSM["Hardware Security Module (HSM: FIPS 140-2 Level 3/4, DUKPT to Zone Key Translation)"]
-        Monitoring["ATM Management & Telemetry Svc (Cash Levels, CIT Replenishment, Tamper Alerts)"]
+    subgraph SwitchTier["Controller & Network Switch"]
+        XFS["CEN / XFS Local State Machine"]
+        SwitchGW{"ATM Gateway / Switch (ISO 8583)"}
     end
-    subgraph CoreTransactionTier["Transaction Coordinator, Settlement & Audit"]
-        SagaOrch["Transaction Coordinator (3-Step Saga Orchestrator: Hold -> Dispense -> Settle/Reverse)"]
-        CBS[("Core Banking System (CBS: Double-Entry ACID Ledger & Velocity Limits)")]
-        Interbank["Interbank Payment Network (Visa / Mastercard / Cirrus / Plus Off-Us Gateway)"]
-        AuditDB[("Immutable Audit Vault (7-Year S3 Glacier WORM Lock)")]
+    subgraph CoreServices["Security, Telemetry & Saga"]
+        HSM["Hardware Security Module (FIPS L3)"]
+        Monitoring["ATM Telemetry Svc (CIT & Tamper)"]
+        SagaOrch["Transaction Coordinator (3-Step Saga)"]
     end
-    CardReader -->|"EMV Cryptogram"| XFS
-    EPP -->|"DUKPT Encrypted PIN Block"| XFS
-    XFS -->|"Actuate Feeder"| Dispenser
-    Dispenser -->|"Pull Banknotes"| Cassettes
-    Dispenser -->|"Divert Jammed / Forgotten Notes"| RejectBin
-    XFS -->|"Print Slip"| Printer
-    XFS -->|"Persist State Before Actuation"| LocalWAL
-    XFS -->|"Encrypted ISO 8583 (0100 Auth, 0200 Fin, 0420 Rev)"| SwitchGW
-    SwitchGW -->|"Validate PIN Block & CVV"| HSM
-    SwitchGW -->|"Heartbeats & Sensor Events"| Monitoring
-    SwitchGW -->|"Coordinate Transaction"| SagaOrch
-    SagaOrch -->|"On-Us Cards (Balance Hold / Commit / Release)"| CBS
-    SagaOrch -->|"Off-Us Cards (Network Auth)"| Interbank
-    SagaOrch -->|"Append Signed Audit Log"| AuditDB
+    subgraph LedgerAndAudit["Core Banking, Network & Audit"]
+        CBS[("Core Banking System (ACID Ledger)")]
+        Interbank[["Interbank Network (Visa / Cirrus)"]]
+        AuditDB[("Immutable Audit Vault (S3 WORM)")]
+    end
+    CardReader e1@-->|"EMV Cryptogram"| XFS
+    EPP e2@-->|"DUKPT PIN Block"| XFS
+    Cassettes e3@-->|"Pull Notes"| Dispenser
+    Dispenser e4@-->|"Jammed Notes"| RejectBin
+    Dispenser e5@-->|"Sensor Status"| XFS
+    XFS e6@-->|"Persist State"| LocalWAL
+    XFS e7@-->|"ISO 8583 (0100/0200/0420)"| SwitchGW
+    SwitchGW e8@-->|"Translate PIN"| HSM
+    SwitchGW e9@-->|"Heartbeats"| Monitoring
+    SwitchGW e10@-->|"Execute Tx"| SagaOrch
+    SagaOrch e11@-->|"Hold / Settle"| CBS
+    SagaOrch e12@-->|"Off-Us Auth"| Interbank
+    SagaOrch e13@-->|"Signed Log"| AuditDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class CardReader,EPP,Dispenser client
+    class XFS,SwitchGW edge
+    class SagaOrch,Monitoring service
+    class HSM worker
+    class LocalWAL,RejectBin cache
+    class Cassettes,CBS,AuditDB storage
+    class Interbank queue
+
+    style HardwareTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style SwitchTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style LedgerAndAudit fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

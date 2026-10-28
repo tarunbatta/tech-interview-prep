@@ -66,33 +66,63 @@ Designing DocuSign requires solving critical security, legal compliance, and dis
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Clients["Senders / Signers (Web / Mobile / Apps)"]
-    GW["API Gateway & WAF (OAuth2 / SAML SSO, Rate Limiting, DDoS Shield)"]
-    subgraph AppBackend["Application Backend Tier"]
-        EnvWorkflow["Envelope Workflow (State Machine Svc)"]
-        PDFEngine["PDF Rendering Engine (Coordinate Flattener)"]
-        IDVerify["Identity Verify (SMS / OTP / Gov ID)"]
-        Aurora[("Relational DB (Aurora PostgreSQL)")]
-        S3Master[("Encrypted S3 Bucket (Master PDFs)")]
-        AuditSvc["Audit Log Service (Immutable Ledger)"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Clients["Senders / Signers (Web / Mobile)"]
+    subgraph EdgeTier["Edge & Gateway"]
+        GW["API Gateway & WAF (OAuth2 / SAML)"]
     end
-    subgraph SecurityCore["Security & Compliance Core (HSM)"]
-        HSM["HSM / Cryptographic Signing Engine (SHA-256, X.509 PAdES, RFC 3161 TSA)"]
+    subgraph AppBackend["Application Services"]
+        EnvWorkflow["Envelope Workflow (State Machine)"]
+        PDFEngine["PDF Rendering Engine"]
+        IDVerify["Identity Verify (OTP / Gov ID)"]
+        HSM["HSM Signing Engine (X.509 / TSA)"]
     end
-    subgraph ConnectWebhooks["Connect Webhook & Integrations"]
-        Webhook["Webhook Dispatcher (Kafka + DLQ + Exponential Backoff -> Salesforce / Workday / SAP)"]
+    subgraph DataLayer["Storage, Audit & Webhooks"]
+        Aurora[("Aurora PostgreSQL")]
+        S3Master[("Encrypted S3 (PDFs)")]
+        AuditSvc[("Audit Ledger (WORM)")]
+        Webhook[["Webhook Dispatcher (Kafka)"]]
     end
-    Clients -->|"1. Create Envelope / 2. View & Sign PDF"| GW
-    GW -->|"Manage State"| EnvWorkflow
-    GW -->|"Render & Flatten"| PDFEngine
-    GW -->|"Verify Recipient"| IDVerify
-    EnvWorkflow -->|"ACID Metadata"| Aurora
-    PDFEngine -->|"Store / Read PDFs"| S3Master
-    IDVerify -->|"Record Auth Event"| AuditSvc
-    S3Master -->|"Hash & Seal"| HSM
-    AuditSvc -->|"Counter-Sign"| HSM
-    HSM -->|"Trigger Completion Event"| Webhook
+    Clients e1@-->|"1. Create / Sign"| GW
+    GW e2@-->|"Manage State"| EnvWorkflow
+    GW e3@-->|"Render Tabs"| PDFEngine
+    GW e4@-->|"Verify User"| IDVerify
+    EnvWorkflow e5@-->|"ACID State"| Aurora
+    EnvWorkflow e6@-->|"Emit Event"| Webhook
+    PDFEngine e7@-->|"Read / Write"| S3Master
+    IDVerify e8@-->|"Auth Log"| AuditSvc
+    HSM e9@-->|"Hash & Seal"| S3Master
+    HSM e10@-->|"Counter-Sign"| AuditSvc
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Clients client
+    class GW edge
+    class EnvWorkflow,PDFEngine,IDVerify service
+    class HSM worker
+    class Aurora,S3Master,AuditSvc storage
+    class Webhook queue
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppBackend fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -277,39 +307,77 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientApps["Sender & Signer Applications"]
-        Sender["Sender Application (Web / Salesforce Integration: Create Envelope & Routing)"]
-        Signer["Signer Client (Mobile / Browser: OTP/ID Verification & Place Signature)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientApps["Sender & Signer Apps"]
+        Sender["Sender App (Web / CRM Integration)"]
+        Signer["Signer Client (Mobile / Browser)"]
     end
-    subgraph GatewayTier["API Gateway & Edge Security"]
-        GW{"API Gateway / Envoy (OAuth2 / SAML, TLS 1.3, Rate Limit, WAF)"}
+    subgraph GatewayTier["Edge & API Gateway"]
+        GW{"API Gateway / Envoy (OAuth2 & WAF)"}
     end
-    subgraph CoreServices["Core Workflow, Document & PKI Services"]
-        EnvSvc["Envelope Service (State Machine, Sequential/Parallel Workflow Engine)"]
-        DocEngine["Document Processing Engine (Chunked PDF Flattening, Tab Placement, Watermark)"]
-        PKIEngine["Cryptographic Signing Engine (FIPS 140-2 L3 HSM, SHA-256, X.509 PAdES, RFC 3161 TSA)"]
-        AuditSvc["Audit Trail & Verification Svc (Immutable Event Stream & Certificate of Completion)"]
-        WebhookSvc["Webhook Dispatcher / Connect (Kafka, Signed HMAC Retries, Exponential Backoff, DLQ)"]
+    subgraph CoreServices["Core Workflow, Document & PKI"]
+        EnvSvc["Envelope Service (Routing Engine)"]
+        DocEngine["Document Engine (PDF Flattener)"]
+        PKIEngine["PKI Signing Engine (FIPS L3 HSM)"]
+        AuditSvc["Audit Trail Svc (Completion Cert)"]
+        WebhookSvc["Webhook Dispatcher (HMAC & Retries)"]
     end
-    subgraph StorageAndExternal["Storage Ledgers & Enterprise Integrations"]
-        AuroraDB[("Relational DB (PostgreSQL / Aurora: Envelopes, Tabs, Signers, ACID State)")]
-        S3Store[("Encrypted Document Store (AWS S3 KMS AES-256: Master & Sealed PDFs)")]
-        AuditStore[("Immutable Audit Ledger (Amazon QLDB / WORM S3: Cryptographic Hash Chaining)")]
-        ExtCRM["Enterprise CRM / Webhook Endpoints (Salesforce, SAP, Workday, HRIS)"]
+    subgraph StorageAndExternal["Ledgers, Storage & Integrations"]
+        AuroraDB[("Aurora PostgreSQL (ACID State)")]
+        S3Store[("AWS S3 KMS (Master & Sealed PDFs)")]
+        AuditStore[("Immutable Ledger (QLDB / WORM S3)")]
+        Kafka[["Kafka Event Bus (Connect Queue)"]]
+        ExtCRM["Enterprise CRMs (Salesforce / SAP)"]
     end
-    Sender -->|"REST API /v2.1/envelopes"| GW
-    Signer -->|"GET / POST Signing Session"| GW
-    GW -->|"Orchestrate Workflow"| EnvSvc
-    GW -->|"Render & Flatten Tabs"| DocEngine
-    EnvSvc -->|"ACID State Transitions"| AuroraDB
-    DocEngine -->|"Read / Write Encrypted PDFs"| S3Store
-    DocEngine -->|"Seal Completed PDF"| PKIEngine
-    PKIEngine -->|"Store Sealed PDF"| S3Store
-    PKIEngine -->|"Emit Cryptographic Proof"| AuditSvc
-    AuditSvc -->|"Append WORM Record"| AuditStore
-    EnvSvc -->|"Publish Envelope Completed Event"| WebhookSvc
-    WebhookSvc -->|"Signed HMAC POST Callback"| ExtCRM
+    Sender e1@-->|"POST /envelopes"| GW
+    Signer e2@-->|"Signing Session"| GW
+    GW e3@-->|"Orchestrate"| EnvSvc
+    GW e4@-->|"Flatten Tabs"| DocEngine
+    GW e5@-->|"Verify & Log"| AuditSvc
+    EnvSvc e6@-->|"ACID State"| AuroraDB
+    EnvSvc e7@-->|"Publish Event"| Kafka
+    DocEngine e8@-->|"R/W PDFs"| S3Store
+    PKIEngine e9@-->|"Seal X.509 PDF"| S3Store
+    PKIEngine e10@-->|"Hash Proof"| AuditStore
+    AuditSvc e11@-->|"Append WORM"| AuditStore
+    WebhookSvc e12@-->|"Consume Events"| Kafka
+    WebhookSvc e13@-->|"HMAC Callback"| ExtCRM
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Sender,Signer client
+    class GW edge
+    class EnvSvc,DocEngine,AuditSvc service
+    class PKIEngine,WebhookSvc worker
+    class ExtCRM cache
+    class AuroraDB,S3Store,AuditStore storage
+    class Kafka queue
+
+    style ClientApps fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style GatewayTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style StorageAndExternal fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

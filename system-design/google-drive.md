@@ -69,40 +69,64 @@ Designing Google Drive requires solving distinct architectural challenges beyond
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Client["Client Apps (Web / Mobile / Desktop FUSE)"]
-    subgraph BlobLayer["Blob Storage Layer"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Client["Client Apps (Web / Mobile / FUSE)"]
+    subgraph EdgeTier["Edge & Gateways"]
         UploadGW["Resumable Upload Gateway"]
-        Colossus[("Colossus / S3 (Chunk Store)")]
-        UploadGW -->|"Write Chunks"| Colossus
-    end
-    subgraph OfflinePipe["Offline Processing Pipeline"]
-        DocParser["Document Parser (PDF / DOCX Text)"]
-        VisionOCR["Cloud Vision OCR (Receipts / Images)"]
-        SearchIngest["Search Index Ingest Worker"]
-        DocParser -->|"Extracted Text"| SearchIngest
-        VisionOCR -->|"OCR Tokens"| SearchIngest
-    end
-    subgraph AppTier["Application Core Tier"]
         GW["API Gateway / Envoy"]
+    end
+    subgraph AppTier["Core Services & Workers"]
         MetaSvc["Metadata Service"]
         ZanzibarSvc["Zanzibar ACL Service"]
         SearchSvc["Search / OCR Query Service"]
-        GW -->|"Metadata CRUD"| MetaSvc
-        GW -->|"Permission Check"| ZanzibarSvc
-        GW -->|"Search Query"| SearchSvc
+        OfflinePipe["Doc Parser & Vision OCR"]
     end
-    Spanner[("Google Spanner Cluster")]
-    TupleStore[("Zanzibar Tuple Store")]
-    ESIndex[("Elasticsearch / FTS Index")]
-    Client -->|"1. Direct Upload (Colossus Blob)"| UploadGW
-    Client -->|"2. Metadata / Search (gRPC / REST)"| GW
-    Colossus -->|"File Ingested Event"| DocParser
-    Colossus -->|"File Ingested Event"| VisionOCR
-    MetaSvc -->|"ACID Hierarchy"| Spanner
-    ZanzibarSvc -->|"Evaluate Relation Tuples"| TupleStore
-    SearchSvc -->|"Query Inverted Index"| ESIndex
-    SearchIngest -->|"Index Document"| ESIndex
+    subgraph DataLayer["Storage & Indexes"]
+        Colossus[("Colossus / S3 Chunk Store")]
+        Spanner[("Google Spanner Cluster")]
+        TupleStore[("Zanzibar Tuple Store")]
+        ESIndex[("Elasticsearch / FTS Index")]
+    end
+    Client e1@-->|"1. Upload Chunks"| UploadGW
+    UploadGW e2@-->|"Write Chunks"| Colossus
+    Colossus e3@-->|"Ingest Event"| OfflinePipe
+    OfflinePipe e4@-->|"Index Tokens"| ESIndex
+    Client e5@-->|"2. gRPC / REST"| GW
+    GW e6@-->|"Metadata CRUD"| MetaSvc
+    GW e7@-->|"ACL Check"| ZanzibarSvc
+    GW e8@-->|"Search Query"| SearchSvc
+    MetaSvc e9@-->|"ACID Hierarchy"| Spanner
+    ZanzibarSvc e10@-->|"Eval Tuples"| TupleStore
+    SearchSvc e11@-->|"Inverted Index"| ESIndex
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class UploadGW,GW edge
+    class MetaSvc,ZanzibarSvc,SearchSvc service
+    class OfflinePipe worker
+    class Colossus,Spanner,TupleStore,ESIndex storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppTier fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -275,52 +299,87 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientTier["Client Applications Tier"]
-        Client["Client Applications (Web, iOS, Android, Desktop Virtual FS / FUSE - Resumable Chunk Upload & Local Offline Cache)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Client["Client Apps (Web, Mobile, FUSE)"]
     end
-    subgraph GatewayTier["Edge & API Gateway Tier"]
-        Gateway{"API Gateway / Envoy Fleet (TLS 1.3, OAuth2 / Bearer Auth, Rate Limiting, Global Routing)"}
+    subgraph EdgeTier["Edge & API Gateway"]
+        Gateway{"API Gateway / Envoy (Auth, TLS)"}
     end
-    subgraph StorageAndUpload["Resumable Upload & Blob Storage Plane"]
-        UploadSvc["Resumable Upload Service (RFC 7233 Byte-Range Ingestion, Checksums, Quota Pre-Check)"]
-        BlobStore[("Blob Storage (Colossus / S3 - 8+4 Reed-Solomon Erasure-Coded Immutable Chunks)")]
-        TrashGC["Trash & Blob Garbage Collector (30-Day Auto-Purge & Block Reclamation)"]
+    subgraph CoreServices["Core Microservices & Workers"]
+        UploadSvc["Resumable Upload (RFC 7233)"]
+        MetaSvc["Metadata & Hierarchy Service"]
+        Zanzibar["Zanzibar Authorization Engine"]
+        NotifySvc["Sync & Quota Service (gRPC)"]
+        SearchPipe["OCR & Flink Ingest Workers"]
+        TrashGC["30-Day Trash & Blob GC"]
     end
-    subgraph MetadataAndACL["Metadata Hierarchy & Zanzibar Authorization Plane"]
-        MetaSvc["Metadata & Hierarchy Service (Folder Trees, DAG Cycle Prevention, Revisions, Trash Lifecycle)"]
-        Spanner[("Globally Distributed DB (Google Spanner / CockroachDB - TrueTime ACID File Hierarchy)")]
-        Zanzibar["Authorization Service (Google Zanzibar ACL Engine - Inherited Owner/Editor/Viewer Evaluation)"]
-        LeopardCache[("Leopard In-Memory Set Cache (Sub-5ms Group & Hierarchy Tuple Expansion)")]
-        ACLStore[("Zanzibar Tuple Store (Bigtable / Spanner - object#relation@user)")]
+    subgraph DataAndEventTier["Data Stores, Caches & Event Bus"]
+        BlobStore[("Colossus / S3 (8+4 Erasure)")]
+        Spanner[("Google Spanner (ACID Tree)")]
+        LeopardCache[("Leopard Set Cache (Sub-5ms)")]
+        ACLStore[("Zanzibar Tuple Store")]
+        KafkaBus[["Kafka Bus (FileUploaded)"]]
+        SearchIndex[("Elasticsearch (Scoped FTS)")]
+        RedisQuota[("Redis Quota Cluster")]
     end
-    subgraph SearchAndOCR["Asynchronous Search & OCR Ingestion Pipeline"]
-        KafkaBus["Kafka Event Stream (FileUploadedEvent Topic)"]
-        SearchPipe["Search & OCR Ingestion Workers (Apache Flink, Document Parser, Cloud Vision OCR)"]
-        SearchIndex[("Full-Text & Semantic Index (Elasticsearch / Spanner FTS - ACL-Scoped Inverted Index)")]
-    end
-    subgraph SyncAndQuota["Real-Time Sync & Cross-Service Quota Hub"]
-        NotifySvc["Real-Time Sync Notification & Quota Service (gRPC Streams / WebSockets)"]
-        RedisQuota[("Redis Quota Cluster (Aggregated User Quota: Drive + Gmail + Photos)")]
-    end
-    Client -->|"REST / gRPC / WebSockets"| Gateway
-    Gateway -->|"POST & PUT /upload/resumable (Byte Ranges)"| UploadSvc
-    UploadSvc -->|"Store 8MB Chunks"| BlobStore
-    UploadSvc -->|"Commit Active File Revision"| Spanner
-    Gateway -->|"CRUD / Move / Rename / Search"| MetaSvc
-    MetaSvc -->|"ACID Read/Write (Graph Cycle Check)"| Spanner
-    MetaSvc -->|"Check Permission(user, role, fileId)"| Zanzibar
-    Zanzibar -->|"Lookup Transitive Sets"| LeopardCache
-    Zanzibar -->|"Read Relation Tuples"| ACLStore
-    BlobStore -.->|"Emit FileUploadedEvent"| KafkaBus
-    KafkaBus -->|"Consume Upload Event"| SearchPipe
-    SearchPipe -->|"Index Extracted Text & OCR"| SearchIndex
-    MetaSvc -->|"Execute Scoped Search Query"| SearchIndex
-    Gateway <-->|"Subscribe Sync Channel"| NotifySvc
-    MetaSvc -->|"Publish Tree Change & Delta Bytes"| NotifySvc
-    NotifySvc -->|"Increment / Enforce Quota"| RedisQuota
-    TrashGC -->|"Scan trashedAt < NOW() - 30d"| Spanner
-    TrashGC -->|"Reclaim Orphaned Blocks"| BlobStore
+    Client e1@-->|"REST / gRPC"| Gateway
+    Gateway e2@-->|"PUT Byte Ranges"| UploadSvc
+    UploadSvc e3@-->|"Write 8MB Chunks"| BlobStore
+    UploadSvc e4@-->|"Commit Revision"| Spanner
+    UploadSvc e5@-->|"Emit Upload"| KafkaBus
+    Gateway e6@-->|"CRUD / Move / Search"| MetaSvc
+    MetaSvc e7@-->|"ACID Cycle Check"| Spanner
+    MetaSvc e8@-->|"Scoped Search"| SearchIndex
+    Gateway e9@-->|"Check ACL"| Zanzibar
+    Zanzibar e10@-->|"Transitive Sets"| LeopardCache
+    Zanzibar e11@-->|"Read Tuples"| ACLStore
+    KafkaBus e12@-->|"Consume Event"| SearchPipe
+    SearchPipe e13@-->|"Index OCR & Text"| SearchIndex
+    Gateway e14@<-->|"Sync Stream"| NotifySvc
+    NotifySvc e15@-->|"Enforce Quota"| RedisQuota
+    TrashGC e16@-->|"Scan Expired"| Spanner
+    TrashGC e17@-->|"Reclaim Blocks"| BlobStore
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+    e16@{ animate: true }
+    e17@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class Gateway edge
+    class UploadSvc,MetaSvc,Zanzibar,NotifySvc service
+    class SearchPipe,TrashGC worker
+    class LeopardCache,RedisQuota cache
+    class BlobStore,Spanner,ACLStore,SearchIndex storage
+    class KafkaBus queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

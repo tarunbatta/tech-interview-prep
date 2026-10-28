@@ -55,14 +55,49 @@ Unlike curated VOD services like Netflix, YouTube must handle massive, uncontrol
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Clients["Client Apps"] -->|"1. Chunked PUT / PATCH (Tus Protocol Resumable Upload)"| IngestSvc["Ingestion & Resumable Service"]
-    Clients -->|"2. Stream (HLS / DASH)"| EdgeCDN["Edge CDN Nodes (Top 20% Hot Videos)"]
-    IngestSvc --> RawMaster[("Raw Master Storage (S3)")]
-    RawMaster --> TranscodeDAG["Transcoding DAG Worker (FFmpeg, VP9/AV1, Multi-Bitrate)"]
-    TranscodeDAG --> TranscodedChunks["Transcoded Chunks & M3U8 Manifests"]
-    TranscodedChunks --> OriginStore[("Google Cloud Storage / Blob Master Store")]
-    EdgeCDN -->|"Origin Fetch"| OriginStore
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Clients["Client Apps (Upload & Stream)"]
+    subgraph EdgeTier["Edge & Ingress"]
+        EdgeCDN["Edge CDN (Top 20% Hot Videos)"]
+        IngestSvc["Resumable Ingestion (Tus)"]
+    end
+    subgraph AppBackend["Transcoding Pipeline"]
+        TranscodeDAG["GPU Transcoding DAG (AV1/VP9)"]
+    end
+    subgraph DataLayer["Blob Storage"]
+        RawMaster[("Raw Master Store (S3)")]
+        OriginStore[("GCS / S3 HLS & DASH Store")]
+    end
+    Clients e1@-->|"1. Tus PATCH"| IngestSvc
+    Clients e2@-->|"2. Stream ABR"| EdgeCDN
+    IngestSvc e3@-->|"Save Raw"| RawMaster
+    RawMaster e4@-->|"5s GOP Jobs"| TranscodeDAG
+    TranscodeDAG e5@-->|"HLS / DASH"| OriginStore
+    EdgeCDN e6@-->|"Origin Pull"| OriginStore
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Clients client
+    class EdgeCDN edge
+    class IngestSvc service
+    class TranscodeDAG worker
+    class RawMaster,OriginStore storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppBackend fill:transparent,stroke:#22d3ee,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -202,38 +237,71 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph Client_Layer["Creator & Viewer Clients"]
-        Creator["Creator Client (500 hrs/min Uploads, Resumable Tus Protocol)"]
-        Viewer["Viewer Client (Adaptive Bitrate ABR Playback, 30s View Beacons)"]
-        Gateway{"API Gateway (Auth, Rate Limiting, Upload Session Allocation)"}
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Creator["Creator Client (Tus Upload)"]
+        Viewer["Viewer Client (ABR & Beacons)"]
     end
-    subgraph Upload_And_Transcoding_DAG["Resumable Ingestion & Distributed Transcoding DAG"]
-        IngestSvc["Resumable Ingestion Service (Tus / HTTP PATCH, 10MB Chunks, SHA-256 Checksum & Byte Offset State)"]
-        MasterS3[("Master Video Blob Store (GCS / S3 Cold Archive: Full Raw Master Files)")]
-        TranscodeDAG["Distributed Transcoding DAG (GPU Fleet: 1. Slices 5s GOP Chunks, 2. Encodes 144p-4K AV1/VP9/H.264, 3. Generates M3U8 & MPD)"]
-        TranscodedStore[("Transcoded Video Store (HLS/DASH Chunks & Manifests)")]
+    subgraph EdgeTier["Edge CDN & API Gateway"]
+        Gateway{"API Gateway (Auth & Session)"}
+        EdgeCDN["Edge CDN PoPs (Top 20% Viral)"]
+        RegionalCDN["Regional Transit CDN"]
     end
-    subgraph Tiered_CDN_Layer["Tiered Global CDN Delivery"]
-        EdgeCDN["Tiered Edge CDN PoPs (Caches Top 20% Hot Viral Videos, Serves 80% of Global Traffic)"]
-        RegionalCDN["Regional Transit CDN (Intermediate Cache for Moderately Popular Videos)"]
+    subgraph CoreServices["Ingestion, Transcoding & Flink"]
+        IngestSvc["Resumable Ingestion (10MB PATCH)"]
+        TranscodeDAG["GPU Transcoding DAG (144p-4K)"]
+        FlinkViews["Flink View Counter (Anti-Bot)"]
     end
-    subgraph View_Counting_Pipeline["Real-Time View Counting & Anti-Fraud Pipeline"]
-        ViewKafka["Kafka Topic (view-beacons)"]
-        FlinkViews["Apache Flink Stream Processor (10s Tumbling Windows, Anti-Bot Deduplication, Enforces 30s Watch Threshold)"]
-        BigtableViews[("Google Bigtable / Cassandra (Aggregated Video View Counts, High Write Throughput Counter)")]
+    subgraph DataAndEventTier["Data Stores & Event Bus"]
+        MasterS3[("Master Video Store (GCS / S3)")]
+        TranscodedStore[("Transcoded HLS/DASH Store")]
+        ViewKafka[["Kafka Bus (view-beacons)"]]
+        BigtableViews[("Bigtable / Cassandra Views")]
     end
-    Creator -->|"POST /upload-session & PATCH Chunks"| Gateway
-    Gateway -->|"Route Chunk Stream"| IngestSvc
-    IngestSvc -->|"Write Master"| MasterS3
-    MasterS3 -->|"Dispatch 5s GOP Chunk Tasks"| TranscodeDAG
-    TranscodeDAG -->|"Write Encoded Segments"| TranscodedStore
-    TranscodedStore -->|"Push Hot Videos / Origin Fetch"| RegionalCDN
-    RegionalCDN -->|"Populate Edge NVMe"| EdgeCDN
-    Viewer -->|"Stream HLS / DASH (<500ms)"| EdgeCDN
-    Viewer -->|"30s Playback Beacon"| ViewKafka
-    ViewKafka -->|"Stream Beacons"| FlinkViews
-    FlinkViews -->|"Flush +N Verified Views"| BigtableViews
+    Creator e1@-->|"PATCH Chunks"| Gateway
+    Gateway e2@-->|"Route Stream"| IngestSvc
+    IngestSvc e3@-->|"Write Master"| MasterS3
+    MasterS3 e4@-->|"5s GOP Tasks"| TranscodeDAG
+    TranscodeDAG e5@-->|"Write Segments"| TranscodedStore
+    Viewer e6@-->|"Stream (<500ms)"| EdgeCDN
+    EdgeCDN e7@-->|"Miss Pull"| RegionalCDN
+    RegionalCDN e8@-->|"Origin Fetch"| TranscodedStore
+    Viewer e9@-->|"30s Beacon"| ViewKafka
+    ViewKafka e10@-->|"10s Window"| FlinkViews
+    FlinkViews e11@-->|"Flush +N Views"| BigtableViews
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Creator,Viewer client
+    class Gateway,EdgeCDN,RegionalCDN edge
+    class IngestSvc service
+    class TranscodeDAG,FlinkViews worker
+    class MasterS3,TranscodedStore,BigtableViews storage
+    class ViewKafka queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

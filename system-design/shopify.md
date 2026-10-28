@@ -64,22 +64,61 @@ Designing Shopify requires solving core distributed e-commerce challenges:
 Shopify's groundbreaking engineering architecture partitions the entire platform into isolated **Pods**:
 
 ```mermaid
-flowchart TD
-    Shoppers["Shoppers & Buyers (Web / Mobile Clients)"] -->|"HTTP Requests"| Edge["Global Edge CDN & Ingress Router (shop_id -> Pod Mapping)"]
-    Edge -->|"Route to Pod 1"| App1["Storefront App Fleet (Pod 1)"]
-    Edge -->|"Route to Pod 2 (Dedicated)"| WaitRoom["Virtual Waiting Room (Pod 2)"]
-    subgraph Pod1["Merchant Pod 1 (Shared Standard Stores)"]
-        App1 --> Redis1[("Redis (Inventory / Lock)")]
-        Redis1 --> DB1[("MySQL Cluster (Master + Replicas)")]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Shoppers["Shoppers & Buyers (Web / Mobile)"]
+    subgraph EdgeTier["Edge & Pod Routing"]
+        Edge["Edge CDN & Router (shop_id -> Pod)"]
+        WaitRoom["Virtual Waiting Room (Pod 2)"]
     end
-    subgraph Pod2["Merchant Pod 2 (Dedicated Flash Sale Pod)"]
-        WaitRoom --> App2["Storefront App Fleet (Pod 2)"]
-        App2 --> DB2[("Isolated Redis & DB (High Throughput)")]
+    subgraph PodApps["Pod Application Fleets"]
+        App1["Storefront App Fleet (Pod 1)"]
+        App2["Flash Sale App Fleet (Pod 2)"]
     end
-    DB1 -->|"Order Completed"| Payments["Shopify Payments / Stripe (Idempotent 2-Phase Auth)"]
-    DB2 -->|"Order Completed"| Payments
-    DB1 -->|"Events"| Webhooks["Webhook Pipeline (Kafka / Sidekiq -> 3P Apps)"]
-    DB2 -->|"Events"| Webhooks
+    subgraph PodStorage["Pod Storage & Shared Services"]
+        Redis1[("Pod 1 Redis & MySQL")]
+        DB2[("Pod 2 Redis & MySQL")]
+        Payments["Shopify Payments / Stripe"]
+        Webhooks[["Webhook Pipeline (Kafka)"]]
+    end
+    Shoppers e1@-->|"HTTP Requests"| Edge
+    Edge e2@-->|"Standard Shop"| App1
+    Edge e3@-->|"Flash Sale"| WaitRoom
+    WaitRoom e4@-->|"Admit Batch"| App2
+    App1 e5@-->|"Lock & Commit"| Redis1
+    App2 e6@-->|"EVALSHA & Write"| DB2
+    App1 e7@-->|"2-Phase Auth"| Payments
+    App2 e8@-->|"2-Phase Auth"| Payments
+    Redis1 e9@-->|"Order Events"| Webhooks
+    DB2 e10@-->|"Order Events"| Webhooks
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Shoppers client
+    class Edge,WaitRoom edge
+    class App1,App2,Payments service
+    class Redis1,DB2 storage
+    class Webhooks queue
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style PodApps fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style PodStorage fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -236,50 +275,81 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph Users["Clients & Store Admins"]
-        Buyers["Shoppers & Mobile Buyers (Browse Storefront, Cart & Flash Checkout)"]
-        Merchants["Merchants & Store Admins (Product Admin, Inventory, Orders & Analytics)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph Users["Clients & Admins"]
+        Buyers["Shoppers & Mobile Buyers"]
+        Merchants["Merchants & Store Admins"]
     end
-    subgraph EdgeRouting["Global Edge CDN & Pod Routing Tier"]
-        CDN["Global Edge CDN (Cloudflare / Fastly: Liquid HTML Cache, Product Images, DDoS Shield)"]
-        RoutingGW["Global Routing Gateway (Nginx / Envoy: Looks up Host / shop_id -> Pod Mapping)"]
+    subgraph EdgeRouting["Edge CDN & Pod Routing"]
+        CDN["Global Edge CDN (Liquid Cache)"]
+        RoutingGW{"Global Routing GW (shop_id)"}
+        WaitRoom["Virtual Waiting Room (FIFO)"]
     end
-    subgraph Pod1Cluster["Merchant Pod 1 (Shared Standard Merchants)"]
-        Pod1App["Storefront & Admin App Fleet (Ruby on Rails / Puma)"]
-        Pod1Queue["Checkout & Background Worker Queue (Sidekiq)"]
-        Pod1Redis[("Pod 1 Redis Cluster (Session Cache & Inventory Locks)")]
-        Pod1MySQL[("Pod 1 MySQL Cluster (Vitess Sharded Master + Read Replicas by shop_id)")]
+    subgraph PodCompute["Pod App & Worker Fleets"]
+        Pod1App["Pod 1 App & Sidekiq Fleet"]
+        Pod2App["Pod 2 Flash Checkout Fleet"]
+        PaymentSvc["Shopify Payments / Stripe"]
     end
-    subgraph Pod2Cluster["Merchant Pod 2 (Dedicated Flash Sale Pod - e.g., Kylie Cosmetics / Gymshark)"]
-        WaitRoom["Virtual Waiting Room (FIFO Traffic Shaping Queue)"]
-        Pod2App["High-Throughput Checkout & Storefront Fleet"]
-        Pod2Redis[("Isolated Flash-Sale Redis Cluster (Atomic Lua Inventory Reservation)")]
-        Pod2MySQL[("Dedicated MySQL Shards (High Write IOPS)")]
+    subgraph DataAndBackplane["Pod Datastores & Webhooks"]
+        Pod1Redis[("Pod 1 Redis (Locks & Cache)")]
+        Pod1MySQL[("Pod 1 MySQL (Vitess Shards)")]
+        Pod2Redis[("Pod 2 Flash Redis (EVALSHA)")]
+        Pod2MySQL[("Pod 2 Dedicated MySQL")]
+        WebhookPipe[["Webhook Dispatcher (Kafka)"]]
     end
-    subgraph SharedBackplane["Payments, Webhooks & App Ecosystem Backplane"]
-        PaymentSvc["Payment & Saga Service (Stripe / Shopify Payments: Idempotent Intent & Escrow)"]
-        WebhookPipe["Webhook Ingestion & Dispatcher (Apache Kafka CDC + Sidekiq / Go Workers: HMAC-SHA256 Signed Retries)"]
-        ThirdPartyApps["3rd-Party App Ecosystem (ERP, Fulfillment, Dropshipping Webhook Receivers)"]
-    end
-    Buyers -->|"Browse Catalog (GET)"| CDN
-    Buyers -->|"Dynamic Cart / Checkout (POST)"| RoutingGW
-    Merchants -->|"Admin API / Catalog Updates"| RoutingGW
-    CDN -->|"Cache Miss"| RoutingGW
-    RoutingGW -->|"Route Standard Shop"| Pod1App
-    RoutingGW -->|"Route Flash Sale Shop"| WaitRoom
-    Pod1App -->|"Enqueue Job"| Pod1Queue
-    Pod1App <-->|"Atomic Lock / Cache"| Pod1Redis
-    Pod1App <-->|"Read/Write Store Data"| Pod1MySQL
-    Pod1MySQL -.->|"Micro-Invalidation (<150ms Purge)"| CDN
-    WaitRoom -->|"Admit Shopper Batch"| Pod2App
-    Pod2App <-->|"EVALSHA Reserve Stock"| Pod2Redis
-    Pod2App <-->|"Commit Order & Deduct Stock"| Pod2MySQL
-    Pod1App -->|"Execute Payment"| PaymentSvc
-    Pod2App -->|"Execute Payment"| PaymentSvc
-    Pod1MySQL -.->|"CDC Events (orders/create)"| WebhookPipe
-    Pod2MySQL -.->|"CDC Events (orders/create)"| WebhookPipe
-    WebhookPipe -->|"Signed HTTPS Webhooks (Exponential Backoff)"| ThirdPartyApps
+    Buyers e1@-->|"GET Storefront"| CDN
+    Buyers e2@-->|"POST Checkout"| RoutingGW
+    Merchants e3@-->|"Admin API"| RoutingGW
+    CDN e4@-->|"Cache Miss"| RoutingGW
+    RoutingGW e5@-->|"Standard Shop"| Pod1App
+    RoutingGW e6@-->|"Flash Sale"| WaitRoom
+    WaitRoom e7@-->|"Admit Batch"| Pod2App
+    Pod1App e8@-->|"Atomic Lock"| Pod1Redis
+    Pod1App e9@-->|"Read/Write"| Pod1MySQL
+    Pod1MySQL e10@-.->|"Purge (<150ms)"| CDN
+    Pod2App e11@-->|"Reserve Stock"| Pod2Redis
+    Pod2App e12@-->|"Commit Order"| Pod2MySQL
+    Pod1App e13@-->|"Charge Card"| PaymentSvc
+    Pod2App e14@-->|"Charge Card"| PaymentSvc
+    Pod1MySQL e15@-.->|"CDC Events"| WebhookPipe
+    Pod2MySQL e16@-.->|"CDC Events"| WebhookPipe
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+    e16@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Buyers,Merchants client
+    class CDN,RoutingGW,WaitRoom edge
+    class Pod1App,Pod2App,PaymentSvc service
+    class Pod1Redis,Pod2Redis cache
+    class Pod1MySQL,Pod2MySQL storage
+    class WebhookPipe queue
+
+    style Users fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeRouting fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style PodCompute fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndBackplane fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

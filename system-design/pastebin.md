@@ -65,15 +65,57 @@ Designing Pastebin involves solving classic high-throughput distributed systems 
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Clients["Client Apps (Browser / curl)"] -->|"1. GET /k9Az8Q (Cached Reads)"| CDN["Global Edge CDN (Cloudflare)"]
-    Clients -->|"2. POST /api/v1/pastes (Writes)"| Gateway["API Gateway / Load Balancer"]
-    CDN -->|"Cache Miss"| PasteSvc["Paste Application Service"]
-    Gateway --> PasteSvc
-    KGS["Key Generation Service (KGS) (7-char Base62 Keys)"] -->|"Fetch Key"| PasteSvc
-    PasteSvc -->|"1. Check / Hydrate Cache"| Redis[("Redis In-Memory Cache")]
-    PasteSvc -->|"2. Read / Write Raw Text Blob"| S3[("AWS S3 / MinIO Blob Store")]
-    PasteSvc -->|"3. Read / Write Metadata"| DynamoDB[("Metadata NoSQL DB (DynamoDB / Cassandra)")]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Clients["Client Apps (Browser / curl)"]
+    subgraph EdgeTier["Edge & Ingress"]
+        CDN["Global Edge CDN (Cloudflare)"]
+        Gateway["API Gateway / Load Balancer"]
+    end
+    subgraph AppTier["Application Services"]
+        PasteSvc["Paste Application Service"]
+        KGS["Key Generation Svc (KGS)"]
+    end
+    subgraph StorageTier["Storage & Caching"]
+        Redis[("Redis In-Memory Cache")]
+        S3[("AWS S3 / MinIO Blob Store")]
+        DynamoDB[("DynamoDB / Cassandra")]
+    end
+    Clients e1@-->|"1. GET /{id}"| CDN
+    Clients e2@-->|"2. POST /pastes"| Gateway
+    CDN e3@-->|"Cache Miss"| PasteSvc
+    Gateway e4@-->|"Route API"| PasteSvc
+    KGS e5@-->|"Base62 Key"| PasteSvc
+    PasteSvc e6@-->|"Hydrate Cache"| Redis
+    PasteSvc e7@-->|"Raw Text Blob"| S3
+    PasteSvc e8@-->|"Paste Metadata"| DynamoDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Clients client
+    class CDN,Gateway edge
+    class PasteSvc service
+    class KGS worker
+    class Redis cache
+    class S3,DynamoDB storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppTier fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style StorageTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -179,31 +221,63 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientTier["Client & Edge Layer"]
-        Clients["Clients (Web, CLI, curl: POST /api/v1/pastes, GET /{pasteId})"]
-        CDN["Global Edge CDN (Cloudflare: Caches Popular / Viral Pastes & Static Assets)"]
-        Gateway["API Gateway / Load Balancer (Rate Limiter, SSL, WAF, Max 10MB Payload Guard)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Clients["Clients (Web, CLI, curl)"]
     end
-    subgraph AppTier["Application & Key Generation Services"]
-        PasteSvc["Paste Application Service (Creates & Fetches Pastes, Syntax Highlighting Parser, Lazy TTL Check)"]
-        KGS["Key Generation Service (KGS) (In-Memory Ring Buffer of 100k Pre-generated Base62 Keys)"]
-        KGSDB[("KGS Key Storage (PostgreSQL: unused_keys & assigned_keys Tables)")]
+    subgraph EdgeTier["Edge & API Gateway"]
+        CDN["Global Edge CDN (Cloudflare)"]
+        Gateway{"API Gateway (WAF & Rate Limit)"}
     end
-    subgraph StorageTier["Tiered Cache, Blob & Metadata Storage"]
-        Redis[("Redis In-Memory Cache (4-Node Cluster, LRU Eviction, 80-20 Hot Pastes)")]
-        S3[("Blob Store (AWS S3 / MinIO: Immutable /pastes/{id}.txt Blobs, Lifecycle Auto-Expiration Rules)")]
-        MetaDB[("Metadata NoSQL DB (Amazon DynamoDB / Cassandra: paste_id PK, Conditional Alias Check, Native TTL Daemon)")]
+    subgraph AppTier["Core Services & Key Gen"]
+        PasteSvc["Paste Service (Parser & Lazy TTL)"]
+        KGS["KGS Service (100k Ring Buffer)"]
     end
-    Clients -->|"GET /{id} (Cached Read)"| CDN
-    Clients -->|"REST / API (Write or Dynamic Read)"| Gateway
-    CDN -->|"Cache Miss"| Gateway
-    Gateway -->|"Forward Request"| PasteSvc
-    PasteSvc <-->|"Fetch Unique 7-Char Key"| KGS
-    KGS <-->|"Sync Disjoint Key Ranges"| KGSDB
-    PasteSvc <-->|"1. Sub-ms Cache Lookup / Hydrate"| Redis
-    PasteSvc <-->|"2. Store / Fetch Raw Text Content"| S3
-    PasteSvc <-->|"3. Write / Query Metadata & Conditional Alias Insert"| MetaDB
+    subgraph StorageTier["Caches, Blob & Metadata Stores"]
+        Redis[("Redis Cluster (LRU Hot Pastes)")]
+        S3[("AWS S3 / MinIO (Text Blobs)")]
+        MetaDB[("DynamoDB (Metadata & TTL)")]
+        KGSDB[("PostgreSQL (Pre-Generated Keys)")]
+    end
+    Clients e1@-->|"GET /{id}"| CDN
+    Clients e2@-->|"POST /pastes"| Gateway
+    CDN e3@-->|"Origin Miss"| Gateway
+    Gateway e4@-->|"Forward API"| PasteSvc
+    KGS e5@-->|"7-Char Key"| PasteSvc
+    KGS e6@-->|"Sync Ranges"| KGSDB
+    PasteSvc e7@-->|"Sub-ms Lookup"| Redis
+    PasteSvc e8@-->|"Store / Fetch"| S3
+    PasteSvc e9@-->|"Conditional Write"| MetaDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Clients client
+    class CDN,Gateway edge
+    class PasteSvc service
+    class KGS worker
+    class Redis cache
+    class S3,MetaDB,KGSDB storage
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppTier fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style StorageTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

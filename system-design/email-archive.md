@@ -63,24 +63,53 @@ Designing an enterprise email archiving platform requires solving critical syste
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    MailSrc["Corporate Mail Servers (Exchange / O365 / Google Workspace)"]
-    IngestGW["Journal Ingestion Gateway (TLS 1.3, DKIM/SPF, Envelope Decapsulation)"]
-    Kafka["Ingestion Queue & Buffer (Apache Kafka Raw MIME Stream)"]
-    subgraph Workers["Parser & Deduplication Workers"]
-        MIMEParser["MIME Header & Body Parser (To, From, Cc, Bcc, Text)"]
-        Dedup["SHA-256 Attachment Deduplicator (Content-Addressed Blobs)"]
-        MIMEParser -->|"Extract Attachments"| Dedup
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    MailSrc["Corporate Mail (Exchange / O365)"]
+    subgraph EdgeTier["Edge & Ingestion"]
+        IngestGW["Journal Gateway (TLS / DKIM)"]
+        Kafka[["Kafka MIME Stream"]]
     end
-    SearchIdx[("eDiscovery Search Index (Elasticsearch / OpenSearch)")]
-    RelDB[("Relational DB (Aurora PostgreSQL - Custodians & Legal Holds)")]
-    WORM[("Compliant WORM Store (S3 Object Lock & Glacier Tiering)")]
-    MailSrc -->|"SMTP Journal Feed"| IngestGW
-    IngestGW -->|"Enqueue Raw RFC 822"| Kafka
-    Kafka -->|"Consume Stream"| MIMEParser
-    MIMEParser -->|"1. Inverted Index"| SearchIdx
-    MIMEParser -->|"2. Save Metadata"| RelDB
-    Dedup -->|"3. Write Immutable Blobs"| WORM
+    subgraph Workers["Parser & Dedup Workers"]
+        MIMEParser["MIME Header & Body Parser"]
+        Dedup["SHA-256 Attachment Dedup"]
+    end
+    subgraph DataLayer["Storage & Indexing"]
+        SearchIdx[("Elasticsearch Index")]
+        RelDB[("Aurora PostgreSQL")]
+        WORM[("S3 Object Lock (WORM)")]
+    end
+    MailSrc e1@-->|"SMTP Journal"| IngestGW
+    IngestGW e2@-->|"Enqueue RFC 822"| Kafka
+    Kafka e3@-->|"Consume"| MIMEParser
+    Kafka e4@-->|"Extract Blobs"| Dedup
+    MIMEParser e5@-->|"Inverted Index"| SearchIdx
+    MIMEParser e6@-->|"Save Metadata"| RelDB
+    Dedup e7@-->|"Write Blobs"| WORM
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class MailSrc client
+    class IngestGW edge
+    class Kafka queue
+    class MIMEParser,Dedup worker
+    class SearchIdx,RelDB,WORM storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style Workers fill:transparent,stroke:#22d3ee,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -90,11 +119,34 @@ flowchart TD
 To meet strict legal compliance without exploding cloud storage costs:
 
 ```mermaid
-flowchart TD
-    Ingest["Email Ingested"] --> Hot["Hot Tier: S3 Standard + Elasticsearch (Day 0 - 90)"]
-    Hot -->|"Lifecycle Rule (Day 91)"| Warm["Warm Tier: S3 Glacier Instant Retrieval (Day 91 - 365)"]
-    Warm -->|"Lifecycle Rule (Year 1)"| Cold["Cold Tier: S3 Glacier Deep Archive (Year 1 - Year 7+)"]
-    Cold -->|"Lifecycle Expiration (Unless Legal Hold Active)"| Purge["Permanent Cryptographic Purge"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    Ingest["Email Ingested"]
+    Hot["Hot: S3 Standard + ES (0-90d)"]
+    Warm["Warm: Glacier Instant (91-365d)"]
+    Cold["Cold: Deep Archive (1-7+ Yrs)"]
+    Purge["Cryptographic Purge"]
+    Ingest e1@-->|"Write"| Hot
+    Hot e2@-->|"Day 91 Rule"| Warm
+    Warm e3@-->|"Year 1 Rule"| Cold
+    Cold e4@-->|"Expiry (No Hold)"| Purge
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+
+    class Ingest client
+    class Hot service
+    class Warm worker
+    class Cold storage
+    class Purge cache
 ```
 
 * **AWS S3 Object Lock in Compliance Mode**: Neither the AWS root user nor IAM administrators can delete or overwrite objects during the retention duration.
@@ -233,49 +285,82 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph SourcesAndUsers["External Sources & Compliance Users"]
-        MailSrc["Corporate Mail Servers (Exchange / Office 365 / Google Workspace)"]
-        Auditors["Legal & Compliance Officers (eDiscovery Web Console)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Sources & Compliance Users"]
+        MailSrc["Corporate Mail (Exchange / O365)"]
+        Auditors["Compliance Officers (eDiscovery UI)"]
     end
-    subgraph GatewayTier["Gateway & Security Layer"]
-        IngestGW{"Ingestion Gateway (MTA / Journal Receiver - TLS 1.3, DKIM/SPF)"}
-        SearchGW{"eDiscovery API Gateway (RBAC, MFA, Immutable Audit Query Log)"}
+    subgraph EdgeTier["Edge & API Gateways"]
+        IngestGW{"Ingestion Gateway (TLS 1.3, DKIM)"}
+        SearchGW{"eDiscovery Gateway (RBAC, MFA)"}
     end
-    subgraph IngestionPipeline["Asynchronous Ingestion & Deduplication Pipeline"]
-        Kafka[("Ingestion Event Stream (Apache Kafka - Zero-Loss Raw Buffer)")]
-        ParserWorkers["MIME Parser & Deduplication Fleet (RFC 822 Parse, Tika Doc Text Extraction)"]
-        DedupCache[("Redis CAS Index (SHA-256 Attachment Hash Lookup)")]
+    subgraph CoreServices["Core Services & Workers"]
+        ParserWorkers["MIME Parser & Tika Workers"]
+        ExportSvc["Evidentiary Export (EDRM / PST)"]
+        RetentionDaemon["Retention & Purge Worker"]
     end
-    subgraph IndexingAndMetadata["Indexing, Metadata & Legal Hold State Machine"]
-        SearchEngine[("Full-Text eDiscovery Index (Elasticsearch / OpenSearch Cluster)")]
-        MetaDB[("Metadata & Legal Hold DB (Aurora PostgreSQL - Headers, Custodians, Holds)")]
-        AuditLog[("Tamper-Evident Audit Log (Hash-Chained Access & Query Ledger)")]
-        RetentionDaemon["Retention & Expiration Worker (Purges Expired Non-Held Records)"]
+    subgraph DataAndEventTier["Data Stores, Caches & WORM Storage"]
+        Kafka[["Apache Kafka (Raw MIME Buffer)"]]
+        DedupCache[("Redis CAS (SHA-256 Dedup)")]
+        SearchEngine[("Elasticsearch (Full-Text Index)")]
+        MetaDB[("Aurora PostgreSQL (Holds & Meta)")]
+        AuditLog[("Immutable Audit Ledger")]
+        HotS3[("S3 Standard WORM (Days 0-90)")]
+        ColdS3[("S3 Glacier Archive (Years 1-7+)")]
     end
-    subgraph TieredWORM["Compliant Tiered WORM Storage (AWS S3 Object Lock - SEC 17a-4)"]
-        HotS3[("Hot Tier: S3 Standard (Days 0-90, LegalHold Flag)")]
-        WarmS3[("Warm Tier: S3 Glacier Instant Retrieval (Days 91-365)")]
-        ColdS3[("Cold Tier: S3 Glacier Deep Archive (Years 1-7+)")]
-        ExportSvc["Evidentiary Export Service (EDRM XML / PST with SHA-256 Manifest)"]
-        HotS3 -->|"S3 Lifecycle Policy (90d)"| WarmS3
-        WarmS3 -->|"S3 Lifecycle Policy (365d)"| ColdS3
-    end
-    MailSrc -->|"SMTP Journal Stream"| IngestGW
-    Auditors -->|"Boolean Search, Hold & Export"| SearchGW
-    IngestGW -->|"Publish Raw MIME"| Kafka
-    Kafka -->|"Consume Batch"| ParserWorkers
-    ParserWorkers -->|"EXISTS att:sha256"| DedupCache
-    ParserWorkers -->|"Index Tokenized Body & Attachment Text"| SearchEngine
-    ParserWorkers -->|"Commit Headers & References"| MetaDB
-    ParserWorkers -->|"Store Immutable EML & Unique Attachments"| HotS3
-    SearchGW -->|"Execute Boolean / Date / Custodian Query"| SearchEngine
-    SearchGW -->|"Enact / Release Legal Hold"| MetaDB
-    SearchGW -->|"Append Access Event"| AuditLog
-    SearchGW -->|"Trigger Case Export"| ExportSvc
-    ExportSvc -->|"Fetch Locked Blobs"| HotS3
-    RetentionDaemon -->|"Scan retentionExpiry < NOW() AND isHeld = FALSE"| MetaDB
-    RetentionDaemon -->|"Purge Eligible Objects"| ColdS3
+    MailSrc e1@-->|"SMTP Journal"| IngestGW
+    Auditors e2@-->|"Search & Hold"| SearchGW
+    IngestGW e3@-->|"Raw MIME"| Kafka
+    Kafka e4@-->|"Consume Batch"| ParserWorkers
+    ParserWorkers e5@-->|"Check Hash"| DedupCache
+    ParserWorkers e6@-->|"Index Tokens"| SearchEngine
+    ParserWorkers e7@-->|"Save Headers"| MetaDB
+    ParserWorkers e8@-->|"Write WORM"| HotS3
+    SearchGW e9@-->|"Boolean Query"| SearchEngine
+    SearchGW e10@-->|"Enact Hold"| MetaDB
+    SearchGW e11@-->|"Log Query"| AuditLog
+    SearchGW e12@-->|"Trigger Export"| ExportSvc
+    ExportSvc e13@-->|"Fetch Blobs"| HotS3
+    RetentionDaemon e14@-->|"Check Expiry"| MetaDB
+    RetentionDaemon e15@-->|"Purge Expired"| ColdS3
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class MailSrc,Auditors client
+    class IngestGW,SearchGW edge
+    class ExportSvc service
+    class ParserWorkers,RetentionDaemon worker
+    class DedupCache cache
+    class SearchEngine,MetaDB,AuditLog,HotS3,ColdS3 storage
+    class Kafka queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

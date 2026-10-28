@@ -65,9 +65,28 @@ Formulated by Eric Brewer and proved by Gilbert & Lynch, the CAP theorem states 
 ### CP vs. AP Systems Comparison
 
 ```mermaid
-flowchart TD
-    P["Network Partition (P) Occurs"] --> CP["Consistency (CP)<br/>• Rejects / pauses writes on minority partition<br/>• Guarantees Strong Consistency (Linearizability)<br/>• Examples: Google Spanner, etcd, ZooKeeper, HBase"]
-    P --> AP["Availability (AP)<br/>• Accepts reads & writes on both sides of split<br/>• Eventual Consistency (async reconciliation)<br/>• Examples: Cassandra, DynamoDB, CouchDB, Riak"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    P["Network Partition (P) Occurs"]
+    subgraph Choices["CAP Trade-Off During Partition"]
+        CP["Consistency (CP): Rejects minority writes (Spanner, etcd, ZooKeeper)"]
+        AP["Availability (AP): Accepts divergent writes (Cassandra, DynamoDB, Riak)"]
+    end
+    P e1@-->|"Preserve Linearizability"| CP
+    P e2@-->|"Maximize Uptime"| AP
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+
+    classDef partition fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef cp fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef ap fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+
+    class P partition
+    class CP cp
+    class AP ap
+
+    style Choices fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 | Dimension | CP (Consistency + Partition Tolerance) | AP (Availability + Partition Tolerance) |

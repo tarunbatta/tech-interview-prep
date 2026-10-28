@@ -62,23 +62,68 @@ Designing an enterprise-grade notification platform presents rigorous distribute
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Upstreams["Upstream Services (Auth, Payment, Social)"] -->|"POST /v1/notifications"| Gateway["Ingestion API Gateway"]
-    Gateway -->|"Validate & Check"| Guard["Deduplication & Preference Guard (Redis)"]
-    Guard -->|"P0 Critical"| P0["Kafka Topic: P0 (OTP / Critical)"]
-    Guard -->|"P1 Informational"| P1["Kafka Topic: P1 (Informational)"]
-    Guard -->|"P2 Marketing"| P2["Kafka Topic: P2 (Promotions / Bulk)"]
-    P0 --> Dispatcher["Dispatcher & Template Workers"]
-    P1 --> Dispatcher
-    P2 --> Dispatcher
-    Dispatcher --> APNs["Apple APNs (HTTP/2)"]
-    Dispatcher --> FCM["Google FCM (gRPC)"]
-    Dispatcher --> SMS["SMS Gateway (Twilio)"]
-    Dispatcher --> Email["Email Gateway (SendGrid / SES)"]
-    APNs --> iOS["iOS Devices"]
-    FCM --> Android["Android Devices"]
-    SMS --> Carriers["SMS Carriers"]
-    Email --> Inboxes["Email Inboxes"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Upstreams["Upstream Services (Auth, Pay, Social)"]
+    subgraph EdgeTier["Ingestion & Guard"]
+        Gateway["Ingestion API Gateway"]
+        Guard[("Redis Dedupe & Pref Guard")]
+    end
+    subgraph QueueAndWorkers["Priority Queues & Dispatcher"]
+        P0[["Kafka P0: Critical (OTP)"]]
+        P1[["Kafka P1: Informational"]]
+        P2[["Kafka P2: Marketing Bulk"]]
+        Dispatcher["Dispatcher & Template Workers"]
+    end
+    subgraph Providers["Channel Gateways"]
+        APNs["Apple APNs (iOS Push)"]
+        FCM["Google FCM (Android Push)"]
+        SMS["SMS Gateway (Twilio)"]
+        Email["Email Gateway (SendGrid)"]
+    end
+    Upstreams e1@-->|"POST /notify"| Gateway
+    Gateway e2@<-->|"Dedupe & DND"| Guard
+    Gateway e3@-->|"P0 (<1s)"| P0
+    Gateway e4@-->|"P1 (<10s)"| P1
+    Gateway e5@-->|"P2 (Batch)"| P2
+    P0 e6@-->|"Consume"| Dispatcher
+    P1 e7@-->|"Consume"| Dispatcher
+    P2 e8@-->|"Consume"| Dispatcher
+    Dispatcher e9@-->|"HTTP/2"| APNs
+    Dispatcher e10@-->|"gRPC"| FCM
+    Dispatcher e11@-->|"Shortcode"| SMS
+    Dispatcher e12@-->|"SMTP / API"| Email
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Upstreams client
+    class Gateway edge
+    class Guard cache
+    class P0,P1,P2 queue
+    class Dispatcher worker
+    class APNs,FCM,SMS,Email storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style QueueAndWorkers fill:transparent,stroke:#818cf8,stroke-width:1.5px,stroke-dasharray: 5 5
+    style Providers fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -220,59 +265,82 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph Producers["Upstream Trigger Services"]
-        AuthSvc["Auth Service (2FA / OTP)"]
-        PaySvc["Payment Service (Fraud / Receipts)"]
-        SocialSvc["Social Graph (Messages / Mentions)"]
-        MktgSvc["Marketing Platform (Campaigns / Promos)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph Producers["Trigger Services"]
+        AuthSvc["Auth & Payment (P0 OTP / Fraud)"]
+        SocialSvc["Social & Marketing (P1 / P2)"]
     end
-    subgraph IngestionTier["Ingestion & Guard Layer"]
-        IngestAPI["Notification Ingestion API (Rate Limiting, Schema Validation, Idempotency Check)"]
-        DedupeGuard["Deduplication & Rate Guard (Redis Sliding Window: 5-min Dedupe, Quiet Hours, Frequency Cap)"]
-        DelayedQueue["Delayed Notification Scheduler (Redis ZSet: Quiet Hours Wakeup)"]
+    subgraph IngestionTier["Ingestion & Priority Queues"]
+        IngestAPI{"Notification Ingestion Gateway"}
+        KafkaP0[["Kafka P0: Critical (<1s SLA)"]]
+        KafkaP1[["Kafka P1/P2: Info & Bulk"]]
+        KafkaDLQ[["Kafka DLQ & Token Cleanup"]]
     end
-    subgraph PriorityQueues["Isolated Priority Queue Hub (Apache Kafka)"]
-        KafkaP0["Kafka P0: Critical Queue (OTP, Security, Payment Alerts - SLA < 1s)"]
-        KafkaP1["Kafka P1: Informational Queue (Friend Requests, Direct Messages - SLA < 10s)"]
-        KafkaP2["Kafka P2: Marketing / Promo Queue (Discounts, Weekly Digests - Off-Peak Batched)"]
-        KafkaDLQ["Kafka Dead-Letter Queue (DLQ) & Token Cleanup Topic"]
+    subgraph DispatchTier["Guard, Enrichment & Routing"]
+        DedupeGuard[("Redis Guard (5m Dedupe & DND)")]
+        UserDB[("User Pref & Token DB (Postgres)")]
+        Dispatcher["Dispatcher & Template Workers"]
     end
-    subgraph DispatchTier["Notification Dispatcher & Enrichment Tier"]
-        Dispatcher["Notification Dispatcher Fleet (Template Hydration, Localization, Token Resolution)"]
-        UserDB[("User Preference & Device DB (PostgreSQL / DynamoDB: APNs/FCM Tokens, Opt-Outs, Locale)")]
-        CircuitBreaker["Dynamic Circuit Breaker & Fallback Router (Resilience4j / Envoy Outlier Detection)"]
+    subgraph Gateways["Downstream Channel Gateways"]
+        APNs["Apple APNs (iOS HTTP/2)"]
+        FCM["Firebase FCM (Android gRPC)"]
+        SMS["SMS Gateway (Twilio / Sinch)"]
+        Email["Email Gateway (SendGrid / SES)"]
+        InApp["In-App Hub (WebSockets / SSE)"]
     end
-    subgraph Gateways["Downstream Channel Gateways & Providers"]
-        APNs["Apple APNs Gateway (iOS Push - Persistent HTTP/2)"]
-        FCM["Firebase FCM Gateway (Android Push - Multiplexed gRPC)"]
-        SMS["SMS Gateway (Twilio Primary / Sinch Failover)"]
-        Email["Email Gateway (SendGrid Primary / Amazon SES Failover)"]
-        InApp["In-App Notification Hub (WebSockets / SSE Cluster)"]
-    end
-    AuthSvc -->|"POST /v1/notifications"| IngestAPI
-    PaySvc -->|"POST /v1/notifications"| IngestAPI
-    SocialSvc -->|"POST /v1/notifications"| IngestAPI
-    MktgSvc -->|"POST /v1/notifications"| IngestAPI
-    IngestAPI <-->|"SET NX EX 300 / Check DND"| DedupeGuard
-    DedupeGuard -->|"Defer During Quiet Hours (P1/P2)"| DelayedQueue
-    DelayedQueue -->|"Wake Timestamp Reached"| IngestAPI
-    IngestAPI -->|"Route P0 (Bypass DND)"| KafkaP0
-    IngestAPI -->|"Route P1"| KafkaP1
-    IngestAPI -->|"Route P2"| KafkaP2
-    KafkaP0 -->|"Consume Critical"| Dispatcher
-    KafkaP1 -->|"Consume Informational"| Dispatcher
-    KafkaP2 -->|"Consume Bulk"| Dispatcher
-    Dispatcher <-->|"Fetch Preferences & Active Tokens"| UserDB
-    Dispatcher -->|"Dispatch Hydrated Payloads"| CircuitBreaker
-    CircuitBreaker -->|"iOS Push"| APNs
-    CircuitBreaker -->|"Android Push"| FCM
-    CircuitBreaker -->|"Rate-Limited SMS"| SMS
-    CircuitBreaker -->|"Circuit-Protected Email"| Email
-    CircuitBreaker -->|"Real-Time Stream"| InApp
-    APNs -.->|"410 Unregistered / BadDeviceToken"| KafkaDLQ
-    FCM -.->|"Stale Token / Delivery Error"| KafkaDLQ
-    KafkaDLQ -.->|"Prune Dead Tokens (is_active = FALSE)"| UserDB
+    AuthSvc e1@-->|"POST P0"| IngestAPI
+    SocialSvc e2@-->|"POST P1/P2"| IngestAPI
+    IngestAPI e3@<-->|"SETNX & Quiet Hrs"| DedupeGuard
+    IngestAPI e4@-->|"Enqueue P0"| KafkaP0
+    IngestAPI e5@-->|"Enqueue P1/P2"| KafkaP1
+    KafkaP0 e6@-->|"Consume P0"| Dispatcher
+    KafkaP1 e7@-->|"Consume P1/P2"| Dispatcher
+    Dispatcher e8@<-->|"Tokens & Prefs"| UserDB
+    Dispatcher e9@-->|"iOS Push"| APNs
+    Dispatcher e10@-->|"Android Push"| FCM
+    Dispatcher e11@-->|"Circuit SMS"| SMS
+    Dispatcher e12@-->|"Circuit Email"| Email
+    Dispatcher e13@-->|"Live Stream"| InApp
+    APNs e14@-.->|"410 Stale Token"| KafkaDLQ
+    FCM e15@-.->|"Unregistered"| KafkaDLQ
+    KafkaDLQ e16@-.->|"Prune Token"| UserDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+    e16@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class AuthSvc,SocialSvc client
+    class IngestAPI edge
+    class KafkaP0,KafkaP1,KafkaDLQ queue
+    class DedupeGuard cache
+    class UserDB,APNs,FCM,SMS,Email,InApp storage
+    class Dispatcher worker
+
+    style Producers fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style IngestionTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DispatchTier fill:transparent,stroke:#22d3ee,stroke-width:1.5px,stroke-dasharray: 5 5
+    style Gateways fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

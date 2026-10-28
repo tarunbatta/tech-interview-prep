@@ -74,21 +74,75 @@ Designing a modern social media platform requires solving fundamental distribute
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Clients["Clients (iOS, Android, Web)"] -->|"Static & Media (GET)"| CDN["Global Edge CDN"]
-    Clients -->|"Dynamic API (REST / GraphQL)"| Gateway["API Gateway / Load Balancer"]
-    CDN -->|"Origin Fetch"| S3[("Object Storage (S3)")]
-    Gateway --> PostSvc["Post Service"]
-    Gateway --> GraphSvc["Social Graph Service"]
-    Gateway --> FeedSvc["Feed Service"]
-    PostSvc --> Kafka{{"Event Bus (Kafka)"}}
-    PostSvc --> PostDB[("Post Database")]
-    Kafka --> Fanout["Fanout Workers"]
-    Fanout --> GraphSvc
-    Fanout --> FeedCache[("Feed Cache (Redis)")]
-    FeedSvc --> FeedCache
-    FeedSvc --> PostDB
-    GraphSvc --> GraphDB[("Graph Database")]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Clients["Clients (iOS, Android, Web)"]
+    subgraph EdgeTier["Edge & Ingress"]
+        CDN["Global Edge CDN"]
+        Gateway["API Gateway / Load Balancer"]
+    end
+    subgraph AppTier["Core Services & Fanout"]
+        PostSvc["Post Service"]
+        GraphSvc["Social Graph Service"]
+        FeedSvc["Feed Service"]
+        Fanout["Fanout Workers"]
+    end
+    subgraph DataTier["Storage, Cache & Event Bus"]
+        S3[("Object Storage (S3)")]
+        Kafka[["Event Bus (Kafka)"]]
+        FeedCache[("Feed Cache (Redis)")]
+        PostDB[("Post Database")]
+        GraphDB[("Graph Database")]
+    end
+    Clients e1@-->|"Static & Media"| CDN
+    CDN e2@-->|"Origin Fetch"| S3
+    Clients e3@-->|"REST / GraphQL"| Gateway
+    Gateway e4@-->|"Publish"| PostSvc
+    Gateway e5@-->|"Follow"| GraphSvc
+    Gateway e6@-->|"Get Feed"| FeedSvc
+    PostSvc e7@-->|"Emit Event"| Kafka
+    PostSvc e8@-->|"Write Post"| PostDB
+    Kafka e9@-->|"Consume"| Fanout
+    Fanout e10@-->|"Get Followers"| GraphSvc
+    Fanout e11@-->|"Push Timeline"| FeedCache
+    FeedSvc e12@-->|"Read ZSet"| FeedCache
+    FeedSvc e13@-->|"Hydrate"| PostDB
+    GraphSvc e14@-->|"Adjacency"| GraphDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Clients client
+    class CDN,Gateway edge
+    class PostSvc,GraphSvc,FeedSvc service
+    class Fanout worker
+    class FeedCache cache
+    class S3,PostDB,GraphDB storage
+    class Kafka queue
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppTier fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -115,25 +169,59 @@ The defining architectural decision of any social media app is how feeds are con
    * Merge-sort the two streams in memory by timestamp or recommendation score and return the top 20 items.
 
 ```mermaid
-flowchart TD
-    subgraph WritePath["Write Path: Post Creation & Hybrid Fanout"]
-        A["Author Creates Post"] --> B{"Follower Count > 25,000?"}
-        B -->|"No: Regular User"| C["Publish to Kafka: post-events"]
-        C --> D["Fanout Worker Pool"]
-        D --> E["Fetch Followers List from Social Graph"]
-        E --> F["Inject postId into each Follower's Redis Timeline ZSet"]
-        B -->|"Yes: Celebrity / Influencer"| G["Write solely to Celebrity's User Timeline"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph WritePath["Write Path: Hybrid Fanout"]
+        A["Author Creates Post"]
+        B{"Followers > 25k?"}
+        C["Fanout Worker Pool"]
+        F[("Follower Redis ZSet")]
+        G[("Celebrity User Timeline")]
     end
-    subgraph ReadPath["Read Path: Feed Generation & Hydration"]
-        H["Follower Opens App"] --> I["Feed Service"]
-        I --> J["Fetch Follower's Precomputed Redis Timeline"]
-        I --> K["Fetch Latest Posts from followed Celebrities"]
-        J --> L["In-Memory Merge & ML Ranker"]
-        K --> L
-        L --> M["Return Paginated Feed to Client"]
+    subgraph ReadPath["Read Path: Feed Hydration"]
+        H["Follower Opens App"]
+        I["Feed Service"]
+        L["In-Memory Merge & ML Ranker"]
+        M["Return Paginated Feed"]
     end
-    F -.->|"Cached Timeline Data"| J
-    G -.->|"On-Demand Fetch"| K
+    A e1@-->|"Publish"| B
+    B e2@-->|"No (Regular)"| C
+    C e3@-->|"Push postId"| F
+    B e4@-->|"Yes (Celeb)"| G
+    H e5@-->|"GET /feed"| I
+    I e6@-->|"Read Cache"| F
+    I e7@-->|"Pull Latest"| G
+    F e8@-.->|"Precomputed"| L
+    G e9@-.->|"On-Demand"| L
+    L e10@-->|"Top 20"| M
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class A,H client
+    class B edge
+    class I,M service
+    class C,L worker
+    class F cache
+    class G storage
+
+    style WritePath fill:transparent,stroke:#22d3ee,stroke-width:1.5px,stroke-dasharray: 5 5
+    style ReadPath fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ### 2. Media Upload Pipeline (Direct-to-S3 with Pre-Signed URLs)
@@ -262,57 +350,87 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph Clients["Clients Layer"]
-        ClientApp["Client App (iOS / Android / Web)<br/>• Infinite Scroll Feed<br/>• Pre-Signed Media Upload"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph Clients["Clients"]
+        ClientApp["Client App (iOS / Android / Web)"]
     end
-    subgraph Edge["Edge & Ingress Layer"]
-        CDN["Global Edge CDN (CloudFront / Cloudflare)<br/>• Caches Media & Thumbnails"]
-        Gateway["API Gateway / Envoy Proxy<br/>• Auth, Rate Limiting, SSL<br/>• Keyset Cursor Routing"]
+    subgraph Edge["Edge & API Gateway"]
+        CDN["Global Edge CDN (CloudFront)"]
+        Gateway{"API Gateway / Envoy Proxy"}
     end
-    subgraph Storage["Media Storage & Processing"]
-        S3[("AWS S3 / Blob Storage<br/>Master Media & Transcoded Assets")]
-        MediaWorkers["Media Transcode Workers<br/>• HLS Video Chunks & Multi-res Thumbs"]
+    subgraph CoreServices["Core Microservices & Workers"]
+        PostSvc["Post Publishing Service"]
+        GraphSvc["Social Graph Svc (TAO Cache)"]
+        FeedSvc["Feed Service & ML Ranker"]
+        Fanout["Hybrid Fanout Engine (25k Cap)"]
+        MediaWorkers["Media Transcode Workers (HLS)"]
     end
-    subgraph CoreServices["Microservices & Ingestion"]
-        PostSvc["Post Publishing Service<br/>• Pre-Signed URLs<br/>• Snowflake Post IDs"]
-        GraphSvc["Social Graph Service<br/>• Follower / Following Lists<br/>• Cached via TAO / Memcached"]
-        FeedSvc["Feed Service & ML Ranker<br/>• Reads User Timeline<br/>• Pulls Celebrity Posts<br/>• In-Memory Merge & Hydration"]
+    subgraph CachesDatastores["Datastores, Caches & Event Bus"]
+        S3[("AWS S3 (Master & HLS Media)")]
+        Kafka[["Apache Kafka (post-created)"]]
+        RedisFeed[("Redis Feed Cache (Timeline ZSet)")]
+        PostDB[("Post Master DB (Cassandra)")]
+        GraphDB[("Social Graph DB (MySQL / RocksDB)")]
     end
-    subgraph AsyncPipeline["Async Event & Fanout Engine"]
-        Kafka{{"Apache Kafka<br/>Topic: post-created<br/>Partitioned by AuthorId"}}
-        Fanout["Hybrid Fanout Engine<br/>• &lt; 25k Followers: Push to Redis<br/>• &gt; 25k Followers: Keep in User Timeline"]
-    end
-    subgraph CachesDatastores["Datastores & Caching Layer"]
-        RedisFeed[("Redis Feed Cache Cluster<br/>Timeline ZSet per Active User<br/>Key: userId | Score: time | Val: postId")]
-        PostDB[("Post Master DB<br/>Cassandra / CockroachDB<br/>Post Metadata & Content")]
-        GraphDB[("Social Graph DB<br/>MySQL / RocksDB<br/>Adjacency List")]
-    end
-    %% Client Interactions
-    ClientApp -->|"1. Static / Media Fetch"| CDN
-    ClientApp -->|"2. REST / GraphQL APIs"| Gateway
-    ClientApp -.->|"3. Direct Media PUT (Pre-Signed URL)"| S3
-    %% Media Processing
-    CDN -->|"Origin Fetch"| S3
-    S3 -.->|"S3 Event Notification"| MediaWorkers
-    MediaWorkers -->|"Save Transcoded Media"| S3
-    %% API Gateway Routing
-    Gateway -->|"POST /api/v1/posts"| PostSvc
-    Gateway -->|"POST /api/v1/follow"| GraphSvc
-    Gateway -->|"GET /api/v1/feed"| FeedSvc
-    %% Publishing & Fanout Flow
-    PostSvc -->|"Persist Post"| PostDB
-    PostSvc -->|"Publish post-created Event"| Kafka
-    Kafka -->|"Consume Events"| Fanout
-    Fanout -->|"Lookup Followers"| GraphSvc
-    Fanout -->|"Push postId to Followers"| RedisFeed
-    %% Feed Generation Flow
-    FeedSvc -->|"1. Fetch Precomputed Feed"| RedisFeed
-    FeedSvc -->|"2. Pull Celebrity Posts"| PostDB
-    FeedSvc -->|"3. Query Followees"| GraphSvc
-    FeedSvc -->|"4. Hydrate Post Metadata"| PostDB
-    %% Social Graph Storage
-    GraphSvc -->|"Read / Write Graph"| GraphDB
+    ClientApp e1@-->|"Media Fetch"| CDN
+    ClientApp e2@-->|"REST / GraphQL"| Gateway
+    ClientApp e3@-.->|"Pre-Signed PUT"| S3
+    CDN e4@-->|"Origin Pull"| S3
+    S3 e5@-.->|"S3 Event"| MediaWorkers
+    MediaWorkers e6@-->|"Save Chunks"| S3
+    Gateway e7@-->|"POST /posts"| PostSvc
+    Gateway e8@-->|"POST /follow"| GraphSvc
+    Gateway e9@-->|"GET /feed"| FeedSvc
+    PostSvc e10@-->|"Persist Post"| PostDB
+    PostSvc e11@-->|"Emit Event"| Kafka
+    Kafka e12@-->|"Consume"| Fanout
+    Fanout e13@-->|"Get Followers"| GraphSvc
+    Fanout e14@-->|"Push postId"| RedisFeed
+    FeedSvc e15@-->|"Read Timeline"| RedisFeed
+    FeedSvc e16@-->|"Pull & Hydrate"| PostDB
+    FeedSvc e17@-->|"Query Followees"| GraphSvc
+    GraphSvc e18@-->|"Read / Write"| GraphDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+    e16@{ animate: true }
+    e17@{ animate: true }
+    e18@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class ClientApp client
+    class CDN,Gateway edge
+    class PostSvc,GraphSvc,FeedSvc service
+    class Fanout,MediaWorkers worker
+    class RedisFeed cache
+    class S3,PostDB,GraphDB storage
+    class Kafka queue
+
+    style Clients fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style Edge fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CachesDatastores fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

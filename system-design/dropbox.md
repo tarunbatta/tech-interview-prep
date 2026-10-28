@@ -72,30 +72,60 @@ Designing Dropbox involves solving critical distributed systems challenges:
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Client["Client Devices (Desktop, Mobile, Web)"]
-    subgraph BlockTier["Block Storage Tier"]
-        CDN["Global Edge CDN (Regional Caching)"]
-        BlockSvc["Block Server (4MB Chunking & SHA-256 Deduplication)"]
-        S3["S3 / Magic Pocket (Erasure-Coded Block Store)"]
-    end
-    subgraph MetaTier["Metadata & Sync Tier"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Client["Client Devices (Desktop / Mobile / Web)"]
+    subgraph EdgeTier["Edge & Ingress"]
+        CDN["Global Edge CDN"]
         GW["API Gateway / Load Balancers"]
-        MetaSvc["Metadata Service (File Tree & Namespace)"]
-        NotifSvc["Notification Service (Long-Poll / WebSocket)"]
-        MetaDB[("Sharded Metadata DB (Edgestore / MySQL)")]
-        SyncStream["Redis / Kafka Sync Stream Hub"]
     end
-    Client -->|"1. Direct Chunk Upload/Download"| CDN
-    CDN -->|"Route Blocks"| BlockSvc
-    BlockSvc -->|"Content-Addressed SHA-256 Chunks"| S3
-    Client -->|"2. Metadata & Long-Poll Sync"| GW
-    GW -->|"Commit & Query Metadata"| MetaSvc
-    GW -->|"Subscribe to File Changes"| NotifSvc
-    MetaSvc -->|"ACID Transactions"| MetaDB
-    MetaSvc -->|"Publish FileUpdatedEvent"| SyncStream
-    SyncStream -->|"Fanout Delta Events"| NotifSvc
-    NotifSvc -.->|"Push Sync Hint"| Client
+    subgraph AppServices["Block, Metadata & Sync Services"]
+        BlockSvc["Block Server (4MB SHA-256)"]
+        MetaSvc["Metadata Service (File Tree)"]
+        NotifSvc["Notification Svc (Long-Poll)"]
+    end
+    subgraph DataLayer["Storage & Sync Stream"]
+        S3[("S3 / Magic Pocket (Blocks)")]
+        MetaDB[("Sharded Metadata DB")]
+        SyncStream[["Redis / Kafka Sync Hub"]]
+    end
+    Client e1@-->|"1. Upload / Download"| CDN
+    CDN e2@-->|"Route Blocks"| BlockSvc
+    BlockSvc e3@-->|"SHA-256 Chunks"| S3
+    Client e4@-->|"2. Metadata & Sync"| GW
+    GW e5@-->|"Commit Version"| MetaSvc
+    GW e6@-->|"Subscribe"| NotifSvc
+    MetaSvc e7@-->|"ACID Tx"| MetaDB
+    MetaSvc e8@-->|"Delta Event"| SyncStream
+    NotifSvc e9@-->|"Consume Hint"| SyncStream
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDN,GW edge
+    class BlockSvc,MetaSvc service
+    class NotifSvc worker
+    class S3,MetaDB storage
+    class SyncStream queue
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -257,48 +287,82 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientTier["Client Devices Tier"]
-        Watcher["OS File Watcher (inotify / FSEvents / ReadDirectoryChangesW)"]
-        Chunker["Chunker & Hasher (4MB Rabin Fingerprints & SHA-256)"]
-        LocalDB[("Local SQLite Index DB (Paths, Hashes, Local Versions)")]
-        SyncEng["Client Sync Engine (Deduplication & Delta Transfer)"]
-        Watcher -->|"File Modified Event"| Chunker
-        Chunker -->|"Compare Chunk Hashes"| LocalDB
-        LocalDB -->|"Identify Changed Chunks"| SyncEng
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Client Agents"]
+        Watcher["OS File Watcher & 4MB Chunker"]
+        LocalDB[("Local SQLite Index (Chunk Hashes)")]
+        SyncEng["Client Sync Engine (Delta Transfer)"]
     end
-    subgraph EdgeTier["Edge & API Gateway Tier"]
-        EdgeCDN["Global Edge CDN (Regional Block Caching)"]
-        Gateway{"API Gateway (TLS 1.3, OAuth2, Rate Limiting)"}
+    subgraph EdgeTier["Edge & API Gateway"]
+        EdgeCDN["Global Edge CDN (Regional Blocks)"]
+        Gateway{"API Gateway (TLS 1.3 & OAuth2)"}
     end
-    subgraph BlockStoragePlane["Content-Addressed Block Storage Plane"]
-        BlockSvc["Block Server (Chunking Service, SHA-256 Verification, Pre-Signed S3 URLs)"]
-        DedupCache[("Redis Global Chunk Hash Index (SHA-256 Existence Cache)")]
-        MagicPocket[("S3 / Magic Pocket Block Store (8+4 Reed-Solomon Erasure Coding, AES-256)")]
-        ColdArchive[("Glacier / Cold Storage Tier (Aged Version History)")]
+    subgraph CoreServices["Block, Metadata & Notification"]
+        BlockSvc["Block Server (SHA-256 & Pre-Signed)"]
+        SyncSvc["Sync & Metadata Svc (OCC & Forking)"]
+        NotifSvc["Notification Gateway (Long-Poll/SSE)"]
     end
-    subgraph MetadataSyncPlane["Metadata & Synchronization Control Plane"]
-        SyncSvc["Sync & Metadata Service (File Trees, OCC Version Checks, Conflicted Copy Engine)"]
-        MetaCache[("Redis Metadata & Session Cache (Hot Namespace Trees)")]
-        MetaDB[("Sharded Metadata DB (Aurora MySQL / Edgestore - Users, Files, Block Manifests)")]
+    subgraph DataAndEventTier["Block Store, Caches & Event Bus"]
+        DedupCache[("Redis Hash Index (Dedup Cache)")]
+        MagicPocket[("S3 / Magic Pocket (8+4 Erasure)")]
+        ColdArchive[("Glacier Cold Store (Aged Versions)")]
+        MetaCache[("Redis Cache (Hot File Trees)")]
+        MetaDB[("Sharded Metadata DB (Aurora MySQL)")]
+        KafkaBus[["Kafka / Redis Pub-Sub (Sync Stream)"]]
     end
-    subgraph NotificationPlane["Real-Time Notification Plane (300M Connections)"]
-        KafkaBus["Kafka / Redis Pub-Sub Sync Stream (Partitioned by userId)"]
-        NotifSvc["Notification Gateway Cluster (Long-Polling / WebSocket / SSE)"]
-    end
-    SyncEng -->|"1. Check Chunk Hashes & Commit Metadata"| Gateway
-    SyncEng -->|"2. Upload / Download 4MB Blocks"| EdgeCDN
-    EdgeCDN -->|"Forward Uncached Blocks"| BlockSvc
-    Gateway -->|"POST /chunks/check-exists"| BlockSvc
-    BlockSvc -->|"Lookup SHA-256"| DedupCache
-    BlockSvc -->|"Multipart PUT / GET Key=SHA-256"| MagicPocket
-    MagicPocket -->|"Lifecycle Tiering"| ColdArchive
-    Gateway -->|"POST /files/commit (baseVersion)"| SyncSvc
-    SyncSvc -->|"Read/Write Hot File Trees"| MetaCache
-    SyncSvc -->|"ACID Transaction (OCC Check)"| MetaDB
-    SyncSvc -->|"Publish Delta Event"| KafkaBus
-    KafkaBus -->|"Route by userId"| NotifSvc
-    NotifSvc -.->|"Push FileUpdated Hint"| SyncEng
+    Watcher e1@-->|"File Diff"| SyncEng
+    LocalDB e2@-->|"Hash Compare"| SyncEng
+    SyncEng e3@-->|"4MB Blocks"| EdgeCDN
+    SyncEng e4@-->|"Commit & Dedup"| Gateway
+    SyncEng e5@-.->|"Long-Poll / SSE"| NotifSvc
+    EdgeCDN e6@-->|"Uncached Blocks"| BlockSvc
+    Gateway e7@-->|"Check Hashes"| BlockSvc
+    Gateway e8@-->|"POST /commit"| SyncSvc
+    BlockSvc e9@-->|"Lookup SHA-256"| DedupCache
+    BlockSvc e10@-->|"PUT / GET Blocks"| MagicPocket
+    BlockSvc e11@-->|"Tier History"| ColdArchive
+    SyncSvc e12@-->|"Hot Trees"| MetaCache
+    SyncSvc e13@-->|"OCC Commit"| MetaDB
+    SyncSvc e14@-->|"Delta Event"| KafkaBus
+    NotifSvc e15@-->|"Subscribe"| KafkaBus
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Watcher,SyncEng client
+    class EdgeCDN,Gateway edge
+    class BlockSvc,SyncSvc service
+    class NotifSvc worker
+    class LocalDB,DedupCache,MetaCache cache
+    class MagicPocket,ColdArchive,MetaDB storage
+    class KafkaBus queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

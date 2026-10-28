@@ -59,30 +59,67 @@ Prominent examples include Facebook News Feed, Instagram Feed, Twitter/X Home Ti
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
     Client["Client Apps (iOS, Android, Web)"]
-    subgraph PostIngestFlow["Post Ingestion Flow"]
+    subgraph EdgeTier["Edge & Gateway"]
+        GW["API Gateway / Load Balancer"]
+    end
+    subgraph CoreServices["Feed Services & Workers"]
         PostSvc["Post Service"]
-        Kafka["Apache Kafka Topic ('new-posts')"]
-        Fanout["Fanout Workers Engine"]
-        PostSvc -->|"Publish Event"| Kafka
-        Kafka -->|"Consume"| Fanout
-    end
-    subgraph FeedRetrievalFlow["Feed Retrieval Flow"]
         FeedSvc["Feed Service"]
-        RedisRead["Redis Feed Cache (ZSet per User)"]
-        Hydrator["Post & Author Hydrator (Memcached / DB)"]
-        FeedSvc -->|"Fetch Top Post IDs"| RedisRead
-        RedisRead -->|"Candidate Post IDs"| Hydrator
+        Fanout["Fanout Workers Engine"]
+        Hydrator["Post & Author Hydrator"]
     end
-    SocialGraph[("Social Graph (Followers DB)")]
-    RedisCache[("Redis Feed Cache (ZSet)")]
-    PostDB[("Post Master Database")]
-    Client -->|"1. POST /feed/posts"| PostSvc
-    Client -->|"2. GET /feed"| FeedSvc
-    Fanout -->|"Query Followers"| SocialGraph
-    Fanout -->|"Push postId"| RedisCache
-    Hydrator -->|"Hydrate Post Objects"| PostDB
+    subgraph DataLayer["Storage, Cache & Bus"]
+        Kafka[["Kafka ('new-posts')"]]
+        SocialGraph[("Social Graph DB")]
+        RedisCache[("Redis Feed Cache (ZSet)")]
+        PostDB[("Post Master Database")]
+    end
+    Client e1@-->|"1. POST /posts & GET /feed"| GW
+    GW e2@-->|"Publish"| PostSvc
+    GW e3@-->|"Fetch Feed"| FeedSvc
+    PostSvc e4@-->|"Emit Event"| Kafka
+    PostSvc e5@-->|"Save Post"| PostDB
+    Fanout e6@-->|"Consume"| Kafka
+    Fanout e7@-->|"Get Followers"| SocialGraph
+    Fanout e8@-->|"Push postId"| RedisCache
+    FeedSvc e9@-->|"Top Post IDs"| RedisCache
+    FeedSvc e10@-->|"Hydrate IDs"| Hydrator
+    Hydrator e11@-->|"MGET Objects"| PostDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class GW edge
+    class PostSvc,FeedSvc service
+    class Fanout,Hydrator worker
+    class RedisCache cache
+    class SocialGraph,PostDB storage
+    class Kafka queue
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -211,49 +248,89 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientAndEdge["Client & API Gateway Tier"]
-        Client["Client Devices (iOS, Android, Web - Infinite Scroll & Cursor Pagination)"]
-        Gateway{"API Gateway / Load Balancer (Rate Limiting, Auth, Routing)"}
-        CDN["Global Media CDN (Images, Video Previews, User Avatars)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Client["Client Devices (iOS, Android, Web)"]
     end
-    subgraph PublishingAndFanout["FEED PUBLISHING & HYBRID FAN-OUT FLOW"]
-        PostSvc["Post Service (Validates & Saves Post Record)"]
-        KafkaPosts["Apache Kafka Topic ('new-posts' Event Stream)"]
-        FanoutSvc["Fanout Worker Engine (Hybrid Push < 20K Followers vs Pull > 20K Celebrities)"]
-        UserGraph[("Social Graph DB (Followers & Followees Index)")]
-        RedisTimeline[("Redis Timeline Cache (ZSet: userId -> Top 500 postIds Ordered by Timestamp)")]
-        CelebrityCache[("Celebrity Outbox Cache (Redis ZSet per High-Follower Author)")]
-        PostSvc -->|"Emit PostCreatedEvent"| KafkaPosts
-        KafkaPosts -->|"Consume Event"| FanoutSvc
-        FanoutSvc -->|"Fetch Active Followers"| UserGraph
-        FanoutSvc -->|"Push postId (Regular Author)"| RedisTimeline
-        PostSvc -->|"Append Celebrity Post"| CelebrityCache
+    subgraph EdgeTier["Edge & API Gateway"]
+        CDN["Global Media CDN (Images & Video)"]
+        Gateway{"API Gateway / Load Balancer"}
     end
-    subgraph RetrievalAndRanking["FEED RETRIEVAL, ML RANKING & HYDRATION PIPELINE"]
-        FeedSvc["Feed Service Coordinator (Merges Precomputed ZSet + Celebrity Pull Streams)"]
-        FeatureStore[("Online Feature Store (User Engagement History & Author Affinity Scores)")]
-        Ranker["ML Ranking Engine (Two-Tower Neural Net / GBDT - Predicts Click, Like, Comment, Share, Hide)"]
-        DiversityFilter["Diversity & Deduplication Filter (Author Spacing & Sponsored Post Injection)"]
-        Hydrator["Post Hydrator Service (Batch MGET Post Text, Media URLs, Like/Comment Counts & Avatars)"]
-        PostCache[("Post & Counter Cache (Memcached / Redis)")]
-        PostMasterDB[("Sharded Post Master Database (PostgreSQL / Cassandra)")]
-        FeedSvc -->|"500 Merged Candidate IDs"| Ranker
-        FeatureStore -->|"User + Author + Post Features"| Ranker
-        Ranker -->|"Scored Candidates"| DiversityFilter
-        DiversityFilter -->|"Top 20 Page IDs"| Hydrator
-        Hydrator -->|"Multi-Key MGET"| PostCache
-        PostCache <-->|"Cache Miss Read / Write"| PostMasterDB
+    subgraph CoreServices["Core Services, Ranking & Workers"]
+        PostSvc["Post Service (Validate & Save)"]
+        FanoutSvc["Fanout Worker (<20K Push Hybrid)"]
+        FeedSvc["Feed Coordinator (Merge Push/Pull)"]
+        Ranker["ML Ranking Engine (Two-Tower / GBDT)"]
+        Hydrator["Post Hydrator & Diversity Filter"]
     end
-    Client -->|"1. POST /api/v1/posts & 2. GET /api/v1/feed"| Gateway
-    Client -->|"Fetch Media Assets"| CDN
-    Gateway -->|"Publish Post"| PostSvc
-    PostSvc -->|"Persist Master Record"| PostMasterDB
-    PostSvc -->|"Warm Cache"| PostCache
-    Gateway -->|"GET /feed (cursor, limit)"| FeedSvc
-    FeedSvc -->|"Read Regular Candidate IDs"| RedisTimeline
-    FeedSvc -->|"Pull Followed Celebrity IDs"| CelebrityCache
-    FeedSvc -->|"Lookup Followed Celebrities"| UserGraph
+    subgraph DataAndEventTier["Data Stores, Caches & Event Bus"]
+        KafkaPosts[["Kafka Bus ('new-posts' Stream)"]]
+        UserGraph[("Social Graph DB (Followers)")]
+        RedisTimeline[("Redis Timeline ZSet (Top 500 IDs)")]
+        CelebrityCache[("Celebrity Outbox Cache (Redis)")]
+        FeatureStore[("Online Feature Store (Affinity)")]
+        PostCache[("Post & Counter Cache (Memcached)")]
+        PostMasterDB[("Sharded Post Master DB")]
+    end
+    Client e1@-->|"1. POST & GET"| Gateway
+    Client e2@-->|"Fetch Media"| CDN
+    Gateway e3@-->|"Publish Post"| PostSvc
+    Gateway e4@-->|"GET /feed"| FeedSvc
+    PostSvc e5@-->|"Save Master"| PostMasterDB
+    PostSvc e6@-->|"Warm Cache"| PostCache
+    PostSvc e7@-->|"Celeb Outbox"| CelebrityCache
+    PostSvc e8@-->|"Emit Event"| KafkaPosts
+    FanoutSvc e9@-->|"Consume"| KafkaPosts
+    FanoutSvc e10@-->|"Get Followers"| UserGraph
+    FanoutSvc e11@-->|"Push Regular"| RedisTimeline
+    FeedSvc e12@-->|"Read Regular"| RedisTimeline
+    FeedSvc e13@-->|"Pull Celebs"| CelebrityCache
+    FeedSvc e14@-->|"Rank 500 IDs"| Ranker
+    Ranker e15@-->|"Read Features"| FeatureStore
+    FeedSvc e16@-->|"Hydrate Top 20"| Hydrator
+    Hydrator e17@-->|"Batch MGET"| PostCache
+    Hydrator e18@-->|"Cache Miss"| PostMasterDB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+    e16@{ animate: true }
+    e17@{ animate: true }
+    e18@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDN,Gateway edge
+    class PostSvc,FeedSvc,Ranker service
+    class FanoutSvc,Hydrator worker
+    class RedisTimeline,CelebrityCache,PostCache cache
+    class UserGraph,FeatureStore,PostMasterDB storage
+    class KafkaPosts queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -263,11 +340,34 @@ flowchart TD
 While chronological feeds simply sort by `createdAt DESC`, modern feeds rank content by predicted user engagement.
 
 ```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
 flowchart LR
-    A["Candidate Generation"] --> B["Feature Extraction"]
-    B --> C["ML Scoring & Ranking"]
-    C --> D["Business Logic & Diversity"]
-    D --> E["Hydration & Delivery"]
+    A["Candidate Generation"]
+    B["Feature Extraction"]
+    C["ML Scoring & Ranking"]
+    D["Diversity & Filtering"]
+    E["Hydration & Delivery"]
+    A e1@-->|"500 IDs"| B
+    B e2@-->|"Vectors"| C
+    C e3@-->|"Scored"| D
+    D e4@-->|"Top 20"| E
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class A client
+    class B edge
+    class C service
+    class D worker
+    class E storage
 ```
 
 1. **Candidate Generation (Retrieval)**:

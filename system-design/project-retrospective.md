@@ -26,14 +26,47 @@ DocuSign's commercial success resulted in explosive transaction volume that over
 * **High Days Sales Outstanding (DSO)**: Collecting payments took an average of **5 days**, locking up corporate cash flow.
 
 ```mermaid
-flowchart TD
-    subgraph LegacyArch["Legacy Architecture (Batch-Coupled & Monolithic)"]
-        Client["Client (Web)"] --> GW["Gateway & Load Balancer"]
-        GW --> App["App (Monolithic Web App)"]
-        App --> Core["Core (Monolithic API: Relational & NoSQL DB)"]
-        Core <-->|"Overloaded / Timeouts"| Quartz["Quartz Batch Jobs"]
-        Quartz <-->|"Out-of-Sync Batch Polling"| Zuora["Zuora Billing"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    subgraph LegacyIngress["Client & Edge"]
+        Client["Client (Web)"]
+        GW["Gateway & Load Balancer"]
     end
+    subgraph LegacyMonolith["Monolithic App & API"]
+        App["Monolithic Web App"]
+        Core["Core Monolithic API"]
+    end
+    subgraph LegacyBatch["Batch & External Billing"]
+        Quartz["Quartz Batch Jobs"]
+        Zuora["Zuora Billing Engine"]
+    end
+    Client e1@-->|"HTTPS"| GW
+    GW e2@-->|"Route"| App
+    App e3@-->|"Sync Call"| Core
+    Core e4@-->|"Lock Contention"| Quartz
+    Quartz e5@-->|"Batch Polling"| Zuora
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class GW edge
+    class App,Core service
+    class Quartz worker
+    class Zuora storage
+
+    style LegacyIngress fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style LegacyMonolith fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style LegacyBatch fill:transparent,stroke:#fb7185,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -43,17 +76,60 @@ flowchart TD
 The modernization strategy re-architected the billing lifecycle into an **event-driven, decoupled integration platform**:
 
 ```mermaid
-flowchart TD
-    subgraph ModernizedArch["Modernized Event-Driven Architecture"]
-        Client["Client (Web)"] --> IstioGW["Istio Service Gateway"]
-        IstioGW --> App["App (Micro-Frontends)"]
-        App --> Core["Core Microservices (Istio Service Mesh, Distributed Cache, DB Optimization)"]
-        Zuora["Zuora (SSOT: Billing)"] <-->|"Webhooks (Event-Driven)"| MuleSoft["MuleSoft Platform (Contract Abstraction, DataWeave, DLQ & Exponential Backoff)"]
-        MuleSoft <-->|"Idempotent REST APIs"| Core
-        MuleSoft --> Obs["Azure Monitor, Grafana & PagerDuty Alerting"]
-        Core --> DB[("Relational & NoSQL DB (Idempotency Verified)")]
-        Core --> Obs
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientEdge["Clients & Edge"]
+        Client["Client (Web)"]
+        IstioGW["Istio Service Gateway"]
+        Zuora["Zuora (SSOT: Billing)"]
     end
+    subgraph IntegrationAndApp["App & Integration Tier"]
+        App["App (Micro-Frontends)"]
+        MuleSoft["MuleSoft AnyPoint (DLQ & Retry)"]
+    end
+    subgraph CoreMesh["DocuSign Core Mesh"]
+        Core["Core Microservices (Istio Mesh)"]
+    end
+    subgraph DataAndObs["Persistence & Observability"]
+        DB[("Relational & NoSQL DB")]
+        Obs["Azure Monitor, Grafana & PagerDuty"]
+    end
+    Client e1@-->|"HTTPS"| IstioGW
+    IstioGW e2@-->|"Route"| App
+    App e3@-->|"mTLS API"| Core
+    Zuora e4@-->|"Webhooks"| MuleSoft
+    MuleSoft e5@-->|"Idempotent REST"| Core
+    MuleSoft e6@-->|"Flow Alerts"| Obs
+    Core e7@-->|"ACID Write"| DB
+    Core e8@-->|"Telemetry"| Obs
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class IstioGW edge
+    class Zuora,DB storage
+    class App,Core service
+    class MuleSoft queue
+    class Obs worker
+
+    style ClientEdge fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style IntegrationAndApp fill:transparent,stroke:#818cf8,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreMesh fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndObs fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ### Core Architectural Decisions
@@ -93,68 +169,87 @@ Migrating financial infrastructure while processing millions of dollars daily re
 ## 3. System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientEdge["Client & Edge Routing Tier"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientEdge["Clients & Ingress"]
         Client["Web & Enterprise Clients"]
-        Akamai["Akamai CDN (Static Assets & Edge Caching)"]
-        IstioIngress["Istio Ingress Gateway & Load Balancer"]
+        Akamai["Akamai Edge CDN"]
+        IstioIngress{"Istio Ingress Gateway"}
     end
-    subgraph FrontendApp["Web Application & Ecommerce Tier"]
-        AppShell["App Container (Micro-Frontends)"]
+    subgraph FrontendAndBilling["Web Apps & Billing Ecosystem"]
+        AppShell["App Container (Micro-FE)"]
         AcctServer["Account Server"]
-        EcomUI["Ecommerce Checkout App"]
-        EcomBackend["Ecommerce Backend Service"]
-        EcomDB[("Ecommerce DB")]
-        Mixpanel["Mixpanel Product Analytics"]
+        EcomBackend["Ecommerce Checkout Svc"]
+        Zuora["Zuora Billing (SSOT)"]
     end
-    subgraph IntegrationTier["MuleSoft AnyPoint Integration Platform"]
-        MuleSoft["MuleSoft Integration Engine (Contract Abstraction, DataWeave Transform, Per-Account Redis Locks)"]
-        MuleDLQ["Dead Letter Queue (DLQ) & Exponential Backoff Retry Handler"]
-        ShadowAudit[("Shadow Audit Datastore (Dual-Run Learning Mode Reconciliation)")]
+    subgraph IntegrationAndMesh["MuleSoft & Core Service Mesh"]
+        MuleSoft["MuleSoft Engine (DataWeave)"]
+        MuleDLQ[["Dead Letter Queue (DLQ)"]]
+        APIServer["Core Domain Microservices"]
+        OracleERP["Oracle ERP & Pay Gateways"]
     end
-    subgraph ExternalBilling["Billing, Finance & Payment Ecosystem"]
-        Zuora["Zuora Billing Engine (SSOT: Billing, Invoices, Payments, Subscriptions)"]
-        OracleERP["Oracle ERP (Financial Ledger & Revenue Recognition)"]
-        PayGateways["Payment Gateways (Stripe, PayPal, Credit Card Processors)"]
+    subgraph DataAndObs["Stores, Caches & Observability"]
+        RedisCache[("Redis Cache & Locks")]
+        RelDB[("Core Relational & NoSQL DB")]
+        ShadowAudit[("Shadow Audit Datastore")]
+        Obs["Azure Monitor, Grafana & PagerDuty"]
     end
-    subgraph CoreAzure["DocuSign Core Platform (Azure AKS & Istio Service Mesh)"]
-        IstioInternal["Istio Internal Service Mesh Gateway (mTLS)"]
-        APIServer["Core API Server & Domain Microservices (Account, User, Billing, Subscription, Entitlement)"]
-        RedisCache[("Redis Distributed Cache (Sub-ms Entitlement Lookups & Tenant Locks)")]
-        RelDB[("Core Relational DB (Indexed Account & Idempotency Deduplication Tables)")]
-        NoSQLDB[("Core NoSQL DB (Product Objects & Metadata)")]
-    end
-    subgraph Observability["Observability, Telemetry & Incident Response"]
-        AzureMon["Azure Monitor & Log Analytics"]
-        Grafana["Grafana Real-Time Dashboards"]
-        PagerDuty["PagerDuty Alerting (>5 DLQ/15m, >1% Error Rate, Latency Drift)"]
-    end
-    Client -->|"HTTPS"| IstioIngress
-    IstioIngress -->|"Route"| AcctServer
-    IstioIngress -->|"Route"| AppShell
-    AppShell -->|"CDN Assets"| Akamai
-    AppShell -->|"User Events"| Mixpanel
-    AppShell -->|"Checkout Flow"| EcomUI
-    AcctServer -->|"Direct API"| APIServer
-    EcomUI -->|"Order / Checkout"| EcomBackend
-    EcomBackend -->|"Persist"| EcomDB
-    EcomBackend -->|"Subscription / Billing"| Zuora
-    EcomBackend -->|"General Ledger"| OracleERP
-    EcomBackend -->|"Charge Authorization"| PayGateways
-    AppShell -->|"Service Mesh Call"| IstioInternal
-    IstioInternal -->|"mTLS"| APIServer
-    Zuora <-->|"Event-Driven Webhooks & REST"| MuleSoft
-    MuleSoft -->|"Transient Failures"| MuleDLQ
-    MuleSoft -.->|"Shadow State Verification"| ShadowAudit
-    MuleSoft <-->|"Idempotent REST APIs (event_id / idempotency_key)"| APIServer
-    APIServer <-->|"Read/Write Cache"| RedisCache
-    APIServer -->|"ACID Transactions & Optimistic Concurrency"| RelDB
-    APIServer -->|"Document Persistence"| NoSQLDB
-    AppShell -->|"Frontend Telemetry"| AzureMon
-    APIServer -->|"Service Metrics & Traces"| AzureMon
-    MuleSoft -->|"Flow Metrics & DLQ Alerts"| PagerDuty
-    AzureMon <-->|"Visualize"| Grafana
-    AzureMon <-->|"Trigger Incidents"| PagerDuty
+    Client e1@-->|"Static Assets"| Akamai
+    Client e2@-->|"HTTPS"| IstioIngress
+    IstioIngress e3@-->|"Route UI"| AppShell
+    IstioIngress e4@-->|"Route Auth"| AcctServer
+    AppShell e5@-->|"Checkout"| EcomBackend
+    AppShell e6@-->|"mTLS Mesh"| APIServer
+    AcctServer e7@-->|"Direct API"| APIServer
+    EcomBackend e8@-->|"Create Sub"| Zuora
+    EcomBackend e9@-->|"Ledger & Auth"| OracleERP
+    Zuora e10@-->|"Webhooks"| MuleSoft
+    MuleSoft e11@-->|"Retries"| MuleDLQ
+    MuleSoft e12@-.->|"Learning Mode"| ShadowAudit
+    MuleSoft e13@-->|"Idempotent API"| APIServer
+    APIServer e14@-->|"Tenant Lock"| RedisCache
+    APIServer e15@-->|"ACID Commit"| RelDB
+    APIServer e16@-->|"Metrics & Traces"| Obs
+    MuleSoft e17@-->|"DLQ Alerts"| Obs
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+    e16@{ animate: true }
+    e17@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class Akamai,IstioIngress edge
+    class AppShell,AcctServer,EcomBackend,APIServer service
+    class MuleSoft,OracleERP,Obs worker
+    class MuleDLQ queue
+    class RedisCache cache
+    class Zuora,RelDB,ShadowAudit storage
+
+    style ClientEdge fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style FrontendAndBilling fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style IntegrationAndMesh fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndObs fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

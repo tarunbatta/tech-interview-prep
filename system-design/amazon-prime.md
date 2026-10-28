@@ -50,32 +50,62 @@ In a system design interview, Amazon Prime is typically explored through the len
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Client["Client App (FireTV, Phone, Web)"]
-    subgraph AmazonBackend["Amazon Backend"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Client["Client Apps (FireTV / Mobile / Web)"]
+    subgraph EdgeTier["Edge & Multi-CDN"]
+        CDNRouter["Dynamic CDN Router"]
         GW["API Gateway (AppSync)"]
+    end
+    subgraph AppBackend["Application Services"]
+        EdgePoP["Edge Video PoPs (HLS / DASH)"]
         EntSvc["Entitlement Service"]
         CatSvc["Catalog Service"]
         XRaySvc["X-Ray Service"]
-        DynamoEnt[("Amazon DynamoDB")]
-        DynamoCat[("DynamoDB / Elasticsearch")]
-        Neptune[("Neptune (Graph DB)")]
     end
-    subgraph MultiCDN["Multi-CDN Data Plane"]
-        CDNRouter["Dynamic CDN Router (CloudFront, Akamai, Fastly)"]
-        EdgePoP["Video Chunks & Manifests (Edge PoPs Worldwide)"]
-        S3Master[("Amazon S3 Master Storage (Transcoded Video & DRM)")]
+    subgraph DataLayer["Storage & Databases"]
+        S3Master[("AWS S3 (Video & DRM)")]
+        DynamoEnt[("DynamoDB (Entitlements)")]
+        DynamoCat[("DynamoDB / ES (Catalog)")]
+        Neptune[("Amazon Neptune (Graph)")]
     end
-    Client -->|"1. Entitlement API & X-Ray Metadata"| GW
-    GW -->|"Verify Subscription"| EntSvc
-    GW -->|"Browse Titles"| CatSvc
-    GW -->|"Fetch Scene Metadata"| XRaySvc
-    EntSvc -->|"Global Lookup"| DynamoEnt
-    CatSvc -->|"Search & Metadata"| DynamoCat
-    XRaySvc -->|"Graph Traversal"| Neptune
-    Client -->|"2. Stream Video (HLS / DASH)"| CDNRouter
-    CDNRouter -->|"Route to Optimal PoP"| EdgePoP
-    S3Master -->|"Origin Fetch"| EdgePoP
+    Client e1@-->|"1. Stream Video"| CDNRouter
+    CDNRouter e2@-->|"Optimal PoP"| EdgePoP
+    EdgePoP e3@-->|"Origin Pull"| S3Master
+    Client e4@-->|"2. Control & X-Ray"| GW
+    GW e5@-->|"Verify Plan"| EntSvc
+    GW e6@-->|"Browse Titles"| CatSvc
+    GW e7@-->|"Scene Data"| XRaySvc
+    EntSvc e8@-->|"Global Lookup"| DynamoEnt
+    CatSvc e9@-->|"Search Query"| DynamoCat
+    XRaySvc e10@-->|"Graph Query"| Neptune
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CDNRouter,GW edge
+    class EntSvc,CatSvc,XRaySvc service
+    class EdgePoP cache
+    class S3Master,DynamoEnt,DynamoCat,Neptune storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppBackend fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -198,42 +228,81 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
     subgraph ClientTier["Client Devices"]
-        Client["Client Devices (Fire TV, Smart TV, Mobile, Web: Multi-CDN Switcher & X-Ray Overlay)"]
+        Client["Client Apps (FireTV / Mobile / Web)"]
     end
-    subgraph CDNTier["Multi-CDN Data Plane"]
-        CloudFront["Amazon CloudFront (Primary Edge CDN)"]
-        Akamai["Akamai CDN (Secondary Failover)"]
-        Fastly["Fastly CDN (Live Events / Thursday Night Football)"]
+    subgraph EdgeTier["Multi-CDN & API Gateway"]
+        CloudFront["Amazon CloudFront (Primary CDN)"]
+        Akamai["Akamai CDN (Failover PoP)"]
+        Fastly["Fastly CDN (Live Sports)"]
+        GW{"API Gateway / AppSync (Auth & GraphQL)"}
     end
-    subgraph ControlPlane["API Gateway & Control Plane Services"]
-        GW{"API Gateway / AppSync (GraphQL / REST, Auth, Entitlement Routing)"}
-        EntSvc["Prime Entitlement Service (Sub-50ms Validation: Video, Music, Shipping)"]
-        XRaySvc["Amazon X-Ray Service (Time-Synchronized Scene Engine: Actor, Trivia & Music)"]
-        WatchSvc["Playback History & Sync Service (Multi-Profile Bookmark Resume Timestamp)"]
-        DRMSvc["DRM License Service (Widevine L1, FairPlay, PlayReady)"]
+    subgraph CoreServices["Core Control Plane Services"]
+        EntSvc["Prime Entitlement Svc (Sub-50ms Auth)"]
+        XRaySvc["Amazon X-Ray Service (Scene Metadata)"]
+        WatchSvc["Playback Sync Svc (Watch History)"]
+        DRMSvc["DRM License Svc (Widevine / FairPlay)"]
     end
-    subgraph DataAndMediaStorage["Global Data Stores & Media Pipeline"]
-        RedisEnt[("ElastiCache Redis (Sub-5ms Entitlement Cache)")]
-        DynamoGlobal[("DynamoDB Global Tables (Prime Membership Records Replicated Worldwide)")]
-        Neptune[("Amazon Neptune Graph DB (Actor -> Character -> Filmography & Soundtrack)")]
-        S3Master[("AWS S3 Master Video Bucket & MediaConvert GPU Pipeline (H.264/HEVC/AV1)")]
+    subgraph DataAndMediaStorage["Global Data Stores & Media"]
+        S3Master[("AWS S3 & MediaConvert (AV1 / HEVC)")]
+        RedisEnt[("ElastiCache Redis (Entitlement Cache)")]
+        DynamoGlobal[("DynamoDB Global (Member & History)")]
+        Neptune[("Amazon Neptune (X-Ray Scene Graph)")]
     end
-    Client -->|"Stream Chunks (HLS / MPEG-DASH ABR)"| CloudFront
-    Client -.->|"Dynamic Client Reroute on Packet Loss"| Akamai
-    Client -.->|"Live Sports Stream"| Fastly
-    Client -->|"Control / Playback Session / Metadata"| GW
-    GW -->|"Verify Benefit"| EntSvc
-    EntSvc -->|"Read Cache"| RedisEnt
-    EntSvc -->|"Fallback / Sync"| DynamoGlobal
-    GW -->|"Fetch Scene JSON Track"| XRaySvc
-    XRaySvc -->|"Query Graph Relationships"| Neptune
-    GW -->|"Sync Watch Position"| WatchSvc
-    GW -->|"Acquire Decryption Keys"| DRMSvc
-    S3Master -.->|"Origin Fetch to Edge PoPs"| CloudFront
-    S3Master -.->|"Origin Fetch to Edge PoPs"| Akamai
-    S3Master -.->|"Origin Fetch to Edge PoPs"| Fastly
+    Client e1@-->|"HLS / DASH ABR"| CloudFront
+    Client e2@-.->|"Failover Reroute"| Akamai
+    Client e3@-.->|"Live Sports"| Fastly
+    CloudFront e4@-.->|"Origin Fetch"| S3Master
+    Akamai e5@-.->|"Origin Fetch"| S3Master
+    Fastly e6@-.->|"Origin Fetch"| S3Master
+    Client e7@-->|"Playback Session"| GW
+    GW e8@-->|"Verify Benefit"| EntSvc
+    GW e9@-->|"Fetch Scene JSON"| XRaySvc
+    GW e10@-->|"Sync Position"| WatchSvc
+    GW e11@-->|"License Keys"| DRMSvc
+    EntSvc e12@-->|"Sub-5ms Read"| RedisEnt
+    EntSvc e13@-->|"Global Sync"| DynamoGlobal
+    XRaySvc e14@-->|"Graph Query"| Neptune
+    WatchSvc e15@-->|"Persist State"| DynamoGlobal
+    DRMSvc e16@-->|"Key Store"| S3Master
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+    e16@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class CloudFront,Akamai,Fastly,GW edge
+    class EntSvc,XRaySvc,WatchSvc service
+    class DRMSvc worker
+    class RedisEnt cache
+    class S3Master,DynamoGlobal,Neptune storage
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndMediaStorage fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

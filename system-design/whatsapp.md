@@ -63,14 +63,58 @@ The core technical challenge is maintaining hundreds of millions of persistent, 
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Sender["Sender Device"] -->|"Persistent WebSocket / TLS"| GwA["Gateway Node A (Erlang / Go)"]
-    GwA --> Router["Message Router & Dispatch"]
-    Router -->|"Lookup Session"| SessionReg[("User Session Registry (Redis: User -> Node)")]
-    Router -->|"Recipient Online"| GwB["Gateway Node B (Erlang / Go)"]
-    GwB -->|"Persistent WS / TLS"| Recipient["Recipient Device"]
-    Router -->|"Recipient Offline"| OfflineQueue[("Transient Queue (Cassandra / Mnesia)")]
-    OfflineQueue --> PushSvc["Push Notification Service (Apple APNs / FCM)"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Sender["Sender Device (Signal E2EE)"]
+        Recipient["Recipient Device (Signal E2EE)"]
+    end
+    subgraph EdgeTier["Connection Gateways"]
+        GwA["Gateway Node A (Erlang / Go)"]
+        GwB["Gateway Node B (Erlang / Go)"]
+    end
+    subgraph AppBackend["Routing & Push Services"]
+        Router["Message Router & Dispatch"]
+        PushSvc["Push Notification Svc (APNs/FCM)"]
+    end
+    subgraph DataLayer["Session Cache & Transient Queue"]
+        SessionReg[("Session Registry (Redis)")]
+        OfflineQueue[("Offline Queue (Cassandra)")]
+    end
+    Sender e1@-->|"TLS / WS"| GwA
+    GwA e2@-->|"Route Msg"| Router
+    Router e3@-->|"Lookup Node"| SessionReg
+    Router e4@-->|"Online Push"| GwB
+    GwB e5@-->|"Deliver WS"| Recipient
+    Router e6@-->|"Offline Buffer"| OfflineQueue
+    OfflineQueue e7@-->|"Wake Device"| PushSvc
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Sender,Recipient client
+    class GwA,GwB edge
+    class Router service
+    class PushSvc worker
+    class SessionReg cache
+    class OfflineQueue storage
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style AppBackend fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -180,37 +224,72 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph Mobile_Clients["Mobile Clients (Signal Protocol E2EE)"]
-        Sender["Sender Client (iOS / Android: Signal Protocol Double Ratchet + X3DH, Local SQLite DB)"]
-        Recipient["Recipient Client (iOS / Android: Signal Protocol E2EE, Sends Delivery & Read Receipts)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Mobile Clients (Signal E2EE)"]
+        Sender["Sender Client (Double Ratchet)"]
+        Recipient["Recipient Client (E2EE & Receipts)"]
     end
-    subgraph Gateway_Tier["Connection Gateway Tier (Erlang / Go - 500 Nodes, 1M Conns/Server)"]
-        GwNodeA["Gateway Node A (Persistent TLS / WS, Noise Pipes Binary XMPP)"]
-        GwNodeB["Gateway Node B (Persistent TLS / WS, Noise Pipes Binary XMPP)"]
+    subgraph EdgeTier["Gateway Tier (1M Conns/Node)"]
+        GwNodeA["Gateway Node A (Noise Pipes)"]
+        GwNodeB["Gateway Node B (Noise Pipes)"]
     end
-    subgraph Routing_And_Group_Core["Routing Core, Session Registry & Group Fanout"]
-        SessionStore[("User Session Registry (Redis: Maps userId -> GatewayNodeId, Sub-ms Lookup)")]
-        MsgRouter["Message Router & Dispatcher (Validates Message ID, Routes to Node or Offline Queue)"]
-        GroupSvc["Group Messaging Service (Sender-Key Protocol: 1 Upload -> Multicast Fanout up to 1,024 Members)"]
-        KafkaEvents["Apache Kafka (Message & Receipt Events Partitioned by ChatId)"]
+    subgraph CoreServices["Routing, Group Fanout & Push"]
+        MsgRouter["Message Router & Dispatcher"]
+        GroupSvc["Group Service (Sender-Key Fanout)"]
+        PushSvc["Push Gateway (APNs & FCM)"]
     end
-    subgraph Transient_Offline_And_Push["Transient Offline Storage & Push Wakeup"]
-        OfflineDB[("Transient Message Queue (Apache Cassandra / Mnesia: Encrypted Payload with 30-Day TTL, Deleted on ACK)")]
-        PushSvc["Push Notification Gateway (Apple APNs & Google FCM: Wakes Sleeping Mobile Devices)"]
+    subgraph DataAndEventTier["Session Registry, Queue & Events"]
+        SessionStore[("Redis Session Registry")]
+        KafkaEvents[["Kafka Bus (Message & Receipts)"]]
+        OfflineDB[("Cassandra Offline Queue (30d TTL)")]
     end
-    Sender -->|"TLS / WS Connection (Ciphertext)"| GwNodeA
-    GwNodeA -->|"Lookup Recipient Node"| SessionStore
-    GwNodeA -->|"Ingest Ciphertext"| MsgRouter
-    MsgRouter -->|"Group Chat Payload"| GroupSvc
-    GroupSvc -->|"Multicast to Member Nodes"| MsgRouter
-    MsgRouter -->|"Publish Event Stream"| KafkaEvents
-    MsgRouter -->|"Recipient Online (Dispatch to Node B)"| GwNodeB
-    GwNodeB -->|"Push Message / Status"| Recipient
-    Recipient -.->|"DELIVERY_RECEIPT / READ_RECEIPT"| GwNodeB
-    MsgRouter -->|"Recipient Offline (Buffer Message)"| OfflineDB
-    OfflineDB -->|"Trigger Wakeup"| PushSvc
-    OfflineDB -.->|"Flush on Reconnect & Delete"| GwNodeB
+    Sender e1@-->|"TLS / WS Cipher"| GwNodeA
+    GwNodeA e2@-->|"Lookup Node"| SessionStore
+    GwNodeA e3@-->|"Ingest Msg"| MsgRouter
+    MsgRouter e4@-->|"Group Msg"| GroupSvc
+    GroupSvc e5@-->|"Multicast"| MsgRouter
+    MsgRouter e6@-->|"Publish Event"| KafkaEvents
+    MsgRouter e7@-->|"Online Route"| GwNodeB
+    GwNodeB e8@-->|"Push Cipher"| Recipient
+    Recipient e9@-.->|"ACK / Receipt"| GwNodeB
+    MsgRouter e10@-->|"Offline Buffer"| OfflineDB
+    OfflineDB e11@-->|"Wake Device"| PushSvc
+    OfflineDB e12@-.->|"Flush & Delete"| GwNodeB
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Sender,Recipient client
+    class GwNodeA,GwNodeB edge
+    class MsgRouter,GroupSvc service
+    class PushSvc worker
+    class SessionStore cache
+    class OfflineDB storage
+    class KafkaEvents queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

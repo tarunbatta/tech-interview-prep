@@ -77,32 +77,67 @@ Architecturally, Netflix is split into two distinct, decoupled subsystems:
 ## High-Level Architecture
 
 ```mermaid
-flowchart TD
-    Client["Client Device (SmartTV, Phone, Web)"]
-    subgraph ControlPlane["AWS Cloud (Control Plane)"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Client["Client Device (SmartTV, Mobile, Web)"]
+    subgraph EdgeTier["Edge & Open Connect"]
         GW["Route53 / Zuul Gateway"]
+        OCA["Embedded OCA in ISP (NVMe)"]
+    end
+    subgraph ControlPlane["AWS Control Plane & Workers"]
         CatalogSvc["Catalog Search Service"]
         ProfileSvc["Profile & Billing Service"]
         SteeringSvc["Playback Steering Service"]
+        Transcode["Dynamic Optimizer (Titus)"]
+    end
+    subgraph DataLayer["Data Stores & Cache"]
         ES[("Elasticsearch")]
         Aurora[("AWS Aurora (MySQL)")]
         EVCache[("EVCache / Redis")]
-        Cassandra[("Apache Cassandra (Bookmarks)")]
-        GW -->|"Search"| CatalogSvc
-        GW -->|"Auth & Billing"| ProfileSvc
-        GW -->|"Play Request"| SteeringSvc
-        CatalogSvc -->|"Query Index"| ES
-        ProfileSvc -->|"ACID Transactions"| Aurora
-        SteeringSvc -->|"Fast Lookup"| EVCache
-        EVCache -->|"Persist State"| Cassandra
+        Cassandra[("Cassandra (Bookmarks)")]
+        S3Master[("AWS S3 Encoded Assets")]
     end
-    subgraph DataPlane["Open Connect (Data Plane / CDN)"]
-        OCA["Embedded OCA in ISP / IXP (FreeBSD, NGINX, 100GbE / NVMe)"]
-        S3Transcode["S3 Encoded Master Assets & Transcoding Workers (Dynamic Optimizer / Titus)"]
-        S3Transcode -->|"Nocturnal Pre-Fill"| OCA
-    end
-    Client -->|"1. Browse / Control (REST / GraphQL)"| GW
-    Client -->|"2. Stream Video (HLS / DASH Chunks)"| OCA
+    Client e1@-->|"1. Control / Browse"| GW
+    Client e2@-->|"2. Stream HLS / DASH"| OCA
+    GW e3@-->|"Search"| CatalogSvc
+    GW e4@-->|"Auth & Billing"| ProfileSvc
+    GW e5@-->|"Play Request"| SteeringSvc
+    CatalogSvc e6@-->|"Query Index"| ES
+    ProfileSvc e7@-->|"ACID Tx"| Aurora
+    SteeringSvc e8@-->|"Fast Lookup"| EVCache
+    SteeringSvc e9@-->|"Save State"| Cassandra
+    Transcode e10@-->|"Write Streams"| S3Master
+    OCA e11@-->|"2AM-6AM Pre-Fill"| S3Master
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class GW,OCA edge
+    class CatalogSvc,ProfileSvc,SteeringSvc service
+    class Transcode worker
+    class EVCache cache
+    class ES,Aurora,Cassandra,S3Master storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style ControlPlane fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -256,52 +291,84 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientTier["Client Devices Tier"]
-        Client["Client Devices (Smart TV, Mobile, Web - ABR Player Engine BBA/MPC & 10s Bookmark Beacon)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        Client["Client Devices (TV, Mobile, Web ABR)"]
     end
-    subgraph OpenConnectCDN["DATA PLANE: Netflix Open Connect CDN"]
-        OCA_ISP["Embedded OCA in ISP Networks (FreeBSD, 100GbE NIC, NVMe - Serves >95% Video Locally via NGINX)"]
-        OCA_IXP["Regional OCA in IXPs (Internet Exchange Points - Overflow & Long-Tail Cache)"]
-        NocturnalPrefill["Nocturnal Pre-Fill Coordinator (Pushed 2AM-6AM Local Off-Peak)"]
-        NocturnalPrefill -->|"Populate Hot Catalog"| OCA_ISP
-        NocturnalPrefill -->|"Populate Full Catalog"| OCA_IXP
-        OCA_IXP -->|"Cache Miss Fill"| OCA_ISP
+    subgraph EdgeTier["Edge & Open Connect CDN"]
+        OCA_ISP["ISP OCA Server (100GbE NVMe >95%)"]
+        Gateway{"Zuul Gateway & Route53 (Chaos Kong)"}
     end
-    subgraph AWSControlPlane["CONTROL PLANE: AWS Cloud Microservices (Active-Active Multi-Region)"]
-        Gateway{"API Gateway (Zuul) & Route53 (Auth, Rate Limiting, Chaos Kong Regional Evacuation)"}
-        SteeringSvc["Playback Steering Service (Selects Top 3 Healthy Nearest OCA Servers & DRM License URLs)"]
-        CatalogSvc["Catalog & Search Service (Elasticsearch Cluster)"]
-        RecomSvc["Recommendation Engine (Personalized Homepage Rows, Candidate Retrieval & Deep Ranking)"]
-        EVCache[("EVCache Cluster (Distributed Memcached / Redis for Microsecond Metadata & Entitlements)")]
-        Aurora[("AWS Aurora MySQL (User Auth, Profiles, Subscriptions & Multi-Tier Billing - ACID)")]
-        subgraph BookmarkPipeline["High-Throughput Playback Bookmark Pipeline (10M QPS)"]
-            KafkaBookmarks["Apache Kafka (10M QPS Bookmark Topic, Partitioned by accountId)"]
-            FlinkProc["Apache Flink Stream Processor (Deduplicates Pings & Sliding Window Aggregation)"]
-            Cassandra[("Apache Cassandra (Viewing History & Bookmarks - Key: profileId, videoId)")]
-            KafkaBookmarks -->|"Consume Stream"| FlinkProc
-            FlinkProc -->|"Micro-Batch Write"| Cassandra
-        end
-        subgraph TranscodePipeline["Studio Ingestion & Transcode Pipeline (Titus Container Fleet)"]
-            StudioS3[("Master S3 Mezzanine Store")]
-            DynOpt["Dynamic Optimizer (Per-Shot AV1 / HEVC / VP9 Encoding, VMAF Score > 95)"]
-            DRMPack["DRM Packaging & Manifest Generator (Widevine, FairPlay, PlayReady, HLS/DASH)"]
-            StudioS3 -->|"Scene / Shot Chunks"| DynOpt
-            DynOpt -->|"Encoded Streams"| DRMPack
-        end
+    subgraph CoreServices["AWS Control Plane & Workers"]
+        SteeringSvc["Playback Steering (Top 3 OCAs & DRM)"]
+        CatalogSvc["Catalog & Search Service"]
+        RecomSvc["Recommendation Engine (Deep Ranking)"]
+        FlinkProc["Apache Flink (10M QPS Bookmarks)"]
+        DynOpt["Dynamic Optimizer (AV1/HEVC & DRM)"]
     end
-    Client -->|"1. Control / Browse / Play Request (REST / GraphQL)"| Gateway
-    Client -->|"2. Stream HLS / DASH Chunks (Adaptive Bitrate)"| OCA_ISP
-    Gateway -->|"Request Playback Manifest"| SteeringSvc
-    SteeringSvc -.->|"Health & Load Telemetry"| OCA_ISP
-    Gateway -->|"Search & Browse"| CatalogSvc
-    Gateway -->|"Fetch Personalized Rows"| RecomSvc
-    CatalogSvc -->|"Read/Write Cache"| EVCache
-    RecomSvc -->|"Read Features & Cache"| EVCache
-    Gateway -->|"10s Playback Beacons"| KafkaBookmarks
-    FlinkProc -->|"Real-Time Continue Watching Update"| EVCache
-    Gateway -->|"Account & Billing Operations"| Aurora
-    DRMPack -.->|"Push Encoded Assets Over Backbone"| NocturnalPrefill
+    subgraph DataAndEventTier["Data Stores, Caches & Event Bus"]
+        EVCache[("EVCache Cluster (Memcached / Redis)")]
+        ES[("Elasticsearch (Title & Actor Index)")]
+        Aurora[("AWS Aurora MySQL (Auth & Billing)")]
+        KafkaBookmarks[["Kafka Bus (10M QPS Beacon Stream)"]]
+        Cassandra[("Apache Cassandra (Watch History)")]
+        StudioS3[("Master & Encoded S3 Store")]
+    end
+    Client e1@-->|"1. REST / GraphQL"| Gateway
+    Client e2@-->|"2. HLS / DASH Chunks"| OCA_ISP
+    Gateway e3@-->|"Play Manifest"| SteeringSvc
+    SteeringSvc e4@-.->|"Health Check"| OCA_ISP
+    Gateway e5@-->|"Search"| CatalogSvc
+    Gateway e6@-->|"Homepage Rows"| RecomSvc
+    Gateway e7@-->|"Auth & Billing"| Aurora
+    Gateway e8@-->|"10s Beacons"| KafkaBookmarks
+    CatalogSvc e9@-->|"Query"| ES
+    CatalogSvc e10@-->|"Read Cache"| EVCache
+    RecomSvc e11@-->|"Read Features"| EVCache
+    FlinkProc e12@-->|"Consume"| KafkaBookmarks
+    FlinkProc e13@-->|"Update Cache"| EVCache
+    FlinkProc e14@-->|"Batch Write"| Cassandra
+    DynOpt e15@<-->|"Encode Shots"| StudioS3
+    OCA_ISP e16@-->|"2AM-6AM Pre-Fill"| StudioS3
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+    e14@{ animate: true }
+    e15@{ animate: true }
+    e16@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Client client
+    class OCA_ISP,Gateway edge
+    class SteeringSvc,CatalogSvc,RecomSvc service
+    class FlinkProc,DynOpt worker
+    class EVCache cache
+    class ES,Aurora,Cassandra,StudioS3 storage
+    class KafkaBookmarks queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -318,13 +385,40 @@ The client video player runs an ABR algorithm to decide which resolution chunk t
 * **Model Predictive Control (MPC)**: Netflix combines throughput forecasting with buffer occupancy using stochastic optimization for smooth, stutter-free playback.
 
 ```mermaid
-flowchart TD
-    A["Client Buffer Level"] --> C{"ABR Controller Engine"}
-    B["Recent Chunk Download Throughput"] --> C
-    D["Device Screen Resolution & CPU"] --> C
-    C -->|"High Buffer & High Speed"| E["Request 4K HDR Chunk @ 16 Mbps"]
-    C -->|"Normal Conditions"| F["Request 1080p Chunk @ 4 Mbps"]
-    C -->|"Congested Network / Low Buffer"| G["Request 480p Chunk @ 800 Kbps"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    A["Client Buffer Level"]
+    B["Chunk Throughput"]
+    D["Screen Res & CPU"]
+    C{"ABR Controller Engine"}
+    E["4K HDR @ 16 Mbps"]
+    F["1080p @ 4 Mbps"]
+    G["480p @ 800 Kbps"]
+    A e1@-->|"Occupancy"| C
+    B e2@-->|"Bandwidth"| C
+    D e3@-->|"Capabilities"| C
+    C e4@-->|"High Buffer"| E
+    C e5@-->|"Normal"| F
+    C e6@-->|"Low Buffer"| G
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+
+    class A,B,D client
+    class C edge
+    class E service
+    class F worker
+    class G cache
 ```
 
 ### 2. High-Throughput Write Path for Playback Bookmarks (10M QPS)

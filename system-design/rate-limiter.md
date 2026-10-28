@@ -67,13 +67,50 @@ Designing an enterprise distributed rate limiter requires mastering:
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Clients["Client Apps (Web, Mobile, 3P APIs)"] -->|"HTTP Request"| Gateway["API Gateway / Envoy Proxy (Sidecar Rate Limit Filter & Local Token Cache)"]
-    Gateway -->|"Cache Miss or Sync"| RateEngine["Rate Limiter Engine (gRPC Service Fleet)"]
-    RuleStore[("Rule & Policy Config Store (etcd / ZooKeeper GitOps)")] -->|"Watch Rules"| RateEngine
-    RateEngine -->|"Atomic EVALSHA Lua Script"| Redis[("Redis Cluster (Sharded)")]
-    Redis -->|"Allowed"| Backends["Internal Backend Services (Protected Core APIs)"]
-    Redis -->|"Exceeded"| Reject["HTTP 429 Too Many Requests (Retry-After Header)"]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Clients["Client Apps (Web / Mobile / API)"]
+    subgraph EdgeTier["Edge & Gateway"]
+        Gateway["API Gateway / Envoy Proxy"]
+    end
+    subgraph ControlTier["Rate Limit Control Plane"]
+        RateEngine["Rate Limiter Engine (gRPC)"]
+        RuleStore[("Rule Store (etcd / GitOps)")]
+    end
+    subgraph StateAndBackend["State & Target Services"]
+        Redis[("Redis Cluster (Sharded Lua)")]
+        Backends["Protected Backend APIs"]
+        Reject["HTTP 429 Too Many Requests"]
+    end
+    Clients e1@-->|"HTTP Request"| Gateway
+    Gateway e2@-->|"Check Quota"| RateEngine
+    RuleStore e3@-->|"Watch Rules"| RateEngine
+    RateEngine e4@-->|"EVALSHA Lua"| Redis
+    Gateway e5@-->|"Allowed (200)"| Backends
+    Gateway e6@-->|"Exceeded (429)"| Reject
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class Clients client
+    class Gateway edge
+    class RateEngine,Backends service
+    class Redis,Reject cache
+    class RuleStore storage
+
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style ControlTier fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style StateAndBackend fill:transparent,stroke:#fb7185,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -188,35 +225,65 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph ClientTier["API Consumers & Traffic Sources"]
-        Clients["Clients & API Consumers (Web, Mobile, 3rd Party APIs with API Keys)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["API Consumers"]
+        Clients["Clients (Web, Mobile, 3P APIs)"]
     end
-    subgraph EdgeProxy["Edge Gateway & Local Token Batching"]
-        Gateway["API Gateway / Envoy Proxy (Sidecar Rate Limit Filter: Extracts IP / User / API Key)"]
-        LocalBatch["Local In-Memory Token Cache (Thread-Safe Batch Token Reservation: Reduces Redis Calls by 98%)"]
-        FailGuard["Resilience Circuit Policy (Fail-Open for General APIs / Fail-Closed for Auth & Payments)"]
+    subgraph EdgeProxy["Edge Gateway & Token Cache"]
+        Gateway{"API Gateway / Envoy Filter"}
+        LocalBatch[("Local Token Batch Cache")]
     end
-    subgraph RateLimitControl["Distributed Rate Limiter Control Plane"]
-        RateSvc["Distributed Rate Limiter Service (gRPC Server Fleet: Tier Policy Evaluator & Script Invoker)"]
-        RuleStore[("Rule Config Store & Sync (etcd / ZooKeeper / GitOps: Free 10/m, Pro 1000/m, IP Lists)")]
+    subgraph RateLimitControl["Rate Limiter Control Plane"]
+        FailGuard["Circuit Policy (Fail-Open/Closed)"]
+        RateSvc["Rate Limiter Fleet (gRPC)"]
+        Backends["Protected Core Microservices"]
     end
-    subgraph StateStore["Sharded In-Memory State Tier"]
-        RedisMaster[("Redis Cluster Shards (In-Memory Token Bucket Hashes & Sliding Window ZSets via Atomic EVALSHA Lua)")]
+    subgraph StateAndObs["State, Config & Telemetry"]
+        RuleStore[("Rule Config (etcd / GitOps)")]
+        RedisMaster[("Redis Shards (EVALSHA Lua)")]
+        Telemetry[["Telemetry (Prometheus / Kafka)"]]
     end
-    subgraph Downstream["Protected Infrastructure & Observability"]
-        Backends["Internal Backend Services (Protected Core Microservices)"]
-        Telemetry["Telemetry & Audit Pipeline (Prometheus, Grafana, Kafka: 429 Rejection Heatmaps & DDoS Detection)"]
-    end
-    Clients -->|"Incoming HTTP Request"| Gateway
-    Gateway <-->|"Check Local Reserved Batch"| LocalBatch
-    LocalBatch -->|"Batch Exhausted / Cache Miss"| FailGuard
-    FailGuard -->|"CheckRateLimit(key) via gRPC"| RateSvc
-    RuleStore -->|"Watch & Hot-Reload Rules"| RateSvc
-    RateSvc <-->|"Atomic EVALSHA Lua Script"| RedisMaster
-    Gateway -->|"Allowed: Forward Request (200 OK + X-RateLimit-* Headers)"| Backends
-    Gateway -->|"Blocked: HTTP 429 Too Many Requests (Retry-After: 15s)"| Clients
-    RateSvc -.->|"Async Throttling Metrics & Audit Logs"| Telemetry
+    Clients e1@-->|"HTTP Request"| Gateway
+    Gateway e2@-->|"Reserve Token"| LocalBatch
+    Gateway e3@-->|"Batch Miss"| FailGuard
+    FailGuard e4@-->|"gRPC Check"| RateSvc
+    RuleStore e5@-->|"Hot-Reload"| RateSvc
+    RateSvc e6@-->|"Atomic Lua"| RedisMaster
+    Gateway e7@-->|"Allowed (200)"| Backends
+    Gateway e8@-->|"Blocked (429)"| Clients
+    RateSvc e9@-.->|"429 Metrics"| Telemetry
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Clients client
+    class Gateway edge
+    class FailGuard worker
+    class RateSvc,Backends service
+    class LocalBatch,RedisMaster cache
+    class RuleStore storage
+    class Telemetry queue
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeProxy fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style RateLimitControl fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style StateAndObs fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

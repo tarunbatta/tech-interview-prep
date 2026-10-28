@@ -65,26 +65,61 @@ Building Google Docs requires solving foundational distributed systems and concu
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    ClientA["Collaborator A (Web Editor AST & Optimistic Buffer)"]
-    ClientB["Collaborator B (Mobile Editor AST & Optimistic Buffer)"]
-    Router["Session Router & Gateway (WebSocket TLS & Consistent Hash on doc_id)"]
-    subgraph SessionServer["Document Session Server (Actor Node)"]
-        OTEngine["OT Transformation Serializer Engine"]
-        MemState["In-Memory Document State (Master Revision Clock)"]
-        OTEngine <-->|"Transform(OpA, OpB)"| MemState
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Clients"]
+        ClientA["Collaborator A (Web AST)"]
+        ClientB["Collaborator B (Mobile AST)"]
     end
-    OpLog[("Append-Only Operation Log (Cassandra / Bigtable)")]
-    Presence["Ephemeral Presence Service (Redis Pub/Sub - Live Cursors)"]
-    Compactor["Snapshot Compactor Worker (Folds 100 Ops into AST)"]
-    SnapStore[("Snapshot Store (S3 / Colossus Base Snapshots)")]
-    ClientA -->|"WebSocket"| Router
-    ClientB -->|"WebSocket"| Router
-    Router -->|"Sticky Route by doc_id"| OTEngine
-    OTEngine -->|"Commit Op (doc_id, rev)"| OpLog
-    OTEngine -->|"Broadcast Cursor & Selection"| Presence
-    OpLog -->|"Background Read"| Compactor
-    Compactor -->|"Write Base Snapshot"| SnapStore
+    subgraph EdgeTier["Edge & Routing"]
+        Router["Session Router (Consistent Hash)"]
+    end
+    subgraph SessionServer["Document Session & Workers"]
+        OTEngine["OT Transformation Engine"]
+        Compactor["Snapshot Compactor Worker"]
+    end
+    subgraph DataLayer["Storage & Presence"]
+        MemState[("In-Memory Doc State")]
+        Presence[("Redis Pub/Sub (Cursors)")]
+        OpLog[("Cassandra Operation Log")]
+        SnapStore[("Colossus / S3 Snapshots")]
+    end
+    ClientA e1@-->|"WebSocket"| Router
+    ClientB e2@-->|"WebSocket"| Router
+    Router e3@-->|"Sticky doc_id"| OTEngine
+    OTEngine e4@-->|"Transform Ops"| MemState
+    OTEngine e5@-->|"Commit Op"| OpLog
+    OTEngine e6@-->|"Live Cursors"| Presence
+    Compactor e7@-->|"Read 100 Ops"| OpLog
+    Compactor e8@-->|"Write Snapshot"| SnapStore
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class ClientA,ClientB client
+    class Router edge
+    class OTEngine service
+    class Compactor worker
+    class MemState,Presence cache
+    class OpLog,SnapStore storage
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style SessionServer fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -277,40 +312,73 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph Clients["Collaborative Client Tier"]
-        ClientA["Collaborator A (Web Browser - Local Editor AST, Pending OT Buffer, Optimistic Apply)"]
-        ClientB["Collaborator B (Mobile App - Local Editor AST, Pending OT Buffer, Optimistic Apply)"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph ClientTier["Collaborative Clients"]
+        ClientA["Collaborator A (Web AST & OT Buffer)"]
+        ClientB["Collaborator B (Mobile AST & OT Buffer)"]
     end
-    subgraph RoutingAndCoordination["Session Routing & Cluster Coordination"]
-        LB{"Session Router & Load Balancer (WebSocket TLS Termination, Consistent Hash by doc_id)"}
-        Coordinator["Cluster Coordinator (ZooKeeper / Kubernetes Leases - Partition Election & Failover)"]
+    subgraph EdgeTier["Routing & Coordination"]
+        LB{"Session Router (WebSocket & Hash)"}
+        Coordinator["Cluster Coordinator (ZK / Leases)"]
     end
-    subgraph CollabEngine["Real-Time Collaboration & Presence Tier"]
-        DocLeader["Doc Collaboration Node (In-Memory Session Leader, OT Serializer, Transform Engine)"]
-        PresenceSvc["Presence & Cursor Service (Redis Pub/Sub - Live User Cursors & Selection Ranges)"]
-        CommentsSvc["Comments & Suggestions Service (Anchored Thread Resolution & Track Changes)"]
+    subgraph CoreServices["Collaboration & Compaction Tier"]
+        DocLeader["Doc Session Leader (OT Transform)"]
+        CommentsSvc["Comments & Suggestions Service"]
+        SnapshotWorker["Snapshot Compactor (Every 100 Ops)"]
     end
-    subgraph PersistenceAndCompaction["Persistence, Compaction & Storage Tier"]
-        OpLog[("Append-Only Operation Log (Cassandra / Bigtable - Key: doc_id, revision_num)")]
-        DocMeta[("Document Metadata DB (Google Spanner / CockroachDB - ACLs, Title, Snapshot Pointer)")]
-        SnapshotWorker["Snapshot Compactor Worker (Runs Every 100 Ops or 60s - Folds Op Log into Base AST)"]
-        SnapshotStore[("Snapshot Object Store (S3 / Colossus - Compressed Base Document AST Checkpoints)")]
+    subgraph DataAndEventTier["Persistence, Cache & Storage"]
+        PresenceSvc[("Redis Pub/Sub (Live Cursors)")]
+        OpLog[("Cassandra / Bigtable (Op Log)")]
+        DocMeta[("Google Spanner (ACLs & Pointers)")]
+        SnapshotStore[("Colossus / S3 (AST Checkpoints)")]
     end
-    ClientA <-->|"WebSocket (Batched Ops & ACK)"| LB
-    ClientB <-->|"WebSocket (Batched Ops & ACK)"| LB
-    LB <-->|"Sticky doc_id Route"| DocLeader
-    LB -.->|"Ephemeral Cursor Frames"| PresenceSvc
-    Coordinator -.->|"Leader Lease & Health Check"| DocLeader
-    Coordinator -.->|"Update Routing Table"| LB
-    DocLeader -->|"1. Commit Transformed Op"| OpLog
-    DocLeader -->|"2. Update Revision & Pointers"| DocMeta
-    DocLeader <-->|"3. Anchor Offsets"| CommentsSvc
-    CommentsSvc -->|"Persist Threads"| DocMeta
-    OpLog -->|"Read Uncompacted Ops"| SnapshotWorker
-    SnapshotWorker -->|"Write Compressed AST Checkpoint"| SnapshotStore
-    SnapshotWorker -->|"Advance latestSnapshotRev"| DocMeta
-    SnapshotStore -.->|"Cold-Start State Recovery"| DocLeader
+    ClientA e1@<-->|"Batched Ops & ACK"| LB
+    ClientB e2@<-->|"Batched Ops & ACK"| LB
+    LB e3@<-->|"Sticky doc_id"| DocLeader
+    LB e4@-.->|"Cursor Frames"| PresenceSvc
+    Coordinator e5@-.->|"Leader Lease"| DocLeader
+    DocLeader e6@-->|"Commit Op"| OpLog
+    DocLeader e7@-->|"Update Revision"| DocMeta
+    LB e8@-->|"Manage Threads"| CommentsSvc
+    CommentsSvc e9@-->|"Persist Threads"| DocMeta
+    SnapshotWorker e10@-->|"Read Ops"| OpLog
+    SnapshotWorker e11@-->|"Write Checkpoint"| SnapshotStore
+    SnapshotWorker e12@-->|"Advance Pointer"| DocMeta
+    SnapshotStore e13@-.->|"Cold Recovery"| DocLeader
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+    e12@{ animate: true }
+    e13@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class ClientA,ClientB client
+    class LB,Coordinator edge
+    class DocLeader,CommentsSvc service
+    class SnapshotWorker worker
+    class PresenceSvc cache
+    class OpLog,DocMeta,SnapshotStore storage
+
+    style ClientTier fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style EdgeTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---

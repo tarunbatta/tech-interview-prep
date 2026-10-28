@@ -62,14 +62,54 @@ Designing a distributed web crawler requires solving foundational internet-scale
 ## High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    Seeds["Seed URLs & Discovery"] -->|"Ingest Links"| Dedupe["URL Deduplication & Filter Layer (Canonicalizer + 18 GB Bloom Filter + RocksDB)"]
-    Dedupe -->|"Unseen URLs"| Frontier["Mercator Distributed URL Frontier (Priority Front Queues + Host Router + Politeness Back Queues)"]
-    Frontier -->|"Pop Next Polite URL"| Fetcher["HTML Fetcher & DNS Fleet (Local Async DNS Cache + Robots.txt Cache + HTTP/3 Workers)"]
-    Fetcher -->|"Raw HTML Stream"| ContentDedupe["Content Deduplicator (64-bit SimHash: Discards Mirrors & Spam)"]
-    Fetcher -->|"Raw HTML Stream"| LinkExt["Link Extractor & Canonicalizer (Discovers href Links)"]
-    LinkExt -->|"Loops Back"| Dedupe
-    ContentDedupe -->|"Verified Unique Document"| DocRepo[("Document Repository (Google Colossus / AWS S3 Compressed WARC/HTML)")]
+%%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 45, 'padding': 10}}}%%
+flowchart LR
+    Seeds["Seed URLs & Discovery"]
+    subgraph FrontierTier["Dedupe & URL Frontier"]
+        Dedupe["URL Dedupe (18GB Bloom Filter)"]
+        Frontier[["Mercator URL Frontier"]]
+    end
+    subgraph FetchAndParse["Fetch & Parse Workers"]
+        Fetcher["HTML Fetcher & Async DNS"]
+        ContentDedupe["Content Dedupe (64b SimHash)"]
+        LinkExt["Link Extractor & Canonicalizer"]
+    end
+    subgraph DataLayer["Storage"]
+        DocRepo[("Document Repo (S3 / WARC)")]
+    end
+    Seeds e1@-->|"Ingest Links"| Dedupe
+    Dedupe e2@-->|"Unseen URLs"| Frontier
+    Frontier e3@-->|"Polite URL"| Fetcher
+    Fetcher e4@-->|"Raw HTML"| ContentDedupe
+    Fetcher e5@-->|"Raw HTML"| LinkExt
+    LinkExt e6@-.->|"Loop URLs"| Dedupe
+    ContentDedupe e7@-->|"Unique Doc"| DocRepo
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Seeds client
+    class Dedupe edge
+    class Frontier queue
+    class Fetcher service
+    class ContentDedupe,LinkExt worker
+    class DocRepo storage
+
+    style FrontierTier fill:transparent,stroke:#818cf8,stroke-width:1.5px,stroke-dasharray: 5 5
+    style FetchAndParse fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataLayer fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
@@ -84,12 +124,45 @@ A naive FIFO queue causes two catastrophic failures:
 * **Low Quality Crawl**: Scraping low-quality forum pages while ignoring critical front pages.
 
 ```mermaid
-flowchart TD
-    Incoming["Incoming Discovered URLs"] --> PriorityQueues["Priority Queues (Front Queues: Ranked by PageRank & Historical Value)"]
-    PriorityQueues -->|"Weighted Fair Selection"| QueueRouter["Queue Router (Hashes hostname -> Back Queue ID)"]
-    QueueRouter --> PolitenessQueues["Politeness Queues (Back Queues Q1, Q2, ... Qk: Strictly 1 Queue per Domain)"]
-    PolitenessQueues --> MinHeap["Min-Heap (Stores next_available_crawl_time, QueueID)"]
-    MinHeap -->|"Pops queue whose delay has elapsed"| FetcherWorker["Fetcher Worker"]
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    Incoming["Incoming Discovered URLs"]
+    subgraph FrontTier["Front Queues (Priority)"]
+        PriorityQueues[["Priority Queues (PageRank)"]]
+        QueueRouter{"Host Queue Router"}
+    end
+    subgraph BackTier["Back Queues (Politeness)"]
+        PolitenessQueues[["Back Queues (1 per Host)"]]
+        MinHeap["Crawl-Delay Min-Heap"]
+    end
+    FetcherWorker["Fetcher Worker"]
+
+    Incoming e1@-->|"Rank"| PriorityQueues
+    PriorityQueues e2@-->|"Weighted Select"| QueueRouter
+    QueueRouter e3@-->|"Hash Host"| PolitenessQueues
+    PolitenessQueues e4@-->|"Schedule"| MinHeap
+    MinHeap e5@-->|"Pop Elapsed"| FetcherWorker
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class Incoming client
+    class PriorityQueues,PolitenessQueues queue
+    class QueueRouter edge
+    class MinHeap service
+    class FetcherWorker worker
+
+    style FrontTier fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style BackTier fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ### 2. Near-Duplicate Detection (SimHash)
@@ -182,37 +255,71 @@ erDiagram
 ## System Design Diagram
 
 ```mermaid
-flowchart TD
-    subgraph Ingestion_And_URL_Deduplication["Seed Ingestion & URL Deduplication Layer"]
-        SeedUrls["Seed URLs / New Links (Discovered by Link Extractor or Admin Ingest)"]
-        UrlFilter{"URL Filter & Deduplication (Bloom Filter 18GB RAM + RocksDB: Normalize URL, Spider Trap Heuristics)"}
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    subgraph SeedAndDedupe["Seed & URL Deduplication"]
+        SeedUrls["Seed URLs & Discovered Links"]
+        UrlFilter{"URL Filter (18GB Bloom Filter)"}
     end
-    subgraph Mercator_URL_Frontier["Mercator Distributed URL Frontier"]
-        PriorityQueues["Priority Queues (Front Queues: PageRank, Domain Quality & Freshness)"]
-        QueueRouter["Queue Router (Host Hash Mapping)"]
-        PolitenessQueues["Politeness Queues & Min-Heap (Back Queues: 1 per Host, Crawl-Delay Timer)"]
+    subgraph MercatorFrontier["Mercator URL Frontier"]
+        PriorityQueues[["Priority Front Queues (PageRank)"]]
+        QueueRouter["Host Queue Router"]
+        PolitenessQueues[["Politeness Back Queues (Min-Heap)"]]
     end
-    subgraph Fetcher_And_DNS_Fleet["Asynchronous DNS, Robots.txt & Fetcher Fleet"]
-        DnsRobots[("DNS & Robots.txt Cache (Local In-Memory Redis / c-ares: Async DNS & Disallow Rules)")]
-        Fetcher["HTML Fetcher Workers (High-Concurrency HTTP/3 Fleet, 5s Timeout, Respects HTTP 429)"]
-        Internet(("The Public Web (External Web Servers & APIs)"))
+    subgraph CoreServices["Fetcher, Parser & Extractor Fleet"]
+        Fetcher["HTML Fetcher Fleet (HTTP/3)"]
+        Parser["Content Parser (64b SimHash)"]
+        LinkExtractor["Link Extractor & Canonicalizer"]
     end
-    subgraph Parsing_And_Storage["Content Parsing, SimHash Deduplication & Storage"]
-        Parser["Content Parser & Deduplication (HTML Parsing, Text Extraction, 64-bit SimHash Near-Duplicate Check)"]
-        LinkExtractor["Link Extractor (Extracts href Links, Strips Tracking Params & Canonicalizes)"]
-        DocRepo[("Document Repository (Bigtable / S3 / Colossus: Compressed WARC Pages for Search Indexing)")]
+    subgraph DataAndEventTier["Caches, Web & Document Storage"]
+        DnsRobots[("DNS & Robots.txt Cache (Redis)")]
+        Internet(("The Public Web (Servers)"))
+        DocRepo[("Document Repo (S3 / Colossus WARC)")]
     end
-    SeedUrls -->|"Raw URLs"| UrlFilter
-    UrlFilter -->|"Unseen URLs"| PriorityQueues
-    PriorityQueues -->|"Weighted Fair Selection"| QueueRouter
-    QueueRouter -->|"Route by Host"| PolitenessQueues
-    PolitenessQueues -->|"Check Rules & IP"| DnsRobots
-    PolitenessQueues -->|"Pop Polite URL"| Fetcher
-    Fetcher -->|"GET / HTTP"| Internet
-    Fetcher -->|"Raw HTML"| Parser
-    Parser -->|"Discovered Links"| LinkExtractor
-    LinkExtractor -.->|"New URLs to Ingest"| UrlFilter
-    Parser -->|"Store Verified Unique Page"| DocRepo
+    SeedUrls e1@-->|"Raw URLs"| UrlFilter
+    UrlFilter e2@-->|"Unseen URLs"| PriorityQueues
+    PriorityQueues e3@-->|"Fair Select"| QueueRouter
+    QueueRouter e4@-->|"By Host"| PolitenessQueues
+    PolitenessQueues e5@-->|"Pop Polite"| Fetcher
+    Fetcher e6@-->|"Check IP/Rules"| DnsRobots
+    Fetcher e7@-->|"GET / HTTP"| Internet
+    Fetcher e8@-->|"Raw HTML"| Parser
+    Parser e9@-->|"Extract href"| LinkExtractor
+    LinkExtractor e10@-.->|"Loop URLs"| UrlFilter
+    Parser e11@-->|"Unique WARC"| DocRepo
+
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    e6@{ animate: true }
+    e7@{ animate: true }
+    e8@{ animate: true }
+    e9@{ animate: true }
+    e10@{ animate: true }
+    e11@{ animate: true }
+
+    classDef client fill:#1d4ed8,stroke:#60a5fa,stroke-width:2px,color:#ffffff
+    classDef edge fill:#6d28d9,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef service fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef worker fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#ffffff
+    classDef cache fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef storage fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef queue fill:#3730a3,stroke:#818cf8,stroke-width:2px,color:#ffffff
+
+    class SeedUrls,Internet client
+    class UrlFilter,QueueRouter edge
+    class PriorityQueues,PolitenessQueues queue
+    class Fetcher service
+    class Parser,LinkExtractor worker
+    class DnsRobots cache
+    class DocRepo storage
+
+    style SeedAndDedupe fill:transparent,stroke:#60a5fa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style MercatorFrontier fill:transparent,stroke:#818cf8,stroke-width:1.5px,stroke-dasharray: 5 5
+    style CoreServices fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style DataAndEventTier fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
 ```
 
 ---
