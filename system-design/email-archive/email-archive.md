@@ -4,17 +4,239 @@
 
 ## Overview
 
-An email archive system is designed to store, index, and retrieve historical email communications for compliance, legal, and business purposes. The system needs to handle massive email storage, efficient search capabilities, data retention policies, and secure access controls. It requires robust indexing mechanisms, data compression, and compliance features to maintain regulatory requirements while ensuring quick access to archived emails.
+An enterprise email archiving system is engineered to capture, index, preserve, and retrieve high volumes of corporate email communications for regulatory compliance (SEC Rule 17a-4, FINRA, HIPAA, GDPR) and corporate legal proceedings (eDiscovery). The system must guarantee immutability (Write Once, Read Many - WORM), protect against intentional or accidental deletion, enforce automated retention schedules, and allow legal compliance officers to execute complex boolean searches across petabytes of historical correspondence.
+
+Designing an enterprise email archiving platform requires solving critical systems challenges:
+
+1. **Immutable WORM Compliance**: Ensuring emails and attachments cannot be altered or deleted prior to retention expiry, even by root/administrator accounts.
+2. **eDiscovery Full-Text Search Across Petabytes**: Indexing millions of raw MIME messages and document attachments (PDFs, spreadsheets, slides) with sub-second keyword search.
+3. **Content-Addressed Attachment Deduplication**: Preventing storage explosion when company-wide broadcast emails are sent to 50,000 employees with a 10MB attachment.
+4. **Litigation / Legal Hold State Machine**: Overriding standard retention schedules instantaneously when a legal hold is placed on specific custodians or keywords.
+
+---
 
 ## Functional Requirements
 
+* **Automated Ingestion (Journaling)**: Ingest all inbound, outbound, and internal emails in real time via SMTP journaling feeds from Microsoft Exchange, Office 365, and Google Workspace.
+* **MIME Parsing & Attachment Extraction**: Parse RFC 822 / MIME emails, extract metadata headers (From, To, Cc, Bcc, Subject, Date, Message-ID), and isolate file attachments.
+* **Global Attachment Deduplication**: Store single copies of identical attachments referenced by cryptographic hash (SHA-256).
+* **eDiscovery Search**: Compliance officers can search across millions of mailboxes using boolean queries, date windows, custodians, and extracted attachment text.
+* **Legal / Litigation Hold**: Place immediate, indefinite holds on specific users or topics, suspending automated deletion policies.
+* **Export & Evidentiary Chain of Custody**: Export search results to EDRM XML or PST formats with cryptographic verification hashes for court presentation.
+
+---
+
 ## Non-Functional Requirements
+
+* **Regulatory Immutability (WORM)**: Support SEC Rule 17a-4 compliance using hardware or cloud Object Lock (compliance mode).
+* **High Durability (11 9s)**: $99.999999999\%$ durability across multi-region object storage tiers.
+* **High Ingestion Throughput**: Capable of ingesting over **$5,000\text{ emails/second}$** during corporate peak hours without dropping messages.
+* **Audit Trail Completeness**: $100\%$ tamper-evident logging of every search query and document access made by compliance officers.
+* **Storage Cost Optimization**: Automated lifecycle tiering from high-performance SSD to cold Glacier Deep Archive.
+
+---
 
 ## Back of the Envelope Estimations
 
-## API Endpoints
+### Scale & Traffic
 
-## Object Model
+* **Enterprise Mailboxes**: $100,000\text{ employees}$.
+* **Average Emails per Employee / Day**: $50\text{ emails/day}$.
+* **Daily Ingested Emails**:
+  $$100,000 \times 50 = 5,000,000\text{ emails/day}$$
+* **Average Ingestion QPS**:
+  $$\text{Ingestion QPS} = \frac{5,000,000}{86,400} \approx 58\text{ emails/sec} \quad (\text{Peak: } \approx 250\text{ QPS})$$
+
+### Storage Calculations
+
+* **Average Email Size (Headers + Body)**: $50\text{ KB}$.
+* **Average Attachment Size (Weighted)**: $150\text{ KB}$ per email.
+* **Daily Storage Ingestion**:
+  $$5,000,000 \times 200\text{ KB} = 1,000\text{ GB} = 1\text{ Terabyte/day}$$
+* **Deduplication Savings**: Deduplicating attachments saves $\approx 40\%$ storage $\implies 600\text{ GB/day net}$.
+* **Annual Storage Footprint**:
+  $$600\text{ GB} \times 365 \approx 219\text{ Terabytes/year}$$
+* **7-Year Regulatory Retention Total**: $\approx 1.5\text{ Petabytes}$ total archive storage.
+
+---
+
+## High-Level System Architecture
+
+```text
+                                  ┌────────────────────────┐
+                                  │ Corporate Mail Servers │
+                                  │ (Exchange / O365 / GSuite)
+                                  └───────────┬────────────┘
+                                              │ SMTP Journal Feed
+                                              ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           JOURNAL INGESTION GATEWAY                         │
+│  - TLS 1.3, DKIM/SPF Verification, Envelope Decapsulation                   │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │
+                                       ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                     INGESTION QUEUE & BUFFER (Kafka)                        │
+│  - Raw MIME Message Buffer (Zero-Loss Guarantee)                            │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │
+                                       ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                       PARSER & DEDUPLICATION WORKERS                        │
+│                                                                             │
+│  ┌───────────────────────┐  Extract Attachments  ┌───────────────────────┐  │
+│  │ MIME Header Parser    │──────────────────────▶│ SHA-256 Deduplicator  │  │
+│  │ (To, From, Cc, Bcc)   │                       │ (Stores Unique Blobs) │  │
+│  └──────────┬────────────┘                       └───────────┬───────────┘  │
+└─────────────┼────────────────────────────────────────────────┼──────────────┘
+              │                                                │
+              ├───────────────────────────────┐                │
+              │                               │                │
+              ▼ 1. Inverted Index             ▼ 2. Metadata    ▼ 3. WORM Storage
+┌─────────────────────────────┐ ┌─────────────────────────────┐ ┌─────────────────────────────┐
+│  eDiscovery Search Index    │ │    Relational DB (Aurora)   │ │  Compliant WORM Store (S3)  │
+│  (Elasticsearch/OpenSearch) │ │  - Custodians, Messages     │ │  - S3 Object Lock (Compliance)
+│  - Full text of body & docs │ │  - Active Legal Holds       │ │  - Automated Glacier Tiering│
+└─────────────────────────────┘ └─────────────────────────────┘ └─────────────────────────────┘
+```
+
+---
+
+## Tiered WORM Storage Strategy
+
+To meet strict legal compliance without exploding cloud storage costs:
+
+```text
+[ Email Ingested ] ──► [ Hot Tier: S3 Standard + Elasticsearch ] (Day 0 - 90)
+                              │
+                              ▼ Lifecycle Rule
+                       [ Warm Tier: S3 Glacier Instant Retrieval ] (Day 91 - 365)
+                              │
+                              ▼ Lifecycle Rule
+                       [ Cold Tier: S3 Glacier Deep Archive ] (Year 1 - Year 7+)
+                              │
+                              ▼ Lifecycle Expiration (Unless Legal Hold Active!)
+                       [ Permanent Cryptographic Purge ]
+```
+
+* **AWS S3 Object Lock in Compliance Mode**: Neither the AWS root user nor IAM administrators can delete or overwrite objects during the retention duration.
+* **Legal Hold Override**: If a legal hold is applied, the S3 Object Lock `LegalHold: ON` flag is toggled, preventing deletion indefinitely regardless of retention expiration.
+
+---
+
+## API Specifications
+
+### 1. Ingest Email (Internal MTA Journal Receiver)
+
+```http
+POST /api/v1/archive/ingest
+Authorization: Bearer <mta_service_token>
+Content-Type: message/rfc822
+```
+
+```http
+// Response: 202 Accepted
+{
+  "messageId": "msg_9918231a-4bc1-49fa",
+  "status": "QUEUED_FOR_PARSING"
+}
+```
+
+### 2. Search Archived Emails (eDiscovery)
+
+```http
+POST /api/v1/ediscovery/search
+Authorization: Bearer <compliance_officer_token>
+Content-Type: application/json
+```
+
+```json
+// Request
+{
+  "query": "project titan AND confidential",
+  "custodians": ["ceo@company.com", "cfo@company.com"],
+  "startDate": "2024-01-01T00:00:00Z",
+  "endDate": "2026-10-27T00:00:00Z",
+  "hasAttachments": true,
+  "page": 1,
+  "pageSize": 50
+}
+
+// Response: 200 OK
+{
+  "totalMatches": 182,
+  "results": [
+    {
+      "archiveId": "arc_4410291",
+      "subject": "RE: Project Titan Financial Forecast",
+      "sender": "cfo@company.com",
+      "recipients": ["ceo@company.com"],
+      "sentDate": "2025-06-14T14:22:10Z",
+      "hasLegalHold": true,
+      "attachmentCount": 1
+    }
+  ]
+}
+```
+
+### 3. Apply Legal Hold
+
+```http
+POST /api/v1/legal-holds
+Authorization: Bearer <legal_officer_token>
+Content-Type: application/json
+```
+
+```json
+// Request
+{
+  "caseName": "SEC Investigation 2026-B",
+  "matterId": "MATTER_88192",
+  "custodianEmails": ["trader1@company.com", "trader2@company.com"],
+  "reason": "Regulatory document subpoena",
+  "targetKeywords": ["short position", "margin loan"]
+}
+
+// Response: 201 Created
+{
+  "holdId": "hold_99102",
+  "affectedMessagesCount": 14250,
+  "status": "ACTIVE_HOLD_ENFORCED"
+}
+```
+
+---
+
+## Object Model & Database Schema
+
+```text
+┌───────────────────────┐          ┌───────────────────────┐
+│       Custodian       │1        *│     ArchivedEmail     │
+├───────────────────────┤──────────├───────────────────────┤
+│ custodianId: PK (Int) │          │ emailId: PK (UUID)    │
+│ email: Varchar(255)   │          │ messageIdHeader: Str  │
+│ department: Varchar   │          │ senderId: FK (Cust.)  │
+│ isUnderHold: Boolean  │          │ subject: Varchar(500) │
+│ createdAt: Timestamp  │          │ sentAt: Timestamp     │
+└──────────┬────────────┘          │ rawS3Locator: String  │
+           │1                      │ retentionExpiry: Date │
+           │*                      │ isHeld: Boolean       │
+┌──────────▼────────────┐          └───────────┬───────────┘
+│       LegalHold       │                      │1
+├───────────────────────┤                      │*
+│ holdId: PK (UUID)     │          ┌───────────▼───────────┐
+│ matterId: Varchar(50) │          │       Attachment      │
+│ caseName: Varchar(255)│          ├───────────────────────┤
+│ initiatedBy: Varchar  │          │ attachmentId: PK(UUID)│
+│ createdAt: Timestamp  │          │ emailId: FK           │
+│ isActive: Boolean     │          │ sha256Hash: (Binary32)│
+└───────────────────────┘          │ fileName: Varchar(255)│
+                                   │ sizeBytes: BigInt     │
+                                   │ s3BlobUri: String     │
+                                   └───────────────────────┘
+```
+
+---
 
 ## System Design Diagram
 
@@ -22,74 +244,44 @@ An email archive system is designed to store, index, and retrieve historical ema
 
 [Download Draw.io File](email-archive.drawio)
 
+---
+
+## Deep Dive & Key Technical Challenges
+
+### 1. Global Attachment Deduplication
+
+When the CEO emails all 100,000 employees with a 15MB video:
+
+* A naive archiver writes $100,000 \times 15\text{ MB} = 1.5\text{ Terabytes}$.
+* **Content-Addressed Storage (CAS)**:
+  * Worker computes $\text{SHA-256}$ of the attachment byte stream.
+  * Checks Redis: `EXISTS att:<sha256>`.
+  * If the blob already exists in S3, the worker writes a lightweight pointer in the database linking the email to the existing attachment blob.
+  * Only 1 copy is saved to S3, reducing storage from $1.5\text{ TB}$ to $15\text{ MB}$ ($99.999\%$ bandwidth and disk savings).
+
+### 2. Legal Hold Priority Over Expiration Daemons
+
+* Background lifecycle workers continuously scan for messages where `retentionExpiry < NOW()`.
+* **Guard Condition**:
+
+  ```sql
+  DELETE FROM archived_emails 
+  WHERE retention_expiry < NOW() 
+    AND is_held = FALSE;
+  ```
+
+* Before any row or S3 object is purged, the system issues an atomic check against the `legal_holds` table. If any active case attaches to the custodian or email ID, the deletion is aborted.
+
+---
+
 ## Additional Notes
 
-### Step-by-Step Interaction Flow Client Action (User Archives)
+### Client-Side User Archive Interaction Flow
 
-1. User clicks "Archive" on an email/conversation in the client.
+For desktop/web clients supporting user-initiated email archiving (e.g. Gmail / Outlook user interface):
 
-2. Client (Optimistic UI Update):
-   - The client immediately moves the email to the "Archive" view locally
-   - Provides instant feedback to the user
-
-3. Client (API Request):
-   - The client sends an HTTP POST request to the API Gateway:
-
-   ```text
-   URL: /api/v1/emails/{emailId}/archive
-   Body: { 
-     "userId": "...", 
-     "clientVersion": "timestamp_or_version_id_of_email_state" 
-   }
-   ```
-
-   Note: clientVersion helps with optimistic concurrency. It indicates the state the client saw when it initiated the archive.
-
-4. API Gateway:
-   - Receives the request
-   - Authenticates and authorizes the user
-   - Forwards the request to an available API Server
-
-5. API Server:
-   - Validates the request
-   - Enqueues Archive Event: Instead of directly updating the database, it publishes an ArchiveEmailEvent message to the Message Queue
-
-   ```text
-   Topic: user_actions
-   Message: { 
-     "type": "ArchiveEmail", 
-     "emailId": "...", 
-     "userId": "...", 
-     "clientVersion": "..." 
-   }
-   ```
-
-   - Sends an HTTP 202 Accepted response back to the client immediately (indicating the request is being processed asynchronously)
-
-6. Action Processor Worker (Consumes from Message Queue):
-   - A worker consumes the ArchiveEmailEvent from the user_actions queue
-   - Database Read: Fetches the current state of the emailId from the Database (e.g., conversation state, last updated timestamp)
-   - Conflict Detection: Compares the clientVersion from the event with the lastUpdated timestamp in the database
-   - If clientVersion is older than lastUpdated (conflict detected): This means the email state has changed after the client initiated the archive but before this worker processed it (e.g., a new thread arrived)
-   - Conflict Resolution (Archive Wins): The worker proceeds to archive the email anyway. Any new threads for this email will also be considered archived
-   - If clientVersion matches or is newer (no conflict): The state is as the client saw it
-   - Database Write: Updates the email/conversation record in the Database:
-     - Set status = 'ARCHIVED'
-     - Update lastUpdated timestamp
-   - Cache Invalidation: Invalidates relevant entries in the Cache (e.g., the user's inbox view)
-   - Real-time Update (Optional/Important): Publishes an EmailArchived event to the Real-time Communication Service (or a separate internal queue)
-
-7. Real-time Communication Service (if applicable):
-   - Receives EmailArchived event
-   - Pushes an update to all connected clients (e.g., other devices) for that user:
-
-   ```text
-   WebSocket message: { 
-     "type": "emailUpdated", 
-     "emailId": "...", 
-     "newStatus": "archived" 
-   }
-   ```
-
-8. Other Clients (Listening):
-   - If the user has the email open on another device, that client receives the WebSocket update and refreshes its UI to show the email as archived
+1. **User Action**: User clicks "Archive" on an email conversation.
+2. **Client Optimistic UI Update**: The client immediately removes the email from the inbox view and places it into the local "Archive" folder for instant responsiveness.
+3. **API Dispatch**: Sends `POST /api/v1/emails/{emailId}/archive` with `clientVersion` to protect against concurrent thread updates.
+4. **Asynchronous Message Queue**: API Gateway enqueues an `ArchiveEmailEvent` to Kafka and returns `202 Accepted`.
+5. **Worker Execution**: Worker checks version conflicts, commits `status = 'ARCHIVED'` to database, invalidates user inbox cache, and broadcasts state update via WebSockets to keep mobile and web clients synchronized.

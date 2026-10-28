@@ -1,43 +1,115 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
-  <diagram id="BM8zh54oFEZDL_S1QSXD" name="AmazonPrime">
-    <mxGraphModel dx="2305" dy="1134" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <diagram id="Amazon_Architecture" name="Amazon E-Commerce Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="TuEia0F1BFCH1UdOG985-1" value="Client" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="120" y="289.86" width="120" height="80" as="geometry" />
+
+        <!-- Client -->
+        <mxCell id="client" value="Customer Client&#xa;(Web / Mobile App)&#xa;- Search &amp; Catalog Browse&#xa;- Cart &amp; 1-Click Checkout" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="170" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-2" value="CDN" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="340" y="289.86" width="80" height="80" as="geometry" />
+
+        <!-- CDN -->
+        <mxCell id="cdn" value="Global Edge CDN (CloudFront)&#xa;Caches Product Images, Reviews&#xa;&amp; Static Assets" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="50" width="190" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-3" value="Load Balancer" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="289.86" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-4" value="Application Servers" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="409.86" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-5" value="Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="340" y="409.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-6" value="Cache" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="520" y="529.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-1" target="TuEia0F1BFCH1UdOG985-2">
+
+        <mxCell id="e_client_cdn" value="Static Media" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="client" target="cdn">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-2" target="TuEia0F1BFCH1UdOG985-3">
+
+        <!-- Gateway -->
+        <mxCell id="gateway" value="API Gateway / Envoy&#xa;(Auth, Rate Limiting, SSL,&#xa;Idempotency Key Check)" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="225" width="190" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_client_gw" value="REST / GraphQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="client" target="gateway">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-4">
+
+        <!-- Product Catalog Service -->
+        <mxCell id="catalog_svc" value="Product Catalog Service&#xa;(100M+ SKUs, Categories,&#xa;Attributes, Pricing &amp; Ratings)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="70" width="200" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_catalog" value="Browse / Search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="catalog_svc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-4" target="TuEia0F1BFCH1UdOG985-5">
+
+        <!-- Elasticsearch -->
+        <mxCell id="elastic" value="Elasticsearch Cluster&#xa;(Full-Text Product Search,&#xa;Faceted Filtering &amp; Autocomplete)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="60" width="190" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_cat_elastic" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="catalog_svc" target="elastic">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-4" target="TuEia0F1BFCH1UdOG985-6">
+
+        <!-- Shopping Cart Service -->
+        <mxCell id="cart_svc" value="Shopping Cart Service&#xa;(Session &amp; User Carts,&#xa;Sub-ms Response Time)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="180" width="200" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_cart" value="Cart CRUD" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="cart_svc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+
+        <!-- DynamoDB Cart Store -->
+        <mxCell id="dynamo_cart" value="DynamoDB / Redis&#xa;(Shopping Cart Key-Value Store&#xa;Partition Key: CustomerId)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="170" width="190" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_cart_dynamo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cart_svc" target="dynamo_cart">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Order & Checkout Saga Orchestrator -->
+        <mxCell id="order_svc" value="Order &amp; Checkout Orchestrator&#xa;(Distributed Saga: Reserve Inventory&#xa;-&gt; Charge Payment -&gt; Create Order)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="295" width="230" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_order" value="POST /checkout" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="gateway" target="order_svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Inventory Service -->
+        <mxCell id="inventory_svc" value="Inventory Service&#xa;(Two-Phase Reservation with TTL,&#xa;Atomic Lua Decr / Prevents Overselling)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="295" width="240" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_order_inv" value="1. Reserve Hold" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="order_svc" target="inventory_svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Payment Service -->
+        <mxCell id="payment_svc" value="Payment Service&#xa;(Credit Cards, 1-Click Pay,&#xa;Strict Idempotency Tokens)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="420" width="200" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_order_pay" value="2. Charge Card" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="order_svc" target="payment_svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Order Database (ACID) -->
+        <mxCell id="order_db" value="Order DB (Aurora MySQL)&#xa;Immutable Order Records&#xa;&amp; Financial Audit Ledger" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="415" width="190" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_order_db" value="3. Commit Order" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="order_svc" target="order_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Fulfillment & Warehouse -->
+        <mxCell id="fulfillment" value="Fulfillment &amp; Warehouse (WMS)&#xa;Package Dispatch &amp; Tracking" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="420" width="200" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_db_fulfill" value="Dispatch Event" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="order_db" target="fulfillment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
-</mxfile> 
+</mxfile>

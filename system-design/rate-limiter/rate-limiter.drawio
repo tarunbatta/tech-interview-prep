@@ -1,113 +1,79 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
-  <diagram id="wf-KizYnAGKLBIfAIfjt" name="RateLimiter">
-    <mxGraphModel dx="1185" dy="613" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
+  <diagram id="Rate_Limiter_Architecture" name="Distributed Rate Limiter Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-3" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="263" y="450" as="targetPoint" />
-          </mxGeometry>
+
+        <!-- Clients -->
+        <mxCell id="clients" value="Clients &amp; API Consumers&#xa;(Web, Mobile, 3rd Party APIs)&#xa;- HTTP Requests with API Keys" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="220" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-3" value="Client(s)" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-          <mxGeometry x="55" y="410" width="80" height="80" as="geometry" />
+
+        <!-- API Gateway / Envoy Proxy -->
+        <mxCell id="gateway" value="API Gateway / Envoy Proxy&#xa;(Sidecar Rate Limit Filter)&#xa;- Extracts IP / Client Token&#xa;- Fast Local Memory Cache" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="195" width="200" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-20" target="4ik4Wy8fY1Yr2PfcAqNs-9" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="529" y="320" as="sourcePoint" />
-          </mxGeometry>
+
+        <mxCell id="e_cli_gw" value="Incoming HTTP Request" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="clients" target="gateway">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-20" target="4ik4Wy8fY1Yr2PfcAqNs-19" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="529" y="240" as="sourcePoint" />
-          </mxGeometry>
+
+        <!-- Central Rate Limiter Service -->
+        <mxCell id="rate_svc" value="Distributed Rate Limiter Svc&#xa;(gRPC Server Fleet)&#xa;- Evaluates Tier Policies&#xa;- Atomic Script Invoker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="100" width="210" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-6" value="Success" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-9" target="4ik4Wy8fY1Yr2PfcAqNs-11" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="679" y="450" as="targetPoint" />
-          </mxGeometry>
+
+        <mxCell id="e_gw_ratesvc" value="CheckRateLimit(key)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="rate_svc">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-9" target="4ik4Wy8fY1Yr2PfcAqNs-3" edge="1">
+
+        <!-- Rule & Policy Config Store -->
+        <mxCell id="rule_store" value="Rule Config Store &amp; Sync&#xa;(etcd / ZooKeeper / GitOps)&#xa;- Free Tier: 10 req/min&#xa;- Pro Tier: 1,000 req/min&#xa;- IP Blacklist / Whitelist" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="575" y="270" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_rule_svc" value="Watch Rules" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="rule_store" target="rate_svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Redis Cluster -->
+        <mxCell id="redis" value="Redis Cluster (Sharded)&#xa;(In-Memory Token Counter)&#xa;- Atomic Lua Scripts&#xa;- Sliding Window ZSet&#xa;- Token Bucket Hash" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="90" width="200" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_svc_redis" value="EVAL Lua Script" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="rate_svc" target="redis">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Upstream Backend Services -->
+        <mxCell id="backends" value="Internal Backend Services&#xa;(Protected Microservices)&#xa;- Core Business Logic" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="270" width="200" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_back" value="Allowed: Forward Request&#xa;(200 OK + Headers)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="gateway" target="backends">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 429 Dropped Response -->
+        <mxCell id="e_gw_block" value="Blocked: HTTP 429&#xa;Retry-After: 15s" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#b85450;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1" source="gateway" target="clients">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="529" y="550" />
-              <mxPoint x="95" y="550" />
+              <mxPoint x="390" y="370" />
+              <mxPoint x="130" y="370" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-8" value="Failure: Http 429 Status Code" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="4ik4Wy8fY1Yr2PfcAqNs-7" connectable="0" vertex="1">
-          <mxGeometry x="0.3" y="2" relative="1" as="geometry">
-            <mxPoint x="36" y="-2" as="offset" />
-          </mxGeometry>
+
+        <!-- Telemetry & Analytics -->
+        <mxCell id="telemetry" value="Telemetry &amp; Audit Pipeline&#xa;(Prometheus + Grafana + Kafka)&#xa;- 429 Rejection Heatmaps&#xa;- DDoS Anomaly Detection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="575" y="440" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-9" value="Rate Limiter (s&lt;span style=&quot;background-color: initial;&quot;&gt;)&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="479" y="400" width="100" height="100" as="geometry" />
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-11" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="559" y="470" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-11" value="API Server(s&lt;span style=&quot;background-color: initial;&quot;&gt;)&lt;/span&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-          <mxGeometry x="689" y="410" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-12" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.16;exitY=0.7;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-9" target="4ik4Wy8fY1Yr2PfcAqNs-25" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="125" y="400" as="sourcePoint" />
-            <mxPoint x="355" y="470" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-13" value="Http 200" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="4ik4Wy8fY1Yr2PfcAqNs-12" connectable="0" vertex="1">
-          <mxGeometry x="-0.0223" y="2" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-21" target="4ik4Wy8fY1Yr2PfcAqNs-17" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="709" y="600" as="sourcePoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-15" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.688;exitY=0.85;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-9" target="4ik4Wy8fY1Yr2PfcAqNs-21" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="449" y="690" as="sourcePoint" />
-            <mxPoint x="649" y="560" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-17" target="4ik4Wy8fY1Yr2PfcAqNs-18" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="969" y="600" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-17" value="Logging" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-          <mxGeometry x="715" y="680" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-18" value="Logging DB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
-          <mxGeometry x="725" y="860" width="60" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-19" value="Rules Engine" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-          <mxGeometry x="489" y="80" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-20" value="Rules Cache" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="469" y="250" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-21" value="Cache&amp;nbsp;&lt;div&gt;(High Throughput)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="579" y="570" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-22" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.61;exitY=0.09;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.583;entryY=0.967;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-9" target="4ik4Wy8fY1Yr2PfcAqNs-20" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="559" y="390" as="sourcePoint" />
-            <mxPoint x="609" y="340" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-25" target="4ik4Wy8fY1Yr2PfcAqNs-3" edge="1">
+
+        <mxCell id="e_svc_telem" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="rate_svc" target="telemetry">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="4ik4Wy8fY1Yr2PfcAqNs-25" target="4ik4Wy8fY1Yr2PfcAqNs-9" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="4ik4Wy8fY1Yr2PfcAqNs-25" value="Load Balancer" style="whiteSpace=wrap;html=1;aspect=fixed;shape=process;backgroundOutline=1;" parent="1" vertex="1">
-          <mxGeometry x="265" y="410" width="80" height="80" as="geometry" />
-        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>

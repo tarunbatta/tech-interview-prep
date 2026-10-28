@@ -1,43 +1,105 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
-  <diagram id="BM8zh54oFEZDL_S1QSXD" name="AmazonPrime">
-    <mxGraphModel dx="2305" dy="1134" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <diagram id="AmazonPrime_Architecture" name="Amazon Prime Video Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="TuEia0F1BFCH1UdOG985-1" value="Client" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="120" y="289.86" width="120" height="80" as="geometry" />
+
+        <!-- Client -->
+        <mxCell id="client" value="Client Devices&#xa;(Fire TV, Smart TV, Mobile)&#xa;- Multi-CDN Dynamic Switcher&#xa;- X-Ray Metadata Overlay" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-2" value="CDN" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="340" y="289.86" width="80" height="80" as="geometry" />
+
+        <!-- Dynamic Multi-CDN Router -->
+        <mxCell id="cdn_tier" value="MULTI-CDN DATA PLANE" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;fontStyle=1;startSize=25;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="450" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-3" value="Load Balancer" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="289.86" width="80" height="80" as="geometry" />
+
+        <mxCell id="cloudfront" value="Amazon CloudFront&#xa;(Primary Edge CDN)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="cdn_tier">
+          <mxGeometry x="20" y="40" width="130" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-4" value="Application Servers" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="409.86" width="80" height="80" as="geometry" />
+
+        <mxCell id="akamai" value="Akamai CDN&#xa;(Secondary Failover)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="cdn_tier">
+          <mxGeometry x="160" y="40" width="130" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-5" value="Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="340" y="409.86" width="80" height="120" as="geometry" />
+
+        <mxCell id="fastly" value="Fastly CDN&#xa;(Live Events / TNF)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="cdn_tier">
+          <mxGeometry x="300" y="40" width="130" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-6" value="Cache" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="520" y="529.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-1" target="TuEia0F1BFCH1UdOG985-2">
+
+        <mxCell id="e_client_cdn" value="Stream Chunks (ABR)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2b7bba;" edge="1" parent="1" source="client" target="cloudfront">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-2" target="TuEia0F1BFCH1UdOG985-3">
+
+        <!-- Gateway -->
+        <mxCell id="gateway" value="API Gateway (AppSync)&#xa;(GraphQL / REST, Auth,&#xa;Entitlement Routing)" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="225" width="190" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_client_gw" value="Control / Metadata" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="client" target="gateway">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-4">
+
+        <!-- Unified Entitlement Engine -->
+        <mxCell id="entitlement_svc" value="Prime Entitlement Service&#xa;(Sub-50ms Subscription Validation,&#xa;Cross-benefit check: Video/Music/Ship)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="130" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_entitlement" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="entitlement_svc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-4" target="TuEia0F1BFCH1UdOG985-5">
+
+        <!-- DynamoDB Global Tables -->
+        <mxCell id="dynamo_members" value="DynamoDB Global Tables&#xa;(Prime Membership Records,&#xa;Replicated across all AWS Regions)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="125" width="210" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_ent_dynamo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="entitlement_svc" target="dynamo_members">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-4" target="TuEia0F1BFCH1UdOG985-6">
+
+        <!-- Amazon X-Ray Service -->
+        <mxCell id="xray_svc" value="Amazon X-Ray Service&#xa;(Time-Synchronized Scene Engine,&#xa;Actor, Trivia &amp; Music Recognition)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="250" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_xray" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="xray_svc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+
+        <!-- Amazon Neptune Graph DB -->
+        <mxCell id="neptune_graph" value="Amazon Neptune (Graph DB)&#xa;(Actor -&gt; Character -&gt; Filmography&#xa;&amp; Soundtrack Graph Relationships)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="245" width="210" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_xray_neptune" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xray_svc" target="neptune_graph">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- S3 Video Master & Transcode -->
+        <mxCell id="s3_master" value="AWS S3 Master Video Bucket&#xa;&amp; MediaConvert GPU Pipeline&#xa;(H.264/HEVC/AV1, Multi-bitrate)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="380" width="200" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_s3_cdn" value="Origin Fetch to CDNs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="s3_master" target="cdn_tier">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="428" />
+              <mxPoint x="500" y="115" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Watch History & Bookmarking -->
+        <mxCell id="watch_history_svc" value="Playback History &amp; Sync Svc&#xa;(Bookmark resume timestamp)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="300" y="390" width="190" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_watch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="watch_history_svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
-</mxfile> 
+</mxfile>

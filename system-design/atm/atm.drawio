@@ -1,0 +1,127 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
+  <diagram id="ATM_System_Design" name="ATM System Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Hardware Box Container -->
+        <mxCell id="atm_box" value="ATM Physical Terminal (Client Hardware)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;fontStyle=1;startSize=25;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="340" height="520" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="card_reader" value="Motorized Card Reader&#xa;(EMV Chip / NFC)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="atm_box">
+          <mxGeometry x="20" y="40" width="130" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="epp" value="Encrypted PIN Pad&#xa;(EPP - 3DES/DUKPT)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="atm_box">
+          <mxGeometry x="180" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="xfs_layer" value="CEN / XFS Device Drivers &amp; Local State Machine&#xa;(Hardware Abstraction Layer)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="atm_box">
+          <mxGeometry x="20" y="140" width="300" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dispenser" value="Cash Dispenser System&#xa;(Optical double-detect sensor)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="atm_box">
+          <mxGeometry x="20" y="240" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cassettes" value="Cash Cassettes (1-4)&#xa;($10, $20, $50, $100)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="atm_box">
+          <mxGeometry x="190" y="230" width="130" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="reject_bin" value="Reject / Purge Bin&#xa;(Defective / Forgotten bills)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="atm_box">
+          <mxGeometry x="20" y="340" width="140" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="receipt_printer" value="Thermal Receipt Printer&#xa;&amp; Camera Sensor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="atm_box">
+          <mxGeometry x="190" y="345" width="130" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="local_wal" value="Local Encrypted NVRAM Journal&#xa;(Write-Ahead Log for Power Cuts)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="atm_box">
+          <mxGeometry x="20" y="440" width="300" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Edges inside ATM -->
+        <mxCell id="e_card_xfs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="atm_box" source="card_reader" target="xfs_layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_epp_xfs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="atm_box" source="epp" target="xfs_layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_xfs_dispenser" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="atm_box" source="xfs_layer" target="dispenser">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dispenser_cass" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="atm_box" source="dispenser" target="cassettes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dispenser_rej" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="atm_box" source="dispenser" target="reject_bin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Network / Gateway -->
+        <mxCell id="switch_gw" value="ATM Gateway / Switch&#xa;(ISO 8583 / AS 2805 Parser, TLS)" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="220" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Connection ATM to Switch -->
+        <mxCell id="e_atm_switch" value="Encrypted ISO 8583&#xa;(0100 Auth, 0200 Fin, 0420 Rev)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="xfs_layer" target="switch_gw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- HSM -->
+        <mxCell id="hsm" value="Hardware Security Module (HSM)&#xa;(FIPS 140-2 Level 3/4&#xa;DUKPT to Zone Key PIN Translation)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="60" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_switch_hsm" value="Validate PIN / CVV" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="switch_gw" target="hsm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Transaction Coordinator / Saga -->
+        <mxCell id="saga_orch" value="Transaction Coordinator&#xa;(3-Step Saga Orchestrator:&#xa;Hold -&gt; Dispense -&gt; Settle/Reverse)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="225" width="210" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_switch_saga" value="Coordinate Txn" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="switch_gw" target="saga_orch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- CBS Ledger -->
+        <mxCell id="cbs" value="Core Banking System (CBS)&#xa;(Double-Entry ACID Balance Ledger,&#xa;Strict Isolation &amp; Velocity Limits)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="110" width="160" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_saga_cbs" value="On-Us Cards&#xa;(Balance Hold / Commit)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="saga_orch" target="cbs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Interbank Network -->
+        <mxCell id="interbank" value="Interbank Payment Network&#xa;(Visa / Mastercard / Cirrus / Plus)&#xa;Off-Us Interchange Gateway" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="980" y="320" width="190" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_saga_interbank" value="Off-Us Cards&#xa;(Network Auth)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="saga_orch" target="interbank">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Monitoring & Telemetry -->
+        <mxCell id="monitoring" value="ATM Management &amp; Telemetry Svc&#xa;(Cash Levels, Replenishment Alert,&#xa;Mechanical Health &amp; Tamper Sensors)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="460" y="440" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_switch_mon" value="Heartbeats &amp; Sensor Events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="switch_gw" target="monitoring">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="audit_db" value="Immutable Audit Vault&#xa;(7-Year S3 Glacier Lock)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="770" y="435" width="110" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_saga_audit" value="Signed Audit Log" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="saga_orch" target="audit_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

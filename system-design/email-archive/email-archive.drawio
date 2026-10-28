@@ -1,72 +1,87 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
-  <diagram id="AsHtNMLsNTLCxXA9mggR" name="Email Archive">
-    <mxGraphModel dx="1185" dy="613" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
+  <diagram id="Email_Archive_Architecture" name="Enterprise Email Archiving &amp; eDiscovery">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="NBRzxqssuzjyefBCx1Op-1" value="Client Apps&#xa;(Web, Mobile)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="325" y="150" width="140" height="60" as="geometry" />
+
+        <!-- Mail Servers / Sources -->
+        <mxCell id="mail_src" value="Corporate Mail Servers&#xa;(Exchange / Office 365 / GSuite)&#xa;- Journaling Feed / SMTP&#xa;- Envelope &amp; MIME Stream" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="190" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-2" value="Load Balancer" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="325" y="230" width="140" height="60" as="geometry" />
+
+        <!-- Compliance & Legal Auditors -->
+        <mxCell id="auditors" value="Legal &amp; Compliance Officers&#xa;(eDiscovery Web Console)&#xa;- Keyword Search across years&#xa;- Enact Legal Holds &amp; Export" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="270" width="190" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-3" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-1" target="NBRzxqssuzjyefBCx1Op-2" edge="1">
+
+        <!-- Ingestion Gateway -->
+        <mxCell id="ingest_gw" value="Ingestion Gateway&#xa;(MTA / Journal Receiver)&#xa;- TLS 1.3, Auth, DKIM/SPF Verify" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="80" width="190" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_src_gw" value="SMTP Journal Stream" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="mail_src" target="ingest_gw">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-4" value="API Gateway&#xa;(Auth, Rate Limit)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="325" y="310" width="160" height="60" as="geometry" />
+
+        <!-- eDiscovery Search Gateway -->
+        <mxCell id="search_gw" value="eDiscovery API Gateway&#xa;(Role-Based Access, Multi-Factor,&#xa;Immutable Audit Query Log)" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="260" width="190" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-5" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-2" target="NBRzxqssuzjyefBCx1Op-4" edge="1">
+
+        <mxCell id="e_audit_gw" value="Search &amp; Legal Hold" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="auditors" target="search_gw">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-6" value="Real-time Comm.&#xa;(WebSocket Server)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="525" y="230" width="180" height="60" as="geometry" />
+
+        <!-- Ingestion Queue (Kafka) -->
+        <mxCell id="kafka" value="Ingestion Event Stream&#xa;(Apache Kafka)&#xa;- Unprocessed Email Buffer&#xa;- Zero-Loss Guarantee" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="90" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-7" style="endArrow=block;dashed=1;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-4" target="NBRzxqssuzjyefBCx1Op-6" edge="1">
+
+        <mxCell id="e_gw_kafka" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="ingest_gw" target="kafka">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-8" value="API Servers&#xa;(Business Logic)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="325" y="390" width="160" height="60" as="geometry" />
+
+        <!-- Parser & Deduplication Workers -->
+        <mxCell id="parser_workers" value="MIME Parser &amp; Deduplication&#xa;(Worker Fleet)&#xa;- Extract Body Text &amp; Attachments&#xa;- SHA-256 Attachment Deduplication" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="770" y="90" width="220" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-9" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-4" target="NBRzxqssuzjyefBCx1Op-8" edge="1">
+
+        <mxCell id="e_kafka_worker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="kafka" target="parser_workers">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-10" value="Message Queue&#xa;(e.g., Kafka)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="325" y="470" width="160" height="60" as="geometry" />
+
+        <!-- Full-Text & eDiscovery Search Engine -->
+        <mxCell id="search_engine" value="Full-Text &amp; eDiscovery Index&#xa;(Elasticsearch / OpenSearch Cluster)&#xa;- Tokenized Body &amp; Attachment Text&#xa;- Boolean Date/Sender/Keyword Query" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="525" y="260" width="210" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-11" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-8" target="NBRzxqssuzjyefBCx1Op-10" edge="1">
+
+        <mxCell id="e_gw_search" value="Execute Query" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="search_gw" target="search_engine">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-12" value="Email Ingestion/MTA&#xa;(SMTP, Parse Mail)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="145" y="470" width="160" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-13" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-12" target="NBRzxqssuzjyefBCx1Op-10" edge="1">
+
+        <mxCell id="e_parse_search" value="Index Content" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="parser_workers" target="search_engine">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-14" value="Action Processor&#xa;Worker (Archives)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="145" y="570" width="160" height="60" as="geometry" />
+
+        <!-- Metadata & Legal Hold DB -->
+        <mxCell id="meta_db" value="Metadata &amp; Legal Hold DB&#xa;(PostgreSQL / Aurora)&#xa;- Email Headers &amp; Participants&#xa;- Active Legal Holds &amp; Retention" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="260" width="210" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-15" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-14" target="NBRzxqssuzjyefBCx1Op-10" edge="1">
+
+        <mxCell id="e_parse_meta" value="Save Metadata" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="parser_workers" target="meta_db">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-16" value="Email Processor&#xa;Worker (New Threads)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="505" y="570" width="180" height="60" as="geometry" />
+
+        <!-- Tiered WORM Storage -->
+        <mxCell id="worm_storage" value="Compliant WORM Object Store&#xa;(AWS S3 Object Lock - SEC 17a-4)&#xa;├── Hot: S3 Standard (0-90 Days)&#xa;├── Warm: S3 Glacier Instant (90-365d)&#xa;└── Cold: Glacier Deep Archive (1-7yr)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="140" width="250" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-17" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-16" target="NBRzxqssuzjyefBCx1Op-10" edge="1">
+
+        <mxCell id="e_parse_worm" value="Store Immutable EML" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="parser_workers" target="worm_storage">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-18" value="Database&#xa;(PostgreSQL, NoSQL)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="325" y="670" width="180" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-19" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-10" target="NBRzxqssuzjyefBCx1Op-18" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-20" value="Cache&#xa;(e.g., Redis)" style="shape=rectangle;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="325" y="750" width="140" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="NBRzxqssuzjyefBCx1Op-21" style="endArrow=block;html=1;" parent="1" source="NBRzxqssuzjyefBCx1Op-18" target="NBRzxqssuzjyefBCx1Op-20" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>

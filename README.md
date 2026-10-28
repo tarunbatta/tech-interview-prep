@@ -7,7 +7,7 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
 [![.NET](https://img.shields.io/badge/.NET-10.0-purple.svg)](https://dotnet.microsoft.com/)
 [![Java](https://img.shields.io/badge/Java-CTCI%206th-orange.svg)](src/java/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-Node.js-yellow.svg)](src/javascript/)
-[![System Design](https://img.shields.io/badge/System%20Design-25%20Case%20Studies-blue.svg)](system-design/system-design.md)
+[![System Design](https://img.shields.io/badge/System%20Design-28%20Case%20Studies-blue.svg)](system-design/system-design.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ---
@@ -22,7 +22,8 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
   - [Languages & Problem Sets](#languages--problem-sets)
   - [C# Solution Snippet Template](#c-solution-snippet-template)
 - [Pillar 2: System Design & Architecture](#pillar-2-system-design--architecture)
-  - [25 Case Studies & Architectures](#25-case-studies--architectures)
+  - [Featured Real-World Project Retrospective](#-featured-real-world-project-retrospective)
+  - [28 Interview System Design Case Studies](#28-interview-system-design-case-studies)
   - [Back-of-the-Envelope Calculations Cheat Sheet](#back-of-the-envelope-calculations-cheat-sheet)
   - [Load Balancing Cheat Sheet](#load-balancing-cheat-sheet)
 - [Pillar 3: Engineering Management & Behavioural](#pillar-3-engineering-management--behavioural)
@@ -57,7 +58,7 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
 ┌─────────────────────────┐                        ┌─────────────────────────┐                        ┌─────────────────────────┐
 │  Coding & Algorithms    │                        │      System Design      │                        │  Leadership & Behaviour │
 ├─────────────────────────┤                        ├─────────────────────────┤                        ├─────────────────────────┤
-│ • .NET 10 Core & LeetCode│                       │ • 25 System Deep Dives  │                        │ • CAR / STAR Framework  │
+│ • .NET 10 Core & LeetCode│                       │ • 28 System Deep Dives  │                        │ • CAR / STAR Framework  │
 │ • Java CTCI 6th Edition │                        │ • Architecture Diagrams │                        │ • Strategic Challenges  │
 │ • JavaScript Solutions  │                        │ • Estimation Numbers    │                        │ • 20 ATS Resume Models  │
 │ • Chess & Expression App│                        │ • Draw.io Tooling       │                        │ • Role Targeting Guide  │
@@ -79,7 +80,7 @@ tech-interview-prep/
 │   │   └── practice/              # Practice questions (1–54) and QOTD problems
 │   ├── java/                      # Cracking the Coding Interview (6th ed.) Java solutions
 │   └── javascript/                # JavaScript QOTD and utility solutions
-├── system-design/                 # 25 Complete System Design case studies
+├── system-design/                 # 28 Complete System Design case studies
 │   ├── system-design.md           # Master index, estimation cheat sheet, references
 │   └── [case-studies]/            # airbnb, uber, whatsapp, youtube, etc.
 ├── behavioural/                   # Leadership and behavioural interview guide
@@ -203,15 +204,20 @@ Use this VS Code snippet structure for adding new solutions:
 
 ## Pillar 2: System Design & Architecture
 
-The [`system-design/`](system-design/system-design.md) directory contains 25 comprehensive architecture case studies, complete with functional/non-functional requirements, API schemas, object models, data storage estimates, and editable `.drawio` + vector `.svg` diagrams.
+The [`system-design/`](system-design/system-design.md) directory contains real-world production engineering retrospectives alongside 28 comprehensive architecture case studies, complete with functional/non-functional requirements, API schemas, object models, data storage estimates, and editable `.drawio` + vector `.svg` diagrams.
 
-### 25 Case Studies & Architectures
+### 🌟 Featured Real-World Project Retrospective
+
+- [**DocuSign Billing & Invoicing Modernization Case Study**](system-design/project-retrospective/project-retrospective.md) — Production architecture retrospective: Migrating legacy Quartz batch systems to an event-driven MuleSoft & Core microservices integration platform. Features before/after architecture, zero-downtime "learning mode" dual-run strategy, and quantified business impact (reduced invoice latency from 7 days to real-time, 90% reduction in reconciliation discrepancies, 80% DSO reduction).
+
+### 28 Interview System Design Case Studies
 
 | System | Focus Areas | Documentation |
 | :--- | :--- | :--- |
 | **Airbnb** | Search indexing, booking concurrency, payments, availability calendar | [Airbnb Design](system-design/airbnb/airbnb.md) |
 | **Amazon** | E-commerce catalog, cart persistence, inventory reservation, checkout | [Amazon Design](system-design/amazon/amazon.md) |
 | **Amazon Prime** | Video streaming CDN, chunking, adaptive bitrate, metadata service | [Prime Design](system-design/amazon-prime/amazon-prime.md) |
+| **ATM** | Hardware sensors, ISO 8583 protocol, financial ACID saga, HSM encryption | [ATM Design](system-design/atm/atm.md) |
 | **Autocomplete Search** | Trie cache, typeahead latency, prefix indexing, ranking | [Autocomplete Design](system-design/autocomplete-search/autocomplete-search.md) |
 | **Bitly** | URL shortening, Base62 encoding, high read-to-write ratio caching | [Bitly Design](system-design/bitly/bitly.md) |
 | **DocuSign** | Digital signatures, audit trails, document hashing, encryption | [DocuSign Design](system-design/docusign/docusign.md) |
@@ -220,12 +226,14 @@ The [`system-design/`](system-design/system-design.md) directory contains 25 com
 | **Google Docs** | Real-time collaborative editing, OT / CRDT, WebSocket sync | [Google Docs Design](system-design/google-docs/google-docs.md) |
 | **Google Drive** | File metadata, chunked upload/download, versioning, quota service | [Google Drive Design](system-design/google-drive/google-drive.md) |
 | **Instagram** | Feed generation, image delivery CDN, followers graph, fanout | [Instagram Design](system-design/instagram/instagram.md) |
+| **Netflix** | Open Connect CDN, dynamic optimizer transcode, ABR, state bookmarks | [Netflix Design](system-design/netflix/netflix.md) |
 | **News Feed** | Fanout-on-write vs fanout-on-read, timeline caching, ranking | [News Feed Design](system-design/news-feed/news-feed.md) |
 | **Notification System** | Push notifications, SMS/Email gateways, deduplication, rate limits | [Notification Design](system-design/notification-system/notification-system.md) |
 | **Parking Garage** | Concurrency control, spot allocation, ticket validation, sensors | [Parking Garage Design](system-design/parking-garage/parking-garage.md) |
 | **PasteBin** | Text storage, expiring keys, S3/blob integration, rate limiting | [PasteBin Design](system-design/pastebin/pastebin.md) |
 | **Rate Limiter** | Token bucket, sliding window counter, Redis distributed locking | [Rate Limiter Design](system-design/rate-limiter/rate-limiter.md) |
 | **Shopify** | Multi-tenant architecture, order processing, flash-sale traffic handling | [Shopify Design](system-design/shopify/shopify.md) |
+| **Social Media** | Hybrid fanout, pre-signed media upload, social graph, timeline cache | [Social Media Design](system-design/social-media/social-media.md) |
 | **Tag Service** | Inverted index, tag aggregation, lookup performance, caching | [Tag Service Design](system-design/tag-service/tag-service.md) |
 | **TicketMaster** | Virtual queues, fair ticketing, seat reservation locking | [TicketMaster Design](system-design/ticketmaster/ticketmaster.md) |
 | **TikTok** | Video feed recommendation pipeline, transcode pipeline, delivery | [TikTok Design](system-design/tiktok/tiktok.md) |

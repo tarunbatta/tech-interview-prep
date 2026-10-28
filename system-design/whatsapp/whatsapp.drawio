@@ -1,43 +1,103 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
-  <diagram id="AsHtNMLsNTLCxXA9mggR" name="ChatSystem">
-    <mxGraphModel dx="2305" dy="1134" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <diagram id="WhatsApp_Architecture" name="WhatsApp Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="TuEia0F1BFCH1UdOG985-1" value="Client" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="120" y="289.86" width="120" height="80" as="geometry" />
+
+        <!-- Sender & Recipient Clients -->
+        <mxCell id="sender" value="Sender Client&#xa;(iOS / Android)&#xa;- Signal Protocol E2EE&#xa;- Local SQLite DB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="160" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-2" value="Load Balancer" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="340" y="289.86" width="80" height="80" as="geometry" />
+
+        <mxCell id="recipient" value="Recipient Client&#xa;(iOS / Android)&#xa;- Signal Protocol E2EE&#xa;- Sends Delivery Receipts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="380" width="160" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-3" value="Chat Service" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="289.86" width="80" height="80" as="geometry" />
+
+        <!-- Gateway Tier -->
+        <mxCell id="gw_box" value="CONNECTION GATEWAY TIER (Erlang / Go - 500 Nodes, 1M Conns/Server)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;fontStyle=1;startSize=25;" vertex="1" parent="1">
+          <mxGeometry x="270" y="40" width="260" height="460" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-4" value="WebSocket Server" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="409.86" width="80" height="80" as="geometry" />
+
+        <mxCell id="gw_node_a" value="Gateway Node A&#xa;(Persistent TLS / WS&#xa;Noise Pipes Protocol)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="gw_box">
+          <mxGeometry x="30" y="60" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-5" value="Message Queue" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
-          <mxGeometry x="340" y="409.86" width="80" height="80" as="geometry" />
+
+        <mxCell id="gw_node_b" value="Gateway Node B&#xa;(Persistent TLS / WS&#xa;Noise Pipes Protocol)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="gw_box">
+          <mxGeometry x="30" y="330" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-6" value="Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="520" y="529.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-1" target="TuEia0F1BFCH1UdOG985-2">
+
+        <mxCell id="e_sender_gwa" value="TLS / WS Connection" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="sender" target="gw_node_a">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-2" target="TuEia0F1BFCH1UdOG985-3">
+
+        <mxCell id="e_gwb_recip" value="Push Message / Status" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="gw_node_b" target="recipient">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-4">
+
+        <!-- User Session Registry -->
+        <mxCell id="session_store" value="User Session Registry (Redis)&#xa;Maps userId -&gt; GatewayNodeId&#xa;(In-Memory Sub-Millisecond Lookup)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="50" width="240" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gwa_session" value="Lookup Recipient Node" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gw_node_a" target="session_store">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-5">
+
+        <!-- Message Router & Kafka -->
+        <mxCell id="msg_router" value="Message Router &amp; Dispatcher&#xa;(Validates Message ID, Routes to Node&#xa;or Triggers Offline Queue)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="210" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gwa_router" value="Ingest Ciphertext" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gw_node_a" target="msg_router">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-4" target="TuEia0F1BFCH1UdOG985-6">
+
+        <mxCell id="e_router_gwb" value="Recipient Online&#xa;(Dispatch to Node B)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="msg_router" target="gw_node_b">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+
+        <!-- Kafka Event Stream -->
+        <mxCell id="kafka_events" value="Apache Kafka&#xa;(Message &amp; Receipt Events&#xa;Partitioned by ChatId)" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="205" width="180" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_router_kafka" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="msg_router" target="kafka_events">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Transient Offline Queue -->
+        <mxCell id="offline_db" value="Transient Message Queue&#xa;(Apache Cassandra / Mnesia)&#xa;- Encrypted Payload with 30-Day TTL&#xa;- Deleted immediately on delivery" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="615" y="370" width="230" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_router_offline" value="Recipient Offline&#xa;(Buffer Message)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b85450;" edge="1" parent="1" source="msg_router" target="offline_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_offline_gwb" value="Flush on Reconnect" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="offline_db" target="gw_node_b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Push Notifications (APNs / FCM) -->
+        <mxCell id="push_svc" value="Push Notification Gateway&#xa;(Apple APNs &amp; Google FCM)&#xa;Wakes up sleeping mobile devices" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="930" y="380" width="210" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_offline_push" value="Trigger Wakeup" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="offline_db" target="push_svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Group Messaging Service -->
+        <mxCell id="group_svc" value="Group Messaging Svc (Sender-Key)&#xa;1 Upload -&gt; Multicast Fanout&#xa;Supports up to 1,024 members" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="55" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_router_group" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="msg_router" target="group_svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
-</mxfile> 
+</mxfile>

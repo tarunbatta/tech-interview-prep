@@ -1,43 +1,93 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
-  <diagram id="AsHtNMLsNTLCxXA9mggR" name="PasteBin">
-    <mxGraphModel dx="2305" dy="1134" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <diagram id="Pastebin_Architecture" name="Pastebin Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="TuEia0F1BFCH1UdOG985-1" value="Client" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="120" y="289.86" width="120" height="80" as="geometry" />
+
+        <!-- Clients -->
+        <mxCell id="clients" value="Clients (Web, CLI, curl)&#xa;- POST /api/v1/pastes&#xa;- GET /{pasteId}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="230" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-2" value="Load Balancer" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="340" y="289.86" width="80" height="80" as="geometry" />
+
+        <!-- CDN / Edge Cache -->
+        <mxCell id="cdn" value="Global Edge CDN (Cloudflare)&#xa;- Caches Popular / Viral Pastes&#xa;- Static Asset Distribution" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="60" width="210" height="95" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-3" value="API Server" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="289.86" width="80" height="80" as="geometry" />
+
+        <!-- API Gateway / Load Balancer -->
+        <mxCell id="gateway" value="API Gateway / Load Balancer&#xa;(Rate Limiter, SSL, WAF,&#xa;Max 10MB Payload Guard)" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="210" width="210" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-4" value="Paste Service" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="409.86" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-5" value="Cache" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="340" y="409.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-6" value="Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="520" y="529.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-1" target="TuEia0F1BFCH1UdOG985-2">
+
+        <mxCell id="e_cli_cdn" value="GET /{id} (Cached)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="clients" target="cdn">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-2" target="TuEia0F1BFCH1UdOG985-3">
+
+        <mxCell id="e_cli_gw" value="REST / API" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="clients" target="gateway">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-4">
+
+        <!-- Paste Service -->
+        <mxCell id="paste_svc" value="Paste Application Service&#xa;(Creates &amp; Fetches Pastes,&#xa;Syntax Highlighting Parser)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="235" width="210" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_svc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="paste_svc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-5">
+
+        <!-- Key Generation Service (KGS) -->
+        <mxCell id="kgs" value="Key Generation Service (KGS)&#xa;(Pre-generates Base62 Keys,&#xa;Maintains Unused Key Cache)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="70" width="210" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_svc_kgs" value="Fetch Unique Key" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="paste_svc" target="kgs">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-4" target="TuEia0F1BFCH1UdOG985-6">
+
+        <!-- Redis Cache Cluster -->
+        <mxCell id="redis" value="Redis In-Memory Cache&#xa;(LRU Eviction, 80-20 Hot Data,&#xa;Sub-millisecond Read Cache)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="70" width="200" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_svc_redis" value="1. Cache Lookup" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="paste_svc" target="redis">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+
+        <!-- S3 Object Storage for Text Blobs -->
+        <mxCell id="s3" value="Blob Store (AWS S3 / MinIO)&#xa;(Immutable Text Content Blobs,&#xa;Lifecycle Auto-Expiration Rules)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="215" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_svc_s3" value="2. Store / Fetch Raw Text" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="paste_svc" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Metadata NoSQL Database (DynamoDB / Cassandra) -->
+        <mxCell id="db" value="Metadata DB (DynamoDB)&#xa;(paste_id PK, user_id, size,&#xa;created_at, TTL Expiration)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="370" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_svc_db" value="3. Write / Query Metadata" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="paste_svc" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- KGS Persistent Key Store -->
+        <mxCell id="kgs_db" value="KGS Key Storage (PostgreSQL)&#xa;(Unused &amp; Assigned Key Tables)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="565" y="470" width="200" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_kgs_db" value="Sync Keys" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kgs" target="kgs_db">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="530" y="110" />
+              <mxPoint x="530" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
-</mxfile> 
+</mxfile>

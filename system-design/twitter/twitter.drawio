@@ -1,43 +1,119 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
-  <diagram id="AsHtNMLsNTLCxXA9mggR" name="TikTok">
-    <mxGraphModel dx="2305" dy="1134" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <diagram id="Twitter_Architecture" name="Twitter Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="TuEia0F1BFCH1UdOG985-1" value="Client" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="120" y="289.86" width="120" height="80" as="geometry" />
+
+        <!-- Clients -->
+        <mxCell id="client" value="Client App&#xa;(iOS / Android / Web)&#xa;- Post Tweet (280 Chars)&#xa;- Home Timeline (&lt;100ms)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="170" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-2" value="Load Balancer" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="340" y="289.86" width="80" height="80" as="geometry" />
+
+        <!-- Gateway -->
+        <mxCell id="gateway" value="API Gateway / Envoy&#xa;(Auth, Rate Limiting,&#xa;Snowflake ID Allocator)" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="225" width="180" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-3" value="API Server" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="289.86" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-4" value="Video Service" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="409.86" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-5" value="CDN" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="340" y="409.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-6" value="Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="520" y="529.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-1" target="TuEia0F1BFCH1UdOG985-2">
+
+        <mxCell id="e_client_gw" value="REST / GraphQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="client" target="gateway">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-2" target="TuEia0F1BFCH1UdOG985-3">
+
+        <!-- Snowflake ID Generator -->
+        <mxCell id="snowflake" value="Snowflake Generator&#xa;(64-bit Time-Sortable ID:&#xa;41b Time + 10b Node + 12b Seq)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="80" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_snowflake" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="snowflake">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-4">
+
+        <!-- TWEET WRITE PATH -->
+        <mxCell id="tweet_write_svc" value="Tweet Write Service&#xa;(Creates Tweet with ID,&#xa;Extracts #hashtags &amp; @mentions)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="140" width="210" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_write" value="POST /tweets" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="tweet_write_svc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-5">
+
+        <!-- User Timeline DB -->
+        <mxCell id="manhattan_db" value="Manhattan DB (Key-Value)&#xa;(User Timelines: authorId -&gt; tweets)&#xa;Cassandra / MySQL Shards" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="40" width="210" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_write_manhattan" value="Save User Tweet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="tweet_write_svc" target="manhattan_db">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-4" target="TuEia0F1BFCH1UdOG985-6">
+
+        <!-- Kafka Event Bus -->
+        <mxCell id="kafka" value="Apache Kafka Event Bus&#xa;(Topic: tweets-created)" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="145" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_write_kafka" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="tweet_write_svc" target="kafka">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+
+        <!-- Fanout Engine -->
+        <mxCell id="fanout_svc" value="Fanout Service (Hybrid)&#xa;- Queries FlockDB Social Graph&#xa;- Injects tweetId to Follower Timelines&#xa;- Skips Celebrities (&gt;25K followers)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="135" width="240" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_kafka_fanout" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kafka" target="fanout_svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Social Graph -->
+        <mxCell id="flock_db" value="FlockDB (Graph DB)&#xa;(Followers &amp; Followees)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="20" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_fanout_graph" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fanout_svc" target="flock_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Redis Home Timeline Cluster -->
+        <mxCell id="redis_timeline" value="Redis Timeline Cluster&#xa;(Home Timelines: ZSet per User)&#xa;Max 800 Tweet IDs" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1075" y="290" width="210" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_fanout_redis" value="Push tweetId" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fanout_svc" target="redis_timeline">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Earlybird Search Index -->
+        <mxCell id="earlybird" value="Earlybird Search Cluster&#xa;(In-Memory Inverted Index,&#xa;Real-Time Full-Text Search)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="260" width="190" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_kafka_earlybird" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kafka" target="earlybird">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Trending Topics -->
+        <mxCell id="trending_svc" value="Trending Engine (Flink / Heron)&#xa;(Sliding Window Count-Min Sketch,&#xa;Hashtag Velocity &amp; Spike Detection)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="800" y="370" width="220" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_kafka_trending" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kafka" target="trending_svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Timeline Read Service -->
+        <mxCell id="timeline_svc" value="Timeline Read Service&#xa;- Reads User Redis Cache&#xa;- Pulls Celebrity Tweets On-the-fly&#xa;- Merges &amp; Returns Top 20 (&lt;100ms)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="320" width="230" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_timeline" value="GET /timeline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="timeline_svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_timeline_redis" value="Read ZSet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="timeline_svc" target="redis_timeline">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
-</mxfile> 
+</mxfile>

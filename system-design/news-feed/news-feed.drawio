@@ -1,43 +1,127 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
-  <diagram id="AsHtNMLsNTLCxXA9mggR" name="NewsFeed">
-    <mxGraphModel dx="2305" dy="1134" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <diagram id="NewsFeed_Architecture" name="News Feed Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="TuEia0F1BFCH1UdOG985-1" value="Client" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="120" y="289.86" width="120" height="80" as="geometry" />
+
+        <!-- Clients -->
+        <mxCell id="client" value="Client Devices&#xa;(iOS, Android, Web)&#xa;- Infinite Scroll Feed&#xa;- Cursor Pagination" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="160" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-2" value="Load Balancer" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="340" y="289.86" width="80" height="80" as="geometry" />
+
+        <!-- Gateway -->
+        <mxCell id="gateway" value="API Gateway / Load Balancer&#xa;(Rate Limiting, Auth, Routing)" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="225" width="180" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-3" value="API Server" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="289.86" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-4" value="Feed Service" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="409.86" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-5" value="Cache" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="340" y="409.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-6" value="Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="520" y="529.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-1" target="TuEia0F1BFCH1UdOG985-2">
+
+        <mxCell id="e_client_gw" value="1. Publish Post&#xa;2. Get Feed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="client" target="gateway">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-2" target="TuEia0F1BFCH1UdOG985-3">
+
+        <!-- PUBLISHING FLOW (TOP) -->
+        <mxCell id="pub_box" value="FEED PUBLISHING &amp; FAN-OUT FLOW" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;fontStyle=1;startSize=25;" vertex="1" parent="1">
+          <mxGeometry x="510" y="40" width="750" height="220" as="geometry" />
+        </mxCell>
+
+        <mxCell id="post_svc" value="Post Service&#xa;(Saves Post Record)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="pub_box">
+          <mxGeometry x="20" y="45" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="kafka_posts" value="Kafka Topic&#xa;('new-posts')" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="pub_box">
+          <mxGeometry x="200" y="40" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fanout_svc" value="Fanout Worker Engine&#xa;(Hybrid Push vs Pull)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="pub_box">
+          <mxGeometry x="360" y="45" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="user_graph" value="Social Graph&#xa;(Followers DB)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="pub_box">
+          <mxGeometry x="385" y="130" width="110" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="redis_timeline" value="Redis Timeline Cache&#xa;(ZSet: userId -&gt; postIds&#xa;Ordered by timestamp)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="pub_box">
+          <mxGeometry x="560" y="35" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_post_kafka" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="pub_box" source="post_svc" target="kafka_posts">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-4">
+        <mxCell id="e_kafka_fanout" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="pub_box" source="kafka_posts" target="fanout_svc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-5">
+        <mxCell id="e_fanout_graph" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="pub_box" source="fanout_svc" target="user_graph">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-4" target="TuEia0F1BFCH1UdOG985-6">
+        <mxCell id="e_fanout_redis" value="Push postId" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="pub_box" source="fanout_svc" target="redis_timeline">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+
+        <mxCell id="e_gw_post" value="Publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="post_svc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="115" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- RETRIEVAL FLOW (BOTTOM) -->
+        <mxCell id="ret_box" value="FEED RETRIEVAL &amp; RANKING PIPELINE" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;fontStyle=1;startSize=25;" vertex="1" parent="1">
+          <mxGeometry x="510" y="290" width="750" height="270" as="geometry" />
+        </mxCell>
+
+        <mxCell id="feed_svc" value="Feed Service Coordinator&#xa;(Fetches Candidates &amp;&#xa;Celebrity Pull Streams)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="ret_box">
+          <mxGeometry x="20" y="45" width="170" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="feature_store" value="Feature Store&#xa;(User &amp; Author Affinity)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="ret_box">
+          <mxGeometry x="240" y="160" width="130" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ranker" value="ML Ranking Engine&#xa;(Two-Tower Model / GBDT&#xa;Predicts Like/Comment/Share)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="ret_box">
+          <mxGeometry x="230" y="45" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="hydrator" value="Post Hydrator Service&#xa;(MGET Post Text, Media &amp;&#xa;Author Avatars from Cache)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="ret_box">
+          <mxGeometry x="450" y="45" width="170" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="post_cache" value="Post Cache (Memcached)&#xa;&amp; Master Database" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="ret_box">
+          <mxGeometry x="460" y="160" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_feed_ranker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="ret_box" source="feed_svc" target="ranker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_feat_ranker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="ret_box" source="feature_store" target="ranker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ranker_hyd" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="ret_box" source="ranker" target="hydrator">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_hyd_cache" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="ret_box" source="hydrator" target="post_cache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_feed" value="GET /feed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="feed_svc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e_feed_redis_read" value="Read Candidate IDs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="feed_svc" target="redis_timeline">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="490" y="350" />
+              <mxPoint x="490" y="270" />
+              <mxPoint x="1150" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
-</mxfile> 
+</mxfile>

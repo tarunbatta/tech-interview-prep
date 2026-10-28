@@ -1,43 +1,115 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
-  <diagram id="AsHtNMLsNTLCxXA9mggR" name="GoogleDrive">
-    <mxGraphModel dx="2305" dy="1134" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <diagram id="Google_Drive_Architecture" name="Google Drive Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="TuEia0F1BFCH1UdOG985-1" value="Client" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="120" y="289.86" width="120" height="80" as="geometry" />
+
+        <!-- Clients -->
+        <mxCell id="client" value="Client Applications&#xa;(Web, iOS, Android,&#xa;Desktop Virtual FS / FUSE)&#xa;- Resumable Chunk Upload&#xa;- Local Sync &amp; Offline Cache" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="230" width="190" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-2" value="Load Balancer" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="340" y="289.86" width="80" height="80" as="geometry" />
+
+        <!-- API Gateway / Envoy -->
+        <mxCell id="gateway" value="API Gateway / Envoy Fleet&#xa;(TLS 1.3, OAuth2 / Bearer Auth,&#xa;Rate Limiting, Global Routing)" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="215" width="200" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-3" value="API Server" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="289.86" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-4" value="Storage Service" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="409.86" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-5" value="Metadata DB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="340" y="409.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-6" value="Google Cloud Storage" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="520" y="529.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-1" target="TuEia0F1BFCH1UdOG985-2">
+
+        <mxCell id="e_client_gw" value="REST / gRPC / WebSockets" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="client" target="gateway">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-2" target="TuEia0F1BFCH1UdOG985-3">
+
+        <!-- Resumable Upload Service -->
+        <mxCell id="upload_svc" value="Resumable Upload Service&#xa;(Byte-Range Chunk Ingestion,&#xa;Content Hashes, Quota Check)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="60" width="210" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_upload" value="POST /upload/resumable" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="upload_svc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-4">
+
+        <!-- Colossus Blob Store -->
+        <mxCell id="blob_store" value="Blob Storage (Colossus / S3)&#xa;(Erasure Coded 8+4 Chunks,&#xa;Immutable Content Store)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="55" width="200" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_upload_blob" value="Store 4MB Chunks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="upload_svc" target="blob_store">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-5">
+
+        <!-- Metadata & Hierarchy Service -->
+        <mxCell id="meta_svc" value="Metadata &amp; Hierarchy Service&#xa;(Folder Trees, DAG Links,&#xa;Revisions, Trash Lifecycle)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="190" width="210" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_meta" value="CRUD / Move / Rename" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="meta_svc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-4" target="TuEia0F1BFCH1UdOG985-6">
+
+        <!-- Google Spanner Metadata DB -->
+        <mxCell id="spanner" value="Globally Distributed DB&#xa;(Google Spanner / CockroachDB)&#xa;- ACID File Hierarchy&#xa;- TrueTime Commit Ordering" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="180" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_meta_spanner" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="meta_svc" target="spanner">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+
+        <!-- Authorization / Zanzibar Service -->
+        <mxCell id="zanzibar" value="Authorization Service&#xa;(Zanzibar ACL Model)&#xa;- Inherited Permissions&#xa;- Owner / Editor / Viewer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="320" width="210" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_meta_zanzibar" value="Check Permission" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="meta_svc" target="zanzibar">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ACL Tuple Store -->
+        <mxCell id="acl_store" value="Zanzibar Tuple Store&#xa;(Bigtable / Spanner)&#xa;(object#relation@user)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="900" y="320" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_zan_store" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="zanzibar" target="acl_store">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Search & OCR Ingestion Pipeline -->
+        <mxCell id="search_pipe" value="Search &amp; OCR Ingestion&#xa;(Apache Flink / Cloud Vision)&#xa;- Document Text Extraction&#xa;- Image &amp; PDF OCR Processing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="450" width="210" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_blob_pipe" value="File Uploaded Event" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="blob_store" target="search_pipe">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Search Index -->
+        <mxCell id="search_index" value="Full-Text &amp; Semantic Index&#xa;(Elasticsearch / Spanner FTS)&#xa;- Inverted Index &amp; OCR Text&#xa;- Instant Prefix Query" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="900" y="445" width="200" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_pipe_index" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="search_pipe" target="search_index">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Sync Notification & Quota Hub -->
+        <mxCell id="notify_svc" value="Real-Time Sync Notification&#xa;(gRPC Streams / WebSockets)&#xa;&amp; Shared Quota Counter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="580" width="210" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_notify" value="Sync Channel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="notify_svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Redis Quota Cache -->
+        <mxCell id="redis_quota" value="Redis Cluster&#xa;(Per-User Quota Aggregation:&#xa;Drive + Gmail + Photos)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="900" y="580" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_notif_redis" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="notify_svc" target="redis_quota">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
-</mxfile> 
+</mxfile>

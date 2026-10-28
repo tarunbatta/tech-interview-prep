@@ -1,37 +1,96 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
-  <diagram id="AsHtNMLsNTLCxXA9mggR" name="Web Crawler">
-    <mxGraphModel dx="2305" dy="1134" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <diagram id="WebCrawler_Architecture" name="Distributed Web Crawler Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="TuEia0F1BFCH1UdOG985-1" value="URL Frontier" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="120" y="289.86" width="120" height="80" as="geometry" />
+
+        <!-- Seed URLs & Frontier Ingest -->
+        <mxCell id="seed_urls" value="Seed URLs / New Links&#xa;(Discovered by Link Extractor&#xa;or Ingested by Admin)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="180" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-2" value="Crawler" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="340" y="289.86" width="80" height="80" as="geometry" />
+
+        <!-- URL Deduplication (Bloom Filter) -->
+        <mxCell id="url_filter" value="URL Filter &amp; Deduplication&#xa;(Bloom Filter + RocksDB)&#xa;- Have we seen this URL?&#xa;- Normalize URL (scheme, port)" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="215" width="200" height="135" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-3" value="Parser" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="289.86" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-4" value="Content Store" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="340" y="409.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-5" value="URL Store" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="520" y="409.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-1" target="TuEia0F1BFCH1UdOG985-2">
+
+        <mxCell id="e_seed_filter" value="Raw URLs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="seed_urls" target="url_filter">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-2" target="TuEia0F1BFCH1UdOG985-3">
+
+        <!-- URL Frontier (Mercator Model) -->
+        <mxCell id="frontier" value="Distributed URL Frontier&#xa;┌───────────────────────────────────┐&#xa;│ Priority Queues (PageRank, Fresh) │&#xa;├───────────────────────────────────┤&#xa;│ Queue Router (Host Hash)          │&#xa;├───────────────────────────────────┤&#xa;│ Politeness Queues (1 per host)    │&#xa;└───────────────────────────────────┘" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacingLeft=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="205" width="240" height="155" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_filt_front" value="Unseen URLs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="url_filter" target="frontier">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-2" target="TuEia0F1BFCH1UdOG985-4">
+
+        <!-- Robots.txt & DNS Cache -->
+        <mxCell id="dns_robots" value="DNS &amp; Robots.txt Cache&#xa;(Local In-Memory Redis)&#xa;- Async DNS Resolution&#xa;- Disallow / Crawl-delay Rules" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="555" y="40" width="210" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_front_dns" value="Check Rules &amp; IP" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="frontier" target="dns_robots">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-5">
+
+        <!-- HTML Fetcher Fleet -->
+        <mxCell id="fetcher" value="HTML Fetcher Workers&#xa;(High-Concurrency HTTP/3 Fleet)&#xa;- Stream HTML Body&#xa;- Respect HTTP 429 &amp; Backoff" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="240" width="210" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_front_fetch" value="Pop Polite URL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="frontier" target="fetcher">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+
+        <!-- Target Web Servers (The Internet) -->
+        <mxCell id="internet" value="The Public Web&#xa;(External Web Servers)&#xa;- Websites &amp; APIs" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="235" width="180" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_fetch_net" value="GET / HTTP" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fetcher" target="internet">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Content Parser & SimHash Dedupe -->
+        <mxCell id="parser" value="Content Parser &amp; Deduplication&#xa;(HTML Parsing, Text Extraction,&#xa;SimHash Near-Duplicate Check)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="420" width="210" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_fetch_parse" value="Raw HTML" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fetcher" target="parser">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Link Extractor -->
+        <mxCell id="link_extractor" value="Link Extractor&#xa;(Extract href links &amp; canonicalize)&#xa;Cycles back to Frontier" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="540" y="425" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_parse_link" value="Discovered Links" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="parser" target="link_extractor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_link_filter" value="New URLs to Ingest" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="link_extractor" target="url_filter">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="370" y="465" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Document Repository (Raw HTML Store) -->
+        <mxCell id="doc_repo" value="Document Repository&#xa;(Bigtable / S3 / Colossus)&#xa;- Compressed Raw Webpages&#xa;- Ingest for Search Indexing" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="415" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_parse_repo" value="Store Verified Page" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="parser" target="doc_repo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
-</mxfile> 
+</mxfile>

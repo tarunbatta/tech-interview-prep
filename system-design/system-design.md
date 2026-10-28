@@ -2,35 +2,40 @@
 
 [← Back to Main README](../README.md)
 
-This directory contains system design documentation for various systems, each organized in its own folder with detailed information about the system's architecture, components, and considerations.
+## Real-World Architectural Retrospectives
 
-## Systems
+* [🌟 **DocuSign Billing & Invoicing Modernization**](project-retrospective/project-retrospective.md) — Production architecture retrospective: Migrating legacy Quartz batch systems to event-driven MuleSoft & Core microservices, reducing invoice latency from 7 days to real-time (< 2s), achieving a 90% reduction in reconciliation discrepancies, and an 80% DSO reduction.
+
+## Interview System Design Case Studies (28 Systems)
 
 1. [Airbnb](airbnb/airbnb.md)
 2. [Amazon Prime](amazon-prime/amazon-prime.md)
 3. [Amazon](amazon/amazon.md)
-4. [Autocomplete Search](autocomplete-search/autocomplete-search.md)
-5. [Bitly](bitly/bitly.md)
-6. [DocuSign](docusign/docusign.md)
-7. [Dropbox](dropbox/dropbox.md)
-8. [Email Archive](email-archive/email-archive.md)
-9. [Google Docs](google-docs/google-docs.md)
-10. [Google Drive](google-drive/google-drive.md)
-11. [Instagram](instagram/instagram.md)
-12. [News Feed](news-feed/news-feed.md)
-13. [Notification System](notification-system/notification-system.md)
-14. [Parking Garage](parking-garage/parking-garage.md)
-15. [PasteBin](pastebin/pastebin.md)
-16. [Rate Limiter](rate-limiter/rate-limiter.md)
-17. [Shopify](shopify/shopify.md)
-18. [Tag Service](tag-service/tag-service.md)
-19. [TicketMaster](ticketmaster/ticketmaster.md)
-20. [TikTok](tiktok/tiktok.md)
-21. [Twitter](twitter/twitter.md)
-22. [Uber](uber/uber.md)
-23. [Web Crawler](webcrawler/webcrawler.md)
-24. [Whatsapp](whatsapp/whatsapp.md)
-25. [YouTube](youtube/youtube.md)
+4. [ATM](atm/atm.md)
+5. [Autocomplete Search](autocomplete-search/autocomplete-search.md)
+6. [Bitly](bitly/bitly.md)
+7. [DocuSign](docusign/docusign.md)
+8. [Dropbox](dropbox/dropbox.md)
+9. [Email Archive](email-archive/email-archive.md)
+10. [Google Docs](google-docs/google-docs.md)
+11. [Google Drive](google-drive/google-drive.md)
+12. [Instagram](instagram/instagram.md)
+13. [Netflix](netflix/netflix.md)
+14. [News Feed](news-feed/news-feed.md)
+15. [Notification System](notification-system/notification-system.md)
+16. [Parking Garage](parking-garage/parking-garage.md)
+17. [PasteBin](pastebin/pastebin.md)
+18. [Rate Limiter](rate-limiter/rate-limiter.md)
+19. [Shopify](shopify/shopify.md)
+20. [Social Media](social-media/social-media.md)
+21. [Tag Service](tag-service/tag-service.md)
+22. [TicketMaster](ticketmaster/ticketmaster.md)
+23. [TikTok](tiktok/tiktok.md)
+24. [Twitter](twitter/twitter.md)
+25. [Uber](uber/uber.md)
+26. [Web Crawler](webcrawler/webcrawler.md)
+27. [Whatsapp](whatsapp/whatsapp.md)
+28. [YouTube](youtube/youtube.md)
 
 ## Easy to remember numbers for back-of-the-envelope calculations in system design interviews
 

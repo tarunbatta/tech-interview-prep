@@ -1,43 +1,106 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="1">
-  <diagram id="AsHtNMLsNTLCxXA9mggR" name="YouTube">
-    <mxGraphModel dx="2305" dy="1134" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <diagram id="YouTube_Architecture" name="YouTube Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="TuEia0F1BFCH1UdOG985-1" value="Client" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="120" y="289.86" width="120" height="80" as="geometry" />
+
+        <!-- Creator & Viewer Clients -->
+        <mxCell id="creator" value="Creator Client&#xa;- 500 hrs/min Uploads&#xa;- Resumable Tus Protocol" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="160" height="75" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-2" value="Load Balancer" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="340" y="289.86" width="80" height="80" as="geometry" />
+
+        <mxCell id="viewer" value="Viewer Client&#xa;- Adaptive Bitrate (ABR)&#xa;- 30s View Beacons" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="380" width="160" height="75" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-3" value="API Server" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="289.86" width="80" height="80" as="geometry" />
+
+        <!-- CDN Tier (Viewer playback) -->
+        <mxCell id="edge_cdn" value="Tiered Edge CDN (PoPs)&#xa;Caches Top 20% Hot Viral Videos&#xa;(Serves 80% of Global Traffic)" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="220" width="200" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-4" value="Video Service" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="520" y="409.86" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-5" value="CDN" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="340" y="409.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-6" value="Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-          <mxGeometry x="520" y="529.86" width="80" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-1" target="TuEia0F1BFCH1UdOG985-2">
+
+        <mxCell id="e_viewer_cdn" value="Stream HLS / DASH" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2b7bba;" edge="1" parent="1" source="viewer" target="edge_cdn">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-2" target="TuEia0F1BFCH1UdOG985-3">
+
+        <!-- Gateway -->
+        <mxCell id="gateway" value="API Gateway&#xa;(Auth, Rate Limiting,&#xa;Session Allocation)" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="80" width="170" height="115" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_creator_gw" value="POST /upload-session" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="creator" target="gateway">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-4">
+
+        <!-- Ingestion Service -->
+        <mxCell id="ingest_svc" value="Resumable Ingestion Service&#xa;(Tus / HTTP PATCH, 10MB chunks,&#xa;Checksum &amp; Byte Offset State)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="100" width="200" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_gw_ingest" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gateway" target="ingest_svc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-3" target="TuEia0F1BFCH1UdOG985-5">
+
+        <!-- Master Storage -->
+        <mxCell id="master_s3" value="Master Video Blob Store&#xa;(GCS / S3 Cold Archive)&#xa;Full Raw Master Files" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="90" width="170" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_ingest_master" value="Write Master" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ingest_svc" target="master_s3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TuEia0F1BFCH1UdOG985-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TuEia0F1BFCH1UdOG985-4" target="TuEia0F1BFCH1UdOG985-6">
+
+        <!-- Transcoding DAG Workers -->
+        <mxCell id="transcode_dag" value="Distributed Transcoding DAG (GPU Fleet)&#xa;1. Slices Video into 5s GOP Chunks&#xa;2. Encodes 144p to 4K (AV1, VP9, H.264)&#xa;3. Generates M3U8 &amp; MPD Manifests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="87.5" width="260" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_master_transcode" value="Chunk Tasks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="master_s3" target="transcode_dag">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+
+        <!-- Transcoded Video Store -->
+        <mxCell id="transcoded_store" value="Transcoded Video Store&#xa;(Chunks &amp; Manifests)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1065" y="240" width="170" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_dag_store" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="transcode_dag" target="transcoded_store">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_store_cdn" value="Push / Origin Fetch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="transcoded_store" target="edge_cdn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- VIEW COUNTING PIPELINE -->
+        <mxCell id="view_box" value="REAL-TIME VIEW COUNTING &amp; ANTI-FRAUD PIPELINE" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;fontStyle=1;startSize=25;" vertex="1" parent="1">
+          <mxGeometry x="270" y="380" width="800" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="view_kafka" value="Kafka Topic&#xa;('view-beacons')" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="view_box">
+          <mxGeometry x="30" y="55" width="130" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flink_views" value="Apache Flink Stream Processor&#xa;- 10s Tumbling Windows&#xa;- Deduplicates Bot/Repeated Clicks&#xa;- Enforces 30s Watch Threshold" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="view_box">
+          <mxGeometry x="220" y="47.5" width="240" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="bigtable_views" value="Google Bigtable / Cassandra&#xa;(Aggregated Video View Counts,&#xa;High Write Throughput Counter)" style="shape=cylinder3;whiteSpace=wrap;html=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="view_box">
+          <mxGeometry x="520" y="45" width="220" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_kafka_flink" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="view_box" source="view_kafka" target="flink_views">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_flink_bigtable" value="+N views" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="view_box" source="flink_views" target="bigtable_views">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_viewer_views" value="30s Beacon" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="viewer" target="view_kafka">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
-</mxfile> 
+</mxfile>
