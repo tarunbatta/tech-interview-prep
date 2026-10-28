@@ -4,38 +4,110 @@
 
 ## Real-World Architectural Retrospectives
 
-* [🌟 **DocuSign Billing & Invoicing Modernization**](project-retrospective/project-retrospective.md) — Production architecture retrospective: Migrating legacy Quartz batch systems to event-driven MuleSoft & Core microservices, reducing invoice latency from 7 days to real-time (< 2s), achieving a 90% reduction in reconciliation discrepancies, and an 80% DSO reduction.
+* [🌟 **DocuSign Billing & Invoicing Modernization**](project-retrospective.md) — Production architecture retrospective: Migrating legacy Quartz batch systems to event-driven MuleSoft & Core microservices, reducing invoice latency from 7 days to real-time (< 2s), achieving a 90% reduction in reconciliation discrepancies, and an 80% DSO reduction.
 
 ## Interview System Design Case Studies (28 Systems)
 
-1. [Airbnb](airbnb/airbnb.md)
-2. [Amazon Prime](amazon-prime/amazon-prime.md)
-3. [Amazon](amazon/amazon.md)
-4. [ATM](atm/atm.md)
-5. [Autocomplete Search](autocomplete-search/autocomplete-search.md)
-6. [Bitly](bitly/bitly.md)
-7. [DocuSign](docusign/docusign.md)
-8. [Dropbox](dropbox/dropbox.md)
-9. [Email Archive](email-archive/email-archive.md)
-10. [Google Docs](google-docs/google-docs.md)
-11. [Google Drive](google-drive/google-drive.md)
-12. [Instagram](instagram/instagram.md)
-13. [Netflix](netflix/netflix.md)
-14. [News Feed](news-feed/news-feed.md)
-15. [Notification System](notification-system/notification-system.md)
-16. [Parking Garage](parking-garage/parking-garage.md)
-17. [PasteBin](pastebin/pastebin.md)
-18. [Rate Limiter](rate-limiter/rate-limiter.md)
-19. [Shopify](shopify/shopify.md)
-20. [Social Media](social-media/social-media.md)
-21. [Tag Service](tag-service/tag-service.md)
-22. [TicketMaster](ticketmaster/ticketmaster.md)
-23. [TikTok](tiktok/tiktok.md)
-24. [Twitter](twitter/twitter.md)
-25. [Uber](uber/uber.md)
-26. [Web Crawler](webcrawler/webcrawler.md)
-27. [Whatsapp](whatsapp/whatsapp.md)
-28. [YouTube](youtube/youtube.md)
+1. [Airbnb](airbnb.md)
+2. [Amazon Prime](amazon-prime.md)
+3. [Amazon](amazon.md)
+4. [ATM](atm.md)
+5. [Autocomplete Search](autocomplete-search.md)
+6. [Bitly](bitly.md)
+7. [DocuSign](docusign.md)
+8. [Dropbox](dropbox.md)
+9. [Email Archive](email-archive.md)
+10. [Google Docs](google-docs.md)
+11. [Google Drive](google-drive.md)
+12. [Instagram](instagram.md)
+13. [Netflix](netflix.md)
+14. [News Feed](news-feed.md)
+15. [Notification System](notification-system.md)
+16. [Parking Garage](parking-garage.md)
+17. [PasteBin](pastebin.md)
+18. [Rate Limiter](rate-limiter.md)
+19. [Shopify](shopify.md)
+20. [Social Media](social-media.md)
+21. [Tag Service](tag-service.md)
+22. [TicketMaster](ticketmaster.md)
+23. [TikTok](tiktok.md)
+24. [Twitter](twitter.md)
+25. [Uber](uber.md)
+26. [Web Crawler](webcrawler.md)
+27. [Whatsapp](whatsapp.md)
+28. [YouTube](youtube.md)
+
+## Distributed Systems Fundamentals: CAP & PACELC Theorem
+
+In distributed systems, trade-offs between consistency, availability, and latency are inevitable. Understanding these models is essential during system design interviews when choosing databases, replication strategies, and caching layers.
+
+### CAP Theorem Overview
+
+Formulated by Eric Brewer and proved by Gilbert & Lynch, the CAP theorem states that a distributed data store can guarantee at most **two out of three** properties:
+
+| Property | Definition | Interview Reality |
+| :--- | :--- | :--- |
+| **Consistency (C)** | **Linearizability / Single-Copy Consistency**: Every read receives the most recent write or an error. All nodes see identical data simultaneously. | Note: This refers to *linearizability* in distributed systems, not ACID's "C" (database schema invariants/integrity). |
+| **Availability (A)** | Every non-failing node returns a non-error response for every received request (without guaranteeing it contains the most recent write). | Does not mean high uptime percentage (e.g., 99.99%); it means non-blocking responses without explicit error. |
+| **Partition Tolerance (P)** | The system continues to operate despite arbitrary dropped, delayed, or duplicated messages across network partitions. | **Non-negotiable** in distributed systems; networks will experience partitions, packet drops, or hardware links going down. |
+
+> [!IMPORTANT]
+> **Why "CA" is not a valid choice in distributed systems:**
+> Network partitions ($P$) cannot be avoided across distributed networks. Therefore, when a network partition occurs, a system must choose between:
+>
+> 1. **Cancel the operation / return an error** to preserve consistency $\rightarrow$ **CP**
+> 2. **Proceed with the operation** accepting stale or divergent reads/writes $\rightarrow$ **AP**
+>
+> "CA" only exists in single-node systems (e.g., traditional single-instance RDBMS) where network partitions between data replicas cannot happen.
+
+---
+
+### CP vs. AP Systems Comparison
+
+```mermaid
+flowchart TD
+    P["Network Partition (P) Occurs"] --> CP["Consistency (CP)<br/>• Rejects / pauses writes on minority partition<br/>• Guarantees Strong Consistency (Linearizability)<br/>• Examples: Google Spanner, etcd, ZooKeeper, HBase"]
+    P --> AP["Availability (AP)<br/>• Accepts reads & writes on both sides of split<br/>• Eventual Consistency (async reconciliation)<br/>• Examples: Cassandra, DynamoDB, CouchDB, Riak"]
+```
+
+| Dimension | CP (Consistency + Partition Tolerance) | AP (Availability + Partition Tolerance) |
+| :--- | :--- | :--- |
+| **Primary Goal** | Data correctness and linearizability. | Maximum availability and minimal downtime. |
+| **Partition Behavior** | Nodes on minority partitions refuse writes/reads to prevent stale/split-brain states. | All partitions accept reads/writes; data diverges and syncs later. |
+| **Consistency Model** | Strong Consistency (Sequential / Linearizable). | Eventual Consistency / Causal Consistency / Read-Your-Writes. |
+| **Conflict Handling** | Prevented up-front using distributed consensus (Raft, Paxos, 2PC). | Resolved asynchronously (CRDTs, Last-Write-Wins, Vector Clocks). |
+| **Typical Use Cases** | Banking, payment gateways, ledger balances, distributed locks, inventory reservation. | Social feeds, comments/likes, product catalogs, shopping carts, metrics collection. |
+
+---
+
+### The PACELC Theorem (Modern Extension)
+
+The CAP theorem only describes behavior **during network partitions** ($P$). However, distributed systems run under normal operating conditions most of the time. Daniel Abadi created **PACELC** to describe trade-offs under both states:
+
+$$\text{If } \mathbf{P} \text{ (Partition) } \rightarrow \text{choose between } \mathbf{A} \text{ and } \mathbf{C}; \quad \mathbf{E} \text{lse (Normal Operation) } \rightarrow \text{choose between } \mathbf{L} \text{ (Latency) and } \mathbf{C} \text{ (Consistency)}$$
+
+| Classification | Meaning | Database Examples |
+| :--- | :--- | :--- |
+| **PA / EL** | During partition: choose **Availability**; Else (normal): choose **Latency** (async replication). | Cassandra, DynamoDB, CouchDB |
+| **PC / EC** | During partition: choose **Consistency**; Else (normal): choose **Consistency** (sync replication / consensus). | Google Spanner, Bigtable, HBase, etcd |
+| **PA / EC** | During partition: choose **Availability**; Else (normal): choose **Consistency**. | MongoDB (configured with primary writes and replica sync) |
+| **PC / EL** | During partition: choose **Consistency**; Else (normal): choose **Latency**. | Megastore, VoltDB / H-Store |
+
+---
+
+### Interview Cheatsheet: Making the Right Trade-Off
+
+When designing a system in an interview:
+
+1. **Clarify Business Requirements First**:
+   * *"Does a user need to see their own updates immediately?"* $\rightarrow$ Read-Your-Writes consistency.
+   * *"Is double-spending or overselling acceptable?"* $\rightarrow$ Strong Consistency (CP).
+   * *"Can users tolerate seeing 10-second-old comments or views?"* $\rightarrow$ Eventual Consistency (AP).
+2. **Hybrid Architectural Patterns**:
+   * **Dual-path architecture**: Use CP datastores for transactions/checkout/orders and AP datastores for product search, recommendations, and analytics.
+   * **Tunable consistency**: Many modern distributed databases (e.g., Cassandra, DynamoDB) allow tuning consistency per operation using quorum read/write levels:
+     $$R + W > N$$
+     *(Where $N$ = replication factor, $W$ = write ack count, $R$ = read replica count. If $R + W > N$, you guarantee strong consistency; otherwise eventual consistency).*
 
 ## Easy to remember numbers for back-of-the-envelope calculations in system design interviews
 
@@ -113,3 +185,5 @@ Numbers for requests calculations
 ## References
 
 * [The System Design Primer (donnemartin)](https://github.com/donnemartin/system-design-primer)
+* [Brewer's CAP Theorem (Eric Brewer)](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/)
+* [Consistency Tradeoffs in Modern Distributed Database System Design (Daniel Abadi on PACELC)](https://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf)

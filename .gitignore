@@ -225,15 +225,3 @@ yarn-error.log*
 **/bin/
 **/obj/
 
-# Draw.io temporary files
-.*.drawio.dtmp
-*.drawio.dtmp
-.*.drawio.tmp
-*.drawio.tmp
-.*.drawio.bak
-*.drawio.bak
-
-# Diagram tracking
-.diagram-tracking
-
-

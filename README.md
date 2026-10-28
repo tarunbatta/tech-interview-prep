@@ -91,11 +91,10 @@ tech-interview-prep/
 │   ├── top100-leetcode.md         # Curated top 100 LeetCode problems
 │   └── study-topics.md            # Concurrency, networking, and algorithm references
 ├── scripts/                       # Monorepo maintenance and generation tools
-│   ├── convert-diagrams.sh        # Automated Draw.io to SVG diagram exporter
 │   ├── create-system-design.sh    # Scaffold a new system design case study
-│   └── template/                  # System design base templates (.drawio, .md, .svg)
+│   └── template/                  # System design base template (.md with Mermaid diagrams)
 ├── shared/                        # Shared assets (dictionaries, scowl word lists)
-├── package.json                   # Monorepo tasks (builds, test runs, diagram conversions)
+├── package.json                   # Monorepo tasks (builds, test runs, linting)
 └── README.md                      # Unified guide and cheatsheet
 ```
 
@@ -122,7 +121,6 @@ npm run start:js                  # Run JavaScript QOTD script
 
 # System design tooling
 npm run create-system-design -- <name>   # Scaffold new system design folder & template
-npm run convert-diagrams                # Export all updated .drawio diagrams to .svg
 
 # Markdown linting
 npm run lint:md                   # Check markdown formatting
@@ -204,44 +202,44 @@ Use this VS Code snippet structure for adding new solutions:
 
 ## Pillar 2: System Design & Architecture
 
-The [`system-design/`](system-design/system-design.md) directory contains real-world production engineering retrospectives alongside 28 comprehensive architecture case studies, complete with functional/non-functional requirements, API schemas, object models, data storage estimates, and editable `.drawio` + vector `.svg` diagrams.
+The [`system-design/`](system-design/system-design.md) directory contains real-world production engineering retrospectives alongside 28 comprehensive architecture case studies, complete with functional/non-functional requirements, API schemas, object models, data storage estimates, and embedded Mermaid architecture & ER diagrams.
 
 ### 🌟 Featured Real-World Project Retrospective
 
-- [**DocuSign Billing & Invoicing Modernization Case Study**](system-design/project-retrospective/project-retrospective.md) — Production architecture retrospective: Migrating legacy Quartz batch systems to an event-driven MuleSoft & Core microservices integration platform. Features before/after architecture, zero-downtime "learning mode" dual-run strategy, and quantified business impact (reduced invoice latency from 7 days to real-time, 90% reduction in reconciliation discrepancies, 80% DSO reduction).
+- [**DocuSign Billing & Invoicing Modernization Case Study**](system-design/project-retrospective.md) — Production architecture retrospective: Migrating legacy Quartz batch systems to an event-driven MuleSoft & Core microservices integration platform. Features before/after architecture, zero-downtime "learning mode" dual-run strategy, and quantified business impact (reduced invoice latency from 7 days to real-time, 90% reduction in reconciliation discrepancies, 80% DSO reduction).
 
 ### 28 Interview System Design Case Studies
 
 | System | Focus Areas | Documentation |
 | :--- | :--- | :--- |
-| **Airbnb** | Search indexing, booking concurrency, payments, availability calendar | [Airbnb Design](system-design/airbnb/airbnb.md) |
-| **Amazon** | E-commerce catalog, cart persistence, inventory reservation, checkout | [Amazon Design](system-design/amazon/amazon.md) |
-| **Amazon Prime** | Video streaming CDN, chunking, adaptive bitrate, metadata service | [Prime Design](system-design/amazon-prime/amazon-prime.md) |
-| **ATM** | Hardware sensors, ISO 8583 protocol, financial ACID saga, HSM encryption | [ATM Design](system-design/atm/atm.md) |
-| **Autocomplete Search** | Trie cache, typeahead latency, prefix indexing, ranking | [Autocomplete Design](system-design/autocomplete-search/autocomplete-search.md) |
-| **Bitly** | URL shortening, Base62 encoding, high read-to-write ratio caching | [Bitly Design](system-design/bitly/bitly.md) |
-| **DocuSign** | Digital signatures, audit trails, document hashing, encryption | [DocuSign Design](system-design/docusign/docusign.md) |
-| **Dropbox** | Block-level sync, deduplication, conflict resolution, chunking | [Dropbox Design](system-design/dropbox/dropbox.md) |
-| **Email Archive** | Large-scale cold storage, full-text search indexing, compression | [Email Archive Design](system-design/email-archive/email-archive.md) |
-| **Google Docs** | Real-time collaborative editing, OT / CRDT, WebSocket sync | [Google Docs Design](system-design/google-docs/google-docs.md) |
-| **Google Drive** | File metadata, chunked upload/download, versioning, quota service | [Google Drive Design](system-design/google-drive/google-drive.md) |
-| **Instagram** | Feed generation, image delivery CDN, followers graph, fanout | [Instagram Design](system-design/instagram/instagram.md) |
-| **Netflix** | Open Connect CDN, dynamic optimizer transcode, ABR, state bookmarks | [Netflix Design](system-design/netflix/netflix.md) |
-| **News Feed** | Fanout-on-write vs fanout-on-read, timeline caching, ranking | [News Feed Design](system-design/news-feed/news-feed.md) |
-| **Notification System** | Push notifications, SMS/Email gateways, deduplication, rate limits | [Notification Design](system-design/notification-system/notification-system.md) |
-| **Parking Garage** | Concurrency control, spot allocation, ticket validation, sensors | [Parking Garage Design](system-design/parking-garage/parking-garage.md) |
-| **PasteBin** | Text storage, expiring keys, S3/blob integration, rate limiting | [PasteBin Design](system-design/pastebin/pastebin.md) |
-| **Rate Limiter** | Token bucket, sliding window counter, Redis distributed locking | [Rate Limiter Design](system-design/rate-limiter/rate-limiter.md) |
-| **Shopify** | Multi-tenant architecture, order processing, flash-sale traffic handling | [Shopify Design](system-design/shopify/shopify.md) |
-| **Social Media** | Hybrid fanout, pre-signed media upload, social graph, timeline cache | [Social Media Design](system-design/social-media/social-media.md) |
-| **Tag Service** | Inverted index, tag aggregation, lookup performance, caching | [Tag Service Design](system-design/tag-service/tag-service.md) |
-| **TicketMaster** | Virtual queues, fair ticketing, seat reservation locking | [TicketMaster Design](system-design/ticketmaster/ticketmaster.md) |
-| **TikTok** | Video feed recommendation pipeline, transcode pipeline, delivery | [TikTok Design](system-design/tiktok/tiktok.md) |
-| **Twitter** | Distributed timeline, Redis fanout cluster, search indexing | [Twitter Design](system-design/twitter/twitter.md) |
-| **Uber** | Geospatial indexing (QuadTree/H3), driver dispatch, location updates | [Uber Design](system-design/uber/uber.md) |
-| **Web Crawler** | Distributed frontier queue, robots.txt parser, deduplication, DNS | [Web Crawler Design](system-design/webcrawler/webcrawler.md) |
-| **WhatsApp** | Real-time chat, WebSocket connection managers, E2E encryption | [WhatsApp Design](system-design/whatsapp/whatsapp.md) |
-| **YouTube** | Video upload pipeline, transcode farm, CDN distribution, views counting | [YouTube Design](system-design/youtube/youtube.md) |
+| **Airbnb** | Search indexing, booking concurrency, payments, availability calendar | [Airbnb Design](system-design/airbnb.md) |
+| **Amazon** | E-commerce catalog, cart persistence, inventory reservation, checkout | [Amazon Design](system-design/amazon.md) |
+| **Amazon Prime** | Video streaming CDN, chunking, adaptive bitrate, metadata service | [Prime Design](system-design/amazon-prime.md) |
+| **ATM** | Hardware sensors, ISO 8583 protocol, financial ACID saga, HSM encryption | [ATM Design](system-design/atm.md) |
+| **Autocomplete Search** | Trie cache, typeahead latency, prefix indexing, ranking | [Autocomplete Design](system-design/autocomplete-search.md) |
+| **Bitly** | URL shortening, Base62 encoding, high read-to-write ratio caching | [Bitly Design](system-design/bitly.md) |
+| **DocuSign** | Digital signatures, audit trails, document hashing, encryption | [DocuSign Design](system-design/docusign.md) |
+| **Dropbox** | Block-level sync, deduplication, conflict resolution, chunking | [Dropbox Design](system-design/dropbox.md) |
+| **Email Archive** | Large-scale cold storage, full-text search indexing, compression | [Email Archive Design](system-design/email-archive.md) |
+| **Google Docs** | Real-time collaborative editing, OT / CRDT, WebSocket sync | [Google Docs Design](system-design/google-docs.md) |
+| **Google Drive** | File metadata, chunked upload/download, versioning, quota service | [Google Drive Design](system-design/google-drive.md) |
+| **Instagram** | Feed generation, image delivery CDN, followers graph, fanout | [Instagram Design](system-design/instagram.md) |
+| **Netflix** | Open Connect CDN, dynamic optimizer transcode, ABR, state bookmarks | [Netflix Design](system-design/netflix.md) |
+| **News Feed** | Fanout-on-write vs fanout-on-read, timeline caching, ranking | [News Feed Design](system-design/news-feed.md) |
+| **Notification System** | Push notifications, SMS/Email gateways, deduplication, rate limits | [Notification Design](system-design/notification-system.md) |
+| **Parking Garage** | Concurrency control, spot allocation, ticket validation, sensors | [Parking Garage Design](system-design/parking-garage.md) |
+| **PasteBin** | Text storage, expiring keys, S3/blob integration, rate limiting | [PasteBin Design](system-design/pastebin.md) |
+| **Rate Limiter** | Token bucket, sliding window counter, Redis distributed locking | [Rate Limiter Design](system-design/rate-limiter.md) |
+| **Shopify** | Multi-tenant architecture, order processing, flash-sale traffic handling | [Shopify Design](system-design/shopify.md) |
+| **Social Media** | Hybrid fanout, pre-signed media upload, social graph, timeline cache | [Social Media Design](system-design/social-media.md) |
+| **Tag Service** | Inverted index, tag aggregation, lookup performance, caching | [Tag Service Design](system-design/tag-service.md) |
+| **TicketMaster** | Virtual queues, fair ticketing, seat reservation locking | [TicketMaster Design](system-design/ticketmaster.md) |
+| **TikTok** | Video feed recommendation pipeline, transcode pipeline, delivery | [TikTok Design](system-design/tiktok.md) |
+| **Twitter** | Distributed timeline, Redis fanout cluster, search indexing | [Twitter Design](system-design/twitter.md) |
+| **Uber** | Geospatial indexing (QuadTree/H3), driver dispatch, location updates | [Uber Design](system-design/uber.md) |
+| **Web Crawler** | Distributed frontier queue, robots.txt parser, deduplication, DNS | [Web Crawler Design](system-design/webcrawler.md) |
+| **WhatsApp** | Real-time chat, WebSocket connection managers, E2E encryption | [WhatsApp Design](system-design/whatsapp.md) |
+| **YouTube** | Video upload pipeline, transcode farm, CDN distribution, views counting | [YouTube Design](system-design/youtube.md) |
 
 ### Back-of-the-Envelope Calculations Cheat Sheet
 
@@ -516,20 +514,8 @@ npm run create-system-design -- <system-name>
 
 This creates `system-design/<system-name>/` with:
 
-- `<system-name>.md`: Structured architecture template
-- `<system-name>.drawio`: Source diagram template
-- `<system-name>.svg`: Vector graphic template
+- `<system-name>.md`: Structured architecture template with embedded Mermaid HLD, ER, and detailed System Design diagrams
 - Automatically updates `system-design/system-design.md` with an alphabetically sorted index entry.
-
-### 2. Export Draw.io Diagrams to SVG
-
-```bash
-npm run convert-diagrams
-```
-
-- Scans `system-design/` for modified `.drawio` files using SHA-256 caching (`.diagram-tracking`).
-- Exports changed diagrams to `.svg` with automatic background styling.
-- Prerequisite: `draw.io` desktop application installed.
 
 ---
 

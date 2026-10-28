@@ -14,7 +14,6 @@
     "start:dotnet-core": "dotnet run --project src/dotnet/core",
     "start:practice": "dotnet run --project src/dotnet/practice",
     "start:js": "node src/javascript/qotd/SuperArray.js",
-    "convert-diagrams": "./scripts/convert-diagrams.sh",
     "create-system-design": "./scripts/create-system-design.sh",
     "lint:md": "npx markdownlint-cli2 '**/*.md'",
     "lint:md:fix": "npx markdownlint-cli2 --fix '**/*.md'"

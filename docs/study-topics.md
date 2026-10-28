@@ -16,7 +16,7 @@ Common interview discussion topics (eBay and others):
 - Pub/sub messaging
 - Stateless services and 3-tier architecture
 - Distributed key-value stores
-- Alert / monitoring system design — see also [notification-system](../system-design/notification-system)
+- Alert / monitoring system design — see also [notification-system](../system-design/notification-system.md)
 - WebSockets vs. long polling vs. short polling
 - SQL basics: joins, aggregation, indexes
 
