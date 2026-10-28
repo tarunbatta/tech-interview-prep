@@ -225,4 +225,5 @@ Content-Type: application/json
 
 ### Video References
 
-* [![TicketMaster System Design Video](https://img.youtube.com/vi/lbaNYrcun38/0.jpg)](https://www.youtube.com/watch?v=lbaNYrcun38)
+* [![TicketMaster System Design Video 1](https://img.youtube.com/vi/fhdPyoO6aXI/0.jpg)](https://www.youtube.com/watch?v=fhdPyoO6aXI)
+* [![TicketMaster System Design Video 2](https://img.youtube.com/vi/sMgxHf9AU_U/0.jpg)](https://www.youtube.com/watch?v=sMgxHf9AU_U)

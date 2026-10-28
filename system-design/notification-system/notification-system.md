@@ -273,4 +273,5 @@ If an external provider (e.g., SendGrid) experiences an outage:
 
 ### Video References
 
-* [![Notification System Design Video](https://img.youtube.com/vi/bBTPZ946NnI/0.jpg)](https://www.youtube.com/watch?v=bBTPZ946NnI)
+* [![Notification System Design Video 1](https://img.youtube.com/vi/bBTPZ9NdSk8/0.jpg)](https://www.youtube.com/watch?v=bBTPZ9NdSk8)
+* [![Notification System Design Video 2](https://img.youtube.com/vi/J-5JozlYIqI/0.jpg)](https://www.youtube.com/watch?v=J-5JozlYIqI)

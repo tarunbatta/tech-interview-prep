@@ -301,4 +301,5 @@ New videos cannot be ranked by historical watch time because they have zero view
 
 ### Video References
 
-* [![TikTok System Design Video](https://img.youtube.com/vi/07wvffvyc10/0.jpg)](https://www.youtube.com/watch?v=07wvffvyc10)
+* [![TikTok System Design Video 1](https://img.youtube.com/vi/Z-0g_aJL5Fw/0.jpg)](https://www.youtube.com/watch?v=Z-0g_aJL5Fw)
+* [![TikTok System Design Video 2](https://img.youtube.com/vi/c_oEJ14jW8A/0.jpg)](https://www.youtube.com/watch?v=c_oEJ14jW8A)

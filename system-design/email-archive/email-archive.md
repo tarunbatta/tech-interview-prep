@@ -285,3 +285,8 @@ For desktop/web clients supporting user-initiated email archiving (e.g. Gmail / 
 3. **API Dispatch**: Sends `POST /api/v1/emails/{emailId}/archive` with `clientVersion` to protect against concurrent thread updates.
 4. **Asynchronous Message Queue**: API Gateway enqueues an `ArchiveEmailEvent` to Kafka and returns `202 Accepted`.
 5. **Worker Execution**: Worker checks version conflicts, commits `status = 'ARCHIVED'` to database, invalidates user inbox cache, and broadcasts state update via WebSockets to keep mobile and web clients synchronized.
+
+### Video References
+
+* [![Email Archive System Design Video 1](https://img.youtube.com/vi/PuZvF2EyfBM/0.jpg)](https://www.youtube.com/watch?v=PuZvF2EyfBM)
+* [![Email Archive System Design Video 2](https://img.youtube.com/vi/ak1wTYq_opQ/0.jpg)](https://www.youtube.com/watch?v=ak1wTYq_opQ)

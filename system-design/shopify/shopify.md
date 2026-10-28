@@ -282,4 +282,5 @@ Content-Type: application/json
 
 ### Video References
 
-* [![Shopify System Design Video](https://img.youtube.com/vi/l1nZ_PzAm_8/0.jpg)](https://www.youtube.com/watch?v=l1nZ_PzAm_8)
+* [![Shopify System Design Video 1](https://img.youtube.com/vi/9yY6A0HvDT4/0.jpg)](https://www.youtube.com/watch?v=9yY6A0HvDT4)
+* [![Shopify System Design Video 2](https://img.youtube.com/vi/U2Acfwcah80/0.jpg)](https://www.youtube.com/watch?v=U2Acfwcah80)

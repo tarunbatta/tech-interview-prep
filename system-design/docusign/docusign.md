@@ -319,4 +319,5 @@ Content-Type: application/json
 
 ### Video References
 
-* [![DocuSign System Design Video](https://img.youtube.com/vi/WbBfP_l-c4k/0.jpg)](https://www.youtube.com/watch?v=WbBfP_l-c4k)
+* [![DocuSign System Design Video 1](https://img.youtube.com/vi/s22eJ1eVLTU/0.jpg)](https://www.youtube.com/watch?v=s22eJ1eVLTU)
+* [![DocuSign System Design Video 2](https://img.youtube.com/vi/0ctat6RBrFo/0.jpg)](https://www.youtube.com/watch?v=0ctat6RBrFo)

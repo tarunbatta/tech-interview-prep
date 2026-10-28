@@ -340,4 +340,4 @@ Raw mobile GPS chips provide jittery, inaccurate points with up to 10-meter erro
 ### Video References
 
 * [![Uber System Design Video 1](https://img.youtube.com/vi/lsKU38RKQSo/0.jpg)](https://www.youtube.com/watch?v=lsKU38RKQSo)
-* [![Uber System Design Video 2](https://img.youtube.com/vi/bdfLKAwEGvg/0.jpg)](https://www.youtube.com/watch?v=bdfLKAwEGvg)
+* [![Uber System Design Video 2](https://img.youtube.com/vi/umWABit-wbk/0.jpg)](https://www.youtube.com/watch?v=umWABit-wbk)

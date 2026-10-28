@@ -250,4 +250,5 @@ graph LR
 
 ### Video References
 
-* [![News Feed System Design Video](https://img.youtube.com/vi/S2y9_S4lh1A/0.jpg)](https://www.youtube.com/watch?v=S2y9_S4lh1A)
+* [![News Feed System Design Video 1](https://img.youtube.com/vi/Qj4-GruzyDU/0.jpg)](https://www.youtube.com/watch?v=Qj4-GruzyDU)
+* [![News Feed System Design Video 2](https://img.youtube.com/vi/PE7ZwE5Ace4/0.jpg)](https://www.youtube.com/watch?v=PE7ZwE5Ace4)

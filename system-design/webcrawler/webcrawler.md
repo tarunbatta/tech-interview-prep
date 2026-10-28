@@ -270,4 +270,4 @@ Authorization: Bearer <admin_token>
 
 ### Video References
 
-* [![Web Crawler System Design Video](https://img.youtube.com/vi/BKxkzG2U_4I/0.jpg)](https://www.youtube.com/watch?v=BKxkzG2U_4I)
+* [![Web Crawler System Design Video](https://img.youtube.com/vi/6u25GckPhLU/0.jpg)](https://www.youtube.com/watch?v=6u25GckPhLU)

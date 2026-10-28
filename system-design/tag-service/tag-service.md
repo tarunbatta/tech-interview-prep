@@ -247,3 +247,8 @@ Content-Type: application/json
 ---
 
 ## Additional Notes
+
+### Video References
+
+* [![Tag Service System Design Video 1](https://img.youtube.com/vi/WNIR7eiv0Hk/0.jpg)](https://www.youtube.com/watch?v=WNIR7eiv0Hk)
+* [![Tag Service System Design Video 2](https://img.youtube.com/vi/BHCSL_ZifI0/0.jpg)](https://www.youtube.com/watch?v=BHCSL_ZifI0)

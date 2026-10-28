@@ -299,4 +299,5 @@ Storing 3 full replicas of exabyte-scale data triples storage hardware costs.
 
 ### Video References
 
-* [![Dropbox System Design Video](https://img.youtube.com/vi/U0xTu6_QG5E/0.jpg)](https://www.youtube.com/watch?v=U0xTu6_QG5E)
+* [![Dropbox System Design Video 1](https://img.youtube.com/vi/_UZ1ngy-kOI/0.jpg)](https://www.youtube.com/watch?v=_UZ1ngy-kOI)
+* [![Dropbox System Design Video 2](https://img.youtube.com/vi/bIhXn_3jBo0/0.jpg)](https://www.youtube.com/watch?v=bIhXn_3jBo0)

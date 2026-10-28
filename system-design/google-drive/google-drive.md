@@ -298,4 +298,5 @@ When moving a folder $A$ into folder $B$, the system must verify that $B$ is not
 
 ### Video References
 
-* [![Google Drive System Design Video](https://img.youtube.com/vi/jmqXb_8wB7A/0.jpg)](https://www.youtube.com/watch?v=jmqXb_8wB7A)
+* [![Google Drive System Design Video 1](https://img.youtube.com/vi/_UZ1ngy-kOI/0.jpg)](https://www.youtube.com/watch?v=_UZ1ngy-kOI)
+* [![Google Drive System Design Video 2](https://img.youtube.com/vi/Ai0Osa1-f74/0.jpg)](https://www.youtube.com/watch?v=Ai0Osa1-f74)

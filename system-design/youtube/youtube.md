@@ -223,4 +223,5 @@ GET /api/v1/videos/{videoId}/master.m3u8
 
 ### Video References
 
-* [![YouTube System Design Video](https://img.youtube.com/vi/jPKTo166FbU/0.jpg)](https://www.youtube.com/watch?v=jPKTo166FbU)
+* [![YouTube System Design Video 1](https://img.youtube.com/vi/jPKTo1iGQiE/0.jpg)](https://www.youtube.com/watch?v=jPKTo1iGQiE)
+* [![YouTube System Design Video 2](https://img.youtube.com/vi/IUrQ5_g3XKs/0.jpg)](https://www.youtube.com/watch?v=IUrQ5_g3XKs)

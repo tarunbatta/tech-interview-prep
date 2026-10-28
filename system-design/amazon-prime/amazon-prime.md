@@ -199,4 +199,5 @@ Content-Type: application/json
 
 ### Video References
 
-* [![Amazon Prime System Design Video](https://img.youtube.com/vi/aW3B_66Z998/0.jpg)](https://www.youtube.com/watch?v=aW3B_66Z998)
+* [![Amazon Prime System Design Video 1](https://img.youtube.com/vi/v6qvrIY5Tgs/0.jpg)](https://www.youtube.com/watch?v=v6qvrIY5Tgs)
+* [![Amazon Prime System Design Video 2](https://img.youtube.com/vi/7hZXBrI2TjY/0.jpg)](https://www.youtube.com/watch?v=7hZXBrI2TjY)

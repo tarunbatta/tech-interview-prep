@@ -397,4 +397,5 @@ sequenceDiagram
 
 ### Video References
 
-* [![ATM System Design Video](https://img.youtube.com/vi/SokR_8fF6bQ/0.jpg)](https://www.youtube.com/watch?v=SokR_8fF6bQ)
+* [![ATM System Design Video 1](https://img.youtube.com/vi/-niG_rMWynw/0.jpg)](https://www.youtube.com/watch?v=-niG_rMWynw)
+* [![ATM System Design Video 2](https://img.youtube.com/vi/GSuaqBR0Wpc/0.jpg)](https://www.youtube.com/watch?v=GSuaqBR0Wpc)

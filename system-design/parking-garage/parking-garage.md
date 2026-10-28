@@ -259,3 +259,8 @@ Content-Type: application/json
 ---
 
 ## Additional Notes
+
+### Video References
+
+* [![Parking Garage System Design Video 1](https://img.youtube.com/vi/NtMvNh0WFVM/0.jpg)](https://www.youtube.com/watch?v=NtMvNh0WFVM)
+* [![Parking Garage System Design Video 2](https://img.youtube.com/vi/eV5Xh6jNfmU/0.jpg)](https://www.youtube.com/watch?v=eV5Xh6jNfmU)

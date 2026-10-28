@@ -240,4 +240,5 @@ Active polling of expired records via `SELECT * WHERE expires_at < NOW()` table 
 
 ### Video References
 
-* [![Pastebin System Design Video](https://img.youtube.com/vi/jPKTo16454k/0.jpg)](https://www.youtube.com/watch?v=jPKTo16454k)
+* [![Pastebin System Design Video 1](https://img.youtube.com/vi/BAwUuEdNgy8/0.jpg)](https://www.youtube.com/watch?v=BAwUuEdNgy8)
+* [![Pastebin System Design Video 2](https://img.youtube.com/vi/V_yOcipUqUE/0.jpg)](https://www.youtube.com/watch?v=V_yOcipUqUE)

@@ -329,5 +329,5 @@ In popular posts, thousands of users may like a post in the same second. Running
 
 ### Video References
 
-* [![Social Media System Design Video 1](https://img.youtube.com/vi/S2y9_S4lh1A/0.jpg)](https://www.youtube.com/watch?v=S2y9_S4lh1A)
-* [![Social Media System Design Video 2](https://img.youtube.com/vi/KmAyPUv976E/0.jpg)](https://www.youtube.com/watch?v=KmAyPUv976E)
+* [![Social Media System Design Video 1](https://img.youtube.com/vi/Qj4-GruzyDU/0.jpg)](https://www.youtube.com/watch?v=Qj4-GruzyDU)
+* [![Social Media System Design Video 2](https://img.youtube.com/vi/QmX2NPkJTKg/0.jpg)](https://www.youtube.com/watch?v=QmX2NPkJTKg)

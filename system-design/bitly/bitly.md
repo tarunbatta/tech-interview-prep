@@ -245,3 +245,8 @@ Cache-Control: private, max-age=90
 ---
 
 ## Additional Notes
+
+### Video References
+
+* [![Bitly System Design Video 1](https://img.youtube.com/vi/iUU4O1sWtJA/0.jpg)](https://www.youtube.com/watch?v=iUU4O1sWtJA)
+* [![Bitly System Design Video 2](https://img.youtube.com/vi/16d35un5a9Q/0.jpg)](https://www.youtube.com/watch?v=16d35un5a9Q)
