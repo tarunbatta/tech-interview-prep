@@ -15,6 +15,8 @@ namespace InterviewPreperationGuide.Core {
         static void Main (string[] args) {
             //Algorithms.Search.Dijkstra.Init ();
             //Algorithms.Others.LongestCommonSubstring.Init();
+            //Ctci.c1q1.Solution.Init();
+            //Ctci.c4q8.Solution.Init();
 
             LeetCode.problem2384.Solution.Init();
         }
