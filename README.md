@@ -23,9 +23,7 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
   - [C# Solution Snippet Template](#c-solution-snippet-template)
 - [Pillar 2: System Design & Architecture](#pillar-2-system-design--architecture)
   - [Featured Real-World Project Retrospective](#-featured-real-world-project-retrospective)
-  - [31 Interview System Design Case Studies](#31-interview-system-design-case-studies)
-  - [Back-of-the-Envelope Calculations Cheat Sheet](#back-of-the-envelope-calculations-cheat-sheet)
-  - [Load Balancing Cheat Sheet](#load-balancing-cheat-sheet)
+  - [System Design Master Guide & 31 Case Studies](#system-design-master-guide--31-case-studies)
 - [Pillar 3: Engineering Management & Behavioural](#pillar-3-engineering-management--behavioural)
   - [CAR / STAR Story Framework](#car--star-story-framework)
   - [Role Scope & Strategic Leadership Assessment](#role-scope--strategic-leadership-assessment)
@@ -202,85 +200,21 @@ Use this VS Code snippet structure for adding new solutions:
 
 ## Pillar 2: System Design & Architecture
 
-The [`system-design/`](system-design/system-design.md) directory contains real-world production engineering retrospectives alongside 31 comprehensive architecture case studies, complete with functional/non-functional requirements, API schemas, object models, data storage estimates, and embedded Mermaid architecture & ER diagrams.
+All system design theory, core architectural building blocks, capacity estimation cheat sheets, and 31 end-to-end interview case studies are consolidated in **[`system-design/system-design.md`](system-design/system-design.md)**.
 
 ### 🌟 Featured Real-World Project Retrospective
 
 - [**DocuSign Billing & Invoicing Modernization Case Study**](system-design/project-retrospective.md) — Production architecture retrospective: Migrating legacy Quartz batch systems to an event-driven MuleSoft & Core microservices integration platform. Features before/after architecture, zero-downtime "learning mode" dual-run strategy, and quantified business impact (reduced invoice latency from 7 days to real-time, 90% reduction in reconciliation discrepancies, 80% DSO reduction).
 
-### 31 Interview System Design Case Studies
+### System Design Master Guide & 31 Case Studies
 
-| System | Focus Areas | Documentation |
-| :--- | :--- | :--- |
-| **Airbnb** | Search indexing, booking concurrency, payments, availability calendar | [Airbnb Design](system-design/airbnb.md) |
-| **Amazon** | E-commerce catalog, cart persistence, inventory reservation, checkout | [Amazon Design](system-design/amazon.md) |
-| **Amazon Prime** | Video streaming CDN, chunking, adaptive bitrate, metadata service | [Prime Design](system-design/amazon-prime.md) |
-| **ATM** | Hardware sensors, ISO 8583 protocol, financial ACID saga, HSM encryption | [ATM Design](system-design/atm.md) |
-| **Autocomplete Search** | Trie cache, typeahead latency, prefix indexing, ranking | [Autocomplete Design](system-design/autocomplete-search.md) |
-| **Bitly** | URL shortening, Base62 encoding, high read-to-write ratio caching | [Bitly Design](system-design/bitly.md) |
-| **DocuSign** | Digital signatures, audit trails, document hashing, encryption | [DocuSign Design](system-design/docusign.md) |
-| **Dropbox** | Block-level sync, deduplication, conflict resolution, chunking | [Dropbox Design](system-design/dropbox.md) |
-| **Email Archive** | Large-scale cold storage, full-text search indexing, compression | [Email Archive Design](system-design/email-archive.md) |
-| **Fraud Detection** | Sub-50ms risk scoring, Flink velocity features, dual feature store, GNN rings | [Fraud Detection Design](system-design/fraud-detection.md) |
-| **Google Docs** | Real-time collaborative editing, OT / CRDT, WebSocket sync | [Google Docs Design](system-design/google-docs.md) |
-| **Google Drive** | File metadata, chunked upload/download, versioning, quota service | [Google Drive Design](system-design/google-drive.md) |
-| **Instagram** | Feed generation, image delivery CDN, followers graph, fanout | [Instagram Design](system-design/instagram.md) |
-| **Metrics Monitoring** | TSDB Gorilla compression, log/trace ingestion, PromQL, streaming alert rules | [Metrics Monitoring Design](system-design/metrics-monitoring.md) |
-| **Netflix** | Open Connect CDN, dynamic optimizer transcode, ABR, state bookmarks | [Netflix Design](system-design/netflix.md) |
-| **News Feed** | Fanout-on-write vs fanout-on-read, timeline caching, ranking | [News Feed Design](system-design/news-feed.md) |
-| **Notification System** | Push notifications, SMS/Email gateways, deduplication, rate limits | [Notification Design](system-design/notification-system.md) |
-| **Parking Garage** | Concurrency control, spot allocation, ticket validation, sensors | [Parking Garage Design](system-design/parking-garage.md) |
-| **PasteBin** | Text storage, expiring keys, S3/blob integration, rate limiting | [PasteBin Design](system-design/pastebin.md) |
-| **Payment System** | Double-entry ledger, idempotency keys, claims payout saga, T+1 reconciliation | [Payment System Design](system-design/payment-system.md) |
-| **Rate Limiter** | Token bucket, sliding window counter, Redis distributed locking | [Rate Limiter Design](system-design/rate-limiter.md) |
-| **Shopify** | Multi-tenant architecture, order processing, flash-sale traffic handling | [Shopify Design](system-design/shopify.md) |
-| **Social Media** | Hybrid fanout, pre-signed media upload, social graph, timeline cache | [Social Media Design](system-design/social-media.md) |
-| **Tag Service** | Inverted index, tag aggregation, lookup performance, caching | [Tag Service Design](system-design/tag-service.md) |
-| **TicketMaster** | Virtual queues, fair ticketing, seat reservation locking | [TicketMaster Design](system-design/ticketmaster.md) |
-| **TikTok** | Video feed recommendation pipeline, transcode pipeline, delivery | [TikTok Design](system-design/tiktok.md) |
-| **Twitter** | Distributed timeline, Redis fanout cluster, search indexing | [Twitter Design](system-design/twitter.md) |
-| **Uber** | Geospatial indexing (QuadTree/H3), driver dispatch, location updates | [Uber Design](system-design/uber.md) |
-| **Web Crawler** | Mercator frontier, multi-format doc parsing/OCR, SimHash dedupe, RAG chunking | [Web Crawler Design](system-design/webcrawler.md) |
-| **WhatsApp** | Real-time chat, WebSocket connection managers, E2E encryption | [WhatsApp Design](system-design/whatsapp.md) |
-| **YouTube** | Video upload pipeline, transcode farm, CDN distribution, views counting | [YouTube Design](system-design/youtube.md) |
+Explore the **[System Design Master Documentation](system-design/system-design.md)** for:
 
-### Back-of-the-Envelope Calculations Cheat Sheet
-
-#### Powers of Two Quick Reference
-
-| Power | Exact Value (Bytes) | Approx Value | Unit |
-| :--- | :--- | :--- | :--- |
-| **$2^{10}$** | 1,024 | 1 Thousand | 1 KB |
-| **$2^{20}$** | 1,048,576 | 1 Million | 1 MB |
-| **$2^{30}$** | 1,073,741,824 | 1 Billion | 1 GB |
-| **$2^{40}$** | 1,099,511,627,776 | 1 Trillion | 1 TB |
-| **$2^{50}$** | 1,125,899,906,842,624 | 1 Quadrillion | 1 PB |
-
-#### SQL Data Type Storage Rules
-
-- **ASCII Character**: 1 Byte
-- **Unicode Character**: 2 Bytes
-- **String of length $N$**:
-  - UTF-8 / ASCII: $N$ bytes
-  - Unicode (UTF-16): $2 \times N$ bytes
-- **UUID / GUID**: 16 Bytes (binary) or 36 Bytes (string formatted)
-- **Timestamp**: 4 Bytes (32-bit Unix) or 8 Bytes (64-bit datetime)
-
-#### Traffic Conversion Rules of Thumb
-
-```text
-1 Million requests / month   ≈  0.4 requests / second
-2.6 Million requests / month ≈  1.0 request / second
-10 Million requests / month  ≈  4.0 requests / second
-100 Million requests / month ≈  40 requests / second
-1 Billion requests / month   ≈  400 requests / second
-```
-
-### Load Balancing Cheat Sheet
-
-- **Layer 3 (Network)**: Routing decisions based on IP address alone (source & destination).
-- **Layer 4 (Transport)**: Routing decisions based on IP and TCP/UDP ports. State-aware routing without inspecting payload contents. High throughput, lower CPU overhead.
-- **Layer 7 (Application)**: Content-based routing inspecting HTTP headers, cookies, URLs, and JSON payloads. Enables SSL termination, intelligent routing to microservices, and gzip/brotli compression.
+- **[31 Interview System Design Case Studies](system-design/system-design.md#interview-system-design-case-studies-31-systems)** — Full deep dives (Airbnb, Amazon, Netflix, Payment System, Rate Limiter, Uber, WhatsApp, YouTube, etc.) with functional/non-functional requirements, API schemas, data storage estimates, and embedded Mermaid HLD & ER diagrams.
+- **[System Design Interview 45-Minute Execution Framework](system-design/system-design.md#system-design-interview-45-minute-execution-framework)** — Structured 5-phase pacing guide from requirements scoping and estimations to deep-dive trade-offs.
+- **[Core Architectural Building Blocks (11 Deep-Dive Modules)](system-design/system-design.md#core-architectural-building-blocks)** — Networking & OSI layers, Load Balancers & Proxies, API Gateways, CDNs, Caching strategies & failure modes, Vertical vs. Horizontal Scaling & Auto-Scaling (HPA/KEDA/connection draining), Consistent Hashing, Message Queues vs. Pub/Sub Streams, Database Replication & Sharding, Storage Engine Internals (B+Tree vs. LSM-Tree, Object/Block/File storage), Search & Geospatial Indexing (Inverted Index, Geohash, QuadTree, Uber H3), Distributed Consensus & Transactions (Raft, Fencing Tokens, 2PC, Saga, Transactional Outbox, Idempotency), Resiliency Patterns (SLA/SLO/SLI, Rate Limiting, Circuit Breakers, Exponential Backoff, Bulkheads), and Observability (Metrics, Logs, Tracing).
+- **[Distributed Systems Fundamentals (CAP & PACELC)](system-design/system-design.md#distributed-systems-fundamentals-cap--pacelc-theorem)** — CP vs. AP trade-offs, tunable quorum consistency ($R + W > N$), and the Database Selection Cheat Sheet across 10 datastore categories.
+- **[Back-of-the-Envelope Calculations Cheat Sheet](system-design/system-design.md#back-of-the-envelope-calculations-cheat-sheet)** — Powers of two, SQL data type storage sizes, latency numbers every programmer should know, and traffic/QPS conversion rules of thumb.
 
 ---
 
