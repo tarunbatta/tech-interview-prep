@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — Low-Latency REST/HTTP/2](fundamentals/01-networking-and-api-paradigms.md#http-evolution-http11-vs-http2-vs-http3) · [Chapter 3 — Multi-Tier L1 Browser + L2 Edge/Redis Trie Caching](fundamentals/03-caching-and-scaling.md#multi-tier-caching-across-the-system-stack) · [Chapter 7 — Count-Min Sketch (Top-K Heavy Hitters) & Stream Windowing](fundamentals/07-probabilistic-structures-and-stream-processing.md#count-min-sketch--the-top-k-heavy-hitters-problem)
+
 ## Overview
 
 An Autocomplete (Typeahead) search system predicts and suggests the top $K$ most relevant, high-frequency search queries in real time as a user types characters into a search bar. The system is a core feature of search engines (Google), e-commerce platforms (Amazon), streaming apps (YouTube, Netflix), and social media platforms (Twitter/X).

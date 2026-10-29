@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — Stateful WebSockets & Redis Pub/Sub Scaling](fundamentals/01-networking-and-api-paradigms.md#websockets-deep-dive--horizontal-scaling-architecture) · [Chapter 3 — Consistent Hashing Session Affinity](fundamentals/03-caching-and-scaling.md#4-consistent-hashing) · [Chapter 5 — Logical Clocks & Causal Ordering](fundamentals/05-distributed-systems-and-messaging.md#7-time-clocks--ordering-in-distributed-systems-ntp-lamport-vector-clocks-truetime) · [Chapter 7 — Operational Transformation (OT) vs. CRDTs & Event Sourcing](fundamentals/07-probabilistic-structures-and-stream-processing.md#crdts-vs-operational-transformation-ot)
+
 ## Overview
 
 Google Docs is a real-time collaborative document processing service used by hundreds of millions of users daily. The system allows multiple users across different continents to type, delete, format, comment, and see each other's live cursor positions inside the same document with latency under 100 milliseconds.

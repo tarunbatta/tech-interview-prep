@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 3 — Read-Through Redis Set Caching (`SMEMBERS` / `SINTER`)](fundamentals/03-caching-and-scaling.md#1-caching-deep-dive) · [Chapter 4 — Inverted Index (Elasticsearch) & Wide-Column Bi-Directional Tables](fundamentals/04-databases-sql-vs-nosql.md#full-text-search--inverted-index-elasticsearch--lucene) · [Chapter 7 — Count-Min Sketch (Trending Tags) & HyperLogLog Cardinality](fundamentals/07-probabilistic-structures-and-stream-processing.md#count-min-sketch--the-top-k-heavy-hitters-problem)
+
 ## Overview
 
 A distributed Tag Service provides scalable metadata classification, discovery, and filtering for large-scale content platforms such as Stack Overflow, YouTube, GitHub, or Instagram. The system allows users to tag arbitrary entities (questions, videos, repositories, posts), perform sub-millisecond autocompletion, query complex boolean tag expressions (`[python] AND [concurrency] NOT [threading]`), and track real-time trending topics.

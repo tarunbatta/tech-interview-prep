@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 3 — Redis Atomic Flash-Sale Inventory Decrements (`DECRBY` Lua)](fundamentals/03-caching-and-scaling.md#caching-failure-modes--interview-mitigations) · [Chapter 4 — Pod-Sharded Multi-Tenant MySQL & Optimistic Locking](fundamentals/04-databases-sql-vs-nosql.md#sharding--horizontal-partitioning-scaling-writes--storage) · [Chapter 5 — Checkout Saga Pattern & Transactional Outbox](fundamentals/05-distributed-systems-and-messaging.md#4-distributed-transactions-2pc-vs-saga-vs-transactional-outbox) · [Chapter 8 — Cell-Based Pod Architecture (Blast-Radius Isolation)](fundamentals/08-security-multi-region-and-deployments.md#cell-based-architecture--shuffle-sharding-blast-radius-isolation)
+
 ## Overview
 
 Shopify is a multi-tenant commerce operating system powering over 4 million active merchants in 175+ countries, processing over $200+ billion in gross merchandise volume (GMV) annually. During global shopping events like Black Friday / Cyber Monday (BFCM), the platform withstands peak traffic exceeding $100,000+\text{ orders/minute}$ and $30+\text{ Terabytes/minute}$ of edge egress.

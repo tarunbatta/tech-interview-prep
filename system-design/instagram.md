@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 2 — Pull CDN with Origin Shield for Media Delivery](fundamentals/02-edge-load-balancing-and-cdn.md#4-content-delivery-network-cdn) · [Chapter 3 — Redis Timeline Caching & Celebrity Hot-Key Mitigation](fundamentals/03-caching-and-scaling.md#caching-failure-modes--interview-mitigations) · [Chapter 4 — Pre-Signed S3 Uploads, Cassandra Feeds & Social Graph](fundamentals/04-databases-sql-vs-nosql.md#block-storage-vs-file-storage-vs-object-blob-storage) · [Chapter 5 — Snowflake 64-Bit Time-Sortable IDs](fundamentals/05-distributed-systems-and-messaging.md#6-distributed-unique-id-generation-snowflake-uuidv7-ticket-servers)
+
 ## Overview
 
 Instagram is a global photo and video-centric social network serving over 500 million Daily Active Users (DAU) and 2 billion Monthly Active Users (MAU). The platform specializes in visual content sharing, ephemeral stories (24-hour expiration), short-form algorithmic video reels, user discovery, and direct messaging.

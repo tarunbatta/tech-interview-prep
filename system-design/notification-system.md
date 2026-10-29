@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 3 — KEDA Queue-Depth Worker Auto-Scaling](fundamentals/03-caching-and-scaling.md#3-auto-scaling-nodes-in-production) · [Chapter 5 — Priority Message Queues (Kafka/SQS), Transactional Outbox & Idempotency](fundamentals/05-distributed-systems-and-messaging.md#8-asynchronous-messaging-message-queues-vs-pubsub-event-streams) · [Chapter 6 — Token Bucket Rate Limiting, Circuit Breakers & Exponential Backoff + Jitter](fundamentals/06-resiliency-observability-and-metrics.md#2-resiliency-fault-tolerance--reliability-patterns)
+
 ## Overview
 
 A modern distributed notification system serves as the mission-critical communication backbone for consumer and enterprise platforms. It delivers hundreds of millions of notifications daily across multiple communication channels—Mobile Push (iOS APNs, Android FCM), SMS, Email, and In-App WebSockets.

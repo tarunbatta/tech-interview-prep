@@ -22,7 +22,7 @@
 
 ## 1. Production RAG (Retrieval-Augmented Generation) Architecture
 
-Modern system design interviews frequently ask how to design enterprise AI assistants, semantic search engines ([Web Crawler](../webcrawler.md)), or customer support copilots grounded on private, rapidly changing data without hallucinating.
+Modern system design interviews frequently ask how to design enterprise AI assistants ([ChatGPT & Enterprise RAG Copilot](../chatgpt-rag-copilot.md)), semantic search engines ([Web Crawler](../webcrawler.md)), or customer support copilots grounded on private, rapidly changing data without hallucinating.
 
 ### End-to-End Ingestion & Query Pipeline
 

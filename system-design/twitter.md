@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 3 — Hybrid Fanout-on-Write vs. Celebrity Fanout-on-Read Caching](fundamentals/03-caching-and-scaling.md#1-caching-deep-dive) · [Chapter 4 — Inverted Index (Earlybird Real-Time Search) & Graph Store (FlockDB)](fundamentals/04-databases-sql-vs-nosql.md#full-text-search--inverted-index-elasticsearch--lucene) · [Chapter 5 — Twitter Snowflake 64-Bit Unique ID Generator](fundamentals/05-distributed-systems-and-messaging.md#twitter-snowflake-64-bit-binary-layout) · [Chapter 7 — Count-Min Sketch (Trending Hashtags) & HyperLogLog](fundamentals/07-probabilistic-structures-and-stream-processing.md#count-min-sketch--the-top-k-heavy-hitters-problem)
+
 ## Overview
 
 Twitter (now X) is a real-time microblogging and social broadcast platform where users post short messages (tweets up to 280 characters), follow other users, interact via retweets, likes, and replies, and discover real-time breaking news through trending topics and full-text search.

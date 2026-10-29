@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 3 — Redis Distributed Caching](fundamentals/03-caching-and-scaling.md#1-caching-deep-dive) · [Chapter 5 — Event-Driven Architecture, Saga Orchestration & Idempotency](fundamentals/05-distributed-systems-and-messaging.md#4-distributed-transactions-2pc-vs-saga-vs-transactional-outbox) · [Chapter 6 — SLIs/SLOs, Distributed Tracing & Alerting](fundamentals/06-resiliency-observability-and-metrics.md#3-observability-metrics-logs--distributed-tracing) · [Chapter 8 — Zero-Downtime Shadow / Dual-Run Migration Pattern](fundamentals/08-security-multi-region-and-deployments.md#4-zero-downtime-deployment--database-migration-patterns)
+
 ## Executive Summary & Interview Context
 
 * **Role**: Lead Architect / Staff Software Engineer

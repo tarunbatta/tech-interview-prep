@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 4 — Immutable Blob Storage (S3 WORM) & Pre-Signed URLs](fundamentals/04-databases-sql-vs-nosql.md#block-storage-vs-file-storage-vs-object-blob-storage) · [Chapter 5 — Event-Driven Workflow State Machines & Outbox Pattern](fundamentals/05-distributed-systems-and-messaging.md#4-distributed-transactions-2pc-vs-saga-vs-transactional-outbox) · [Chapter 7 — Event Sourcing & Cryptographic Hash Chains](fundamentals/07-probabilistic-structures-and-stream-processing.md#cqrs-event-sourcing--lambda-vs-kappa-architecture) · [Chapter 8 — Envelope Encryption (KEK/DEK) & PKI Digital Signatures](fundamentals/08-security-multi-region-and-deployments.md#envelope-encryption-kms-master-key--data-encryption-keys)
+
 ## Overview
 
 DocuSign is the global enterprise standard for electronic signature and digital transaction management, executing billions of secure legal contracts across 180+ countries. The platform enables organizations to upload contracts, designate signing fields (signature, initials, date, text), specify sequential or parallel signer routing orders, verify signer identities, and produce legally binding, tamper-evident sealed PDF documents.

@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — Stateful WebSockets & Redis Pub/Sub Connection Routing](fundamentals/01-networking-and-api-paradigms.md#websockets-deep-dive--horizontal-scaling-architecture) · [Chapter 4 — Wide-Column Inbox Store (Cassandra) & Pre-Signed Media Blobs](fundamentals/04-databases-sql-vs-nosql.md#5-wide-column--column-family-stores-cassandra-scylladb-bigtable) · [Chapter 5 — Snowflake Time-Ordered Message IDs & Per-Chat Sequence Ordering](fundamentals/05-distributed-systems-and-messaging.md#6-distributed-unique-id-generation-snowflake-uuidv7-ticket-servers) · [Chapter 8 — End-to-End Encryption (Signal Double Ratchet / X3DH)](fundamentals/08-security-multi-region-and-deployments.md#2-data-security-encryption--perimeter-defense)
+
 ## Overview
 
 WhatsApp is a global, real-time instant messaging platform supporting over 2 billion active users transmitting more than 100 billion messages daily. The platform enables 1-on-1 private chats, group conversations, media attachments (images, voice notes, video clips), message delivery receipts, voice/video calls, and end-to-end encryption (E2EE).

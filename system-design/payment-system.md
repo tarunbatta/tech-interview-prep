@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 4 — Strict Serializable ACID Double-Entry Ledger & Pessimistic Locking](fundamentals/04-databases-sql-vs-nosql.md#database-isolation-levels--concurrency-control-ddia-deep-dive) · [Chapter 5 — Idempotency Keys, Saga Orchestration & Transactional Outbox (CDC)](fundamentals/05-distributed-systems-and-messaging.md#4-distributed-transactions-2pc-vs-saga-vs-transactional-outbox) · [Chapter 6 — Exponential Backoff with Jitter & Dead-Letter Queues](fundamentals/06-resiliency-observability-and-metrics.md#fault-isolation--cascading-failure-prevention) · [Chapter 8 — PCI-DSS Tokenization & KMS Envelope Encryption](fundamentals/08-security-multi-region-and-deployments.md#pii-tokenization--pci-dss-vaulting)
+
 ## Overview
 
 A modern enterprise **Payment System & Claims Payout Ledger** (such as Stripe, Adyen, PayPal, or an insurance/healthcare claims disbursement platform) processes billions of dollars in both **Pay-Ins** (collecting customer premiums, checkout charges, and subscriptions) and **Pay-Outs** (disbursing approved insurance claims, marketplace seller settlements, and refunds via ACH, FedNow/RTP, SEPA, Wire, or Push-to-Debit rails).

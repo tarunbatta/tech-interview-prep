@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — Long Polling / WebSockets Metadata Sync](fundamentals/01-networking-and-api-paradigms.md#3-real-time-protocols-polling-vs-sse-vs-websockets-vs-webrtc) · [Chapter 4 — Content-Addressable Object Storage (S3), Pre-Signed URLs & ACID Metadata](fundamentals/04-databases-sql-vs-nosql.md#block-storage-vs-file-storage-vs-object-blob-storage) · [Chapter 7 — SHA-256 Chunk Deduplication & Merkle Sync Trees](fundamentals/07-probabilistic-structures-and-stream-processing.md#merkle-trees-cryptographic-anti-entropy-sync)
+
 ## Overview
 
 Dropbox is a premier cloud storage and file synchronization platform serving over 700 million registered users and syncing billions of files daily. The core engineering mandate of Dropbox is to provide the illusion of an instant, infinite, and globally accessible local hard drive while ensuring data durability (99.999999999% - 11 9s), low sync latency, cross-device consistency, and efficient bandwidth utilization.

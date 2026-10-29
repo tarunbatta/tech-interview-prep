@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — GraphQL Feed Aggregation & SSE/WebSocket Live Updates](fundamentals/01-networking-and-api-paradigms.md#2-api-paradigms-rest-vs-graphql-vs-grpc) · [Chapter 3 — Hybrid Fanout-on-Write (Push) vs. Fanout-on-Read (Pull) Caching](fundamentals/03-caching-and-scaling.md#1-caching-deep-dive) · [Chapter 4 — Graph Stores (Social Graph) & Wide-Column Timeline Storage](fundamentals/04-databases-sql-vs-nosql.md#6-graph-databases--relation-stores-neo4j-neptune-meta-tao-zanzibar) · [Chapter 9 — 4-Stage Feed Ranking Funnel](fundamentals/09-genai-llm-and-ml-system-design.md#multi-stage-recommendation--ranking-funnel)
+
 ## Overview
 
 A News Feed system is a real-time, personalized content aggregation and ranking engine that continuously compiles posts, photos, videos, and status updates from friends, followed pages, and algorithmic recommendation engines into an infinite scrollable stream.

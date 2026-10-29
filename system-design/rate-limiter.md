@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 2 — Edge API Gateway Enforcement (Envoy / Kong)](fundamentals/02-edge-load-balancing-and-cdn.md#3-api-gateway) · [Chapter 3 — Redis In-Memory Atomic Lua Scripts & Race Condition Prevention](fundamentals/03-caching-and-scaling.md#redis-vs-memcached) · [Chapter 6 — Token Bucket, Leaky Bucket & Sliding Window Counter Algorithms](fundamentals/06-resiliency-observability-and-metrics.md#rate-limiting-algorithms-comparison) · [Chapter 9 — LLM Token-Aware (TPM / RPM) Rate Limiting](fundamentals/09-genai-llm-and-ml-system-design.md#3-ai-gateway-semantic-caching-token-rate-limiting--guardrails)
+
 ## Overview
 
 A distributed rate limiter controls the rate of traffic sent by clients or services to prevent resource starvation, defend against Distributed Denial of Service (DDoS) attacks, enforce API subscription tiers, and protect downstream databases from cascading failures. In modern hyperscale infrastructure, a rate limiter must evaluate millions of requests per second with sub-millisecond latency overhead.

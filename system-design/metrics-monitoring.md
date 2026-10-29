@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 4 — Time-Series Databases (Gorilla XOR Compression) & LSM-Trees](fundamentals/04-databases-sql-vs-nosql.md#3-the-10-database-categories-complete-interview-taxonomy) · [Chapter 5 — Kafka High-Throughput Telemetry Ingestion](fundamentals/05-distributed-systems-and-messaging.md#8-asynchronous-messaging-message-queues-vs-pubsub-event-streams) · [Chapter 6 — SLIs/SLOs, P99 Histograms & Observability Pillars (Metrics, Logs, Traces)](fundamentals/06-resiliency-observability-and-metrics.md#3-observability-metrics-logs--distributed-tracing) · [Chapter 7 — Flink Streaming Alert Evaluation](fundamentals/07-probabilistic-structures-and-stream-processing.md#3-stream-processing--event-driven-data-architectures)
+
 ## Overview
 
 A **Metrics Monitoring, Logging & Alerting Platform** (like Datadog, Prometheus + Grafana Mimir/Loki, or New Relic) is a unified observability system that collects, compresses, stores, queries, and evaluates telemetry across millions of hosts, containers, and serverless functions. It unifies the **Three Pillars of Observability**:

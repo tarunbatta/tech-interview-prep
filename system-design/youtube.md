@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — Adaptive Bitrate Streaming (HLS/DASH over HTTP/3 QUIC)](fundamentals/01-networking-and-api-paradigms.md#http-evolution-http11-vs-http2-vs-http3) · [Chapter 2 — Two-Tier Push/Pull CDN with Origin Shield](fundamentals/02-edge-load-balancing-and-cdn.md#4-content-delivery-network-cdn) · [Chapter 3 — Write-Behind View Counter Caching](fundamentals/03-caching-and-scaling.md#caching-read--write-strategies) · [Chapter 4 — Pre-Signed Resumable S3 Uploads & Vitess Sharded MySQL](fundamentals/04-databases-sql-vs-nosql.md#sharding--horizontal-partitioning-scaling-writes--storage) · [Chapter 7 — HyperLogLog Unique Viewers & DAG Transcoding](fundamentals/07-probabilistic-structures-and-stream-processing.md#hyperloglog-hll--cardinality--unique-counting)
+
 ## Overview
 
 YouTube is the world's largest user-generated video sharing platform, supporting over 2.5 billion monthly active users. Users can upload, stream, search, like, comment, and subscribe to video channels.

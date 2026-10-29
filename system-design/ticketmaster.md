@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — SSE / WebSockets Real-Time Seat Map Updates](fundamentals/01-networking-and-api-paradigms.md#3-real-time-protocols-polling-vs-sse-vs-websockets-vs-webrtc) · [Chapter 3 — Edge Virtual Waiting Room Queue & Redis Seat Hold TTL](fundamentals/03-caching-and-scaling.md#caching-failure-modes--interview-mitigations) · [Chapter 4 — Pessimistic (`FOR UPDATE`) vs. Optimistic Concurrency Control](fundamentals/04-databases-sql-vs-nosql.md#3-pessimistic-vs-optimistic-concurrency-control-preventing-double-booking) · [Chapter 5 — Distributed Locks with Fencing Tokens](fundamentals/05-distributed-systems-and-messaging.md#3-distributed-locks--fencing-tokens)
+
 ## Overview
 
 TicketMaster is the global market leader in ticketing and live entertainment event reservations, selling hundreds of millions of tickets annually. The platform faces extreme, spiky demand: when mega-concerts (e.g., stadium tours) go on sale, **millions of concurrent fans arrive in the exact same second** competing for tens of thousands of fixed seats.

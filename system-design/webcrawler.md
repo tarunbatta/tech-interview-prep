@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 4 — Object Storage (WARC Blobs), Vector DB & Inverted Index](fundamentals/04-databases-sql-vs-nosql.md#7-vector-databases-milvus-pinecone-qdrant-pgvector) · [Chapter 5 — Priority Queues (Mercator Politeness Frontier) & Consistent Hashing](fundamentals/05-distributed-systems-and-messaging.md#8-asynchronous-messaging-message-queues-vs-pubsub-event-streams) · [Chapter 7 — Sharded Bloom Filters (Seen URLs) & SimHash / MinHash LSH Deduplication](fundamentals/07-probabilistic-structures-and-stream-processing.md#locality-sensitive-hashing-simhash--minhash--near-duplicate-detection) · [Chapter 9 — RAG Semantic Document Chunking](fundamentals/09-genai-llm-and-ml-system-design.md#document-chunking-strategies)
+
 ## Overview
 
 A **Web Crawler & Large-Scale Document Ingestion Pipeline** systematically discovers, fetches, parses, deduplicates, chunks, and indexes billions of web pages and enterprise documents (HTML, PDFs, DOCX, Markdown, scanned images). This architecture forms the data foundation for web search engines (Google, Bing), web archives (Wayback Machine), enterprise knowledge platforms, and large-scale LLM / RAG dataset preparation pipelines (Common Crawl, FineWeb).

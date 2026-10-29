@@ -6,23 +6,24 @@ Non-code notes carried over from the old `todo.md`. The coding problems from tha
 
 ## Concurrency & Distributed Systems
 
-Common interview discussion topics (eBay and others):
+Common interview discussion topics (eBay and others), cross-linked to the **[9-Chapter System Design Fundamentals Curriculum](../system-design/system-design.md#system-design-fundamentals-curriculum-9-chapters)**, **[35 System Design Case Studies](../system-design/system-design.md#interview-system-design-case-studies-35-systems)**, and C# implementations:
 
-- Concurrency fundamentals: threads vs. processes, locks, condition variables, deadlock, starvation
-- Read-write locks — see [readWriteLock.cs](../src/dotnet/core/concurrency/readWriteLock.cs)
-- Blocking concurrent queue / producer-consumer — see [blockingQueue.cs](../src/dotnet/core/concurrency/blockingQueue.cs)
-- Sliding window protocol (flow control over an unreliable link)
-- Two-phase commit (2PC) and its failure modes
-- Pub/sub messaging
-- Stateless services and 3-tier architecture
-- Distributed key-value stores
-- Alert / monitoring system design — see [metrics-monitoring](../system-design/metrics-monitoring.md) and [notification-system](../system-design/notification-system.md)
-- WebSockets vs. long polling vs. short polling
-- SQL basics: joins, aggregation, indexes
+- **Concurrency fundamentals: threads vs. processes, locks, condition variables, deadlock, starvation** — see [Chapter 5: Local Concurrency Primitives vs. Distributed Locks](../system-design/fundamentals/05-distributed-systems-and-messaging.md#local-concurrency-primitives-vs-distributed-locks) and [Chapter 4: Database Isolation Levels & Concurrency Control](../system-design/fundamentals/04-databases-sql-vs-nosql.md#database-isolation-levels--concurrency-control-ddia-deep-dive)
+- **Read-write locks** — see C# implementation [`readWriteLock.cs`](../src/dotnet/core/concurrency/readWriteLock.cs) and [Chapter 5: Local Concurrency Primitives](../system-design/fundamentals/05-distributed-systems-and-messaging.md#local-concurrency-primitives-vs-distributed-locks)
+- **Blocking concurrent queue / producer-consumer** — see C# implementation [`blockingQueue.cs`](../src/dotnet/core/concurrency/blockingQueue.cs), [Chapter 6: Backpressure](../system-design/fundamentals/06-resiliency-observability-and-metrics.md#timeouts-deadlines--backpressure), and lock-free ring buffers in [Stock Exchange Matching Engine](../system-design/stock-exchange.md)
+- **Sliding window protocol (flow control & rate limiting)** — see [Chapter 1: TCP Flow & Congestion Control](../system-design/fundamentals/01-networking-and-api-paradigms.md#transport-layer-tcp-vs-udp-vs-quic), [Chapter 6: Sliding Window Rate Limiting](../system-design/fundamentals/06-resiliency-observability-and-metrics.md#rate-limiting-algorithms-comparison), and [Rate Limiter Design](../system-design/rate-limiter.md)
+- **Two-phase commit (2PC) and its failure modes** — see [Chapter 5: 2PC vs. Saga vs. Transactional Outbox](../system-design/fundamentals/05-distributed-systems-and-messaging.md#4-distributed-transactions-2pc-vs-saga-vs-transactional-outbox), [ATM Design](../system-design/atm.md), and [Payment System Design](../system-design/payment-system.md)
+- **Pub/sub messaging & event streams** — see [Chapter 5: Message Queues (RabbitMQ/SQS) vs. Pub/Sub Streams (Kafka)](../system-design/fundamentals/05-distributed-systems-and-messaging.md#8-asynchronous-messaging-message-queues-vs-pubsub-event-streams) and [Chapter 7: Stream Processing (Apache Flink)](../system-design/fundamentals/07-probabilistic-structures-and-stream-processing.md#3-stream-processing--event-driven-data-architectures)
+- **Stateless services and 3-tier architecture** — see [Chapter 3: Stateless vs. Stateful Compute Tiers & Auto-Scaling](../system-design/fundamentals/03-caching-and-scaling.md#stateless-vs-stateful-compute-tiers) and [End-to-End Request Lifecycle Architecture](../system-design/system-design.md#end-to-end-request-lifecycle-architecture)
+- **Distributed key-value stores** — see [Distributed Key-Value Store (DynamoDB / Cassandra) Case Study](../system-design/distributed-key-value-store.md), [Chapter 3: Consistent Hashing](../system-design/fundamentals/03-caching-and-scaling.md#4-consistent-hashing), [Chapter 4: LSM-Tree vs. B+Tree](../system-design/fundamentals/04-databases-sql-vs-nosql.md#btree-vs-lsm-tree-why-sql-vs-nosql-engines-differ), and [Chapter 7: Gossip Protocol & Merkle Trees](../system-design/fundamentals/07-probabilistic-structures-and-stream-processing.md#2-decentralized-cluster-protocols--conflict-resolution)
+- **Alert / monitoring system design** — see [Metrics Monitoring & Alerting Design](../system-design/metrics-monitoring.md), [Notification System Design](../system-design/notification-system.md), and [Chapter 6: SLAs/SLOs & Observability](../system-design/fundamentals/06-resiliency-observability-and-metrics.md#3-observability-metrics-logs--distributed-tracing)
+- **WebSockets vs. long polling vs. short polling vs. SSE** — see [Chapter 1: Real-Time Protocols & Stateful WebSocket Scaling](../system-design/fundamentals/01-networking-and-api-paradigms.md#3-real-time-protocols-polling-vs-sse-vs-websockets-vs-webrtc), [WhatsApp Design](../system-design/whatsapp.md), and [ChatGPT & Enterprise RAG Copilot](../system-design/chatgpt-rag-copilot.md)
+- **SQL basics: joins, aggregation, indexes & isolation levels** — see [Chapter 4: Relational (SQL) vs. NoSQL, B+Tree Indexes & Sharding](../system-design/fundamentals/04-databases-sql-vs-nosql.md)
 
 ## Networking
 
-- [OSI model](https://en.wikipedia.org/wiki/OSI_model)
+- **OSI 7-Layer Model & Transport Protocols (TCP/UDP/QUIC)** — see [Chapter 1: Networking & OSI 7-Layer Model](../system-design/fundamentals/01-networking-and-api-paradigms.md#1-networking--osi-7-layer-model) and [Wikipedia](https://en.wikipedia.org/wiki/OSI_model)
+- **L4/L7 Load Balancing, VRRP Failover & BGP Anycast Routing** — see [Chapter 2: Proxies, Load Balancers, API Gateways & CDNs](../system-design/fundamentals/02-edge-load-balancing-and-cdn.md#high-availability-ha-for-load-balancers)
 - [Open Shortest Path First (OSPF)](https://en.wikipedia.org/wiki/Open_Shortest_Path_First)
 - [Link-state routing protocol](https://en.wikipedia.org/wiki/Link-state_routing_protocol)
 - [Border Gateway Protocol (BGP)](https://en.wikipedia.org/wiki/Border_Gateway_Protocol)

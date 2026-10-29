@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 2 — Push CDN (Netflix Open Connect Appliances) & BGP Anycast](fundamentals/02-edge-load-balancing-and-cdn.md#push-cdn-vs-pull-cdn) · [Chapter 3 — EVCache (Memcached) & Write-Behind Playback Bookmarks](fundamentals/03-caching-and-scaling.md#caching-read--write-strategies) · [Chapter 4 — S3 Master Video Chunks & Cassandra Viewing History](fundamentals/04-databases-sql-vs-nosql.md#5-wide-column--column-family-stores-cassandra-scylladb-bigtable) · [Chapter 9 — Multi-Stage Personalized Recommendation Funnel](fundamentals/09-genai-llm-and-ml-system-design.md#multi-stage-recommendation--ranking-funnel)
+
 ## Overview
 
 Netflix is the world's leading subscription-based streaming video-on-demand (SVOD) platform, serving over 260 million subscribers in more than 190 countries. The platform delivers hundreds of millions of hours of personalized video daily across thousands of diverse consumer device profiles (Smart TVs, mobile phones, game consoles, browsers, set-top boxes).

@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 3 — Read-Heavy Caching](fundamentals/03-caching-and-scaling.md#1-caching-deep-dive) · [Chapter 4 — Isolation Levels, Pessimistic/Optimistic Locking & Geospatial Indexing](fundamentals/04-databases-sql-vs-nosql.md#database-isolation-levels--concurrency-control-ddia-deep-dive) · [Chapter 5 — Distributed Locks, Saga Pattern & Idempotency Keys](fundamentals/05-distributed-systems-and-messaging.md#3-distributed-locks--fencing-tokens)
+
 ## Overview
 
 Airbnb is a global two-sided online marketplace connecting guests looking for accommodations (vacation rentals, boutique stays, experiences) with hosts looking to monetize their properties. The platform serves over 150 million users and 7+ million active listings across 220+ countries.

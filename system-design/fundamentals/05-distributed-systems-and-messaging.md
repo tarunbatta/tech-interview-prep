@@ -13,6 +13,7 @@
   - [Interview Cheatsheet: Making the Right Trade-Off](#interview-cheatsheet-making-the-right-trade-off)
 - [2. Consensus & Leader Election (Raft, Paxos, etcd, ZooKeeper)](#2-consensus--leader-election-raft-paxos-etcd-zookeeper)
 - [3. Distributed Locks & Fencing Tokens](#3-distributed-locks--fencing-tokens)
+  - [Local Concurrency Primitives vs. Distributed Locks](#local-concurrency-primitives-vs-distributed-locks)
 - [4. Distributed Transactions: 2PC vs. Saga vs. Transactional Outbox](#4-distributed-transactions-2pc-vs-saga-vs-transactional-outbox)
 - [5. Idempotency Keys (Safe Retries Over Unreliable Networks)](#5-idempotency-keys-safe-retries-over-unreliable-networks)
 - [6. Distributed Unique ID Generation (Snowflake, UUIDv7, Ticket Servers)](#6-distributed-unique-id-generation-snowflake-uuidv7-ticket-servers)
@@ -148,7 +149,20 @@ sequenceDiagram
 > **Why TTL Locks Alone Are Unsafe Without Fencing Tokens:**
 > If Client 1 acquires a Redis lock with a 10-second TTL, then experiences a 15-second JVM Garbage Collection pause, its lock expires. Client 2 acquires the lock and writes to the storage system. When Client 1 wakes up from GC, it doesn't know its lock expired and overwrites Client 2's data!
 >
-> **Solution**: The Lock Service returns a monotonically increasing **Fencing Token** (`33`, then `34`) with every lock grant. The downstream database/storage rejects any write carrying a token smaller than the highest token it has already processed (`WHERE fencing_token >= current_token`).
+> **Solution**: The Lock Service returns a monotonically increasing **Fencing Token** (`33`, then `34`) with every lock grant. The downstream database/storage rejects any write carrying a token smaller than the highest token it has already processed (`WHERE fencing_token >= current_token`). See [Distributed Job Scheduler](../distributed-job-scheduler.md) for a complete implementation of shard leases and fencing tokens.
+
+### Local Concurrency Primitives vs. Distributed Locks
+
+Before reaching for a network-bound distributed lock, interviewers often test single-node OS and in-memory concurrency fundamentals:
+
+| Concurrency Concept | Core Mechanism & Trade-Offs | Code & System Design Reference |
+| :--- | :--- | :--- |
+| **Processes vs. Threads** | **Processes** have isolated virtual address spaces (crash isolation, expensive IPC/context switches); **Threads** share heap memory within a process (fast shared-memory communication, requires synchronization to prevent data races). | Foundation of multi-worker vs. multi-threaded server architectures. |
+| **Mutex (`lock` / `Monitor`) & Condition Variables** | Mutual exclusion ensures only 1 thread enters a critical section; condition variables (`Monitor.Wait` / `Monitor.PulseAll`) put waiting threads to sleep without burning CPU via busy-waiting. | Used inside thread-safe pools and bounded buffers. |
+| **Read-Write Lock (`ReaderWriterLockSlim`)** | Allows **multiple concurrent readers** OR **a single exclusive writer**. Watch out for **writer starvation** if continuous readers never let a pending writer acquire the lock (solved via writer-preference queuing). | C# implementation: [`readWriteLock.cs`](../../src/dotnet/core/concurrency/readWriteLock.cs) |
+| **Bounded Blocking Queue (Producer-Consumer)** | Thread-safe FIFO queue that blocks producers when full (applying **backpressure**) and blocks consumers when empty using dual condition variables (`notFull` / `notEmpty`). | C# implementation: [`blockingQueue.cs`](../../src/dotnet/core/concurrency/blockingQueue.cs) |
+| **Lock-Free Ring Buffer (LMAX Disruptor / CAS)** | Replaces OS kernel locks with a pre-allocated power-of-two array and CPU atomic **Compare-And-Swap (`CAS`)** sequence cursors + cache-line padding to prevent false sharing. | System design deep dive: [Stock Exchange Matching Engine](../stock-exchange.md) |
+| **Deadlock vs. Starvation vs. Livelock** | **Deadlock**: 4 Coffman conditions (*Mutual Exclusion, Hold & Wait, No Preemption, Circular Wait* — prevented by acquiring locks in a deterministic global order). **Starvation**: Low-priority or writer threads indefinitely bypassed. | Mitigated via lock ordering, timeouts, and fair queues. |
 
 ---
 

@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — Bi-Directional WebSockets & gRPC Location Streaming](fundamentals/01-networking-and-api-paradigms.md#websockets-deep-dive--horizontal-scaling-architecture) · [Chapter 4 — Uber H3 Hexagonal Geospatial Indexing](fundamentals/04-databases-sql-vs-nosql.md#geospatial-indexing-geohash-vs-quadtree-vs-uber-h3) · [Chapter 5 — Distributed Dispatch Locking & Kafka Partitioning by H3 Cell](fundamentals/05-distributed-systems-and-messaging.md#3-distributed-locks--fencing-tokens) · [Chapter 7 — Apache Flink Dynamic Surge Windowing](fundamentals/07-probabilistic-structures-and-stream-processing.md#stream-windowing-tumbling-sliding--session-windows)
+
 ## Overview
 
 Uber is a real-time, two-sided mobility marketplace connecting riders with drivers. The platform handles real-time driver GPS tracking, dynamic dispatch and matching algorithms, route navigation, dynamic pricing (surge), payment settlement, and two-way rating systems.

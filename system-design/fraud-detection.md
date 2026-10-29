@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 4 — Graph Databases (Neo4j Fraud Rings) & In-Memory Redis/Aerospike](fundamentals/04-databases-sql-vs-nosql.md#6-graph-databases--relation-stores-neo4j-neptune-meta-tao-zanzibar) · [Chapter 6 — Sub-50ms P99 Tail Latency Budget & Fail-Open/Fail-Closed Circuit Breakers](fundamentals/06-resiliency-observability-and-metrics.md#latency-percentiles-p50-p90-p95-p99--p999-tail-latency) · [Chapter 7 — Apache Flink Sliding Windows & Event-Time Watermarks](fundamentals/07-probabilistic-structures-and-stream-processing.md#3-stream-processing--event-driven-data-architectures) · [Chapter 9 — Dual Online/Offline Feature Store (Feast/Tecton)](fundamentals/09-genai-llm-and-ml-system-design.md#dual-feature-store-architecture-online-vs-offline-feature-store)
+
 ## Overview
 
 A **Real-Time Fraud & Anomaly Detection System** evaluates high-velocity financial transactions, insurance claims submissions, account logins, and payout requests in milliseconds to block malicious actors before funds or sensitive data leave the platform. Used by payment processors (Stripe Radar, PayPal), banks, e-commerce marketplaces, and insurance carriers, the system must balance two competing objectives: **stopping fraud loss** (High Recall) while **minimizing false positives** (High Precision) that frustrate legitimate customers.

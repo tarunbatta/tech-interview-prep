@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — Networking & API Paradigms](fundamentals/01-networking-and-api-paradigms.md) · [Chapter 3 — Caching & Scaling](fundamentals/03-caching-and-scaling.md) · [Chapter 4 — Databases & Sharding](fundamentals/04-databases-sql-vs-nosql.md) · [Chapter 5 — Distributed Systems & Messaging](fundamentals/05-distributed-systems-and-messaging.md)
+
 ## Overview
 
 ## Functional Requirements

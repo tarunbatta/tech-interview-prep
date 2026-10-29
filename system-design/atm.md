@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 4 — Strict Serializable ACID Ledgers & Pessimistic Locking](fundamentals/04-databases-sql-vs-nosql.md#database-isolation-levels--concurrency-control-ddia-deep-dive) · [Chapter 5 — Two-Phase Commit (2PC), Saga Compensation & Idempotency Keys](fundamentals/05-distributed-systems-and-messaging.md#4-distributed-transactions-2pc-vs-saga-vs-transactional-outbox) · [Chapter 8 — KMS Envelope Encryption, HSM & mTLS](fundamentals/08-security-multi-region-and-deployments.md#envelope-encryption-kms-master-key--data-encryption-keys)
+
 ## Overview
 
 An Automated Teller Machine (ATM) is a mission-critical, distributed banking terminal that allows bank customers to perform self-service financial transactions—including cash withdrawals, cash/check deposits, account balance inquiries, and funds transfers. The ATM system encompasses both specialized embedded hardware peripherals (card reader, encrypted PIN pad, cash dispenser with optical sensors, depository) and a highly secure, fault-tolerant backend infrastructure (ATM Controller / Switch, Hardware Security Modules, Core Banking Systems, and Interbank Payment Networks).

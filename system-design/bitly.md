@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 2 — Edge CDN 301/302 Redirects](fundamentals/02-edge-load-balancing-and-cdn.md#4-content-delivery-network-cdn) · [Chapter 3 — Cache-Aside (99:1 Read:Write) & Bloom Filter Penetration Defense](fundamentals/03-caching-and-scaling.md#caching-failure-modes--interview-mitigations) · [Chapter 5 — Distributed 64-Bit ID Generation (Snowflake / Base62)](fundamentals/05-distributed-systems-and-messaging.md#6-distributed-unique-id-generation-snowflake-uuidv7-ticket-servers) · [Chapter 7 — HyperLogLog Click Analytics](fundamentals/07-probabilistic-structures-and-stream-processing.md#hyperloglog-hll--cardinality--unique-counting)
+
 ## Overview
 
 Bitly is an enterprise URL shortening, custom branding, and link analytics platform that transforms long, unwieldy web addresses into short, memorable links (e.g. `https://bit.ly/3gH7xKp`). The service handles tens of billions of redirects monthly while providing real-time click tracking, geolocation analytics, and device telemetry.

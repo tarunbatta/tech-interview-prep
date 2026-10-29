@@ -8,7 +8,7 @@
 - [System Design Interview 45-Minute Execution Framework](#system-design-interview-45-minute-execution-framework)
 - [End-to-End Request Lifecycle Architecture](#end-to-end-request-lifecycle-architecture)
 - [Real-World Architectural Retrospectives](#real-world-architectural-retrospectives)
-- [Interview System Design Case Studies (31 Systems)](#interview-system-design-case-studies-31-systems)
+- [Interview System Design Case Studies (35 Systems)](#interview-system-design-case-studies-35-systems)
 - [Back-of-the-Envelope Calculations Cheat Sheet](#back-of-the-envelope-calculations-cheat-sheet)
   - [Powers of Two Quick Reference](#powers-of-two-quick-reference)
   - [SQL Data Type Storage Rules](#sql-data-type-storage-rules)
@@ -111,7 +111,7 @@ flowchart LR
 
 ---
 
-## Interview System Design Case Studies (31 Systems)
+## Interview System Design Case Studies (35 Systems)
 
 | # | System | Focus Areas | Documentation |
 | :--- | :--- | :--- | :--- |
@@ -121,31 +121,35 @@ flowchart LR
 | 4 | **ATM** | Hardware sensors, ISO 8583 protocol, financial ACID saga, HSM encryption | [ATM Design](atm.md) |
 | 5 | **Autocomplete Search** | Trie cache, typeahead latency, prefix indexing, ranking | [Autocomplete Design](autocomplete-search.md) |
 | 6 | **Bitly** | URL shortening, Base62 encoding, high read-to-write ratio caching | [Bitly Design](bitly.md) |
-| 7 | **DocuSign** | Digital signatures, audit trails, document hashing, encryption | [DocuSign Design](docusign.md) |
-| 8 | **Dropbox** | Block-level sync, deduplication, conflict resolution, chunking | [Dropbox Design](dropbox.md) |
-| 9 | **Email Archive** | Large-scale cold storage, full-text search indexing, compression | [Email Archive Design](email-archive.md) |
-| 10 | **Fraud Detection** | Sub-50ms risk scoring, Flink velocity features, dual feature store, GNN rings | [Fraud Detection Design](fraud-detection.md) |
-| 11 | **Google Docs** | Real-time collaborative editing, OT / CRDT, WebSocket sync | [Google Docs Design](google-docs.md) |
-| 12 | **Google Drive** | File metadata, chunked upload/download, versioning, quota service | [Google Drive Design](google-drive.md) |
-| 13 | **Instagram** | Feed generation, image delivery CDN, followers graph, fanout | [Instagram Design](instagram.md) |
-| 14 | **Metrics Monitoring** | TSDB Gorilla compression, log/trace ingestion, PromQL, streaming alert rules | [Metrics Monitoring Design](metrics-monitoring.md) |
-| 15 | **Netflix** | Open Connect CDN, dynamic optimizer transcode, ABR, state bookmarks | [Netflix Design](netflix.md) |
-| 16 | **News Feed** | Fanout-on-write vs fanout-on-read, timeline caching, ranking | [News Feed Design](news-feed.md) |
-| 17 | **Notification System** | Push notifications, SMS/Email gateways, deduplication, rate limits | [Notification Design](notification-system.md) |
-| 18 | **Parking Garage** | Concurrency control, spot allocation, ticket validation, sensors | [Parking Garage Design](parking-garage.md) |
-| 19 | **PasteBin** | Text storage, expiring keys, S3/blob integration, rate limiting | [PasteBin Design](pastebin.md) |
-| 20 | **Payment System** | Double-entry ledger, idempotency keys, claims payout saga, T+1 reconciliation | [Payment System Design](payment-system.md) |
-| 21 | **Rate Limiter** | Token bucket, sliding window counter, Redis distributed locking | [Rate Limiter Design](rate-limiter.md) |
-| 22 | **Shopify** | Multi-tenant architecture, order processing, flash-sale traffic handling | [Shopify Design](shopify.md) |
-| 23 | **Social Media** | Hybrid fanout, pre-signed media upload, social graph, timeline cache | [Social Media Design](social-media.md) |
-| 24 | **Tag Service** | Inverted index, tag aggregation, lookup performance, caching | [Tag Service Design](tag-service.md) |
-| 25 | **TicketMaster** | Virtual queues, fair ticketing, seat reservation locking | [TicketMaster Design](ticketmaster.md) |
-| 26 | **TikTok** | Video feed recommendation pipeline, transcode pipeline, delivery | [TikTok Design](tiktok.md) |
-| 27 | **Twitter** | Distributed timeline, Redis fanout cluster, search indexing | [Twitter Design](twitter.md) |
-| 28 | **Uber** | Geospatial indexing (QuadTree/H3), driver dispatch, location updates | [Uber Design](uber.md) |
-| 29 | **Web Crawler** | Mercator frontier, multi-format doc parsing/OCR, SimHash dedupe, RAG chunking | [Web Crawler Design](webcrawler.md) |
-| 30 | **WhatsApp** | Real-time chat, WebSocket connection managers, E2E encryption | [WhatsApp Design](whatsapp.md) |
-| 31 | **YouTube** | Video upload pipeline, transcode farm, CDN distribution, views counting | [YouTube Design](youtube.md) |
+| 7 | **ChatGPT & Enterprise RAG Copilot** | Hybrid BM25 + Vector RAG, Zanzibar ACLs, SSE streaming, vLLM PagedAttention | [ChatGPT & RAG Design](chatgpt-rag-copilot.md) |
+| 8 | **Distributed Job Scheduler** | Hierarchical timing wheel, shard leases & fencing tokens, cron materialization, DLQ | [Job Scheduler Design](distributed-job-scheduler.md) |
+| 9 | **Distributed Key-Value Store** | Consistent hashing (`vnodes`), tunable quorum ($R+W>N$), vector clocks, gossip, Merkle trees, LSM-Tree | [Key-Value Store Design](distributed-key-value-store.md) |
+| 10 | **DocuSign** | Digital signatures, audit trails, document hashing, encryption | [DocuSign Design](docusign.md) |
+| 11 | **Dropbox** | Block-level sync, deduplication, conflict resolution, chunking | [Dropbox Design](dropbox.md) |
+| 12 | **Email Archive** | Large-scale cold storage, full-text search indexing, compression | [Email Archive Design](email-archive.md) |
+| 13 | **Fraud Detection** | Sub-50ms risk scoring, Flink velocity features, dual feature store, GNN rings | [Fraud Detection Design](fraud-detection.md) |
+| 14 | **Google Docs** | Real-time collaborative editing, OT / CRDT, WebSocket sync | [Google Docs Design](google-docs.md) |
+| 15 | **Google Drive** | File metadata, chunked upload/download, versioning, quota service | [Google Drive Design](google-drive.md) |
+| 16 | **Instagram** | Feed generation, image delivery CDN, followers graph, fanout | [Instagram Design](instagram.md) |
+| 17 | **Metrics Monitoring** | TSDB Gorilla compression, log/trace ingestion, PromQL, streaming alert rules | [Metrics Monitoring Design](metrics-monitoring.md) |
+| 18 | **Netflix** | Open Connect CDN, dynamic optimizer transcode, ABR, state bookmarks | [Netflix Design](netflix.md) |
+| 19 | **News Feed** | Fanout-on-write vs fanout-on-read, timeline caching, ranking | [News Feed Design](news-feed.md) |
+| 20 | **Notification System** | Push notifications, SMS/Email gateways, deduplication, rate limits | [Notification Design](notification-system.md) |
+| 21 | **Parking Garage** | Concurrency control, spot allocation, ticket validation, sensors | [Parking Garage Design](parking-garage.md) |
+| 22 | **PasteBin** | Text storage, expiring keys, S3/blob integration, rate limiting | [PasteBin Design](pastebin.md) |
+| 23 | **Payment System** | Double-entry ledger, idempotency keys, claims payout saga, T+1 reconciliation | [Payment System Design](payment-system.md) |
+| 24 | **Rate Limiter** | Token bucket, sliding window counter, Redis distributed locking | [Rate Limiter Design](rate-limiter.md) |
+| 25 | **Shopify** | Multi-tenant architecture, order processing, flash-sale traffic handling | [Shopify Design](shopify.md) |
+| 26 | **Social Media** | Hybrid fanout, pre-signed media upload, social graph, timeline cache | [Social Media Design](social-media.md) |
+| 27 | **Stock Exchange** | LMAX Disruptor ring buffer, $O(1)$ in-memory order book (Price-Time FIFO), Raft sequencer, ITCH multicast | [Stock Exchange Design](stock-exchange.md) |
+| 28 | **Tag Service** | Inverted index, tag aggregation, lookup performance, caching | [Tag Service Design](tag-service.md) |
+| 29 | **TicketMaster** | Virtual queues, fair ticketing, seat reservation locking | [TicketMaster Design](ticketmaster.md) |
+| 30 | **TikTok** | Video feed recommendation pipeline, transcode pipeline, delivery | [TikTok Design](tiktok.md) |
+| 31 | **Twitter** | Distributed timeline, Redis fanout cluster, search indexing | [Twitter Design](twitter.md) |
+| 32 | **Uber** | Geospatial indexing (QuadTree/H3), driver dispatch, location updates | [Uber Design](uber.md) |
+| 33 | **Web Crawler** | Mercator frontier, multi-format doc parsing/OCR, SimHash dedupe, RAG chunking | [Web Crawler Design](webcrawler.md) |
+| 34 | **WhatsApp** | Real-time chat, WebSocket connection managers, E2E encryption | [WhatsApp Design](whatsapp.md) |
+| 35 | **YouTube** | Video upload pipeline, transcode farm, CDN distribution, views counting | [YouTube Design](youtube.md) |
 
 ---
 

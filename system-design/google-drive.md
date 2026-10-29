@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — WebSockets / Long Polling Notification Sync](fundamentals/01-networking-and-api-paradigms.md#3-real-time-protocols-polling-vs-sse-vs-websockets-vs-webrtc) · [Chapter 4 — Resumable Pre-Signed S3 Chunk Uploads & Sharded SQL Metadata](fundamentals/04-databases-sql-vs-nosql.md#block-storage-vs-file-storage-vs-object-blob-storage) · [Chapter 8 — Google Zanzibar ReBAC Permission Graph & Envelope Encryption](fundamentals/08-security-multi-region-and-deployments.md#authorization-models-rbac-vs-abac-vs-rebac-google-zanzibar)
+
 ## Overview
 
 Google Drive is a planetary-scale cloud storage, synchronization, and content collaboration platform serving over 1 billion monthly active users. Users store documents, photos, videos, and binary assets, while teams collaborate in real time across shared organization drives.

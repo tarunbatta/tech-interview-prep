@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 3 — Redis Atomic Counters for Real-Time Display Boards](fundamentals/03-caching-and-scaling.md#1-caching-deep-dive) · [Chapter 4 — ACID Spot Allocation (`FOR UPDATE SKIP LOCKED`) & Optimistic Concurrency](fundamentals/04-databases-sql-vs-nosql.md#3-pessimistic-vs-optimistic-concurrency-control-preventing-double-booking) · [Chapter 5 — Idempotent Gate Payment Processing](fundamentals/05-distributed-systems-and-messaging.md#5-idempotency-keys-safe-retries-over-unreliable-networks)
+
 ## Overview
 
 A smart parking garage management system orchestrates vehicle access, real-time stall occupancy tracking, dynamic spot allocation, and automated billing across multi-level physical parking structures. Modern installations integrate physical hardware—Automatic License Plate Recognition (ALPR) cameras, ground induction loops, ultrasonic overhead stall sensors, and motorized barrier arms—with edge IoT controllers and cloud reservation platforms.

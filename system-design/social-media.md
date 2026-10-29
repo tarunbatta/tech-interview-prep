@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — GraphQL API & WebSockets Real-Time Notifications](fundamentals/01-networking-and-api-paradigms.md#2-api-paradigms-rest-vs-graphql-vs-grpc) · [Chapter 3 — Hybrid Fanout Timeline Cache & Hot-Key Mitigation](fundamentals/03-caching-and-scaling.md#1-caching-deep-dive) · [Chapter 4 — Pre-Signed S3 Media Uploads, Graph DB (TAO) & Wide-Column Feeds](fundamentals/04-databases-sql-vs-nosql.md#6-graph-databases--relation-stores-neo4j-neptune-meta-tao-zanzibar) · [Chapter 9 — Multi-Stage Feed Recommendation Funnel](fundamentals/09-genai-llm-and-ml-system-design.md#multi-stage-recommendation--ranking-funnel)
+
 ## Overview
 
 A social media application connects hundreds of millions to billions of users globally, enabling them to discover content, publish updates (text, photos, short videos), build social relationships (following, friends), interact via comments and likes, and consume a personalized, algorithmically ranked feed in real time.

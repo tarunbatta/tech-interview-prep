@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — HTTP/3 QUIC Streaming](fundamentals/01-networking-and-api-paradigms.md#http-evolution-http11-vs-http2-vs-http3) · [Chapter 2 — Push vs. Pull CDNs & Origin Shield](fundamentals/02-edge-load-balancing-and-cdn.md#4-content-delivery-network-cdn) · [Chapter 3 — Multi-Tier L1/L2 Entitlement Caching](fundamentals/03-caching-and-scaling.md#multi-tier-caching-across-the-system-stack) · [Chapter 4 — Object Storage (S3) & NoSQL Metadata](fundamentals/04-databases-sql-vs-nosql.md#block-storage-vs-file-storage-vs-object-blob-storage)
+
 ## Overview
 
 Amazon Prime is a global multi-benefit subscription platform encompassing Prime Video on-demand streaming, Prime Music, e-commerce fast delivery benefits, Twitch gaming, and cloud photo storage.

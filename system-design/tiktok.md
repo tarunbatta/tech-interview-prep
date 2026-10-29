@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 1 — HTTP/3 QUIC Video Delivery](fundamentals/01-networking-and-api-paradigms.md#http-evolution-http11-vs-http2-vs-http3) · [Chapter 2 — Global Pull/Push Edge CDN](fundamentals/02-edge-load-balancing-and-cdn.md#4-content-delivery-network-cdn) · [Chapter 7 — Flink Real-Time Engagement Stream & Bloom Filter Seen-Video Dedupe](fundamentals/07-probabilistic-structures-and-stream-processing.md#bloom-filter--cuckoo-filter-set-membership) · [Chapter 9 — 4-Stage Recommendation Funnel (Two-Tower ANN + MMoE Ranking) & Feature Store](fundamentals/09-genai-llm-and-ml-system-design.md#4-classic-real-time-ml-system-design-building-blocks)
+
 ## Overview
 
 TikTok is a global short-form vertical video platform with over 1 billion monthly active users consuming over 1 billion videos daily. Unlike traditional social media platforms driven by explicit friend/follower social graphs, TikTok's engagement is powered almost entirely by its hyper-personalized AI recommendation engine (the **"For You" Page - FYP**) and a playback experience optimized for instantaneous swipe response ($< 50\text{ ms}$).

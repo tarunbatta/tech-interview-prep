@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 4 — Inverted Index (Elasticsearch), Columnar OLAP & S3 Glacier Cold Tiers](fundamentals/04-databases-sql-vs-nosql.md#full-text-search--inverted-index-elasticsearch--lucene) · [Chapter 5 — Kafka Ingestion Buffering & Sharding](fundamentals/05-distributed-systems-and-messaging.md#8-asynchronous-messaging-message-queues-vs-pubsub-event-streams) · [Chapter 7 — SHA-256 Attachment Deduplication & Bloom Filters](fundamentals/07-probabilistic-structures-and-stream-processing.md#bloom-filter--cuckoo-filter-set-membership) · [Chapter 8 — KMS Envelope Encryption & Legal Hold Compliance](fundamentals/08-security-multi-region-and-deployments.md#envelope-encryption-kms-master-key--data-encryption-keys)
+
 ## Overview
 
 An enterprise email archiving system is engineered to capture, index, preserve, and retrieve high volumes of corporate email communications for regulatory compliance (SEC Rule 17a-4, FINRA, HIPAA, GDPR) and corporate legal proceedings (eDiscovery). The system must guarantee immutability (Write Once, Read Many - WORM), protect against intentional or accidental deletion, enforce automated retention schedules, and allow legal compliance officers to execute complex boolean searches across petabytes of historical correspondence.

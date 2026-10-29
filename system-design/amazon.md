@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 3 — Cache-Aside & Hot-Key Mitigation](fundamentals/03-caching-and-scaling.md#caching-failure-modes--interview-mitigations) · [Chapter 4 — ACID Inventory Locking, DynamoDB Carts & Inverted Index Search](fundamentals/04-databases-sql-vs-nosql.md#3-pessimistic-vs-optimistic-concurrency-control-preventing-double-booking) · [Chapter 5 — Checkout Saga Pattern, Transactional Outbox & Idempotency](fundamentals/05-distributed-systems-and-messaging.md#4-distributed-transactions-2pc-vs-saga-vs-transactional-outbox)
+
 ## Overview
 
 Amazon is the world's largest online retail e-commerce platform, serving over 300 million active customer accounts and listing hundreds of millions of unique products (SKUs). The system operates globally, handling everything from product browsing and personalized recommendations to multi-item shopping carts, high-throughput flash-sale checkout, payment settlement, inventory tracking, and warehouse fulfillment.

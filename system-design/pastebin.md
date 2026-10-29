@@ -2,6 +2,8 @@
 
 [← Back to System Design](system-design.md)
 
+> **Core Building Blocks Used**: [Chapter 2 — Pull CDN for Hot Public Pastes](fundamentals/02-edge-load-balancing-and-cdn.md#4-content-delivery-network-cdn) · [Chapter 3 — Cache-Aside & TTL Expiration](fundamentals/03-caching-and-scaling.md#cache-eviction-policies) · [Chapter 4 — Object Storage (S3) for Text Blobs vs. Relational Metadata](fundamentals/04-databases-sql-vs-nosql.md#block-storage-vs-file-storage-vs-object-blob-storage) · [Chapter 5 — Base62 Unique Key Generation (KGS / Snowflake)](fundamentals/05-distributed-systems-and-messaging.md#6-distributed-unique-id-generation-snowflake-uuidv7-ticket-servers)
+
 ## Overview
 
 Pastebin is a text-sharing platform that allows users to store plain text, code snippets, or configuration dumps and share them via compact, readable URLs (e.g. `https://pastebin.com/k9Az8Q`). The platform supports optional syntax highlighting, custom vanity URLs, password protection, and time-to-live (TTL) expiration schedules.
