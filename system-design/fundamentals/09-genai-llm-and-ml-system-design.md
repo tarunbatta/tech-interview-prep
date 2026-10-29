@@ -113,6 +113,32 @@ Autoregressive LLM generation happens in two distinct hardware phases:
 
 ### Core Inference Optimizations: KV-Cache, PagedAttention, Continuous Batching & Speculative Decoding
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    Queue["Incoming Prompts"]
+    Scheduler["Continuous Batching Scheduler (vLLM)"]
+    Prefill["1. Prefill Phase (Parallel Prompt Attention -> TTFT)"]
+    KVCache[("PagedAttention KV-Cache Blocks (GPU HBM)")]
+    Decode["2. Decode Phase + Speculative Draft Model (-> ITL Stream)"]
+    SSE["Client SSE Token Stream"]
+
+    Queue --> Scheduler --> Prefill
+    Prefill <--> KVCache
+    Prefill --> Decode
+    KVCache <--> Decode
+    Decode -->|"Evict Finished & Inject New"| Scheduler
+    Decode --> SSE
+
+    classDef sched fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef gpu fill:#7c3aed,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef out fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+
+    class Queue,Scheduler sched
+    class Prefill,KVCache,Decode gpu
+    class SSE out
+```
+
 | Optimization | Problem It Solves | How It Works |
 | :--- | :--- | :--- |
 | **KV-Cache & Prefix Caching** | Recomputing Key ($K$) and Value ($V$) attention matrices for all previous tokens at every new decode step makes generation $O(N^2)$ slow. | Caches past $K$ and $V$ tensors in GPU HBM RAM (reducing decode complexity to $O(N)$). **Prefix Caching** shares the KV-Cache of common system prompts/RAG documents across requests. |
@@ -169,6 +195,37 @@ flowchart LR
 
 ML models in fraud detection ([Fraud Detection](../fraud-detection.md)), dynamic pricing ([Uber](../uber.md)), and recommendations require both historical batch features (*"User's 90-day average transaction amount"*) and real-time streaming features (*"Number of failed card swipes in the last 60 seconds"*).
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    Events["Kafka Event Stream + DB Logs"]
+    Flink["Apache Flink (Streaming Features)"]
+    Spark["Apache Spark (Batch Historical Features)"]
+
+    subgraph Store["Dual Feature Store (Zero Training-Serving Skew)"]
+        Online[("Online Store: Redis / DynamoDB (< 5ms Point Lookup)")]
+        Offline[("Offline Store: S3 Parquet / Snowflake (Training Datasets)")]
+    end
+
+    Infer["Real-Time ML Inference Service"]
+    Train["Model Training Pipeline"]
+
+    Events --> Flink --> Online
+    Events --> Spark --> Offline
+    Spark -->|"Daily Sync"| Online
+    Online -->|"Low-Latency Fetch"| Infer
+    Offline -->|"Point-in-Time Join"| Train
+
+    classDef src fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef online fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef offline fill:#7c3aed,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+
+    class Events,Flink,Spark src
+    class Online,Infer online
+    class Offline,Train offline
+    style Store fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+```
+
 - **Why a Dual Feature Store Is Mandatory**:
   - **Training-Serving Skew**: If Data Scientists write Python/Spark code to compute features for training, and Backend Engineers rewrite that logic in Java/Go for production inference, subtle bugs destroy model accuracy.
   - **Unified Feature Definition (Feast / Tecton)**: Features are defined once and materialized into two storage tiers:
@@ -178,4 +235,3 @@ ML models in fraud detection ([Fraud Detection](../fraud-detection.md)), dynamic
 ---
 
 [← Back to System Design Hub](../system-design.md) | [← Previous: Chapter 8 — Security, Multi-Region DR & Deployment Patterns](08-security-multi-region-and-deployments.md)
-

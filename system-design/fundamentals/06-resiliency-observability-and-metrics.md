@@ -101,6 +101,20 @@ $$P(\text{at least one call exceeds P99}) = 1 - (0.99)^k$$
 - If $k = 50$ parallel services: $1 - (0.99)^{50} \approx \mathbf{39.5\%}$ of user requests suffer `> P99` latency!
 - **Mitigation — Hedged Requests (Tail-At-Scale)**: If a read request to Replica A hasn't responded by the `P95` duration (e.g., `10 ms`), immediately send a duplicate **hedged request** to Replica B and take whichever response arrives first, cancelling the other.
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+sequenceDiagram
+    participant C as Caller / Aggregator
+    participant R1 as Replica A (Suffering GC Pause)
+    participant R2 as Replica B (Healthy)
+
+    C->>R1: 1. GET /item/42 (t = 0ms)
+    Note over C: P95 Threshold (10ms) Elapsed — No Response!
+    C->>R2: 2. Hedged Request GET /item/42 (t = 10ms)
+    R2-->>C: 3. 200 OK (t = 13ms -> Total Latency = 13ms instead of 500ms!)
+    C-xR1: 4. Cancel In-Flight Request to Replica A
+```
+
 ---
 
 ### Timeouts, Deadlines & Backpressure
@@ -162,6 +176,16 @@ See the full [Rate Limiter Design](../rate-limiter.md) case study for implementa
 
 When one downstream service becomes slow, calling services can exhaust all their threads waiting for timeouts, triggering a **Cascading Failure** across the entire company. Prevent this with four defensive patterns:
 
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> Closed
+    Closed --> Open : Failure Rate > 50% (Trip Circuit)
+    Open --> HalfOpen : Sleep Window Elapsed (e.g., 30s)
+    HalfOpen --> Closed : Probe Requests Succeed
+    HalfOpen --> Open : Probe Request Fails
+```
+
 1. **Circuit Breaker (`Closed` $\rightarrow$ `Open` $\rightarrow$ `Half-Open`)**:
    - **Closed (Normal)**: Requests pass through to the downstream service; failure rate is tracked over a rolling window.
    - **Open (Tripped)**: If the failure/timeout rate exceeds a threshold (e.g., `50%` failures over 10 seconds), the circuit trips **Open** and fails fast locally (or returns a cached fallback) for a sleep window (e.g., 30s) without making any network calls to the struggling service.
@@ -181,6 +205,34 @@ When one downstream service becomes slow, calling services can exhaust all their
 ## 3. Observability: Metrics, Logs & Distributed Tracing
 
 You cannot operate or debug a distributed system at scale without the **Three Pillars of Observability** (see [Metrics Monitoring Design](../metrics-monitoring.md) for a deep dive):
+
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    App["Microservice Pod (OpenTelemetry SDK)"]
+
+    subgraph Pillars["The Three Pillars of Observability"]
+        M[("1. Metrics TSDB (Prometheus / Mimir: RED & USE)")]
+        L[("2. Structured Logs (ClickHouse / OpenSearch: JSON Events)")]
+        T[("3. Distributed Traces (Jaeger / Tempo: TraceID Spans)")]
+    end
+
+    Alert["AlertManager / Grafana Dashboards"]
+
+    App -->|"Counters, Gauges, Histograms"| M
+    App -->|"JSON Logs + TraceID"| L
+    App -->|"Parent/Child Spans"| T
+    M & L & T --> Alert
+
+    classDef app fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef pillar fill:#7c3aed,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef alert fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+
+    class App app
+    class M,L,T pillar
+    class Alert alert
+    style Pillars fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+```
 
 | Pillar | What It Answers | Storage & Query Characteristics | Standard Tooling |
 | :--- | :--- | :--- | :--- |

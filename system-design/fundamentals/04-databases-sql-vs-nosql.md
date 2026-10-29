@@ -79,6 +79,32 @@ In interviews for payment systems ([Payment System](../payment-system.md)), hote
 
 #### 3. Pessimistic vs. Optimistic Concurrency Control (Preventing Double-Booking)
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+sequenceDiagram
+    participant U1 as User 1
+    participant U2 as User 2
+    participant DB as SQL Database
+
+    rect rgb(30, 58, 138)
+    Note over U1,DB: 1. Pessimistic Locking (SELECT ... FOR UPDATE)
+    U1->>DB: BEGIN; SELECT seat 42 FOR UPDATE (Acquires Row X-Lock)
+    U2->>DB: BEGIN; SELECT seat 42 FOR UPDATE (BLOCKED waiting on Lock)
+    U1->>DB: UPDATE seat 42 = 'BOOKED'; COMMIT; (Releases Lock)
+    DB-->>U2: Returns updated row (status = 'BOOKED' -> U2 aborts)
+    end
+
+    rect rgb(6, 78, 59)
+    Note over U1,DB: 2. Optimistic Concurrency Control (OCC Compare-And-Swap)
+    U1->>DB: SELECT seat 42 (status='FREE', version=7) — No Lock!
+    U2->>DB: SELECT seat 42 (status='FREE', version=7) — No Lock!
+    U1->>DB: UPDATE seat 42 SET status='BOOKED', version=8 WHERE version=7
+    DB-->>U1: 1 row affected (SUCCESS)
+    U2->>DB: UPDATE seat 42 SET status='BOOKED', version=8 WHERE version=7
+    DB-->>U2: 0 rows affected (409 Conflict -> Retry/Fail)
+    end
+```
+
 | Approach | SQL Mechanism | How It Works | When to Use in Interviews |
 | :--- | :--- | :--- | :--- |
 | **Pessimistic Locking** | `BEGIN; SELECT * FROM seats WHERE id = 42 AND status = 'FREE' FOR UPDATE; ... COMMIT;` | Acquires an **exclusive row lock** (`X-lock`) before reading. Any concurrent transaction trying to read `FOR UPDATE` or modify seat 42 blocks in a queue until the first transaction commits. | **High contention** or high cost of retry (e.g., financial ledger transfers, ATM withdrawals). *Downside*: Holding row locks across slow external HTTP calls exhausts DB connections and risks deadlocks. |
@@ -246,6 +272,31 @@ When a single database node hits CPU, memory, disk I/O, or network limits, syste
 
 ### Replication Topologies (Scaling Reads & High Availability)
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart TD
+    subgraph Single["1. Single-Leader (Primary-Replica)"]
+        SL_P[("Primary (Writes)")] -->|"WAL Stream"| SL_R1[("Replica 1 (Reads)")] & SL_R2[("Replica 2 (Reads)")]
+    end
+
+    subgraph Multi["2. Multi-Leader (Active-Active Multi-Region)"]
+        ML_1[("Leader US-East")] <-->|"Async Sync + Conflict Resolution"| ML_2[("Leader EU-West")]
+    end
+
+    subgraph Leaderless["3. Leaderless Ring (Dynamo / Cassandra: R + W > N)"]
+        LL_C["Coordinator"] -->|"Write W=2 of N=3"| LL_1[("Node 1")] & LL_2[("Node 2")]
+        LL_C -.->|"Missed Write (Healed by Read Repair)"| LL_3[("Node 3")]
+    end
+
+    classDef primary fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef replica fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef ring fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+
+    class SL_P,ML_1,ML_2 primary
+    class SL_R1,SL_R2 replica
+    class LL_C,LL_1,LL_2,LL_3 ring
+```
+
 | Topology | How It Works | Trade-Offs & Consistency Anomalies |
 | :--- | :--- | :--- |
 | **Single-Leader (Primary–Replica)** | All **writes** go to a single Primary node. The Primary streams its Write-Ahead Log (WAL / binlog) to one or more **Read Replicas** which serve read queries. | **Synchronous Replication**: Strong consistency, but higher write latency. **Asynchronous Replication**: Fast writes, but replicas suffer **Replication Lag** (ms to seconds); mitigate via **Read-Your-Writes** routing to Primary and **Monotonic Reads** session pinning. |
@@ -279,6 +330,32 @@ Relational `LIKE '%keyword%'` queries trigger full table scans ($O(N)$) and cann
 ### Geospatial Indexing (Geohash vs. QuadTree vs. Uber H3)
 
 When designing location-based systems ([Uber](../uber.md), [Airbnb](../airbnb.md), Yelp/DoorDash), querying `WHERE lat BETWEEN x1 AND x2 AND lon BETWEEN y1 AND y2` on two separate B-Tree columns is inefficient because a single B-Tree can only narrow down one 1D range effectively. Instead, convert 2D `(latitude, longitude)` into a 1D indexable key:
+
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    Coords["2D (Latitude, Longitude)"]
+
+    subgraph Geohash["1. Geohash (Base32 Z-Order Grid)"]
+        GH["Prefix `9q8yyk` + 8 Neighbor Cells"]
+    end
+
+    subgraph QuadTree["2. QuadTree (Adaptive Subdivision)"]
+        QT["Root -> NW / NE / SW / SE (Splits when > K points)"]
+    end
+
+    subgraph H3["3. Uber H3 (Hierarchical Hexagons)"]
+        HEX["6 Equidistant Neighbors (Smooth Radius & Surge)"]
+    end
+
+    Coords --> GH & QT & H3
+
+    classDef input fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef geo fill:#7c3aed,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+
+    class Coords input
+    class GH,QT,HEX geo
+```
 
 | Geospatial Index | How It Works | Pros | Cons | Best Interview Use Case |
 | :--- | :--- | :--- | :--- | :--- |

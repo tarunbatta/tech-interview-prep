@@ -45,6 +45,28 @@ In system design interviews, discussions primarily center around **Layer 3 (Netw
 
 ### Transport Layer: TCP vs. UDP vs. QUIC
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+
+    rect rgb(30, 58, 138)
+    Note over C,S: TCP + TLS 1.2/1.3 Handshake (2-3 RTTs before first HTTP byte)
+    C->>S: 1. TCP SYN
+    S-->>C: 2. TCP SYN-ACK
+    C->>S: 3. TCP ACK + TLS ClientHello
+    S-->>C: 4. TLS ServerHello, Cert, Finished
+    C->>S: 5. HTTP GET /api/feed (First Application Data)
+    end
+
+    rect rgb(6, 78, 59)
+    Note over C,S: QUIC / HTTP/3 Handshake over UDP (1-RTT, or 0-RTT on Resumption)
+    C->>S: 1. QUIC Initial (UDP) + TLS 1.3 ClientHello (+ 0-RTT HTTP/3 Data)
+    S-->>C: 2. QUIC Handshake + TLS 1.3 ServerHello + HTTP/3 Response
+    end
+```
+
 | Feature | TCP (Transmission Control Protocol) | UDP (User Datagram Protocol) | QUIC (UDP-Based Multiplexed Transport) |
 | :--- | :--- | :--- | :--- |
 | **Connection Setup** | Connection-oriented: 3-way handshake (`SYN`, `SYN-ACK`, `ACK`) + TLS handshake (2–3 RTTs). | Connectionless: 0 RTT setup; fire-and-forget datagrams. | Connection-oriented over UDP: combines transport + TLS 1.3 into **1-RTT** (or **0-RTT** on resumption). |

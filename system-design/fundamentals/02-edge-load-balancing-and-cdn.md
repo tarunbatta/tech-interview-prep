@@ -76,6 +76,47 @@ flowchart LR
 > 1. **Tier 1 (Edge L4 Load Balancers)**: eBPF/XDP or IPVS/NLB nodes sit behind BGP Anycast routers, absorbing millions of packets/sec and distributing TCP connections evenly across a horizontally scaled fleet of L7 proxies.
 > 2. **Tier 2 (L7 Load Balancers / Envoy / NGINX)**: Terminate TLS, validate headers, compress payloads, and route HTTP/gRPC requests to internal microservices.
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    Internet(("Public Internet"))
+    BGP["BGP Anycast / ECMP Routers"]
+
+    subgraph Tier1["Tier 1: Edge L4 Load Balancers (Stateless Packet Forwarding)"]
+        L4_1["L4 Node 1 (Maglev / NLB)"]
+        L4_2["L4 Node 2 (Maglev / NLB)"]
+    end
+
+    subgraph Tier2["Tier 2: L7 Reverse Proxies & API Gateways (TLS Termination & Routing)"]
+        L7_1["Envoy / ALB 1"]
+        L7_2["Envoy / ALB 2"]
+    end
+
+    subgraph Mesh["Internal Microservices (East-West Service Mesh mTLS)"]
+        UserSvc["User Service (`/users`)"]
+        OrderSvc["Order Service (`/orders`)"]
+    end
+
+    Internet --> BGP
+    BGP --> L4_1 & L4_2
+    L4_1 & L4_2 -->|"5-Tuple Hash"| L7_1 & L7_2
+    L7_1 & L7_2 -->|"Path `/users`"| UserSvc
+    L7_1 & L7_2 -->|"Path `/orders`"| OrderSvc
+
+    classDef edge fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef l4 fill:#7c3aed,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef l7 fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+    classDef svc fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+
+    class Internet,BGP edge
+    class L4_1,L4_2 l4
+    class L7_1,L7_2 l7
+    class UserSvc,OrderSvc svc
+    style Tier1 fill:transparent,stroke:#a78bfa,stroke-width:1.5px,stroke-dasharray: 5 5
+    style Tier2 fill:transparent,stroke:#fbbf24,stroke-width:1.5px,stroke-dasharray: 5 5
+    style Mesh fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+```
+
 ---
 
 ### Load Balancing Routing Algorithms
@@ -93,6 +134,28 @@ flowchart LR
 ### High Availability (HA) for Load Balancers
 
 A single Load Balancer is a Single Point of Failure (SPOF). To make the Load Balancer tier fault-tolerant:
+
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
+flowchart LR
+    VIP["Floating Virtual IP (VIP: 203.0.113.10)"]
+    Active["Active Load Balancer (Primary)"]
+    Passive["Passive Load Balancer (Standby)"]
+    Fleet["Backend Server Pool"]
+
+    VIP -->|"Normal Traffic"| Active
+    VIP -.->|"Failover Traffic (If Active Dies)"| Passive
+    Active <-->|"VRRP / Keepalived Heartbeat (Every 1s)"| Passive
+    Active & Passive --> Fleet
+
+    classDef vip fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef active fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef passive fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class VIP vip
+    class Active,Fleet active
+    class Passive passive
+```
 
 1. **Active-Passive Failover (Floating VIP / VRRP)**:
    - Two load balancers share a Virtual IP (VIP) using `Keepalived` / VRRP heartbeats. If the Active LB fails to send a heartbeat within a threshold (e.g., 3 seconds), the Passive LB claims the Floating VIP via gratuitous ARP and takes over traffic.

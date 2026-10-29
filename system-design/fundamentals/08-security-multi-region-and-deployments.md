@@ -47,6 +47,24 @@
 
 ### OAuth 2.0 & OpenID Connect (OIDC)
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+sequenceDiagram
+    participant U as User / Browser
+    participant App as Client App / API Gateway
+    participant IdP as Identity Provider (Auth0 / Okta)
+    participant Redis as Token Store (Refresh / Blocklist)
+
+    U->>IdP: 1. Login + PKCE code_challenge
+    IdP-->>U: 2. Redirect with One-Time Auth `code`
+    U->>App: 3. Send `code` + `code_verifier`
+    App->>IdP: 4. Exchange `code` for Tokens
+    IdP-->>App: 5. Short-Lived Access JWT (10m) + Opaque Refresh Token (30d)
+    App->>Redis: 6. Persist Refresh Token Family
+    U->>App: 7. API Calls with Access JWT (Verified Statelessly in CPU!)
+    Note over U,App: After 10m: Access JWT Expires -> Rotate Refresh Token via Redis
+```
+
 - **OAuth 2.0 is for Authorization (Delegated Access)**: Grants an application a scoped **Access Token** to act on a user's behalf (e.g., allowing a calendar app to read your Google Calendar without giving it your password).
 - **OIDC (OpenID Connect) is for Authentication (Identity)**: A thin identity layer on top of OAuth 2.0 that issues an **`id_token` (JWT)** proving *who* the user is ("Sign in with Google / Okta / SAML").
 - **Standard Flows**:
@@ -153,6 +171,33 @@ flowchart LR
 
 Even in a horizontally scaled cluster, a single "poison pill" request, bad config push, or noisy-neighbor tenant can trigger a retry storm that takes down **100% of the cluster**.
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    Router["Cell Router (Partition by Tenant / User Hash)"]
+
+    subgraph Cell1["Cell 1 (Healthy — Serves 95% of Tenants)"]
+        C1_App["App + Cache + DB Shard 1"]
+    end
+
+    subgraph Cell2["Cell 2 (Poison-Pill Outage — Contained to 5% Blast Radius!)"]
+        C2_App["App + Cache + DB Shard 2 (DEGRADED)"]
+    end
+
+    Router -->|"Tenants 1..95"| C1_App
+    Router -->|"Poison-Pill Tenant 96"| C2_App
+
+    classDef router fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef ok fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef bad fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+
+    class Router router
+    class C1_App ok
+    class C2_App bad
+    style Cell1 fill:transparent,stroke:#34d399,stroke-width:1.5px,stroke-dasharray: 5 5
+    style Cell2 fill:transparent,stroke:#fb7185,stroke-width:1.5px,stroke-dasharray: 5 5
+```
+
 - **Cell-Based Architecture**: Instead of one giant shared cluster serving 100 million users, partition the infrastructure into 20 completely independent, self-contained **Cells** (each with its own API Gateway, Microservices, Redis, and DB shard serving 5% of users). A catastrophic failure in Cell 4 impacts at most **5% of users**, never 100%.
 - **Shuffle Sharding (AWS Route 53 /Lambda Pattern)**:
   - Suppose you have 8 worker nodes and assign each customer to a random pair of 2 nodes ($\binom{8}{2} = 28$ unique virtual shards).
@@ -179,6 +224,24 @@ During a Rolling or Canary deployment, **`v1` pods and `v2` pods run simultaneou
 
 Always use the **3-Phase Expand-and-Contract (Parallel Change) Pattern**:
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    P1["Phase 1: EXPAND (Add nullable `first_name` + Dual-Write to both columns)"]
+    P2["Phase 2: MIGRATE (Backfill old rows + Switch Reads to `first_name`)"]
+    P3["Phase 3: CONTRACT (Remove `v1` code + DROP legacy `full_name` column)"]
+
+    P1 --> P2 --> P3
+
+    classDef p1 fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef p2 fill:#7c3aed,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef p3 fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+
+    class P1 p1
+    class P2 p2
+    class P3 p3
+```
+
 1. **Phase 1 — Expand (Backwards-Compatible Schema Addition)**:
    - Add the new nullable column `first_name` alongside `full_name` (without dropping `full_name`).
    - Deploy code that **Dual-Writes** to both `full_name` and `first_name`, while still reading from `full_name`.
@@ -191,4 +254,3 @@ Always use the **3-Phase Expand-and-Contract (Parallel Change) Pattern**:
 ---
 
 [← Back to System Design Hub](../system-design.md) | [← Previous: Chapter 7 — Probabilistic Data Structures & Stream Processing](07-probabilistic-structures-and-stream-processing.md) | [Next: Chapter 9 — GenAI, LLM & ML System Design Building Blocks →](09-genai-llm-and-ml-system-design.md)
-

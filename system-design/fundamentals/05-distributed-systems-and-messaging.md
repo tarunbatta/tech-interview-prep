@@ -156,6 +156,30 @@ sequenceDiagram
 
 When a business workflow spans multiple microservices or database shards (e.g., *Create Order $\rightarrow$ Charge Credit Card $\rightarrow$ Reserve Inventory*), single-node SQL `BEGIN / COMMIT` cannot span network boundaries:
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    subgraph Saga["1. Saga Pattern (Forward Steps & Compensating Rollbacks)"]
+        T1["T1: Create Order"] -->|"Success"| T2["T2: Charge Card"]
+        T2 -->|"Inventory Out of Stock!"| T3["T3: Reserve Stock (FAILS)"]
+        T3 -.->|"Compensate C2: Refund Card"| T2
+        T2 -.->|"Compensate C1: Cancel Order"| T1
+    end
+
+    subgraph Outbox["2. Transactional Outbox + CDC (Solving Dual-Write)"]
+        App["Order Service"] -->|"Single Atomic SQL TX"| DB[("Orders Table + Outbox Table")]
+        DB -->|"Tail WAL (Debezium CDC)"| Kafka[["Kafka Topic"]]
+    end
+
+    classDef ok fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef fail fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef cdc fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+
+    class T1,T2 ok
+    class T3 fail
+    class App,DB,Kafka cdc
+```
+
 | Pattern | Mechanism | Pros | Cons | Best Interview Use Case |
 | :--- | :--- | :--- | :--- | :--- |
 | **Two-Phase Commit (2PC)** | A central Coordinator asks all participants to **Phase 1: Prepare** (lock rows & vote Yes/No), then **Phase 2: Commit or Abort** globally. | Strong atomic all-or-nothing semantics across heterogeneous nodes. | **Blocking protocol & SPOF**: holds database row locks across network RTTs; if the Coordinator crashes mid-commit, participants remain blocked holding locks. Poor throughput. | Internal cross-shard commits inside distributed SQL engines (Spanner) or low-QPS legacy banking transfers. |
@@ -167,6 +191,25 @@ When a business workflow spans multiple microservices or database shards (e.g., 
 ## 5. Idempotency Keys (Safe Retries Over Unreliable Networks)
 
 An operation is **idempotent** if performing it multiple times produces the exact same side effect as performing it once ($f(f(x)) = f(x)$):
+
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+sequenceDiagram
+    participant C as Client
+    participant S as Payment Service
+    participant DB as Idempotency Store (Redis/SQL)
+    participant PSP as Stripe / Payment Rail
+
+    C->>S: 1. POST /charge (Idempotency-Key: uuid-99)
+    S->>DB: 2. INSERT key='uuid-99', status='IN_PROGRESS'
+    S->>PSP: 3. Execute $100 Charge
+    PSP-->>S: 4. 200 OK (charge_id='ch_1')
+    S->>DB: 5. UPDATE key='uuid-99', status='COMPLETED', resp='{"id":"ch_1"}'
+    S--xC: 6. Network Drops Before Client Receives Response!
+    C->>S: 7. Retry POST /charge (Idempotency-Key: uuid-99)
+    S->>DB: 8. Lookup 'uuid-99' -> Found status='COMPLETED'
+    S-->>C: 9. Return Cached 200 OK '{"id":"ch_1"}' (Zero Double-Charge!)
+```
 
 - `GET`, `PUT`, and `DELETE` are naturally idempotent; `POST` (e.g., `POST /v1/payments/charge`) is **not**.
 - If a client calls `POST /v1/payments/charge` and the network connection drops *after* the server charges the card but *before* the client receives the `200 OK` response, the client will retry.
@@ -240,6 +283,30 @@ When you need to order events across nodes without trusting physical wall clocks
 ## 8. Asynchronous Messaging: Message Queues vs. Pub/Sub Event Streams
 
 Decoupling synchronous producers from consumers smooths out traffic spikes (load leveling), enables independent failure isolation, and supports event-driven architectures.
+
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    subgraph Queue["1. Point-to-Point Queue (RabbitMQ / SQS: Deleted on ACK)"]
+        P1["Producer"] --> Q[["Queue"]]
+        Q -->|"Msg 1"| W1["Worker 1"]
+        Q -->|"Msg 2"| W2["Worker 2"]
+    end
+
+    subgraph Stream["2. Partitioned Event Log (Kafka: Retained & Replayable by Offset)"]
+        P2["Producer"] --> Part0[["Partition 0: [e1, e2, e3]"]]
+        Part0 -->|"Offset=3"| CG1["Fraud Consumer Group"]
+        Part0 -->|"Offset=1 (Replay)"| CG2["Analytics Consumer Group"]
+    end
+
+    classDef prod fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef broker fill:#7c3aed,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef cons fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+
+    class P1,P2 prod
+    class Q,Part0 broker
+    class W1,W2,CG1,CG2 cons
+```
 
 | Dimension | Traditional Message Queue (Point-to-Point) | Distributed Append-Only Event Log (Pub/Sub Stream) |
 | :--- | :--- | :--- |

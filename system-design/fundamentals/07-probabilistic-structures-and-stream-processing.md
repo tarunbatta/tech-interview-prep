@@ -41,6 +41,34 @@ When dealing with billions of users, URLs, or events, exact data structures (`Ha
 
 ### Bloom Filter & Cuckoo Filter (Set Membership)
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    Key["Key: `user_42`"]
+    H1["Hash h1(x) -> Bit 1"]
+    H2["Hash h2(x) -> Bit 4"]
+    H3["Hash h3(x) -> Bit 7"]
+    Bits["Bit Array: [0, 1, 0, 0, 1, 0, 0, 1]"]
+    Decision{"All k Bits == 1?"}
+    No["Any Bit == 0: 100% Definitely NOT Present"]
+    Yes["All Bits == 1: Probably Present (~99% Sure)"]
+
+    Key --> H1 & H2 & H3
+    H1 & H2 & H3 --> Bits --> Decision
+    Decision -->|"No"| No
+    Decision -->|"Yes"| Yes
+
+    classDef key fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef hash fill:#7c3aed,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef ok fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef miss fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+
+    class Key key
+    class H1,H2,H3,Bits,Decision hash
+    class Yes ok
+    class No miss
+```
+
 - **How a Bloom Filter Works**:
   1. Allocates a bit array of $m$ bits (all initialized to `0`) and $k$ independent hash functions ($h_1, h_2, \dots, h_k$).
   2. **Insert(`item`)**: Computes $h_1(\text{item}), \dots, h_k(\text{item}) \pmod m$ and sets those $k$ bit positions to `1`.
@@ -116,6 +144,28 @@ In leaderless clusters with hundreds of nodes (**Apache Cassandra, Amazon Dynamo
 
 When two Dynamo/Cassandra replicas recover from a network partition, how do they figure out which keys out of 100 million diverged without sending all 100 million keys over the network?
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 30, 'padding': 10}}}%%
+flowchart TD
+    Root["Root Hash: H(H_AB + H_CD) [MISMATCH!]"]
+    Left["Left Branch H_AB [MATCH == Skip 50M Keys!]"]
+    Right["Right Branch H_CD [MISMATCH -> Drill Down]"]
+    LeafA["Range A (Keys 1..25M)"]
+    LeafB["Range B (Keys 25M..50M)"]
+    LeafC["Range C (Keys 50M..75M) [MATCH]"]
+    LeafD["Range D (Keys 75M..100M) [DIVERGED -> Sync Only Here!]"]
+
+    Root --> Left & Right
+    Left --> LeafA & LeafB
+    Right --> LeafC & LeafD
+
+    classDef match fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef diff fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+
+    class Left,LeafA,LeafB,LeafC match
+    class Root,Right,LeafD diff
+```
+
 - Each replica builds a **Merkle Tree** (a binary tree where leaves are hashes of individual key-ranges and parent nodes are hashes of their two children).
 - **Sync in $O(\log N)$**: Replica A and Replica B first compare their **Root Hash**.
   - If the Root Hashes match $\rightarrow$ the 100 million keys are 100% identical (done in 1 packet!).
@@ -169,6 +219,38 @@ To aggregate an unbounded infinite stream (e.g., *"Count ad clicks per minute"* 
 ---
 
 ### CQRS, Event Sourcing & Lambda vs. Kappa Architecture
+
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    subgraph Command["CQRS Write Path (Command)"]
+        Cmd["Write API (`POST /orders`)"]
+        WriteDB[("ACID SQL + Event Log")]
+        Cmd --> WriteDB
+    end
+
+    Kafka[["Kafka Event Stream (CDC / Event Sourcing)"]]
+    Flink["Apache Flink (Kappa Stream Processor)"]
+
+    subgraph Query["CQRS Read Path (Materialized Views)"]
+        ES[("Elasticsearch (Full-Text Search View)")]
+        Redis[("Redis Cluster (Sub-ms Timeline View)")]
+        ReadAPI["Read API (`GET /orders/search`)"]
+        ES & Redis --> ReadAPI
+    end
+
+    WriteDB -->|"Publish Domain Events"| Kafka
+    Kafka --> Flink
+    Flink -->|"Project Denormalized Views"| ES & Redis
+
+    classDef write fill:#be123c,stroke:#fb7185,stroke-width:2px,color:#ffffff
+    classDef stream fill:#7c3aed,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef read fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+
+    class Cmd,WriteDB write
+    class Kafka,Flink stream
+    class ES,Redis,ReadAPI read
+```
 
 1. **CQRS (Command Query Responsibility Segregation)**:
    - Separates the **Write Model (Command)** — normalized ACID PostgreSQL optimized for transactional integrity — from the **Read Model (Query)** — denormalized Elasticsearch / Redis / Cassandra views updated asynchronously via Kafka CDC events.

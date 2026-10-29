@@ -29,6 +29,28 @@ Caching stores copies of frequently accessed or computationally expensive data i
 
 ### Multi-Tier Caching Across the System Stack
 
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 18, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    L1["L1: Browser / Client Cache (< 1ms)"]
+    L2["L2: CDN Edge PoP (5-25ms)"]
+    L3["L3: API Gateway Cache (1-5ms)"]
+    L4["L4: App Heap L1 (Caffeine ~100ns)"]
+    L5["L5: Shared Redis Cluster (0.5-2ms)"]
+    L6["L6: DB Buffer Pool (0.1-1ms)"]
+    Disk[("NVMe Disk (1-5ms)")]
+
+    L1 -->|"Miss"| L2 -->|"Miss"| L3 -->|"Miss"| L4 -->|"Miss"| L5 -->|"Miss"| L6 -->|"Miss"| Disk
+
+    classDef fast fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef mid fill:#7c3aed,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef slow fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class L1,L2 fast
+    class L3,L4,L5 mid
+    class L6,Disk slow
+```
+
 | Cache Tier | Location | Typical Latency | What Is Cached & How |
 | :--- | :--- | :--- | :--- |
 | **L1: Client / Browser Cache** | User's device memory / local disk (`IndexedDB`, HTTP cache) | `< 1 ms` (0 network hops) | Static assets, user preferences, offline state controlled via `ETag`, `If-None-Match` (`304 Not Modified`), and `Cache-Control`. |
@@ -114,6 +136,24 @@ When cache memory is full, the cache must evict existing keys according to its e
 ---
 
 ### Caching Failure Modes & Interview Mitigations
+
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+sequenceDiagram
+    participant R1 as Request 1 (Leader)
+    participant R2 as Requests 2..10,000 (Coalesced)
+    participant Cache as Redis Cache + Mutex
+    participant DB as Primary Database
+
+    R1->>Cache: 1. GET hot_key (MISS)
+    R2->>Cache: 2. GET hot_key (MISS)
+    R1->>Cache: 3. SET lock:hot_key NX PX 5000 (ACQUIRED)
+    R2->>Cache: 4. SET lock:hot_key NX (LOCKED -> Wait / Singleflight)
+    R1->>DB: 5. Single Expensive SQL Query
+    DB-->>R1: 6. Return Result
+    R1->>Cache: 7. SET hot_key + Release Lock
+    Cache-->>R2: 8. Serve Populated Cache to Waiting Requests
+```
 
 | Failure Scenario | What Happens | Production Mitigation Strategies |
 | :--- | :--- | :--- |
@@ -215,6 +255,34 @@ flowchart LR
 With naive modular hashing (`server = hash(key) % N`), adding or removing a single node changes $N$, causing **nearly 100% of keys** ($\frac{N-1}{N}$) to remap to different servers and triggering a catastrophic cache avalanche.
 
 **Consistent Hashing** maps both **Servers** and **Keys** onto a circular **Hash Ring** ($0$ to $2^{32}-1$):
+
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
+flowchart LR
+    N1A["Node A (vnode 1: pos 15)"]
+    K1(("Key 1 (hash 40)"))
+    N2A["Node B (vnode 1: pos 90)"]
+    K2(("Key 2 (hash 140)"))
+    N3A["Node C (vnode 1: pos 180)"]
+    N1B["Node A (vnode 2: pos 260)"]
+    N2B["Node B (vnode 2: pos 330)"]
+
+    N1A --> K1
+    K1 -->|"Clockwise Owner"| N2A
+    N2A --> K2
+    K2 -->|"Clockwise Owner"| N3A
+    N3A --> N1B --> N2B --> N1A
+
+    classDef nodeA fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff
+    classDef nodeB fill:#7c3aed,stroke:#a78bfa,stroke-width:2px,color:#ffffff
+    classDef nodeC fill:#047857,stroke:#34d399,stroke-width:2px,color:#ffffff
+    classDef key fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff
+
+    class N1A,N1B nodeA
+    class N2A,N2B nodeB
+    class N3A nodeC
+    class K1,K2 key
+```
 
 1. A key is assigned to the first server encountered moving **clockwise** on the ring from `hash(key)`.
 2. When a node is added or removed, only **$O(K / N)$ keys** (the fraction of keys on that single segment) are reassigned; all other keys remain undisturbed.
