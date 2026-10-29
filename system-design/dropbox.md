@@ -236,6 +236,15 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **File Tree Metadata, Versions & Shares** | **Sharded MySQL / Amazon Aurora (or Edgestore)** | Relational (ACID, **CP / PC-EC**) | **Why:** File hierarchy updates (`File`), revision commits (`FileVersion`, `FileBlock`), and Optimistic Concurrency Control (`WHERE version = baseVersion`) require strict ACID transactions and linearizable consistency within a user's namespace to prevent silent data corruption or orphaned blocks. Sharded horizontally by `ownerId` / `namespaceId`. |
+| **4MB Content-Addressed File Chunks** | **Dropbox Magic Pocket / AWS S3 (+ Glacier Cold Tier)** | Immutable Object Storage (**11 9s Durability**) | **Why:** Storing $1.2+\text{ PB/day}$ of binary file chunks inside a database is cost-prohibitive. Content-addressed blob storage keyed by `SHA-256(chunk)` enables global block-level deduplication and $8+4$ Reed-Solomon erasure coding across racks, while aged file revisions ($> 30\text{ days}$) automatically tier to cold Glacier storage. |
+| **Chunk Deduplication Index & Hot Metadata** | **Redis Cluster** | In-Memory Key-Value (**Sub-ms Read**) | **Why:** Before uploading a 4MB chunk, clients call `/chunks/check-exists` with an array of SHA-256 hashes. Caching known `blockHash` keys and active directory trees in Redis answers existence checks in $< 1\text{ ms}$ and offloads $>90\%$ of read QPS from the sharded MySQL metadata tier. |
+| **Local Client Sync State** | **Embedded SQLite** | Local Relational (**ACID on Device**) | **Why:** Desktop and mobile sync agents need a lightweight, zero-administration embedded relational store on disk to index local file paths, modification timestamps, and `SHA-256` chunk lists for offline delta comparisons. |
+
 ```mermaid
 erDiagram
     User ||--o{ File : "owns"

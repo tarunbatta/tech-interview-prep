@@ -298,6 +298,14 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Live Driver Geospatial Index (`currentH3Index`)** | **Redis Cluster / Ringpop In-Memory Actor Mesh** | In-Memory Geospatial Index (**AP / Ephemeral 15s TTL**) | **Why:** Active drivers emit $300,000\text{--}600,000\text{ GPS pings/sec}$. Disk-backed SQL `B-Trees` or PostGIS R-Trees would melt under this continuous overwrite rate. Holding all 1.2M active drivers in memory ($\sim 307\text{ MB}$ total) indexed by **Uber H3** hexagonal cell IDs (`Resolution 8`) enables sub-millisecond $k$-ring neighbor queries and automatic 15-second TTL eviction when a driver goes offline. |
+| **Active Trip State Machine, Dispatch Locks & Billing** | **Sharded PostgreSQL / MySQL (Schemaless / DocStore) or CockroachDB** | Transactional Relational / NewSQL (ACID, **CP / PC-EC**) | **Why:** Assigning a driver to a trip (`SEARCHING_FOR_DRIVER` $\to$ `ACCEPTED`), preventing double-dispatch race conditions (`WHERE status = 'SEARCHING_FOR_DRIVER'`), and settling driver/rider financial ledgers require strict ACID consistency and optimistic concurrency control. |
+| **Historical Trip Trajectories & Completed Trips** | **Apache Cassandra + AWS S3 (Parquet)** | Wide-Column Store + Cold Object Lake (**AP / PA-EL**) | **Why:** Storing $3.3\text{ TB/day}$ of raw GPS bread-crumb pings and $25\text{M completed trips/day}$ requires high-throughput append-only LSM-Tree writes partitioned by `tripId` / `riderId` / `driverId`, with older trip history tiered to S3 for ML ETA training and dispute auditing. |
+
 ```mermaid
 erDiagram
     RIDER ||--o{ TRIP : "requests"

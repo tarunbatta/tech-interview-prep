@@ -264,6 +264,17 @@ Authorization: Bearer <user_jwt>
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Users, Posts & Media Metadata** | **Sharded PostgreSQL** | Relational (ACID, **CP / PC-EC**) | **Why:** Instagram famously scaled core metadata (`User`, `Post`, `Media`) across thousands of logical PostgreSQL shards using custom 64-bit PL/pgSQL Snowflake-like IDs (41b timestamp + 13b shard ID + 10b sequence). Embedding the logical shard ID directly inside `postId` enables single-hop routing without a central lookup table while preserving ACID guarantees and relational integrity. |
+| **User Feed Timelines & Activity Inbox** | **Apache Cassandra** | Wide-Column Store (**AP / PA-EL**) | **Why:** Precomputed user feeds require high-velocity fan-out writes and sequential reverse-chronological reads (`WHERE user_id = ? ORDER BY post_id DESC LIMIT 20`). Cassandra's LSM-Tree storage engine handles massive write amplification across data centers with zero single points of failure and tunable quorum consistency. |
+| **Hot Feed Cache, 24h Stories & Counters** | **Redis Cluster (+ Memcached / TAO)** | In-Memory Key-Value / ZSet (**AP / Sub-ms**) | **Why:** Sustaining $250,000\text{ Peak Read QPS}$ with $< 200\text{ ms}$ latency requires serving the active home feed (top 500 `postId`s per active user, $\sim 400\text{ GB}$ RAM) from Redis Sorted Sets (`ZSET`). Ephemeral 24-hour Stories leverage native Redis key TTLs to auto-evict without disk tombstone bloat. |
+| **Social Graph (`Follower` Edges)** | **Meta TAO (Memcached + Sharded MySQL) / Cassandra** | Distributed Graph Cache + Persistent Store (**AP / Read-Your-Writes**) | **Why:** Fan-out workers and privacy checks frequently query bidirectional edges (`followers_of(u)`, `following_of(u)`). TAO caches adjacency lists in memory with write-through persistence to sharded MySQL, serving billions of graph lookups per second at microsecond latency. |
+| **Photos, Videos & WebP Variants** | **AWS S3 / Meta Haystack + Global Edge CDN** | Immutable Object Storage (**11 9s Durability**) | **Why:** $200\text{ TB/day}$ ($73\text{ PB/year}$) of binary media cannot live in relational or NoSQL tables. S3 stores master and transcoded WebP variants (`150px`, `640px`, `1080px`), while Cloudflare/CloudFront Edge CDNs serve $>95\%$ of media reads directly from local ISP PoPs. |
+| **Hashtag & Explore Search** | **Elasticsearch** | Inverted Index (**AP / Near Real-Time**) | **Why:** Indexes captions, hashtags (`#sunset`), and location tags for sub-100ms prefix and relevance search on the Explore page. |
+
 ```mermaid
 erDiagram
     User ||--o{ Post : "publishes"

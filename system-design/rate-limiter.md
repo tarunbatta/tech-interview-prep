@@ -206,6 +206,15 @@ X-RateLimit-Reset: 1730006426
 
 ## Object Model & Rule Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Distributed Token Bucket & Sliding Window Counters** | **Redis Cluster (In-Memory Shards + Lua)** | In-Memory Key-Value (**CP on Master Shard**) | **Why:** Evaluating $1,000,000+\text{ QPS}$ with a strict $< 2\text{ ms}$ P99 latency budget makes disk-based SQL or NoSQL databases unusable ($5\text{--}20\text{ ms}$ disk I/O + lock contention). Redis holds 50M active rate-limit trackers in just $\sim 5\text{ GB}$ of RAM, executes Token Bucket / Sliding Window logic atomically via single-threaded `EVALSHA` Lua scripts (eliminating read-modify-write race conditions), and automatically cleans up idle keys via native `EXPIRE` TTLs. |
+| **Gateway-Local Token Batch Cache** | **In-Process Memory (Envoy / Go Sync Map)** | Local Process Memory (**Zero-Network Hop**) | **Why:** For ultra-hot API keys or global DDoS surges ($10\text{M+}\text{ QPS}$), reserving batches of $N$ tokens in the API Gateway's local memory eliminates $98\%$ of network round-trips to the Redis cluster at the cost of a small, bounded over-admission margin. |
+| **Rate Limit Policy & Rule Configuration (`RateLimitRule`)** | **etcd / Consul (backed by PostgreSQL / GitOps)** | Strongly Consistent KV Store (**CP / Raft Consensus**) | **Why:** Rate-limiting rules (`maxRequests`, `burstCapacity`, `endpointPattern`) are small (< 10 MB total), rarely mutated, and must be pushed to all API Gateway and Rate Limiter nodes immediately upon change. `etcd` provides Raft-backed strong consistency and long-polling `WATCH` streams for sub-second hot reloading without service restarts. |
+| **Throttled Request Telemetry (HTTP 429 Logs)** | **ClickHouse / Prometheus (+ Kafka)** | Time-Series / Columnar OLAP (**AP / Append-Heavy**) | **Why:** Synchronously logging blocked requests during a DDoS attack would overwhelm transactional databases. Asynchronous Kafka streaming into ClickHouse/Prometheus enables real-time anomaly detection and customer quota usage dashboards. |
+
 ```mermaid
 erDiagram
     RateLimitRule {

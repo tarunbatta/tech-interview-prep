@@ -268,6 +268,15 @@ Authorization: Bearer <user_token>
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Append-Only Keystroke Operation Log (`DocumentOp`)** | **Apache Cassandra / Google Cloud Bigtable** | Wide-Column Store (**AP / PC-EC Tunable**) | **Why:** Sustaining $3,000,000+\text{ batched ops/sec}$ of keystroke mutations (`INSERT`/`DELETE`) across 5M concurrent documents would overwhelm relational B-Tree databases due to random disk I/O and row locking. Cassandra/Bigtable uses LSM-Trees (Log-Structured Merge-trees) for ultra-fast sequential memory/WAL appends and partitions by `docId` with clustering key `revision ASC`, enabling instant range scans (`WHERE docId = ? AND revision > 1400`) when reconnecting clients or compacting snapshots. |
+| **Document Metadata, Pointers & Comments** | **Google Cloud Spanner (or CockroachDB)** | Distributed SQL (External Consistency, **CP / PC-EC**) | **Why:** Document ownership, revision pointers (`currentRevision`, `latestSnapshotRev`), ACLs, and threaded `DocumentComment` entities require globally consistent ACID transactions so permission revocations and snapshot pointer advancements are linearizable worldwide. |
+| **Compacted AST Checkpoints (`DocumentSnapshot`)** | **Google Colossus / AWS S3** | Object Storage (**11 9s Durability**) | **Why:** Every 100 operations (or 60 seconds), the Snapshot Compactor folds raw operations into a compressed JSON/Protobuf Abstract Syntax Tree (AST) blob. Storing multi-kilobyte/megabyte version snapshots in object storage keeps the primary database lean and allows cold documents to load in a single blob fetch. |
+| **Live Cursor Presence & Session Routing** | **Redis Cluster (Pub/Sub & Key-Value)** | In-Memory Store (**Sub-ms Ephemeral**) | **Why:** Cursor coordinates, text highlights, and active collaborator colors change multiple times per second and do not require disk persistence. Redis Pub/Sub broadcasts ephemeral presence frames in $< 5\text{ ms}$, while ZooKeeper/Redis leases track which stateful OT Session Leader pod owns each active `docId`. |
+
 ```mermaid
 erDiagram
     Document ||--o{ DocumentOp : "records_operations"

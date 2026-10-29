@@ -248,6 +248,16 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **File & Folder DAG Hierarchy, Revisions & Quotas** | **Google Cloud Spanner** | Distributed Relational SQL (TrueTime ACID, **CP / PC-EC**) | **Why:** Drive's folder structure is a multi-parent Directed Acyclic Graph (`File`, `FileParent`, `FileRevision`) with $200\text{ Billion+}$ records ($\sim 200\text{ TB}$). Moving folders requires cross-shard ACID transactions with strict serializability to prevent directory cycles (`Folder A` moved inside its own child `Folder B`), which eventual-consistency NoSQL databases cannot guarantee. |
+| **Fine-Grained Hierarchical ACLs (`AclTuple`)** | **Google Zanzibar (Spanner + Leopard In-Memory Index)** | Relation Tuple Store + Set Cache (**CP / External Consistency**) | **Why:** Checking whether a user has inherited access to a deeply nested file across nested Google Groups requires evaluating transitive graph reachability (`document#viewer@group:eng#member@alice`). Zanzibar stores relation tuples in Spanner (using TrueTime "zookies" to prevent the "new enemy" stale-ACL problem) and caches expanded group/folder sets in the Leopard in-memory layer for $< 5\text{ ms}$ checks. |
+| **Multi-Exabyte File Chunks** | **Google Colossus / AWS S3** | Distributed Blob Store (**11 9s Durability**) | **Why:** Stores $600+\text{ PB}$ of encrypted 8MB file chunks using $8+4$ Reed-Solomon erasure coding across failure domains, completely decoupled from metadata transactions. |
+| **Scoped Full-Text & OCR Search** | **Elasticsearch / Google Cloud Search** | Inverted Index (**AP / Near Real-Time**) | **Why:** Indexes filenames, document bodies, and Cloud Vision OCR text extracted from images/PDFs, allowing $< 200\text{ ms}$ keyword and attribute queries scoped to the user's authorized file IDs. |
+| **Real-Time Cross-Service Quota Counters** | **Redis Cluster** | In-Memory Key-Value (**Sub-ms Atomic**) | **Why:** Enforces 15GB+ storage quotas shared across Drive, Gmail, and Photos at upload time using fast atomic counters (`INCRBY`), avoiding hot-row contention in Spanner during concurrent chunk uploads. |
+
 ```mermaid
 erDiagram
     User ||--o{ File : "owns_or_modifies"

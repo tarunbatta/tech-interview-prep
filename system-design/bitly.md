@@ -215,6 +215,15 @@ Cache-Control: private, max-age=90
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **URL Mappings (`shortCode` $\to$ `originalUrl`)** | **Amazon DynamoDB / Apache Cassandra** | Key-Value / Wide-Column (**AP / PA-EL**) | **Why:** URL redirection is a pure point-lookup workload (`GET` by 7-char `shortCode` PK) with a $100:1$ read-to-write ratio, $6\text{ Billion+}$ rows ($\sim 3.3\text{ TB}$), and zero relational joins. DynamoDB/Cassandra partitions horizontally by `shortCode` hash, supports native item TTL expiration (`expiresAt`), and delivers single-digit millisecond lookups at any scale. |
+| **Hot Redirect Cache & Bloom Filter** | **Redis Cluster** | In-Memory Key-Value (**Sub-ms Read**) | **Why:** Following the 80/20 rule, caching the top $20\%$ active links ($\sim 37\text{ GB}$ RAM) in Redis serves $>80\%$ of all `302 Found` redirects in $< 2\text{ ms}$. An in-memory Redis Bloom Filter sits in front of the cache to reject bogus/scraped 7-character codes with `404 Not Found` in $< 1\text{ ms}$ without hitting the database. |
+| **Pre-Generated Key Pool (KGS)** | **PostgreSQL** | Relational (ACID, **CP**) | **Why:** The offline Key Generation Service (KGS) stores `available_keys` and `used_keys`. PostgreSQL's `SELECT ... FOR UPDATE SKIP LOCKED` allows multiple KGS server nodes to atomically claim disjoint batches of $100,000$ unused Base62 keys into memory with zero collision risk. |
+| **Real-Time Click Stream Analytics** | **ClickHouse** | Columnar OLAP (**High-Throughput Analytical**) | **Why:** Every `302` redirect emits a `CLICK_EVENT` to Kafka ($15,000+\text{ events/sec}$ at peak). Writing click events into an OLTP row store (PostgreSQL/MySQL) would saturate disk IOPS and slow down dashboard `GROUP BY` queries (clicks by country, referrer, browser, hour). ClickHouse compresses columnar time-series data by $10\times$ and executes real-time analytical aggregations over billions of clicks in $< 100\text{ ms}$. |
+
 ```mermaid
 erDiagram
     USER ||--o{ SHORT_URL : "creates"

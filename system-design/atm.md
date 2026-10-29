@@ -278,6 +278,15 @@ Compensating transaction triggered if cash is trapped, rejected, or mechanical e
 
 ## Object Model & Data Entities
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Core Banking Double-Entry Ledger** | **CockroachDB / Google Spanner (or IBM DB2 Mainframe)** | Distributed SQL (Serializable ACID, **CP / PC-EC**) | **Why:** Cash withdrawals and transfers (`ACCOUNT`, `TRANSACTION`) require strict linearizability and `SERIALIZABLE` ACID isolation. Eventual consistency (AP NoSQL) is unacceptable because concurrent withdrawals at two ATMs could double-spend the same balance. Distributed SQL provides multi-region Raft/Paxos consensus with zero RPO (Recovery Point Objective) and strong row-level locking on `accountId`. |
+| **ATM Inventory & Cassette Telemetry** | **PostgreSQL / Amazon Aurora** | Relational (ACID, **CP**) | **Why:** Tracks `ATM` status, heartbeats, and physical banknote counts across `CASH_CASSETTE` slots (\$10, \$20, \$50, \$100) and reject bins. Relational constraints and transactional updates keep physical cassette counts synchronized with each confirmed dispense or armored-car replenishment. |
+| **Local Terminal Power-Cut Journal** | **Embedded SQLite / LevelDB (on NVRAM)** | Local Embedded WAL (**Strict Local Durability**) | **Why:** Every ATM runs a local CEN/XFS state machine that must survive sudden power loss or WAN cable cuts mid-dispense. Writing each mechanical step (bills picked $\to$ sensor verified $\to$ shutter opened $\to$ cash taken) to a synchronous `fsync` Write-Ahead Log on tamper-resistant NVRAM enables deterministic reconciliation or automated ISO 8583 `0420` reversal upon reboot. |
+| **7-Year Regulatory Audit Vault** | **AWS S3 Glacier (Object Lock WORM)** | Immutable Object Storage (**11 9s Durability**) | **Why:** Banking regulations require retaining cryptographically signed ISO 8583 transaction traces and dispenser sensor logs ($\sim 96\text{ TB}$ over 7 years) in Write-Once-Read-Many (WORM) storage where records cannot be altered or deleted even by database administrators. |
+
 ```mermaid
 erDiagram
     ATM ||--|{ CASH_CASSETTE : "contains"

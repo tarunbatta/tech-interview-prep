@@ -216,6 +216,14 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Authoritative Tags, Synonyms & Item Associations (`Tag`, `ItemTag`)** | **Amazon Aurora PostgreSQL** | Relational (ACID, **CP / PC-EC**) | **Why:** Tag governance (merging synonyms via `canonicalTagId`, enforcing unique `(itemId, tagId)` composite primary keys, and maintaining referential integrity) requires ACID transactions. At $2\text{ Billion}$ rows ($\sim 24\text{ GB}$ of compact integer pairs), the entire association table fits comfortably in a single Aurora instance's buffer pool with read replicas. |
+| **Multi-Tag Boolean Search (`AND` / `OR` / `NOT`)** | **Elasticsearch / Apache Lucene (Roaring Bitmaps)** | Inverted Index (**AP / Near Real-Time**) | **Why:** Evaluating `tag = "python" AND tag = "machine-learning" NOT tag = "tensorflow"` in SQL requires expensive multi-way self-joins (`JOIN item_tags t1 ... JOIN item_tags t2`) that degrade at $150,000\text{ Peak QPS}$. Elasticsearch stores each tag's postings list as a compressed **Roaring Bitmap**, executing bitwise `AND`/`OR`/`ANDNOT` intersections across millions of item IDs in $< 1\text{ ms}$ (synced from PostgreSQL via Debezium CDC). |
+| **Sub-10ms Prefix Autocomplete & Trending Leaderboards** | **Redis Cluster + In-Memory Prefix Trie** | In-Memory Key-Value / ZSet (**AP / Sub-ms**) | **Why:** All 2M unique tag names ($\sim 400\text{ MB}$) fit in process memory as a Prefix Trie with precomputed Top-5 tags per node ($O(L)$ lookup in $< 1\text{ ms}$). Redis Sorted Sets (`ZSET`) store real-time hourly/daily trending tag leaderboards updated by Apache Flink + Count-Min Sketch stream processors. |
+
 ```mermaid
 erDiagram
     Tag ||--o{ ItemTag : "tagged_in"

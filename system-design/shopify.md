@@ -232,6 +232,15 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Per-Pod Merchant Data (`Shop`, `Product`, `Order`)** | **Pod-Isolated MySQL / Vitess Clusters** | Sharded Relational (ACID, **CP / PC-EC**) | **Why:** Orders, payments, refunds, and merchant catalog mutations require strict relational ACID guarantees. Rather than a single monolithic database (where one viral merchant's lock contention brings down all 4M stores), Shopify partitions MySQL into self-contained **Pods** keyed by `shopId`. All rows for a given merchant live inside the same Pod (`podId`), enabling fast local SQL joins (`Order` $\bowtie$ `ProductVariant`) with complete blast-radius isolation. |
+| **Flash-Sale Inventory Reservation & Pod Cache** | **Pod-Isolated Redis Cluster (Atomic Lua)** | In-Memory Key-Value (**CP on Primary**) | **Why:** During Black Friday / Kylie Cosmetics flash sales ($50,000$ concurrent buyers for 100 units), SQL `SELECT ... FOR UPDATE` on `ProductVariant.inventoryQuantity` causes severe thread-pool exhaustion. Executing an atomic Redis Lua script (`EVALSHA`) decrements inventory and issues a 10-minute reservation token in microseconds before touching MySQL. |
+| **Storefront HTML & Liquid Fragment Cache** | **Cloudflare Edge CDN + Redis** | Edge Object / KV Cache (**AP / Sub-50ms**) | **Why:** Absorbs $1.2\text{M QPS}$ of storefront browsing traffic ($100:1$ browse-to-checkout ratio) at the network edge, with instant cache-tag purge ($< 150\text{ ms}$) triggered via MySQL CDC when a merchant updates a product price. |
+| **Cross-Shop Analytics & Merchant Reporting** | **Google BigQuery / Apache Iceberg (via Kafka CDC)** | Cloud Data Warehouse / OLAP (**Analytical**) | **Why:** Merchants query historical sales trends, cohort retention, and BFCM live globes without running heavy analytical `GROUP BY` scans on transactional Pod MySQL databases. |
+
 ```mermaid
 erDiagram
     Shop ||--o{ Product : "lists"

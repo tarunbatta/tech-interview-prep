@@ -235,6 +235,16 @@ Content-Type: application/json
 
 ## Object Model & Data Entities
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Accounts, Subscriptions & Billing** | **Amazon Aurora (MySQL)** | Relational (ACID, **CP / PC-EC**) | **Why:** Account registration (`Account`), subscription tier changes, and monthly billing cycles require strict ACID transactions, strong consistency, and zero financial discrepancy. Because billing write volume is orders of magnitude lower than streaming telemetry, a relational database easily handles the transactional load. |
+| **Viewing History & Playback Bookmarks** | **Apache Cassandra** | Wide-Column Store (**AP / PA-EL**) | **Why:** 100M concurrent streams emit playback position beacons every 10 seconds ($\sim 10\text{M writes/sec}$ raw, micro-batched via Kafka/Flink). Relational B-Trees would collapse under this write velocity. Cassandra's masterless ring architecture and LSM-Tree append-only commit logs absorb massive write throughput across multi-region AWS deployments (`LOCAL_QUORUM`), partitioned by `(accountId, profileId)` with `videoId` / `updatedAt` as clustering keys. |
+| **Hot Catalog, Entitlements & Homepage Rows** | **EVCache (Distributed Memcached / Redis)** | In-Memory Key-Value (**AP / Microsecond Read**) | **Why:** Every app launch fetches personalized homepage rows, profile preferences, and `Video` metadata. Netflix's EVCache replicates hot key-value payloads across AWS Availability Zones and regions in memory, serving tens of millions of reads/sec in $< 2\text{ ms}$ and shielding Cassandra/Aurora from read spikes. |
+| **Title, Actor & Genre Search** | **Elasticsearch** | Inverted Index (**AP / Near Real-Time**) | **Why:** Powers instant typo-tolerant typeahead search across `Video` titles, cast members, directors, and localized multi-language synopses. |
+| **Master & Encoded Video Assets** | **AWS S3 + Netflix Open Connect Appliances (OCAs)** | Object Storage + Embedded ISP NVMe Cache (**11 9s Durability**) | **Why:** Stores $2.7+\text{ PB}$ of encoded AV1/HEVC/H.264 video chunks and $7.5\text{ PB}$ of studio masters in S3, which are proactively pre-positioned onto custom FreeBSD NVMe OCA servers inside ISP networks during off-peak hours (2 AM–6 AM) to serve $87.5+\text{ Tbps}$ of video locally. |
+
 ```mermaid
 erDiagram
     Account ||--|{ Profile : "contains"

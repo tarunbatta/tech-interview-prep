@@ -135,6 +135,15 @@ flowchart LR
 
 ## Object-Oriented Domain Model
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Local Garage Edge State (Tickets, Spots & Tariffs)** | **Embedded SQLite (WAL Mode) / Local PostgreSQL** | Local Relational (ACID, **Strict Local CP**) | **Why:** Physical entry/exit barriers must lift in $< 1\text{ second}$ and operate at $100\%$ availability even if the garage's internet fiber is cut. Running a local relational database on the on-premise Edge Controller provides ACID transactions (`allocateSpot`, `ParkingTicket` issuance) with zero WAN dependency, syncing asynchronously to the cloud via MQTT when connectivity is restored. |
+| **Cloud Reservations, Billing & Fleet Management** | **Amazon Aurora PostgreSQL** | Relational (ACID, **CP / PC-EC**) | **Why:** Mobile pre-bookings, payment ledger settlements, and multi-garage fleet configuration across 10,000 garages require strong ACID consistency and relational integrity to prevent double-booking the $40\%$ pre-booking quota pool. |
+| **Real-Time Floor Occupancy & Wayfinding Cache** | **Redis (Edge + Cloud)** | In-Memory Key-Value (**Sub-ms Read/Write**) | **Why:** Powers instant available-spot counters per floor and vehicle class (`COMPACT`, `REGULAR`, `LARGE`, `EV`, `ACCESSIBLE`) for overhead LED ramp signboards and mobile app live availability views. |
+| **Ultrasonic Sensor & Gate Telemetry History** | **TimescaleDB / InfluxDB (or Cassandra)** | Time-Series Database (**AP / Append-Heavy**) | **Why:** Ingests high-frequency IoT heartbeats and occupancy transitions from 10M+ stall sensors and barrier relays for predictive occupancy modeling and hardware fault alerting. |
+
 ```mermaid
 classDiagram
     class ParkingGarage {

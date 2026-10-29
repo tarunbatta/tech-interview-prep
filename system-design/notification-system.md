@@ -221,6 +221,14 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **User Profiles, Preferences & Device Tokens** | **Amazon Aurora PostgreSQL (or Sharded MySQL)** | Relational (ACID, **CP / PC-EC**) | **Why:** `User`, `DeviceToken`, and `UserPreference` (opt-in/out flags, quiet hours, timezone) require strong consistency (`CP`) so that when a user opts out of marketing SMS or revokes a stale APNs/FCM token, the change is respected immediately with zero compliance violations (TCPA/GDPR). Read-heavy worker lookups are cached in Redis with write-through invalidation. |
+| **5-Minute Deduplication Guard & Rate Caps** | **Redis Cluster** | In-Memory Key-Value / ZSet (**CP on Primary**) | **Why:** At $85,000\text{ Peak QPS}$, checking whether an upstream retry is a duplicate or exceeds a user's daily frequency cap must happen in $< 1\text{ ms}$. Redis `SET dedupe:<md5> 1 NX EX 300` atomically rejects duplicate alerts in memory, while Redis Sorted Sets (`ZADD`) schedule deferred notifications until a user's local Quiet Hours expire. |
+| **Notification Delivery Audit Log (`NotificationLog`)** | **Apache Cassandra / Amazon DynamoDB** | Wide-Column / Key-Value (**AP / PA-EL**) | **Why:** Recording $500\text{ Million+}$ status transitions per day (`queued` $\to$ `sent` $\to$ `delivered` $\to$ `opened`) generates massive append-heavy write traffic. Cassandra/DynamoDB partitions by `userId` (with `deliveredAt` clustering key) or `notifId`, absorbing tens of thousands of writes/sec without relational B-Tree index fragmentation and supporting automatic TTL expiration (e.g., 90 days). |
+
 ```mermaid
 erDiagram
     User ||--o{ DeviceToken : "owns"

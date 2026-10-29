@@ -251,6 +251,15 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Bookings, Reservations & Financial Ledger** | **Amazon Aurora (MySQL)** | Relational (ACID, **CP / PC-EC**) | **Why:** Zero double-booking is non-negotiable. Aurora provides serializable/repeatable-read ACID transactions and enforces a composite primary key constraint `(listing_id, stay_date)` on `LISTING_DATE` as the ultimate guard against concurrent checkout races. NoSQL stores lack native multi-row cross-table transactional rollbacks required for escrow split-payments. Sharded by `listing_id` so all date locks for a single property reside on the same physical shard. |
+| **Geospatial & Faceted Property Search** | **Elasticsearch** | Inverted Index + BKD Geo-Trees (**AP / PA-EL**) | **Why:** Searching 7M+ listings by bounding box/radius (`geo_point`), price range, guest count, and 50+ amenity filters in $< 200\text{ ms}$ is inefficient in relational B-Trees. Elasticsearch combines spatial R-trees/BKD-trees with inverted indexes and custom ML ranking scripts. Eventual consistency ($1\text{--}2\text{ s}$ index refresh) is acceptable for browse/search. |
+| **365-Day Availability Calendar & 15-Min Holds** | **Redis Cluster (Bitmaps & Locks)** | In-Memory Key-Value / Bitfield (**CP-Tuned**) | **Why:** SQL `NOT EXISTS (SELECT ... WHERE stay_date BETWEEN ...)` joins across millions of candidate listings during search would overwhelm the RDBMS. Representing each listing's 365-day availability as a 46-byte Redis bitmap fits all 7M listings into $\sim 322\text{ MB}$ of RAM, enabling microsecond bitwise `BITFIELD` checks and atomic 15-minute checkout locks (`SETNX` with TTL). |
+| **Property Photos & Media** | **AWS S3 + CloudFront CDN** | Object Storage (**11 9s Durability**) | **Why:** Storing $210\text{ TB}$ of high-resolution WebP/JPEG property photos in a database bloats backup snapshots and I/O. S3 provides virtually infinite object storage while CloudFront caches images at the edge closest to browsing guests. |
+
 ```mermaid
 erDiagram
     USER ||--o{ LISTING : "hosts"

@@ -186,6 +186,16 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Prime Entitlements & Watch History** | **Amazon DynamoDB Global Tables** | Key-Value / Wide-Column (**AP / PA-EL**) | **Why:** With 200M+ global subscribers and 60M DAU, playback resume positions (`WATCH_HISTORY`) and entitlement lookups (`PRIME_MEMBER`) require predictable single-digit millisecond latency across all continents. DynamoDB Global Tables provide active-active multi-region replication and seamless horizontal partitioning by `customerId` without managing manual RDBMS shards. |
+| **Sub-5ms Entitlement Hot Cache** | **Amazon ElastiCache (Redis)** | In-Memory Key-Value (**Sub-ms Read**) | **Why:** Every video start and e-commerce page load checks `hasActiveBenefit(userId)`. Caching active entitlement bitmasks in Redis offloads $>98\%$ of read QPS from DynamoDB and guarantees $< 5\text{ ms}$ P99 validation latency. |
+| **Amazon X-Ray Scene & Cast Relationships** | **Amazon Neptune (Graph DB)** | Property Graph (**Gremlin / SPARQL**) | **Why:** X-Ray links time-coded video scenes (`XRAY_SCENE`) to many-to-many relationships across actors, characters, biographies, cross-title filmographies, and soundtrack songs. A graph database traverses multi-hop entity relationships without expensive multi-way SQL join tables, pre-computing scene JSON payloads at ingestion time. |
+| **Video Catalog & Title Search** | **Elasticsearch / OpenSearch** | Inverted Index (**AP / PA-EL**) | **Why:** Powers typo-tolerant full-text search across titles, genres, actors, and directors, plus faceted filtering (4K UHD, HDR, maturity rating, Prime-included) in $< 50\text{ ms}$. |
+| **Encoded Video Segments & DRM Keys** | **AWS S3 + Multi-CDN (CloudFront, Akamai, Fastly)** | Object Storage (**11 9s Durability**) | **Why:** Stores petabytes of multi-bitrate HLS/DASH video chunks (AV1, HEVC, H.264) and static X-Ray JSON tracks, served via dynamic multi-CDN switching to sustain $90+\text{ Tbps}$ live sports peaks. |
+
 ```mermaid
 erDiagram
     PRIME_MEMBER ||--o{ WATCH_HISTORY : "records"

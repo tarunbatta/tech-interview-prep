@@ -228,6 +228,16 @@ Authorization: Bearer <admin_token>
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Seen URL Deduplication (`10B+ URLs`)** | **In-Memory Sharded Bloom Filter (backed by RocksDB)** | Probabilistic Bit Array + Embedded LSM KV (**AP / Sub-ms**) | **Why:** At $19,300\text{ discovered URLs/sec}$, querying a disk-based SQL/NoSQL database to check if a URL was already crawled creates an insurmountable disk IOPS bottleneck. A sharded Bloom Filter holds $10\text{ Billion}$ URLs in just $\sim 18\text{ GB}$ of RAM ($0.1\%$ false-positive rate), filtering $99.9\%$ of duplicate links in $< 0.1\text{ ms}$ without disk I/O. |
+| **Mercator URL Frontier (`FRONTIER_URL`)** | **RocksDB / Berkeley DB (Local NVMe SSD) + Redis Min-Heap** | Embedded LSM-Tree Queue + In-Memory Heap (**High-Throughput FIFO**) | **Why:** The frontier buffers $10\text{ Billion}$ pending URLs ($\sim 1\text{ TB}$), which exceeds comfortable pure-RAM capacity but requires tens of thousands of enqueue/dequeue ops/sec. Embedded RocksDB on local NVMe SSDs provides sequential append/scan speeds without network serialization overhead, while an in-memory Min-Heap tracks per-host `nextAllowedCrawlTime` politeness deadlines. |
+| **Crawl Metadata & SimHash Fingerprints (`CRAWLED_DOCUMENT`)** | **Apache Cassandra / Google Cloud Bigtable** | Wide-Column Store (**AP / PA-EL**) | **Why:** Stores billions of crawled page metadata rows (`urlHash`, `httpStatus`, `simHash64`, `crawledAt`, `s3BlobLocator`), partitioned by reversed domain (`com.example`) so all pages belonging to the same host are co-located on disk for locality-aware batch indexing and re-crawl scheduling. |
+| **DNS & `robots.txt` Politeness Cache** | **Redis Cluster (+ Local Worker LRU Cache)** | In-Memory Key-Value (**AP / 24h TTL**) | **Why:** Every fetch requires checking host `robots.txt` rules and resolving DNS. Caching parsed `Disallow` directives and resolved IP addresses in Redis/local RAM eliminates millions of redundant external HTTP/DNS lookups. |
+| **Compressed Raw HTML / WARC Archive** | **AWS S3 / Google Colossus** | Object Storage (**11 9s Durability**) | **Why:** Stores $25\text{ TB/month}$ ($300\text{ TB/year}$) of compressed WARC (Web ARChive) HTML bundles cheaply for downstream Search Indexer and LLM training pipelines. |
+
 ```mermaid
 erDiagram
     FRONTIER_URL ||--o| CRAWLED_DOCUMENT : "produces"

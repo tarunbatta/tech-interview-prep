@@ -277,6 +277,15 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Stage-1 Candidate Retrieval (Embedding Similarity)** | **Milvus / FAISS (Vector Database)** | Approximate Nearest Neighbor Vector Index (**AP / HNSW & IVF-PQ**) | **Why:** Unlike follower-graph networks, TikTok's FYP must match a user's real-time interest embedding vector (`USER.vectorEmbedding`) against $100\text{ Million+}$ candidate video vectors in $< 30\text{ ms}$. Relational and standard NoSQL databases cannot perform high-dimensional cosine/inner-product similarity search; Milvus uses HNSW/IVF indexes in RAM/NVMe to retrieve the top 5,000 semantic candidates in milliseconds. |
+| **Real-Time User & Video ML Features (<500ms Feedback)** | **Redis Cluster / Feast Online Feature Store** | In-Memory Key-Value (**AP / Sub-ms**) | **Why:** When a user loops a video twice or swipes away in $< 1\text{ s}$, Apache Flink updates `VIDEO_METRICS` (`finishRate`, `avgWatchRatio`) and user short-term interest vectors in Redis within $< 500\text{ ms}$ so the Heavy Neural Ranker can score the very next batch of 10 FYP videos using fresh signals. |
+| **Video Metadata, Audio Track Index & User Graph** | **Apache Cassandra / ScyllaDB (+ Sharded MySQL)** | Wide-Column Store (**AP / PA-EL**) | **Why:** Sustaining $1.5\text{M Peak View QPS}$ and indexing millions of videos per viral sound (`PRIMARY KEY (music_id, view_count DESC, video_id)`) requires horizontal wide-column partitioning with pre-sorted clustering keys so clicking a viral audio track returns top videos in $< 10\text{ ms}$. |
+| **Transcoded 2-Second Video Chunks (AV1 / HEVC)** | **AWS S3 + Global Multi-CDN** | Object Storage + Edge Cache (**11 9s Durability**) | **Why:** Stores $250\text{ TB/day}$ ($91\text{ PB/year}$) of multi-bitrate vertical video segments, with the first 2-second init chunk of hot videos pinned in edge CDN RAM to enable $< 50\text{ ms}$ zero-lag swipe transitions. |
+
 ```mermaid
 erDiagram
     USER ||--o{ VIDEO : "uploads"

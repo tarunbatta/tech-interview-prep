@@ -216,6 +216,16 @@ Authorization: Bearer <user_token>
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Precomputed User Timelines & Celebrity Outboxes** | **Redis Cluster (Sorted Sets / ZSets)** | In-Memory Key-Value (**AP / Sub-ms**) | **Why:** Delivering a personalized feed in $< 150\text{ ms}$ at $70,000\text{ Peak QPS}$ prevents executing expensive SQL `JOIN` queries across hundreds of followed authors on read. Storing only the top 500 `postId` integers (8 bytes each, $\sim 4\text{ KB/user}$) in a Redis `ZSET` keyed by `userId` (scored by timestamp or ML rank) fits 60M active users in $\sim 240\text{ GB}$ RAM and provides $O(\log N)$ insertions and $O(1)$ range fetches. |
+| **Post Master Records & Persistent Timelines** | **Sharded PostgreSQL / MySQL or Apache Cassandra** | Sharded Relational / Wide-Column (**CP or Tunable AP**) | **Why:** `Post` records (`postId`, `authorId`, `content`, `mediaUrls`) require durable persistence and fast batch point-lookups (`MGET` by `postId`) or author-timeline scans (`WHERE authorId = ? ORDER BY postId DESC`). Sharding by `authorId` (or time-sortable Snowflake `postId`) scales storage linearly across terabytes of posts. |
+| **Social Graph (`FollowEdge`)** | **Meta TAO (Memcached + Sharded MySQL) / Neo4j** | Graph / Adjacency Store (**AP / Read-Your-Writes**) | **Why:** Every post fan-out and hybrid read-merge must rapidly fetch `followers(authorId)` or `followees(userId)`. Storing directed adjacency lists (`followerId` $\leftrightarrow$ `followeeId`) indexed in both directions with an in-memory graph cache (TAO) guarantees single-millisecond neighbor traversal. |
+| **Post Hydration & Engagement Counter Cache** | **Memcached / Redis Cluster** | In-Memory Key-Value (**AP / Sub-ms**) | **Why:** Once the ML Ranker selects the top 20 `postId`s, the Hydrator executes a single parallel `MGET` against Memcached/Redis to attach full post payloads, author avatars, and atomic `likeCount`/`commentCount` counters in $< 10\text{ ms}$ without touching disk. |
+| **ML Online Feature Store** | **Redis / Feast (backed by Cassandra/DynamoDB)** | Low-Latency Key-Value (**AP**) | **Why:** The Two-Tower/GBDT Ranking Engine needs real-time user-author affinity vectors and post engagement velocity features in $< 15\text{ ms}$ to score 500 candidate posts on the fly. |
+
 ```mermaid
 erDiagram
     User ||--o{ Post : "publishes"

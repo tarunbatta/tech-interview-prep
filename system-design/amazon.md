@@ -243,6 +243,16 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Orders, Payments & Financial Ledger** | **Amazon Aurora (MySQL / PostgreSQL)** | Relational (ACID, **CP / PC-EC**) | **Why:** Order placement (`ORDER`, `ORDER_ITEM`), payment settlement, and tax auditing require strict ACID transactions, strong consistency, and immutable relational audit trails. Sharded by `customerId` (with global secondary index on `orderId`) to scale beyond single-node write limits. |
+| **Shopping Cart & Session State** | **Amazon DynamoDB** | Key-Value / Document (**AP / PA-EL**) | **Why:** Inspired by the original *Amazon Dynamo* paper, shopping carts (`CART_ITEM`) must be "always writable" ($99.999\%$ availability) so customers are never blocked from adding items—even during network partitions. Keyed by `cartId` / `customerId`, DynamoDB delivers single-digit millisecond reads/writes at any scale without relational schema overhead. |
+| **Flash-Sale Inventory Reservation** | **Redis Cluster (Atomic Lua)** | In-Memory Key-Value (**CP on Primary**) | **Why:** During Prime Day flash sales ($5,000+\text{ orders/sec}$ for a single hot SKU), executing `UPDATE product_sku SET stock = stock - 1` in SQL causes severe row-lock contention. Redis executes single-threaded atomic Lua scripts (`DECRBY` + 15-min `SETEX` lease hold) at $100,000+\text{ ops/sec}$ in memory, flushing committed deductions asynchronously to the relational inventory ledger. |
+| **Product Catalog Metadata** | **DynamoDB / DocumentDB** | Document / Key-Value (**AP / PA-EL**) | **Why:** $100\text{ Million+}$ SKUs across thousands of categories (books, apparel, electronics) have heterogeneous attributes that would require sparse columns or complex EAV tables in SQL. A schemaless JSON document keyed by `skuId` allows flexible per-category attributes and fast point lookups. |
+| **Faceted Product Search** | **Elasticsearch / OpenSearch** | Inverted Index (**AP / PA-EL**) | **Why:** Enables $< 150\text{ ms}$ keyword search, typo tolerance, relevance ranking (Buy Box signals, conversion velocity), and faceted aggregations (Prime-only, brand, star rating, price range). |
+
 ```mermaid
 erDiagram
     CUSTOMER ||--o{ ORDER : "places"

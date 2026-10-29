@@ -188,6 +188,16 @@ message MessageReceipt {
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Live User Session Registry & Presence (`USER_SESSION`)** | **Redis Cluster / Erlang Mnesia (In-Memory Distributed Table)** | In-Memory Key-Value (**AP / Sub-ms**) | **Why:** Routing $1.15\text{M}\text{--}2.9\text{M messages/sec}$ requires knowing which of the 500 Gateway Servers holds `recipient_id`'s open TCP/WebSocket connection in $< 1\text{ ms}$. Mnesia/Redis stores ephemeral `(userId -> gatewayNodeId, lastSeenAt)` mappings entirely in RAM with heartbeat TTLs. |
+| **Transient Offline Message Inbox (`OfflineQueue`)** | **Apache Cassandra / Amazon DynamoDB** | Wide-Column Key-Value (**AP / PA-EL**) | **Why:** WhatsApp is a store-and-forward system: messages for offline recipients ($\sim 1\text{ TB}$ transient buffer) must be written at hundreds of thousands of ops/sec, fetched in strict chronological order when the device reconnects (`PRIMARY KEY (recipient_id, message_id)`), and deleted (or auto-expired via 30-day TTL) once the `DELIVERY_RECEIPT` ACK arrives. |
+| **Users, Signal Pre-Keys & Group Memberships (`USER`, `CHAT_GROUP`, `GROUP_MEMBER`)** | **Sharded MySQL / CockroachDB (+ Redis Cache)** | Relational (ACID, **CP / PC-EC**) | **Why:** User identity registration, X3DH cryptographic public pre-key bundles (`publicKeyIdentity`), and group participant lists (`GROUP_MEMBER`, max 1,024 members) require strong consistency (`CP`) so group membership additions/removals and E2EE key rotations are immediately authoritative. |
+| **Local Chat History (Permanent Storage)** | **SQLite (with SQLCipher AES-256 on Client Device)** | Embedded On-Device Relational (**Local ACID**) | **Why:** Because of End-to-End Encryption (E2EE) and privacy architecture, WhatsApp servers never retain delivered message history. Full searchable chat history lives locally in an encrypted SQLite database on the user's phone (with optional E2EE cloud blob backup to iCloud / Google Drive). |
+| **Encrypted Media Attachments** | **AWS S3 / CDN Blob Store (Ephemeral 30-Day TTL)** | Object Storage (**11 9s Durability**) | **Why:** Encrypted image/video/voice blobs are uploaded directly to blob storage; the sender transmits only the download URL and AES-256 decryption key inside the E2EE Signal message, and the blob is purged once downloaded. |
+
 ```mermaid
 erDiagram
     USER ||--o{ USER_SESSION : "maintains"

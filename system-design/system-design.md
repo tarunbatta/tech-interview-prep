@@ -128,6 +128,23 @@ When designing a system in an interview:
      $$R + W > N$$
      *(Where $N$ = replication factor, $W$ = write ack count, $R$ = read replica count. If $R + W > N$, you guarantee strong consistency; otherwise eventual consistency).*
 
+---
+
+### Database Selection Cheat Sheet (When to Choose Which DB)
+
+| Database Category | Representative Engines | CAP / PACELC | Ideal Access Patterns & Why to Choose | Systems Using It |
+| :--- | :--- | :--- | :--- | :--- |
+| **Relational (RDBMS / Sharded SQL)** | PostgreSQL, MySQL, Amazon Aurora, Vitess | **CP** (`PC / EC`) | Structured schemas, multi-row ACID transactions, foreign-key integrity, and financial/inventory ledgers where double-spending or double-booking is unacceptable. | [Airbnb](airbnb.md), [Amazon](amazon.md), [DocuSign](docusign.md), [Instagram](instagram.md), [Shopify](shopify.md), [YouTube](youtube.md) |
+| **Distributed SQL (NewSQL)** | Google Cloud Spanner, CockroachDB | **CP** (`PC / EC`) | Global multi-region active-active writes requiring external consistency / `SERIALIZABLE` ACID isolation without manual application-level sharding. | [ATM](atm.md), [Google Docs](google-docs.md), [Google Drive](google-drive.md), [TicketMaster](ticketmaster.md), [Uber](uber.md) |
+| **Wide-Column / LSM-Tree NoSQL** | Apache Cassandra, ScyllaDB, Google Bigtable | **AP** (`PA / EL`) | Massive append-heavy write velocity (millions of writes/sec), time-series/ordered range scans by `(partition_key, clustering_key)`, and zero single point of failure. | [Google Docs](google-docs.md), [Netflix](netflix.md), [Notification System](notification-system.md), [Social Media](social-media.md), [TikTok](tiktok.md), [Twitter](twitter.md), [Whatsapp](whatsapp.md), [YouTube](youtube.md) |
+| **Key-Value / Document NoSQL** | Amazon DynamoDB, MongoDB, RocksDB | **AP** (`PA / EL`) | Predictable single-digit millisecond point lookups (`GET/PUT` by primary key), flexible JSON schemas, and native item TTL expiration at any scale. | [Amazon Prime](amazon-prime.md), [Amazon](amazon.md), [Bitly](bitly.md), [PasteBin](pastebin.md), [Web Crawler](webcrawler.md) |
+| **In-Memory Cache & Data Structures** | Redis Cluster, Memcached (EVCache) | **AP / CP-Primary** | Sub-millisecond hot reads, sorted-set timelines (`ZSET`), availability bitmaps, geospatial indexes (`H3`/`GEOADD`), and atomic Lua distributed locks/rate-limiters. | All 28 Systems ([Rate Limiter](rate-limiter.md), [News Feed](news-feed.md), [Autocomplete Search](autocomplete-search.md), [Uber](uber.md), etc.) |
+| **Search & Inverted Index** | Elasticsearch, OpenSearch, Apache Lucene (Earlybird) | **AP** (`PA / EL`) | Full-text keyword search, typo tolerance, faceted filtering, boolean Roaring Bitmap intersections, and `geo_point` bounding-box queries. | [Airbnb](airbnb.md), [Amazon](amazon.md), [Email Archive](email-archive.md), [Google Drive](google-drive.md), [Tag Service](tag-service.md), [Twitter](twitter.md) |
+| **Graph & Relation Tuple Stores** | Amazon Neptune, Neo4j, Meta TAO, Google Zanzibar | **AP / CP** | Highly connected many-to-many relationships, social follower adjacency lists, scene/actor knowledge graphs, and transitive hierarchical ACL checks. | [Amazon Prime](amazon-prime.md), [Google Drive](google-drive.md), [Instagram](instagram.md), [News Feed](news-feed.md), [Social Media](social-media.md) |
+| **Vector Databases** | Milvus, FAISS, Pinecone | **AP** (`PA / EL`) | High-dimensional Approximate Nearest Neighbor (ANN / HNSW) embedding similarity search for real-time ML candidate retrieval. | [TikTok](tiktok.md) |
+| **Columnar OLAP & Time-Series** | ClickHouse, Google BigQuery, TimescaleDB | **AP** (Analytical) | High-compression append-only event streams and sub-second `GROUP BY` aggregations over billions of click, telemetry, or billing rows. | [Bitly](bitly.md), [Parking Garage](parking-garage.md), [Rate Limiter](rate-limiter.md), [Shopify](shopify.md) |
+| **Object / Blob & WORM Ledger** | AWS S3, Google Colossus, Magic Pocket, Amazon QLDB | **11 9s Durability** | Immutable binary media (photos, HLS/DASH video chunks, PDFs, 4MB blocks) and SEC/court-compliant Write-Once-Read-Many (WORM) cryptographic audit trails. | [ATM](atm.md), [DocuSign](docusign.md), [Dropbox](dropbox.md), [Email Archive](email-archive.md), [Netflix](netflix.md), [YouTube](youtube.md) |
+
 ## Easy to remember numbers for back-of-the-envelope calculations in system design interviews
 
 ### Powers of two table

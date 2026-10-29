@@ -196,6 +196,15 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Seats, Ticket Orders & Ownership Ledger (`CONCERT_SEAT`, `TICKET_ORDER`)** | **CockroachDB / Amazon Aurora PostgreSQL** | Distributed Relational SQL (Serializable ACID, **CP / PC-EC**) | **Why:** Zero double-selling is the #1 invariant of TicketMaster. The database enforces a composite primary key `(concertId, seatNumber)` and executes checkout state transitions (`HELD` $\to$ `SOLD`) inside `SERIALIZABLE` / optimistic-locking ACID transactions. Eventual consistency (AP NoSQL) is unusable here because two fans could purchase the same stadium seat during a partition. |
+| **10-Minute Temporary Seat Locks & Live Seat Map Bitsets** | **Redis Cluster (Atomic Lua & Bitfields)** | In-Memory Key-Value (**CP on Primary Shard**) | **Why:** When 1M fans hit on-sale at 10:00 AM, rendering interactive venue SVG seat maps ($< 100\text{ ms}$) and acquiring 10-minute seat holds ($1,000\text{ locks/sec}$) directly on the RDBMS would cause lock-wait collapse. Redis represents 60,000 stadium seats as a compact bitset ($\sim 15\text{ KB}$ per concert) for instant map rendering and uses atomic Lua scripts (`SETNX` with `600s` TTL) to grant exclusive 10-minute checkout leases. |
+| **Event, Artist & Venue Discovery Search** | **Elasticsearch / OpenSearch** | Inverted Index (**AP / PA-EL**) | **Why:** Offloads high-volume browse and search queries (by artist, city, date range, venue coordinates) from the transactional booking database. |
+| **Virtual Waiting Room Queue State** | **Cloudflare Edge Workers + Durable Objects / Redis** | Edge State Store (**High-Throughput FIFO**) | **Why:** Absorbs $1\text{M+}$ concurrent fans at the CDN edge before they reach the origin API Gateway, assigning randomized FIFO queue positions and minting cryptographically signed admission JWTs at a metered rate (e.g., $500\text{ fans/sec}$). |
+
 ```mermaid
 erDiagram
     CONCERT ||--o{ CONCERT_SEAT : "contains"

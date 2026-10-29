@@ -192,6 +192,15 @@ Accept: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Paste Metadata & Expiration Index (`Paste`)** | **Amazon DynamoDB / Apache Cassandra** | Key-Value / Wide-Column (**AP / PA-EL**) | **Why:** Metadata lookups are pure point queries by `pasteId` (7-char Base62 key or vanity alias) with a $20:1$ read-to-write ratio. DynamoDB provides single-digit millisecond reads/writes, atomic conditional writes (`attribute_not_exists(paste_id)`) to prevent custom alias collisions, and native background TTL eviction (`expiresAt`) without expensive SQL `DELETE` table locks. |
+| **Raw Paste Text Blobs (Up to 10 MB)** | **AWS S3 / MinIO + Edge CDN** | Object Storage (**11 9s Durability**) | **Why:** Storing $36.5\text{ TB/year}$ of variable-length text/code payloads (up to $10\text{ MB}$ each) directly inside database rows degrades buffer cache efficiency and inflates NoSQL write costs. Storing raw compressed text in S3 (referenced by `s3BlobUri`) with S3 Lifecycle expiration rules reduces storage cost by $>80\%$. |
+| **Hot Paste Cache & View Counters** | **Redis Cluster** | In-Memory Key-Value (**Sub-ms Read/Write**) | **Why:** Caching the top $20\%$ hot pastes ($\sim 400\text{ GB}$ RAM) with LRU eviction serves $80\%$ of read traffic in $< 5\text{ ms}$, while atomic `INCR` operations buffer high-velocity `viewCount` updates before batch-flushing to DynamoDB. |
+| **Pre-Generated Base62 Key Pool (KGS) & Users** | **PostgreSQL** | Relational (ACID, **CP**) | **Why:** Manages `User` accounts and the KGS `unused_keys` / `used_keys` tables, using ACID transactions (`SELECT FOR UPDATE SKIP LOCKED`) so KGS worker nodes claim disjoint 100K key batches into their in-memory ring buffers without collisions. |
+
 ```mermaid
 erDiagram
     User ||--o{ Paste : "authors"

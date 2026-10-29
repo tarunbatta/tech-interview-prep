@@ -194,6 +194,15 @@ GET /api/v1/videos/{videoId}/master.m3u8
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Channels, Videos, Subscriptions & Comments (`CHANNEL`, `VIDEO`, `SUBSCRIPTION`)** | **Vitess (Sharded MySQL) / Google Cloud Spanner** | Sharded Relational SQL (ACID, **CP / PC-EC**) | **Why:** YouTube created **Vitess** specifically to scale MySQL horizontally across thousands of shards while preserving relational schemas, ACID transactions, and secondary indexes for `VIDEO` metadata, creator `CHANNEL` accounts, and `SUBSCRIPTION` relationships. Read replicas paired with an integrated Memcached/Redis layer absorb millions of metadata reads/sec. |
+| **High-Velocity View & Like Counters & Watch History** | **Google Cloud Bigtable / Apache Cassandra** | Wide-Column Store (**AP / PA-EL**) | **Why:** Updating `viewCount` on a viral video receiving $100,000\text{ views/sec}$ directly in MySQL causes severe row-lock contention. Apache Flink aggregates playback beacons over 10-second tumbling windows and flushes batched counter deltas (`+4,500 views`) and per-user watch history into Bigtable/Cassandra's lock-free LSM-Tree partitions. |
+| **Raw Masters & Transcoded HLS/DASH Video Segments** | **Google Colossus / AWS S3 + Tiered Edge CDN** | Distributed Blob Storage (**11 9s Durability**) | **Why:** Ingesting $25\text{ PB/day}$ ($9.1\text{ EB/year}$) of multi-resolution (`144p`–`4K`) video chunks requires exabyte-scale object storage tiered by popularity: the top $20\%$ viral videos are cached in ISP Edge CDN NVMe PoPs, moderately popular videos sit in Regional Transit CDNs, and long-tail archival videos stream from cold origin disks. |
+| **Full-Text Video Discovery & Tag Search** | **Elasticsearch / Google Search Index** | Inverted Index (**AP / Near Real-Time**) | **Why:** Indexes video titles, descriptions, auto-generated speech-to-text transcripts, and tags to power sub-100ms relevance-ranked search queries. |
+
 ```mermaid
 erDiagram
     CHANNEL ||--o{ VIDEO : "publishes"

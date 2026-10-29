@@ -154,7 +154,16 @@ Rather than tightly coupling DocuSign Core microservices to Zuora’s proprietar
 * Introduced **Istio Service Mesh** on Azure Kubernetes Service (AKS) for traffic routing, mutual TLS (mTLS), and distributed telemetry.
 * Integrated **Redis Distributed Caching** to serve real-time subscription entitlement checks with sub-millisecond latency.
 
-#### 4. The Zero-Downtime "Learning Mode" Migration Strategy
+#### 4. Database & Storage Architecture (Choice & Rationale)
+
+| Workload / Domain | Database / Store Choice | Consistency & Data Model | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Authoritative Billing, Invoices & Subscriptions (SSOT)** | **Zuora Billing Ledger + Oracle ERP** | Financial Double-Entry Relational (**Strict ACID / CP**) | **Why:** Invoices, tax calculations, pro-rated upgrades, and revenue recognition (ASC 606) demand strict financial ACID guarantees, audit trails, and GAAP compliance. Designating Zuora as the single source of truth eliminated split-brain billing calculations previously duplicated in Core. |
+| **Core Account Provisioning & Idempotency Ledger** | **DocuSign Core RDBMS (SQL Server / PostgreSQL)** | Relational (ACID, **CP / PC-EC**) | **Why:** Account entitlements, seat quotas, and the `billing_event_deduplication` table (`PRIMARY KEY (event_id)`) require strong consistency, optimistic concurrency control (`version` timestamps), and transactional rollbacks so retried MuleSoft webhooks never double-provision or corrupt customer accounts. |
+| **Real-Time Entitlement Cache & Tenant Concurrency Locks** | **Redis Enterprise Cluster** | In-Memory Key-Value (**Sub-ms Read / CP Lock**) | **Why:** Serving real-time feature entitlement checks on every envelope creation requires sub-millisecond reads, while distributed locks partitioned by `account_id` serialize concurrent webhook mutations per tenant to eliminate relational deadlocks. |
+| **Dual-Run "Learning Mode" Shadow Audit Store** | **NoSQL Document Store (Azure Cosmos DB / MongoDB)** | Schemaless JSON Document (**AP / High Write Throughput**) | **Why:** During the migration cutover, MuleSoft wrote transformed webhook payloads and diff comparisons into an isolated shadow datastore without impacting production SQL tables, enabling automated reconciliation daemons to verify $< 0.1\%$ drift across two full billing cycles. |
+
+#### 5. The Zero-Downtime "Learning Mode" Migration Strategy
 
 Migrating financial infrastructure while processing millions of dollars daily requires extreme verification:
 

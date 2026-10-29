@@ -258,6 +258,15 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Envelope Workflow State, Recipients & Tabs** | **Amazon Aurora PostgreSQL** | Relational (ACID, **CP / PC-EC**) | **Why:** Multi-party signing workflows (`ENVELOPE`, `RECIPIENT`, `DOCUMENT_TAB`) require strict ACID state machine transitions (e.g., advancing `routingOrder` from Signer 1 to Signer 2 only after all mandatory tabs are committed). Relational foreign keys and row-level locking prevent split-brain envelope states when parallel recipients sign simultaneously. Sharded by `accountId` / `envelopeId`. |
+| **Tamper-Evident Court-Admissible Audit Trail** | **Amazon QLDB (Quantum Ledger DB) + S3 Object Lock (WORM)** | Cryptographic Append-Only Ledger (**CP / Immutable**) | **Why:** Legal non-repudiation (ESIGN, eIDAS) requires proving that no administrator or attacker altered the signing history (`signedAt`, `ipAddress`, `authMethod`, SHA-256 document digests). QLDB maintains a cryptographically chained SHA-256 Merkle tree journal of every state change, backed by WORM S3 archival for 11 9s durability. |
+| **Master & PKI-Sealed PDF Documents** | **AWS S3 (with KMS Envelope Encryption)** | Object Storage (**11 9s Durability**) | **Why:** Storing $15\text{ TB/day}$ ($5.5\text{ PB/year}$) of $1.5\text{ MB}$ binary PDF files inside PostgreSQL `BYTEA` columns would destroy database buffer cache and replication performance. S3 stores encrypted master and X.509-sealed PDFs cheaply while PostgreSQL stores only lightweight `masterPdfS3Url` and `completedPdfS3Url` pointers. |
+| **Signing Session Tokens & Rate Limiting** | **Redis Cluster** | In-Memory Key-Value (**Sub-ms Read/Write**) | **Why:** Stores short-lived OTP verification codes, ephemeral recipient signing session tokens, and idempotency keys with automatic TTL expiration. |
+
 ```mermaid
 erDiagram
     ACCOUNT ||--o{ ENVELOPE : "owns"

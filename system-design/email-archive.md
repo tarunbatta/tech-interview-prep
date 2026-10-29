@@ -239,6 +239,16 @@ Content-Type: application/json
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Custodians, Legal Holds & Email Headers** | **Amazon Aurora PostgreSQL** | Relational (ACID, **CP / PC-EC**) | **Why:** Placing a litigation hold (`LegalHold`) on a custodian (`Custodian`) or matter must atomically lock all associated `ArchivedEmail` rows (`isHeld = TRUE`) so background retention daemons cannot purge subpoenaed evidence. Relational ACID transactions and foreign key constraints guarantee zero race conditions between legal holds and expiration jobs. |
+| **eDiscovery Full-Text & Attachment Search** | **Elasticsearch / OpenSearch** | Inverted Index (**AP / Near Real-Time**) | **Why:** Compliance officers run complex boolean queries (`"project titan" AND confidential`), proximity searches, and date-range filters across billions of email bodies and Apache Tika-extracted PDF/Office attachments. Relational `LIKE` or basic full-text indexes cannot deliver sub-second search across hundreds of terabytes of tokenized text. |
+| **Immutable Raw MIME & Deduplicated Attachments** | **AWS S3 Object Lock (Compliance WORM) + S3 Glacier** | Immutable Object Storage (**11 9s Durability**) | **Why:** SEC Rule 17a-4 and FINRA require Write-Once-Read-Many (WORM) immutability where neither root admins nor attackers can alter or delete archived emails before `retentionExpiry`. S3 Object Lock enforces hardware/cloud-level WORM compliance and automatically tiers aged archives ($91+\text{ days}$) to Glacier Deep Archive. |
+| **Content-Addressed Attachment Deduplication** | **Redis Cluster** | In-Memory Key-Value (**Sub-ms Lookup**) | **Why:** When a 15MB company-wide attachment is journaled across 100,000 mailboxes, ingestion workers check `EXISTS att:<sha256>` in Redis in $< 1\text{ ms}$ to store a single S3 blob and link 100,000 lightweight `Attachment` metadata rows. |
+| **Compliance Access Audit Log** | **Amazon QLDB (Quantum Ledger DB)** | Cryptographic Append-Only Ledger (**CP / Immutable**) | **Why:** Every search query, preview, and EDRM/PST export performed by a compliance officer must be recorded in a tamper-evident cryptographic ledger to preserve evidentiary chain of custody in court. |
+
 ```mermaid
 erDiagram
     Custodian ||--o{ ArchivedEmail : "sends_or_receives"

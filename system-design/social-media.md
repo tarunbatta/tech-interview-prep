@@ -306,6 +306,16 @@ Authorization: Bearer <user_jwt_token>
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **User Profiles & Account Settings (`User`)** | **Sharded MySQL / PostgreSQL** | Relational (ACID, **CP / PC-EC**) | **Why:** User registration, unique `username`/`email` constraints, password hashes, and privacy toggles (`PUBLIC` vs `PRIVATE`) require strong ACID consistency and immediate Read-Your-Own-Writes guarantees. |
+| **Posts & Nested Comments (`Post`, `Comment`)** | **Apache Cassandra / ScyllaDB** | Wide-Column Store (**AP / PA-EL**) | **Why:** Sustaining $50\text{M new posts/day}$ and hundreds of millions of comments with $145,000\text{ Peak Read QPS}$ favors an LSM-Tree wide-column database partitioned by `authorId` (or `postId` for comments, with `commentId` Snowflake clustering key). Enables $O(1)$ keyset cursor pagination (`WHERE post_id < :cursor LIMIT 20`) without B-Tree page split overhead. |
+| **Social Graph (`FollowEdge`)** | **Meta TAO (Memcached + Sharded MySQL / RocksDB)** | Distributed Graph Cache + Persistent Store (**AP / Read-Your-Writes**) | **Why:** Querying `followers(userId)` during hybrid fan-out and checking `is_following(A, B)` on every feed render requires single-millisecond adjacency list traversal at millions of QPS, which traditional multi-hop graph DBs or uncached SQL joins cannot sustain at 500M DAU scale. |
+| **Precomputed Feed Timelines, Likes & 24h Stories** | **Redis Cluster (Sorted Sets, Sets & HyperLogLog)** | In-Memory Key-Value (**AP / Sub-ms**) | **Why:** Stores the top 800 `postId`s per active user in Redis `ZSET`s ($\sim 640\text{ GB}$ RAM), buffers high-velocity `likeCount` increments (`INCR` + write-behind batching to prevent DB row-lock contention), and auto-expires 24-hour Stories via native key TTLs. |
+| **Images & HLS Video Segments** | **AWS S3 + Global Edge CDN (CloudFront)** | Object Storage (**11 9s Durability**) | **Why:** Offloads $165\text{ TB/day}$ ($60.2\text{ PB/year}$) of compressed WebP images and transcoded multi-bitrate video chunks from backend servers via direct pre-signed S3 uploads and edge CDN caching. |
+
 ```mermaid
 erDiagram
     User ||--o{ Post : "creates"

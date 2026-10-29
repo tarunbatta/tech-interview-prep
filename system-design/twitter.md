@@ -252,6 +252,15 @@ Authorization: Bearer <user_token>
 
 ## Object Model & Database Schema
 
+### Database Selection & Rationale
+
+| Workload / Subsystem | Database Choice | Data Model & CAP Profile | Why This Database? (Justification & Trade-offs) |
+| :--- | :--- | :--- | :--- |
+| **Tweets & User Timelines (`TWEET`, `USER`)** | **Twitter Manhattan / Apache Cassandra** | Distributed Wide-Column Key-Value (**AP / Tunable Consistency**) | **Why:** Ingesting $500\text{M tweets/day}$ ($15,000\text{ Peak Write QPS}$) and serving author timelines requires horizontal write scalability and time-ordered range scans. Keying by `authorId` with 64-bit time-sortable **Snowflake** `tweetId` as the clustering key stores a user's tweets contiguously on disk in chronological order, making `User Timeline` queries and cursor pagination single-partition sequential reads. |
+| **Home Timelines (Fanout Cache)** | **Redis Cluster (Sorted Sets / Native Lists)** | In-Memory Key-Value (**AP / Sub-ms**) | **Why:** Serving $150,000\text{ Peak Read QPS}$ for Home Timelines in $< 100\text{ ms}$ is only possible from RAM. Each active user's Home Timeline is a Redis Sorted Set (`ZSET`) capped at 800 `tweetId`s (8-byte Snowflake IDs + sender IDs $\approx 1.6\text{ TB}$ cluster RAM), populated on write for regular accounts ($< 25\text{K}$ followers) and merged on read with celebrity timelines from Manhattan. |
+| **Social Graph (`FOLLOWER` Adjacency Lists)** | **FlockDB (Sharded MySQL + Gizzard) / Cassandra** | Distributed Graph Adjacency Store (**AP / Idempotent Set Ops**) | **Why:** Twitter's social graph requires high-throughput set intersections ("who do both Alice and Bob follow?"), paginated adjacency lookups (`followers_of` for fan-out), and out-of-order idempotent follow/unfollow writes—optimized via forward (`followeeId` $\to$ `followerId`) and backward (`followerId` $\to$ `followeeId`) B-Tree/LSM shards rather than deep multi-hop graph traversal engines. |
+| **Real-Time Full-Text Search (Tweets)** | **Earlybird (Custom In-Memory Lucene Inverted Index)** | In-Memory Inverted Index (**AP / Sub-Second Ingestion**) | **Why:** Traditional disk-based Lucene/Elasticsearch segment merges take seconds, which is too slow during breaking news. Earlybird holds lock-free append-only posting lists in RAM so a newly published tweet is searchable globally within $< 1\text{ second}$. |
+
 ```mermaid
 erDiagram
     USER ||--o{ TWEET : "authors"
