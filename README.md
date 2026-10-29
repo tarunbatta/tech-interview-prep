@@ -7,7 +7,7 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
 [![.NET](https://img.shields.io/badge/.NET-10.0-purple.svg)](https://dotnet.microsoft.com/)
 [![Java](https://img.shields.io/badge/Java-CTCI%206th-orange.svg)](src/java/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-Node.js-yellow.svg)](src/javascript/)
-[![System Design](https://img.shields.io/badge/System%20Design-28%20Case%20Studies-blue.svg)](system-design/system-design.md)
+[![System Design](https://img.shields.io/badge/System%20Design-31%20Case%20Studies-blue.svg)](system-design/system-design.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ---
@@ -23,7 +23,7 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
   - [C# Solution Snippet Template](#c-solution-snippet-template)
 - [Pillar 2: System Design & Architecture](#pillar-2-system-design--architecture)
   - [Featured Real-World Project Retrospective](#-featured-real-world-project-retrospective)
-  - [28 Interview System Design Case Studies](#28-interview-system-design-case-studies)
+  - [31 Interview System Design Case Studies](#31-interview-system-design-case-studies)
   - [Back-of-the-Envelope Calculations Cheat Sheet](#back-of-the-envelope-calculations-cheat-sheet)
   - [Load Balancing Cheat Sheet](#load-balancing-cheat-sheet)
 - [Pillar 3: Engineering Management & Behavioural](#pillar-3-engineering-management--behavioural)
@@ -58,7 +58,7 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
 ┌─────────────────────────┐                        ┌─────────────────────────┐                        ┌─────────────────────────┐
 │  Coding & Algorithms    │                        │      System Design      │                        │  Leadership & Behaviour │
 ├─────────────────────────┤                        ├─────────────────────────┤                        ├─────────────────────────┤
-│ • .NET 10 Core & LeetCode│                       │ • 28 System Deep Dives  │                        │ • CAR / STAR Framework  │
+│ • .NET 10 Core & LeetCode│                       │ • 31 System Deep Dives  │                        │ • CAR / STAR Framework  │
 │ • Java CTCI 6th Edition │                        │ • Architecture Diagrams │                        │ • Strategic Challenges  │
 │ • JavaScript Solutions  │                        │ • Estimation Numbers    │                        │ • 20 ATS Resume Models  │
 │ • Chess & Expression App│                        │ • Draw.io Tooling       │                        │ • Role Targeting Guide  │
@@ -80,7 +80,7 @@ tech-interview-prep/
 │   │   └── practice/              # Practice questions (1–54) and QOTD problems
 │   ├── java/                      # Cracking the Coding Interview (6th ed.) Java solutions
 │   └── javascript/                # JavaScript QOTD and utility solutions
-├── system-design/                 # 28 Complete System Design case studies
+├── system-design/                 # 31 Complete System Design case studies
 │   ├── system-design.md           # Master index, estimation cheat sheet, references
 │   └── [case-studies]/            # airbnb, uber, whatsapp, youtube, etc.
 ├── behavioural/                   # Leadership and behavioural interview guide
@@ -202,13 +202,13 @@ Use this VS Code snippet structure for adding new solutions:
 
 ## Pillar 2: System Design & Architecture
 
-The [`system-design/`](system-design/system-design.md) directory contains real-world production engineering retrospectives alongside 28 comprehensive architecture case studies, complete with functional/non-functional requirements, API schemas, object models, data storage estimates, and embedded Mermaid architecture & ER diagrams.
+The [`system-design/`](system-design/system-design.md) directory contains real-world production engineering retrospectives alongside 31 comprehensive architecture case studies, complete with functional/non-functional requirements, API schemas, object models, data storage estimates, and embedded Mermaid architecture & ER diagrams.
 
 ### 🌟 Featured Real-World Project Retrospective
 
 - [**DocuSign Billing & Invoicing Modernization Case Study**](system-design/project-retrospective.md) — Production architecture retrospective: Migrating legacy Quartz batch systems to an event-driven MuleSoft & Core microservices integration platform. Features before/after architecture, zero-downtime "learning mode" dual-run strategy, and quantified business impact (reduced invoice latency from 7 days to real-time, 90% reduction in reconciliation discrepancies, 80% DSO reduction).
 
-### 28 Interview System Design Case Studies
+### 31 Interview System Design Case Studies
 
 | System | Focus Areas | Documentation |
 | :--- | :--- | :--- |
@@ -221,14 +221,17 @@ The [`system-design/`](system-design/system-design.md) directory contains real-w
 | **DocuSign** | Digital signatures, audit trails, document hashing, encryption | [DocuSign Design](system-design/docusign.md) |
 | **Dropbox** | Block-level sync, deduplication, conflict resolution, chunking | [Dropbox Design](system-design/dropbox.md) |
 | **Email Archive** | Large-scale cold storage, full-text search indexing, compression | [Email Archive Design](system-design/email-archive.md) |
+| **Fraud Detection** | Sub-50ms risk scoring, Flink velocity features, dual feature store, GNN rings | [Fraud Detection Design](system-design/fraud-detection.md) |
 | **Google Docs** | Real-time collaborative editing, OT / CRDT, WebSocket sync | [Google Docs Design](system-design/google-docs.md) |
 | **Google Drive** | File metadata, chunked upload/download, versioning, quota service | [Google Drive Design](system-design/google-drive.md) |
 | **Instagram** | Feed generation, image delivery CDN, followers graph, fanout | [Instagram Design](system-design/instagram.md) |
+| **Metrics Monitoring** | TSDB Gorilla compression, log/trace ingestion, PromQL, streaming alert rules | [Metrics Monitoring Design](system-design/metrics-monitoring.md) |
 | **Netflix** | Open Connect CDN, dynamic optimizer transcode, ABR, state bookmarks | [Netflix Design](system-design/netflix.md) |
 | **News Feed** | Fanout-on-write vs fanout-on-read, timeline caching, ranking | [News Feed Design](system-design/news-feed.md) |
 | **Notification System** | Push notifications, SMS/Email gateways, deduplication, rate limits | [Notification Design](system-design/notification-system.md) |
 | **Parking Garage** | Concurrency control, spot allocation, ticket validation, sensors | [Parking Garage Design](system-design/parking-garage.md) |
 | **PasteBin** | Text storage, expiring keys, S3/blob integration, rate limiting | [PasteBin Design](system-design/pastebin.md) |
+| **Payment System** | Double-entry ledger, idempotency keys, claims payout saga, T+1 reconciliation | [Payment System Design](system-design/payment-system.md) |
 | **Rate Limiter** | Token bucket, sliding window counter, Redis distributed locking | [Rate Limiter Design](system-design/rate-limiter.md) |
 | **Shopify** | Multi-tenant architecture, order processing, flash-sale traffic handling | [Shopify Design](system-design/shopify.md) |
 | **Social Media** | Hybrid fanout, pre-signed media upload, social graph, timeline cache | [Social Media Design](system-design/social-media.md) |
@@ -237,7 +240,7 @@ The [`system-design/`](system-design/system-design.md) directory contains real-w
 | **TikTok** | Video feed recommendation pipeline, transcode pipeline, delivery | [TikTok Design](system-design/tiktok.md) |
 | **Twitter** | Distributed timeline, Redis fanout cluster, search indexing | [Twitter Design](system-design/twitter.md) |
 | **Uber** | Geospatial indexing (QuadTree/H3), driver dispatch, location updates | [Uber Design](system-design/uber.md) |
-| **Web Crawler** | Distributed frontier queue, robots.txt parser, deduplication, DNS | [Web Crawler Design](system-design/webcrawler.md) |
+| **Web Crawler** | Mercator frontier, multi-format doc parsing/OCR, SimHash dedupe, RAG chunking | [Web Crawler Design](system-design/webcrawler.md) |
 | **WhatsApp** | Real-time chat, WebSocket connection managers, E2E encryption | [WhatsApp Design](system-design/whatsapp.md) |
 | **YouTube** | Video upload pipeline, transcode farm, CDN distribution, views counting | [YouTube Design](system-design/youtube.md) |
 

@@ -6,7 +6,7 @@
 
 * [🌟 **DocuSign Billing & Invoicing Modernization**](project-retrospective.md) — Production architecture retrospective: Migrating legacy Quartz batch systems to event-driven MuleSoft & Core microservices, reducing invoice latency from 7 days to real-time (< 2s), achieving a 90% reduction in reconciliation discrepancies, and an 80% DSO reduction.
 
-## Interview System Design Case Studies (28 Systems)
+## Interview System Design Case Studies (31 Systems)
 
 1. [Airbnb](airbnb.md)
 2. [Amazon Prime](amazon-prime.md)
@@ -17,25 +17,28 @@
 7. [DocuSign](docusign.md)
 8. [Dropbox](dropbox.md)
 9. [Email Archive](email-archive.md)
-10. [Google Docs](google-docs.md)
-11. [Google Drive](google-drive.md)
-12. [Instagram](instagram.md)
-13. [Netflix](netflix.md)
-14. [News Feed](news-feed.md)
-15. [Notification System](notification-system.md)
-16. [Parking Garage](parking-garage.md)
-17. [PasteBin](pastebin.md)
-18. [Rate Limiter](rate-limiter.md)
-19. [Shopify](shopify.md)
-20. [Social Media](social-media.md)
-21. [Tag Service](tag-service.md)
-22. [TicketMaster](ticketmaster.md)
-23. [TikTok](tiktok.md)
-24. [Twitter](twitter.md)
-25. [Uber](uber.md)
-26. [Web Crawler](webcrawler.md)
-27. [Whatsapp](whatsapp.md)
-28. [YouTube](youtube.md)
+10. [Fraud Detection](fraud-detection.md)
+11. [Google Docs](google-docs.md)
+12. [Google Drive](google-drive.md)
+13. [Instagram](instagram.md)
+14. [Metrics Monitoring](metrics-monitoring.md)
+15. [Netflix](netflix.md)
+16. [News Feed](news-feed.md)
+17. [Notification System](notification-system.md)
+18. [Parking Garage](parking-garage.md)
+19. [PasteBin](pastebin.md)
+20. [Payment System](payment-system.md)
+21. [Rate Limiter](rate-limiter.md)
+22. [Shopify](shopify.md)
+23. [Social Media](social-media.md)
+24. [Tag Service](tag-service.md)
+25. [TicketMaster](ticketmaster.md)
+26. [TikTok](tiktok.md)
+27. [Twitter](twitter.md)
+28. [Uber](uber.md)
+29. [Web Crawler](webcrawler.md)
+30. [Whatsapp](whatsapp.md)
+31. [YouTube](youtube.md)
 
 ## Distributed Systems Fundamentals: CAP & PACELC Theorem
 
@@ -134,16 +137,16 @@ When designing a system in an interview:
 
 | Database Category | Representative Engines | CAP / PACELC | Ideal Access Patterns & Why to Choose | Systems Using It |
 | :--- | :--- | :--- | :--- | :--- |
-| **Relational (RDBMS / Sharded SQL)** | PostgreSQL, MySQL, Amazon Aurora, Vitess | **CP** (`PC / EC`) | Structured schemas, multi-row ACID transactions, foreign-key integrity, and financial/inventory ledgers where double-spending or double-booking is unacceptable. | [Airbnb](airbnb.md), [Amazon](amazon.md), [DocuSign](docusign.md), [Instagram](instagram.md), [Shopify](shopify.md), [YouTube](youtube.md) |
-| **Distributed SQL (NewSQL)** | Google Cloud Spanner, CockroachDB | **CP** (`PC / EC`) | Global multi-region active-active writes requiring external consistency / `SERIALIZABLE` ACID isolation without manual application-level sharding. | [ATM](atm.md), [Google Docs](google-docs.md), [Google Drive](google-drive.md), [TicketMaster](ticketmaster.md), [Uber](uber.md) |
-| **Wide-Column / LSM-Tree NoSQL** | Apache Cassandra, ScyllaDB, Google Bigtable | **AP** (`PA / EL`) | Massive append-heavy write velocity (millions of writes/sec), time-series/ordered range scans by `(partition_key, clustering_key)`, and zero single point of failure. | [Google Docs](google-docs.md), [Netflix](netflix.md), [Notification System](notification-system.md), [Social Media](social-media.md), [TikTok](tiktok.md), [Twitter](twitter.md), [Whatsapp](whatsapp.md), [YouTube](youtube.md) |
-| **Key-Value / Document NoSQL** | Amazon DynamoDB, MongoDB, RocksDB | **AP** (`PA / EL`) | Predictable single-digit millisecond point lookups (`GET/PUT` by primary key), flexible JSON schemas, and native item TTL expiration at any scale. | [Amazon Prime](amazon-prime.md), [Amazon](amazon.md), [Bitly](bitly.md), [PasteBin](pastebin.md), [Web Crawler](webcrawler.md) |
-| **In-Memory Cache & Data Structures** | Redis Cluster, Memcached (EVCache) | **AP / CP-Primary** | Sub-millisecond hot reads, sorted-set timelines (`ZSET`), availability bitmaps, geospatial indexes (`H3`/`GEOADD`), and atomic Lua distributed locks/rate-limiters. | All 28 Systems ([Rate Limiter](rate-limiter.md), [News Feed](news-feed.md), [Autocomplete Search](autocomplete-search.md), [Uber](uber.md), etc.) |
-| **Search & Inverted Index** | Elasticsearch, OpenSearch, Apache Lucene (Earlybird) | **AP** (`PA / EL`) | Full-text keyword search, typo tolerance, faceted filtering, boolean Roaring Bitmap intersections, and `geo_point` bounding-box queries. | [Airbnb](airbnb.md), [Amazon](amazon.md), [Email Archive](email-archive.md), [Google Drive](google-drive.md), [Tag Service](tag-service.md), [Twitter](twitter.md) |
-| **Graph & Relation Tuple Stores** | Amazon Neptune, Neo4j, Meta TAO, Google Zanzibar | **AP / CP** | Highly connected many-to-many relationships, social follower adjacency lists, scene/actor knowledge graphs, and transitive hierarchical ACL checks. | [Amazon Prime](amazon-prime.md), [Google Drive](google-drive.md), [Instagram](instagram.md), [News Feed](news-feed.md), [Social Media](social-media.md) |
-| **Vector Databases** | Milvus, FAISS, Pinecone | **AP** (`PA / EL`) | High-dimensional Approximate Nearest Neighbor (ANN / HNSW) embedding similarity search for real-time ML candidate retrieval. | [TikTok](tiktok.md) |
-| **Columnar OLAP & Time-Series** | ClickHouse, Google BigQuery, TimescaleDB | **AP** (Analytical) | High-compression append-only event streams and sub-second `GROUP BY` aggregations over billions of click, telemetry, or billing rows. | [Bitly](bitly.md), [Parking Garage](parking-garage.md), [Rate Limiter](rate-limiter.md), [Shopify](shopify.md) |
-| **Object / Blob & WORM Ledger** | AWS S3, Google Colossus, Magic Pocket, Amazon QLDB | **11 9s Durability** | Immutable binary media (photos, HLS/DASH video chunks, PDFs, 4MB blocks) and SEC/court-compliant Write-Once-Read-Many (WORM) cryptographic audit trails. | [ATM](atm.md), [DocuSign](docusign.md), [Dropbox](dropbox.md), [Email Archive](email-archive.md), [Netflix](netflix.md), [YouTube](youtube.md) |
+| **Relational (RDBMS / Sharded SQL)** | PostgreSQL, MySQL, Amazon Aurora, Vitess | **CP** (`PC / EC`) | Structured schemas, multi-row ACID transactions, foreign-key integrity, and financial/inventory ledgers where double-spending or double-booking is unacceptable. | [Airbnb](airbnb.md), [Amazon](amazon.md), [DocuSign](docusign.md), [Fraud Detection](fraud-detection.md), [Instagram](instagram.md), [Metrics Monitoring](metrics-monitoring.md), [Payment System](payment-system.md), [Shopify](shopify.md), [YouTube](youtube.md) |
+| **Distributed SQL (NewSQL)** | Google Cloud Spanner, CockroachDB | **CP** (`PC / EC`) | Global multi-region active-active writes requiring external consistency / `SERIALIZABLE` ACID isolation without manual application-level sharding. | [ATM](atm.md), [Google Docs](google-docs.md), [Google Drive](google-drive.md), [Payment System](payment-system.md), [TicketMaster](ticketmaster.md), [Uber](uber.md) |
+| **Wide-Column / LSM-Tree NoSQL** | Apache Cassandra, ScyllaDB, Google Bigtable | **AP** (`PA / EL`) | Massive append-heavy write velocity (millions of writes/sec), time-series/ordered range scans by `(partition_key, clustering_key)`, and zero single point of failure. | [Fraud Detection](fraud-detection.md), [Google Docs](google-docs.md), [Netflix](netflix.md), [Notification System](notification-system.md), [Social Media](social-media.md), [TikTok](tiktok.md), [Twitter](twitter.md), [Web Crawler](webcrawler.md), [Whatsapp](whatsapp.md), [YouTube](youtube.md) |
+| **Key-Value / Document NoSQL** | Amazon DynamoDB, MongoDB, RocksDB | **AP** (`PA / EL`) | Predictable single-digit millisecond point lookups (`GET/PUT` by primary key), flexible JSON schemas, and native item TTL expiration at any scale. | [Amazon Prime](amazon-prime.md), [Amazon](amazon.md), [Bitly](bitly.md), [Fraud Detection](fraud-detection.md), [PasteBin](pastebin.md), [Payment System](payment-system.md), [Web Crawler](webcrawler.md) |
+| **In-Memory Cache & Data Structures** | Redis Cluster, Memcached (EVCache) | **AP / CP-Primary** | Sub-millisecond hot reads, sorted-set timelines (`ZSET`), availability bitmaps, geospatial indexes (`H3`/`GEOADD`), and atomic Lua distributed locks/rate-limiters. | All 31 Systems ([Rate Limiter](rate-limiter.md), [Fraud Detection](fraud-detection.md), [Metrics Monitoring](metrics-monitoring.md), [News Feed](news-feed.md), [Uber](uber.md), etc.) |
+| **Search & Inverted Index** | Elasticsearch, OpenSearch, Apache Lucene (Earlybird) | **AP** (`PA / EL`) | Full-text keyword search, typo tolerance, faceted filtering, boolean Roaring Bitmap intersections, and `geo_point` bounding-box queries. | [Airbnb](airbnb.md), [Amazon](amazon.md), [Email Archive](email-archive.md), [Google Drive](google-drive.md), [Payment System](payment-system.md), [Tag Service](tag-service.md), [Twitter](twitter.md), [Web Crawler](webcrawler.md) |
+| **Graph & Relation Tuple Stores** | Amazon Neptune, Neo4j, Meta TAO, Google Zanzibar | **AP / CP** | Highly connected many-to-many relationships, social follower adjacency lists, fraud ring detection, and transitive hierarchical ACL checks. | [Amazon Prime](amazon-prime.md), [Fraud Detection](fraud-detection.md), [Google Drive](google-drive.md), [Instagram](instagram.md), [News Feed](news-feed.md), [Social Media](social-media.md) |
+| **Vector Databases** | Milvus, FAISS, Pinecone, Qdrant | **AP** (`PA / EL`) | High-dimensional Approximate Nearest Neighbor (ANN / HNSW) embedding similarity search for real-time ML candidate retrieval and RAG document chunks. | [TikTok](tiktok.md), [Web Crawler](webcrawler.md) |
+| **Columnar OLAP & Time-Series** | ClickHouse, Prometheus/Mimir TSDB, BigQuery, Snowflake | **AP** (Analytical) | Gorilla XOR/delta-of-delta time-series compression and sub-second SIMD `GROUP BY` aggregations over billions of metrics, logs, click, or billing rows. | [Bitly](bitly.md), [Fraud Detection](fraud-detection.md), [Metrics Monitoring](metrics-monitoring.md), [Parking Garage](parking-garage.md), [Payment System](payment-system.md), [Rate Limiter](rate-limiter.md), [Shopify](shopify.md) |
+| **Object / Blob & WORM Ledger** | AWS S3, Google Colossus, Magic Pocket, Amazon QLDB | **11 9s Durability** | Immutable binary media (photos, HLS/DASH video chunks, PDFs, WARC archives, TSDB blocks) and SEC/court-compliant Write-Once-Read-Many (WORM) cryptographic audit trails. | [ATM](atm.md), [DocuSign](docusign.md), [Dropbox](dropbox.md), [Email Archive](email-archive.md), [Metrics Monitoring](metrics-monitoring.md), [Netflix](netflix.md), [Payment System](payment-system.md), [Web Crawler](webcrawler.md), [YouTube](youtube.md) |
 
 ## Easy to remember numbers for back-of-the-envelope calculations in system design interviews
 
