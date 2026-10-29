@@ -78,8 +78,9 @@ tech-interview-prep/
 │   │   └── practice/              # Practice questions (1–54) and QOTD problems
 │   ├── java/                      # Cracking the Coding Interview (6th ed.) Java solutions
 │   └── javascript/                # JavaScript QOTD and utility solutions
-├── system-design/                 # 31 Complete System Design case studies
-│   ├── system-design.md           # Master index, estimation cheat sheet, references
+├── system-design/                 # 31 Complete System Design case studies & fundamentals
+│   ├── system-design.md           # Master hub, interview framework, estimation cheat sheet
+│   ├── fundamentals/              # 6-chapter curriculum (networking, DBs, caching, scaling, etc.)
 │   └── [case-studies]/            # airbnb, uber, whatsapp, youtube, etc.
 ├── behavioural/                   # Leadership and behavioural interview guide
 │   ├── behavioural.md             # Questions, CAR format, ATS resume guide
@@ -208,13 +209,15 @@ All system design theory, core architectural building blocks, capacity estimatio
 
 ### System Design Master Guide & 31 Case Studies
 
-Explore the **[System Design Master Documentation](system-design/system-design.md)** for:
+Explore the **[System Design Documentation Hub](system-design/system-design.md)** and its **[6-Chapter Fundamentals Curriculum](system-design/system-design.md#system-design-fundamentals-curriculum-6-chapters)**:
 
-- **[31 Interview System Design Case Studies](system-design/system-design.md#interview-system-design-case-studies-31-systems)** — Full deep dives (Airbnb, Amazon, Netflix, Payment System, Rate Limiter, Uber, WhatsApp, YouTube, etc.) with functional/non-functional requirements, API schemas, data storage estimates, and embedded Mermaid HLD & ER diagrams.
-- **[System Design Interview 45-Minute Execution Framework](system-design/system-design.md#system-design-interview-45-minute-execution-framework)** — Structured 5-phase pacing guide from requirements scoping and estimations to deep-dive trade-offs.
-- **[Core Architectural Building Blocks (11 Deep-Dive Modules)](system-design/system-design.md#core-architectural-building-blocks)** — Networking & OSI layers, Load Balancers & Proxies, API Gateways, CDNs, Caching strategies & failure modes, Vertical vs. Horizontal Scaling & Auto-Scaling (HPA/KEDA/connection draining), Consistent Hashing, Message Queues vs. Pub/Sub Streams, Database Replication & Sharding, Storage Engine Internals (B+Tree vs. LSM-Tree, Object/Block/File storage), Search & Geospatial Indexing (Inverted Index, Geohash, QuadTree, Uber H3), Distributed Consensus & Transactions (Raft, Fencing Tokens, 2PC, Saga, Transactional Outbox, Idempotency), Resiliency Patterns (SLA/SLO/SLI, Rate Limiting, Circuit Breakers, Exponential Backoff, Bulkheads), and Observability (Metrics, Logs, Tracing).
-- **[Distributed Systems Fundamentals (CAP & PACELC)](system-design/system-design.md#distributed-systems-fundamentals-cap--pacelc-theorem)** — CP vs. AP trade-offs, tunable quorum consistency ($R + W > N$), and the Database Selection Cheat Sheet across 10 datastore categories.
-- **[Back-of-the-Envelope Calculations Cheat Sheet](system-design/system-design.md#back-of-the-envelope-calculations-cheat-sheet)** — Powers of two, SQL data type storage sizes, latency numbers every programmer should know, and traffic/QPS conversion rules of thumb.
+- **[Chapter 1: Networking, API Paradigms & Real-Time Protocols](system-design/fundamentals/01-networking-and-api-paradigms.md)** — OSI 7-layer model, TCP vs. UDP vs. QUIC, HTTP/1.1–HTTP/3, **REST vs. GraphQL vs. gRPC**, and **Short Polling vs. Long Polling vs. SSE vs. WebSockets vs. WebRTC** (with stateful WebSocket horizontal scaling).
+- **[Chapter 2: Proxies, Load Balancers, API Gateways & CDNs](system-design/fundamentals/02-edge-load-balancing-and-cdn.md)** — Forward vs. Reverse Proxy, L4 vs. L7 Load Balancing, routing algorithms, HA (VRRP/Anycast), API Gateway vs. Service Mesh, and Push vs. Pull CDNs.
+- **[Chapter 3: Caching Deep Dive, Compute Scaling & Auto-Scaling](system-design/fundamentals/03-caching-and-scaling.md)** — L1–L6 caching tiers, Redis vs. Memcached, Cache-Aside / Read-Through / Write-Through / Write-Behind / Write-Around, Stampede/Penetration/Avalanche/Hot Key mitigations, Vertical vs. Horizontal Scaling, Auto-Scaling (HPA/KEDA/VPA, connection draining), and Consistent Hashing.
+- **[Chapter 4: Databases Deep Dive — SQL vs. NoSQL, Internals & Sharding](system-design/fundamentals/04-databases-sql-vs-nosql.md)** — Relational (ACID) vs. NoSQL (BASE), B+Tree vs. LSM-Tree, Row (OLTP) vs. Columnar (OLAP), Block/File/Object storage (Pre-Signed URLs), **All 10 Database Categories**, Replication, Sharding, Inverted Index, and Geospatial Indexing (Geohash, QuadTree, Uber H3).
+- **[Chapter 5: Distributed Systems, Consensus, Transactions & Messaging](system-design/fundamentals/05-distributed-systems-and-messaging.md)** — CAP & PACELC theorems, Raft/Paxos leader election, Distributed Locks & Fencing Tokens, **2PC vs. Saga vs. Transactional Outbox (CDC)**, Idempotency Keys, and Message Queues (RabbitMQ/SQS) vs. Event Streams (Kafka/Kinesis).
+- **[Chapter 6: Performance Metrics, Resiliency & Observability](system-design/fundamentals/06-resiliency-observability-and-metrics.md)** — Latency vs. Response Time, Throughput, Little's Law, **P50/P95/P99 Tail Latency Amplification**, Timeouts, Deadline Propagation, Backpressure, SLA/SLO/SLI ("The Nines"), Rate Limiting, Circuit Breakers, and Observability (Metrics, Logs, Tracing).
+- **[31 Interview System Design Case Studies](system-design/system-design.md#interview-system-design-case-studies-31-systems)** & **[Back-of-the-Envelope Calculations Cheat Sheet](system-design/system-design.md#back-of-the-envelope-calculations-cheat-sheet)**.
 
 ---
 
