@@ -1,6 +1,6 @@
 # Chapter 6: Performance Metrics (Latency, Throughput, P95/P99, Timeouts), Resiliency & Observability
 
-[← Back to System Design Hub](../system-design.md) | [← Previous: Chapter 5 — Distributed Systems, Consensus, Transactions & Messaging](05-distributed-systems-and-messaging.md)
+[← Back to System Design Hub](../system-design.md) | [← Previous: Chapter 5 — Distributed Systems, Consensus, Transactions & Messaging](05-distributed-systems-and-messaging.md) | [Next: Chapter 7 — Probabilistic Data Structures & Stream Processing →](07-probabilistic-structures-and-stream-processing.md)
 
 ---
 
@@ -193,5 +193,4 @@ You cannot operate or debug a distributed system at scale without the **Three Pi
 
 ---
 
-[← Back to System Design Hub](../system-design.md) | [← Previous: Chapter 5 — Distributed Systems, Consensus, Transactions & Messaging](05-distributed-systems-and-messaging.md)
-
+[← Back to System Design Hub](../system-design.md) | [← Previous: Chapter 5 — Distributed Systems, Consensus, Transactions & Messaging](05-distributed-systems-and-messaging.md) | [Next: Chapter 7 — Probabilistic Data Structures & Stream Processing →](07-probabilistic-structures-and-stream-processing.md)

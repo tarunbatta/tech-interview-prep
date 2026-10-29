@@ -459,4 +459,3 @@ Deploying a flawed fraud rule or miscalibrated ML model can accidentally block $
 ### Video References
 
 * [![Fraud Detection System Design Video](https://img.youtube.com/vi/SwN11da6fbI/0.jpg)](https://www.youtube.com/watch?v=SwN11da6fbI)
-

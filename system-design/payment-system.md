@@ -474,4 +474,3 @@ External banking networks can drop webhooks or apply unexpected FX/interchange f
 ### Video References
 
 * [![Payment System Design Video](https://img.youtube.com/vi/olfaBgJrUBI/0.jpg)](https://www.youtube.com/watch?v=olfaBgJrUBI)
-

@@ -9,6 +9,7 @@
 - [1. Relational (SQL) vs. Non-Relational (NoSQL) Deep Dive](#1-relational-sql-vs-non-relational-nosql-deep-dive)
   - [Head-to-Head Comparison](#head-to-head-comparison)
   - [ACID vs. BASE Consistency Models](#acid-vs-base-consistency-models)
+  - [Database Isolation Levels & Concurrency Control (DDIA Deep Dive)](#database-isolation-levels--concurrency-control-ddia-deep-dive)
   - [Normalization (SQL) vs. Access-Pattern Denormalization (NoSQL)](#normalization-sql-vs-access-pattern-denormalization-nosql)
   - [Interview Decision Guide: When to Pick SQL vs. NoSQL](#interview-decision-guide-when-to-pick-sql-vs-nosql)
 - [2. Storage Engine Internals & Cloud Storage Tiers](#2-storage-engine-internals--cloud-storage-tiers)
@@ -52,6 +53,36 @@ Choosing between a **Relational Database (RDBMS)** and a **NoSQL Database** — 
 | :--- | :--- | :--- |
 | **ACID (Relational / NewSQL)** | **Atomicity** (all statements succeed or roll back via Undo Log); **Consistency** (foreign keys & constraints enforced); **Isolation** (concurrent transactions isolated via `MVCC` + locks); **Durability** (flushed to **WAL** on disk before returning `COMMIT OK`). | Prioritizes **correctness over raw write velocity**. Essential when an invalid intermediate state (like deducting money from Account A without crediting Account B) is unacceptable. |
 | **BASE (NoSQL / AP Distributed)** | **Basically Available** (returns non-error responses during partial node failures); **Soft state** (replica state updates in background via anti-entropy); **Eventually consistent** (all replicas converge once writes stop). | Prioritizes **massive write throughput, low latency, and 100% uptime** over immediate global read-after-write agreement. |
+
+---
+
+### Database Isolation Levels & Concurrency Control (DDIA Deep Dive)
+
+In interviews for payment systems ([Payment System](../payment-system.md)), hotel booking ([Airbnb](../airbnb.md)), or concert ticketing ([TicketMaster](../ticketmaster.md)), simply saying *"We use an ACID database"* is not enough — most SQL databases default to **`READ COMMITTED`**, which still allows lost updates and double-booking!
+
+#### 1. Concurrency Anomalies Explained
+
+- **Dirty Read**: Transaction $T_1$ reads data written by Transaction $T_2$ before $T_2$ has committed (if $T_2$ rolls back, $T_1$ acted on phantom state).
+- **Non-Repeatable Read (Read Skew)**: $T_1$ reads the same row twice within one transaction and sees two different values because $T_2$ committed an update in between.
+- **Lost Update**: $T_1$ and $T_2$ both read `balance = $100`, both add `$50` in application memory, and both write back `balance = $150` (one `$50` deposit is silently lost).
+- **Phantom Read**: $T_1$ runs a `WHERE` range query twice and sees new "phantom" rows inserted by $T_2$ in between.
+- **Write Skew (The Classic Senior Interview Question)**: Two transactions read the same overlapping dataset (`SELECT COUNT(*) FROM on_call_doctors WHERE shift = 1` $\rightarrow$ returns `2`), verify a business invariant (*"At least 1 doctor must remain on call"*), and **update two different rows** ($T_1$ removes Alice; $T_2$ removes Bob). Neither updated the same row, yet the committed result (`0` doctors on call, or two bookings for overlapping calendar dates) violates the business invariant!
+
+#### 2. SQL Isolation Levels Comparison
+
+| Isolation Level | Dirty Read | Non-Repeatable Read | Lost Update | Write Skew / Phantoms | How Storage Engines Implement It |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Read Uncommitted** | Possible | Possible | Possible | Possible | No read locks; reads dirty in-memory pages. |
+| **Read Committed** *(PostgreSQL / Oracle / SQL Server Default)* | **Prevented** | Possible | Possible | Possible | Uses **MVCC (Multi-Version Concurrency Control)**: each SQL statement sees a snapshot of rows committed prior to that statement. |
+| **Repeatable Read / Snapshot Isolation** *(MySQL InnoDB Default)* | **Prevented** | **Prevented** | Prevented in PG (aborts on conflict); Possible in MySQL without `FOR UPDATE` | Possible (**Write Skew** still happens under Snapshot Isolation!) | **MVCC Transaction Snapshot**: the entire transaction sees a consistent snapshot frozen at `BEGIN` (`txid`). Readers never block writers; writers never block readers. |
+| **Serializable** | **Prevented** | **Prevented** | **Prevented** | **Prevented** | **Two-Phase Locking (2PL)** with predicate/next-key gap locks, OR **SSI (Serializable Snapshot Isolation)** in PostgreSQL/CockroachDB which tracks read-write dependency cycles and aborts conflicting transactions. |
+
+#### 3. Pessimistic vs. Optimistic Concurrency Control (Preventing Double-Booking)
+
+| Approach | SQL Mechanism | How It Works | When to Use in Interviews |
+| :--- | :--- | :--- | :--- |
+| **Pessimistic Locking** | `BEGIN; SELECT * FROM seats WHERE id = 42 AND status = 'FREE' FOR UPDATE; ... COMMIT;` | Acquires an **exclusive row lock** (`X-lock`) before reading. Any concurrent transaction trying to read `FOR UPDATE` or modify seat 42 blocks in a queue until the first transaction commits. | **High contention** or high cost of retry (e.g., financial ledger transfers, ATM withdrawals). *Downside*: Holding row locks across slow external HTTP calls exhausts DB connections and risks deadlocks. |
+| **Optimistic Concurrency Control (OCC)** | `UPDATE seats SET status = 'BOOKED', version = version + 1 WHERE id = 42 AND version = 7;` | No locks held during read! App reads `version = 7`, computes changes, and performs an atomic **Compare-And-Swap (CAS)** write. If `affected_rows == 0`, another user modified the row first — retry or return `409 Conflict`. | **Low-to-moderate contention** or when user think-time is involved ([Airbnb](../airbnb.md) checkout, wiki edits, shopping cart updates). Zero lock contention on the DB. |
 
 ---
 

@@ -225,4 +225,3 @@ With naive modular hashing (`server = hash(key) % N`), adding or removing a sing
 ---
 
 [← Back to System Design Hub](../system-design.md) | [← Previous: Chapter 2 — Proxies, Load Balancers, API Gateways & CDNs](02-edge-load-balancing-and-cdn.md) | [Next: Chapter 4 — Databases: SQL vs. NoSQL, Storage Internals & Sharding →](04-databases-sql-vs-nosql.md)
-

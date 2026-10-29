@@ -15,7 +15,9 @@
 - [3. Distributed Locks & Fencing Tokens](#3-distributed-locks--fencing-tokens)
 - [4. Distributed Transactions: 2PC vs. Saga vs. Transactional Outbox](#4-distributed-transactions-2pc-vs-saga-vs-transactional-outbox)
 - [5. Idempotency Keys (Safe Retries Over Unreliable Networks)](#5-idempotency-keys-safe-retries-over-unreliable-networks)
-- [6. Asynchronous Messaging: Message Queues vs. Pub/Sub Event Streams](#6-asynchronous-messaging-message-queues-vs-pubsub-event-streams)
+- [6. Distributed Unique ID Generation (Snowflake, UUIDv7, Ticket Servers)](#6-distributed-unique-id-generation-snowflake-uuidv7-ticket-servers)
+- [7. Time, Clocks & Ordering in Distributed Systems (NTP, Lamport, Vector Clocks, TrueTime)](#7-time-clocks--ordering-in-distributed-systems-ntp-lamport-vector-clocks-truetime)
+- [8. Asynchronous Messaging: Message Queues vs. Pub/Sub Event Streams](#8-asynchronous-messaging-message-queues-vs-pubsub-event-streams)
 
 ---
 
@@ -126,7 +128,6 @@ In a distributed cluster, nodes must agree on a single source of truth (e.g., *"
 When two processes try to modify a shared resource (e.g., booking the same concert seat in [TicketMaster](../ticketmaster.md) or executing a scheduled cron job once), a **Distributed Lock** (via Redis or etcd) ensures mutual exclusion:
 
 ```mermaid
-%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'padding': 10}}}%%
 sequenceDiagram
     autonumber
     participant C1 as Client 1 (GC Paused)
@@ -178,7 +179,65 @@ An operation is **idempotent** if performing it multiple times produces the exac
 
 ---
 
-## 6. Asynchronous Messaging: Message Queues vs. Pub/Sub Event Streams
+## 6. Distributed Unique ID Generation (Snowflake, UUIDv7, Ticket Servers)
+
+In a sharded database, a single SQL `AUTO_INCREMENT` primary key becomes a Single Point of Failure (SPOF) and write bottleneck. Every distributed system ([Twitter](../twitter.md), [WhatsApp](../whatsapp.md), [Payment System](../payment-system.md)) needs a way to generate globally unique, roughly **time-sortable (`k-ordered`) 64-bit IDs** at `100,000+ IDs/sec` without cross-node coordination on every write.
+
+### Comparing Distributed ID Generation Strategies
+
+| Strategy | Size | Time-Sortable? | Pros | Cons / Why It Fails at Scale |
+| :--- | :--- | :--- | :--- | :--- |
+| **UUIDv4 (Random)** | 128 bits (36-char string) | **No** (Completely random) | Zero coordination between servers; generated locally in CPU. | **Destroys B+Tree Clustered Index performance**: inserting random UUIDv4 primary keys into MySQL/PostgreSQL causes constant random disk page splits and buffer-pool cache misses; $2\times$ larger than `BIGINT`. |
+| **UUIDv7 (Time-Ordered RFC 9562)** | 128 bits | **Yes** (48-bit Unix ms timestamp prefix + random bits) | Zero coordination between servers **and** preserves sequential B+Tree index locality! | 128 bits (16 bytes) instead of 64 bits (8 bytes) when `BIGINT` compactness is strictly required. |
+| **DB Ticket Server (Flickr)** | 64 bits | Yes | Simple central SQL nodes using `REPLACE INTO` with `auto_increment_offset` ($1, 3, 5\dots$ vs $2, 4, 6\dots$). | Requires network round-trip to Ticket DB on every insert; database tier becomes a bottleneck at extreme QPS. |
+| **Range Allocator (etcd / ZooKeeper)** | 64 bits | Approximately | Each app server claims a block of 10,000 IDs (e.g., `100,000..109,999`) from etcd in memory and hands them out locally. | If a server crashes, its unused in-memory ID range is skipped (leaves small gaps, which is fine for non-accounting IDs). |
+| **Twitter Snowflake (64-Bit ID)** | **64 bits (`BIGINT`)** | **Yes** (Sorted by millisecond) | Fits in a standard 64-bit SQL `BIGINT` / Redis score; generates **4.096 Million unique IDs/sec per node** purely in local memory! | Requires assigning unique `worker_id` (via ZooKeeper/K8s StatefulSet ordinal) and handling **NTP clock drift**. |
+
+### Twitter Snowflake 64-Bit Binary Layout
+
+```text
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 ... 63
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+
+|0|          41-bit Timestamp (ms since custom epoch)           |10b|12b|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+
+ │ ◄───────────────────────── 41 bits ─────────────────────────► │   │
+ │                                                               │   └── 12-bit Sequence (4,096 IDs/ms)
+ │                                                               └────── 10-bit Machine ID (1,024 nodes)
+ └────────────────────────────────────────────────────────────────────── 1-bit Sign (Always 0 for positive BIGINT)
+```
+
+- **1-bit Sign**: Always `0` so the 64-bit integer is positive in signed `int64` languages (Java, C#, SQL `BIGINT`).
+- **41-bit Timestamp**: Milliseconds elapsed since a custom epoch ($2^{41} - 1\text{ ms} \approx \mathbf{69\text{ years}}$ of IDs). Because the timestamp sits in the most significant bits, sorting by `id` automatically sorts chronologically!
+- **10-bit Machine / Worker ID**: Supports $2^{10} = \mathbf{1,024}$ generator nodes (often split into `5 bits Datacenter ID` = 32 DCs $\times$ `5 bits Worker ID` = 32 nodes/DC).
+- **12-bit Sequence Number**: Incremented for every ID generated within the *same* millisecond on the same node ($2^{12} = \mathbf{4,096\text{ IDs/ms}} = 4,096,000\text{ IDs/sec}$ per node). Resets to `0` on the next millisecond.
+
+---
+
+## 7. Time, Clocks & Ordering in Distributed Systems (NTP, Lamport, Vector Clocks, TrueTime)
+
+In a single machine, there is one CPU clock. Across distributed nodes, physical quartz clocks drift apart by up to `10–50 ms` per day even with **NTP (Network Time Protocol)** synchronization.
+
+### 1. Physical Clocks: Time-of-Day vs. Monotonic Clocks
+
+- **Time-of-Day Clock (`System.currentTimeMillis()`, `DateTime.UtcNow`)**: Returns wall-clock time synchronized periodically via NTP. If the local clock drifted ahead of the NTP server, NTP will **jump the clock backward** (or slew it), meaning `t2 - t1` can be **negative**!
+  - *Danger of Last-Write-Wins (LWW)*: If Node A (whose clock is 50ms fast) writes `x = 1` at physical time `10.050s`, and Node B writes `x = 2` 10ms later at physical time `10.010s`, Cassandra/Dynamo LWW silently discards Node B's newer write because `10.010 < 10.050`!
+- **Monotonic Clock (`System.nanoTime()`, `Stopwatch.GetTimestamp()`)**: Guaranteed to always move forward on a single machine. Always use monotonic clocks to measure timeouts and latency durations, never wall-clock time.
+
+### 2. Logical Clocks & Causal Ordering
+
+When you need to order events across nodes without trusting physical wall clocks:
+
+| Clock Mechanism | How It Works | What It Guarantees | Where It Is Used |
+| :--- | :--- | :--- | :--- |
+| **Lamport Timestamps** | Each node keeps an integer counter $c$. On every local event, $c \leftarrow c + 1$. Every network message carries $c$; the receiver sets $c_{\text{recv}} \leftarrow \max(c_{\text{local}}, c_{\text{msg}}) + 1$. | Provides a **total causal order**: if event $A$ causally happened before $B$ ($A \rightarrow B$), then $L(A) < L(B)$. *(Cannot tell if two events were concurrent solely from $L(A) < L(B)$).* | Distributed lock fencing tokens, Paxos/Raft ballot numbers. |
+| **Vector Clocks** | Maintains an array of counters $[c_1, c_2, \dots, c_N]$ (one slot per node/replica). If $V(A) \le V(B)$ in all slots, $A$ causally preceded $B$. If neither $V(A) \le V(B)$ nor $V(B) \le V(A)$, the writes are **concurrent conflicts (siblings)**! | **Detects exact concurrency conflicts** so both sibling versions can be preserved and merged by the client or via CRDTs. | Amazon Dynamo shopping cart conflict detection, Riak, collaborative sync ([Google Docs](../google-docs.md)). |
+| **Google TrueTime (`[earliest, latest]`)** | Combines GPS receivers + Atomic Clocks in every datacenter to bound physical clock uncertainty $\epsilon$ to `1–7 ms`. Before committing a transaction, Spanner simply **waits out the uncertainty window ($2\epsilon$)**! | **External Consistency (Linearizability)** across global datacenters without cross-region lock messages on reads. | Google Cloud Spanner ([Payment System](../payment-system.md), [Uber](../uber.md)). |
+| **Hybrid Logical Clocks (HLC)** | Combines physical NTP time with a logical counter $(pt, l)$ so timestamps stay within milliseconds of wall-clock time while strictly preserving causal ordering without TrueTime atomic hardware. | Monotonic causal snapshots on commodity cloud VMs. | CockroachDB, YugabyteDB, MongoDB oplog. |
+
+---
+
+## 8. Asynchronous Messaging: Message Queues vs. Pub/Sub Event Streams
 
 Decoupling synchronous producers from consumers smooths out traffic spikes (load leveling), enables independent failure isolation, and supports event-driven architectures.
 
@@ -195,4 +254,3 @@ Decoupling synchronous producers from consumers smooths out traffic spikes (load
 ---
 
 [← Back to System Design Hub](../system-design.md) | [← Previous: Chapter 4 — Databases: SQL vs. NoSQL, Storage Internals & Sharding](04-databases-sql-vs-nosql.md) | [Next: Chapter 6 — Performance Metrics, Resiliency & Observability →](06-resiliency-observability-and-metrics.md)
-

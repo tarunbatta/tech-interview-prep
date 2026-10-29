@@ -150,40 +150,40 @@ flowchart LR
 When the server needs to push updates to the client (chat messages, live notifications, collaborative document edits, stock prices, driver GPS locations), standard request-response HTTP/1.1 is insufficient because a server cannot initiate a connection to a client sitting behind NAT/firewalls.
 
 ```mermaid
-%%{init: {'flowchart': {'nodeSpacing': 20, 'rankSpacing': 35, 'padding': 10}}}%%
 sequenceDiagram
+    autonumber
     participant C as Client
     participant S as Server
 
-    rect rgb(30, 58, 138)
-    Note over C,S: 1. Short Polling (Repeated timer intervals)
-    C->>S: GET /messages (Any new?)
-    S-->>C: 200 OK [] (Empty)
-    C->>S: GET /messages (Any new?)
-    S-->>C: 200 OK [Msg 1]
+    rect rgba(30, 58, 138, 0.15)
+        Note over C,S: 1. Short Polling (Repeated timer intervals)
+        C->>S: GET /messages (Any new?)
+        S-->>C: 200 OK [] (Empty)
+        C->>S: GET /messages (Any new?)
+        S-->>C: 200 OK [Msg 1]
     end
 
-    rect rgb(88, 28, 135)
-    Note over C,S: 2. Long Polling (Hanging GET until event or timeout)
-    C->>S: GET /messages?timeout=30s
-    Note over S: Holds connection open until Msg arrives...
-    S-->>C: 200 OK [Msg 2]
-    C->>S: Immediately re-opens GET /messages?timeout=30s
+    rect rgba(88, 28, 135, 0.15)
+        Note over C,S: 2. Long Polling (Hanging GET until event or timeout)
+        C->>S: GET /messages?timeout=30s
+        Note over S: Holds connection open until Msg arrives...
+        S-->>C: 200 OK [Msg 2]
+        C->>S: Immediately re-opens GET /messages?timeout=30s
     end
 
-    rect rgb(6, 78, 59)
-    Note over C,S: 3. Server-Sent Events (SSE — Unidirectional Stream)
-    C->>S: GET /stream (Accept: text/event-stream)
-    S-->>C: data: {"event": "chunk_1"}\n\n
-    S-->>C: data: {"event": "chunk_2"}\n\n
+    rect rgba(6, 78, 59, 0.15)
+        Note over C,S: 3. Server-Sent Events (SSE — Unidirectional Stream)
+        C->>S: GET /stream (Accept: text/event-stream)
+        S-->>C: data: {"event": "chunk_1"}
+        S-->>C: data: {"event": "chunk_2"}
     end
 
-    rect rgb(124, 45, 18)
-    Note over C,S: 4. WebSockets (Full-Duplex Bidirectional TCP)
-    C->>S: GET /chat (Upgrade: websocket)
-    S-->>C: 101 Switching Protocols
-    C->>S: WS Frame: "Hello!"
-    S-->>C: WS Frame: "Typing..."
+    rect rgba(124, 45, 18, 0.15)
+        Note over C,S: 4. WebSockets (Full-Duplex Bidirectional TCP)
+        C->>S: GET /chat (Upgrade: websocket)
+        S-->>C: 101 Switching Protocols
+        C->>S: WS Frame: "Hello!"
+        S-->>C: WS Frame: "Typing..."
     end
 ```
 
