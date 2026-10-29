@@ -1,0 +1,8 @@
+{
+    "number": "301",
+    "title": "Remove Invalid Parentheses",
+    "url": "https://leetcode.com/problems/remove-invalid-parentheses",
+    "difficulty": "Hard",
+    "question": "Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.\n\nNote:&#xA0;The input string may contain letters other than the parentheses ( and ).\n\nExample 1:\n\nInput: &quot;()())()&quot;\nOutput: [&quot;()()()&quot;, &quot;(())()&quot;]\n\n\nExample 2:\n\nInput: &quot;(a)())()&quot;\nOutput: [&quot;(a)()()&quot;, &quot;(a())()&quot;]\n\n\nExample 3:\n\nInput: &quot;)(&quot;\nOutput: [&quot;&quot;]\n",
+    "code": "undefinedpublic class Solution {    public IList<string> RemoveInvalidParentheses(string s) {            }}"
+}

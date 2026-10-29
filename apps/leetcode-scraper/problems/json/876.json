@@ -1,0 +1,8 @@
+{
+    "number": "876",
+    "title": "Middle of the Linked List",
+    "url": "https://leetcode.com/problems/middle-of-the-linked-list",
+    "difficulty": "Easy",
+    "question": "Given a non-empty, singly&#xA0;linked list with head node head, return&#xA0;a&#xA0;middle node of linked list.\n\nIf there are two middle nodes, return the second middle node.\n\n&#xA0;\n\n\nExample 1:\n\nInput: [1,2,3,4,5]\nOutput: Node 3 from this list (Serialization: [3,4,5])\nThe returned node has value 3.  (The judge&apos;s serialization of this node is [3,4,5]).\nNote that we returned a ListNode object ans, such that:\nans.val = 3, ans.next.val = 4, ans.next.next.val = 5, and ans.next.next.next = NULL.\n\n\n\nExample 2:\n\nInput: [1,2,3,4,5,6]\nOutput: Node 4 from this list (Serialization: [4,5,6])\nSince the list has two middle nodes with values 3 and 4, we return the second one.\n\n\n&#xA0;\n\nNote:\n\n\n\tThe number of nodes in the given list will be between 1&#xA0;and 100.\n\n\n\n",
+    "code": "undefined/** * Definition for singly-linked list. * public class ListNode { *     public int val; *     public ListNode next; *     public ListNode(int x) { val = x; } * } */public class Solution {    public ListNode MiddleNode(ListNode head) {            }}"
+}

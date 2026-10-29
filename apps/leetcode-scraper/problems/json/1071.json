@@ -1,0 +1,8 @@
+{
+    "number": "1071",
+    "title": "Greatest Common Divisor of Strings",
+    "url": "https://leetcode.com/problems/greatest-common-divisor-of-strings",
+    "difficulty": "Easy",
+    "question": "For strings S and T, we say &quot;T divides S&quot; if and only if S = T + ... + T&#xA0; (T concatenated with itself 1 or more times)\n\nReturn the largest string X such that X divides str1&#xA0;and X divides str2.\n\n&#xA0;\n\nExample 1:\n\nInput: str1 = &quot;ABCABC&quot;, str2 = &quot;ABC&quot;\nOutput: &quot;ABC&quot;\n\n\nExample 2:\n\nInput: str1 = &quot;ABABAB&quot;, str2 = &quot;ABAB&quot;\nOutput: &quot;AB&quot;\n\n\nExample 3:\n\nInput: str1 = &quot;LEET&quot;, str2 = &quot;CODE&quot;\nOutput: &quot;&quot;\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= str1.length &lt;= 1000\n\t1 &lt;= str2.length &lt;= 1000\n\tstr1[i] and str2[i] are English uppercase letters.\n",
+    "code": "undefinedpublic class Solution {    public string GcdOfStrings(string str1, string str2) {            }}"
+}

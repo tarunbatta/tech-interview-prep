@@ -1,0 +1,8 @@
+{
+    "number": "1072",
+    "title": "Flip Columns For Maximum Number of Equal Rows",
+    "url": "https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows",
+    "difficulty": "Medium",
+    "question": "Given a matrix consisting of 0s and 1s, we may choose any number of columns in the matrix and flip every&#xA0;cell in that column.&#xA0; Flipping a cell changes the value of that cell from 0 to 1 or from 1 to 0.\n\nReturn the maximum number of rows that have all values equal after some number of flips.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: [[0,1],[1,1]]\nOutput: 1\nExplanation: After flipping no values, 1 row has all values equal.\n\n\n\nExample 2:\n\nInput: [[0,1],[1,0]]\nOutput: 2\nExplanation: After flipping values in the first column, both rows have equal values.\n\n\n\nExample 3:\n\nInput: [[0,0,0],[0,0,1],[1,1,0]]\nOutput: 2\nExplanation: After flipping values in the first two columns, the last two rows have equal values.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= matrix.length &lt;= 300\n\t1 &lt;= matrix[i].length &lt;= 300\n\tAll matrix[i].length&apos;s are equal\n\tmatrix[i][j] is&#xA0;0 or 1\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int MaxEqualRowsAfterFlips(int[][] matrix) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "926",
+    "title": "Flip String to Monotone Increasing",
+    "url": "https://leetcode.com/problems/flip-string-to-monotone-increasing",
+    "difficulty": "Medium",
+    "question": "A string of &apos;0&apos;s and &apos;1&apos;s is monotone increasing if it consists of some number of &apos;0&apos;s (possibly 0), followed by some number of &apos;1&apos;s (also possibly 0.)\n\nWe are given a string S of &apos;0&apos;s and &apos;1&apos;s, and we may flip any &apos;0&apos; to a &apos;1&apos; or a &apos;1&apos; to a &apos;0&apos;.\n\nReturn the minimum number of flips to make S&#xA0;monotone increasing.\n\n&#xA0;\n\n\nExample 1:\n\nInput: &quot;00110&quot;\nOutput: 1\nExplanation: We flip the last digit to get 00111.\n\n\n\nExample 2:\n\nInput: &quot;010110&quot;\nOutput: 2\nExplanation: We flip to get 011111, or alternatively 000111.\n\n\n\nExample 3:\n\nInput: &quot;00011000&quot;\nOutput: 2\nExplanation: We flip to get 00000000.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= S.length &lt;= 20000\n\tS only consists of &apos;0&apos; and &apos;1&apos; characters.\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int MinFlipsMonoIncr(string S) {            }}"
+}

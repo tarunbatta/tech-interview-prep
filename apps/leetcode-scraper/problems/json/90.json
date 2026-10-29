@@ -1,0 +1,8 @@
+{
+    "number": "90",
+    "title": "Subsets II",
+    "url": "https://leetcode.com/problems/subsets-ii",
+    "difficulty": "Medium",
+    "question": "Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).\n\nNote: The solution set must not contain duplicate subsets.\n\nExample:\n\nInput: [1,2,2]\nOutput:\n[\n  [2],\n  [1],\n  [1,2,2],\n  [2,2],\n  [1,2],\n  []\n]\n\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<int>> SubsetsWithDup(int[] nums) {            }}"
+}

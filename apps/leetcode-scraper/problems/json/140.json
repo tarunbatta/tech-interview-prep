@@ -1,0 +1,8 @@
+{
+    "number": "140",
+    "title": "Word Break II",
+    "url": "https://leetcode.com/problems/word-break-ii",
+    "difficulty": "Hard",
+    "question": "Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, add spaces in s to construct a sentence where each word is a valid dictionary word.&#xA0;Return all such possible sentences.\n\nNote:\n\n\n\tThe same word in the dictionary may be reused multiple times in the segmentation.\n\tYou may assume the dictionary does not contain duplicate words.\n\n\nExample 1:\n\nInput:\ns = &quot;catsanddog&quot;\nwordDict = [&quot;cat&quot;, &quot;cats&quot;, &quot;and&quot;, &quot;sand&quot;, &quot;dog&quot;]\nOutput:\n[\n&#xA0; &quot;cats and dog&quot;,\n&#xA0; &quot;cat sand dog&quot;\n]\n\n\nExample 2:\n\nInput:\ns = &quot;pineapplepenapple&quot;\nwordDict = [&quot;apple&quot;, &quot;pen&quot;, &quot;applepen&quot;, &quot;pine&quot;, &quot;pineapple&quot;]\nOutput:\n[\n&#xA0; &quot;pine apple pen apple&quot;,\n&#xA0; &quot;pineapple pen apple&quot;,\n&#xA0; &quot;pine applepen apple&quot;\n]\nExplanation: Note that you are allowed to reuse a dictionary word.\n\n\nExample 3:\n\nInput:\ns = &quot;catsandog&quot;\nwordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]\nOutput:\n[]\n",
+    "code": "undefinedpublic class Solution {    public IList<string> WordBreak(string s, IList<string> wordDict) {            }}"
+}

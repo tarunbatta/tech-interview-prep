@@ -1,0 +1,8 @@
+{
+    "number": "896",
+    "title": "Monotonic Array",
+    "url": "https://leetcode.com/problems/monotonic-array",
+    "difficulty": "Easy",
+    "question": "An array is monotonic if it is either monotone increasing or monotone decreasing.\n\nAn array A is monotone increasing if for all i &lt;= j, A[i] &lt;= A[j].&#xA0; An array A is monotone decreasing if for all i &lt;= j, A[i] &gt;= A[j].\n\nReturn true if and only if the given array A is monotonic.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: [1,2,2,3]\nOutput: true\n\n\n\nExample 2:\n\nInput: [6,5,4,4]\nOutput: true\n\n\n\nExample 3:\n\nInput: [1,3,2]\nOutput: false\n\n\n\nExample 4:\n\nInput: [1,2,4,5]\nOutput: true\n\n\n\nExample 5:\n\nInput: [1,1,1]\nOutput: true\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 50000\n\t-100000 &lt;= A[i] &lt;= 100000\n\n\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool IsMonotonic(int[] A) {            }}"
+}

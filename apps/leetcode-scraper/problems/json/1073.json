@@ -1,0 +1,8 @@
+{
+    "number": "1073",
+    "title": "Adding Two Negabinary Numbers",
+    "url": "https://leetcode.com/problems/adding-two-negabinary-numbers",
+    "difficulty": "Medium",
+    "question": "Given two numbers arr1 and arr2 in base -2, return the result of adding them together.\n\nEach number is given in array format:&#xA0; as an array of 0s and 1s, from most significant bit to least significant bit.&#xA0; For example, arr = [1,1,0,1] represents the number (-2)^3&#xA0;+ (-2)^2 + (-2)^0 = -3.&#xA0; A number arr in array format is also guaranteed to have no leading zeros: either&#xA0;arr == [0] or arr[0] == 1.\n\nReturn the result of adding arr1 and arr2 in the same format: as an array of 0s and 1s with no leading zeros.\n\n&#xA0;\n\nExample 1:\n\nInput: arr1 = [1,1,1,1,1], arr2 = [1,0,1]\nOutput: [1,0,0,0,0]\nExplanation: arr1 represents 11, arr2 represents 5, the output represents 16.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= arr1.length &lt;= 1000\n\t1 &lt;= arr2.length &lt;= 1000\n\tarr1 and arr2 have no leading zeros\n\tarr1[i] is 0 or 1\n\tarr2[i] is 0 or 1\n",
+    "code": "undefinedpublic class Solution {    public int[] AddNegabinary(int[] arr1, int[] arr2) {            }}"
+}

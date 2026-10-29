@@ -221,6 +221,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# LeetCode Scraper generated outputs
+apps/leetcode-scraper/problems/cs/
+apps/leetcode-scraper/log.txt
+
 # General build artifacts
 **/bin/
 **/obj/

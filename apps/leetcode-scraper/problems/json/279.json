@@ -1,0 +1,8 @@
+{
+    "number": "279",
+    "title": "Perfect Squares",
+    "url": "https://leetcode.com/problems/perfect-squares",
+    "difficulty": "Medium",
+    "question": "Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.\n\nExample 1:\n\nInput: n = 12\nOutput: 3 \nExplanation: 12 = 4 + 4 + 4.\n\nExample 2:\n\nInput: n = 13\nOutput: 2\nExplanation: 13 = 4 + 9.",
+    "code": "undefinedpublic class Solution {    public int NumSquares(int n) {            }}"
+}

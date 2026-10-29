@@ -1,0 +1,8 @@
+{
+    "number": "803",
+    "title": "Bricks Falling When Hit",
+    "url": "https://leetcode.com/problems/bricks-falling-when-hit",
+    "difficulty": "Hard",
+    "question": "We have a grid of 1s and 0s; the 1s in a cell represent bricks.&#xA0; A brick will not drop if and only if it is directly connected to the top of the grid, or at least one of its (4-way) adjacent bricks will not drop.\n\nWe will do some erasures&#xA0;sequentially. Each time we want to do the erasure at the location (i, j), the brick (if it exists) on that location will disappear, and then some other bricks may&#xA0;drop because of that&#xA0;erasure.\n\nReturn an array representing the number of bricks that will drop after each erasure in sequence.\n\nExample 1:\nInput: \ngrid = [[1,0,0,0],[1,1,1,0]]\nhits = [[1,0]]\nOutput: [2]\nExplanation: \nIf we erase the brick at (1, 0), the brick at (1, 1) and (1, 2) will drop. So we should return 2.\n\nExample 2:\nInput: \ngrid = [[1,0,0,0],[1,1,0,0]]\nhits = [[1,1],[1,0]]\nOutput: [0,0]\nExplanation: \nWhen we erase the brick at (1, 0), the brick at (1, 1) has already disappeared due to the last move. So each erasure will cause no bricks dropping.  Note that the erased brick (1, 0) will not be counted as a dropped brick.\n\n&#xA0;\n\nNote:\n\n\n\tThe number of rows and columns in the grid will be in the range&#xA0;[1, 200].\n\tThe number of erasures will not exceed the area of the grid.\n\tIt is guaranteed that each erasure will be different from any other erasure, and located inside the grid.\n\tAn erasure may refer to a location with no brick - if it does, no bricks drop.\n\n",
+    "code": "undefinedpublic class Solution {    public int[] HitBricks(int[][] grid, int[][] hits) {            }}"
+}

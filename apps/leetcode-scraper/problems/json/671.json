@@ -1,0 +1,8 @@
+{
+    "number": "671",
+    "title": "Second Minimum Node In a Binary Tree",
+    "url": "https://leetcode.com/problems/second-minimum-node-in-a-binary-tree",
+    "difficulty": "Easy",
+    "question": "Given a non-empty special binary tree consisting of nodes with the non-negative value, where each node in this tree has exactly two or zero sub-node. If the node has two sub-nodes, then this node&apos;s value is the smaller value among its two sub-nodes. More formally, the property&#xA0;root.val = min(root.left.val, root.right.val)&#xA0;always holds.\n\nGiven such a binary tree, you need to output the second minimum value in the set made of all the nodes&apos; value in the whole tree.\n\nIf no such second minimum value exists, output -1 instead.\n\nExample 1:\n\nInput: \n    2\n   / \\\n  2   5\n     / \\\n    5   7\n\nOutput: 5\nExplanation: The smallest value is 2, the second smallest value is 5.\n\n\n&#xA0;\n\nExample 2:\n\nInput: \n    2\n   / \\\n  2   2\n\nOutput: -1\nExplanation: The smallest value is 2, but there isn&apos;t any second smallest value.\n\n\n&#xA0;\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public int FindSecondMinimumValue(TreeNode root) {            }}"
+}

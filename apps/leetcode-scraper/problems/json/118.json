@@ -1,0 +1,8 @@
+{
+    "number": "118",
+    "title": "Pascal's Triangle",
+    "url": "https://leetcode.com/problems/pascals-triangle",
+    "difficulty": "Easy",
+    "question": "Given a non-negative integer&#xA0;numRows, generate the first numRows of Pascal&apos;s triangle.\n\n\nIn Pascal&apos;s triangle, each number is the sum of the two numbers directly above it.\n\nExample:\n\nInput: 5\nOutput:\n[\n     [1],\n    [1,1],\n   [1,2,1],\n  [1,3,3,1],\n [1,4,6,4,1]\n]\n\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<int>> Generate(int numRows) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "85",
+    "title": "Maximal Rectangle",
+    "url": "https://leetcode.com/problems/maximal-rectangle",
+    "difficulty": "Hard",
+    "question": "Given a 2D binary matrix filled with 0&apos;s and 1&apos;s, find the largest rectangle containing only 1&apos;s and return its area.\n\nExample:\n\nInput:\n[\n  [&quot;1&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;],\n  [&quot;1&quot;,&quot;0&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;],\n  [&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;],\n  [&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;]\n]\nOutput: 6\n\n",
+    "code": "undefinedpublic class Solution {    public int MaximalRectangle(char[][] matrix) {            }}"
+}

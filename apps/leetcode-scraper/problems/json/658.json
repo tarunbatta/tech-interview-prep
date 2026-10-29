@@ -1,0 +1,8 @@
+{
+    "number": "658",
+    "title": "Find K Closest Elements",
+    "url": "https://leetcode.com/problems/find-k-closest-elements",
+    "difficulty": "Medium",
+    "question": "\nGiven a sorted array, two integers k and x, find the k closest elements to x in the array.  The result should also be sorted in ascending order.\nIf there is a tie,  the smaller elements are always preferred.\n\n\nExample 1:\nInput: [1,2,3,4,5], k=4, x=3\nOutput: [1,2,3,4]\n\n\n\n\nExample 2:\nInput: [1,2,3,4,5], k=4, x=-1\nOutput: [1,2,3,4]\n\n\n\nNote:\n\nThe value k is positive and will always be smaller than the length of the sorted array.\n Length of the given array is positive and will not exceed 104\n Absolute value of elements in the array and x will not exceed 104\n\n\n\n\n\n\nUPDATE (2017/9/19):\nThe arr parameter had been changed to an array of integers (instead of a list of integers). Please reload the code definition to get the latest changes.\n",
+    "code": "undefinedpublic class Solution {    public IList<int> FindClosestElements(int[] arr, int k, int x) {            }}"
+}

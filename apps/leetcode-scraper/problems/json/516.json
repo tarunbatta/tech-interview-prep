@@ -1,0 +1,8 @@
+{
+    "number": "516",
+    "title": "Longest Palindromic Subsequence",
+    "url": "https://leetcode.com/problems/longest-palindromic-subsequence",
+    "difficulty": "Medium",
+    "question": "\nGiven a string s, find the longest palindromic subsequence&apos;s length in s. You may assume that the maximum length of s is 1000.\n\n\nExample 1:\nInput: \n&quot;bbbab&quot;\n\nOutput: \n4\n\nOne possible longest palindromic subsequence is &quot;bbbb&quot;.\n\n\nExample 2:\nInput:\n&quot;cbbd&quot;\n\nOutput:\n2\n\nOne possible longest palindromic subsequence is &quot;bb&quot;.\n",
+    "code": "undefinedpublic class Solution {    public int LongestPalindromeSubseq(string s) {            }}"
+}

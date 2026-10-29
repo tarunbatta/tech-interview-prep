@@ -1,0 +1,8 @@
+{
+    "number": "866",
+    "title": "Prime Palindrome",
+    "url": "https://leetcode.com/problems/prime-palindrome",
+    "difficulty": "Medium",
+    "question": "Find the smallest prime palindrome greater than or equal to N.\n\nRecall that a&#xA0;number is prime if it&apos;s only divisors are 1 and itself, and it is greater than 1.&#xA0;\n\nFor example, 2,3,5,7,11 and 13 are&#xA0;primes.\n\nRecall that a number is a palindrome if it reads the same from left to right as it does from right to left.&#xA0;\n\nFor example, 12321 is a palindrome.\n\n&#xA0;\n\n\nExample 1:\n\nInput: 6\nOutput: 7\n\n\n\nExample 2:\n\nInput: 8\nOutput: 11\n\n\n\nExample 3:\n\nInput: 13\nOutput: 101\n\n\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= N &lt;= 10^8\n\tThe answer is guaranteed to exist and be less than 2 * 10^8.\n\n",
+    "code": "undefinedpublic class Solution {    public int PrimePalindrome(int N) {            }}"
+}

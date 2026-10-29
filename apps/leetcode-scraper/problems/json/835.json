@@ -1,0 +1,8 @@
+{
+    "number": "835",
+    "title": "Image Overlap",
+    "url": "https://leetcode.com/problems/image-overlap",
+    "difficulty": "Medium",
+    "question": "Two images A and B are given, represented as&#xA0;binary, square matrices of the same size.&#xA0; (A binary matrix has only 0s and 1s as values.)\n\nWe translate one image however we choose (sliding it left, right, up, or down any number of units), and place it on top of the other image.&#xA0; After, the overlap of this translation is the number of positions that have a 1 in both images.\n\n(Note also that a translation does not include any kind of rotation.)\n\nWhat is the largest possible overlap?\n\nExample 1:\n\nInput: A = [[1,1,0],\n            [0,1,0],\n&#xA0;           [0,1,0]]\n&#xA0;      B = [[0,0,0],\n&#xA0;           [0,1,1],\n&#xA0;           [0,0,1]]\nOutput: 3\nExplanation: We slide A to right by 1 unit and down by 1 unit.\n\nNotes:&#xA0;\n\n\n\t1 &lt;= A.length = A[0].length = B.length = B[0].length &lt;= 30\n\t0 &lt;=&#xA0;A[i][j], B[i][j] &lt;= 1\n\n",
+    "code": "undefinedpublic class Solution {    public int LargestOverlap(int[][] A, int[][] B) {            }}"
+}

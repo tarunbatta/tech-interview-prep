@@ -1,0 +1,8 @@
+{
+    "number": "968",
+    "title": "Binary Tree Cameras",
+    "url": "https://leetcode.com/problems/binary-tree-cameras",
+    "difficulty": "Hard",
+    "question": "Given a binary tree, we install cameras on the nodes of the tree.&#xA0;\n\nEach camera at&#xA0;a node can monitor its parent, itself, and its immediate children.\n\nCalculate the minimum number of cameras needed to monitor all nodes of the tree.\n\n&#xA0;\n\nExample 1:\n\n\nInput: [0,0,null,0,0]\nOutput: 1\nExplanation: One camera is enough to monitor all nodes if placed as shown.\n\n\n\nExample 2:\n\nInput: [0,0,null,0,null,0,null,null,0]\nOutput: 2\nExplanation: At least two cameras are needed to monitor all nodes of the tree. The above image shows one of the valid configurations of camera placement.\n\n\n\nNote:\n\n\n\tThe number of nodes in the given tree will be in the range&#xA0;[1, 1000].\n\tEvery node has value 0.\n\n\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public int MinCameraCover(TreeNode root) {            }}"
+}

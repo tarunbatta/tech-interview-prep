@@ -1,0 +1,8 @@
+{
+    "number": "462",
+    "title": "Minimum Moves to Equal Array Elements II",
+    "url": "https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii",
+    "difficulty": "Medium",
+    "question": "Given a non-empty integer array, find the minimum number of moves required to make all array elements equal, where a move is incrementing a selected element by 1 or decrementing a selected element by 1.\n\nYou may assume the array&apos;s length is at most 10,000.\n\nExample:\nInput:\n[1,2,3]\n\nOutput:\n2\n\nExplanation:\nOnly two moves are needed (remember each move increments or decrements one element):\n\n[1,2,3]  =&gt;  [2,2,3]  =&gt;  [2,2,2]\n\n",
+    "code": "undefinedpublic class Solution {    public int MinMoves2(int[] nums) {            }}"
+}

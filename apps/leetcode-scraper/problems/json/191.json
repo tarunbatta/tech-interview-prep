@@ -1,0 +1,8 @@
+{
+    "number": "191",
+    "title": "Number of 1 Bits",
+    "url": "https://leetcode.com/problems/number-of-1-bits",
+    "difficulty": "Easy",
+    "question": "Write a function that takes an unsigned integer and return&#xA0;the number of &apos;1&apos;&#xA0;bits it has (also known as the Hamming weight).\n\n&#xA0;\n\nExample 1:\n\nInput: 00000000000000000000000000001011\nOutput: 3\nExplanation: The input binary string 00000000000000000000000000001011&#xA0;has a total of three &apos;1&apos; bits.\n\n\nExample 2:\n\nInput: 00000000000000000000000010000000\nOutput: 1\nExplanation: The input binary string 00000000000000000000000010000000&#xA0;has a total of one &apos;1&apos; bit.\n\n\nExample 3:\n\nInput: 11111111111111111111111111111101\nOutput: 31\nExplanation: The input binary string 11111111111111111111111111111101 has a total of thirty one &apos;1&apos; bits.\n\n&#xA0;\n\nNote:\n\n\n\tNote that in some languages such as Java, there is no unsigned integer type. In this case, the input will be given as signed integer type and should not affect your implementation, as the internal binary representation of the integer is the same whether it is signed or unsigned.\n\tIn Java,&#xA0;the compiler represents the signed integers using 2&apos;s complement notation. Therefore, in Example 3&#xA0;above the input represents the signed integer -3.\n\n\n&#xA0;\n\nFollow up:\n\nIf this function is called many times, how would you optimize it?\n",
+    "code": "undefinedpublic class Solution {    public int HammingWeight(uint n) {            }}"
+}

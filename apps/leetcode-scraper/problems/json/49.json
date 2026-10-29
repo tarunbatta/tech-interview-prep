@@ -1,0 +1,8 @@
+{
+    "number": "49",
+    "title": "Group Anagrams",
+    "url": "https://leetcode.com/problems/group-anagrams",
+    "difficulty": "Medium",
+    "question": "Given an array of strings, group anagrams together.\n\nExample:\n\nInput: [&quot;eat&quot;, &quot;tea&quot;, &quot;tan&quot;, &quot;ate&quot;, &quot;nat&quot;, &quot;bat&quot;],\nOutput:\n[\n  [&quot;ate&quot;,&quot;eat&quot;,&quot;tea&quot;],\n  [&quot;nat&quot;,&quot;tan&quot;],\n  [&quot;bat&quot;]\n]\n\nNote:\n\n\n\tAll inputs will be in lowercase.\n\tThe order of your output does not&#xA0;matter.\n\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<string>> GroupAnagrams(string[] strs) {            }}"
+}

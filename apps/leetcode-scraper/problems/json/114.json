@@ -1,0 +1,8 @@
+{
+    "number": "114",
+    "title": "Flatten Binary Tree to Linked List",
+    "url": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list",
+    "difficulty": "Medium",
+    "question": "Given a binary tree, flatten it to a linked list in-place.\n\nFor example, given the following tree:\n\n    1\n   / \\\n  2   5\n / \\   \\\n3   4   6\n\n\nThe flattened tree should look like:\n\n1\n \\\n  2\n   \\\n    3\n     \\\n      4\n       \\\n        5\n         \\\n          6\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public void Flatten(TreeNode root) {            }}"
+}

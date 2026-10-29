@@ -1,0 +1,8 @@
+{
+    "number": "403",
+    "title": "Frog Jump",
+    "url": "https://leetcode.com/problems/frog-jump",
+    "difficulty": "Hard",
+    "question": "A frog is crossing a river. The river is divided into x units and at each unit there may or may not exist a stone. The frog can jump on a stone, but it must not jump into the water.\n\nGiven a list of stones&apos; positions (in units) in sorted ascending order, determine if the frog is able to cross the river by landing on the last stone. Initially, the frog is on the first stone and assume the first jump must be 1 unit.\n\n\nIf the frog&apos;s last jump was k units, then its next jump must be either k - 1, k, or k + 1 units. Note that the frog can only jump in the forward direction.\n\nNote:\n\nThe number of stones is &#x2265; 2 and is &lt; 1,100.\nEach stone&apos;s position will be a non-negative integer &lt; 231.\nThe first stone&apos;s position is always 0.\n\n\n\nExample 1:\n[0,1,3,5,6,8,12,17]\n\nThere are a total of 8 stones.\nThe first stone at the 0th unit, second stone at the 1st unit,\nthird stone at the 3rd unit, and so on...\nThe last stone at the 17th unit.\n\nReturn true. The frog can jump to the last stone by jumping \n1 unit to the 2nd stone, then 2 units to the 3rd stone, then \n2 units to the 4th stone, then 3 units to the 6th stone, \n4 units to the 7th stone, and 5 units to the 8th stone.\n\n\n\nExample 2:\n[0,1,2,3,4,8,9,11]\n\nReturn false. There is no way to jump to the last stone as \nthe gap between the 5th and 6th stone is too large.\n\n",
+    "code": "undefinedpublic class Solution {    public bool CanCross(int[] stones) {            }}"
+}

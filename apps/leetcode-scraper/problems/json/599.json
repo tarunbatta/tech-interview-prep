@@ -1,0 +1,8 @@
+{
+    "number": "599",
+    "title": "Minimum Index Sum of Two Lists",
+    "url": "https://leetcode.com/problems/minimum-index-sum-of-two-lists",
+    "difficulty": "Easy",
+    "question": "\nSuppose Andy and Doris want to choose a restaurant for dinner, and they both have a list of favorite restaurants represented by strings. \n\n\nYou need to help them find out their common interest with the least list index sum. If there is a choice tie between answers, output all of them with no order requirement. You could assume there always exists an answer.\n\n\n\nExample 1:\nInput:\n[&quot;Shogun&quot;, &quot;Tapioca Express&quot;, &quot;Burger King&quot;, &quot;KFC&quot;]\n[&quot;Piatti&quot;, &quot;The Grill at Torrey Pines&quot;, &quot;Hungry Hunter Steakhouse&quot;, &quot;Shogun&quot;]\nOutput: [&quot;Shogun&quot;]\nExplanation: The only restaurant they both like is &quot;Shogun&quot;.\n\n\n\nExample 2:\nInput:\n[&quot;Shogun&quot;, &quot;Tapioca Express&quot;, &quot;Burger King&quot;, &quot;KFC&quot;]\n[&quot;KFC&quot;, &quot;Shogun&quot;, &quot;Burger King&quot;]\nOutput: [&quot;Shogun&quot;]\nExplanation: The restaurant they both like and have the least index sum is &quot;Shogun&quot; with index sum 1 (0+1).\n\n\n\n\nNote:\n\nThe length of both lists will be in the range of [1, 1000].\nThe length of strings in both lists will be in the range of [1, 30].\nThe index is starting from 0 to the list length minus 1.\nNo duplicates in both lists.\n\n",
+    "code": "undefinedpublic class Solution {    public string[] FindRestaurant(string[] list1, string[] list2) {            }}"
+}

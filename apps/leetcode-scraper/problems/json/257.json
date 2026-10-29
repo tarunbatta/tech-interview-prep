@@ -1,0 +1,8 @@
+{
+    "number": "257",
+    "title": "Binary Tree Paths",
+    "url": "https://leetcode.com/problems/binary-tree-paths",
+    "difficulty": "Easy",
+    "question": "Given a binary tree, return all root-to-leaf paths.\n\nNote:&#xA0;A leaf is a node with no children.\n\nExample:\n\nInput:\n\n   1\n /   \\\n2     3\n \\\n  5\n\nOutput: [&quot;1-&gt;2-&gt;5&quot;, &quot;1-&gt;3&quot;]\n\nExplanation: All root-to-leaf paths are: 1-&gt;2-&gt;5, 1-&gt;3\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public IList<string> BinaryTreePaths(TreeNode root) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "692",
+    "title": "Top K Frequent Words",
+    "url": "https://leetcode.com/problems/top-k-frequent-words",
+    "difficulty": "Medium",
+    "question": "Given a non-empty list of words, return the k most frequent elements.\nYour answer should be sorted by frequency from highest to lowest. If two words have the same frequency, then the word with the lower alphabetical order comes first.\n\nExample 1:\nInput: [&quot;i&quot;, &quot;love&quot;, &quot;leetcode&quot;, &quot;i&quot;, &quot;love&quot;, &quot;coding&quot;], k = 2\nOutput: [&quot;i&quot;, &quot;love&quot;]\nExplanation: &quot;i&quot; and &quot;love&quot; are the two most frequent words.\n    Note that &quot;i&quot; comes before &quot;love&quot; due to a lower alphabetical order.\n\n\n\nExample 2:\nInput: [&quot;the&quot;, &quot;day&quot;, &quot;is&quot;, &quot;sunny&quot;, &quot;the&quot;, &quot;the&quot;, &quot;the&quot;, &quot;sunny&quot;, &quot;is&quot;, &quot;is&quot;], k = 4\nOutput: [&quot;the&quot;, &quot;is&quot;, &quot;sunny&quot;, &quot;day&quot;]\nExplanation: &quot;the&quot;, &quot;is&quot;, &quot;sunny&quot; and &quot;day&quot; are the four most frequent words,\n    with the number of occurrence being 4, 3, 2 and 1 respectively.\n\n\n\nNote:\n\nYou may assume k is always valid, 1 &#x2264; k &#x2264; number of unique elements.\nInput words contain only lowercase letters.\n\n\n\nFollow up:\n\nTry to solve it in O(n log k) time and O(n) extra space.\n\n",
+    "code": "undefinedpublic class Solution {    public IList<string> TopKFrequent(string[] words, int k) {            }}"
+}

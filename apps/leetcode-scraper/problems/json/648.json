@@ -1,0 +1,8 @@
+{
+    "number": "648",
+    "title": "Replace Words",
+    "url": "https://leetcode.com/problems/replace-words",
+    "difficulty": "Medium",
+    "question": "In English, we have a concept called root, which can be followed by some other words to form another longer word - let&apos;s call this word successor. For example, the root an, followed by other, which can form another word another.\n\nNow, given a dictionary consisting of many roots and a sentence. You need to replace all the successor in the sentence with the root forming it. If a successor has many roots can form it, replace it with the root with the shortest length.\n\nYou need to output the sentence after the replacement.\n\nExample 1:\n\nInput: dict = [&quot;cat&quot;, &quot;bat&quot;, &quot;rat&quot;]\nsentence = &quot;the cattle was rattled by the battery&quot;\nOutput: &quot;the cat was rat by the bat&quot;\n\n\n&#xA0;\n\nNote:\n\n\n\tThe input will only have lower-case letters.\n\t1 &lt;= dict words number &lt;= 1000\n\t1 &lt;= sentence words number &lt;= 1000\n\t1 &lt;= root length &lt;= 100\n\t1 &lt;= sentence words length &lt;= 1000\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public string ReplaceWords(IList<string> dict, string sentence) {            }}"
+}

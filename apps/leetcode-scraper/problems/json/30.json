@@ -1,0 +1,8 @@
+{
+    "number": "30",
+    "title": "Substring with Concatenation of All Words",
+    "url": "https://leetcode.com/problems/substring-with-concatenation-of-all-words",
+    "difficulty": "Hard",
+    "question": "You are given a string, s, and a list of words, words, that are all of the same length. Find all starting indices of substring(s) in s that is a concatenation of each word in words exactly once and without any intervening characters.\n\nExample 1:\n\nInput:\n  s = &quot;barfoothefoobarman&quot;,\n  words = [&quot;foo&quot;,&quot;bar&quot;]\nOutput: [0,9]\nExplanation: Substrings starting at index 0 and 9 are &quot;barfoor&quot; and &quot;foobar&quot; respectively.\nThe output order does not matter, returning [9,0] is fine too.\n\n\nExample 2:\n\nInput:\n  s = &quot;wordgoodgoodgoodbestword&quot;,\n  words = [&quot;word&quot;,&quot;good&quot;,&quot;best&quot;,&quot;word&quot;]\nOutput: []\n\n",
+    "code": "undefinedpublic class Solution {    public IList<int> FindSubstring(string s, string[] words) {            }}"
+}

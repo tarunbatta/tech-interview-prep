@@ -1,0 +1,8 @@
+{
+    "number": "1081",
+    "title": "Smallest Subsequence of Distinct Characters",
+    "url": "https://leetcode.com/problems/smallest-subsequence-of-distinct-characters",
+    "difficulty": "Medium",
+    "question": "Return the lexicographically smallest subsequence of text that contains all the distinct characters of text exactly once.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;cdadabcc&quot;\nOutput: &quot;adbc&quot;\n\n\n\nExample 2:\n\nInput: &quot;abcd&quot;\nOutput: &quot;abcd&quot;\n\n\n\nExample 3:\n\nInput: &quot;ecbacba&quot;\nOutput: &quot;eacb&quot;\n\n\n\nExample 4:\n\nInput: &quot;leetcode&quot;\nOutput: &quot;letcod&quot;\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= text.length &lt;= 1000\n\ttext consists of lowercase English letters.\n\n\n&#xA0;\n\n\n",
+    "code": "undefinedpublic class Solution {    public string SmallestSubsequence(string text) {            }}"
+}

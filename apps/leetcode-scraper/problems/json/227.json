@@ -1,0 +1,8 @@
+{
+    "number": "227",
+    "title": "Basic Calculator II",
+    "url": "https://leetcode.com/problems/basic-calculator-ii",
+    "difficulty": "Medium",
+    "question": "Implement a basic calculator to evaluate a simple expression string.\n\nThe expression string contains only non-negative integers, +, -, *, / operators and empty spaces  . The integer division should truncate toward zero.\n\nExample 1:\n\nInput: &quot;3+2*2&quot;\nOutput: 7\n\n\nExample 2:\n\nInput: &quot; 3/2 &quot;\nOutput: 1\n\nExample 3:\n\nInput: &quot; 3+5 / 2 &quot;\nOutput: 5\n\n\nNote:\n\n\n\tYou may assume that the given expression is always valid.\n\tDo not use the eval built-in library function.\n\n",
+    "code": "undefinedpublic class Solution {    public int Calculate(string s) {            }}"
+}

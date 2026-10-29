@@ -1,0 +1,8 @@
+{
+    "number": "884",
+    "title": "Uncommon Words from Two Sentences",
+    "url": "https://leetcode.com/problems/uncommon-words-from-two-sentences",
+    "difficulty": "Easy",
+    "question": "We are given two sentences A and B.&#xA0; (A sentence&#xA0;is a string of space separated words.&#xA0; Each word consists only of lowercase letters.)\n\nA word is uncommon&#xA0;if it appears exactly once in one of the sentences, and does not appear in the other sentence.\n\nReturn a list of all uncommon words.&#xA0;\n\nYou may return the list in any order.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: A = &quot;this apple is sweet&quot;, B = &quot;this apple is sour&quot;\nOutput: [&quot;sweet&quot;,&quot;sour&quot;]\n\n\n\nExample 2:\n\nInput: A = &quot;apple apple&quot;, B = &quot;banana&quot;\nOutput: [&quot;banana&quot;]\n\n\n&#xA0;\n\nNote:\n\n\n\t0 &lt;= A.length &lt;= 200\n\t0 &lt;= B.length &lt;= 200\n\tA and B both contain only spaces and lowercase letters.\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public string[] UncommonFromSentences(string A, string B) {            }}"
+}

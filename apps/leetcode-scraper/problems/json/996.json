@@ -1,0 +1,8 @@
+{
+    "number": "996",
+    "title": "Number of Squareful Arrays",
+    "url": "https://leetcode.com/problems/number-of-squareful-arrays",
+    "difficulty": "Hard",
+    "question": "Given an array A of non-negative integers, the array is squareful if for every pair of adjacent elements, their sum is a perfect square.\n\nReturn the number of permutations of A that are squareful.&#xA0; Two permutations A1 and A2 differ if and only if there is some index i such that A1[i] != A2[i].\n\n&#xA0;\n\nExample 1:\n\nInput: [1,17,8]\nOutput: 2\nExplanation: \n[1,8,17] and [17,8,1] are the valid permutations.\n\n\nExample 2:\n\nInput: [2,2,2]\nOutput: 1\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 12\n\t0 &lt;= A[i] &lt;= 1e9\n",
+    "code": "undefinedpublic class Solution {    public int NumSquarefulPerms(int[] A) {            }}"
+}

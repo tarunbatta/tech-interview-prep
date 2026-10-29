@@ -1,0 +1,8 @@
+{
+    "number": "914",
+    "title": "X of a Kind in a Deck of Cards",
+    "url": "https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards",
+    "difficulty": "Easy",
+    "question": "In a deck of cards, each card has an integer written on it.\n\nReturn true if and only if you can choose&#xA0;X &gt;= 2 such that&#xA0;it is possible to split the entire deck&#xA0;into 1 or more groups of cards, where:\n\n\n\tEach group has exactly X cards.\n\tAll the cards in each group have the same integer.\n\n\n&#xA0;\n\nExample 1:\n\nInput: [1,2,3,4,4,3,2,1]\nOutput: true\nExplanation: Possible partition [1,1],[2,2],[3,3],[4,4]\n\n\n\nExample 2:\n\nInput: [1,1,1,2,2,2,3,3]\nOutput: false\nExplanation: No possible partition.\n\n\n\nExample 3:\n\nInput: [1]\nOutput: false\nExplanation: No possible partition.\n\n\n\nExample 4:\n\nInput: [1,1]\nOutput: true\nExplanation: Possible partition [1,1]\n\n\n\nExample 5:\n\nInput: [1,1,2,2,2,2]\nOutput: true\nExplanation: Possible partition [1,1],[2,2],[2,2]\n\n\n\n\n\n\n\nNote:\n\n\n\t1 &lt;= deck.length &lt;= 10000\n\t0 &lt;= deck[i] &lt;&#xA0;10000\n\n\n\n\n\n\n&#xA0;\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool HasGroupsSizeX(int[] deck) {            }}"
+}

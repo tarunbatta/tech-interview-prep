@@ -1,0 +1,8 @@
+{
+    "number": "273",
+    "title": "Integer to English Words",
+    "url": "https://leetcode.com/problems/integer-to-english-words",
+    "difficulty": "Hard",
+    "question": "Convert a non-negative integer to its english words representation. Given input is guaranteed to be less than 231 - 1.\n\nExample 1:\n\nInput: 123\nOutput: &quot;One Hundred Twenty Three&quot;\n\n\nExample 2:\n\nInput: 12345\nOutput: &quot;Twelve Thousand Three Hundred Forty Five&quot;\n\nExample 3:\n\nInput: 1234567\nOutput: &quot;One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven&quot;\n\n\nExample 4:\n\nInput: 1234567891\nOutput: &quot;One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One&quot;\n\n",
+    "code": "undefinedpublic class Solution {    public string NumberToWords(int num) {            }}"
+}

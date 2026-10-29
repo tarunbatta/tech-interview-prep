@@ -1,0 +1,8 @@
+{
+    "number": "744",
+    "title": "Find Smallest Letter Greater Than Target",
+    "url": "https://leetcode.com/problems/find-smallest-letter-greater-than-target",
+    "difficulty": "Easy",
+    "question": "\nGiven a list of sorted characters letters containing only lowercase letters, and given a target letter target, find the smallest element in the list that is larger than the given target.\n\nLetters also wrap around.  For example, if the target is target = &apos;z&apos; and letters = [&apos;a&apos;, &apos;b&apos;], the answer is &apos;a&apos;.\n\n\nExamples:\nInput:\nletters = [&quot;c&quot;, &quot;f&quot;, &quot;j&quot;]\ntarget = &quot;a&quot;\nOutput: &quot;c&quot;\n\nInput:\nletters = [&quot;c&quot;, &quot;f&quot;, &quot;j&quot;]\ntarget = &quot;c&quot;\nOutput: &quot;f&quot;\n\nInput:\nletters = [&quot;c&quot;, &quot;f&quot;, &quot;j&quot;]\ntarget = &quot;d&quot;\nOutput: &quot;f&quot;\n\nInput:\nletters = [&quot;c&quot;, &quot;f&quot;, &quot;j&quot;]\ntarget = &quot;g&quot;\nOutput: &quot;j&quot;\n\nInput:\nletters = [&quot;c&quot;, &quot;f&quot;, &quot;j&quot;]\ntarget = &quot;j&quot;\nOutput: &quot;c&quot;\n\nInput:\nletters = [&quot;c&quot;, &quot;f&quot;, &quot;j&quot;]\ntarget = &quot;k&quot;\nOutput: &quot;c&quot;\n\n\n\nNote:\n\nletters has a length in range [2, 10000].\nletters consists of lowercase letters, and contains at least 2 unique letters.\ntarget is a lowercase letter.\n\n",
+    "code": "undefinedpublic class Solution {    public char NextGreatestLetter(char[] letters, char target) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "1030",
+    "title": "Matrix Cells in Distance Order",
+    "url": "https://leetcode.com/problems/matrix-cells-in-distance-order",
+    "difficulty": "Easy",
+    "question": "We are given a matrix with R rows and C columns has cells with integer coordinates&#xA0;(r, c), where 0 &lt;= r &lt; R and 0 &lt;= c &lt; C.\n\nAdditionally, we are given a cell in that matrix with coordinates&#xA0;(r0, c0).\n\nReturn the coordinates of&#xA0;all cells in the matrix, sorted by their distance from (r0, c0)&#xA0;from smallest distance to largest distance.&#xA0; Here,&#xA0;the distance between two cells (r1, c1) and (r2, c2) is the Manhattan distance,&#xA0;|r1 - r2| + |c1 - c2|.&#xA0; (You may return the answer in any order that satisfies this condition.)\n\n&#xA0;\n\n\nExample 1:\n\nInput: R = 1, C = 2, r0 = 0, c0 = 0\nOutput: [[0,0],[0,1]]\nExplanation: The distances from (r0, c0) to other cells are: [0,1]\n\n\n\nExample 2:\n\nInput: R = 2, C = 2, r0 = 0, c0 = 1\nOutput: [[0,1],[0,0],[1,1],[1,0]]\nExplanation: The distances from (r0, c0) to other cells are: [0,1,1,2]\nThe answer [[0,1],[1,1],[0,0],[1,0]] would also be accepted as correct.\n\n\n\nExample 3:\n\nInput: R = 2, C = 3, r0 = 1, c0 = 2\nOutput: [[1,2],[0,2],[1,1],[0,1],[1,0],[0,0]]\nExplanation: The distances from (r0, c0) to other cells are: [0,1,1,2,2,3]\nThere are other answers that would also be accepted as correct, such as [[1,2],[1,1],[0,2],[1,0],[0,1],[0,0]].\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= R &lt;= 100\n\t1 &lt;= C &lt;= 100\n\t0 &lt;= r0 &lt; R\n\t0 &lt;= c0 &lt; C\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int[][] AllCellsDistOrder(int R, int C, int r0, int c0) {            }}"
+}

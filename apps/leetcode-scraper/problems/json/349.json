@@ -1,0 +1,8 @@
+{
+    "number": "349",
+    "title": "Intersection of Two Arrays",
+    "url": "https://leetcode.com/problems/intersection-of-two-arrays",
+    "difficulty": "Easy",
+    "question": "Given two arrays, write a function to compute their intersection.\n\nExample 1:\n\nInput: nums1 = [1,2,2,1], nums2 = [2,2]\nOutput: [2]\n\n\n\nExample 2:\n\nInput: nums1 = [4,9,5], nums2 = [9,4,9,8,4]\nOutput: [9,4]\n\n\nNote:\n\n\n\tEach element in the result must be unique.\n\tThe result can be in any order.\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int[] Intersection(int[] nums1, int[] nums2) {            }}"
+}

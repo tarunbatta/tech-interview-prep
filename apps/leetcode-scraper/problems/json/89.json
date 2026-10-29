@@ -1,0 +1,8 @@
+{
+    "number": "89",
+    "title": "Gray Code",
+    "url": "https://leetcode.com/problems/gray-code",
+    "difficulty": "Medium",
+    "question": "The gray code is a binary numeral system where two successive values differ in only one bit.\n\nGiven a non-negative integer n representing the total number of bits in the code, print the sequence of gray code. A gray code sequence must begin with 0.\n\nExample 1:\n\nInput:&#xA0;2\nOutput:&#xA0;[0,1,3,2]\nExplanation:\n00 - 0\n01 - 1\n11 - 3\n10 - 2\n\nFor a given&#xA0;n, a gray code sequence may not be uniquely defined.\nFor example, [0,2,3,1] is also a valid gray code sequence.\n\n00 - 0\n10 - 2\n11 - 3\n01 - 1\n\n\nExample 2:\n\nInput:&#xA0;0\nOutput:&#xA0;[0]\nExplanation: We define the gray code sequence to begin with 0.\n&#xA0;            A gray code sequence of n has size = 2n, which for n = 0 the size is 20 = 1.\n&#xA0;            Therefore, for n = 0 the gray code sequence is [0].\n\n",
+    "code": "undefinedpublic class Solution {    public IList<int> GrayCode(int n) {            }}"
+}

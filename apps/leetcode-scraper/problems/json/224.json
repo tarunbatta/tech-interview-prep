@@ -1,0 +1,8 @@
+{
+    "number": "224",
+    "title": "Basic Calculator",
+    "url": "https://leetcode.com/problems/basic-calculator",
+    "difficulty": "Hard",
+    "question": "Implement a basic calculator to evaluate a simple expression string.\n\nThe expression string may contain open ( and closing parentheses ), the plus + or minus sign -, non-negative integers and empty spaces  .\n\nExample 1:\n\nInput: &quot;1 + 1&quot;\nOutput: 2\n\n\nExample 2:\n\nInput: &quot; 2-1 + 2 &quot;\nOutput: 3\n\nExample 3:\n\nInput: &quot;(1+(4+5+2)-3)+(6+8)&quot;\nOutput: 23\nNote:\n\n\n\tYou may assume that the given expression is always valid.\n\tDo not use the eval built-in library function.\n\n",
+    "code": "undefinedpublic class Solution {    public int Calculate(string s) {            }}"
+}

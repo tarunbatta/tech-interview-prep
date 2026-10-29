@@ -1,0 +1,8 @@
+{
+    "number": "14",
+    "title": "Longest Common Prefix",
+    "url": "https://leetcode.com/problems/longest-common-prefix",
+    "difficulty": "Easy",
+    "question": "Write a function to find the longest common prefix string amongst an array of strings.\n\nIf there is no common prefix, return an empty string &quot;&quot;.\n\nExample 1:\n\nInput: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]\nOutput: &quot;fl&quot;\n\n\nExample 2:\n\nInput: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]\nOutput: &quot;&quot;\nExplanation: There is no common prefix among the input strings.\n\n\nNote:\n\nAll given inputs are in lowercase letters a-z.\n",
+    "code": "undefinedpublic class Solution {    public string LongestCommonPrefix(string[] strs) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "451",
+    "title": "Sort Characters By Frequency",
+    "url": "https://leetcode.com/problems/sort-characters-by-frequency",
+    "difficulty": "Medium",
+    "question": "Given a string, sort it in decreasing order based on the frequency of characters.\n\nExample 1:\nInput:\n&quot;tree&quot;\n\nOutput:\n&quot;eert&quot;\n\nExplanation:\n&apos;e&apos; appears twice while &apos;r&apos; and &apos;t&apos; both appear once.\nSo &apos;e&apos; must appear before both &apos;r&apos; and &apos;t&apos;. Therefore &quot;eetr&quot; is also a valid answer.\n\n\n\nExample 2:\nInput:\n&quot;cccaaa&quot;\n\nOutput:\n&quot;cccaaa&quot;\n\nExplanation:\nBoth &apos;c&apos; and &apos;a&apos; appear three times, so &quot;aaaccc&quot; is also a valid answer.\nNote that &quot;cacaca&quot; is incorrect, as the same characters must be together.\n\n\n\nExample 3:\nInput:\n&quot;Aabb&quot;\n\nOutput:\n&quot;bbAa&quot;\n\nExplanation:\n&quot;bbaA&quot; is also a valid answer, but &quot;Aabb&quot; is incorrect.\nNote that &apos;A&apos; and &apos;a&apos; are treated as two different characters.\n\n",
+    "code": "undefinedpublic class Solution {    public string FrequencySort(string s) {            }}"
+}

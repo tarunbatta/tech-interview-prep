@@ -1,0 +1,8 @@
+{
+    "number": "38",
+    "title": "Count and Say",
+    "url": "https://leetcode.com/problems/count-and-say",
+    "difficulty": "Easy",
+    "question": "The count-and-say sequence is the sequence of integers with the first five terms as following:\n\n1.     1\n2.     11\n3.     21\n4.     1211\n5.     111221\n\n\n1 is read off as &quot;one 1&quot; or 11.\n11 is read off as &quot;two 1s&quot; or 21.\n21 is read off as &quot;one 2, then one 1&quot; or 1211.\n\nGiven an integer n&#xA0;where 1 &#x2264; n &#x2264; 30, generate the nth term of the count-and-say sequence.\n\nNote: Each term of the sequence of integers will be represented as a string.\n\n&#xA0;\n\nExample 1:\n\nInput: 1\nOutput: &quot;1&quot;\n\n\nExample 2:\n\nInput: 4\nOutput: &quot;1211&quot;\n",
+    "code": "undefinedpublic class Solution {    public string CountAndSay(int n) {            }}"
+}

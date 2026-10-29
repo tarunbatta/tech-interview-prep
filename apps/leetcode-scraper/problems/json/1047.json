@@ -1,0 +1,8 @@
+{
+    "number": "1047",
+    "title": "Remove All Adjacent Duplicates In String",
+    "url": "https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string",
+    "difficulty": "Easy",
+    "question": "Given a string S of lowercase letters, a duplicate removal consists of choosing two adjacent and equal letters, and removing&#xA0;them.\n\nWe repeatedly make duplicate removals on S until we no longer can.\n\nReturn the final string after all such duplicate removals have been made.&#xA0; It is guaranteed the answer is unique.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;abbaca&quot;\nOutput: &quot;ca&quot;\nExplanation: \nFor example, in &quot;abbaca&quot; we could remove &quot;bb&quot; since the letters are adjacent and equal, and this is the only possible move.&#xA0; The result of this move is that the string is &quot;aaca&quot;, of which only &quot;aa&quot; is possible, so the final string is &quot;ca&quot;.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= S.length &lt;= 20000\n\tS consists only of English lowercase letters.\n",
+    "code": "undefinedpublic class Solution {    public string RemoveDuplicates(string S) {            }}"
+}

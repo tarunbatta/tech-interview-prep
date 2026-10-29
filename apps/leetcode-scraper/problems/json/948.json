@@ -1,0 +1,8 @@
+{
+    "number": "948",
+    "title": "Bag of Tokens",
+    "url": "https://leetcode.com/problems/bag-of-tokens",
+    "difficulty": "Medium",
+    "question": "You have an initial power P, an initial score of 0 points, and a bag of tokens.\n\nEach token can be used at most once, has a value token[i], and has potentially two ways to use it.\n\n\n\tIf we have at least token[i] power, we may play the token face up, losing token[i] power, and gaining 1 point.\n\tIf we have at least 1 point, we may play the token face down, gaining token[i] power, and losing 1 point.\n\n\nReturn the largest number of points we can have after playing any number of tokens.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: tokens = [100], P = 50\nOutput: 0\n\n\n\nExample 2:\n\nInput: tokens = [100,200], P = 150\nOutput: 1\n\n\n\nExample 3:\n\nInput: tokens = [100,200,300,400], P = 200\nOutput: 2\n\n\n&#xA0;\n\nNote:\n\n\n\ttokens.length &lt;= 1000\n\t0 &lt;= tokens[i] &lt; 10000\n\t0 &lt;= P &lt; 10000\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int BagOfTokensScore(int[] tokens, int P) {            }}"
+}

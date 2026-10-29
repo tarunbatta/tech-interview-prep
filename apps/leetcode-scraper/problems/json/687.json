@@ -1,0 +1,8 @@
+{
+    "number": "687",
+    "title": "Longest Univalue Path",
+    "url": "https://leetcode.com/problems/longest-univalue-path",
+    "difficulty": "Easy",
+    "question": "Given a binary tree, find the length of the longest path where each node in the path has the same value. This path may or may not pass through the root.\n\nThe length of path between two nodes is represented by the number of edges between them.\n\n&#xA0;\n\nExample 1:\n\nInput:\n\n              5\n             / \\\n            4   5\n           / \\   \\\n          1   1   5\n\n\nOutput:&#xA0;2\n\n&#xA0;\n\nExample 2:\n\nInput:\n\n              1\n             / \\\n            4   5\n           / \\   \\\n          4   4   5\n\n\nOutput:&#xA0;2\n\n&#xA0;\n\nNote: The given binary tree has not more than 10000 nodes. The height of the tree is not more than 1000.\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public int LongestUnivaluePath(TreeNode root) {            }}"
+}

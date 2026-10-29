@@ -1,0 +1,8 @@
+{
+    "number": "779",
+    "title": "K-th Symbol in Grammar",
+    "url": "https://leetcode.com/problems/k-th-symbol-in-grammar",
+    "difficulty": "Medium",
+    "question": "On the first row, we write a 0. Now in every subsequent row, we look at the previous row and replace each occurrence of 0 with 01, and each occurrence of 1 with 10.\n\nGiven row N and index K, return the K-th indexed symbol in row N. (The values of K are 1-indexed.) (1 indexed).\n\nExamples:\nInput: N = 1, K = 1\nOutput: 0\n\nInput: N = 2, K = 1\nOutput: 0\n\nInput: N = 2, K = 2\nOutput: 1\n\nInput: N = 4, K = 5\nOutput: 1\n\nExplanation:\nrow 1: 0\nrow 2: 01\nrow 3: 0110\nrow 4: 01101001\n\n\nNote:\n\n\n\tN will be an integer in the range [1, 30].\n\tK will be an integer in the range [1, 2^(N-1)].\n\n",
+    "code": "undefinedpublic class Solution {    public int KthGrammar(int N, int K) {            }}"
+}

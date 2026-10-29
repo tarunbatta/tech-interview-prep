@@ -1,0 +1,8 @@
+{
+    "number": "830",
+    "title": "Positions of Large Groups",
+    "url": "https://leetcode.com/problems/positions-of-large-groups",
+    "difficulty": "Easy",
+    "question": "In a string&#xA0;S&#xA0;of lowercase letters, these letters form consecutive groups of the same character.\n\nFor example, a string like S = &quot;abbxxxxzyy&quot; has the groups &quot;a&quot;, &quot;bb&quot;, &quot;xxxx&quot;, &quot;z&quot; and&#xA0;&quot;yy&quot;.\n\nCall a group large if it has 3 or more characters.&#xA0; We would like the starting and ending positions of every large group.\n\nThe final answer should be in lexicographic order.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;abbxxxxzzy&quot;\nOutput: [[3,6]]\nExplanation: &quot;xxxx&quot; is the single large group with starting  3 and ending positions 6.\n\n\nExample 2:\n\nInput: &quot;abc&quot;\nOutput: []\nExplanation: We have &quot;a&quot;,&quot;b&quot; and &quot;c&quot; but no large group.\n\n\nExample 3:\n\nInput: &quot;abcdddeeeeaabbbcd&quot;\nOutput: [[3,5],[6,9],[12,14]]\n\n&#xA0;\n\nNote:&#xA0;&#xA0;1 &lt;= S.length &lt;= 1000\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<int>> LargeGroupPositions(string S) {            }}"
+}

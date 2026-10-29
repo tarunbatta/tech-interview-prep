@@ -1,0 +1,8 @@
+{
+    "number": "701",
+    "title": "Insert into a Binary Search Tree",
+    "url": "https://leetcode.com/problems/insert-into-a-binary-search-tree",
+    "difficulty": "Medium",
+    "question": "Given the root node of a binary search tree (BST) and a value to be inserted into the tree,&#xA0;insert the value into the BST. Return the root node of the BST after the insertion. It is guaranteed that the new value does not exist in the original BST.\n\nNote that there may exist&#xA0;multiple valid ways for the&#xA0;insertion, as long as the tree remains a BST after insertion. You can return any of them.\n\nFor example,&#xA0;\n\nGiven the tree:\n        4\n       / \\\n      2   7\n     / \\\n    1   3\nAnd the value to insert: 5\n\n\nYou can return this binary search tree:\n\n         4\n       /   \\\n      2     7\n     / \\   /\n    1   3 5\n\n\nThis tree is also valid:\n\n         5\n       /   \\\n      2     7\n     / \\   \n    1   3\n         \\\n          4\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public TreeNode InsertIntoBST(TreeNode root, int val) {            }}"
+}

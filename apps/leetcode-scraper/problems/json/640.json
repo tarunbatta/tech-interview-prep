@@ -1,0 +1,8 @@
+{
+    "number": "640",
+    "title": "Solve the Equation",
+    "url": "https://leetcode.com/problems/solve-the-equation",
+    "difficulty": "Medium",
+    "question": "\nSolve a given equation and return the value of x in the form of string &quot;x=#value&quot;. The equation contains only &apos;+&apos;, &apos;-&apos; operation, the variable x and its coefficient.\n\n\n\nIf there is no solution for the equation, return &quot;No solution&quot;.\n\n\nIf there are infinite solutions for the equation, return &quot;Infinite solutions&quot;.\n\n\nIf there is exactly one solution for the equation, we ensure that the value of x is an integer.\n\n\nExample 1:\nInput: &quot;x+5-3+x=6+x-2&quot;\nOutput: &quot;x=2&quot;\n\n\n\nExample 2:\nInput: &quot;x=x&quot;\nOutput: &quot;Infinite solutions&quot;\n\n\n\nExample 3:\nInput: &quot;2x=x&quot;\nOutput: &quot;x=0&quot;\n\n\n\nExample 4:\nInput: &quot;2x+3x-6x=x+2&quot;\nOutput: &quot;x=-1&quot;\n\n\n\nExample 5:\nInput: &quot;x=x+2&quot;\nOutput: &quot;No solution&quot;\n\n",
+    "code": "undefinedpublic class Solution {    public string SolveEquation(string equation) {            }}"
+}

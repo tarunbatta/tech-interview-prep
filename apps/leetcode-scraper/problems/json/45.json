@@ -1,0 +1,8 @@
+{
+    "number": "45",
+    "title": "Jump Game II",
+    "url": "https://leetcode.com/problems/jump-game-ii",
+    "difficulty": "Hard",
+    "question": "Given an array of non-negative integers, you are initially positioned at the first index of the array.\n\nEach element in the array represents your maximum jump length at that position.\n\nYour goal is to reach the last index in the minimum number of jumps.\n\nExample:\n\nInput: [2,3,1,1,4]\nOutput: 2\nExplanation: The minimum number of jumps to reach the last index is 2.\n    Jump 1 step from index 0 to 1, then 3 steps to the last index.\n\nNote:\n\nYou can assume that you can always reach the last index.\n",
+    "code": "undefinedpublic class Solution {    public int Jump(int[] nums) {            }}"
+}

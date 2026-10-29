@@ -1,0 +1,8 @@
+{
+    "number": "1170",
+    "title": "Compare Strings by Frequency of the Smallest Character",
+    "url": "https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character",
+    "difficulty": "Easy",
+    "question": "Let&apos;s define a function f(s) over a non-empty string s, which calculates the frequency of the smallest character in s. For example,&#xA0;if s = &quot;dcce&quot; then f(s) = 2 because the smallest character is &quot;c&quot; and its frequency is 2.\n\nNow, given string arrays queries&#xA0;and words, return an integer array answer, where each answer[i]&#xA0;is the number of words such that f(queries[i])&#xA0;&lt; f(W), where W&#xA0;is a word in words.\n\n&#xA0;\nExample 1:\n\nInput: queries = [&quot;cbd&quot;], words = [&quot;zaaaz&quot;]\nOutput: [1]\nExplanation: On the first query we have f(&quot;cbd&quot;) = 1, f(&quot;zaaaz&quot;) = 3 so f(&quot;cbd&quot;) &lt; f(&quot;zaaaz&quot;).\n\n\nExample 2:\n\nInput: queries = [&quot;bbb&quot;,&quot;cc&quot;], words = [&quot;a&quot;,&quot;aa&quot;,&quot;aaa&quot;,&quot;aaaa&quot;]\nOutput: [1,2]\nExplanation: On the first query only f(&quot;bbb&quot;) &lt; f(&quot;aaaa&quot;). On the second query both f(&quot;aaa&quot;) and f(&quot;aaaa&quot;) are both &gt; f(&quot;cc&quot;).\n\n\n&#xA0;\nConstraints:\n\n\n\t1 &lt;= queries.length &lt;= 2000\n\t1 &lt;= words.length &lt;= 2000\n\t1 &lt;= queries[i].length, words[i].length &lt;= 10\n\tqueries[i][j], words[i][j] are English lowercase letters.\n\n",
+    "code": "undefinedpublic class Solution {    public int[] NumSmallerByFrequency(string[] queries, string[] words) {            }}"
+}

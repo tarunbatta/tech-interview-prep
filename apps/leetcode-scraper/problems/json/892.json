@@ -1,0 +1,8 @@
+{
+    "number": "892",
+    "title": "Surface Area of 3D Shapes",
+    "url": "https://leetcode.com/problems/surface-area-of-3d-shapes",
+    "difficulty": "Easy",
+    "question": "On a&#xA0;N&#xA0;*&#xA0;N&#xA0;grid, we place some&#xA0;1 * 1 * 1&#xA0;cubes.\n\nEach value&#xA0;v = grid[i][j]&#xA0;represents a tower of&#xA0;v&#xA0;cubes placed on top of grid cell&#xA0;(i, j).\n\nReturn the total surface area of the resulting shapes.\n\n&#xA0;\n\n\n\n\n\n\n\n\n\n\n\nExample 1:\n\nInput: [[2]]\nOutput: 10\n\n\n\nExample 2:\n\nInput: [[1,2],[3,4]]\nOutput: 34\n\n\n\nExample 3:\n\nInput: [[1,0],[0,2]]\nOutput: 16\n\n\n\nExample 4:\n\nInput: [[1,1,1],[1,0,1],[1,1,1]]\nOutput: 32\n\n\n\nExample 5:\n\nInput: [[2,2,2],[2,1,2],[2,2,2]]\nOutput: 46\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= N &lt;= 50\n\t0 &lt;= grid[i][j] &lt;= 50\n\n\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int SurfaceArea(int[][] grid) {            }}"
+}

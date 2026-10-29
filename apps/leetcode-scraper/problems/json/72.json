@@ -1,0 +1,8 @@
+{
+    "number": "72",
+    "title": "Edit Distance",
+    "url": "https://leetcode.com/problems/edit-distance",
+    "difficulty": "Hard",
+    "question": "Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2.\n\nYou have the following 3 operations permitted on a word:\n\n\n\tInsert a character\n\tDelete a character\n\tReplace a character\n\n\nExample 1:\n\nInput: word1 = &quot;horse&quot;, word2 = &quot;ros&quot;\nOutput: 3\nExplanation: \nhorse -&gt; rorse (replace &apos;h&apos; with &apos;r&apos;)\nrorse -&gt; rose (remove &apos;r&apos;)\nrose -&gt; ros (remove &apos;e&apos;)\n\n\nExample 2:\n\nInput: word1 = &quot;intention&quot;, word2 = &quot;execution&quot;\nOutput: 5\nExplanation: \nintention -&gt; inention (remove &apos;t&apos;)\ninention -&gt; enention (replace &apos;i&apos; with &apos;e&apos;)\nenention -&gt; exention (replace &apos;n&apos; with &apos;x&apos;)\nexention -&gt; exection (replace &apos;n&apos; with &apos;c&apos;)\nexection -&gt; execution (insert &apos;u&apos;)\n\n",
+    "code": "undefinedpublic class Solution {    public int MinDistance(string word1, string word2) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "120",
+    "title": "Triangle",
+    "url": "https://leetcode.com/problems/triangle",
+    "difficulty": "Medium",
+    "question": "Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.\n\nFor example, given the following triangle\n\n[\n     [2],\n    [3,4],\n   [6,5,7],\n  [4,1,8,3]\n]\n\n\nThe minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).\n\nNote:\n\nBonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle.\n",
+    "code": "undefinedpublic class Solution {    public int MinimumTotal(IList<IList<int>> triangle) {            }}"
+}

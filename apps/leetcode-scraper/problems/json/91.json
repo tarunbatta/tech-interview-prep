@@ -1,0 +1,8 @@
+{
+    "number": "91",
+    "title": "Decode Ways",
+    "url": "https://leetcode.com/problems/decode-ways",
+    "difficulty": "Medium",
+    "question": "A message containing letters from A-Z is being encoded to numbers using the following mapping:\n\n&apos;A&apos; -&gt; 1\n&apos;B&apos; -&gt; 2\n...\n&apos;Z&apos; -&gt; 26\n\n\nGiven a non-empty string containing only digits, determine the total number of ways to decode it.\n\nExample 1:\n\nInput: &quot;12&quot;\nOutput: 2\nExplanation:&#xA0;It could be decoded as &quot;AB&quot; (1 2) or &quot;L&quot; (12).\n\n\nExample 2:\n\nInput: &quot;226&quot;\nOutput: 3\nExplanation:&#xA0;It could be decoded as &quot;BZ&quot; (2 26), &quot;VF&quot; (22 6), or &quot;BBF&quot; (2 2 6).\n",
+    "code": "undefinedpublic class Solution {    public int NumDecodings(string s) {            }}"
+}

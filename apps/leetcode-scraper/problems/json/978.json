@@ -1,0 +1,8 @@
+{
+    "number": "978",
+    "title": "Longest Turbulent Subarray",
+    "url": "https://leetcode.com/problems/longest-turbulent-subarray",
+    "difficulty": "Medium",
+    "question": "A subarray A[i], A[i+1], ..., A[j]&#xA0;of A is said to be turbulent if and only if:\n\n\n\tFor i &lt;= k &lt; j, A[k] &gt; A[k+1] when k is odd, and A[k] &lt; A[k+1] when k is even;\n\tOR, for i &lt;= k &lt; j, A[k] &gt; A[k+1] when k is even, and A[k] &lt; A[k+1] when k is odd.\n\n\nThat is, the subarray is turbulent if the comparison sign flips between each adjacent pair of elements in the subarray.\n\nReturn the length of a&#xA0;maximum size turbulent subarray of A.\n\n&#xA0;\n\n\nExample 1:\n\nInput: [9,4,2,10,7,8,8,1,9]\nOutput: 5\nExplanation: (A[1] &gt; A[2] &lt; A[3] &gt; A[4] &lt; A[5])\n\n\n\nExample 2:\n\nInput: [4,8,12,16]\nOutput: 2\n\n\n\nExample 3:\n\nInput: [100]\nOutput: 1\n\n\n\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 40000\n\t0 &lt;= A[i] &lt;= 10^9\n",
+    "code": "undefinedpublic class Solution {    public int MaxTurbulenceSize(int[] A) {            }}"
+}

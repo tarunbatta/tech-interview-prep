@@ -1,0 +1,8 @@
+{
+    "number": "43",
+    "title": "Multiply Strings",
+    "url": "https://leetcode.com/problems/multiply-strings",
+    "difficulty": "Medium",
+    "question": "Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2, also represented as a string.\n\nExample 1:\n\nInput: num1 = &quot;2&quot;, num2 = &quot;3&quot;\nOutput: &quot;6&quot;\n\nExample 2:\n\nInput: num1 = &quot;123&quot;, num2 = &quot;456&quot;\nOutput: &quot;56088&quot;\n\n\nNote:\n\n\n\tThe length of both num1 and num2 is &lt; 110.\n\tBoth num1 and num2 contain&#xA0;only digits 0-9.\n\tBoth num1 and num2&#xA0;do not contain any leading zero, except the number 0 itself.\n\tYou must not use any built-in BigInteger library or convert the inputs to integer directly.\n\n",
+    "code": "undefinedpublic class Solution {    public string Multiply(string num1, string num2) {            }}"
+}

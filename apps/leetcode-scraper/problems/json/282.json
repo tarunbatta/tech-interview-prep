@@ -1,0 +1,8 @@
+{
+    "number": "282",
+    "title": "Expression Add Operators",
+    "url": "https://leetcode.com/problems/expression-add-operators",
+    "difficulty": "Hard",
+    "question": "Given a string that contains only digits 0-9 and a target value, return all possibilities to add binary operators (not unary) +, -, or * between the digits so they evaluate to the target value.\n\nExample 1:\n\nInput: num = &quot;123&quot;, target = 6\nOutput: [&quot;1+2+3&quot;, &quot;1*2*3&quot;] \n\n\nExample 2:\n\nInput: num = &quot;232&quot;, target = 8\nOutput: [&quot;2*3+2&quot;, &quot;2+3*2&quot;]\n\nExample 3:\n\nInput: num = &quot;105&quot;, target = 5\nOutput: [&quot;1*0+5&quot;,&quot;10-5&quot;]\n\nExample 4:\n\nInput: num = &quot;00&quot;, target = 0\nOutput: [&quot;0+0&quot;, &quot;0-0&quot;, &quot;0*0&quot;]\n\n\nExample 5:\n\nInput: num = &quot;3456237490&quot;, target = 9191\nOutput: []\n\n",
+    "code": "undefinedpublic class Solution {    public IList<string> AddOperators(string num, int target) {            }}"
+}

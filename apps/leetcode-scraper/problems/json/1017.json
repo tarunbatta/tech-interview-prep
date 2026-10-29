@@ -1,0 +1,8 @@
+{
+    "number": "1017",
+    "title": "Convert to Base -2",
+    "url": "https://leetcode.com/problems/convert-to-base-2",
+    "difficulty": "Medium",
+    "question": "Given a number N, return a string consisting of &quot;0&quot;s and &quot;1&quot;s&#xA0;that represents its value in base -2&#xA0;(negative two).\n\nThe returned string must have no leading zeroes, unless the string is &quot;0&quot;.\n\n&#xA0;\n\n\nExample 1:\n\nInput: 2\nOutput: &quot;110&quot;\nExplantion: (-2) ^ 2 + (-2) ^ 1 = 2\n\n\n\nExample 2:\n\nInput: 3\nOutput: &quot;111&quot;\nExplantion: (-2) ^ 2 + (-2) ^ 1 + (-2) ^ 0 = 3\n\n\n\nExample 3:\n\nInput: 4\nOutput: &quot;100&quot;\nExplantion: (-2) ^ 2 = 4\n\n\n&#xA0;\n\nNote:\n\n\n\t0 &lt;= N &lt;= 10^9\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public string BaseNeg2(int N) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "1161",
+    "title": "Maximum Level Sum of a Binary Tree",
+    "url": "https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree",
+    "difficulty": "Medium",
+    "question": "Given the root of a binary tree, the level of its root is 1,&#xA0;the level of its children is 2,&#xA0;and so on.\n\nReturn the smallest level X such that the sum of all the values of nodes at level X is maximal.\n\n&#xA0;\n\nExample 1:\n\n\n\nInput: [1,7,0,7,-8,null,null]\nOutput: 2\nExplanation: \nLevel 1 sum = 1.\nLevel 2 sum = 7 + 0 = 7.\nLevel 3 sum = 7 + -8 = -1.\nSo we return the level with the maximum sum which is level 2.\n\n\n&#xA0;\n\nNote:\n\n\n\tThe number of nodes in the given tree is between 1 and 10^4.\n\t-10^5 &lt;= node.val &lt;= 10^5\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public int MaxLevelSum(TreeNode root) {            }}"
+}

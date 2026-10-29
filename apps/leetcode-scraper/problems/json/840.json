@@ -1,0 +1,8 @@
+{
+    "number": "840",
+    "title": "Magic Squares In Grid",
+    "url": "https://leetcode.com/problems/magic-squares-in-grid",
+    "difficulty": "Easy",
+    "question": "A 3 x 3 magic square is a 3 x 3 grid filled with distinct numbers from 1 to 9 such that each row, column, and both diagonals all have the same sum.\n\nGiven an grid&#xA0;of integers, how many 3 x 3 &quot;magic square&quot; subgrids are there?&#xA0; (Each subgrid is contiguous).\n\n&#xA0;\n\nExample 1:\n\nInput: [[4,3,8,4],\n        [9,5,1,9],\n        [2,7,6,2]]\nOutput: 1\nExplanation: \nThe following subgrid is a 3 x 3 magic square:\n438\n951\n276\n\nwhile this one is not:\n384\n519\n762\n\nIn total, there is only one magic square inside the given grid.\n\n\nNote:\n\n\n\t1 &lt;= grid.length&#xA0;&lt;= 10\n\t1 &lt;= grid[0].length&#xA0;&lt;= 10\n\t0 &lt;= grid[i][j] &lt;= 15\n\n",
+    "code": "undefinedpublic class Solution {    public int NumMagicSquaresInside(int[][] grid) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "67",
+    "title": "Add Binary",
+    "url": "https://leetcode.com/problems/add-binary",
+    "difficulty": "Easy",
+    "question": "Given two binary strings, return their sum (also a binary string).\n\nThe input strings are both non-empty and contains only characters 1 or&#xA0;0.\n\nExample 1:\n\nInput: a = &quot;11&quot;, b = &quot;1&quot;\nOutput: &quot;100&quot;\n\nExample 2:\n\nInput: a = &quot;1010&quot;, b = &quot;1011&quot;\nOutput: &quot;10101&quot;\n",
+    "code": "undefinedpublic class Solution {    public string AddBinary(string a, string b) {            }}"
+}

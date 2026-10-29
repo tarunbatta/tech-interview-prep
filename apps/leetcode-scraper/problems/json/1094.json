@@ -1,0 +1,8 @@
+{
+    "number": "1094",
+    "title": "Car Pooling",
+    "url": "https://leetcode.com/problems/car-pooling",
+    "difficulty": "Medium",
+    "question": "You are driving a vehicle that&#xA0;has capacity empty seats initially available for passengers.&#xA0; The vehicle only drives east (ie. it cannot turn around and drive west.)\n\nGiven a list of trips, trip[i] = [num_passengers, start_location, end_location]&#xA0;contains information about the i-th trip: the number of passengers that must be picked up, and the locations to pick them up and drop them off.&#xA0; The locations are given as the number of kilometers&#xA0;due east from your vehicle&apos;s initial location.\n\nReturn true if and only if&#xA0;it is possible to pick up and drop off all passengers for all the given trips.&#xA0;\n\n&#xA0;\n\nExample 1:\n\nInput: trips = [[2,1,5],[3,3,7]], capacity = 4\nOutput: false\n\n\n\nExample 2:\n\nInput: trips = [[2,1,5],[3,3,7]], capacity = 5\nOutput: true\n\n\n\nExample 3:\n\nInput: trips = [[2,1,5],[3,5,7]], capacity = 3\nOutput: true\n\n\n\nExample 4:\n\nInput: trips = [[3,2,7],[3,7,9],[8,3,9]], capacity = 11\nOutput: true\n\n\n\n\n\n\n\n\n&#xA0;\n\n\n\n\n&#xA0;\nConstraints:\n\n\n\ttrips.length &lt;= 1000\n\ttrips[i].length == 3\n\t1 &lt;= trips[i][0] &lt;= 100\n\t0 &lt;= trips[i][1] &lt; trips[i][2] &lt;= 1000\n\t1 &lt;=&#xA0;capacity &lt;= 100000\n\n",
+    "code": "undefinedpublic class Solution {    public bool CarPooling(int[][] trips, int capacity) {            }}"
+}

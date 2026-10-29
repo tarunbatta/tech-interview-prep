@@ -1,0 +1,8 @@
+{
+    "number": "212",
+    "title": "Word Search II",
+    "url": "https://leetcode.com/problems/word-search-ii",
+    "difficulty": "Hard",
+    "question": "Given a 2D board and a list of words from the dictionary, find all words in the board.\n\nEach word must be constructed from letters of sequentially adjacent cell, where &quot;adjacent&quot; cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.\n\n&#xA0;\n\nExample:\n\nInput: \nboard = [\n  [&apos;o&apos;,&apos;a&apos;,&apos;a&apos;,&apos;n&apos;],\n  [&apos;e&apos;,&apos;t&apos;,&apos;a&apos;,&apos;e&apos;],\n  [&apos;i&apos;,&apos;h&apos;,&apos;k&apos;,&apos;r&apos;],\n  [&apos;i&apos;,&apos;f&apos;,&apos;l&apos;,&apos;v&apos;]\n]\nwords = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;]\n\nOutput:&#xA0;[&quot;eat&quot;,&quot;oath&quot;]\n\n\n&#xA0;\n\nNote:\n\n\n\tAll inputs are consist of lowercase letters a-z.\n\tThe values of&#xA0;words are distinct.\n\n",
+    "code": "undefinedpublic class Solution {    public IList<string> FindWords(char[][] board, string[] words) {            }}"
+}

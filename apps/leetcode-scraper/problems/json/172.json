@@ -1,0 +1,8 @@
+{
+    "number": "172",
+    "title": "Factorial Trailing Zeroes",
+    "url": "https://leetcode.com/problems/factorial-trailing-zeroes",
+    "difficulty": "Easy",
+    "question": "Given an integer n, return the number of trailing zeroes in n!.\n\nExample 1:\n\nInput: 3\nOutput: 0\nExplanation:&#xA0;3! = 6, no trailing zero.\n\nExample 2:\n\nInput: 5\nOutput: 1\nExplanation:&#xA0;5! = 120, one trailing zero.\n\nNote: Your solution should be in logarithmic time complexity.\n",
+    "code": "undefinedpublic class Solution {    public int TrailingZeroes(int n) {            }}"
+}

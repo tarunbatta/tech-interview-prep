@@ -1,0 +1,8 @@
+{
+    "number": "459",
+    "title": "Repeated Substring Pattern",
+    "url": "https://leetcode.com/problems/repeated-substring-pattern",
+    "difficulty": "Easy",
+    "question": "Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;abab&quot;\nOutput: True\nExplanation: It&apos;s the substring &quot;ab&quot; twice.\n\n\nExample 2:\n\nInput: &quot;aba&quot;\nOutput: False\n\n\nExample 3:\n\nInput: &quot;abcabcabcabc&quot;\nOutput: True\nExplanation: It&apos;s the substring &quot;abc&quot; four times. (And the substring &quot;abcabc&quot; twice.)\n\n",
+    "code": "undefinedpublic class Solution {    public bool RepeatedSubstringPattern(string s) {            }}"
+}

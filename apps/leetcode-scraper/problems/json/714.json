@@ -1,0 +1,8 @@
+{
+    "number": "714",
+    "title": "Best Time to Buy and Sell Stock with Transaction Fee",
+    "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee",
+    "difficulty": "Medium",
+    "question": "Your are given an array of integers prices, for which the i-th element is the price of a given stock on day i; and a non-negative integer fee representing a transaction fee.\nYou may complete as many transactions as you like, but you need to pay the transaction fee for each transaction.  You may not buy more than 1 share of a stock at a time (ie. you must sell the stock share before you buy again.)\nReturn the maximum profit you can make.\n\nExample 1:\nInput: prices = [1, 3, 2, 8, 4, 9], fee = 2\nOutput: 8\nExplanation: The maximum profit can be achieved by:\nBuying at prices[0] = 1Selling at prices[3] = 8Buying at prices[4] = 4Selling at prices[5] = 9The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8.\n\n\n\nNote:\n0 &lt; prices.length &lt;= 50000.\n0 &lt; prices[i] &lt; 50000.\n0 &lt;= fee &lt; 50000.\n",
+    "code": "undefinedpublic class Solution {    public int MaxProfit(int[] prices, int fee) {            }}"
+}

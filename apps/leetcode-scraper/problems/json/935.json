@@ -1,0 +1,8 @@
+{
+    "number": "935",
+    "title": "Knight Dialer",
+    "url": "https://leetcode.com/problems/knight-dialer",
+    "difficulty": "Medium",
+    "question": "A chess knight can move as indicated in the chess diagram below:\n\n&#xA0;.&#xA0; &#xA0; &#xA0; &#xA0; &#xA0; &#xA0;\n\n&#xA0;\n\nThis time, we place our chess knight on any numbered key of a phone pad (indicated above), and the knight makes N-1 hops.&#xA0; Each hop must be from one key to another numbered key.\n\nEach time it lands on a key (including the initial placement of the knight), it presses the number of that key, pressing N digits total.\n\nHow many distinct numbers can you dial in this manner?\n\nSince the answer may be large, output the answer&#xA0;modulo 10^9 + 7.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: 1\nOutput: 10\n\n\n\nExample 2:\n\nInput: 2\nOutput: 20\n\n\n\nExample 3:\n\nInput: 3\nOutput: 46\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= N &lt;= 5000\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int KnightDialer(int N) {            }}"
+}

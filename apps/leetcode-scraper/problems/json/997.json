@@ -1,0 +1,8 @@
+{
+    "number": "997",
+    "title": "Find the Town Judge",
+    "url": "https://leetcode.com/problems/find-the-town-judge",
+    "difficulty": "Easy",
+    "question": "In a town, there are N people labelled from&#xA0;1 to N.&#xA0; There is a rumor that one of these people is secretly the town judge.\n\nIf the&#xA0;town judge exists, then:\n\n\n\tThe town judge trusts nobody.\n\tEverybody (except for the town judge) trusts the town judge.\n\tThere is exactly one person that satisfies properties 1 and 2.\n\n\nYou are given trust, an array of pairs trust[i] = [a, b] representing that the person labelled a trusts the person labelled b.\n\nIf the town judge exists and can be identified, return the label of the town judge.&#xA0; Otherwise, return -1.\n\n&#xA0;\n\nExample 1:\n\nInput: N = 2, trust = [[1,2]]\nOutput: 2\n\n\n\nExample 2:\n\nInput: N = 3, trust = [[1,3],[2,3]]\nOutput: 3\n\n\n\nExample 3:\n\nInput: N = 3, trust = [[1,3],[2,3],[3,1]]\nOutput: -1\n\n\n\nExample 4:\n\nInput: N = 3, trust = [[1,2],[2,3]]\nOutput: -1\n\n\n\nExample 5:\n\nInput: N = 4, trust = [[1,3],[1,4],[2,3],[2,4],[4,3]]\nOutput: 3\n\n&#xA0;\n\n\n\n\n\nNote:\n\n\n\t1 &lt;= N &lt;= 1000\n\ttrust.length &lt;= 10000\n\ttrust[i] are all different\n\ttrust[i][0] != trust[i][1]\n\t1 &lt;= trust[i][0], trust[i][1] &lt;= N\n\n",
+    "code": "undefinedpublic class Solution {    public int FindJudge(int N, int[][] trust) {            }}"
+}

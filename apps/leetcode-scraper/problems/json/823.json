@@ -1,0 +1,8 @@
+{
+    "number": "823",
+    "title": "Binary Trees With Factors",
+    "url": "https://leetcode.com/problems/binary-trees-with-factors",
+    "difficulty": "Medium",
+    "question": "Given an array of unique integers, each integer is strictly greater than 1.\n\nWe make a binary tree using these integers&#xA0;and each number may be used for any number of times.\n\nEach non-leaf node&apos;s&#xA0;value should be equal to the product of the values of it&apos;s children.\n\nHow many binary trees can we make?&#xA0; Return the answer modulo 10 ** 9 + 7.\n\nExample 1:\n\nInput: A = [2, 4]\nOutput: 3\nExplanation: We can make these trees: [2], [4], [4, 2, 2]\n\nExample 2:\n\nInput: A = [2, 4, 5, 10]\nOutput: 7\nExplanation: We can make these trees: [2], [4], [5], [10], [4, 2, 2], [10, 2, 5], [10, 5, 2].\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;=&#xA0;1000.\n\t2 &lt;=&#xA0;A[i]&#xA0;&lt;=&#xA0;10 ^ 9.\n\n",
+    "code": "undefinedpublic class Solution {    public int NumFactoredBinaryTrees(int[] A) {            }}"
+}

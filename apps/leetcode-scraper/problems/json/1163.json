@@ -1,0 +1,8 @@
+{
+    "number": "1163",
+    "title": "Last Substring in Lexicographical Order",
+    "url": "https://leetcode.com/problems/last-substring-in-lexicographical-order",
+    "difficulty": "Hard",
+    "question": "Given a string s, return the last substring of s in lexicographical order.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;abab&quot;\nOutput: &quot;bab&quot;\nExplanation: The substrings are [&quot;a&quot;, &quot;ab&quot;, &quot;aba&quot;, &quot;abab&quot;, &quot;b&quot;, &quot;ba&quot;, &quot;bab&quot;]. The lexicographically maximum substring is &quot;bab&quot;.\n\n\nExample 2:\n\nInput: &quot;leetcode&quot;\nOutput: &quot;tcode&quot;\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= s.length &lt;= 4&#xA0;* 10^5\n\ts contains only lowercase English letters.\n\n",
+    "code": "undefinedpublic class Solution {    public string LastSubstring(string s) {            }}"
+}

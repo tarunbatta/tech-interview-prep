@@ -1,0 +1,8 @@
+{
+    "number": "856",
+    "title": "Score of Parentheses",
+    "url": "https://leetcode.com/problems/score-of-parentheses",
+    "difficulty": "Medium",
+    "question": "Given a balanced parentheses string S, compute the score of the string based on the following rule:\n\n\n\t() has score 1\n\tAB has score A + B, where A and B are balanced parentheses strings.\n\t(A) has score 2 * A, where A is a balanced parentheses string.\n\n\n&#xA0;\n\n\nExample 1:\n\nInput: &quot;()&quot;\nOutput: 1\n\n\n\nExample 2:\n\nInput: &quot;(())&quot;\nOutput: 2\n\n\n\nExample 3:\n\nInput: &quot;()()&quot;\nOutput: 2\n\n\n\nExample 4:\n\nInput: &quot;(()(()))&quot;\nOutput: 6\n\n\n&#xA0;\n\nNote:\n\n\n\tS is a balanced parentheses string, containing only ( and ).\n\t2 &lt;= S.length &lt;= 50\n\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int ScoreOfParentheses(string S) {            }}"
+}

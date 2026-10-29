@@ -1,0 +1,8 @@
+{
+    "number": "343",
+    "title": "Integer Break",
+    "url": "https://leetcode.com/problems/integer-break",
+    "difficulty": "Medium",
+    "question": "Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get.\n\nExample 1:\n\n\nInput: 2\nOutput: 1\nExplanation: 2 = 1 + 1, 1 &#xD7; 1 = 1.\n\n\nExample 2:\n\nInput: 10\nOutput: 36\nExplanation: 10 = 3 + 3 + 4, 3 &#xD7;&#xA0;3 &#xD7;&#xA0;4 = 36.\n\nNote: You may assume that n is not less than 2 and not larger than 58.\n\n",
+    "code": "undefinedpublic class Solution {    public int IntegerBreak(int n) {            }}"
+}

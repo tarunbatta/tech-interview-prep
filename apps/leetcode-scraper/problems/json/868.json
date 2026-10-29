@@ -1,0 +1,8 @@
+{
+    "number": "868",
+    "title": "Binary Gap",
+    "url": "https://leetcode.com/problems/binary-gap",
+    "difficulty": "Easy",
+    "question": "Given a positive&#xA0;integer N, find and return the longest distance between two consecutive 1&apos;s in the binary representation of N.\n\nIf there aren&apos;t two consecutive 1&apos;s, return 0.\n\n&#xA0;\n\n\n\n\n\n\n\n\n\n\n\nExample 1:\n\nInput: 22\nOutput: 2\nExplanation: \n22 in binary is 0b10110.\nIn the binary representation of 22, there are three ones, and two consecutive pairs of 1&apos;s.\nThe first consecutive pair of 1&apos;s have distance 2.\nThe second consecutive pair of 1&apos;s have distance 1.\nThe answer is the largest of these two distances, which is 2.\n\n\n\nExample 2:\n\nInput: 5\nOutput: 2\nExplanation: \n5 in binary is 0b101.\n\n\n\nExample 3:\n\nInput: 6\nOutput: 1\nExplanation: \n6 in binary is 0b110.\n\n\n\nExample 4:\n\nInput: 8\nOutput: 0\nExplanation: \n8 in binary is 0b1000.\nThere aren&apos;t any consecutive pairs of 1&apos;s in the binary representation of 8, so we return 0.\n\n\n&#xA0;\n\n\n\n\nNote:\n\n\n\t1 &lt;= N &lt;= 10^9\n\n\n\n\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int BinaryGap(int N) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "214",
+    "title": "Shortest Palindrome",
+    "url": "https://leetcode.com/problems/shortest-palindrome",
+    "difficulty": "Hard",
+    "question": "Given a string s, you are allowed to convert it to a palindrome by adding characters in front of it. Find and return the shortest palindrome you can find by performing this transformation.\n\nExample 1:\n\nInput: &quot;aacecaaa&quot;\nOutput: &quot;aaacecaaa&quot;\n\n\nExample 2:\n\nInput: &quot;abcd&quot;\nOutput: &quot;dcbabcd&quot;",
+    "code": "undefinedpublic class Solution {    public string ShortestPalindrome(string s) {            }}"
+}

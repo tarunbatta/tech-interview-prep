@@ -1,0 +1,8 @@
+{
+    "number": "890",
+    "title": "Find and Replace Pattern",
+    "url": "https://leetcode.com/problems/find-and-replace-pattern",
+    "difficulty": "Medium",
+    "question": "You have a list of&#xA0;words and a pattern, and you want to know which words in words matches the pattern.\n\nA word matches the pattern if there exists a permutation of letters p so that after replacing every letter x in the pattern with p(x), we get the desired word.\n\n(Recall that a permutation of letters is a bijection from letters to letters: every letter maps to another letter, and no two letters map to the same letter.)\n\nReturn a list of the words in words&#xA0;that match the given pattern.&#xA0;\n\nYou may return the answer in any order.\n\n&#xA0;\n\n\nExample 1:\n\nInput: words = [&quot;abc&quot;,&quot;deq&quot;,&quot;mee&quot;,&quot;aqq&quot;,&quot;dkd&quot;,&quot;ccc&quot;], pattern = &quot;abb&quot;\nOutput: [&quot;mee&quot;,&quot;aqq&quot;]\nExplanation: &quot;mee&quot; matches the pattern because there is a permutation {a -&gt; m, b -&gt; e, ...}. \n&quot;ccc&quot; does not match the pattern because {a -&gt; c, b -&gt; c, ...} is not a permutation,\nsince a and b map to the same letter.\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= words.length &lt;= 50\n\t1 &lt;= pattern.length = words[i].length&#xA0;&lt;= 20\n\n\n",
+    "code": "undefinedpublic class Solution {    public IList<string> FindAndReplacePattern(string[] words, string pattern) {            }}"
+}

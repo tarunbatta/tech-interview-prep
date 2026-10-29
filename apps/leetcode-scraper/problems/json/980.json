@@ -1,0 +1,8 @@
+{
+    "number": "980",
+    "title": "Unique Paths III",
+    "url": "https://leetcode.com/problems/unique-paths-iii",
+    "difficulty": "Hard",
+    "question": "On a 2-dimensional&#xA0;grid, there are 4 types of squares:\n\n\n\t1 represents the starting square.&#xA0; There is exactly one starting square.\n\t2 represents the ending square.&#xA0; There is exactly one ending square.\n\t0 represents empty squares we can walk over.\n\t-1 represents obstacles that we cannot walk over.\n\n\nReturn the number of 4-directional walks&#xA0;from the starting square to the ending square, that walk over every non-obstacle square&#xA0;exactly once.\n\n&#xA0;\n\n\nExample 1:\n\nInput: [[1,0,0,0],[0,0,0,0],[0,0,2,-1]]\nOutput: 2\nExplanation: We have the following two paths: \n1. (0,0),(0,1),(0,2),(0,3),(1,3),(1,2),(1,1),(1,0),(2,0),(2,1),(2,2)\n2. (0,0),(1,0),(2,0),(2,1),(1,1),(0,1),(0,2),(0,3),(1,3),(1,2),(2,2)\n\n\nExample 2:\n\nInput: [[1,0,0,0],[0,0,0,0],[0,0,0,2]]\nOutput: 4\nExplanation: We have the following four paths: \n1. (0,0),(0,1),(0,2),(0,3),(1,3),(1,2),(1,1),(1,0),(2,0),(2,1),(2,2),(2,3)\n2. (0,0),(0,1),(1,1),(1,0),(2,0),(2,1),(2,2),(1,2),(0,2),(0,3),(1,3),(2,3)\n3. (0,0),(1,0),(2,0),(2,1),(2,2),(1,2),(1,1),(0,1),(0,2),(0,3),(1,3),(2,3)\n4. (0,0),(1,0),(2,0),(2,1),(1,1),(0,1),(0,2),(0,3),(1,3),(1,2),(2,2),(2,3)\n\n\nExample 3:\n\nInput: [[0,1],[2,0]]\nOutput: 0\nExplanation: \nThere is no path that walks over every empty square exactly once.\nNote that the starting and ending square can be anywhere in the grid.\n\n\n\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= grid.length * grid[0].length &lt;= 20\n",
+    "code": "undefinedpublic class Solution {    public int UniquePathsIII(int[][] grid) {            }}"
+}

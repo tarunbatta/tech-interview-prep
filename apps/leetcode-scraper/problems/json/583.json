@@ -1,0 +1,8 @@
+{
+    "number": "583",
+    "title": "Delete Operation for Two Strings",
+    "url": "https://leetcode.com/problems/delete-operation-for-two-strings",
+    "difficulty": "Medium",
+    "question": "\nGiven two words word1 and word2, find the minimum number of steps required to make word1 and word2 the same, where in each step you can delete one character in either string.\n\n\nExample 1:\nInput: &quot;sea&quot;, &quot;eat&quot;\nOutput: 2\nExplanation: You need one step to make &quot;sea&quot; to &quot;ea&quot; and another step to make &quot;eat&quot; to &quot;ea&quot;.\n\n\n\nNote:\n\nThe length of given words won&apos;t exceed 500.\nCharacters in given words can only be lower-case letters.\n\n",
+    "code": "undefinedpublic class Solution {    public int MinDistance(string word1, string word2) {            }}"
+}

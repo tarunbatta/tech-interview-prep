@@ -1,0 +1,8 @@
+{
+    "number": "521",
+    "title": "Longest Uncommon Subsequence I ",
+    "url": "https://leetcode.com/problems/longest-uncommon-subsequence-i",
+    "difficulty": "Easy",
+    "question": "\nGiven a group of two strings, you need to find the longest uncommon subsequence of this group of two strings.\nThe longest uncommon subsequence is defined as the longest subsequence of one of these strings and this subsequence should not be any subsequence of the other strings.\n\n\n\nA subsequence is a sequence that can be derived from one sequence by deleting some characters without changing the order of the remaining elements. Trivially, any string is a subsequence of itself and an empty string is a subsequence of any string.\n\n\n\nThe input will be two strings, and the output needs to be the length of the longest uncommon subsequence. If the longest uncommon subsequence doesn&apos;t exist, return -1.\n\n\nExample 1:\nInput: &quot;aba&quot;, &quot;cdc&quot;\nOutput: 3\nExplanation: The longest uncommon subsequence is &quot;aba&quot; (or &quot;cdc&quot;), because &quot;aba&quot; is a subsequence of &quot;aba&quot;, but not a subsequence of any other strings in the group of two strings. \n\n\n\nNote:\n\nBoth strings&apos; lengths will not exceed 100.\nOnly letters from a ~ z will appear in input strings. \n\n",
+    "code": "undefinedpublic class Solution {    public int FindLUSlength(string a, string b) {            }}"
+}

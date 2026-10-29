@@ -1,0 +1,8 @@
+{
+    "number": "424",
+    "title": "Longest Repeating Character Replacement",
+    "url": "https://leetcode.com/problems/longest-repeating-character-replacement",
+    "difficulty": "Medium",
+    "question": "Given a string s&#xA0;that consists of only uppercase English letters, you can perform at most k operations on that string.\n\nIn one operation, you can choose any character of the string and change it to any other uppercase English character.\n\nFind the length of the longest sub-string containing all repeating letters you can get after performing the above operations.\n\nNote:\nBoth the string&apos;s length and k will not exceed 104.\n\nExample 1:\n\nInput:\ns = &quot;ABAB&quot;, k = 2\n\nOutput:\n4\n\nExplanation:\nReplace the two &apos;A&apos;s with two &apos;B&apos;s or vice versa.\n\n\n&#xA0;\n\nExample 2:\n\nInput:\ns = &quot;AABABBA&quot;, k = 1\n\nOutput:\n4\n\nExplanation:\nReplace the one &apos;A&apos; in the middle with &apos;B&apos; and form &quot;AABBBBA&quot;.\nThe substring &quot;BBBB&quot; has the longest repeating letters, which is 4.\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int CharacterReplacement(string s, int k) {            }}"
+}

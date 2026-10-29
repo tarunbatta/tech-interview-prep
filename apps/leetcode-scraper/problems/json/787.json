@@ -1,0 +1,8 @@
+{
+    "number": "787",
+    "title": "Cheapest Flights Within K Stops",
+    "url": "https://leetcode.com/problems/cheapest-flights-within-k-stops",
+    "difficulty": "Medium",
+    "question": "There are n cities connected by&#xA0;m flights. Each fight starts from city&#xA0;u and arrives at&#xA0;v with a price w.\n\nNow given all the cities and flights, together with starting city src and the destination&#xA0;dst, your task is to find the cheapest price from src to dst with up to k stops. If there is no such route, output -1.\n\nExample 1:\nInput: \nn = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]\nsrc = 0, dst = 2, k = 1\nOutput: 200\nExplanation: \nThe graph looks like this:\n\n\nThe cheapest price from city 0 to city 2 with at most 1 stop costs 200, as marked red in the picture.\n\nExample 2:\nInput: \nn = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]\nsrc = 0, dst = 2, k = 0\nOutput: 500\nExplanation: \nThe graph looks like this:\n\n\nThe cheapest price from city 0 to city 2 with at most 0 stop costs 500, as marked blue in the picture.\n\nNote:\n\n\n\tThe number of&#xA0;nodes&#xA0;n will be&#xA0;in range [1, 100], with nodes labeled from 0 to n - 1.\n\tThe&#xA0;size of flights will be&#xA0;in range [0, n * (n - 1) / 2].\n\tThe format of each flight will be (src, dst, price).\n\tThe price of each flight will be in the range [1, 10000].\n\tk is in the range of [0, n - 1].\n\tThere&#xA0;will&#xA0;not&#xA0;be&#xA0;any&#xA0;duplicated&#xA0;flights or&#xA0;self&#xA0;cycles.\n\n",
+    "code": "undefinedpublic class Solution {    public int FindCheapestPrice(int n, int[][] flights, int src, int dst, int K) {            }}"
+}

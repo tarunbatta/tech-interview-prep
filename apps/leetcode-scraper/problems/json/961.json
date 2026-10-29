@@ -1,0 +1,8 @@
+{
+    "number": "961",
+    "title": "N-Repeated Element in Size 2N Array",
+    "url": "https://leetcode.com/problems/n-repeated-element-in-size-2n-array",
+    "difficulty": "Easy",
+    "question": "In a array A of size 2N, there are N+1 unique elements, and exactly one of these elements is repeated N times.\n\nReturn the element repeated N times.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: [1,2,3,3]\nOutput: 3\n\n\n\nExample 2:\n\nInput: [2,1,2,5,3,2]\nOutput: 2\n\n\n\nExample 3:\n\nInput: [5,1,5,2,5,3,5,4]\nOutput: 5\n\n\n&#xA0;\n\nNote:\n\n\n\t4 &lt;= A.length &lt;= 10000\n\t0 &lt;= A[i] &lt; 10000\n\tA.length is even\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int RepeatedNTimes(int[] A) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "874",
+    "title": "Walking Robot Simulation",
+    "url": "https://leetcode.com/problems/walking-robot-simulation",
+    "difficulty": "Easy",
+    "question": "A robot on an infinite grid starts at point (0, 0) and faces north.&#xA0; The robot can receive one of three possible types of commands:\n\n\n\t-2: turn left 90 degrees\n\t-1: turn right 90 degrees\n\t1 &lt;= x &lt;= 9: move forward x units\n\n\nSome of the grid squares are obstacles.&#xA0;\n\nThe i-th obstacle is at grid point (obstacles[i][0], obstacles[i][1])\n\nIf the robot would try to move onto them, the robot stays on the previous grid square instead (but still continues following the rest of the route.)\n\nReturn the square of the maximum Euclidean distance that the robot will be from the origin.\n\n&#xA0;\n\nExample 1:\n\nInput: commands = [4,-1,3], obstacles = []\nOutput: 25\nExplanation: robot will go to (3, 4)\n\n\n\nExample 2:\n\nInput: commands = [4,-1,4,-2,4], obstacles = [[2,4]]\nOutput: 65\nExplanation: robot will be stuck at (1, 4) before turning left and going to (1, 8)\n\n\n\n&#xA0;\n\nNote:\n\n\n\t0 &lt;= commands.length &lt;= 10000\n\t0 &lt;= obstacles.length &lt;= 10000\n\t-30000 &lt;= obstacle[i][0] &lt;= 30000\n\t-30000 &lt;= obstacle[i][1] &lt;= 30000\n\tThe answer is guaranteed to be less than 2 ^ 31.\n\n",
+    "code": "undefinedpublic class Solution {    public int RobotSim(int[] commands, int[][] obstacles) {            }}"
+}

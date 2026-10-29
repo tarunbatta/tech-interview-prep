@@ -1,0 +1,8 @@
+{
+    "number": "500",
+    "title": "Keyboard Row",
+    "url": "https://leetcode.com/problems/keyboard-row",
+    "difficulty": "Easy",
+    "question": "Given a List of words, return the words that can be typed using letters of alphabet on only one row&apos;s of American keyboard like the image below.\n\n&#xA0;\n\n\n&#xA0;\n\nExample:\n\nInput: [&quot;Hello&quot;, &quot;Alaska&quot;, &quot;Dad&quot;, &quot;Peace&quot;]\nOutput: [&quot;Alaska&quot;, &quot;Dad&quot;]\n\n\n&#xA0;\n\nNote:\n\n\n\tYou may use one character in the keyboard more than once.\n\tYou may assume the input string will only contain letters of alphabet.\n\n",
+    "code": "undefinedpublic class Solution {    public string[] FindWords(string[] words) {            }}"
+}

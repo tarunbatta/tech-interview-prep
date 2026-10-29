@@ -1,0 +1,8 @@
+{
+    "number": "650",
+    "title": "2 Keys Keyboard",
+    "url": "https://leetcode.com/problems/2-keys-keyboard",
+    "difficulty": "Medium",
+    "question": "Initially on a notepad only one character &apos;A&apos; is present. You can perform two operations on this notepad for each step:\n\n\n\tCopy All: You can copy all the characters present on the notepad (partial copy is not allowed).\n\tPaste: You can paste the characters which are copied last time.\n\n\n&#xA0;\n\nGiven a number n. You have to get exactly n &apos;A&apos; on the notepad by performing the minimum number of steps permitted. Output the minimum number of steps to get n &apos;A&apos;.\n\nExample 1:\n\nInput: 3\nOutput: 3\nExplanation:\nIntitally, we have one character &apos;A&apos;.\nIn step 1, we use Copy All operation.\nIn step 2, we use Paste operation to get &apos;AA&apos;.\nIn step 3, we use Paste operation to get &apos;AAA&apos;.\n\n\n&#xA0;\n\nNote:\n\n\n\tThe n will be in the range [1, 1000].\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int MinSteps(int n) {            }}"
+}

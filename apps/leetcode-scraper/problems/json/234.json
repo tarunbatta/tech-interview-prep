@@ -1,0 +1,8 @@
+{
+    "number": "234",
+    "title": "Palindrome Linked List",
+    "url": "https://leetcode.com/problems/palindrome-linked-list",
+    "difficulty": "Easy",
+    "question": "Given a singly linked list, determine if it is a palindrome.\n\nExample 1:\n\nInput: 1-&gt;2\nOutput: false\n\nExample 2:\n\nInput: 1-&gt;2-&gt;2-&gt;1\nOutput: true\n\nFollow up:\nCould you do it in O(n) time and O(1) space?\n",
+    "code": "undefined/** * Definition for singly-linked list. * public class ListNode { *     public int val; *     public ListNode next; *     public ListNode(int x) { val = x; } * } */public class Solution {    public bool IsPalindrome(ListNode head) {            }}"
+}

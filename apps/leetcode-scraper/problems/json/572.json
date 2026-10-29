@@ -1,0 +1,8 @@
+{
+    "number": "572",
+    "title": "Subtree of Another Tree",
+    "url": "https://leetcode.com/problems/subtree-of-another-tree",
+    "difficulty": "Easy",
+    "question": "\nGiven two non-empty binary trees s and t, check whether tree t has exactly the same structure and node values with a subtree of s. A subtree of s is a tree consists of a node in s and all of this node&apos;s descendants. The tree s could also be considered as a subtree of itself.\n\n\nExample 1:\n\nGiven tree s:\n     3\n    / \\\n   4   5\n  / \\\n 1   2\n\nGiven tree t:\n   4 \n  / \\\n 1   2\n\nReturn true, because t has the same structure and node values with a subtree of s.\n\n\nExample 2:\n\nGiven tree s:\n     3\n    / \\\n   4   5\n  / \\\n 1   2\n    /\n   0\n\nGiven tree t:\n   4\n  / \\\n 1   2\n\nReturn false.\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public bool IsSubtree(TreeNode s, TreeNode t) {            }}"
+}

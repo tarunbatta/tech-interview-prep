@@ -1,0 +1,8 @@
+{
+    "number": "397",
+    "title": "Integer Replacement",
+    "url": "https://leetcode.com/problems/integer-replacement",
+    "difficulty": "Medium",
+    "question": "\nGiven a positive integer n and you can do operations as follow:\n\n\n\n\nIf n is even, replace n with n/2.\nIf n is odd, you can replace n with either n + 1 or n - 1.\n\n\n\n\nWhat is the minimum number of replacements needed for n to become 1?\n\n\n\n\nExample 1:\nInput:\n8\n\nOutput:\n3\n\nExplanation:\n8 -&gt; 4 -&gt; 2 -&gt; 1\n\n\n\nExample 2:\nInput:\n7\n\nOutput:\n4\n\nExplanation:\n7 -&gt; 8 -&gt; 4 -&gt; 2 -&gt; 1\nor\n7 -&gt; 6 -&gt; 3 -&gt; 2 -&gt; 1\n\n",
+    "code": "undefinedpublic class Solution {    public int IntegerReplacement(int n) {            }}"
+}

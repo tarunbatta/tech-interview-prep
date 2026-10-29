@@ -1,0 +1,8 @@
+{
+    "number": "814",
+    "title": "Binary Tree Pruning",
+    "url": "https://leetcode.com/problems/binary-tree-pruning",
+    "difficulty": "Medium",
+    "question": "We are given the head node root&#xA0;of a binary tree, where additionally every node&apos;s value is either a 0 or a 1.\n\nReturn the same tree where every subtree (of the given tree) not containing a 1 has been removed.\n\n(Recall that the subtree of a node X is X, plus every node that is a descendant of X.)\n\nExample 1:\nInput: [1,null,0,0,1]\nOutput: [1,null,0,null,1]\n \nExplanation: \nOnly the red nodes satisfy the property &quot;every subtree not containing a 1&quot;.\nThe diagram on the right represents the answer.\n\n\n\n\nExample 2:\nInput: [1,0,1,0,0,0,1]\nOutput: [1,null,1,null,1]\n\n\n\n\n\nExample 3:\nInput: [1,1,0,1,1,0,1,0]\nOutput: [1,1,0,1,1,null,1]\n\n\n\n\n\nNote: \n\n\n\tThe binary tree&#xA0;will&#xA0;have&#xA0;at&#xA0;most 100 nodes.\n\tThe value of each node will only be 0 or 1.\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public TreeNode PruneTree(TreeNode root) {            }}"
+}

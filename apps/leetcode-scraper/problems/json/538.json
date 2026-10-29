@@ -1,0 +1,8 @@
+{
+    "number": "538",
+    "title": "Convert BST to Greater Tree",
+    "url": "https://leetcode.com/problems/convert-bst-to-greater-tree",
+    "difficulty": "Easy",
+    "question": "Given a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.\n\n\nExample:\nInput: The root of a Binary Search Tree like this:\n              5\n            /   \\\n           2     13\n\nOutput: The root of a Greater Tree like this:\n             18\n            /   \\\n          20     13\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public TreeNode ConvertBST(TreeNode root) {            }}"
+}

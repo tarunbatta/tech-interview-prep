@@ -1,0 +1,8 @@
+{
+    "number": "520",
+    "title": "Detect Capital",
+    "url": "https://leetcode.com/problems/detect-capital",
+    "difficulty": "Easy",
+    "question": "Given a word, you need to judge whether the usage of capitals in it is right or not.\n\nWe define the usage of capitals in a word to be right when one of the following cases holds:\n\n\n\tAll letters in this word are capitals, like &quot;USA&quot;.\n\tAll letters in this word are not capitals, like &quot;leetcode&quot;.\n\tOnly the first letter in this word is capital, like &quot;Google&quot;.\n\nOtherwise, we define that this word doesn&apos;t use capitals in a right way.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;USA&quot;\nOutput: True\n\n\n&#xA0;\n\nExample 2:\n\nInput: &quot;FlaG&quot;\nOutput: False\n\n\n&#xA0;\n\nNote: The input will be a non-empty word consisting of uppercase and lowercase latin letters.\n",
+    "code": "undefinedpublic class Solution {    public bool DetectCapitalUse(string word) {            }}"
+}

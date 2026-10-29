@@ -1,0 +1,8 @@
+{
+    "number": "1006",
+    "title": "Clumsy Factorial",
+    "url": "https://leetcode.com/problems/clumsy-factorial",
+    "difficulty": "Medium",
+    "question": "Normally, the factorial of a positive integer n&#xA0;is the product of all positive integers less than or equal to n.&#xA0; For example, factorial(10) = 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1.\n\nWe instead make a clumsy factorial:&#xA0;using the integers in decreasing order, we&#xA0;swap out the multiply operations for a fixed rotation of operations:&#xA0;multiply (*), divide (/), add (+) and subtract (-) in this order.\n\nFor example, clumsy(10) = 10 * 9 / 8 + 7 - 6 * 5 / 4 + 3 - 2 * 1.&#xA0; However, these operations are still applied using the usual order of operations of arithmetic: we do all multiplication and division steps before any addition or subtraction steps, and multiplication and division steps are processed left to right.\n\nAdditionally, the division that we use is floor division&#xA0;such that&#xA0;10 * 9 / 8&#xA0;equals&#xA0;11.&#xA0; This guarantees the result is&#xA0;an integer.\n\nImplement the&#xA0;clumsy&#xA0;function&#xA0;as defined above: given an integer N, it returns the clumsy factorial of N.\n\n&#xA0;\n\nExample 1:\n\nInput: 4\nOutput:&#xA0;7\nExplanation: 7 = 4 * 3 / 2 + 1\n\n\nExample 2:\n\nInput: 10\nOutput: 12\nExplanation: 12 = 10 * 9 / 8 + 7 - 6 * 5 / 4 + 3 - 2 * 1\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= N &lt;= 10000\n\t-2^31 &lt;= answer &lt;= 2^31 - 1&#xA0; (The answer is guaranteed to fit within a 32-bit integer.)\n\n",
+    "code": "undefinedpublic class Solution {    public int Clumsy(int N) {            }}"
+}

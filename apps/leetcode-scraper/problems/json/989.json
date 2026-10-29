@@ -1,0 +1,8 @@
+{
+    "number": "989",
+    "title": "Add to Array-Form of Integer",
+    "url": "https://leetcode.com/problems/add-to-array-form-of-integer",
+    "difficulty": "Easy",
+    "question": "For a non-negative integer X, the&#xA0;array-form of X&#xA0;is an array of its digits in left to right order.&#xA0; For example, if X = 1231, then the array form is&#xA0;[1,2,3,1].\n\nGiven the array-form A of a non-negative&#xA0;integer X, return the array-form of the integer X+K.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: A = [1,2,0,0], K = 34\nOutput: [1,2,3,4]\nExplanation: 1200 + 34 = 1234\n\n\n\nExample 2:\n\nInput: A = [2,7,4], K = 181\nOutput: [4,5,5]\nExplanation: 274 + 181 = 455\n\n\n\nExample 3:\n\nInput: A = [2,1,5], K = 806\nOutput: [1,0,2,1]\nExplanation: 215 + 806 = 1021\n\n\n\nExample 4:\n\nInput: A = [9,9,9,9,9,9,9,9,9,9], K = 1\nOutput: [1,0,0,0,0,0,0,0,0,0,0]\nExplanation: 9999999999 + 1 = 10000000000\n\n\n&#xA0;\n\nNote&#xFF1A;\n\n\n\t1 &lt;= A.length &lt;= 10000\n\t0 &lt;= A[i] &lt;= 9\n\t0 &lt;= K &lt;= 10000\n\tIf A.length &gt; 1, then A[0] != 0\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public IList<int> AddToArrayForm(int[] A, int K) {            }}"
+}

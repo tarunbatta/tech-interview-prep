@@ -1,0 +1,8 @@
+{
+    "number": "326",
+    "title": "Power of Three",
+    "url": "https://leetcode.com/problems/power-of-three",
+    "difficulty": "Easy",
+    "question": "Given an integer, write a function to determine if it is a power of three.\n\nExample 1:\n\nInput: 27\nOutput: true\n\n\nExample 2:\n\nInput: 0\nOutput: false\n\nExample 3:\n\nInput: 9\nOutput: true\n\nExample 4:\n\nInput: 45\nOutput: false\n\nFollow up:\nCould you do it without using any loop / recursion?",
+    "code": "undefinedpublic class Solution {    public bool IsPowerOfThree(int n) {            }}"
+}

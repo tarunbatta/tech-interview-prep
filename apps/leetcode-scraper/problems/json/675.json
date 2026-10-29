@@ -1,0 +1,8 @@
+{
+    "number": "675",
+    "title": "Cut Off Trees for Golf Event",
+    "url": "https://leetcode.com/problems/cut-off-trees-for-golf-event",
+    "difficulty": "Hard",
+    "question": "You are asked to cut off trees in a forest for a golf event. The forest is represented as a non-negative 2D map, in this map:\n\n\n\t0 represents the obstacle can&apos;t be reached.\n\t1 represents the ground can be walked through.\n\tThe place with number bigger than 1 represents a tree can be walked through, and this positive number represents the tree&apos;s height.\n\n\n&#xA0;\n\nYou are asked to cut off all the trees in this forest in the order of tree&apos;s height - always cut off the tree with lowest height first. And after cutting, the original place has the tree will become a grass (value 1).\n\nYou will start from the point (0, 0) and you should output the minimum steps you need to walk to cut off all the trees. If you can&apos;t cut off all the trees, output -1 in that situation.\n\nYou are guaranteed that no two trees have the same height and there is at least one tree needs to be cut off.\n\nExample 1:\n\nInput: \n[\n [1,2,3],\n [0,0,4],\n [7,6,5]\n]\nOutput: 6\n\n\n&#xA0;\n\nExample 2:\n\nInput: \n[\n [1,2,3],\n [0,0,0],\n [7,6,5]\n]\nOutput: -1\n\n\n&#xA0;\n\nExample 3:\n\nInput: \n[\n [2,3,4],\n [0,0,5],\n [8,7,6]\n]\nOutput: 6\nExplanation: You started from the point (0,0) and you can cut off the tree in (0,0) directly without walking.\n\n\n&#xA0;\n\nHint: size of the given matrix will not exceed 50x50.\n",
+    "code": "undefinedpublic class Solution {    public int CutOffTree(IList<IList<int>> forest) {            }}"
+}

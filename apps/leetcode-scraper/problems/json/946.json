@@ -1,0 +1,8 @@
+{
+    "number": "946",
+    "title": "Validate Stack Sequences",
+    "url": "https://leetcode.com/problems/validate-stack-sequences",
+    "difficulty": "Medium",
+    "question": "Given two sequences pushed and popped&#xA0;with distinct values,&#xA0;return true if and only if this could have been the result of a sequence of push and pop operations on an initially empty stack.\n\n&#xA0;\n\n\nExample 1:\n\nInput: pushed = [1,2,3,4,5], popped = [4,5,3,2,1]\nOutput: true\nExplanation: We might do the following sequence:\npush(1), push(2), push(3), push(4), pop() -&gt; 4,\npush(5), pop() -&gt; 5, pop() -&gt; 3, pop() -&gt; 2, pop() -&gt; 1\n\n\n\nExample 2:\n\nInput: pushed = [1,2,3,4,5], popped = [4,3,5,1,2]\nOutput: false\nExplanation: 1 cannot be popped before 2.\n\n\n&#xA0;\n\nNote:\n\n\n\t0 &lt;= pushed.length == popped.length &lt;= 1000\n\t0 &lt;= pushed[i], popped[i] &lt; 1000\n\tpushed is a permutation of popped.\n\tpushed and popped have distinct values.\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool ValidateStackSequences(int[] pushed, int[] popped) {            }}"
+}

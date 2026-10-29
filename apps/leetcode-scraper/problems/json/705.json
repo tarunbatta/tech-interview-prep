@@ -1,0 +1,8 @@
+{
+    "number": "705",
+    "title": "Design HashSet",
+    "url": "https://leetcode.com/problems/design-hashset",
+    "difficulty": "Easy",
+    "question": "Design a HashSet&#xA0;without using any built-in hash table libraries.\n\nTo be specific, your design should include these functions:\n\n\n\tadd(value):&#xA0;Insert a value into the HashSet.&#xA0;\n\tcontains(value) : Return whether the value exists in the HashSet or not.\n\tremove(value): Remove a value in&#xA0;the HashSet. If the value does not exist in the HashSet, do nothing.\n\n\n\nExample:\n\nMyHashSet hashSet = new MyHashSet();\nhashSet.add(1); &#xA0; &#xA0; &#xA0; &#xA0; \nhashSet.add(2); &#xA0; &#xA0; &#xA0; &#xA0; \nhashSet.contains(1); &#xA0;&#xA0;&#xA0;// returns true\nhashSet.contains(3); &#xA0;&#xA0;&#xA0;// returns false (not found)\nhashSet.add(2); &#xA0; &#xA0; &#xA0; &#xA0; &#xA0;\nhashSet.contains(2); &#xA0;&#xA0;&#xA0;// returns true\nhashSet.remove(2); &#xA0; &#xA0; &#xA0; &#xA0; &#xA0;\nhashSet.contains(2); &#xA0;&#xA0;&#xA0;// returns false (already removed)\n\n\n\nNote:\n\n\n\tAll values will be in the range of [0, 1000000].\n\tThe number of operations will be in the range of&#xA0;[1, 10000].\n\tPlease do not use the built-in HashSet library.\n\n",
+    "code": "undefinedpublic class MyHashSet {​    /** Initialize your data structure here. */    public MyHashSet() {            }        public void Add(int key) {            }        public void Remove(int key) {            }        /** Returns true if this set contains the specified element */    public bool Contains(int key) {            }}​/** * Your MyHashSet object will be instantiated and called as such: * MyHashSet obj = new MyHashSet(); * obj.Add(key); * obj.Remove(key); * bool param_3 = obj.Contains(key); */"
+}

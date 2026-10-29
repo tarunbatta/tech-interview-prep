@@ -1,0 +1,8 @@
+{
+    "number": "940",
+    "title": "Distinct Subsequences II",
+    "url": "https://leetcode.com/problems/distinct-subsequences-ii",
+    "difficulty": "Hard",
+    "question": "Given a string S, count the number of distinct, non-empty subsequences of S .\n\nSince the result may be large, return the answer modulo 10^9 + 7.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;abc&quot;\nOutput: 7\nExplanation: The 7 distinct subsequences are &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;ab&quot;, &quot;ac&quot;, &quot;bc&quot;, and &quot;abc&quot;.\n\n\n\nExample 2:\n\nInput: &quot;aba&quot;\nOutput: 6\nExplanation: The 6 distinct subsequences are &quot;a&quot;, &quot;b&quot;, &quot;ab&quot;, &quot;ba&quot;, &quot;aa&quot; and &quot;aba&quot;.\n\n\n\nExample 3:\n\nInput: &quot;aaa&quot;\nOutput: 3\nExplanation: The 3 distinct subsequences are &quot;a&quot;, &quot;aa&quot; and &quot;aaa&quot;.\n\n\n\n\n&#xA0;\n\n&#xA0;\n\nNote:\n\n\n\tS contains only lowercase letters.\n\t1 &lt;= S.length &lt;= 2000\n\n\n\n&#xA0;\n\n\n&#xA0;\n\n",
+    "code": "undefinedpublic class Solution {    public int DistinctSubseqII(string S) {            }}"
+}

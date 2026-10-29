@@ -1,0 +1,8 @@
+{
+    "number": "169",
+    "title": "Majority Element",
+    "url": "https://leetcode.com/problems/majority-element",
+    "difficulty": "Easy",
+    "question": "Given an array of size n, find the majority element. The majority element is the element that appears more than &#x230A; n/2 &#x230B; times.\n\nYou may assume that the array is non-empty and the majority element always exist in the array.\n\nExample 1:\n\nInput: [3,2,3]\nOutput: 3\n\nExample 2:\n\nInput: [2,2,1,1,1,2,2]\nOutput: 2\n\n",
+    "code": "undefinedpublic class Solution {    public int MajorityElement(int[] nums) {            }}"
+}

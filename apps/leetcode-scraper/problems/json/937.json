@@ -1,0 +1,8 @@
+{
+    "number": "937",
+    "title": "Reorder Data in Log Files",
+    "url": "https://leetcode.com/problems/reorder-data-in-log-files",
+    "difficulty": "Easy",
+    "question": "You have an array of logs.&#xA0; Each log is a space delimited string of words.\n\nFor each log, the first word in each log is an alphanumeric identifier.&#xA0; Then, either:\n\n\n\tEach word after the identifier will consist only of lowercase letters, or;\n\tEach word after the identifier will consist only of digits.\n\n\nWe will call these two varieties of logs letter-logs and digit-logs.&#xA0; It is guaranteed that each log has at least one word after its identifier.\n\nReorder the logs so that all of the letter-logs come before any digit-log.&#xA0; The letter-logs are ordered lexicographically ignoring identifier, with the identifier used in case of ties.&#xA0; The digit-logs should be put in their original order.\n\nReturn the final order of the logs.\n\n&#xA0;\nExample 1:\nInput: logs = [&quot;dig1 8 1 5 1&quot;,&quot;let1 art can&quot;,&quot;dig2 3 6&quot;,&quot;let2 own kit dig&quot;,&quot;let3 art zero&quot;]\nOutput: [&quot;let1 art can&quot;,&quot;let3 art zero&quot;,&quot;let2 own kit dig&quot;,&quot;dig1 8 1 5 1&quot;,&quot;dig2 3 6&quot;]\n\n&#xA0;\nConstraints:\n\n\n\t0 &lt;= logs.length &lt;= 100\n\t3 &lt;= logs[i].length &lt;= 100\n\tlogs[i] is guaranteed to have an identifier, and a word after the identifier.\n\n",
+    "code": "undefinedpublic class Solution {    public string[] ReorderLogFiles(string[] logs) {            }}"
+}

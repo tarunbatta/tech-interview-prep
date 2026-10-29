@@ -1,0 +1,8 @@
+{
+    "number": "963",
+    "title": "Minimum Area Rectangle II",
+    "url": "https://leetcode.com/problems/minimum-area-rectangle-ii",
+    "difficulty": "Medium",
+    "question": "Given a set of points in the xy-plane, determine the minimum area of any rectangle formed from these points, with sides not necessarily parallel to the x and y axes.\n\nIf there isn&apos;t any rectangle, return 0.\n\n&#xA0;\n\nExample 1:\n\n\n\nInput: [[1,2],[2,1],[1,0],[0,1]]\nOutput: 2.00000\nExplanation: The minimum area rectangle occurs at [1,2],[2,1],[1,0],[0,1], with an area of 2.\n\n\n\nExample 2:\n\n\n\nInput: [[0,1],[2,1],[1,1],[1,0],[2,0]]\nOutput: 1.00000\nExplanation: The minimum area rectangle occurs at [1,0],[1,1],[2,1],[2,0], with an area of 1.\n\n\n\nExample 3:\n\n\n\nInput: [[0,3],[1,2],[3,1],[1,3],[2,1]]\nOutput: 0\nExplanation: There is no possible rectangle to form from these points.\n\n\n\nExample 4:\n\n\n\nInput: [[3,1],[1,1],[0,1],[2,1],[3,3],[3,2],[0,2],[2,3]]\nOutput: 2.00000\nExplanation: The minimum area rectangle occurs at [2,1],[2,3],[3,3],[3,1], with an area of 2.\n\n\n\n&#xA0;\n\n\n\nNote:\n\n\n\t1 &lt;= points.length &lt;= 50\n\t0 &lt;=&#xA0;points[i][0] &lt;=&#xA0;40000\n\t0 &lt;=&#xA0;points[i][1] &lt;=&#xA0;40000\n\tAll points are distinct.\n\tAnswers within 10^-5 of the actual value will be accepted as correct.\n\n",
+    "code": "undefinedpublic class Solution {    public double MinAreaFreeRect(int[][] points) {            }}"
+}

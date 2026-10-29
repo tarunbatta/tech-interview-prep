@@ -1,0 +1,8 @@
+{
+    "number": "400",
+    "title": "Nth Digit",
+    "url": "https://leetcode.com/problems/nth-digit",
+    "difficulty": "Medium",
+    "question": "Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... \n\nNote:\nn is positive and will fit within the range of a 32-bit signed integer (n &lt; 231).\n\n\nExample 1:\nInput:\n3\n\nOutput:\n3\n\n\n\nExample 2:\nInput:\n11\n\nOutput:\n0\n\nExplanation:\nThe 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... is a 0, which is part of the number 10.\n\n",
+    "code": "undefinedpublic class Solution {    public int FindNthDigit(int n) {            }}"
+}

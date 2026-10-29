@@ -1,0 +1,8 @@
+{
+    "number": "647",
+    "title": "Palindromic Substrings",
+    "url": "https://leetcode.com/problems/palindromic-substrings",
+    "difficulty": "Medium",
+    "question": "Given a string, your task is to count how many palindromic substrings in this string.\n\nThe substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.\n\nExample 1:\n\nInput: &quot;abc&quot;\nOutput: 3\nExplanation: Three palindromic strings: &quot;a&quot;, &quot;b&quot;, &quot;c&quot;.\n\n\n&#xA0;\n\nExample 2:\n\nInput: &quot;aaa&quot;\nOutput: 6\nExplanation: Six palindromic strings: &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;aa&quot;, &quot;aa&quot;, &quot;aaa&quot;.\n\n\n&#xA0;\n\nNote:\n\n\n\tThe input string length won&apos;t exceed 1000.\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int CountSubstrings(string s) {            }}"
+}

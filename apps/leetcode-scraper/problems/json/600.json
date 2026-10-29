@@ -1,0 +1,8 @@
+{
+    "number": "600",
+    "title": "Non-negative Integers without Consecutive Ones",
+    "url": "https://leetcode.com/problems/non-negative-integers-without-consecutive-ones",
+    "difficulty": "Hard",
+    "question": "Given a positive integer n, find the number of non-negative integers less than or equal to n, whose binary representations do NOT contain consecutive ones.\n\nExample 1:\nInput: 5\nOutput: 5\nExplanation: \nHere are the non-negative integers &lt;= 5 with their corresponding binary representations:\n0 : 0\n1 : 1\n2 : 10\n3 : 11\n4 : 100\n5 : 101\nAmong them, only integer 3 disobeys the rule (two consecutive ones) and the other 5 satisfy the rule. \n\n\n\nNote:\n1 &lt;= n &lt;= 109\n\n",
+    "code": "undefinedpublic class Solution {    public int FindIntegers(int num) {            }}"
+}

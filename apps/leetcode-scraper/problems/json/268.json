@@ -1,0 +1,8 @@
+{
+    "number": "268",
+    "title": "Missing Number",
+    "url": "https://leetcode.com/problems/missing-number",
+    "difficulty": "Easy",
+    "question": "Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.\n\nExample 1:\n\nInput: [3,0,1]\nOutput: 2\n\n\nExample 2:\n\nInput: [9,6,4,2,3,5,7,0,1]\nOutput: 8\n\n\nNote:\nYour algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?",
+    "code": "undefinedpublic class Solution {    public int MissingNumber(int[] nums) {            }}"
+}

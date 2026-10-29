@@ -1,0 +1,8 @@
+{
+    "number": "188",
+    "title": "Best Time to Buy and Sell Stock IV",
+    "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv",
+    "difficulty": "Hard",
+    "question": "Say you have an array for which the i-th&#xA0;element is the price of a given stock on day i.\n\nDesign an algorithm to find the maximum profit. You may complete at most k transactions.\n\nNote:\nYou may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).\n\nExample 1:\n\nInput: [2,4,1], k = 2\nOutput: 2\nExplanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2.\n\n\nExample 2:\n\nInput: [3,2,6,5,0,3], k = 2\nOutput: 7\nExplanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4.\n&#xA0;            Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.\n\n",
+    "code": "undefinedpublic class Solution {    public int MaxProfit(int k, int[] prices) {            }}"
+}

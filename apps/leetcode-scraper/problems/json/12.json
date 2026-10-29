@@ -1,0 +1,8 @@
+{
+    "number": "12",
+    "title": "Integer to Roman",
+    "url": "https://leetcode.com/problems/integer-to-roman",
+    "difficulty": "Medium",
+    "question": "Roman numerals are represented by seven different symbols:&#xA0;I, V, X, L, C, D and M.\n\nSymbol       Value\nI             1\nV             5\nX             10\nL             50\nC             100\nD             500\nM             1000\n\nFor example,&#xA0;two is written as II&#xA0;in Roman numeral, just two one&apos;s added together. Twelve is written as, XII, which is simply X + II. The number twenty seven is written as XXVII, which is XX + V + II.\n\nRoman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:\n\n\n\tI can be placed before V (5) and X (10) to make 4 and 9.&#xA0;\n\tX can be placed before L (50) and C (100) to make 40 and 90.&#xA0;\n\tC can be placed before D (500) and M (1000) to make 400 and 900.\n\n\nGiven an integer, convert it to a roman numeral. Input is guaranteed to be within the range from 1 to 3999.\n\nExample 1:\n\nInput:&#xA0;3\nOutput: &quot;III&quot;\n\nExample 2:\n\nInput:&#xA0;4\nOutput: &quot;IV&quot;\n\nExample 3:\n\nInput:&#xA0;9\nOutput: &quot;IX&quot;\n\nExample 4:\n\nInput:&#xA0;58\nOutput: &quot;LVIII&quot;\nExplanation: L = 50, V = 5, III = 3.\n\n\nExample 5:\n\nInput:&#xA0;1994\nOutput: &quot;MCMXCIV&quot;\nExplanation: M = 1000, CM = 900, XC = 90 and IV = 4.\n",
+    "code": "undefinedpublic class Solution {    public string IntToRoman(int num) {            }}"
+}

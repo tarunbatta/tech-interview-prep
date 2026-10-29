@@ -1,0 +1,8 @@
+{
+    "number": "906",
+    "title": "Super Palindromes",
+    "url": "https://leetcode.com/problems/super-palindromes",
+    "difficulty": "Hard",
+    "question": "Let&apos;s say a positive integer is a&#xA0;superpalindrome&#xA0;if it is a palindrome, and it is also the square of a palindrome.\n\nNow, given two positive&#xA0;integers L and R (represented as strings), return the number of superpalindromes in the inclusive range [L, R].\n\n&#xA0;\n\nExample 1:\n\nInput: L = &quot;4&quot;, R = &quot;1000&quot;\nOutput: 4\nExplanation: 4, 9, 121, and 484 are superpalindromes.\nNote that 676 is not a superpalindrome: 26 * 26 = 676, but 26 is not a palindrome.\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= len(L) &lt;= 18\n\t1 &lt;= len(R) &lt;= 18\n\tL and R are strings representing integers in the range [1, 10^18).\n\tint(L) &lt;= int(R)\n\n\n\n&#xA0;\n\n",
+    "code": "undefinedpublic class Solution {    public int SuperpalindromesInRange(string L, string R) {            }}"
+}

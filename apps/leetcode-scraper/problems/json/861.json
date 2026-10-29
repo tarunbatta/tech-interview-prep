@@ -1,0 +1,8 @@
+{
+    "number": "861",
+    "title": "Score After Flipping Matrix",
+    "url": "https://leetcode.com/problems/score-after-flipping-matrix",
+    "difficulty": "Medium",
+    "question": "We have a two dimensional matrix&#xA0;A where each value is 0 or 1.\n\nA move consists of choosing any row or column, and toggling each value in that row or column: changing all 0s to 1s, and all 1s to 0s.\n\nAfter making any number of moves, every row of this matrix is interpreted as a binary number, and the score of the matrix is the sum of these numbers.\n\nReturn the highest possible&#xA0;score.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: [[0,0,1,1],[1,0,1,0],[1,1,0,0]]\nOutput: 39\nExplanation:\nToggled to [[1,1,1,1],[1,0,0,1],[1,1,1,1]].\n0b1111 + 0b1001 + 0b1111 = 15 + 9 + 15 = 39\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 20\n\t1 &lt;= A[0].length &lt;= 20\n\tA[i][j]&#xA0;is 0 or 1.\n\n\n",
+    "code": "undefinedpublic class Solution {    public int MatrixScore(int[][] A) {            }}"
+}

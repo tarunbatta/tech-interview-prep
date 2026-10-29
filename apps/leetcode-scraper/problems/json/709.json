@@ -1,0 +1,8 @@
+{
+    "number": "709",
+    "title": "To Lower Case",
+    "url": "https://leetcode.com/problems/to-lower-case",
+    "difficulty": "Easy",
+    "question": "Implement function ToLowerCase() that has a string parameter str, and returns the same string in lowercase.\n\n&#xA0;\n\n\nExample 1:\n\nInput: &quot;Hello&quot;\nOutput: &quot;hello&quot;\n\n\n\nExample 2:\n\nInput: &quot;here&quot;\nOutput: &quot;here&quot;\n\n\n\nExample 3:\n\nInput: &quot;LOVELY&quot;\nOutput: &quot;lovely&quot;\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public string ToLowerCase(string str) {            }}"
+}

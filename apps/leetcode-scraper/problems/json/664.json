@@ -1,0 +1,8 @@
+{
+    "number": "664",
+    "title": "Strange Printer",
+    "url": "https://leetcode.com/problems/strange-printer",
+    "difficulty": "Hard",
+    "question": "\nThere is a strange printer with the following two special requirements:\n\n\nThe printer can only print a sequence of the same character each time.\nAt each turn, the printer can print new characters starting from and ending at any places, and will cover the original existing characters.\n\n\n\n\n\nGiven a string consists of lower English letters only, your job is to count the minimum number of turns the printer needed in order to print it.\n\n\nExample 1:\nInput: &quot;aaabbb&quot;\nOutput: 2\nExplanation: Print &quot;aaa&quot; first and then print &quot;bbb&quot;.\n\n\n\nExample 2:\nInput: &quot;aba&quot;\nOutput: 2\nExplanation: Print &quot;aaa&quot; first and then print &quot;b&quot; from the second place of the string, which will cover the existing character &apos;a&apos;.\n\n\n\nHint: Length of the given string will not exceed 100.",
+    "code": "undefinedpublic class Solution {    public int StrangePrinter(string s) {            }}"
+}

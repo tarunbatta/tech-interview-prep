@@ -1,0 +1,8 @@
+{
+    "number": "125",
+    "title": "Valid Palindrome",
+    "url": "https://leetcode.com/problems/valid-palindrome",
+    "difficulty": "Easy",
+    "question": "Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.\n\nNote:&#xA0;For the purpose of this problem, we define empty string as valid palindrome.\n\nExample 1:\n\nInput: &quot;A man, a plan, a canal: Panama&quot;\nOutput: true\n\n\nExample 2:\n\nInput: &quot;race a car&quot;\nOutput: false\n\n",
+    "code": "undefinedpublic class Solution {    public bool IsPalindrome(string s) {            }}"
+}

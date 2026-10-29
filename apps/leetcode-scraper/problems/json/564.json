@@ -1,0 +1,8 @@
+{
+    "number": "564",
+    "title": "Find the Closest Palindrome",
+    "url": "https://leetcode.com/problems/find-the-closest-palindrome",
+    "difficulty": "Hard",
+    "question": "Given an integer n, find the closest integer (not including itself), which is a palindrome. \n\nThe &apos;closest&apos; is defined as absolute difference minimized between two integers.\n\nExample 1:\nInput: &quot;123&quot;\nOutput: &quot;121&quot;\n\n\n\nNote:\n\nThe input n is a positive integer represented by string, whose length will not exceed 18.\nIf there is a tie, return the smaller one as answer.\n\n",
+    "code": "undefinedpublic class Solution {    public string NearestPalindromic(string n) {            }}"
+}

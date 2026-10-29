@@ -1,0 +1,8 @@
+{
+    "number": "131",
+    "title": "Palindrome Partitioning",
+    "url": "https://leetcode.com/problems/palindrome-partitioning",
+    "difficulty": "Medium",
+    "question": "Given a string s, partition s such that every substring of the partition is a palindrome.\n\nReturn all possible palindrome partitioning of s.\n\nExample:\n\nInput:&#xA0;&quot;aab&quot;\nOutput:\n[\n  [&quot;aa&quot;,&quot;b&quot;],\n  [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]\n]\n\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<string>> Partition(string s) {            }}"
+}

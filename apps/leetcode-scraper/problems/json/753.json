@@ -1,0 +1,8 @@
+{
+    "number": "753",
+    "title": "Cracking the Safe",
+    "url": "https://leetcode.com/problems/cracking-the-safe",
+    "difficulty": "Hard",
+    "question": "There is a box protected by a password. The password is a sequence of&#xA0;n digits&#xA0;where each digit can be one of the first k digits 0, 1, ..., k-1.\n\nWhile entering a password,&#xA0;the last n digits entered will automatically be matched against the correct password.\n\nFor example, assuming the correct password is &quot;345&quot;,&#xA0;if you type &quot;012345&quot;, the box will open because the correct password matches the suffix of the entered password.\n\nReturn any password of minimum length that is guaranteed to open the box at some point of entering it.\n\n&#xA0;\n\nExample 1:\n\nInput: n = 1, k = 2\nOutput: &quot;01&quot;\nNote: &quot;10&quot; will be accepted too.\n\n\nExample 2:\n\nInput: n = 2, k = 2\nOutput: &quot;00110&quot;\nNote: &quot;01100&quot;, &quot;10011&quot;, &quot;11001&quot; will be accepted too.\n\n\n&#xA0;\n\nNote:\n\n\n\tn will be in the range [1, 4].\n\tk will be in the range [1, 10].\n\tk^n will be at most 4096.\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public string CrackSafe(int n, int k) {            }}"
+}

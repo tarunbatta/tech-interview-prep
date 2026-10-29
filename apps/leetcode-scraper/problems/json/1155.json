@@ -1,0 +1,8 @@
+{
+    "number": "1155",
+    "title": "Number of Dice Rolls With Target Sum",
+    "url": "https://leetcode.com/problems/number-of-dice-rolls-with-target-sum",
+    "difficulty": "Medium",
+    "question": "You have d dice, and each die has f faces numbered 1, 2, ..., f.\n\nReturn the number of possible ways (out of fd&#xA0;total ways) modulo 10^9 + 7 to roll the dice so the sum of the face up numbers equals target.\n\n&#xA0;\nExample 1:\n\nInput: d = 1, f = 6, target = 3\nOutput: 1\nExplanation: \nYou throw one die with 6 faces.  There is only one way to get a sum of 3.\n\n\nExample 2:\n\nInput: d = 2, f = 6, target = 7\nOutput: 6\nExplanation: \nYou throw two dice, each with 6 faces.  There are 6 ways to get a sum of 7:\n1+6, 2+5, 3+4, 4+3, 5+2, 6+1.\n\n\nExample 3:\n\nInput: d = 2, f = 5, target = 10\nOutput: 1\nExplanation: \nYou throw two dice, each with 5 faces.  There is only one way to get a sum of 10: 5+5.\n\n\nExample 4:\n\nInput: d = 1, f = 2, target = 3\nOutput: 0\nExplanation: \nYou throw one die with 2 faces.  There is no way to get a sum of 3.\n\n\nExample 5:\n\nInput: d = 30, f = 30, target = 500\nOutput: 222616187\nExplanation: \nThe answer must be returned modulo 10^9 + 7.\n\n\n&#xA0;\nConstraints:\n\n\n\t1 &lt;= d, f &lt;= 30\n\t1 &lt;= target &lt;= 1000\n",
+    "code": "undefinedpublic class Solution {    public int NumRollsToTarget(int d, int f, int target) {            }}"
+}

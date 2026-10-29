@@ -1,0 +1,8 @@
+{
+    "number": "93",
+    "title": "Restore IP Addresses",
+    "url": "https://leetcode.com/problems/restore-ip-addresses",
+    "difficulty": "Medium",
+    "question": "Given a string containing only digits, restore it by returning all possible valid IP address combinations.\n\nExample:\n\nInput: &quot;25525511135&quot;\nOutput: [&quot;255.255.11.135&quot;, &quot;255.255.111.35&quot;]\n\n",
+    "code": "undefinedpublic class Solution {    public IList<string> RestoreIpAddresses(string s) {            }}"
+}

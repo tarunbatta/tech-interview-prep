@@ -1,0 +1,8 @@
+{
+    "number": "300",
+    "title": "Longest Increasing Subsequence",
+    "url": "https://leetcode.com/problems/longest-increasing-subsequence",
+    "difficulty": "Medium",
+    "question": "Given an unsorted array of integers, find the length of longest increasing subsequence.\n\nExample:\n\nInput: [10,9,2,5,3,7,101,18]\nOutput: 4 \nExplanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4. \n\nNote: \n\n\n\tThere may be more than one LIS combination, it is only necessary for you to return the length.\n\tYour algorithm should run in O(n2) complexity.\n\n\nFollow up: Could you improve it to O(n log n) time complexity?\n",
+    "code": "undefinedpublic class Solution {    public int LengthOfLIS(int[] nums) {            }}"
+}

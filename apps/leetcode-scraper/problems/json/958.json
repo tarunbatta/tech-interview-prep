@@ -1,0 +1,8 @@
+{
+    "number": "958",
+    "title": "Check Completeness of a Binary Tree",
+    "url": "https://leetcode.com/problems/check-completeness-of-a-binary-tree",
+    "difficulty": "Medium",
+    "question": "Given a binary tree, determine if it is a complete binary tree.\n\nDefinition of a complete binary tree from Wikipedia:\nIn a complete binary tree every level, except possibly the last, is completely filled, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.\n\n&#xA0;\n\nExample 1:\n\n\n\nInput: [1,2,3,4,5,6]\nOutput: true\nExplanation: Every level before the last is full (ie. levels with node-values {1} and {2, 3}), and all nodes in the last level ({4, 5, 6}) are as far left as possible.\n\n\n\nExample 2:\n\n\n\nInput: [1,2,3,4,5,null,7]\nOutput: false\nExplanation: The node with value 7 isn&apos;t as far left as possible.\n\n\n&#xA0;\n\n\nNote:\n\n\n\tThe tree will have between 1 and 100 nodes.\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public bool IsCompleteTree(TreeNode root) {            }}"
+}

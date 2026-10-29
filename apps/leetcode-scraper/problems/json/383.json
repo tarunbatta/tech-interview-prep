@@ -1,0 +1,8 @@
+{
+    "number": "383",
+    "title": "Ransom Note",
+    "url": "https://leetcode.com/problems/ransom-note",
+    "difficulty": "Easy",
+    "question": "\nGiven an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom \nnote can be constructed from the magazines ; otherwise, it will return false. \n\n\nEach letter in the magazine string can only be used once in your ransom note.\n\n\nNote:\nYou may assume that both strings contain only lowercase letters.\n\n\ncanConstruct(&quot;a&quot;, &quot;b&quot;) -&gt; false\ncanConstruct(&quot;aa&quot;, &quot;ab&quot;) -&gt; false\ncanConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true\n\n",
+    "code": "undefinedpublic class Solution {    public bool CanConstruct(string ransomNote, string magazine) {            }}"
+}

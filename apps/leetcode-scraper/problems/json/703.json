@@ -1,0 +1,8 @@
+{
+    "number": "703",
+    "title": "Kth Largest Element in a Stream",
+    "url": "https://leetcode.com/problems/kth-largest-element-in-a-stream",
+    "difficulty": "Easy",
+    "question": "Design a class to find&#xA0;the kth largest element in a stream. Note that it is the kth largest element in the sorted order, not the kth distinct element.\n\nYour&#xA0;KthLargest&#xA0;class will have a constructor which accepts an integer k and an integer array nums, which contains initial elements from&#xA0;the stream. For each call to the method KthLargest.add, return the element representing the kth largest element in the stream.\n\nExample:\n\nint k = 3;\nint[] arr = [4,5,8,2];\nKthLargest kthLargest = new KthLargest(3, arr);\nkthLargest.add(3);&#xA0; &#xA0;// returns 4\nkthLargest.add(5);&#xA0; &#xA0;// returns 5\nkthLargest.add(10);&#xA0; // returns 5\nkthLargest.add(9);&#xA0; &#xA0;// returns 8\nkthLargest.add(4);&#xA0; &#xA0;// returns 8\n\n\nNote: \nYou may assume that&#xA0;nums&apos; length&#xA0;&#x2265;&#xA0;k-1&#xA0;and k &#x2265;&#xA0;1.\n",
+    "code": "undefinedpublic class KthLargest {​    public KthLargest(int k, int[] nums) {            }        public int Add(int val) {            }}​/** * Your KthLargest object will be instantiated and called as such: * KthLargest obj = new KthLargest(k, nums); * int param_1 = obj.Add(val); */"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "387",
+    "title": "First Unique Character in a String",
+    "url": "https://leetcode.com/problems/first-unique-character-in-a-string",
+    "difficulty": "Easy",
+    "question": "\nGiven a string, find the first non-repeating character in it and return it&apos;s index. If it doesn&apos;t exist, return -1.\n\nExamples:\ns = &quot;leetcode&quot;\nreturn 0.\n\ns = &quot;loveleetcode&quot;,\nreturn 2.\n\n\n\n\nNote: You may assume the string contain only lowercase letters.\n",
+    "code": "undefinedpublic class Solution {    public int FirstUniqChar(string s) {            }}"
+}

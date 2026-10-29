@@ -1,0 +1,8 @@
+{
+    "number": "942",
+    "title": "DI String Match",
+    "url": "https://leetcode.com/problems/di-string-match",
+    "difficulty": "Easy",
+    "question": "Given a string S that only contains &quot;I&quot; (increase) or &quot;D&quot; (decrease), let N = S.length.\n\nReturn any permutation A of [0, 1, ..., N] such that for all i = 0,&#xA0;..., N-1:\n\n\n\tIf S[i] == &quot;I&quot;, then A[i] &lt; A[i+1]\n\tIf S[i] == &quot;D&quot;, then A[i] &gt; A[i+1]\n\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;IDID&quot;\nOutput: [0,4,1,3,2]\n\n\n\nExample 2:\n\nInput: &quot;III&quot;\nOutput: [0,1,2,3]\n\n\n\nExample 3:\n\nInput: &quot;DDI&quot;\nOutput: [3,2,0,1]\n\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= S.length &lt;= 10000\n\tS only contains characters &quot;I&quot; or &quot;D&quot;.\n",
+    "code": "undefinedpublic class Solution {    public int[] DiStringMatch(string S) {            }}"
+}

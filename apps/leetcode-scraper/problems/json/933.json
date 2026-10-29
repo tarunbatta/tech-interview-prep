@@ -1,0 +1,8 @@
+{
+    "number": "933",
+    "title": "Number of Recent Calls",
+    "url": "https://leetcode.com/problems/number-of-recent-calls",
+    "difficulty": "Easy",
+    "question": "Write a class RecentCounter to count recent requests.\n\nIt has only one method:&#xA0;ping(int t), where t represents some time in milliseconds.\n\nReturn the number of pings that have been made from 3000 milliseconds ago until now.\n\nAny ping with time in [t - 3000, t] will count, including the current ping.\n\nIt is guaranteed that every call to ping uses a strictly larger value of&#xA0;t than before.\n\n&#xA0;\n\nExample 1:\n\nInput: inputs = [&quot;RecentCounter&quot;,&quot;ping&quot;,&quot;ping&quot;,&quot;ping&quot;,&quot;ping&quot;], inputs = [[],[1],[100],[3001],[3002]]\nOutput: [null,1,2,3,3]\n\n&#xA0;\n\nNote:\n\n\n\tEach test case will have at most 10000 calls to ping.\n\tEach test case will call&#xA0;ping with strictly increasing values of t.\n\tEach call to ping will have 1 &lt;= t &lt;= 10^9.\n\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class RecentCounter {​    public RecentCounter() {            }        public int Ping(int t) {            }}​/** * Your RecentCounter object will be instantiated and called as such: * RecentCounter obj = new RecentCounter(); * int param_1 = obj.Ping(t); */"
+}

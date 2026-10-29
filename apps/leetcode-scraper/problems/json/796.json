@@ -1,0 +1,8 @@
+{
+    "number": "796",
+    "title": "Rotate String",
+    "url": "https://leetcode.com/problems/rotate-string",
+    "difficulty": "Easy",
+    "question": "We are given two strings, A and B.\n\nA shift on A consists of taking string A and moving the leftmost character to the rightmost position. For example, if A = &apos;abcde&apos;, then it will be &apos;bcdea&apos; after one shift on A. Return True if and only if A can become B after some number of shifts on A.\n\nExample 1:\nInput: A = &apos;abcde&apos;, B = &apos;cdeab&apos;\nOutput: true\n\nExample 2:\nInput: A = &apos;abcde&apos;, B = &apos;abced&apos;\nOutput: false\n\n\nNote:\n\n\n\tA and B will have length at most 100.\n\n",
+    "code": "undefinedpublic class Solution {    public bool RotateString(string A, string B) {            }}"
+}

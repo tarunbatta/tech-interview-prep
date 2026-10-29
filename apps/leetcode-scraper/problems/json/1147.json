@@ -1,0 +1,8 @@
+{
+    "number": "1147",
+    "title": "Longest Chunked Palindrome Decomposition",
+    "url": "https://leetcode.com/problems/longest-chunked-palindrome-decomposition",
+    "difficulty": "Hard",
+    "question": "Return the largest possible k&#xA0;such that there exists&#xA0;a_1, a_2, ..., a_k&#xA0;such that:\n\n\n\tEach a_i is a non-empty string;\n\tTheir concatenation a_1 + a_2 + ... + a_k is equal to text;\n\tFor all 1 &lt;= i &lt;= k,&#xA0;&#xA0;a_i = a_{k+1 - i}.\n\n\n&#xA0;\nExample 1:\n\nInput: text = &quot;ghiabcdefhelloadamhelloabcdefghi&quot;\nOutput: 7\nExplanation: We can split the string on &quot;(ghi)(abcdef)(hello)(adam)(hello)(abcdef)(ghi)&quot;.\n\n\nExample 2:\n\nInput: text = &quot;merchant&quot;\nOutput: 1\nExplanation: We can split the string on &quot;(merchant)&quot;.\n\n\nExample 3:\n\nInput: text = &quot;antaprezatepzapreanta&quot;\nOutput: 11\nExplanation: We can split the string on &quot;(a)(nt)(a)(pre)(za)(tpe)(za)(pre)(a)(nt)(a)&quot;.\n\n\nExample 4:\n\nInput: text = &quot;aaa&quot;\nOutput: 3\nExplanation: We can split the string on &quot;(a)(a)(a)&quot;.\n\n\n&#xA0;\nConstraints:\n\n\n\ttext consists only of lowercase English characters.\n\t1 &lt;= text.length &lt;= 1000\n",
+    "code": "undefinedpublic class Solution {    public int LongestDecomposition(string text) {            }}"
+}

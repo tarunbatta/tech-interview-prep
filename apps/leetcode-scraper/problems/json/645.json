@@ -1,0 +1,8 @@
+{
+    "number": "645",
+    "title": "Set Mismatch",
+    "url": "https://leetcode.com/problems/set-mismatch",
+    "difficulty": "Easy",
+    "question": "\nThe set S originally contains numbers from 1 to n. But unfortunately, due to the data error, one of the numbers in the set got duplicated to another number in the set, which results in repetition of one number and loss of another number. \n\n\n\nGiven an array nums representing the data status of this set after the error. Your task is to firstly find the number occurs twice and then find the number that is missing. Return them in the form of an array.\n\n\n\nExample 1:\nInput: nums = [1,2,2,4]\nOutput: [2,3]\n\n\n\nNote:\n\nThe given array size will in the range [2, 10000].\nThe given array&apos;s numbers won&apos;t have any order.\n\n",
+    "code": "undefinedpublic class Solution {    public int[] FindErrorNums(int[] nums) {            }}"
+}

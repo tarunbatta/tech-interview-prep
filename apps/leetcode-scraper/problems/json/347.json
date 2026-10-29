@@ -1,0 +1,8 @@
+{
+    "number": "347",
+    "title": "Top K Frequent Elements",
+    "url": "https://leetcode.com/problems/top-k-frequent-elements",
+    "difficulty": "Medium",
+    "question": "Given a non-empty array of integers, return the k most frequent elements.\n\nExample 1:\n\nInput: nums = [1,1,1,2,2,3], k = 2\nOutput: [1,2]\n\n\n\nExample 2:\n\nInput: nums = [1], k = 1\nOutput: [1]\n\n\nNote: \n\n\n\tYou may assume k is always valid, 1 &#x2264; k &#x2264; number of unique elements.\n\tYour algorithm&apos;s time complexity must be better than O(n log n), where n is the array&apos;s size.\n\n",
+    "code": "undefinedpublic class Solution {    public IList<int> TopKFrequent(int[] nums, int k) {            }}"
+}

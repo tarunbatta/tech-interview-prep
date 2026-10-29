@@ -1,0 +1,8 @@
+{
+    "number": "979",
+    "title": "Distribute Coins in Binary Tree",
+    "url": "https://leetcode.com/problems/distribute-coins-in-binary-tree",
+    "difficulty": "Medium",
+    "question": "Given the root of a binary tree with N nodes, each node&#xA0;in the tree has node.val coins, and there are N coins total.\n\nIn one move, we may choose two adjacent nodes and move one coin from one node to another.&#xA0; (The move may be from parent to child, or from child to parent.)\n\nReturn the number of moves required to make every node have exactly one coin.\n\n&#xA0;\n\n\nExample 1:\n\n\n\nInput: [3,0,0]\nOutput: 2\nExplanation: From the root of the tree, we move one coin to its left child, and one coin to its right child.\n\n\n\nExample 2:\n\n\n\nInput: [0,3,0]\nOutput: 3\nExplanation: From the left child of the root, we move two coins to the root [taking two moves].  Then, we move one coin from the root of the tree to the right child.\n\n\n\nExample 3:\n\n\n\nInput: [1,0,2]\nOutput: 2\n\n\n\nExample 4:\n\n\n\nInput: [1,0,0,null,3]\nOutput: 4\n\n\n&#xA0;\n\nNote:\n\n\n\t1&lt;= N &lt;= 100\n\t0 &lt;= node.val &lt;= N\n\n\n\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public int DistributeCoins(TreeNode root) {            }}"
+}

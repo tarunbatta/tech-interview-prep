@@ -1,0 +1,8 @@
+{
+    "number": "1143",
+    "title": "Longest Common Subsequence",
+    "url": "https://leetcode.com/problems/longest-common-subsequence",
+    "difficulty": "Medium",
+    "question": "Given two strings text1 and text2, return the length of their longest common subsequence.\n\nA subsequence of a string is a new string generated from the original string with some characters(can be none) deleted without changing the relative order of the remaining characters. (eg, &quot;ace&quot; is a subsequence of &quot;abcde&quot; while &quot;aec&quot; is not).&#xA0;A common subsequence&#xA0;of two strings is a subsequence that is common to both strings.\n\n&#xA0;\n\nIf there is no common subsequence, return 0.\n\n&#xA0;\nExample 1:\n\nInput: text1 = &quot;abcde&quot;, text2 = &quot;ace&quot; \nOutput: 3  \nExplanation: The longest common subsequence is &quot;ace&quot; and its length is 3.\n\n\nExample 2:\n\nInput: text1 = &quot;abc&quot;, text2 = &quot;abc&quot;\nOutput: 3\nExplanation: The longest common subsequence is &quot;abc&quot; and its length is 3.\n\n\nExample 3:\n\nInput: text1 = &quot;abc&quot;, text2 = &quot;def&quot;\nOutput: 0\nExplanation: There is no such common subsequence, so the result is 0.\n\n\n&#xA0;\nConstraints:\n\n\n\t1 &lt;= text1.length &lt;= 1000\n\t1 &lt;= text2.length &lt;= 1000\n\tThe input strings consist of lowercase English characters only.\n\n",
+    "code": "undefinedpublic class Solution {    public int LongestCommonSubsequence(string text1, string text2) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "710",
+    "title": "Random Pick with Blacklist",
+    "url": "https://leetcode.com/problems/random-pick-with-blacklist",
+    "difficulty": "Hard",
+    "question": "Given a blacklist&#xA0;B containing unique integers&#xA0;from [0, N), write a function to return a uniform random integer from [0, N) which is NOT&#xA0;in B.\n\nOptimize it such that it minimizes the call to system&#x2019;s Math.random().\n\nNote:\n\n\n\t1 &lt;= N &lt;= 1000000000\n\t0 &lt;= B.length &lt; min(100000, N)\n\t[0, N)&#xA0;does NOT include N. See interval notation.\n\n\nExample 1:\n\nInput: \n[&quot;Solution&quot;,&quot;pick&quot;,&quot;pick&quot;,&quot;pick&quot;]\n[[1,[]],[],[],[]]\nOutput: [null,0,0,0]\n\n\nExample 2:\n\nInput: \n[&quot;Solution&quot;,&quot;pick&quot;,&quot;pick&quot;,&quot;pick&quot;]\n[[2,[]],[],[],[]]\nOutput: [null,1,1,1]\n\n\nExample 3:\n\nInput: \n[&quot;Solution&quot;,&quot;pick&quot;,&quot;pick&quot;,&quot;pick&quot;]\n[[3,[1]],[],[],[]]\nOutput: [null,0,0,2]\n\n\nExample 4:\n\nInput: \n[&quot;Solution&quot;,&quot;pick&quot;,&quot;pick&quot;,&quot;pick&quot;]\n[[4,[2]],[],[],[]]\nOutput: [null,1,3,1]\n\n\nExplanation of Input Syntax:\n\nThe input is two lists:&#xA0;the subroutines called&#xA0;and their&#xA0;arguments.&#xA0;Solution&apos;s&#xA0;constructor has two arguments,&#xA0;N and the blacklist B. pick has no arguments.&#xA0;Arguments&#xA0;are&#xA0;always wrapped with a list, even if there aren&apos;t any.\n",
+    "code": "undefinedpublic class Solution {​    public Solution(int N, int[] blacklist) {            }        public int Pick() {            }}​/** * Your Solution object will be instantiated and called as such: * Solution obj = new Solution(N, blacklist); * int param_1 = obj.Pick(); */"
+}

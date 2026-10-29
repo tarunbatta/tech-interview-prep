@@ -1,0 +1,8 @@
+{
+    "number": "539",
+    "title": "Minimum Time Difference",
+    "url": "https://leetcode.com/problems/minimum-time-difference",
+    "difficulty": "Medium",
+    "question": "Given a list of 24-hour clock time points in &quot;Hour:Minutes&quot; format, find the minimum minutes difference between any two time points in the list. \n\nExample 1:\nInput: [&quot;23:59&quot;,&quot;00:00&quot;]\nOutput: 1\n\n\n\nNote:\n\nThe number of time points in the given list is at least 2 and won&apos;t exceed 20000.\nThe input time is legal and ranges from 00:00 to 23:59.\n\n",
+    "code": "undefinedpublic class Solution {    public int FindMinDifference(IList<string> timePoints) {            }}"
+}

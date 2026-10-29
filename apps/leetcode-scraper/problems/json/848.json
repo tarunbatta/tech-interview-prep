@@ -1,0 +1,8 @@
+{
+    "number": "848",
+    "title": "Shifting Letters",
+    "url": "https://leetcode.com/problems/shifting-letters",
+    "difficulty": "Medium",
+    "question": "We have a string S of lowercase letters, and an integer array shifts.\n\nCall the shift of a letter, the next letter in the alphabet, (wrapping around so that &apos;z&apos; becomes &apos;a&apos;).&#xA0;\n\nFor example, shift(&apos;a&apos;) = &apos;b&apos;, shift(&apos;t&apos;) = &apos;u&apos;, and shift(&apos;z&apos;) = &apos;a&apos;.\n\nNow for each shifts[i] = x, we want to shift the first i+1&#xA0;letters of S, x times.\n\nReturn the final string&#xA0;after all such shifts to S are applied.\n\nExample 1:\n\nInput: S = &quot;abc&quot;, shifts = [3,5,9]\nOutput: &quot;rpl&quot;\nExplanation: \nWe start with &quot;abc&quot;.\nAfter shifting the first 1 letters of S by 3, we have &quot;dbc&quot;.\nAfter shifting the first 2 letters of S by 5, we have &quot;igc&quot;.\nAfter shifting the first 3 letters of S by 9, we have &quot;rpl&quot;, the answer.\n\n\nNote:\n\n\n\t1 &lt;= S.length = shifts.length &lt;= 20000\n\t0 &lt;= shifts[i] &lt;= 10 ^ 9\n\n",
+    "code": "undefinedpublic class Solution {    public string ShiftingLetters(string S, int[] shifts) {            }}"
+}

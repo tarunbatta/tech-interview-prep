@@ -1,0 +1,8 @@
+{
+    "number": "470",
+    "title": "Implement Rand10() Using Rand7()",
+    "url": "https://leetcode.com/problems/implement-rand10-using-rand7",
+    "difficulty": "Medium",
+    "question": "Given a function rand7 which generates a uniform random integer in the range 1 to 7, write a function rand10&#xA0;which generates a uniform random integer in the range 1 to 10.\n\nDo NOT use system&apos;s Math.random().\n\n\n\n\n&#xA0;\n\n\nExample 1:\n\nInput: 1\nOutput: [7]\n\n\n\nExample 2:\n\nInput: 2\nOutput: [8,4]\n\n\n\nExample 3:\n\nInput: 3\nOutput: [8,1,10]\n\n\n&#xA0;\n\nNote:\n\n\n\trand7 is predefined.\n\tEach testcase has one argument:&#xA0;n, the number of times that rand10 is called.\n\n\n&#xA0;\n\nFollow up:\n\n\n\tWhat is the expected value&#xA0;for the number of calls to&#xA0;rand7()&#xA0;function?\n\tCould you minimize the number of calls to rand7()?\n\n\n\n\n",
+    "code": "undefined/** * The Rand7() API is already defined in the parent class SolBase. * public int Rand7(); * @return a random integer in the range 1 to 7 */public class Solution : SolBase {    public int Rand10() {            }}"
+}

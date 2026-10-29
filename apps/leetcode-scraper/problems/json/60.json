@@ -1,0 +1,8 @@
+{
+    "number": "60",
+    "title": "Permutation Sequence",
+    "url": "https://leetcode.com/problems/permutation-sequence",
+    "difficulty": "Medium",
+    "question": "The set [1,2,3,...,n] contains a total of n! unique permutations.\n\nBy listing and labeling all of the permutations in order, we get the following sequence for n = 3:\n\n\n\t&quot;123&quot;\n\t&quot;132&quot;\n\t&quot;213&quot;\n\t&quot;231&quot;\n\t&quot;312&quot;\n\t&quot;321&quot;\n\n\nGiven n and k, return the kth permutation sequence.\n\nNote:\n\n\n\tGiven n will be between 1 and 9 inclusive.\n\tGiven&#xA0;k&#xA0;will be between 1 and n! inclusive.\n\n\nExample 1:\n\nInput: n = 3, k = 3\nOutput: &quot;213&quot;\n\n\nExample 2:\n\nInput: n = 4, k = 9\nOutput: &quot;2314&quot;\n\n",
+    "code": "undefinedpublic class Solution {    public string GetPermutation(int n, int k) {            }}"
+}

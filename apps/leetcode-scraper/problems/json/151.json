@@ -1,0 +1,8 @@
+{
+    "number": "151",
+    "title": "Reverse Words in a String",
+    "url": "https://leetcode.com/problems/reverse-words-in-a-string",
+    "difficulty": "Medium",
+    "question": "Given an input string, reverse the string word by word.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;the sky is blue&quot;\nOutput:&#xA0;&quot;blue is sky the&quot;\n\n\nExample 2:\n\nInput: &quot; &#xA0;hello world! &#xA0;&quot;\nOutput:&#xA0;&quot;world! hello&quot;\nExplanation: Your reversed string should not contain leading or trailing spaces.\n\n\nExample 3:\n\nInput: &quot;a good &#xA0; example&quot;\nOutput:&#xA0;&quot;example good a&quot;\nExplanation: You need to reduce multiple spaces between two words to a single space in the reversed string.\n\n\n&#xA0;\n\nNote:\n\n\n\tA word is defined as a sequence of non-space characters.\n\tInput string may contain leading or trailing spaces. However, your reversed string should not contain leading or trailing spaces.\n\tYou need to reduce multiple spaces between two words to a single space in the reversed string.\n\n\n&#xA0;\n\nFollow up:\n\nFor C programmers, try to solve it in-place in O(1) extra space.",
+    "code": "undefinedpublic class Solution {    public string ReverseWords(string s) {            }}"
+}

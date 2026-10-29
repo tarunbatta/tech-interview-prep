@@ -1,0 +1,8 @@
+{
+    "number": "777",
+    "title": "Swap Adjacent in LR String",
+    "url": "https://leetcode.com/problems/swap-adjacent-in-lr-string",
+    "difficulty": "Medium",
+    "question": "In a string composed of &apos;L&apos;, &apos;R&apos;, and &apos;X&apos; characters, like &quot;RXXLRXRXL&quot;, a move consists of either replacing one occurrence of &quot;XL&quot; with &quot;LX&quot;, or replacing one occurrence of &quot;RX&quot; with &quot;XR&quot;. Given the starting string start and the ending string end, return True if and only if there exists a sequence of moves to transform one string to the other.\n\nExample:\n\nInput: start = &quot;RXXLRXRXL&quot;, end = &quot;XRLXXRRLX&quot;\nOutput: True\nExplanation:\nWe can transform start to end following these steps:\nRXXLRXRXL -&gt;\nXRXLRXRXL -&gt;\nXRLXRXRXL -&gt;\nXRLXXRRXL -&gt;\nXRLXXRRLX\n\n\nNote:\n\n\n\t1 &lt;= len(start) = len(end) &lt;= 10000.\n\tBoth start and end will only consist of characters in {&apos;L&apos;, &apos;R&apos;, &apos;X&apos;}.\n\n",
+    "code": "undefinedpublic class Solution {    public bool CanTransform(string start, string end) {            }}"
+}

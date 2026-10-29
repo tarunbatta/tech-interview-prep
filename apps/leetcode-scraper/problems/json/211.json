@@ -1,0 +1,8 @@
+{
+    "number": "211",
+    "title": "Add and Search Word - Data structure design",
+    "url": "https://leetcode.com/problems/add-and-search-word-data-structure-design",
+    "difficulty": "Medium",
+    "question": "Design a data structure that supports the following two operations:\n\nvoid addWord(word)\nbool search(word)\n\n\nsearch(word) can search a literal word or a regular expression string containing only letters a-z or .. A . means it can represent any one letter.\n\nExample:\n\naddWord(&quot;bad&quot;)\naddWord(&quot;dad&quot;)\naddWord(&quot;mad&quot;)\nsearch(&quot;pad&quot;) -&gt; false\nsearch(&quot;bad&quot;) -&gt; true\nsearch(&quot;.ad&quot;) -&gt; true\nsearch(&quot;b..&quot;) -&gt; true\n\n\nNote:\nYou may assume that all words are consist of lowercase letters a-z.\n",
+    "code": "undefinedpublic class WordDictionary {​    /** Initialize your data structure here. */    public WordDictionary() {            }        /** Adds a word into the data structure. */    public void AddWord(string word) {            }        /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */    public bool Search(string word) {            }}​/** * Your WordDictionary object will be instantiated and called as such: * WordDictionary obj = new WordDictionary(); * obj.AddWord(word); * bool param_2 = obj.Search(word); */"
+}

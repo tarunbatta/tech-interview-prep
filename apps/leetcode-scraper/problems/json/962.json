@@ -1,0 +1,8 @@
+{
+    "number": "962",
+    "title": "Maximum Width Ramp",
+    "url": "https://leetcode.com/problems/maximum-width-ramp",
+    "difficulty": "Medium",
+    "question": "Given an array A of integers, a ramp&#xA0;is a tuple (i, j) for which i &lt; j&#xA0;and&#xA0;A[i] &lt;= A[j].&#xA0; The width of such a&#xA0;ramp is j - i.\n\nFind the maximum width of a ramp in A.&#xA0; If one doesn&apos;t exist, return 0.\n\n&#xA0;\n\nExample 1:\n\nInput: [6,0,8,2,1,5]\nOutput: 4\nExplanation: \nThe maximum width ramp is achieved at (i, j) = (1, 5): A[1] = 0 and A[5] = 5.\n\n\n\nExample 2:\n\nInput: [9,8,1,0,1,9,4,0,4,1]\nOutput: 7\nExplanation: \nThe maximum width ramp is achieved at (i, j) = (2, 9): A[2] = 1 and A[9] = 1.\n\n\n\n\n\n&#xA0;\n\nNote:\n\n\n\t2 &lt;= A.length &lt;= 50000\n\t0 &lt;= A[i] &lt;= 50000\n\n\n\n\n\n&#xA0;\n\n",
+    "code": "undefinedpublic class Solution {    public int MaxWidthRamp(int[] A) {            }}"
+}

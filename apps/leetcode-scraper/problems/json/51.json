@@ -1,0 +1,8 @@
+{
+    "number": "51",
+    "title": "N-Queens",
+    "url": "https://leetcode.com/problems/n-queens",
+    "difficulty": "Hard",
+    "question": "The n-queens puzzle is the problem of placing n queens on an n&#xD7;n chessboard such that no two queens attack each other.\n\n\n\nGiven an integer n, return all distinct solutions to the n-queens puzzle.\n\nEach solution contains a distinct board configuration of the n-queens&apos; placement, where &apos;Q&apos; and &apos;.&apos; both indicate a queen and an empty space respectively.\n\nExample:\n\nInput: 4\nOutput: [\n [&quot;.Q..&quot;,  // Solution 1\n  &quot;...Q&quot;,\n  &quot;Q...&quot;,\n  &quot;..Q.&quot;],\n\n [&quot;..Q.&quot;,  // Solution 2\n  &quot;Q...&quot;,\n  &quot;...Q&quot;,\n  &quot;.Q..&quot;]\n]\nExplanation: There exist two distinct solutions to the 4-queens puzzle as shown above.\n\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<string>> SolveNQueens(int n) {            }}"
+}

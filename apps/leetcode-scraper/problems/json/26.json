@@ -1,0 +1,8 @@
+{
+    "number": "26",
+    "title": "Remove Duplicates from Sorted Array",
+    "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array",
+    "difficulty": "Easy",
+    "question": "Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.\n\nDo not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.\n\nExample 1:\n\nGiven nums = [1,1,2],\n\nYour function should return length = 2, with the first two elements of nums being 1 and 2 respectively.\n\nIt doesn&apos;t matter what you leave beyond the returned length.\n\nExample 2:\n\nGiven nums = [0,0,1,1,1,2,2,3,3,4],\n\nYour function should return length = 5, with the first five elements of nums being modified to&#xA0;0, 1, 2, 3, and&#xA0;4 respectively.\n\nIt doesn&apos;t matter what values are set beyond&#xA0;the returned length.\n\n\nClarification:\n\nConfused why the returned value is an integer but your answer is an array?\n\nNote that the input array is passed in by reference, which means modification to the input array will be known to the caller as well.\n\nInternally you can think of this:\n\n// nums is passed in by reference. (i.e., without making a copy)\nint len = removeDuplicates(nums);\n\n// any modification to nums in your function would be known by the caller.\n// using the length returned by your function, it prints the first len elements.\nfor (int i = 0; i &lt; len; i++) {\n&#xA0; &#xA0; print(nums[i]);\n}\n",
+    "code": "undefinedpublic class Solution {    public int RemoveDuplicates(int[] nums) {            }}"
+}

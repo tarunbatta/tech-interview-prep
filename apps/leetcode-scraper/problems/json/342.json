@@ -1,0 +1,8 @@
+{
+    "number": "342",
+    "title": "Power of Four",
+    "url": "https://leetcode.com/problems/power-of-four",
+    "difficulty": "Easy",
+    "question": "Given an integer (signed 32 bits), write a function to check whether it is a power of 4.\n\nExample 1:\n\nInput: 16\nOutput: true\n\n\n\nExample 2:\n\nInput: 5\nOutput: false\n\n\nFollow up: Could you solve it without loops/recursion?",
+    "code": "undefinedpublic class Solution {    public bool IsPowerOfFour(int num) {            }}"
+}

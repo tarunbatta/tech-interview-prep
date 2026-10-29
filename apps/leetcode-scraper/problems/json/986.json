@@ -1,0 +1,8 @@
+{
+    "number": "986",
+    "title": "Interval List Intersections",
+    "url": "https://leetcode.com/problems/interval-list-intersections",
+    "difficulty": "Medium",
+    "question": "Given two lists&#xA0;of closed intervals, each list of intervals is pairwise disjoint and in sorted order.\n\nReturn the intersection of these two interval lists.\n\n(Formally, a closed interval [a, b] (with a &lt;= b) denotes&#xA0;the set of real numbers x with a &lt;= x &lt;= b.&#xA0; The&#xA0;intersection of two closed intervals is a set of real numbers that is either empty, or can be represented as a closed interval.&#xA0; For example, the intersection of [1, 3] and [2, 4] is [2, 3].)\n\n\n&#xA0;\n\nExample 1:\n\n\n\nInput: A = [[0,2],[5,10],[13,23],[24,25]], B = [[1,5],[8,12],[15,24],[25,26]]\nOutput: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]\nReminder: The inputs and the desired output are lists of Interval&#xA0;objects, and not arrays or lists.\n\n\n&#xA0;\n\nNote:\n\n\n\t0 &lt;= A.length &lt; 1000\n\t0 &lt;= B.length &lt; 1000\n\t0 &lt;= A[i].start, A[i].end, B[i].start, B[i].end &lt; 10^9\n\n\nNOTE:&#xA0;input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature.\n\n",
+    "code": "undefinedpublic class Solution {    public int[][] IntervalIntersection(int[][] A, int[][] B) {            }}"
+}

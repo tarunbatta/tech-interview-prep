@@ -1,0 +1,8 @@
+{
+    "number": "155",
+    "title": "Min Stack",
+    "url": "https://leetcode.com/problems/min-stack",
+    "difficulty": "Easy",
+    "question": "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.\n\n\n\tpush(x) -- Push element x onto stack.\n\tpop() -- Removes the element on top of the stack.\n\ttop() -- Get the top element.\n\tgetMin() -- Retrieve the minimum element in the stack.\n\n\n&#xA0;\n\nExample:\n\nMinStack minStack = new MinStack();\nminStack.push(-2);\nminStack.push(0);\nminStack.push(-3);\nminStack.getMin();   --&gt; Returns -3.\nminStack.pop();\nminStack.top();      --&gt; Returns 0.\nminStack.getMin();   --&gt; Returns -2.\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class MinStack {​    /** initialize your data structure here. */    public MinStack() {            }        public void Push(int x) {            }        public void Pop() {            }        public int Top() {            }        public int GetMin() {            }}​/** * Your MinStack object will be instantiated and called as such: * MinStack obj = new MinStack(); * obj.Push(x); * obj.Pop(); * int param_3 = obj.Top(); * int param_4 = obj.GetMin(); */"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "22",
+    "title": "Generate Parentheses",
+    "url": "https://leetcode.com/problems/generate-parentheses",
+    "difficulty": "Medium",
+    "question": "\nGiven n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.\n\n\n\nFor example, given n = 3, a solution set is:\n\n[\n  &quot;((()))&quot;,\n  &quot;(()())&quot;,\n  &quot;(())()&quot;,\n  &quot;()(())&quot;,\n  &quot;()()()&quot;\n]\n",
+    "code": "undefinedpublic class Solution {    public IList<string> GenerateParenthesis(int n) {            }}"
+}

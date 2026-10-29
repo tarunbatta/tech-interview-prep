@@ -1,0 +1,8 @@
+{
+    "number": "205",
+    "title": "Isomorphic Strings",
+    "url": "https://leetcode.com/problems/isomorphic-strings",
+    "difficulty": "Easy",
+    "question": "Given two strings s and t, determine if they are isomorphic.\n\nTwo strings are isomorphic if the characters in s can be replaced to get t.\n\nAll occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself.\n\nExample 1:\n\nInput: s = &quot;egg&quot;, t = &quot;add&quot;\nOutput: true\n\n\nExample 2:\n\nInput: s = &quot;foo&quot;, t = &quot;bar&quot;\nOutput: false\n\nExample 3:\n\nInput: s = &quot;paper&quot;, t = &quot;title&quot;\nOutput: true\n\nNote:\nYou may assume both s&#xA0;and t&#xA0;have the same length.\n",
+    "code": "undefinedpublic class Solution {    public bool IsIsomorphic(string s, string t) {            }}"
+}

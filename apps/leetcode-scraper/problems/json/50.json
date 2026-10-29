@@ -1,0 +1,8 @@
+{
+    "number": "50",
+    "title": "Pow(x, n)",
+    "url": "https://leetcode.com/problems/powx-n",
+    "difficulty": "Medium",
+    "question": "Implement pow(x, n), which calculates&#xA0;x raised to the power n (xn).\n\nExample 1:\n\nInput: 2.00000, 10\nOutput: 1024.00000\n\n\nExample 2:\n\nInput: 2.10000, 3\nOutput: 9.26100\n\n\nExample 3:\n\nInput: 2.00000, -2\nOutput: 0.25000\nExplanation: 2-2 = 1/22 = 1/4 = 0.25\n\n\nNote:\n\n\n\t-100.0 &lt; x &lt; 100.0\n\tn is a 32-bit signed integer, within the range&#xA0;[&#x2212;231,&#xA0;231&#xA0;&#x2212; 1]\n\n",
+    "code": "undefinedpublic class Solution {    public double MyPow(double x, int n) {            }}"
+}

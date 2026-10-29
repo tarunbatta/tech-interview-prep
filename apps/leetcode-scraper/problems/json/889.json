@@ -1,0 +1,8 @@
+{
+    "number": "889",
+    "title": "Construct Binary Tree from Preorder and Postorder Traversal",
+    "url": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal",
+    "difficulty": "Medium",
+    "question": "Return any binary tree that matches the given preorder and postorder traversals.\n\nValues in the traversals&#xA0;pre and post&#xA0;are distinct&#xA0;positive integers.\n\n&#xA0;\n\n\nExample 1:\n\nInput: pre = [1,2,4,5,3,6,7], post = [4,5,2,6,7,3,1]\nOutput: [1,2,3,4,5,6,7]\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= pre.length == post.length &lt;= 30\n\tpre[] and post[]&#xA0;are both permutations of 1, 2, ..., pre.length.\n\tIt is guaranteed an answer exists. If there exists multiple answers, you can return any of them.\n\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public TreeNode ConstructFromPrePost(int[] pre, int[] post) {            }}"
+}

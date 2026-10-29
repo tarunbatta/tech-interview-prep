@@ -1,0 +1,8 @@
+{
+    "number": "41",
+    "title": "First Missing Positive",
+    "url": "https://leetcode.com/problems/first-missing-positive",
+    "difficulty": "Hard",
+    "question": "Given an unsorted integer array, find the smallest missing&#xA0;positive integer.\n\nExample 1:\n\nInput: [1,2,0]\nOutput: 3\n\n\nExample 2:\n\nInput: [3,4,-1,1]\nOutput: 2\n\n\nExample 3:\n\nInput: [7,8,9,11,12]\nOutput: 1\n\n\nNote:\n\nYour algorithm should run in O(n) time and uses constant extra space.\n",
+    "code": "undefinedpublic class Solution {    public int FirstMissingPositive(int[] nums) {            }}"
+}

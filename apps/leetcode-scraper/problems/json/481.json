@@ -1,0 +1,8 @@
+{
+    "number": "481",
+    "title": "Magical String",
+    "url": "https://leetcode.com/problems/magical-string",
+    "difficulty": "Medium",
+    "question": "\nA magical string S consists of only &apos;1&apos; and &apos;2&apos; and obeys the following rules:\n\n\nThe string S is magical because concatenating the number of contiguous occurrences of characters &apos;1&apos; and &apos;2&apos; generates the string S itself.\n\n\n\nThe first few elements of string S is the following:\nS = &quot;1221121221221121122&#x2026;&#x2026;&quot;\n\n\n\nIf we group the consecutive &apos;1&apos;s and &apos;2&apos;s in S, it will be:\n\n\n1   22  11  2  1  22  1  22  11  2  11  22 ......\n\n\nand the occurrences of &apos;1&apos;s or &apos;2&apos;s in each group are:\n\n\n1   2\t   2    1   1    2     1    2     2    1    2    2 ......\n\n\n\nYou can see that the occurrence sequence above is the S itself. \n\n\n\nGiven an integer N as input, return the number of &apos;1&apos;s in the first N number in the magical string S.\n\n\nNote:\nN will not exceed 100,000.\n\n\n\nExample 1:\nInput: 6\nOutput: 3\nExplanation: The first 6 elements of magical string S is &quot;12211&quot; and it contains three 1&apos;s, so return 3.\n\n",
+    "code": "undefinedpublic class Solution {    public int MagicalString(int n) {            }}"
+}

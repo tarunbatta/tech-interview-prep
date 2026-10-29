@@ -1,0 +1,8 @@
+{
+    "number": "1154",
+    "title": "Day of the Year",
+    "url": "https://leetcode.com/problems/day-of-the-year",
+    "difficulty": "Easy",
+    "question": "Given a string date representing a Gregorian&#xA0;calendar date formatted as YYYY-MM-DD, return the day number of the year.\n\n&#xA0;\nExample 1:\n\nInput: date = &quot;2019-01-09&quot;\nOutput: 9\nExplanation: Given date is the 9th day of the year in 2019.\n\n\nExample 2:\n\nInput: date = &quot;2019-02-10&quot;\nOutput: 41\n\n\nExample 3:\n\nInput: date = &quot;2003-03-01&quot;\nOutput: 60\n\n\nExample 4:\n\nInput: date = &quot;2004-03-01&quot;\nOutput: 61\n\n\n&#xA0;\nConstraints:\n\n\n\tdate.length == 10\n\tdate[4] == date[7] == &apos;-&apos;, and all other date[i]&apos;s are digits\n\tdate represents a calendar date between Jan 1st, 1900 and Dec 31, 2019.\n",
+    "code": "undefinedpublic class Solution {    public int DayOfYear(string date) {            }}"
+}

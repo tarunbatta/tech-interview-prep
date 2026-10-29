@@ -1,0 +1,8 @@
+{
+    "number": "670",
+    "title": "Maximum Swap",
+    "url": "https://leetcode.com/problems/maximum-swap",
+    "difficulty": "Medium",
+    "question": "\nGiven a non-negative integer, you could swap two digits at most once to get the maximum valued number. Return the maximum valued number you could get.\n\n\nExample 1:\nInput: 2736\nOutput: 7236\nExplanation: Swap the number 2 and the number 7.\n\n\n\nExample 2:\nInput: 9973\nOutput: 9973\nExplanation: No swap.\n\n\n\n\nNote:\n\nThe given number is in the range [0, 108]\n\n",
+    "code": "undefinedpublic class Solution {    public int MaximumSwap(int num) {            }}"
+}

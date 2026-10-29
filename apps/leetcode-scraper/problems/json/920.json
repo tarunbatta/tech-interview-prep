@@ -1,0 +1,8 @@
+{
+    "number": "920",
+    "title": "Number of Music Playlists",
+    "url": "https://leetcode.com/problems/number-of-music-playlists",
+    "difficulty": "Hard",
+    "question": "Your music player contains N&#xA0;different songs and she wants to listen to L (not necessarily different) songs during your trip. &#xA0;You&#xA0;create&#xA0;a playlist so&#xA0;that:\n\n\n\tEvery song is played at least once\n\tA song can only be played again only if&#xA0;K&#xA0;other songs have been played\n\n\nReturn the number of possible playlists.&#xA0; As the answer can be very large, return it modulo 10^9 + 7.\n\n&#xA0;\n\n\n\n\nExample 1:\n\nInput: N = 3, L = 3, K = 1\nOutput: 6\nExplanation: There are 6 possible playlists. [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1].\n\n\n\nExample 2:\n\nInput: N = 2, L = 3, K = 0\nOutput: 6\nExplanation: There are 6 possible playlists. [1, 1, 2], [1, 2, 1], [2, 1, 1], [2, 2, 1], [2, 1, 2], [1, 2, 2]\n\n\n\nExample 3:\n\nInput: N = 2, L = 3, K = 1\nOutput: 2\nExplanation: There are 2 possible playlists. [1, 2, 1], [2, 1, 2]\n\n\n\n\n&#xA0;\n\nNote:\n\n\n\t0 &lt;= K &lt; N &lt;= L &lt;= 100\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int NumMusicPlaylists(int N, int L, int K) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "1012",
+    "title": "Numbers With Repeated Digits",
+    "url": "https://leetcode.com/problems/numbers-with-repeated-digits",
+    "difficulty": "Hard",
+    "question": "Given a positive integer N, return the number of positive integers less than or equal to N that have at least 1 repeated digit.\n\n&#xA0;\n\n\nExample 1:\n\nInput: 20\nOutput: 1\nExplanation: The only positive number (&lt;= 20) with at least 1 repeated digit is 11.\n\n\n\nExample 2:\n\nInput: 100\nOutput: 10\nExplanation: The positive numbers (&lt;= 100) with atleast 1 repeated digit are 11, 22, 33, 44, 55, 66, 77, 88, 99, and 100.\n\n\n\nExample 3:\n\nInput: 1000\nOutput: 262\n\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= N &lt;= 10^9\n\n\n",
+    "code": "undefinedpublic class Solution {    public int NumDupDigitsAtMostN(int N) {            }}"
+}

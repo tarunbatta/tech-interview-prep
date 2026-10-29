@@ -1,0 +1,8 @@
+{
+    "number": "274",
+    "title": "H-Index",
+    "url": "https://leetcode.com/problems/h-index",
+    "difficulty": "Medium",
+    "question": "Given an array of citations (each citation is a non-negative integer) of a researcher, write a function to compute the researcher&apos;s h-index.\n\nAccording to the definition of h-index on Wikipedia: &quot;A scientist has index h if h of his/her N papers have at least h citations each, and the other N &#x2212; h papers have no more than h citations each.&quot;\n\nExample:\n\nInput: citations = [3,0,6,1,5]\nOutput: 3 \nExplanation: [3,0,6,1,5] means the researcher has 5 papers in total and each of them had \n             received 3, 0, 6, 1, 5 citations respectively. \n&#xA0;            Since the researcher has 3 papers with at least 3 citations each and the remaining \n&#xA0;            two with no more than 3 citations each, her h-index is 3.\n\nNote:&#xA0;If there are several possible values for h, the maximum one is taken as the h-index.\n",
+    "code": "undefinedpublic class Solution {    public int HIndex(int[] citations) {            }}"
+}

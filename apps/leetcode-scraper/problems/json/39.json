@@ -1,0 +1,8 @@
+{
+    "number": "39",
+    "title": "Combination Sum",
+    "url": "https://leetcode.com/problems/combination-sum",
+    "difficulty": "Medium",
+    "question": "Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates&#xA0;where the candidate numbers sums to target.\n\nThe same repeated number may be chosen from candidates&#xA0;unlimited number of times.\n\nNote:\n\n\n\tAll numbers (including target) will be positive integers.\n\tThe solution set must not contain duplicate combinations.\n\n\nExample 1:\n\nInput: candidates = [2,3,6,7], target = 7,\nA solution set is:\n[\n  [7],\n  [2,2,3]\n]\n\n\nExample 2:\n\nInput: candidates = [2,3,5], target = 8,\nA solution set is:\n[\n&#xA0; [2,2,2,2],\n&#xA0; [2,3,3],\n&#xA0; [3,5]\n]\n\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<int>> CombinationSum(int[] candidates, int target) {            }}"
+}

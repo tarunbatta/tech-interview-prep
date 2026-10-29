@@ -1,0 +1,8 @@
+{
+    "number": "862",
+    "title": "Shortest Subarray with Sum at Least K",
+    "url": "https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k",
+    "difficulty": "Hard",
+    "question": "Return the length of the shortest, non-empty, contiguous&#xA0;subarray of A with sum at least K.\n\nIf there is no non-empty subarray with sum at least K, return -1.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: A = [1], K = 1\nOutput: 1\n\n\n\nExample 2:\n\nInput: A = [1,2], K = 4\nOutput: -1\n\n\n\nExample 3:\n\nInput: A = [2,-1,2], K = 3\nOutput: 3\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 50000\n\t-10 ^ 5&#xA0;&lt;= A[i] &lt;= 10 ^ 5\n\t1 &lt;= K &lt;= 10 ^ 9\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int ShortestSubarray(int[] A, int K) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "194",
+    "title": "Transpose File",
+    "url": "https://leetcode.com/problems/transpose-file",
+    "difficulty": "Medium",
+    "question": "Given a text file file.txt, transpose its content.\n\nYou may assume that each row has the same number of columns and each field is separated by the &apos; &apos; character.\n\nExample:\n\nIf file.txt has the following content:\n\nname age\nalice 21\nryan 30\n\n\nOutput the following:\n\nname alice ryan\nage 21 30\n\n\n&#xA0;\n",
+    "code": "undefined# Read from the file file.txt and print its transposed content to stdout.​"
+}

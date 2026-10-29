@@ -1,0 +1,8 @@
+{
+    "number": "233",
+    "title": "Number of Digit One",
+    "url": "https://leetcode.com/problems/number-of-digit-one",
+    "difficulty": "Hard",
+    "question": "Given an integer n, count the total number of digit 1 appearing in all non-negative integers less than or equal to n.\n\nExample:\n\nInput: 13\nOutput: 6 \nExplanation: Digit 1 occurred in the following numbers: 1, 10, 11, 12, 13.\n\n",
+    "code": "undefinedpublic class Solution {    public int CountDigitOne(int n) {            }}"
+}

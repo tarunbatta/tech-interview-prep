@@ -1,0 +1,8 @@
+{
+    "number": "852",
+    "title": "Peak Index in a Mountain Array",
+    "url": "https://leetcode.com/problems/peak-index-in-a-mountain-array",
+    "difficulty": "Easy",
+    "question": "Let&apos;s call an array A a mountain&#xA0;if the following properties hold:\n\n\n\tA.length &gt;= 3\n\tThere exists some 0 &lt; i&#xA0;&lt; A.length - 1 such that A[0] &lt; A[1] &lt; ... A[i-1] &lt; A[i] &gt; A[i+1] &gt; ... &gt; A[A.length - 1]\n\n\nGiven an array that is definitely a mountain, return any&#xA0;i&#xA0;such that&#xA0;A[0] &lt; A[1] &lt; ... A[i-1] &lt; A[i] &gt; A[i+1] &gt; ... &gt; A[A.length - 1].\n\nExample 1:\n\nInput: [0,1,0]\nOutput: 1\n\n\n\nExample 2:\n\nInput: [0,2,1,0]\nOutput: 1\n\n\nNote:\n\n\n\t3 &lt;= A.length &lt;= 10000\n\t0 &lt;= A[i] &lt;= 10^6\n\tA&#xA0;is a mountain, as defined above.\n\n",
+    "code": "undefinedpublic class Solution {    public int PeakIndexInMountainArray(int[] A) {            }}"
+}

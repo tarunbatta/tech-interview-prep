@@ -1,0 +1,8 @@
+{
+    "number": "858",
+    "title": "Mirror Reflection",
+    "url": "https://leetcode.com/problems/mirror-reflection",
+    "difficulty": "Medium",
+    "question": "There is&#xA0;a special square room with mirrors on each of the four&#xA0;walls.&#xA0; Except for the southwest&#xA0;corner, there are receptors on each of the remaining corners, numbered 0, 1, and 2.\n\nThe square room has walls of length p, and a laser ray from the southwest corner&#xA0;first meets the east wall at a distance q&#xA0;from the 0th receptor.\n\nReturn the number of the receptor that the ray meets first.&#xA0; (It is guaranteed that the ray will meet&#xA0;a receptor eventually.)\n\n&#xA0;\n\n\nExample 1:\n\nInput: p = 2, q = 1\nOutput: 2\nExplanation: The ray meets receptor 2 the first time it gets reflected back to the left wall.\n\n\n\n\nNote:\n\n\n\t1 &lt;= p &lt;= 1000\n\t0 &lt;= q &lt;= p\n\n\n",
+    "code": "undefinedpublic class Solution {    public int MirrorReflection(int p, int q) {            }}"
+}

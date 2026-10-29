@@ -1,0 +1,8 @@
+{
+    "number": "678",
+    "title": "Valid Parenthesis String",
+    "url": "https://leetcode.com/problems/valid-parenthesis-string",
+    "difficulty": "Medium",
+    "question": "\nGiven a string containing only three types of characters: &apos;(&apos;, &apos;)&apos; and &apos;*&apos;, write a function to check whether this string is valid. We define the validity of a string by these rules:\n\nAny left parenthesis &apos;(&apos; must have a corresponding right parenthesis &apos;)&apos;.\nAny right parenthesis &apos;)&apos; must have a corresponding left parenthesis &apos;(&apos;.\nLeft parenthesis &apos;(&apos; must go before the corresponding right parenthesis &apos;)&apos;.\n&apos;*&apos; could be treated as a single right parenthesis &apos;)&apos; or a single left parenthesis &apos;(&apos; or an empty string.\nAn empty string is also valid.\n\n\n\nExample 1:\nInput: &quot;()&quot;\nOutput: True\n\n\n\nExample 2:\nInput: &quot;(*)&quot;\nOutput: True\n\n\n\nExample 3:\nInput: &quot;(*))&quot;\nOutput: True\n\n\n\nNote:\n\nThe string size will be in the range [1, 100].\n\n",
+    "code": "undefinedpublic class Solution {    public bool CheckValidString(string s) {            }}"
+}

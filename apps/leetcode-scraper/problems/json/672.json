@@ -1,0 +1,8 @@
+{
+    "number": "672",
+    "title": "Bulb Switcher II",
+    "url": "https://leetcode.com/problems/bulb-switcher-ii",
+    "difficulty": "Medium",
+    "question": "There is a room with n lights which are turned on initially and 4 buttons on the wall. After performing exactly m unknown operations towards buttons, you need to return how many different kinds of status of the n lights could be.\n\nSuppose n lights are labeled as number [1, 2, 3 ..., n], function of these 4 buttons are given below:\n\n\n\tFlip all the lights.\n\tFlip lights with even numbers.\n\tFlip lights with odd numbers.\n\tFlip lights with (3k + 1) numbers, k = 0, 1, 2, ...\n\n\n&#xA0;\n\nExample 1:\n\nInput: n = 1, m = 1.\nOutput: 2\nExplanation: Status can be: [on], [off]\n\n\n&#xA0;\n\nExample 2:\n\nInput: n = 2, m = 1.\nOutput: 3\nExplanation: Status can be: [on, off], [off, on], [off, off]\n\n\n&#xA0;\n\nExample 3:\n\nInput: n = 3, m = 1.\nOutput: 4\nExplanation: Status can be: [off, on, off], [on, off, on], [off, off, off], [off, on, on].\n\n\n&#xA0;\n\nNote: n and m both fit in range [0, 1000].\n",
+    "code": "undefinedpublic class Solution {    public int FlipLights(int n, int m) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "171",
+    "title": "Excel Sheet Column Number",
+    "url": "https://leetcode.com/problems/excel-sheet-column-number",
+    "difficulty": "Easy",
+    "question": "Given a column title as appear in an Excel sheet, return its corresponding column number.\n\nFor example:\n\n    A -&gt; 1\n    B -&gt; 2\n    C -&gt; 3\n    ...\n    Z -&gt; 26\n    AA -&gt; 27\n    AB -&gt; 28 \n    ...\n\n\nExample 1:\n\nInput: &quot;A&quot;\nOutput: 1\n\n\nExample 2:\n\nInput: &quot;AB&quot;\nOutput: 28\n\n\nExample 3:\n\nInput: &quot;ZY&quot;\nOutput: 701\n",
+    "code": "undefinedpublic class Solution {    public int TitleToNumber(string s) {            }}"
+}

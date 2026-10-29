@@ -1,0 +1,8 @@
+{
+    "number": "839",
+    "title": "Similar String Groups",
+    "url": "https://leetcode.com/problems/similar-string-groups",
+    "difficulty": "Hard",
+    "question": "Two strings X&#xA0;and Y&#xA0;are similar if we can swap two letters (in different positions) of X, so that&#xA0;it equals Y.\n\nFor example, &quot;tars&quot;&#xA0;and &quot;rats&quot;&#xA0;are similar (swapping at positions 0 and 2), and &quot;rats&quot; and &quot;arts&quot; are similar, but &quot;star&quot; is not similar to &quot;tars&quot;, &quot;rats&quot;, or &quot;arts&quot;.\n\nTogether, these form two connected groups by similarity: {&quot;tars&quot;, &quot;rats&quot;, &quot;arts&quot;} and {&quot;star&quot;}.&#xA0; Notice that &quot;tars&quot; and &quot;arts&quot; are in the same group even though they are not similar.&#xA0; Formally, each group is such that a word is in the group if and only if it is similar to at least one other word in the group.\n\nWe are given a list A of strings.&#xA0; Every string in A is an anagram of every other string in A.&#xA0; How many groups are there?\n\nExample 1:\n\nInput: [&quot;tars&quot;,&quot;rats&quot;,&quot;arts&quot;,&quot;star&quot;]\nOutput: 2\n\nNote:\n\n\n\tA.length &lt;= 2000\n\tA[i].length &lt;= 1000\n\tA.length * A[i].length &lt;= 20000\n\tAll words in A&#xA0;consist of lowercase letters only.\n\tAll words in A have the same length and are anagrams of each other.\n\tThe judging time limit has been increased for this question.\n\n",
+    "code": "undefinedpublic class Solution {    public int NumSimilarGroups(string[] A) {            }}"
+}

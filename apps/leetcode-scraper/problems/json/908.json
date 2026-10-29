@@ -1,0 +1,8 @@
+{
+    "number": "908",
+    "title": "Smallest Range I",
+    "url": "https://leetcode.com/problems/smallest-range-i",
+    "difficulty": "Easy",
+    "question": "Given an array A of integers, for each integer A[i] we may choose any x with -K &lt;= x &lt;= K, and add x to A[i].\n\nAfter this process, we have some array B.\n\nReturn the smallest possible difference between the maximum value of B&#xA0;and the minimum value of B.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: A = [1], K = 0\nOutput: 0\nExplanation: B = [1]\n\n\n\nExample 2:\n\nInput: A = [0,10], K = 2\nOutput: 6\nExplanation: B = [2,8]\n\n\n\nExample 3:\n\nInput: A = [1,3,6], K = 3\nOutput: 0\nExplanation: B = [3,3,3] or B = [4,4,4]\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 10000\n\t0 &lt;= A[i] &lt;= 10000\n\t0 &lt;= K &lt;= 10000\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int SmallestRangeI(int[] A, int K) {            }}"
+}

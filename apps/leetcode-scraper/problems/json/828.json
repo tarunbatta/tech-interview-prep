@@ -1,0 +1,8 @@
+{
+    "number": "828",
+    "title": "Unique Letter String",
+    "url": "https://leetcode.com/problems/unique-letter-string",
+    "difficulty": "Hard",
+    "question": "A character is unique in string S if it occurs exactly once in it.\n\nFor example, in string S = &quot;LETTER&quot;, the only unique characters are &quot;L&quot; and &quot;R&quot;.\n\nLet&apos;s define UNIQ(S) as the number of unique characters in string S.\n\nFor example, UNIQ(&quot;LETTER&quot;) =&#xA0; 2.\n\nGiven a string S with only uppercases, calculate the sum of UNIQ(substring) over all non-empty substrings of S.\n\nIf there are two or more equal substrings at different positions in S, we consider them different.\n\nSince the answer can be very large, return&#xA0;the answer&#xA0;modulo&#xA0;10 ^ 9 + 7.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;ABC&quot;\nOutput: 10\nExplanation: All possible substrings are: &quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;AB&quot;,&quot;BC&quot; and &quot;ABC&quot;.\nEvey substring is composed with only unique letters.\nSum of lengths of all substring is 1 + 1 + 1 + 2 + 2 + 3 = 10\n\nExample 2:\n\nInput: &quot;ABA&quot;\nOutput: 8\nExplanation: The same as example 1, except uni(&quot;ABA&quot;) = 1.\n\n\n&#xA0;\n\nNote: 0 &lt;= S.length &lt;= 10000.\n",
+    "code": "undefinedpublic class Solution {    public int UniqueLetterString(string S) {            }}"
+}

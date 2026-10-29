@@ -1,0 +1,8 @@
+{
+    "number": "991",
+    "title": "Broken Calculator",
+    "url": "https://leetcode.com/problems/broken-calculator",
+    "difficulty": "Medium",
+    "question": "On a broken calculator that has a number showing on its display, we can perform two operations:\n\n\n\tDouble: Multiply the number on the display by 2, or;\n\tDecrement: Subtract 1 from the number on the display.\n\n\nInitially, the calculator is displaying the number X.\n\nReturn the minimum number of operations needed to display the number Y.\n\n&#xA0;\n\nExample 1:\n\nInput: X = 2, Y = 3\nOutput: 2\nExplanation: Use double operation and then decrement operation {2 -&gt; 4 -&gt; 3}.\n\n\nExample 2:\n\nInput: X = 5, Y = 8\nOutput: 2\nExplanation: Use decrement and then double {5 -&gt; 4 -&gt; 8}.\n\n\nExample 3:\n\nInput: X = 3, Y = 10\nOutput: 3\nExplanation:  Use double, decrement and double {3 -&gt; 6 -&gt; 5 -&gt; 10}.\n\n\nExample 4:\n\nInput: X = 1024, Y = 1\nOutput: 1023\nExplanation: Use decrement operations 1023 times.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= X &lt;= 10^9\n\t1 &lt;= Y &lt;= 10^9\n",
+    "code": "undefinedpublic class Solution {    public int BrokenCalc(int X, int Y) {            }}"
+}

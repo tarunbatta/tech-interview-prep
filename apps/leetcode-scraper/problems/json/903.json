@@ -1,0 +1,8 @@
+{
+    "number": "903",
+    "title": "Valid Permutations for DI Sequence",
+    "url": "https://leetcode.com/problems/valid-permutations-for-di-sequence",
+    "difficulty": "Hard",
+    "question": "We are given S, a length n string of characters from the set {&apos;D&apos;, &apos;I&apos;}. (These letters stand for &quot;decreasing&quot; and &quot;increasing&quot;.)\n\nA&#xA0;valid permutation&#xA0;is a permutation P[0], P[1], ..., P[n] of integers&#xA0;{0, 1, ..., n}, such that for all i:\n\n\n\tIf S[i] == &apos;D&apos;, then P[i] &gt; P[i+1], and;\n\tIf S[i] == &apos;I&apos;, then P[i] &lt; P[i+1].\n\n\nHow many valid permutations are there?&#xA0; Since the answer may be large, return your answer modulo 10^9 + 7.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;DID&quot;\nOutput: 5\nExplanation: \nThe 5 valid permutations of (0, 1, 2, 3) are:\n(1, 0, 3, 2)\n(2, 0, 3, 1)\n(2, 1, 3, 0)\n(3, 0, 2, 1)\n(3, 1, 2, 0)\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= S.length &lt;= 200\n\tS consists only of characters from the set {&apos;D&apos;, &apos;I&apos;}.\n\n\n\n&#xA0;\n\n",
+    "code": "undefinedpublic class Solution {    public int NumPermsDISequence(string S) {            }}"
+}

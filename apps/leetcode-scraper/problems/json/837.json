@@ -1,0 +1,8 @@
+{
+    "number": "837",
+    "title": "New 21 Game",
+    "url": "https://leetcode.com/problems/new-21-game",
+    "difficulty": "Medium",
+    "question": "Alice plays the following game, loosely based on the card game &quot;21&quot;.\n\nAlice starts with 0 points, and draws numbers while she has less than K points.&#xA0; During each draw, she gains an integer number of points randomly from the range [1, W], where W is an integer.&#xA0; Each draw is independent and the outcomes have equal probabilities.\n\nAlice stops drawing numbers when she gets K or more points.&#xA0; What is the probability&#xA0;that she has N or less points?\n\nExample 1:\n\nInput: N = 10, K = 1, W = 10\nOutput: 1.00000\nExplanation:  Alice gets a single card, then stops.\n\n\nExample 2:\n\nInput: N = 6, K = 1, W = 10\nOutput: 0.60000\nExplanation:  Alice gets a single card, then stops.\nIn 6 out of W = 10 possibilities, she is at or below N = 6 points.\n\n\nExample 3:\n\nInput: N = 21, K = 17, W = 10\nOutput: 0.73278\n\nNote:\n\n\n\t0 &lt;= K &lt;= N &lt;= 10000\n\t1 &lt;= W &lt;= 10000\n\tAnswers will be accepted as correct if they are within 10^-5 of the correct answer.\n\tThe judging time limit has been reduced for this question.\n\n",
+    "code": "undefinedpublic class Solution {    public double New21Game(int N, int K, int W) {            }}"
+}

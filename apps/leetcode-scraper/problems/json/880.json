@@ -1,0 +1,8 @@
+{
+    "number": "880",
+    "title": "Decoded String at Index",
+    "url": "https://leetcode.com/problems/decoded-string-at-index",
+    "difficulty": "Medium",
+    "question": "An encoded string S is given.&#xA0; To find and write the decoded string to a tape, the encoded string is read one character at a time&#xA0;and the following steps are taken:\n\n\n\tIf the character read is a letter, that letter is written onto the tape.\n\tIf the character read is a digit (say d), the entire current tape is repeatedly written&#xA0;d-1&#xA0;more times in total.\n\n\nNow for some encoded string S, and an index K, find and return the K-th letter (1 indexed) in the decoded string.\n\n&#xA0;\n\n\nExample 1:\n\nInput: S = &quot;leet2code3&quot;, K = 10\nOutput: &quot;o&quot;\nExplanation: \nThe decoded string is &quot;leetleetcodeleetleetcodeleetleetcode&quot;.\nThe 10th letter in the string is &quot;o&quot;.\n\n\n\nExample 2:\n\nInput: S = &quot;ha22&quot;, K = 5\nOutput: &quot;h&quot;\nExplanation: \nThe decoded string is &quot;hahahaha&quot;.  The 5th letter is &quot;h&quot;.\n\n\n\nExample 3:\n\nInput: S = &quot;a2345678999999999999999&quot;, K = 1\nOutput: &quot;a&quot;\nExplanation: \nThe decoded string is &quot;a&quot; repeated 8301530446056247680 times.  The 1st letter is &quot;a&quot;.\n\n\n&#xA0;\n\nNote:\n\n\n\t2 &lt;= S.length &lt;= 100\n\tS&#xA0;will only contain lowercase letters and digits 2 through 9.\n\tS&#xA0;starts with a letter.\n\t1 &lt;= K &lt;= 10^9\n\tThe decoded string is guaranteed to have less than 2^63 letters.\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public string DecodeAtIndex(string S, int K) {            }}"
+}

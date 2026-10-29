@@ -1,0 +1,8 @@
+{
+    "number": "730",
+    "title": "Count Different Palindromic Subsequences",
+    "url": "https://leetcode.com/problems/count-different-palindromic-subsequences",
+    "difficulty": "Hard",
+    "question": "\nGiven a string S, find the number of different non-empty palindromic subsequences in S, and return that number modulo 10^9 + 7.\n\nA subsequence of a string S is obtained by deleting 0 or more characters from S.\n\nA sequence is palindromic if it is equal to the sequence reversed.\n\nTwo sequences A_1, A_2, ... and B_1, B_2, ... are different if there is some i for which A_i != B_i.\n\n\nExample 1:\nInput: \nS = &apos;bccb&apos;\nOutput: 6\nExplanation: \nThe 6 different non-empty palindromic subsequences are &apos;b&apos;, &apos;c&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;bcb&apos;, &apos;bccb&apos;.\nNote that &apos;bcb&apos; is counted only once, even though it occurs twice.\n\n\n\nExample 2:\nInput: \nS = &apos;abcdabcdabcdabcdabcdabcdabcdabcddcbadcbadcbadcbadcbadcbadcbadcba&apos;\nOutput: 104860361\nExplanation: \nThere are 3104860382 different non-empty palindromic subsequences, which is 104860361 modulo 10^9 + 7.\n\n\n\nNote:\nThe length of S will be in the range [1, 1000].\nEach character S[i] will be in the set {&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;}.\n",
+    "code": "undefinedpublic class Solution {    public int CountPalindromicSubsequences(string S) {            }}"
+}

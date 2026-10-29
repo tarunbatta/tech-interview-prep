@@ -1,0 +1,8 @@
+{
+    "number": "859",
+    "title": "Buddy Strings",
+    "url": "https://leetcode.com/problems/buddy-strings",
+    "difficulty": "Easy",
+    "question": "Given two strings A and B&#xA0;of lowercase letters, return true if and only if we&#xA0;can swap two letters in A so that the result equals B.\n\n&#xA0;\n\nExample 1:\n\n\nInput: A = &quot;ab&quot;, B = &quot;ba&quot;\nOutput: true\n\n\n\nExample 2:\n\nInput: A = &quot;ab&quot;, B = &quot;ab&quot;\nOutput: false\n\n\n\nExample 3:\n\nInput: A = &quot;aa&quot;, B = &quot;aa&quot;\nOutput: true\n\n\n\nExample 4:\n\nInput: A = &quot;aaaaaaabc&quot;, B = &quot;aaaaaaacb&quot;\nOutput: true\n\n\n\nExample 5:\n\nInput: A = &quot;&quot;, B = &quot;aa&quot;\nOutput: false\n\n\n&#xA0;\n\nNote:\n\n\n\t0 &lt;= A.length &lt;= 20000\n\t0 &lt;= B.length &lt;= 20000\n\tA and&#xA0;B consist only of lowercase letters.\n\n\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool BuddyStrings(string A, string B) {            }}"
+}

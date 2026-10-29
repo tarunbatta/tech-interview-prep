@@ -1,0 +1,8 @@
+{
+    "number": "1052",
+    "title": "Grumpy Bookstore Owner",
+    "url": "https://leetcode.com/problems/grumpy-bookstore-owner",
+    "difficulty": "Medium",
+    "question": "Today, the bookstore owner has a store open for customers.length minutes.&#xA0; Every minute, some number of customers (customers[i]) enter the store, and all those customers leave after the end of that minute.\n\nOn some minutes, the bookstore owner is grumpy.&#xA0; If the bookstore owner is grumpy on the i-th minute, grumpy[i] = 1, otherwise grumpy[i] = 0.&#xA0; When the bookstore owner is grumpy, the customers of that minute are not satisfied, otherwise they are satisfied.\n\nThe bookstore owner knows a secret technique to keep themselves&#xA0;not grumpy for X&#xA0;minutes straight, but can only use it once.\n\nReturn the maximum number of customers that can be satisfied throughout the day.\n\n&#xA0;\n\nExample 1:\n\nInput: customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], X = 3\nOutput: 16\nExplanation:&#xA0;The bookstore owner keeps themselves&#xA0;not grumpy for the last 3 minutes. \nThe maximum number of customers that can be satisfied = 1 + 1 + 1 + 1 + 7 + 5 = 16.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= X &lt;=&#xA0;customers.length ==&#xA0;grumpy.length &lt;= 20000\n\t0 &lt;=&#xA0;customers[i] &lt;= 1000\n\t0 &lt;=&#xA0;grumpy[i] &lt;= 1\n",
+    "code": "undefinedpublic class Solution {    public int MaxSatisfied(int[] customers, int[] grumpy, int X) {            }}"
+}

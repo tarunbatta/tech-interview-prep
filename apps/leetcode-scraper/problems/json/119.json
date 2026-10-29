@@ -1,0 +1,8 @@
+{
+    "number": "119",
+    "title": "Pascal's Triangle II",
+    "url": "https://leetcode.com/problems/pascals-triangle-ii",
+    "difficulty": "Easy",
+    "question": "Given a non-negative&#xA0;index k&#xA0;where k &#x2264;&#xA0;33, return the kth&#xA0;index row of the Pascal&apos;s triangle.\n\nNote that the row index starts from&#xA0;0.\n\n\nIn Pascal&apos;s triangle, each number is the sum of the two numbers directly above it.\n\nExample:\n\nInput: 3\nOutput: [1,3,3,1]\n\n\nFollow up:\n\nCould you optimize your algorithm to use only O(k) extra space?\n",
+    "code": "undefinedpublic class Solution {    public IList<int> GetRow(int rowIndex) {            }}"
+}

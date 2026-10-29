@@ -1,0 +1,8 @@
+{
+    "number": "813",
+    "title": "Largest Sum of Averages",
+    "url": "https://leetcode.com/problems/largest-sum-of-averages",
+    "difficulty": "Medium",
+    "question": "We partition a row of numbers A&#xA0;into at most K adjacent (non-empty) groups, then our score is the sum of the average of each group. What is the largest score we can achieve?\n\nNote that our partition must use every number in A, and that scores are not necessarily integers.\n\nExample:\nInput: \nA = [9,1,2,3,9]\nK = 3\nOutput: 20\nExplanation: \nThe best choice is to partition A into [9], [1, 2, 3], [9]. The answer is 9 + (1 + 2 + 3) / 3 + 9 = 20.\nWe could have also partitioned A into [9, 1], [2], [3, 9], for example.\nThat partition would lead to a score of 5 + 2 + 6 = 13, which is worse.\n\n\n&#xA0;\n\nNote: \n\n\n\t1 &lt;= A.length &lt;= 100.\n\t1 &lt;= A[i] &lt;= 10000.\n\t1 &lt;= K &lt;= A.length.\n\tAnswers within 10^-6 of the correct answer will be accepted as correct.\n\n",
+    "code": "undefinedpublic class Solution {    public double LargestSumOfAverages(int[] A, int K) {            }}"
+}

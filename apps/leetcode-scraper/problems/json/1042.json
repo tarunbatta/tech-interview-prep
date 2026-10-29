@@ -1,0 +1,8 @@
+{
+    "number": "1042",
+    "title": "Flower Planting With No Adjacent",
+    "url": "https://leetcode.com/problems/flower-planting-with-no-adjacent",
+    "difficulty": "Easy",
+    "question": "You have N gardens, labelled 1 to N.&#xA0; In each garden, you want to plant one of 4 types of flowers.\n\npaths[i] = [x, y] describes the existence of a bidirectional path from garden x to garden y.\n\nAlso, there is no garden that has more than 3 paths coming into or leaving it.\n\nYour task is to choose a flower type for each garden such that,&#xA0;for any two gardens connected by a path, they have different types of flowers.\n\nReturn any such a choice as an array answer, where&#xA0;answer[i] is the type of flower&#xA0;planted in the (i+1)-th garden.&#xA0; The flower types are denoted&#xA0;1, 2, 3, or 4.&#xA0; It is guaranteed an answer exists.\n\n&#xA0;\n\n\nExample 1:\n\nInput: N = 3, paths = [[1,2],[2,3],[3,1]]\nOutput: [1,2,3]\n\n\n\nExample 2:\n\nInput: N = 4, paths = [[1,2],[3,4]]\nOutput: [1,2,1,2]\n\n\n\nExample 3:\n\nInput: N = 4, paths = [[1,2],[2,3],[3,4],[4,1],[1,3],[2,4]]\nOutput: [1,2,3,4]\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= N &lt;= 10000\n\t0 &lt;= paths.size &lt;= 20000\n\tNo garden has 4 or more paths coming into or leaving it.\n\tIt is guaranteed an answer exists.\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int[] GardenNoAdj(int N, int[][] paths) {            }}"
+}

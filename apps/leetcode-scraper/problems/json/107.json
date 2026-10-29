@@ -1,0 +1,8 @@
+{
+    "number": "107",
+    "title": "Binary Tree Level Order Traversal II",
+    "url": "https://leetcode.com/problems/binary-tree-level-order-traversal-ii",
+    "difficulty": "Easy",
+    "question": "Given a binary tree, return the bottom-up level order traversal of its nodes&apos; values. (ie, from left to right, level by level from leaf to root).\n\n\nFor example:\nGiven binary tree [3,9,20,null,null,15,7],\n    3\n   / \\\n  9  20\n    /  \\\n   15   7\n\n\n\nreturn its bottom-up level order traversal as:\n[\n  [15,7],\n  [9,20],\n  [3]\n]\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public IList<IList<int>> LevelOrderBottom(TreeNode root) {            }}"
+}

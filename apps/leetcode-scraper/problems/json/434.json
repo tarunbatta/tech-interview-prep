@@ -1,0 +1,8 @@
+{
+    "number": "434",
+    "title": "Number of Segments in a String",
+    "url": "https://leetcode.com/problems/number-of-segments-in-a-string",
+    "difficulty": "Easy",
+    "question": "Count the number of segments in a string, where a segment is defined to be a contiguous sequence of non-space characters.\n\nPlease note that the string does not contain any non-printable characters.\n\nExample:\nInput: &quot;Hello, my name is John&quot;\nOutput: 5\n\n",
+    "code": "undefinedpublic class Solution {    public int CountSegments(string s) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "384",
+    "title": "Shuffle an Array",
+    "url": "https://leetcode.com/problems/shuffle-an-array",
+    "difficulty": "Medium",
+    "question": "Shuffle a set of numbers without duplicates.\n\n\nExample:\n// Init an array with set 1, 2, and 3.\nint[] nums = {1,2,3};\nSolution solution = new Solution(nums);\n\n// Shuffle the array [1,2,3] and return its result. Any permutation of [1,2,3] must equally likely to be returned.\nsolution.shuffle();\n\n// Resets the array back to its original configuration [1,2,3].\nsolution.reset();\n\n// Returns the random shuffling of array [1,2,3].\nsolution.shuffle();\n\n",
+    "code": "undefinedpublic class Solution {​    public Solution(int[] nums) {            }        /** Resets the array to its original configuration and return it. */    public int[] Reset() {            }        /** Returns a random shuffling of the array. */    public int[] Shuffle() {            }}​/** * Your Solution object will be instantiated and called as such: * Solution obj = new Solution(nums); * int[] param_1 = obj.Reset(); * int[] param_2 = obj.Shuffle(); */"
+}

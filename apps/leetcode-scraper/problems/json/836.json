@@ -1,0 +1,8 @@
+{
+    "number": "836",
+    "title": "Rectangle Overlap",
+    "url": "https://leetcode.com/problems/rectangle-overlap",
+    "difficulty": "Easy",
+    "question": "A rectangle is&#xA0;represented as a&#xA0;list [x1, y1, x2, y2], where&#xA0;(x1, y1)&#xA0;are the coordinates of its bottom-left corner, and (x2,&#xA0;y2)&#xA0;are the coordinates of its top-right corner.\n\nTwo rectangles overlap if the area of their intersection is positive.&#xA0; To be clear, two rectangles that only touch at the corner or edges do not overlap.\n\nGiven two (axis-aligned) rectangles, return whether&#xA0;they overlap.\n\nExample 1:\n\nInput: rec1 = [0,0,2,2], rec2 = [1,1,3,3]\nOutput: true\n\n\nExample 2:\n\nInput: rec1 = [0,0,1,1], rec2 = [1,0,2,1]\nOutput: false\n\n\nNotes:\n\n\n\tBoth rectangles rec1 and rec2 are lists of 4 integers.\n\tAll coordinates in rectangles will be between&#xA0;-10^9 and 10^9.\n\n",
+    "code": "undefinedpublic class Solution {    public bool IsRectangleOverlap(int[] rec1, int[] rec2) {            }}"
+}

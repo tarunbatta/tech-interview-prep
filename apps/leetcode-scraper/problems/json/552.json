@@ -1,0 +1,8 @@
+{
+    "number": "552",
+    "title": "Student Attendance Record II",
+    "url": "https://leetcode.com/problems/student-attendance-record-ii",
+    "difficulty": "Hard",
+    "question": "Given a positive integer n, return the number of all possible attendance records with length n, which will be regarded as rewardable. The answer may be very large, return it after mod 109 + 7.\n\nA student attendance record is a string that only contains the following three characters:\n\n\n\n&apos;A&apos; : Absent. \n&apos;L&apos; : Late.\n &apos;P&apos; : Present. \n\n\n\n\nA record is regarded as rewardable if it doesn&apos;t contain more than one &apos;A&apos; (absent) or more than two continuous &apos;L&apos; (late).\n\nExample 1:\nInput: n = 2\nOutput: 8 \nExplanation:\nThere are 8 records with length 2 will be regarded as rewardable:\n&quot;PP&quot; , &quot;AP&quot;, &quot;PA&quot;, &quot;LP&quot;, &quot;PL&quot;, &quot;AL&quot;, &quot;LA&quot;, &quot;LL&quot;\nOnly &quot;AA&quot; won&apos;t be regarded as rewardable owing to more than one absent times. \n\n\n\nNote:\nThe value of n won&apos;t exceed 100,000.\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int CheckRecord(int n) {            }}"
+}

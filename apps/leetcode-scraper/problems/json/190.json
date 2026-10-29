@@ -1,0 +1,8 @@
+{
+    "number": "190",
+    "title": "Reverse Bits",
+    "url": "https://leetcode.com/problems/reverse-bits",
+    "difficulty": "Easy",
+    "question": "Reverse bits of a given 32 bits unsigned integer.\n\n&#xA0;\n\nExample 1:\n\nInput: 00000010100101000001111010011100\nOutput: 00111001011110000010100101000000\nExplanation: The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596, so return 964176192 which its binary representation is 00111001011110000010100101000000.\n\n\nExample 2:\n\nInput: 11111111111111111111111111111101\nOutput: 10111111111111111111111111111111\nExplanation: The input binary string 11111111111111111111111111111101 represents the unsigned integer 4294967293, so return 3221225471 which its binary representation is 10101111110010110010011101101001.\n\n&#xA0;\n\nNote:\n\n\n\tNote that in some languages such as Java, there is no unsigned integer type. In this case, both input and output will be given as signed integer type and should not affect your implementation, as the internal binary representation of the integer is the same whether it is signed or unsigned.\n\tIn Java,&#xA0;the compiler represents the signed integers using 2&apos;s complement notation. Therefore, in Example 2&#xA0;above the input represents the signed integer -3&#xA0;and the output represents the signed integer -1073741825.\n\n\n&#xA0;\n\nFollow up:\n\nIf this function is called many times, how would you optimize it?\n",
+    "code": "undefinedpublic class Solution {    public uint reverseBits(uint n) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "781",
+    "title": "Rabbits in Forest",
+    "url": "https://leetcode.com/problems/rabbits-in-forest",
+    "difficulty": "Medium",
+    "question": "In a forest, each rabbit has some color. Some subset of rabbits (possibly all of them) tell you how many other rabbits have the same color as them. Those answers are placed in an array.\n\nReturn the minimum number of rabbits that could be in the forest.\n\nExamples:\nInput: answers = [1, 1, 2]\nOutput: 5\nExplanation:\nThe two rabbits that answered &quot;1&quot; could both be the same color, say red.\nThe rabbit than answered &quot;2&quot; can&apos;t be red or the answers would be inconsistent.\nSay the rabbit that answered &quot;2&quot; was blue.\nThen there should be 2 other blue rabbits in the forest that didn&apos;t answer into the array.\nThe smallest possible number of rabbits in the forest is therefore 5: 3 that answered plus 2 that didn&apos;t.\n\nInput: answers = [10, 10, 10]\nOutput: 11\n\nInput: answers = []\nOutput: 0\n\n\nNote:\n\n\n\tanswers will have length at most 1000.\n\tEach answers[i] will be an integer in the range [0, 999].\n\n",
+    "code": "undefinedpublic class Solution {    public int NumRabbits(int[] answers) {            }}"
+}

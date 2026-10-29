@@ -1,0 +1,8 @@
+{
+    "number": "357",
+    "title": "Count Numbers with Unique Digits",
+    "url": "https://leetcode.com/problems/count-numbers-with-unique-digits",
+    "difficulty": "Medium",
+    "question": "Given a non-negative integer n, count all numbers with unique digits, x, where 0 &#x2264; x &lt; 10n.\n\n\nExample:\n\nInput: 2\nOutput: 91 \nExplanation: The answer should be the total numbers in the range of 0 &#x2264; x &lt; 100, \n&#xA0;            excluding 11,22,33,44,55,66,77,88,99\n\n",
+    "code": "undefinedpublic class Solution {    public int CountNumbersWithUniqueDigits(int n) {            }}"
+}

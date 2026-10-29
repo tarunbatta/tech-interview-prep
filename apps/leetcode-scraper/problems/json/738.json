@@ -1,0 +1,8 @@
+{
+    "number": "738",
+    "title": "Monotone Increasing Digits",
+    "url": "https://leetcode.com/problems/monotone-increasing-digits",
+    "difficulty": "Medium",
+    "question": "\nGiven a non-negative integer N, find the largest number that is less than or equal to N with monotone increasing digits.\n\n(Recall that an integer has monotone increasing digits if and only if each pair of adjacent digits x and y satisfy x &lt;= y.)\n\n\nExample 1:\nInput: N = 10\nOutput: 9\n\n\n\nExample 2:\nInput: N = 1234\nOutput: 1234\n\n\n\nExample 3:\nInput: N = 332\nOutput: 299\n\n\n\nNote:\nN is an integer in the range [0, 10^9].\n",
+    "code": "undefinedpublic class Solution {    public int MonotoneIncreasingDigits(int N) {            }}"
+}

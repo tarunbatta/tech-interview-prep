@@ -1,0 +1,8 @@
+{
+    "number": "47",
+    "title": "Permutations II",
+    "url": "https://leetcode.com/problems/permutations-ii",
+    "difficulty": "Medium",
+    "question": "Given a collection of numbers that might contain duplicates, return all possible unique permutations.\n\nExample:\n\nInput: [1,1,2]\nOutput:\n[\n  [1,1,2],\n  [1,2,1],\n  [2,1,1]\n]\n\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<int>> PermuteUnique(int[] nums) {            }}"
+}

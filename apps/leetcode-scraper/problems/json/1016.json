@@ -1,0 +1,8 @@
+{
+    "number": "1016",
+    "title": "Binary String With Substrings Representing 1 To N",
+    "url": "https://leetcode.com/problems/binary-string-with-substrings-representing-1-to-n",
+    "difficulty": "Medium",
+    "question": "Given a binary string S (a string consisting only of &apos;0&apos; and &apos;1&apos;s) and a positive integer N, return true if and only if for every integer X from 1 to N, the binary representation of X is a substring of S.\n\n&#xA0;\n\nExample 1:\n\nInput: S = &quot;0110&quot;, N = 3\nOutput: true\n\n\nExample 2:\n\nInput: S = &quot;0110&quot;, N = 4\nOutput: false\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= S.length &lt;= 1000\n\t1 &lt;= N &lt;= 10^9\n\n",
+    "code": "undefinedpublic class Solution {    public bool QueryString(string S, int N) {            }}"
+}

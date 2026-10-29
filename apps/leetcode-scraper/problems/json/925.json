@@ -1,0 +1,8 @@
+{
+    "number": "925",
+    "title": "Long Pressed Name",
+    "url": "https://leetcode.com/problems/long-pressed-name",
+    "difficulty": "Easy",
+    "question": "Your friend is typing his name&#xA0;into a keyboard.&#xA0; Sometimes, when typing a character c, the key might get long pressed, and the character will be typed 1 or more times.\n\nYou examine the typed&#xA0;characters of the keyboard.&#xA0; Return True if it is possible that it was your friends name, with some characters (possibly none) being long pressed.\n\n&#xA0;\n\nExample 1:\n\nInput: name = &quot;alex&quot;, typed = &quot;aaleex&quot;\nOutput: true\nExplanation: &apos;a&apos; and &apos;e&apos; in &apos;alex&apos; were long pressed.\n\n\n\nExample 2:\n\nInput: name = &quot;saeed&quot;, typed = &quot;ssaaedd&quot;\nOutput: false\nExplanation: &apos;e&apos; must have been pressed twice, but it wasn&apos;t in the typed output.\n\n\n\nExample 3:\n\nInput: name = &quot;leelee&quot;, typed = &quot;lleeelee&quot;\nOutput: true\n\n\n\nExample 4:\n\nInput: name = &quot;laiden&quot;, typed = &quot;laiden&quot;\nOutput: true\nExplanation: It&apos;s not necessary to long press any character.\n\n\n&#xA0;\n\n\n\n\nNote:\n\n\n\tname.length &lt;= 1000\n\ttyped.length &lt;= 1000\n\tThe characters of name and typed are lowercase letters.\n\n\n\n&#xA0;\n\n\n\n&#xA0;\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool IsLongPressedName(string name, string typed) {            }}"
+}

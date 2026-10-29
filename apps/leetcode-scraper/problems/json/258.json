@@ -1,0 +1,8 @@
+{
+    "number": "258",
+    "title": "Add Digits",
+    "url": "https://leetcode.com/problems/add-digits",
+    "difficulty": "Easy",
+    "question": "Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.\n\nExample:\n\nInput: 38\nOutput: 2 \nExplanation: The process is like: 3 + 8 = 11, 1 + 1 = 2. \n&#xA0;            Since 2 has only one digit, return it.\n\n\nFollow up:\nCould you do it without any loop/recursion in O(1) runtime?",
+    "code": "undefinedpublic class Solution {    public int AddDigits(int num) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "1144",
+    "title": "Decrease Elements To Make Array Zigzag",
+    "url": "https://leetcode.com/problems/decrease-elements-to-make-array-zigzag",
+    "difficulty": "Medium",
+    "question": "Given an array nums of integers, a move&#xA0;consists of choosing any element and decreasing it by 1.\n\nAn array A is a&#xA0;zigzag array&#xA0;if either:\n\n\n\tEvery even-indexed element is greater than adjacent elements, ie.&#xA0;A[0] &gt; A[1] &lt; A[2] &gt; A[3] &lt; A[4] &gt; ...\n\tOR, every odd-indexed element is greater than adjacent elements, ie.&#xA0;A[0] &lt; A[1] &gt; A[2] &lt; A[3] &gt; A[4] &lt; ...\n\n\nReturn the minimum number of moves to transform the given array nums into a zigzag array.\n\n&#xA0;\nExample 1:\n\nInput: nums = [1,2,3]\nOutput: 2\nExplanation: We can decrease 2 to 0 or 3 to 1.\n\n\nExample 2:\n\nInput: nums = [9,6,1,6,2]\nOutput: 4\n\n\n&#xA0;\nConstraints:\n\n\n\t1 &lt;= nums.length &lt;= 1000\n\t1 &lt;= nums[i] &lt;= 1000\n\n",
+    "code": "undefinedpublic class Solution {    public int MovesToMakeZigzag(int[] nums) {            }}"
+}

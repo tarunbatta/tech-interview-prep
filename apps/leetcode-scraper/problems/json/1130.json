@@ -1,0 +1,8 @@
+{
+    "number": "1130",
+    "title": "Minimum Cost Tree From Leaf Values",
+    "url": "https://leetcode.com/problems/minimum-cost-tree-from-leaf-values",
+    "difficulty": "Medium",
+    "question": "Given an array arr of positive integers, consider all binary trees such that:\n\n\n\tEach node has either 0 or 2 children;\n\tThe values of arr correspond to the values of each&#xA0;leaf in an in-order traversal of the tree.&#xA0; (Recall that a node is a leaf if and only if it has 0 children.)\n\tThe value&#xA0;of each non-leaf node is equal to the product of the largest leaf value in its left and right subtree respectively.\n\n\nAmong all possible binary trees considered,&#xA0;return the smallest possible sum of the values of each non-leaf node.&#xA0; It is guaranteed this sum fits into a 32-bit integer.\n\n&#xA0;\nExample 1:\n\nInput: arr = [6,2,4]\nOutput: 32\nExplanation:\nThere are two possible trees.  The first has non-leaf node sum 36, and the second has non-leaf node sum 32.\n\n    24            24\n   /  \\          /  \\\n  12   4        6    8\n /  \\               / \\\n6    2             2   4\n\n\n&#xA0;\nConstraints:\n\n\n\t2 &lt;= arr.length &lt;= 40\n\t1 &lt;= arr[i] &lt;= 15\n\tIt is guaranteed that the answer fits into a 32-bit signed integer (ie.&#xA0;it is less than 2^31).\n",
+    "code": "undefinedpublic class Solution {    public int MctFromLeafValues(int[] arr) {            }}"
+}

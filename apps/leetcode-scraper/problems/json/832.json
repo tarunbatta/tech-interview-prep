@@ -1,0 +1,8 @@
+{
+    "number": "832",
+    "title": "Flipping an Image",
+    "url": "https://leetcode.com/problems/flipping-an-image",
+    "difficulty": "Easy",
+    "question": "Given a binary matrix A, we want to flip the image horizontally, then invert it, and return the resulting image.\n\nTo flip an image horizontally means that each row of the image is reversed.&#xA0; For example, flipping&#xA0;[1, 1, 0]&#xA0;horizontally results in&#xA0;[0, 1, 1].\n\nTo invert an image means&#xA0;that each 0 is replaced by 1, and each 1 is replaced by 0.&#xA0;For example, inverting&#xA0;[0, 1, 1]&#xA0;results in&#xA0;[1, 0, 0].\n\nExample 1:\n\nInput: [[1,1,0],[1,0,1],[0,0,0]]\nOutput: [[1,0,0],[0,1,0],[1,1,1]]\nExplanation: First reverse each row: [[0,1,1],[1,0,1],[0,0,0]].\nThen, invert the image: [[1,0,0],[0,1,0],[1,1,1]]\n\n\nExample 2:\n\nInput: [[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]\nOutput: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]\nExplanation: First reverse each row: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]].\nThen invert the image: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]\n\n\nNotes:\n\n\n\t1 &lt;= A.length = A[0].length &lt;= 20\n\t0 &lt;= A[i][j]&#xA0;&lt;=&#xA0;1\n\n",
+    "code": "undefinedpublic class Solution {    public int[][] FlipAndInvertImage(int[][] A) {            }}"
+}

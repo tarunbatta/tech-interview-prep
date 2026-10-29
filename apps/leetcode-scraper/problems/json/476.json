@@ -1,0 +1,8 @@
+{
+    "number": "476",
+    "title": "Number Complement",
+    "url": "https://leetcode.com/problems/number-complement",
+    "difficulty": "Easy",
+    "question": "Given a positive integer, output its complement number. The complement strategy is to flip the bits of its binary representation.\n\nNote:\n\nThe given integer is guaranteed to fit within the range of a 32-bit signed integer.\nYou could assume no leading zero bit in the integer&#x2019;s binary representation.\n\n\n\nExample 1:\nInput: 5\nOutput: 2\nExplanation: The binary representation of 5 is 101 (no leading zero bits), and its complement is 010. So you need to output 2.\n\n\n\nExample 2:\nInput: 1\nOutput: 0\nExplanation: The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.\n\n",
+    "code": "undefinedpublic class Solution {    public int FindComplement(int num) {            }}"
+}

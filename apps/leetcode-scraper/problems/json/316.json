@@ -1,0 +1,8 @@
+{
+    "number": "316",
+    "title": "Remove Duplicate Letters",
+    "url": "https://leetcode.com/problems/remove-duplicate-letters",
+    "difficulty": "Hard",
+    "question": "Given a string which contains only lowercase letters, remove duplicate letters so that every letter appears once and only once. You must make sure your result is the smallest in lexicographical order among all possible results.\n\nExample 1:\n\nInput: &quot;bcabc&quot;\nOutput: &quot;abc&quot;\n\n\nExample 2:\n\nInput: &quot;cbacdcbc&quot;\nOutput: &quot;acdb&quot;\n\n",
+    "code": "undefinedpublic class Solution {    public string RemoveDuplicateLetters(string s) {            }}"
+}

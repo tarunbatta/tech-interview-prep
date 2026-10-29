@@ -1,0 +1,8 @@
+{
+    "number": "336",
+    "title": "Palindrome Pairs",
+    "url": "https://leetcode.com/problems/palindrome-pairs",
+    "difficulty": "Hard",
+    "question": "Given a list of unique words, find all pairs of distinct indices (i, j) in the given list, so that the concatenation of the two words, i.e. words[i] + words[j] is a palindrome.\n\nExample 1:\n\n\nInput: [&quot;abcd&quot;,&quot;dcba&quot;,&quot;lls&quot;,&quot;s&quot;,&quot;sssll&quot;]\nOutput: [[0,1],[1,0],[3,2],[2,4]] \nExplanation: The palindromes are [&quot;dcbaabcd&quot;,&quot;abcddcba&quot;,&quot;slls&quot;,&quot;llssssll&quot;]\n\n\n\nExample 2:\n\nInput: [&quot;bat&quot;,&quot;tab&quot;,&quot;cat&quot;]\nOutput: [[0,1],[1,0]] \nExplanation: The palindromes are [&quot;battab&quot;,&quot;tabbat&quot;]\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<int>> PalindromePairs(string[] words) {            }}"
+}

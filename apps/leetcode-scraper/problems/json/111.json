@@ -1,0 +1,8 @@
+{
+    "number": "111",
+    "title": "Minimum Depth of Binary Tree",
+    "url": "https://leetcode.com/problems/minimum-depth-of-binary-tree",
+    "difficulty": "Easy",
+    "question": "Given a binary tree, find its minimum depth.\n\nThe minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.\n\nNote:&#xA0;A leaf is a node with no children.\n\nExample:\n\nGiven binary tree [3,9,20,null,null,15,7],\n\n    3\n   / \\\n  9  20\n    /  \\\n   15   7\n\nreturn its minimum&#xA0;depth = 2.\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public int MinDepth(TreeNode root) {            }}"
+}

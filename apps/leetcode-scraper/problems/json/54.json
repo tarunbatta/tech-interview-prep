@@ -1,0 +1,8 @@
+{
+    "number": "54",
+    "title": "Spiral Matrix",
+    "url": "https://leetcode.com/problems/spiral-matrix",
+    "difficulty": "Medium",
+    "question": "Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.\n\nExample 1:\n\nInput:\n[\n [ 1, 2, 3 ],\n [ 4, 5, 6 ],\n [ 7, 8, 9 ]\n]\nOutput: [1,2,3,6,9,8,7,4,5]\n\n\nExample 2:\nInput:\n[\n  [1, 2, 3, 4],\n  [5, 6, 7, 8],\n  [9,10,11,12]\n]\nOutput: [1,2,3,4,8,12,11,10,9,5,6,7]\n",
+    "code": "undefinedpublic class Solution {    public IList<int> SpiralOrder(int[][] matrix) {            }}"
+}

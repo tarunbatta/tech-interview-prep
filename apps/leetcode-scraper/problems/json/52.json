@@ -1,0 +1,8 @@
+{
+    "number": "52",
+    "title": "N-Queens II",
+    "url": "https://leetcode.com/problems/n-queens-ii",
+    "difficulty": "Hard",
+    "question": "The n-queens puzzle is the problem of placing n queens on an n&#xD7;n chessboard such that no two queens attack each other.\n\n\n\nGiven an integer&#xA0;n, return the number of&#xA0;distinct solutions to the&#xA0;n-queens puzzle.\n\nExample:\n\nInput: 4\nOutput: 2\nExplanation: There are two distinct solutions to the 4-queens puzzle as shown below.\n[\n&#xA0;[&quot;.Q..&quot;, &#xA0;// Solution 1\n&#xA0; &quot;...Q&quot;,\n&#xA0; &quot;Q...&quot;,\n&#xA0; &quot;..Q.&quot;],\n\n&#xA0;[&quot;..Q.&quot;, &#xA0;// Solution 2\n&#xA0; &quot;Q...&quot;,\n&#xA0; &quot;...Q&quot;,\n&#xA0; &quot;.Q..&quot;]\n]\n\n",
+    "code": "undefinedpublic class Solution {    public int TotalNQueens(int n) {            }}"
+}

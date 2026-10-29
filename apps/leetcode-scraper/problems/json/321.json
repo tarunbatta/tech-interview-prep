@@ -1,0 +1,8 @@
+{
+    "number": "321",
+    "title": "Create Maximum Number",
+    "url": "https://leetcode.com/problems/create-maximum-number",
+    "difficulty": "Hard",
+    "question": "Given two arrays of length m and n with digits 0-9 representing two numbers. Create the maximum number of length k &lt;= m + n from digits of the two. The relative order of the digits from the same array must be preserved. Return an array of the k digits.\n\nNote: You should try to optimize your time and space complexity.\n\nExample 1:\n\nInput:\nnums1 = [3, 4, 6, 5]\nnums2 = [9, 1, 2, 5, 8, 3]\nk = 5\nOutput:\n[9, 8, 6, 5, 3]\n\nExample 2:\n\nInput:\nnums1 = [6, 7]\nnums2 = [6, 0, 4]\nk = 5\nOutput:\n[6, 7, 6, 0, 4]\n\nExample 3:\n\nInput:\nnums1 = [3, 9]\nnums2 = [8, 9]\nk = 3\nOutput:\n[9, 8, 9]\n",
+    "code": "undefinedpublic class Solution {    public int[] MaxNumber(int[] nums1, int[] nums2, int k) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "130",
+    "title": "Surrounded Regions",
+    "url": "https://leetcode.com/problems/surrounded-regions",
+    "difficulty": "Medium",
+    "question": "Given a 2D board containing &apos;X&apos; and &apos;O&apos; (the letter O), capture all regions surrounded by &apos;X&apos;.\n\nA region is captured by flipping all &apos;O&apos;s into &apos;X&apos;s in that surrounded region.\n\nExample:\n\nX X X X\nX O O X\nX X O X\nX O X X\n\n\nAfter running your function, the board should be:\n\nX X X X\nX X X X\nX X X X\nX O X X\n\n\nExplanation:\n\nSurrounded regions shouldn&#x2019;t be on the border, which means that any &apos;O&apos;&#xA0;on the border of the board are not flipped to &apos;X&apos;. Any &apos;O&apos;&#xA0;that is not on the border and it is not connected to an &apos;O&apos;&#xA0;on the border will be flipped to &apos;X&apos;. Two cells are connected if they are adjacent cells connected horizontally or vertically.\n",
+    "code": "undefinedpublic class Solution {    public void Solve(char[][] board) {            }}"
+}

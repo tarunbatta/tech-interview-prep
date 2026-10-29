@@ -1,0 +1,8 @@
+{
+    "number": "414",
+    "title": "Third Maximum Number",
+    "url": "https://leetcode.com/problems/third-maximum-number",
+    "difficulty": "Easy",
+    "question": "Given a non-empty array of integers, return the third maximum number in this array. If it does not exist, return the maximum number. The time complexity must be in O(n).\n\nExample 1:\nInput: [3, 2, 1]\n\nOutput: 1\n\nExplanation: The third maximum is 1.\n\n\n\nExample 2:\nInput: [1, 2]\n\nOutput: 2\n\nExplanation: The third maximum does not exist, so the maximum (2) is returned instead.\n\n\n\nExample 3:\nInput: [2, 2, 3, 1]\n\nOutput: 1\n\nExplanation: Note that the third maximum here means the third maximum distinct number.\nBoth numbers with value 2 are both considered as second maximum.\n\n",
+    "code": "undefinedpublic class Solution {    public int ThirdMax(int[] nums) {            }}"
+}

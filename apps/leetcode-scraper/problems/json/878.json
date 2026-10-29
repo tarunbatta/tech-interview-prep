@@ -1,0 +1,8 @@
+{
+    "number": "878",
+    "title": "Nth Magical Number",
+    "url": "https://leetcode.com/problems/nth-magical-number",
+    "difficulty": "Hard",
+    "question": "A positive integer&#xA0;is magical&#xA0;if it is divisible by either A&#xA0;or B.\n\nReturn the N-th magical number.&#xA0; Since the answer may be very large, return it modulo 10^9 + 7.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: N = 1, A = 2, B = 3\nOutput: 2\n\n\n\nExample 2:\n\nInput: N = 4, A = 2, B = 3\nOutput: 6\n\n\n\nExample 3:\n\nInput: N = 5, A = 2, B = 4\nOutput: 10\n\n\n\nExample 4:\n\nInput: N = 3, A = 6, B = 4\nOutput: 8\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= N&#xA0;&lt;= 10^9\n\t2 &lt;= A&#xA0;&lt;= 40000\n\t2 &lt;= B&#xA0;&lt;= 40000\n\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int NthMagicalNumber(int N, int A, int B) {            }}"
+}

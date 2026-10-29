@@ -1,0 +1,8 @@
+{
+    "number": "196",
+    "title": "Delete Duplicate Emails",
+    "url": "https://leetcode.com/problems/delete-duplicate-emails",
+    "difficulty": "Easy",
+    "question": "Write a SQL query to delete all duplicate email entries in a table named Person, keeping only unique emails based on its smallest Id.\n\n+----+------------------+\n| Id | Email            |\n+----+------------------+\n| 1  | john@example.com |\n| 2  | bob@example.com  |\n| 3  | john@example.com |\n+----+------------------+\nId is the primary key column for this table.\n\n\nFor example, after running your query, the above Person table should have the following rows:\n\n+----+------------------+\n| Id | Email            |\n+----+------------------+\n| 1  | john@example.com |\n| 2  | bob@example.com  |\n+----+------------------+\n\n\nNote:\n\nYour output is the whole Person&#xA0;table after executing your sql. Use delete statement.\n",
+    "code": "undefined# Write your MySQL query statement below​"
+}

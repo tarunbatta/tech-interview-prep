@@ -1,0 +1,8 @@
+{
+    "number": "547",
+    "title": "Friend Circles",
+    "url": "https://leetcode.com/problems/friend-circles",
+    "difficulty": "Medium",
+    "question": "\nThere are N students in a class. Some of them are friends, while some are not. Their friendship is transitive in nature. For example, if A is a direct friend of B, and B is a direct friend of C, then A is an indirect friend of C. And we defined a friend circle is a group of students who are direct or indirect friends.\n\n\n\nGiven a N*N matrix M representing the friend relationship between students in the class. If M[i][j] = 1, then the ith and jth students are direct friends with each other, otherwise not. And you have to output the total number of friend circles among all the students.\n\n\nExample 1:\nInput: \n[[1,1,0],\n [1,1,0],\n [0,0,1]]\nOutput: 2\nExplanation:The 0th and 1st students are direct friends, so they are in a friend circle. The 2nd student himself is in a friend circle. So return 2.\n\n\n\nExample 2:\nInput: \n[[1,1,0],\n [1,1,1],\n [0,1,1]]\nOutput: 1\nExplanation:The 0th and 1st students are direct friends, the 1st and 2nd students are direct friends, so the 0th and 2nd students are indirect friends. All of them are in the same friend circle, so return 1.\n\n\n\n\nNote:\n\nN is in range [1,200].\nM[i][i] = 1 for all students.\nIf M[i][j] = 1, then M[j][i] = 1.\n\n",
+    "code": "undefinedpublic class Solution {    public int FindCircleNum(int[][] M) {            }}"
+}

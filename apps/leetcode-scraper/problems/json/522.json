@@ -1,0 +1,8 @@
+{
+    "number": "522",
+    "title": "Longest Uncommon Subsequence II",
+    "url": "https://leetcode.com/problems/longest-uncommon-subsequence-ii",
+    "difficulty": "Medium",
+    "question": "\nGiven a list of strings, you need to find the longest uncommon subsequence among them. The longest uncommon subsequence is defined as the longest subsequence of one of these strings and this subsequence should not be any subsequence of the other strings.\n\n\n\nA subsequence is a sequence that can be derived from one sequence by deleting some characters without changing the order of the remaining elements. Trivially, any string is a subsequence of itself and an empty string is a subsequence of any string.\n\n\n\nThe input will be a list of strings, and the output needs to be the length of the longest uncommon subsequence. If the longest uncommon subsequence doesn&apos;t exist, return -1.\n\n\nExample 1:\nInput: &quot;aba&quot;, &quot;cdc&quot;, &quot;eae&quot;\nOutput: 3\n\n\n\nNote:\n\nAll the given strings&apos; lengths will not exceed 10.\nThe length of the given list will be in the range of [2, 50].\n\n",
+    "code": "undefinedpublic class Solution {    public int FindLUSlength(string[] strs) {            }}"
+}

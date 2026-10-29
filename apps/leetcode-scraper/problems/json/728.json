@@ -1,0 +1,8 @@
+{
+    "number": "728",
+    "title": "Self Dividing Numbers",
+    "url": "https://leetcode.com/problems/self-dividing-numbers",
+    "difficulty": "Easy",
+    "question": "\nA self-dividing number is a number that is divisible by every digit it contains.\n\nFor example, 128 is a self-dividing number because 128 % 1 == 0, 128 % 2 == 0, and 128 % 8 == 0.\n\nAlso, a self-dividing number is not allowed to contain the digit zero.\n\nGiven a lower and upper number bound, output a list of every possible self dividing number, including the bounds if possible.\n\nExample 1:\nInput: \nleft = 1, right = 22\nOutput: [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22]\n\n\n\nNote:\nThe boundaries of each input argument are 1 &lt;= left &lt;= right &lt;= 10000.\n",
+    "code": "undefinedpublic class Solution {    public IList<int> SelfDividingNumbers(int left, int right) {            }}"
+}

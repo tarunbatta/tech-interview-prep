@@ -1,0 +1,8 @@
+{
+    "number": "69",
+    "title": "Sqrt(x)",
+    "url": "https://leetcode.com/problems/sqrtx",
+    "difficulty": "Easy",
+    "question": "Implement int sqrt(int x).\n\nCompute and return the square root of x, where&#xA0;x&#xA0;is guaranteed to be a non-negative integer.\n\nSince the return type&#xA0;is an integer, the decimal digits are truncated and only the integer part of the result&#xA0;is returned.\n\nExample 1:\n\nInput: 4\nOutput: 2\n\n\nExample 2:\n\nInput: 8\nOutput: 2\nExplanation: The square root of 8 is 2.82842..., and since \n&#xA0;            the decimal part is truncated, 2 is returned.\n\n",
+    "code": "undefinedpublic class Solution {    public int MySqrt(int x) {            }}"
+}

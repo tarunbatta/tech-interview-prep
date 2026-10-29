@@ -1,0 +1,8 @@
+{
+    "number": "1048",
+    "title": "Longest String Chain",
+    "url": "https://leetcode.com/problems/longest-string-chain",
+    "difficulty": "Medium",
+    "question": "Given a list of words, each word consists of English lowercase letters.\n\nLet&apos;s say word1 is a predecessor of word2&#xA0;if and only if we can add exactly one letter anywhere in word1 to make it equal to word2.&#xA0; For example,&#xA0;&quot;abc&quot;&#xA0;is a predecessor of &quot;abac&quot;.\n\nA word chain&#xA0;is a sequence of words [word_1, word_2, ..., word_k]&#xA0;with k &gt;= 1,&#xA0;where word_1 is a predecessor of word_2, word_2 is a predecessor of word_3, and so on.\n\nReturn the longest possible length of a word chain with words chosen from the given list of words.\n\n&#xA0;\n\nExample 1:\n\nInput: [&quot;a&quot;,&quot;b&quot;,&quot;ba&quot;,&quot;bca&quot;,&quot;bda&quot;,&quot;bdca&quot;]\nOutput: 4\nExplanation: one of the longest word chain is &quot;a&quot;,&quot;ba&quot;,&quot;bda&quot;,&quot;bdca&quot;.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= words.length &lt;= 1000\n\t1 &lt;= words[i].length &lt;= 16\n\twords[i] only consists of English lowercase letters.\n\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int LongestStrChain(string[] words) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "365",
+    "title": "Water and Jug Problem",
+    "url": "https://leetcode.com/problems/water-and-jug-problem",
+    "difficulty": "Medium",
+    "question": "You are given two jugs with capacities x and y litres. There is an infinite amount of water supply available. You need to determine whether it is possible to measure exactly z litres using these two jugs.\n\nIf z liters of water is measurable, you must have z liters of water contained within one or both buckets by the end.\n\nOperations allowed:\n\n\n\tFill any of the jugs completely with water.\n\tEmpty any of the jugs.\n\tPour water from one jug into another till the other jug is completely full or the first jug itself is empty.\n\n\nExample 1: (From the famous &quot;Die Hard&quot; example)\n\nInput: x = 3, y = 5, z = 4\nOutput: True\n\n\nExample 2:\n\nInput: x = 2, y = 6, z = 5\nOutput: False\n",
+    "code": "undefinedpublic class Solution {    public bool CanMeasureWater(int x, int y, int z) {            }}"
+}

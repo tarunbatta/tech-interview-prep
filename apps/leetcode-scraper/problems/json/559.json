@@ -1,0 +1,8 @@
+{
+    "number": "559",
+    "title": "Maximum Depth of N-ary Tree",
+    "url": "https://leetcode.com/problems/maximum-depth-of-n-ary-tree",
+    "difficulty": "Easy",
+    "question": "Given a n-ary tree, find its maximum depth.\n\nThe maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.\n\nFor example, given a 3-ary tree:\n&#xA0;\n\n\n\n&#xA0;\n\nWe should return its max depth, which is 3.\n\n&#xA0;\n\nNote:\n\n\n\tThe depth of the tree is at most 1000.\n\tThe total number of nodes is at most 5000.\n\n",
+    "code": "undefined/*// Definition for a Node.public class Node {    public int val;    public IList<Node> children;​    public Node(){}    public Node(int _val,IList<Node> _children) {        val = _val;        children = _children;}*/public class Solution {    public int MaxDepth(Node root) {            }}"
+}

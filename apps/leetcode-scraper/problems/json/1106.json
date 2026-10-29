@@ -1,0 +1,8 @@
+{
+    "number": "1106",
+    "title": "Parsing A Boolean Expression",
+    "url": "https://leetcode.com/problems/parsing-a-boolean-expression",
+    "difficulty": "Hard",
+    "question": "Return the result of evaluating a given boolean expression, represented as a string.\n\nAn expression can either be:\n\n\n\t&quot;t&quot;, evaluating to True;\n\t&quot;f&quot;, evaluating to False;\n\t&quot;!(expr)&quot;, evaluating to the logical NOT of the inner expression expr;\n\t&quot;&amp;(expr1,expr2,...)&quot;, evaluating to the logical AND of 2 or more inner expressions expr1, expr2, ...;\n\t&quot;|(expr1,expr2,...)&quot;, evaluating to the logical OR of 2 or more inner expressions expr1, expr2, ...\n\n\n&#xA0;\nExample 1:\n\nInput: expression = &quot;!(f)&quot;\nOutput: true\n\n\nExample 2:\n\nInput: expression = &quot;|(f,t)&quot;\nOutput: true\n\n\nExample 3:\n\nInput: expression = &quot;&amp;(t,f)&quot;\nOutput: false\n\n\nExample 4:\n\nInput: expression = &quot;|(&amp;(t,f,t),!(t))&quot;\nOutput: false\n\n\n&#xA0;\nConstraints:\n\n\n\t1 &lt;= expression.length &lt;= 20000\n\texpression[i]&#xA0;consists of characters in {&apos;(&apos;, &apos;)&apos;, &apos;&amp;&apos;, &apos;|&apos;, &apos;!&apos;, &apos;t&apos;, &apos;f&apos;, &apos;,&apos;}.\n\texpression is a valid expression representing a boolean, as given in the description.\n\n",
+    "code": "undefinedpublic class Solution {    public bool ParseBoolExpr(string expression) {            }}"
+}

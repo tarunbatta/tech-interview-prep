@@ -1,0 +1,8 @@
+{
+    "number": "974",
+    "title": "Subarray Sums Divisible by K",
+    "url": "https://leetcode.com/problems/subarray-sums-divisible-by-k",
+    "difficulty": "Medium",
+    "question": "Given an array A of integers, return the number of (contiguous, non-empty) subarrays that have a sum divisible by K.\n\n&#xA0;\n\n\nExample 1:\n\nInput: A = [4,5,0,-2,-3,1], K = 5\nOutput: 7\nExplanation: There are 7 subarrays with a sum divisible by K = 5:\n[4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], [-2, -3]\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 30000\n\t-10000 &lt;= A[i] &lt;= 10000\n\t2 &lt;= K &lt;= 10000\n\n",
+    "code": "undefinedpublic class Solution {    public int SubarraysDivByK(int[] A, int K) {            }}"
+}

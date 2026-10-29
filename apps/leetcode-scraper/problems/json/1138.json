@@ -1,0 +1,8 @@
+{
+    "number": "1138",
+    "title": "Alphabet Board Path",
+    "url": "https://leetcode.com/problems/alphabet-board-path",
+    "difficulty": "Medium",
+    "question": "On an alphabet board, we start at position (0, 0), corresponding to character&#xA0;board[0][0].\n\nHere, board = [&quot;abcde&quot;, &quot;fghij&quot;, &quot;klmno&quot;, &quot;pqrst&quot;, &quot;uvwxy&quot;, &quot;z&quot;], as shown in the diagram below.\n\n\n\nWe may make the following moves:\n\n\n\t&apos;U&apos; moves our position up one row, if the position exists on the board;\n\t&apos;D&apos; moves our position down one row, if the position exists on the board;\n\t&apos;L&apos; moves our position left one column, if the position exists on the board;\n\t&apos;R&apos; moves our position right one column, if the position exists on the board;\n\t&apos;!&apos;&#xA0;adds the character board[r][c] at our current position (r, c)&#xA0;to the&#xA0;answer.\n\n\n(Here, the only positions that exist on the board are positions with letters on them.)\n\nReturn a sequence of moves that makes our answer equal to target&#xA0;in the minimum number of moves.&#xA0; You may return any path that does so.\n\n&#xA0;\nExample 1:\nInput: target = &quot;leet&quot;\nOutput: &quot;DDR!UURRR!!DDD!&quot;\nExample 2:\nInput: target = &quot;code&quot;\nOutput: &quot;RR!DDRR!UUL!R!&quot;\n\n&#xA0;\nConstraints:\n\n\n\t1 &lt;= target.length &lt;= 100\n\ttarget consists only of English lowercase letters.\n",
+    "code": "undefinedpublic class Solution {    public string AlphabetBoardPath(string target) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "319",
+    "title": "Bulb Switcher",
+    "url": "https://leetcode.com/problems/bulb-switcher",
+    "difficulty": "Medium",
+    "question": "There are n bulbs that are initially off. You first turn on all the bulbs. Then, you turn off every second bulb. On the third round, you toggle every third bulb (turning on if it&apos;s off or turning off if it&apos;s on). For the i-th round, you toggle every i bulb. For the n-th round, you only toggle the last bulb. Find how many bulbs are on after n rounds.\n\nExample:\n\nInput: 3\nOutput: 1 \nExplanation: \nAt first, the three bulbs are [off, off, off].\nAfter first round, the three bulbs are [on, on, on].\nAfter second round, the three bulbs are [on, off, on].\nAfter third round, the three bulbs are [on, off, off]. \n\nSo you should return 1, because there is only one bulb is on.\n\n",
+    "code": "undefinedpublic class Solution {    public int BulbSwitch(int n) {            }}"
+}

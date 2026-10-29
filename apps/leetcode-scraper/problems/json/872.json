@@ -1,0 +1,8 @@
+{
+    "number": "872",
+    "title": "Leaf-Similar Trees",
+    "url": "https://leetcode.com/problems/leaf-similar-trees",
+    "difficulty": "Easy",
+    "question": "Consider all the leaves of a binary tree.&#xA0; From&#xA0;left to right order, the values of those&#xA0;leaves form a leaf value sequence.\n\n\n\nFor example, in the given tree above, the leaf value sequence is (6, 7, 4, 9, 8).\n\nTwo binary trees are considered leaf-similar&#xA0;if their leaf value sequence is the same.\n\nReturn true if and only if the two given trees with head nodes root1 and root2 are leaf-similar.\n\n&#xA0;\n\nNote:\n\n\n\tBoth of the given trees will have between 1 and 100 nodes.\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public bool LeafSimilar(TreeNode root1, TreeNode root2) {            }}"
+}

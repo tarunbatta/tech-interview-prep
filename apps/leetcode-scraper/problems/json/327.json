@@ -1,0 +1,8 @@
+{
+    "number": "327",
+    "title": "Count of Range Sum",
+    "url": "https://leetcode.com/problems/count-of-range-sum",
+    "difficulty": "Hard",
+    "question": "Given an integer array nums, return the number of range sums that lie in [lower, upper] inclusive.\nRange sum S(i, j) is defined as the sum of the elements in nums between indices i and j (i &#x2264; j), inclusive.\n\nNote:\nA naive algorithm of O(n2) is trivial. You MUST do better than that.\n\nExample:\n\nInput: nums = [-2,5,-1], lower = -2, upper = 2,\nOutput: 3 \nExplanation: The three ranges are : [0,0], [2,2], [0,2] and their respective sums are: -2, -1, 2.\n",
+    "code": "undefinedpublic class Solution {    public int CountRangeSum(int[] nums, int lower, int upper) {            }}"
+}

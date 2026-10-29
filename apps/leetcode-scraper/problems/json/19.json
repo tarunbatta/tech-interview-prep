@@ -1,0 +1,8 @@
+{
+    "number": "19",
+    "title": "Remove Nth Node From End of List",
+    "url": "https://leetcode.com/problems/remove-nth-node-from-end-of-list",
+    "difficulty": "Medium",
+    "question": "Given a linked list, remove the n-th node from the end of list and return its head.\n\nExample:\n\nGiven linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.\n\nAfter removing the second node from the end, the linked list becomes 1-&gt;2-&gt;3-&gt;5.\n\n\nNote:\n\nGiven n will always be valid.\n\nFollow up:\n\nCould you do this in one pass?\n",
+    "code": "undefined/** * Definition for singly-linked list. * public class ListNode { *     public int val; *     public ListNode next; *     public ListNode(int x) { val = x; } * } */public class Solution {    public ListNode RemoveNthFromEnd(ListNode head, int n) {            }}"
+}

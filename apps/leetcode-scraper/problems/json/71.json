@@ -1,0 +1,8 @@
+{
+    "number": "71",
+    "title": "Simplify Path",
+    "url": "https://leetcode.com/problems/simplify-path",
+    "difficulty": "Medium",
+    "question": "Given an absolute path for a file (Unix-style), simplify it. Or in other words, convert it to the canonical path.\n\nIn a UNIX-style file system, a period .&#xA0;refers to the current directory. Furthermore, a double period ..&#xA0;moves the directory up a level. For more information, see:&#xA0;Absolute path&#xA0;vs&#xA0;relative&#xA0;path&#xA0;in&#xA0;Linux/Unix\n\nNote that the returned canonical path must always begin&#xA0;with a slash /, and there must be only a single slash /&#xA0;between two directory names.&#xA0;The last directory name (if it exists) must not&#xA0;end with a trailing /. Also, the canonical path must be the shortest string&#xA0;representing the absolute path.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;/home/&quot;\nOutput: &quot;/home&quot;\nExplanation: Note that there is no trailing slash after the last directory name.\n\n\nExample 2:\n\nInput: &quot;/../&quot;\nOutput: &quot;/&quot;\nExplanation: Going one level up from the root directory is a no-op, as the root level is the highest level you can go.\n\n\nExample 3:\n\nInput: &quot;/home//foo/&quot;\nOutput: &quot;/home/foo&quot;\nExplanation: In the canonical path, multiple consecutive slashes are replaced by a single one.\n\n\nExample 4:\n\nInput: &quot;/a/./b/../../c/&quot;\nOutput: &quot;/c&quot;\n\n\nExample 5:\n\nInput: &quot;/a/../../b/../c//.//&quot;\nOutput: &quot;/c&quot;\n\n\nExample 6:\n\nInput: &quot;/a//b////c/d//././/..&quot;\nOutput: &quot;/a/b/c&quot;\n\n",
+    "code": "undefinedpublic class Solution {    public string SimplifyPath(string path) {            }}"
+}

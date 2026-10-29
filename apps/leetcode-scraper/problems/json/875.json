@@ -1,0 +1,8 @@
+{
+    "number": "875",
+    "title": "Koko Eating Bananas",
+    "url": "https://leetcode.com/problems/koko-eating-bananas",
+    "difficulty": "Medium",
+    "question": "Koko loves to eat bananas.&#xA0; There are N&#xA0;piles of bananas, the i-th&#xA0;pile has piles[i] bananas.&#xA0; The guards have gone and will come back in H hours.\n\nKoko can decide her bananas-per-hour eating speed of K.&#xA0; Each hour, she chooses some pile of bananas, and eats K bananas from that pile.&#xA0; If the pile has less than K bananas, she eats all of them instead, and won&apos;t eat any more bananas during this hour.\n\nKoko likes to eat slowly, but still wants to finish eating all the bananas before the guards come back.\n\nReturn the minimum integer K such that she can eat all the bananas within H hours.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: piles = [3,6,7,11], H = 8\nOutput: 4\n\n\n\nExample 2:\n\nInput: piles = [30,11,23,4,20], H = 5\nOutput: 30\n\n\n\nExample 3:\n\nInput: piles = [30,11,23,4,20], H = 6\nOutput: 23\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= piles.length &lt;= 10^4\n\tpiles.length &lt;= H &lt;= 10^9\n\t1 &lt;= piles[i] &lt;= 10^9\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int MinEatingSpeed(int[] piles, int H) {            }}"
+}

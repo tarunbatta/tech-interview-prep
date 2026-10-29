@@ -1,0 +1,8 @@
+{
+    "number": "97",
+    "title": "Interleaving String",
+    "url": "https://leetcode.com/problems/interleaving-string",
+    "difficulty": "Hard",
+    "question": "Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.\n\nExample 1:\n\nInput: s1 = &quot;aabcc&quot;, s2 = &quot;dbbca&quot;, s3 = &quot;aadbbcbcac&quot;\nOutput: true\n\n\nExample 2:\n\nInput: s1 = &quot;aabcc&quot;, s2 = &quot;dbbca&quot;, s3 = &quot;aadbbbaccc&quot;\nOutput: false\n\n",
+    "code": "undefinedpublic class Solution {    public bool IsInterleave(string s1, string s2, string s3) {            }}"
+}

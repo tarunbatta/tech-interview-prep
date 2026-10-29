@@ -1,0 +1,8 @@
+{
+    "number": "934",
+    "title": "Shortest Bridge",
+    "url": "https://leetcode.com/problems/shortest-bridge",
+    "difficulty": "Medium",
+    "question": "In a given 2D binary array A, there are two islands.&#xA0; (An island is a 4-directionally connected group of&#xA0;1s not connected to any other 1s.)\n\nNow, we may change 0s to 1s so as to connect the two islands together to form 1 island.\n\nReturn the smallest number of 0s that must be flipped.&#xA0; (It is guaranteed that the answer is at least 1.)\n\n&#xA0;\n\nExample 1:\n\nInput: [[0,1],[1,0]]\nOutput: 1\n\n\n\nExample 2:\n\nInput: [[0,1,0],[0,0,0],[0,0,1]]\nOutput: 2\n\n\n\nExample 3:\n\nInput: [[1,1,1,1,1],[1,0,0,0,1],[1,0,1,0,1],[1,0,0,0,1],[1,1,1,1,1]]\nOutput: 1\n\n&#xA0;\n\n\n\nNote:\n\n\n\t1 &lt;= A.length =&#xA0;A[0].length &lt;= 100\n\tA[i][j] == 0 or A[i][j] == 1\n\n\n\n\n&#xA0;\n\n",
+    "code": "undefinedpublic class Solution {    public int ShortestBridge(int[][] A) {            }}"
+}

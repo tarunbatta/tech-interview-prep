@@ -1,0 +1,8 @@
+{
+    "number": "860",
+    "title": "Lemonade Change",
+    "url": "https://leetcode.com/problems/lemonade-change",
+    "difficulty": "Easy",
+    "question": "At a lemonade stand, each lemonade costs $5.&#xA0;\n\nCustomers are standing in a queue to buy from you, and order one at a time (in the order specified by bills).\n\nEach customer will only buy one lemonade and&#xA0;pay with either a $5, $10, or $20 bill.&#xA0; You must provide the correct change to each customer, so that the net transaction is that the customer pays $5.\n\nNote that you don&apos;t have any change&#xA0;in hand at first.\n\nReturn true&#xA0;if and only if you can provide every customer with correct change.\n\n&#xA0;\n\n\nExample 1:\n\nInput: [5,5,5,10,20]\nOutput: true\nExplanation: \nFrom the first 3 customers, we collect three $5 bills in order.\nFrom the fourth customer, we collect a $10 bill and give back a $5.\nFrom the fifth customer, we give a $10 bill and a $5 bill.\nSince all customers got correct change, we output true.\n\n\n\nExample 2:\n\nInput: [5,5,10]\nOutput: true\n\n\n\nExample 3:\n\nInput: [10,10]\nOutput: false\n\n\n\nExample 4:\n\nInput: [5,5,10,10,20]\nOutput: false\nExplanation: \nFrom the first two customers in order, we collect two $5 bills.\nFor the next two customers in order, we collect a $10 bill and give back a $5 bill.\nFor the last customer, we can&apos;t give change of $15 back because we only have two $10 bills.\nSince not every customer received correct change, the answer is false.\n\n\n&#xA0;\n\nNote:\n\n\n\t0 &lt;= bills.length &lt;= 10000\n\tbills[i]&#xA0;will be either&#xA0;5, 10, or 20.\n\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool LemonadeChange(int[] bills) {            }}"
+}

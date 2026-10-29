@@ -1,0 +1,8 @@
+{
+    "number": "1091",
+    "title": "Shortest Path in Binary Matrix",
+    "url": "https://leetcode.com/problems/shortest-path-in-binary-matrix",
+    "difficulty": "Medium",
+    "question": "In an N by N square grid, each cell is either empty (0) or blocked (1).\n\nA&#xA0;clear&#xA0;path from top-left to bottom-right&#xA0;has length k if and only if it is composed of cells C_1, C_2, ..., C_k&#xA0;such that:\n\n\n\tAdjacent cells C_i and C_{i+1} are connected 8-directionally (ie., they are different and&#xA0;share an edge or corner)\n\tC_1 is at location (0, 0) (ie. has value grid[0][0])\n\tC_k&#xA0;is at location (N-1, N-1) (ie. has value grid[N-1][N-1])\n\tIf C_i is located at&#xA0;(r, c), then grid[r][c] is empty (ie.&#xA0;grid[r][c] ==&#xA0;0).\n\n\nReturn the length of the shortest such clear path from top-left to bottom-right.&#xA0; If such a path does not exist, return -1.\n\n&#xA0;\n\nExample 1:\n\nInput: [[0,1],[1,0]]\n\n\nOutput: 2\n\n\n\n\nExample 2:\n\nInput: [[0,0,0],[1,1,0],[1,1,0]]\n\n\nOutput: 4\n\n\n\n&#xA0;\n\n\nNote:\n\n\n\t1 &lt;= grid.length == grid[0].length &lt;= 100\n\tgrid[r][c] is 0 or 1\n\n",
+    "code": "undefinedpublic class Solution {    public int ShortestPathBinaryMatrix(int[][] grid) {            }}"
+}

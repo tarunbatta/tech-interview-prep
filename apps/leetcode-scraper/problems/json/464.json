@@ -1,0 +1,8 @@
+{
+    "number": "464",
+    "title": "Can I Win",
+    "url": "https://leetcode.com/problems/can-i-win",
+    "difficulty": "Medium",
+    "question": "In the &quot;100 game,&quot; two players take turns adding, to a running total, any integer from 1..10. The player who first causes the running total to reach or exceed 100 wins. \n\nWhat if we change the game so that players cannot re-use integers? \n\nFor example, two players might take turns drawing from a common pool of numbers of 1..15 without replacement until they reach a total &gt;= 100.\n\nGiven an integer maxChoosableInteger and another integer desiredTotal, determine if the first player to move can force a win, assuming both players play optimally. \n\nYou can always assume that maxChoosableInteger will not be larger than 20 and desiredTotal will not be larger than 300.\n\n\nExample\nInput:\nmaxChoosableInteger = 10\ndesiredTotal = 11\n\nOutput:\nfalse\n\nExplanation:\nNo matter which integer the first player choose, the first player will lose.\nThe first player can choose an integer from 1 up to 10.\nIf the first player choose 1, the second player can only choose integers from 2 up to 10.\nThe second player will win by choosing 10 and get a total = 11, which is &gt;= desiredTotal.\nSame with other integers chosen by the first player, the second player will always win.\n\n",
+    "code": "undefinedpublic class Solution {    public bool CanIWin(int maxChoosableInteger, int desiredTotal) {            }}"
+}

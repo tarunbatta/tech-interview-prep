@@ -1,0 +1,8 @@
+{
+    "number": "802",
+    "title": "Find Eventual Safe States",
+    "url": "https://leetcode.com/problems/find-eventual-safe-states",
+    "difficulty": "Medium",
+    "question": "In a directed graph, we start at some node and every turn, walk along a directed edge of the graph.&#xA0; If we reach a node that is terminal (that is, it has no outgoing directed edges), we stop.\n\nNow, say our starting node is eventually safe&#xA0;if and only if we must eventually walk to a terminal node.&#xA0; More specifically, there exists a natural number K so that for any choice of where to walk, we must have stopped at a terminal node in less than K steps.\n\nWhich nodes are eventually safe?&#xA0; Return them as an array in sorted order.\n\nThe directed graph has N nodes with labels 0, 1, ..., N-1, where N is the length of graph.&#xA0; The&#xA0;graph is given in the following form: graph[i] is a list of labels j such that (i, j) is a directed edge of the graph.\n\nExample:\nInput: graph = [[1,2],[2,3],[5],[0],[5],[],[]]\nOutput: [2,4,5,6]\nHere is a diagram of the above graph.\n\n\n\n\n\nNote:\n\n\n\tgraph will have length at most 10000.\n\tThe number of edges in the graph will not exceed 32000.\n\tEach graph[i] will be a sorted list of different integers, chosen within the range [0, graph.length - 1].\n\n",
+    "code": "undefinedpublic class Solution {    public IList<int> EventualSafeNodes(int[][] graph) {            }}"
+}

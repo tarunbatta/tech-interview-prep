@@ -1,0 +1,8 @@
+{
+    "number": "825",
+    "title": "Friends Of Appropriate Ages",
+    "url": "https://leetcode.com/problems/friends-of-appropriate-ages",
+    "difficulty": "Medium",
+    "question": "Some people will make friend requests. The&#xA0;list of their ages is given and&#xA0;ages[i]&#xA0;is the age of the&#xA0;ith person.&#xA0;\n\nPerson A will NOT friend request person B (B != A) if any of the following conditions are true:\n\n\n\tage[B]&#xA0;&lt;= 0.5 * age[A]&#xA0;+ 7\n\tage[B]&#xA0;&gt; age[A]\n\tage[B]&#xA0;&gt; 100 &amp;&amp;&#xA0;age[A]&#xA0;&lt; 100\n\n\nOtherwise, A will friend request B.\n\nNote that if&#xA0;A requests B, B does not necessarily request A.&#xA0; Also, people will not friend request themselves.\n\nHow many total friend requests are made?\n\nExample 1:\n\nInput: [16,16]\nOutput: 2\nExplanation: 2 people friend request each other.\n\n\nExample 2:\n\nInput: [16,17,18]\nOutput: 2\nExplanation: Friend requests are made 17 -&gt; 16, 18 -&gt; 17.\n\nExample 3:\n\nInput: [20,30,100,110,120]\nOutput: \nExplanation: Friend requests are made 110 -&gt; 100, 120 -&gt; 110, 120 -&gt; 100.\n\n\n&#xA0;\n\nNotes:\n\n\n\t1 &lt;= ages.length&#xA0;&lt;= 20000.\n\t1 &lt;= ages[i] &lt;= 120.\n\n",
+    "code": "undefinedpublic class Solution {    public int NumFriendRequests(int[] ages) {            }}"
+}

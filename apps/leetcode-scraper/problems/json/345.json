@@ -1,0 +1,8 @@
+{
+    "number": "345",
+    "title": "Reverse Vowels of a String",
+    "url": "https://leetcode.com/problems/reverse-vowels-of-a-string",
+    "difficulty": "Easy",
+    "question": "Write a function that takes a string as input and reverse only the vowels of a string.\n\nExample 1:\n\nInput: &quot;hello&quot;\nOutput: &quot;holle&quot;\n\n\n\nExample 2:\n\nInput: &quot;leetcode&quot;\nOutput: &quot;leotcede&quot;\n\n\nNote:\nThe vowels does not include the letter &quot;y&quot;.\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public string ReverseVowels(string s) {            }}"
+}

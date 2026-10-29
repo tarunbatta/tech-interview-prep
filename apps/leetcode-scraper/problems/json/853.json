@@ -1,0 +1,8 @@
+{
+    "number": "853",
+    "title": "Car Fleet",
+    "url": "https://leetcode.com/problems/car-fleet",
+    "difficulty": "Medium",
+    "question": "N cars are going to the same destination along a one lane road.&#xA0; The destination is target&#xA0;miles away.\n\nEach car i&#xA0;has a constant speed speed[i]&#xA0;(in miles per hour), and initial position position[i]&#xA0;miles towards the target along the road.\n\nA car can never pass another car ahead of it, but it can catch up to it, and drive bumper to bumper at the same speed.\n\nThe distance between these two cars is ignored - they are assumed to have the same position.\n\nA car fleet is some non-empty set of cars driving&#xA0;at the same position and same speed.&#xA0; Note that a single car is also a car fleet.\n\nIf a car catches up to a car fleet right at the destination point, it will&#xA0;still be&#xA0;considered as one car fleet.\n\n\nHow many car fleets will arrive at the destination?\n\n&#xA0;\n\nExample 1:\n\nInput: target = 12, position = [10,8,0,5,3], speed = [2,4,1,1,3]\nOutput: 3\nExplanation:\nThe cars starting at 10 and 8 become a fleet, meeting each other at 12.\nThe car starting at 0 doesn&apos;t catch up to any other car, so it is a fleet by itself.\nThe cars starting at 5 and 3 become a fleet, meeting each other at 6.\nNote that no other cars meet these fleets before the destination, so the answer is 3.\n\n\n\nNote:\n\n\n\t0 &lt;= N &lt;= 10 ^ 4\n\t0 &lt; target&#xA0;&lt;= 10 ^ 6\n\t0 &lt;&#xA0;speed[i] &lt;= 10 ^ 6\n\t0 &lt;= position[i] &lt; target\n\tAll initial positions are different.\n",
+    "code": "undefinedpublic class Solution {    public int CarFleet(int target, int[] position, int[] speed) {            }}"
+}

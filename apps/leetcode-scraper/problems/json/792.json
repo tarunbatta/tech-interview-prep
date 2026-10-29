@@ -1,0 +1,8 @@
+{
+    "number": "792",
+    "title": "Number of Matching Subsequences",
+    "url": "https://leetcode.com/problems/number-of-matching-subsequences",
+    "difficulty": "Medium",
+    "question": "Given string S and a&#xA0;dictionary of words words, find the number of words[i] that is a subsequence of S.\n\nExample :\nInput: \nS = &quot;abcde&quot;\nwords = [&quot;a&quot;, &quot;bb&quot;, &quot;acd&quot;, &quot;ace&quot;]\nOutput: 3\nExplanation: There are three words in words that are a subsequence of S: &quot;a&quot;, &quot;acd&quot;, &quot;ace&quot;.\n\n\nNote:\n\n\n\tAll words in words and S will only consists of lowercase letters.\n\tThe length of S will be in the range of [1, 50000].\n\tThe length of words will be in the range of&#xA0;[1, 5000].\n\tThe length of words[i] will be in the range of [1, 50].\n\n",
+    "code": "undefinedpublic class Solution {    public int NumMatchingSubseq(string S, string[] words) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "195",
+    "title": "Tenth Line",
+    "url": "https://leetcode.com/problems/tenth-line",
+    "difficulty": "Easy",
+    "question": "Given a text file&#xA0;file.txt, print&#xA0;just the 10th line of the&#xA0;file.\n\nExample:\n\nAssume that file.txt has the following content:\n\nLine 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6\nLine 7\nLine 8\nLine 9\nLine 10\n\n\nYour script should output the tenth line, which is:\n\nLine 10\n\n\nNote:\n1. If the file contains less than 10 lines, what should you output?\n2. There&apos;s at least three different solutions. Try to explore all possibilities.\n",
+    "code": "undefined# Read from the file file.txt and output the tenth line to stdout.​"
+}

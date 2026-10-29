@@ -1,0 +1,8 @@
+{
+    "number": "1025",
+    "title": "Divisor Game",
+    "url": "https://leetcode.com/problems/divisor-game",
+    "difficulty": "Easy",
+    "question": "Alice and Bob take turns playing a game, with Alice starting first.\n\nInitially, there is a number N&#xA0;on the chalkboard.&#xA0; On each player&apos;s turn, that player makes a move&#xA0;consisting of:\n\n\n\tChoosing&#xA0;any x with 0 &lt; x &lt; N and N % x == 0.\n\tReplacing&#xA0;the number&#xA0;N&#xA0;on the chalkboard with N - x.\n\n\nAlso, if a player cannot make a move, they lose the game.\n\nReturn True if and only if Alice wins the game, assuming both players play optimally.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: 2\nOutput: true\nExplanation: Alice chooses 1, and Bob has no more moves.\n\n\n\nExample 2:\n\nInput: 3\nOutput: false\nExplanation: Alice chooses 1, Bob chooses 1, and Alice has no more moves.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= N &lt;= 1000\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool DivisorGame(int N) {            }}"
+}

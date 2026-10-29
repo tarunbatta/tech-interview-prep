@@ -1,0 +1,8 @@
+{
+    "number": "1110",
+    "title": "Delete Nodes And Return Forest",
+    "url": "https://leetcode.com/problems/delete-nodes-and-return-forest",
+    "difficulty": "Medium",
+    "question": "Given the root&#xA0;of a binary tree, each node in the tree has a distinct value.\n\nAfter deleting&#xA0;all nodes with a value in to_delete, we are left with a forest (a&#xA0;disjoint union of trees).\n\nReturn the roots of the trees in the remaining forest.&#xA0; You may return the result in any order.\n\n&#xA0;\nExample 1:\n\n\n\nInput: root = [1,2,3,4,5,6,7], to_delete = [3,5]\nOutput: [[1,2,null,4],[6],[7]]\n\n\n&#xA0;\nConstraints:\n\n\n\tThe number of nodes in the given tree is at most 1000.\n\tEach node has a distinct value between 1 and 1000.\n\tto_delete.length &lt;= 1000\n\tto_delete contains distinct values between 1 and 1000.\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public IList<TreeNode> DelNodes(TreeNode root, int[] to_delete) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "815",
+    "title": "Bus Routes",
+    "url": "https://leetcode.com/problems/bus-routes",
+    "difficulty": "Hard",
+    "question": "We have a list of bus routes. Each routes[i] is a bus route that the i-th bus&#xA0;repeats forever. For example if routes[0] = [1, 5, 7], this means that the first&#xA0;bus (0-th indexed) travels in the sequence 1-&gt;5-&gt;7-&gt;1-&gt;5-&gt;7-&gt;1-&gt;... forever.\n\nWe start at bus stop S (initially not on a bus), and we want to go to bus stop T. Travelling by buses only, what is the least number of buses we must take to reach our destination? Return -1 if it is not possible.\n\nExample:\nInput: \nroutes = [[1, 2, 7], [3, 6, 7]]\nS = 1\nT = 6\nOutput: 2\nExplanation: \nThe best strategy is take the first bus to the bus stop 7, then take the second bus to the bus stop 6.\n\n\nNote: \n\n\n\t1 &lt;= routes.length &lt;= 500.\n\t1 &lt;= routes[i].length &lt;= 500.\n\t0 &lt;= routes[i][j] &lt; 10 ^ 6.\n\n",
+    "code": "undefinedpublic class Solution {    public int NumBusesToDestination(int[][] routes, int S, int T) {            }}"
+}

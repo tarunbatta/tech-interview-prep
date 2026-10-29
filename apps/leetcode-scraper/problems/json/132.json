@@ -1,0 +1,8 @@
+{
+    "number": "132",
+    "title": "Palindrome Partitioning II",
+    "url": "https://leetcode.com/problems/palindrome-partitioning-ii",
+    "difficulty": "Hard",
+    "question": "Given a string s, partition s such that every substring of the partition is a palindrome.\n\nReturn the minimum cuts needed for a palindrome partitioning of s.\n\nExample:\n\nInput:&#xA0;&quot;aab&quot;\nOutput: 1\nExplanation: The palindrome partitioning [&quot;aa&quot;,&quot;b&quot;] could be produced using 1 cut.\n\n",
+    "code": "undefinedpublic class Solution {    public int MinCut(string s) {            }}"
+}

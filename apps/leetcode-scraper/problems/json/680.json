@@ -1,0 +1,8 @@
+{
+    "number": "680",
+    "title": "Valid Palindrome II",
+    "url": "https://leetcode.com/problems/valid-palindrome-ii",
+    "difficulty": "Easy",
+    "question": "\nGiven a non-empty string s, you may delete at most one character.  Judge whether you can make it a palindrome.\n\n\nExample 1:\nInput: &quot;aba&quot;\nOutput: True\n\n\n\nExample 2:\nInput: &quot;abca&quot;\nOutput: True\nExplanation: You could delete the character &apos;c&apos;.\n\n\n\nNote:\n\nThe string will only contain lowercase characters a-z.\nThe maximum length of the string is 50000.\n\n",
+    "code": "undefinedpublic class Solution {    public bool ValidPalindrome(string s) {            }}"
+}

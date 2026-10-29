@@ -1,0 +1,8 @@
+{
+    "number": "306",
+    "title": "Additive Number",
+    "url": "https://leetcode.com/problems/additive-number",
+    "difficulty": "Medium",
+    "question": "Additive number is a string whose digits can form additive sequence.\n\nA valid additive sequence should contain at least three numbers. Except for the first two numbers, each subsequent number in the sequence must be the sum of the preceding two.\n\nGiven a string containing only digits &apos;0&apos;-&apos;9&apos;, write a function to determine if it&apos;s an additive number.\n\nNote: Numbers in the additive sequence cannot have leading zeros, so sequence 1, 2, 03 or 1, 02, 3 is invalid.\n\nExample 1:\n\nInput: &quot;112358&quot;\nOutput: true \nExplanation: The digits can form an additive sequence: 1, 1, 2, 3, 5, 8. \n&#xA0;            1 + 1 = 2, 1 + 2 = 3, 2 + 3 = 5, 3 + 5 = 8\n\n\nExample 2:\n\nInput: &quot;199100199&quot;\nOutput: true \nExplanation: The additive sequence is: 1, 99, 100, 199.&#xA0;\n&#xA0;            1 + 99 = 100, 99 + 100 = 199\n\nFollow up:\nHow would you handle overflow for very large input integers?",
+    "code": "undefinedpublic class Solution {    public bool IsAdditiveNumber(string num) {            }}"
+}

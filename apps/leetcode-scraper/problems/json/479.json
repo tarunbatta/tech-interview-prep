@@ -1,0 +1,8 @@
+{
+    "number": "479",
+    "title": "Largest Palindrome Product",
+    "url": "https://leetcode.com/problems/largest-palindrome-product",
+    "difficulty": "Hard",
+    "question": "Find the largest palindrome made from the product of two n-digit numbers.\n\nSince the result could be very large, you should return the largest palindrome mod 1337.\n\n&#xA0;\n\nExample:\n\nInput: 2\n\nOutput: 987\n\nExplanation: 99 x 91 = 9009, 9009 % 1337 = 987\n\n&#xA0;\n\nNote:\n\nThe range of n is [1,8].\n",
+    "code": "undefinedpublic class Solution {    public int LargestPalindrome(int n) {            }}"
+}

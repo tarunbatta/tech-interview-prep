@@ -1,0 +1,8 @@
+{
+    "number": "932",
+    "title": "Beautiful Array",
+    "url": "https://leetcode.com/problems/beautiful-array",
+    "difficulty": "Medium",
+    "question": "For some fixed N, an array A is beautiful if it is a permutation of the integers 1, 2, ..., N, such that:\n\nFor every i &lt; j, there is no&#xA0;k with i &lt; k &lt; j&#xA0;such that A[k] * 2 = A[i] + A[j].\n\nGiven N, return any beautiful array A.&#xA0; (It is guaranteed that one exists.)\n\n&#xA0;\n\nExample 1:\n\nInput: 4\nOutput: [2,1,4,3]\n\n\n\nExample 2:\n\nInput: 5\nOutput: [3,1,2,5,4]\n\n&#xA0;\n\n\nNote:\n\n\n\t1 &lt;= N &lt;= 1000\n\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int[] BeautifulArray(int N) {            }}"
+}

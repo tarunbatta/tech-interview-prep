@@ -1,0 +1,8 @@
+{
+    "number": "152",
+    "title": "Maximum Product Subarray",
+    "url": "https://leetcode.com/problems/maximum-product-subarray",
+    "difficulty": "Medium",
+    "question": "Given an integer array&#xA0;nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.\n\nExample 1:\n\nInput: [2,3,-2,4]\nOutput: 6\nExplanation:&#xA0;[2,3] has the largest product 6.\n\n\nExample 2:\n\nInput: [-2,0,-1]\nOutput: 0\nExplanation:&#xA0;The result cannot be 2, because [-2,-1] is not a subarray.\n",
+    "code": "undefinedpublic class Solution {    public int MaxProduct(int[] nums) {            }}"
+}

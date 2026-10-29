@@ -1,0 +1,8 @@
+{
+    "number": "1007",
+    "title": "Minimum Domino Rotations For Equal Row",
+    "url": "https://leetcode.com/problems/minimum-domino-rotations-for-equal-row",
+    "difficulty": "Medium",
+    "question": "In a row of dominoes, A[i] and B[i] represent the top and bottom halves of the i-th domino.&#xA0; (A domino is a tile with two numbers from 1 to 6 - one on each half of the tile.)\n\nWe may rotate the i-th domino, so that A[i] and B[i] swap values.\n\nReturn the minimum number of rotations so that all the values in A are the same, or all the values in B&#xA0;are the same.\n\nIf it cannot be done, return -1.\n\n&#xA0;\n\nExample 1:\n\n\n\nInput: A = [2,1,2,4,2,2], B = [5,2,6,2,3,2]\nOutput: 2\nExplanation: \nThe first figure represents the dominoes as given by A and B: before we do any rotations.\nIf we rotate the second and fourth dominoes, we can make every value in the top row equal to 2, as indicated by the second figure.\n\n\nExample 2:\n\nInput: A = [3,5,1,2,3], B = [3,6,3,3,4]\nOutput: -1\nExplanation: \nIn this case, it is not possible to rotate the dominoes to make one row of values equal.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A[i], B[i] &lt;= 6\n\t2 &lt;= A.length == B.length &lt;= 20000\n\n",
+    "code": "undefinedpublic class Solution {    public int MinDominoRotations(int[] A, int[] B) {            }}"
+}

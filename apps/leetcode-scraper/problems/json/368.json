@@ -1,0 +1,8 @@
+{
+    "number": "368",
+    "title": "Largest Divisible Subset",
+    "url": "https://leetcode.com/problems/largest-divisible-subset",
+    "difficulty": "Medium",
+    "question": "Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies:\n\nSi % Sj = 0 or Sj % Si = 0.\n\nIf there are multiple solutions, return any subset is fine.\n\nExample 1:\n\n\nInput: [1,2,3]\nOutput: [1,2] (of course, [1,3] will also be ok)\n\n\n\nExample 2:\n\nInput: [1,2,4,8]\nOutput: [1,2,4,8]\n\n\n",
+    "code": "undefinedpublic class Solution {    public IList<int> LargestDivisibleSubset(int[] nums) {            }}"
+}

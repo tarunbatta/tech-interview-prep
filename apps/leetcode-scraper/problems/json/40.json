@@ -1,0 +1,8 @@
+{
+    "number": "40",
+    "title": "Combination Sum II",
+    "url": "https://leetcode.com/problems/combination-sum-ii",
+    "difficulty": "Medium",
+    "question": "Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates&#xA0;where the candidate numbers sums to target.\n\nEach number in candidates&#xA0;may only be used once in the combination.\n\nNote:\n\n\n\tAll numbers (including target) will be positive integers.\n\tThe solution set must not contain duplicate combinations.\n\n\nExample 1:\n\nInput: candidates =&#xA0;[10,1,2,7,6,1,5], target =&#xA0;8,\nA solution set is:\n[\n  [1, 7],\n  [1, 2, 5],\n  [2, 6],\n  [1, 1, 6]\n]\n\n\nExample 2:\n\nInput: candidates =&#xA0;[2,5,2,1,2], target =&#xA0;5,\nA solution set is:\n[\n&#xA0; [1,2,2],\n&#xA0; [5]\n]\n\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<int>> CombinationSum2(int[] candidates, int target) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "338",
+    "title": "Counting Bits",
+    "url": "https://leetcode.com/problems/counting-bits",
+    "difficulty": "Medium",
+    "question": "Given a non negative integer number num. For every numbers i in the range 0 &#x2264; i &#x2264; num calculate the number of 1&apos;s in their binary representation and return them as an array.\n\nExample 1:\n\nInput: 2\nOutput: [0,1,1]\n\nExample 2:\n\nInput: 5\nOutput: [0,1,1,2,1,2]\n\n\nFollow up:\n\n\n\tIt is very easy to come up with a solution with run time O(n*sizeof(integer)). But can you do it in linear time O(n) /possibly in a single pass?\n\tSpace complexity should be O(n).\n\tCan you do it like a boss? Do it without using any builtin function like __builtin_popcount in c++ or in any other language.\n",
+    "code": "undefinedpublic class Solution {    public int[] CountBits(int num) {            }}"
+}

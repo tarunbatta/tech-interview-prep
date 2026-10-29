@@ -1,0 +1,8 @@
+{
+    "number": "63",
+    "title": "Unique Paths II",
+    "url": "https://leetcode.com/problems/unique-paths-ii",
+    "difficulty": "Medium",
+    "question": "A robot is located at the top-left corner of a m x n grid (marked &apos;Start&apos; in the diagram below).\n\nThe robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked &apos;Finish&apos; in the diagram below).\n\nNow consider if some obstacles are added to the grids. How many unique paths would there be?\n\n\n\nAn obstacle and empty space is marked as 1 and 0 respectively in the grid.\n\nNote: m and n will be at most 100.\n\nExample 1:\n\nInput:\n[\n&#xA0; [0,0,0],\n&#xA0; [0,1,0],\n&#xA0; [0,0,0]\n]\nOutput: 2\nExplanation:\nThere is one obstacle in the middle of the 3x3 grid above.\nThere are two ways to reach the bottom-right corner:\n1. Right -&gt; Right -&gt; Down -&gt; Down\n2. Down -&gt; Down -&gt; Right -&gt; Right\n\n",
+    "code": "undefinedpublic class Solution {    public int UniquePathsWithObstacles(int[][] obstacleGrid) {            }}"
+}

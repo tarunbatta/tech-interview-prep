@@ -1,0 +1,8 @@
+{
+    "number": "423",
+    "title": "Reconstruct Original Digits from English",
+    "url": "https://leetcode.com/problems/reconstruct-original-digits-from-english",
+    "difficulty": "Medium",
+    "question": "Given a non-empty string containing an out-of-order English representation of digits 0-9, output the digits in ascending order.\n\nNote:\n\nInput contains only lowercase English letters.\nInput is guaranteed to be valid and can be transformed to its original digits. That means invalid inputs such as &quot;abc&quot; or &quot;zerone&quot; are not permitted.\nInput length is less than 50,000.\n\n\n\nExample 1:\nInput: &quot;owoztneoer&quot;\n\nOutput: &quot;012&quot;\n\n\n\nExample 2:\nInput: &quot;fviefuro&quot;\n\nOutput: &quot;45&quot;\n\n",
+    "code": "undefinedpublic class Solution {    public string OriginalDigits(string s) {            }}"
+}

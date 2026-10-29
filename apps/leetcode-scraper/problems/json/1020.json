@@ -1,0 +1,8 @@
+{
+    "number": "1020",
+    "title": "Number of Enclaves",
+    "url": "https://leetcode.com/problems/number-of-enclaves",
+    "difficulty": "Medium",
+    "question": "Given a 2D array A, each cell is 0 (representing sea) or 1 (representing land)\n\nA move consists of walking from one land square 4-directionally to another land square, or off the boundary of the grid.\n\nReturn the number of land squares in the grid for which we cannot walk off the boundary of the grid in any number of moves.\n\n&#xA0;\n\nExample 1:\n\nInput: [[0,0,0,0],[1,0,1,0],[0,1,1,0],[0,0,0,0]]\nOutput: 3\nExplanation: \nThere are three 1s that are enclosed by 0s, and one 1 that isn&apos;t enclosed because its on the boundary.\n\nExample 2:\n\nInput: [[0,1,1,0],[0,0,1,0],[0,0,1,0],[0,0,0,0]]\nOutput: 0\nExplanation: \nAll 1s are either on the boundary or can reach the boundary.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 500\n\t1 &lt;= A[i].length &lt;= 500\n\t0 &lt;= A[i][j] &lt;= 1\n\tAll rows have the same size.\n",
+    "code": "undefinedpublic class Solution {    public int NumEnclaves(int[][] A) {            }}"
+}

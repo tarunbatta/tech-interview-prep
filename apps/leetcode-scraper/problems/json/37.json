@@ -1,0 +1,8 @@
+{
+    "number": "37",
+    "title": "Sudoku Solver",
+    "url": "https://leetcode.com/problems/sudoku-solver",
+    "difficulty": "Hard",
+    "question": "Write a program to solve a Sudoku puzzle by filling the empty cells.\n\nA&#xA0;sudoku solution must satisfy all of&#xA0;the following rules:\n\n\n\tEach of the digits&#xA0;1-9 must occur exactly&#xA0;once in each row.\n\tEach of the digits&#xA0;1-9&#xA0;must occur&#xA0;exactly once in each column.\n\tEach of the the digits&#xA0;1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n\n\nEmpty cells are indicated by the character &apos;.&apos;.\n\n\nA sudoku puzzle...\n\n\n...and its solution numbers marked in red.\n\nNote:\n\n\n\tThe given board&#xA0;contain only digits 1-9 and the character &apos;.&apos;.\n\tYou may assume that the given Sudoku puzzle will have a single unique solution.\n\tThe given board size is always 9x9.\n\n",
+    "code": "undefinedpublic class Solution {    public void SolveSudoku(char[][] board) {            }}"
+}

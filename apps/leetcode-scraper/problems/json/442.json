@@ -1,0 +1,8 @@
+{
+    "number": "442",
+    "title": "Find All Duplicates in an Array",
+    "url": "https://leetcode.com/problems/find-all-duplicates-in-an-array",
+    "difficulty": "Medium",
+    "question": "Given an array of integers, 1 &#x2264; a[i] &#x2264; n (n = size of array), some elements appear twice and others appear once.\n\nFind all the elements that appear twice in this array.\n\nCould you do it without extra space and in O(n) runtime?\n\nExample:\nInput:\n[4,3,2,7,8,2,3,1]\n\nOutput:\n[2,3]\n",
+    "code": "undefinedpublic class Solution {    public IList<int> FindDuplicates(int[] nums) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "9",
+    "title": "Palindrome Number",
+    "url": "https://leetcode.com/problems/palindrome-number",
+    "difficulty": "Easy",
+    "question": "Determine whether an integer is a palindrome. An integer&#xA0;is&#xA0;a&#xA0;palindrome when it&#xA0;reads the same backward as forward.\n\nExample 1:\n\nInput: 121\nOutput: true\n\n\nExample 2:\n\nInput: -121\nOutput: false\nExplanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.\n\n\nExample 3:\n\nInput: 10\nOutput: false\nExplanation: Reads 01 from right to left. Therefore it is not a palindrome.\n\n\nFollow up:\n\nCoud you solve&#xA0;it without converting the integer to a string?\n",
+    "code": "undefinedpublic class Solution {    public bool IsPalindrome(int x) {            }}"
+}

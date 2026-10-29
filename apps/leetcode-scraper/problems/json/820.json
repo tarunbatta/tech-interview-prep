@@ -1,0 +1,8 @@
+{
+    "number": "820",
+    "title": "Short Encoding of Words",
+    "url": "https://leetcode.com/problems/short-encoding-of-words",
+    "difficulty": "Medium",
+    "question": "Given a list of words, we may encode it by writing a reference string S and a list of indexes A.\n\nFor example, if the list of words is [&quot;time&quot;, &quot;me&quot;, &quot;bell&quot;], we can write it as S = &quot;time#bell#&quot;&#xA0;and indexes = [0, 2, 5].\n\nThen for each index, we will recover the word by reading from the reference string from that index until we reach a &quot;#&quot; character.\n\nWhat is the length of the shortest reference string S possible that encodes the given words?\n\nExample:\n\nInput: words = [&quot;time&quot;, &quot;me&quot;, &quot;bell&quot;]\nOutput: 10\nExplanation: S = &quot;time#bell#&quot; and indexes = [0, 2, 5].\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= words.length&#xA0;&lt;= 2000.\n\t1 &lt;=&#xA0;words[i].length&#xA0;&lt;= 7.\n\tEach word&#xA0;has only&#xA0;lowercase letters.\n\n",
+    "code": "undefinedpublic class Solution {    public int MinimumLengthEncoding(string[] words) {            }}"
+}

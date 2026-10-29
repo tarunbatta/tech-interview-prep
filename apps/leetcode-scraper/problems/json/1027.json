@@ -1,0 +1,8 @@
+{
+    "number": "1027",
+    "title": "Longest Arithmetic Sequence",
+    "url": "https://leetcode.com/problems/longest-arithmetic-sequence",
+    "difficulty": "Medium",
+    "question": "Given an array A of integers, return the length of the longest arithmetic subsequence in A.\n\nRecall that a subsequence of A is a list A[i_1], A[i_2], ..., A[i_k] with 0 &lt;= i_1 &lt; i_2 &lt; ... &lt; i_k &lt;= A.length - 1, and that a sequence B&#xA0;is arithmetic if B[i+1] - B[i] are all the same value (for 0 &lt;= i &lt; B.length - 1).\n\n&#xA0;\n\nExample 1:\n\nInput: [3,6,9,12]\nOutput: 4\nExplanation: \nThe whole array is an arithmetic sequence with steps of length = 3.\n\n\n\nExample 2:\n\nInput: [9,4,7,2,10]\nOutput: 3\nExplanation: \nThe longest arithmetic subsequence is [4,7,10].\n\n\n\nExample 3:\n\nInput: [20,1,15,3,10,5,8]\nOutput: 4\nExplanation: \nThe longest arithmetic subsequence is [20,15,10,5].\n\n\n\n&#xA0;\n\nNote:\n\n\n\t2 &lt;= A.length &lt;= 2000\n\t0 &lt;= A[i] &lt;= 10000\n\n",
+    "code": "undefinedpublic class Solution {    public int LongestArithSeqLength(int[] A) {            }}"
+}

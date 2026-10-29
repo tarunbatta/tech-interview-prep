@@ -1,0 +1,8 @@
+{
+    "number": "264",
+    "title": "Ugly Number II",
+    "url": "https://leetcode.com/problems/ugly-number-ii",
+    "difficulty": "Medium",
+    "question": "Write a program to find the n-th ugly number.\n\nUgly numbers are positive numbers whose prime factors only include 2, 3, 5.&#xA0;\n\nExample:\n\nInput: n = 10\nOutput: 12\nExplanation: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 is the sequence of the first 10 ugly numbers.\n\nNote: &#xA0;\n\n\n\t1 is typically treated as an ugly number.\n\tn does not exceed 1690.\n",
+    "code": "undefinedpublic class Solution {    public int NthUglyNumber(int n) {            }}"
+}

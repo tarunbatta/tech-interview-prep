@@ -1,0 +1,8 @@
+{
+    "number": "79",
+    "title": "Word Search",
+    "url": "https://leetcode.com/problems/word-search",
+    "difficulty": "Medium",
+    "question": "Given a 2D board and a word, find if the word exists in the grid.\n\nThe word can be constructed from letters of sequentially adjacent cell, where &quot;adjacent&quot; cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once.\n\nExample:\n\nboard =\n[\n  [&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;E&apos;],\n  [&apos;S&apos;,&apos;F&apos;,&apos;C&apos;,&apos;S&apos;],\n  [&apos;A&apos;,&apos;D&apos;,&apos;E&apos;,&apos;E&apos;]\n]\n\nGiven word = &quot;ABCCED&quot;, return true.\nGiven word = &quot;SEE&quot;, return true.\nGiven word = &quot;ABCB&quot;, return false.\n\n",
+    "code": "undefinedpublic class Solution {    public bool Exist(char[][] board, string word) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "912",
+    "title": "Sort an Array",
+    "url": "https://leetcode.com/problems/sort-an-array",
+    "difficulty": "Medium",
+    "question": "Given an array of integers nums, sort the array in ascending order.\n\n&#xA0;\n\n\n\n\nExample 1:\n\nInput:&#xA0;[5,2,3,1]\nOutput: [1,2,3,5]\n\n\nExample 2:\n\nInput: [5,1,1,2,0,0]\nOutput: [0,0,1,1,2,5]\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 10000\n\t-50000 &lt;= A[i] &lt;= 50000\n\n",
+    "code": "undefinedpublic class Solution {    public int[] SortArray(int[] nums) {            }}"
+}

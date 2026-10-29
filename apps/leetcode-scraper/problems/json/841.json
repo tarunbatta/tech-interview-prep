@@ -1,0 +1,8 @@
+{
+    "number": "841",
+    "title": "Keys and Rooms",
+    "url": "https://leetcode.com/problems/keys-and-rooms",
+    "difficulty": "Medium",
+    "question": "There are N rooms and you start in room 0.&#xA0; Each room has a distinct number in 0, 1, 2, ..., N-1, and each room may have&#xA0;some keys to access the next room.&#xA0;\n\nFormally, each room i&#xA0;has a list of keys rooms[i], and each key rooms[i][j] is an integer in [0, 1, ..., N-1] where N = rooms.length.&#xA0; A key rooms[i][j] = v&#xA0;opens the room with number v.\n\nInitially, all the rooms start locked (except for room 0).&#xA0;\n\nYou can walk back and forth between rooms freely.\n\nReturn true&#xA0;if and only if you can enter&#xA0;every room.\n\n\n\n\nExample 1:\n\nInput: [[1],[2],[3],[]]\nOutput: true\nExplanation:  \nWe start in room 0, and pick up key 1.\nWe then go to room 1, and pick up key 2.\nWe then go to room 2, and pick up key 3.\nWe then go to room 3.  Since we were able to go to every room, we return true.\n\n\nExample 2:\n\nInput: [[1,3],[3,0,1],[2],[0]]\nOutput: false\nExplanation: We can&apos;t enter the room with number 2.\n\n\nNote:\n\n\n\t1 &lt;= rooms.length &lt;=&#xA0;1000\n\t0 &lt;= rooms[i].length &lt;= 1000\n\tThe number of keys in all rooms combined is at most&#xA0;3000.\n\n",
+    "code": "undefinedpublic class Solution {    public bool CanVisitAllRooms(IList<IList<int>> rooms) {            }}"
+}

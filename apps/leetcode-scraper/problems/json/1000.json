@@ -1,0 +1,8 @@
+{
+    "number": "1000",
+    "title": "Minimum Cost to Merge Stones",
+    "url": "https://leetcode.com/problems/minimum-cost-to-merge-stones",
+    "difficulty": "Hard",
+    "question": "There are N piles of stones arranged in a row.&#xA0; The i-th pile has stones[i] stones.\n\nA move consists of merging exactly&#xA0;K&#xA0;consecutive piles into one pile, and the cost of this move is equal to the total number of stones in these K piles.\n\nFind the minimum cost to merge all piles of stones into one pile.&#xA0; If it is impossible, return -1.\n\n&#xA0;\n\n\nExample 1:\n\nInput: stones = [3,2,4,1], K = 2\nOutput: 20\nExplanation: \nWe start with [3, 2, 4, 1].\nWe merge [3, 2] for a cost of 5, and we are left with [5, 4, 1].\nWe merge [4, 1] for a cost of 5, and we are left with [5, 5].\nWe merge [5, 5] for a cost of 10, and we are left with [10].\nThe total cost was 20, and this is the minimum possible.\n\n\n\nExample 2:\n\nInput: stones = [3,2,4,1], K = 3\nOutput: -1\nExplanation: After any merge operation, there are 2 piles left, and we can&apos;t merge anymore.  So the task is impossible.\n\n\n\nExample 3:\n\nInput: stones = [3,5,1,2,6], K = 3\nOutput: 25\nExplanation: \nWe start with [3, 5, 1, 2, 6].\nWe merge [5, 1, 2] for a cost of 8, and we are left with [3, 8, 6].\nWe merge [3, 8, 6] for a cost of 17, and we are left with [17].\nThe total cost was 25, and this is the minimum possible.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= stones.length &lt;= 30\n\t2 &lt;= K &lt;= 30\n\t1 &lt;= stones[i] &lt;= 100\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int MergeStones(int[] stones, int K) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "56",
+    "title": "Merge Intervals",
+    "url": "https://leetcode.com/problems/merge-intervals",
+    "difficulty": "Medium",
+    "question": "Given a collection of intervals, merge all overlapping intervals.\n\nExample 1:\n\nInput: [[1,3],[2,6],[8,10],[15,18]]\nOutput: [[1,6],[8,10],[15,18]]\nExplanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].\n\n\nExample 2:\n\nInput: [[1,4],[4,5]]\nOutput: [[1,5]]\nExplanation: Intervals [1,4] and [4,5] are considered overlapping.\n\nNOTE:&#xA0;input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature.\n",
+    "code": "undefinedpublic class Solution {    public int[][] Merge(int[][] intervals) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "263",
+    "title": "Ugly Number",
+    "url": "https://leetcode.com/problems/ugly-number",
+    "difficulty": "Easy",
+    "question": "Write a program to check whether a given number is an ugly number.\n\nUgly numbers are positive numbers whose prime factors only include 2, 3, 5.\n\nExample 1:\n\nInput: 6\nOutput: true\nExplanation: 6 = 2 &#xD7;&#xA0;3\n\nExample 2:\n\nInput: 8\nOutput: true\nExplanation: 8 = 2 &#xD7; 2 &#xD7;&#xA0;2\n\n\nExample 3:\n\nInput: 14\nOutput: false \nExplanation: 14 is not ugly since it includes another prime factor 7.\n\n\nNote:\n\n\n\t1 is typically treated as an ugly number.\n\tInput is within the 32-bit signed integer range:&#xA0;[&#x2212;231,&#xA0; 231&#xA0;&#x2212; 1].\n",
+    "code": "undefinedpublic class Solution {    public bool IsUgly(int num) {            }}"
+}

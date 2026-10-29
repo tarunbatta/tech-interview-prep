@@ -1,0 +1,8 @@
+{
+    "number": "898",
+    "title": "Bitwise ORs of Subarrays",
+    "url": "https://leetcode.com/problems/bitwise-ors-of-subarrays",
+    "difficulty": "Medium",
+    "question": "We have an array A of non-negative integers.\n\nFor every (contiguous) subarray B =&#xA0;[A[i], A[i+1], ..., A[j]] (with i &lt;= j), we take the bitwise OR of all the elements in B, obtaining a result A[i] | A[i+1] | ... | A[j].\n\nReturn the number of possible&#xA0;results.&#xA0; (Results that occur more than once are only counted once in the final answer.)\n\n&#xA0;\n\n\nExample 1:\n\nInput: [0]\nOutput: 1\nExplanation: \nThere is only one possible result: 0.\n\n\n\nExample 2:\n\nInput: [1,1,2]\nOutput: 3\nExplanation: \nThe possible subarrays are [1], [1], [2], [1, 1], [1, 2], [1, 1, 2].\nThese yield the results 1, 1, 2, 1, 3, 3.\nThere are 3 unique values, so the answer is 3.\n\n\n\nExample 3:\n\nInput: [1,2,4]\nOutput: 6\nExplanation: \nThe possible results are 1, 2, 3, 4, 6, and 7.\n\n\n\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 50000\n\t0 &lt;= A[i] &lt;= 10^9\n\n",
+    "code": "undefinedpublic class Solution {    public int SubarrayBitwiseORs(int[] A) {            }}"
+}

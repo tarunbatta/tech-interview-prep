@@ -1,0 +1,8 @@
+{
+    "number": "698",
+    "title": "Partition to K Equal Sum Subsets",
+    "url": "https://leetcode.com/problems/partition-to-k-equal-sum-subsets",
+    "difficulty": "Medium",
+    "question": "Given an array of integers nums and a positive integer k, find whether it&apos;s possible to divide this array into k non-empty subsets whose sums are all equal.\n\n&#xA0;\n\nExample 1:\n\nInput: nums = [4, 3, 2, 3, 5, 2, 1], k = 4\nOutput: True\nExplanation: It&apos;s possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= k &lt;= len(nums) &lt;= 16.\n\t0 &lt; nums[i] &lt; 10000.\n\n",
+    "code": "undefinedpublic class Solution {    public bool CanPartitionKSubsets(int[] nums, int k) {            }}"
+}

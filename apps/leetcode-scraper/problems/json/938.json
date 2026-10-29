@@ -1,0 +1,8 @@
+{
+    "number": "938",
+    "title": "Range Sum of BST",
+    "url": "https://leetcode.com/problems/range-sum-of-bst",
+    "difficulty": "Easy",
+    "question": "Given the root node of a binary search tree, return the sum of values of all nodes with value between L and R (inclusive).\n\nThe binary search tree is guaranteed to have unique values.\n\n&#xA0;\n\n\nExample 1:\n\nInput: root = [10,5,15,3,7,null,18], L = 7, R = 15\nOutput: 32\n\n\n\nExample 2:\n\nInput: root = [10,5,15,3,7,13,18,1,null,6], L = 6, R = 10\nOutput: 23\n\n\n&#xA0;\n\nNote:\n\n\n\tThe number of nodes in the tree is at most 10000.\n\tThe final answer is guaranteed to be less than 2^31.\n\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public int RangeSumBST(TreeNode root, int L, int R) {            }}"
+}

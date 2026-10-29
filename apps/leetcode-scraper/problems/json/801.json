@@ -1,0 +1,8 @@
+{
+    "number": "801",
+    "title": "Minimum Swaps To Make Sequences Increasing",
+    "url": "https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing",
+    "difficulty": "Medium",
+    "question": "We have two integer sequences A and B of the same non-zero length.\n\nWe are allowed to swap elements A[i] and B[i].&#xA0; Note that both elements are in the same index position in their respective sequences.\n\nAt the end of some number of swaps, A and B are both strictly increasing.&#xA0; (A sequence is strictly increasing if and only if A[0] &lt; A[1] &lt; A[2] &lt; ... &lt; A[A.length - 1].)\n\nGiven A and B, return the minimum number of swaps to make both sequences strictly increasing.&#xA0; It is guaranteed that the given input always makes it possible.\n\nExample:\nInput: A = [1,3,5,4], B = [1,2,3,7]\nOutput: 1\nExplanation: \nSwap A[3] and B[3].  Then the sequences are:\nA = [1, 3, 5, 7] and B = [1, 2, 3, 4]\nwhich are both strictly increasing.\n\n\nNote:\n\n\n\tA, B are arrays with the same length, and that length will be in the range [1, 1000].\n\tA[i], B[i] are integer values in the range [0, 2000].\n\n",
+    "code": "undefinedpublic class Solution {    public int MinSwap(int[] A, int[] B) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "654",
+    "title": "Maximum Binary Tree",
+    "url": "https://leetcode.com/problems/maximum-binary-tree",
+    "difficulty": "Medium",
+    "question": "\nGiven an integer array with no duplicates. A maximum tree building on this array is defined as follow:\n\nThe root is the maximum number in the array. \nThe left subtree is the maximum tree constructed from left part subarray divided by the maximum number.\nThe right subtree is the maximum tree constructed from right part subarray divided by the maximum number. \n\n\n\n\nConstruct the maximum tree by the given array and output the root node of this tree.\n\n\nExample 1:\nInput: [3,2,1,6,0,5]\nOutput: return the tree root node representing the following tree:\n\n      6\n    /   \\\n   3     5\n    \\    / \n     2  0   \n       \\\n        1\n\n\n\nNote:\n\nThe size of the given array will be in the range [1,1000].\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public TreeNode ConstructMaximumBinaryTree(int[] nums) {            }}"
+}

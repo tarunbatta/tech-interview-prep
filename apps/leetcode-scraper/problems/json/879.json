@@ -1,0 +1,8 @@
+{
+    "number": "879",
+    "title": "Profitable Schemes",
+    "url": "https://leetcode.com/problems/profitable-schemes",
+    "difficulty": "Hard",
+    "question": "There are G people in a gang, and a list of various crimes they could commit.\n\nThe i-th crime generates a profit[i] and requires group[i] gang members to participate.\n\nIf a gang member participates in one crime, that member can&apos;t participate in another crime.\n\nLet&apos;s call a profitable&#xA0;scheme&#xA0;any subset of these crimes that generates at least P profit, and the total number of gang members participating in that subset of crimes is at most G.\n\nHow many schemes can be chosen?&#xA0; Since the answer may be very&#xA0;large, return it modulo 10^9 + 7.\n\n&#xA0;\n\nExample 1:\n\nInput: G = 5, P = 3, group = [2,2], profit = [2,3]\nOutput: 2\nExplanation: \nTo make a profit of at least 3, the gang could either commit crimes 0 and 1, or just crime 1.\nIn total, there are 2 schemes.\n\n\n\nExample 2:\n\nInput: G = 10, P = 5, group = [2,3,5], profit = [6,7,8]\nOutput: 7\nExplanation: \nTo make a profit of at least 5, the gang could commit any crimes, as long as they commit one.\nThere are 7 possible schemes: (0), (1), (2), (0,1), (0,2), (1,2), and (0,1,2).\n\n\n&#xA0;\n\n\nNote:\n\n\n\t1 &lt;= G &lt;= 100\n\t0 &lt;= P &lt;= 100\n\t1 &lt;= group[i] &lt;= 100\n\t0 &lt;= profit[i] &lt;= 100\n\t1 &lt;= group.length = profit.length &lt;= 100\n\n\n\n&#xA0;\n\n",
+    "code": "undefinedpublic class Solution {    public int ProfitableSchemes(int G, int P, int[] group, int[] profit) {            }}"
+}

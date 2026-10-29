@@ -1,0 +1,8 @@
+{
+    "number": "127",
+    "title": "Word Ladder",
+    "url": "https://leetcode.com/problems/word-ladder",
+    "difficulty": "Medium",
+    "question": "Given two words (beginWord and endWord), and a dictionary&apos;s word list, find the length of shortest transformation sequence from beginWord to endWord, such that:\n\n\n\tOnly one letter can be changed at a time.\n\tEach transformed word must exist in the word list. Note that beginWord is not a transformed word.\n\n\nNote:\n\n\n\tReturn 0 if there is no such transformation sequence.\n\tAll words have the same length.\n\tAll words contain only lowercase alphabetic characters.\n\tYou may assume no duplicates in the word list.\n\tYou may assume beginWord and endWord are non-empty and are not the same.\n\n\nExample 1:\n\nInput:\nbeginWord = &quot;hit&quot;,\nendWord = &quot;cog&quot;,\nwordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]\n\nOutput: 5\n\nExplanation: As one shortest transformation is &quot;hit&quot; -&gt; &quot;hot&quot; -&gt; &quot;dot&quot; -&gt; &quot;dog&quot; -&gt; &quot;cog&quot;,\nreturn its length 5.\n\n\nExample 2:\n\nInput:\nbeginWord = &quot;hit&quot;\nendWord = &quot;cog&quot;\nwordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]\n\nOutput:&#xA0;0\n\nExplanation:&#xA0;The endWord &quot;cog&quot; is not in wordList, therefore no possible&#xA0;transformation.\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int LadderLength(string beginWord, string endWord, IList<string> wordList) {            }}"
+}

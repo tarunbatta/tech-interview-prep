@@ -1,0 +1,8 @@
+{
+    "number": "1038",
+    "title": "Binary Search Tree to Greater Sum Tree",
+    "url": "https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree",
+    "difficulty": "Medium",
+    "question": "Given the root of a binary search tree with distinct values, modify it so that every node&#xA0;has a new value equal to the sum of the values of the original tree that are greater than or equal to node.val.\n\nAs a reminder, a&#xA0;binary search tree is a tree that satisfies these constraints:\n\n\n\tThe left subtree of a node contains only nodes with keys&#xA0;less than&#xA0;the node&apos;s key.\n\tThe right subtree of a node contains only nodes with keys&#xA0;greater than&#xA0;the node&apos;s key.\n\tBoth the left and right subtrees must also be binary search trees.\n\n\n&#xA0;\n\nExample 1:\n\n\n\nInput: [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]\nOutput: [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]\n\n\n\n&#xA0;\n\n\nNote:\n\n\n\tThe number of nodes in the tree is between 1 and 100.\n\tEach node will have value between 0 and 100.\n\tThe given tree is a binary search tree.\n\n\n\n\n&#xA0;\n\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public TreeNode BstToGst(TreeNode root) {            }}"
+}

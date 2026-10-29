@@ -1,0 +1,8 @@
+{
+    "number": "115",
+    "title": "Distinct Subsequences",
+    "url": "https://leetcode.com/problems/distinct-subsequences",
+    "difficulty": "Hard",
+    "question": "Given a string S and a string T, count the number of distinct subsequences of S which equals T.\n\nA subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, &quot;ACE&quot; is a subsequence of &quot;ABCDE&quot; while &quot;AEC&quot; is not).\n\nExample 1:\n\nInput: S = &quot;rabbbit&quot;, T = &quot;rabbit&quot;\nOutput:&#xA0;3\nExplanation:\n\nAs shown below, there are 3 ways you can generate &quot;rabbit&quot; from S.\n(The caret symbol ^ means the chosen letters)\n\nrabbbit\n^^^^ ^^\nrabbbit\n^^ ^^^^\nrabbbit\n^^^ ^^^\n\n\nExample 2:\n\nInput: S = &quot;babgbag&quot;, T = &quot;bag&quot;\nOutput:&#xA0;5\nExplanation:\n\nAs shown below, there are 5 ways you can generate &quot;bag&quot; from S.\n(The caret symbol ^ means the chosen letters)\n\nbabgbag\n^^ ^\nbabgbag\n^^    ^\nbabgbag\n^    ^^\nbabgbag\n  ^  ^^\nbabgbag\n    ^^^\n\n",
+    "code": "undefinedpublic class Solution {    public int NumDistinct(string s, string t) {            }}"
+}

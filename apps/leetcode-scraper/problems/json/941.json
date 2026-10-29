@@ -1,0 +1,8 @@
+{
+    "number": "941",
+    "title": "Valid Mountain Array",
+    "url": "https://leetcode.com/problems/valid-mountain-array",
+    "difficulty": "Easy",
+    "question": "Given an array A of integers, return true if and only if it is a valid mountain array.\n\nRecall that A is a mountain array if and only if:\n\n\n\tA.length &gt;= 3\n\tThere exists some i with&#xA0;0 &lt; i&#xA0;&lt; A.length - 1&#xA0;such that:\n\t\n\t\tA[0] &lt; A[1] &lt; ... A[i-1] &lt; A[i] \n\t\tA[i] &gt; A[i+1] &gt; ... &gt; A[A.length - 1]\n\t\n\t\n\n\n&#xA0;\n\nExample 1:\n\nInput: [2,1]\nOutput: false\n\n\n\nExample 2:\n\nInput: [3,5,5]\nOutput: false\n\n\n\nExample 3:\n\nInput: [0,3,2,1]\nOutput: true\n\n\n\n&#xA0;\n\nNote:\n\n\n\t0 &lt;= A.length &lt;= 10000\n\t0 &lt;= A[i] &lt;= 10000&#xA0;\n\n\n\n&#xA0;\n\n\n&#xA0;\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool ValidMountainArray(int[] A) {            }}"
+}

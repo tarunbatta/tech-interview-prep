@@ -1,0 +1,8 @@
+{
+    "number": "483",
+    "title": "Smallest Good Base",
+    "url": "https://leetcode.com/problems/smallest-good-base",
+    "difficulty": "Hard",
+    "question": "For an integer n, we call k&gt;=2 a good base of n, if all digits of n base k are 1.\n\nNow given a string representing n, you should return the smallest good base of n in string format.\n\nExample 1:\n\nInput: &quot;13&quot;\nOutput: &quot;3&quot;\nExplanation: 13 base 3 is 111.\n\n\n&#xA0;\n\nExample 2:\n\nInput: &quot;4681&quot;\nOutput: &quot;8&quot;\nExplanation: 4681 base 8 is 11111.\n\n\n&#xA0;\n\nExample 3:\n\nInput: &quot;1000000000000000000&quot;\nOutput: &quot;999999999999999999&quot;\nExplanation: 1000000000000000000 base 999999999999999999 is 11.\n\n\n&#xA0;\n\nNote:\n\n\n\tThe range of n is [3, 10^18].\n\tThe string representing n is always valid and will not have leading zeros.\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public string SmallestGoodBase(string n) {            }}"
+}

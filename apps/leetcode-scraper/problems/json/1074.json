@@ -1,0 +1,8 @@
+{
+    "number": "1074",
+    "title": "Number of Submatrices That Sum to Target",
+    "url": "https://leetcode.com/problems/number-of-submatrices-that-sum-to-target",
+    "difficulty": "Hard",
+    "question": "Given a matrix, and a target, return the number of non-empty submatrices that sum to target.\n\nA submatrix x1, y1, x2, y2 is the set of all cells matrix[x][y] with x1 &lt;= x &lt;= x2 and y1 &lt;= y &lt;= y2.\n\nTwo submatrices (x1, y1, x2, y2) and (x1&apos;, y1&apos;, x2&apos;, y2&apos;) are different if they have some coordinate&#xA0;that is different: for example, if x1 != x1&apos;.\n\n&#xA0;\n\nExample 1:\n\nInput: matrix = [[0,1,0],[1,1,1],[0,1,0]], target = 0\nOutput: 4\nExplanation: The four 1x1 submatrices that only contain 0.\n\n\n\nExample 2:\n\nInput: matrix = [[1,-1],[-1,1]], target = 0\nOutput: 5\nExplanation: The two 1x2 submatrices, plus the two 2x1 submatrices, plus the 2x2 submatrix.\n\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= matrix.length &lt;= 300\n\t1 &lt;= matrix[0].length &lt;= 300\n\t-1000 &lt;= matrix[i] &lt;= 1000\n\t-10^8 &lt;= target &lt;= 10^8\n\n",
+    "code": "undefinedpublic class Solution {    public int NumSubmatrixSumTarget(int[][] matrix, int target) {            }}"
+}

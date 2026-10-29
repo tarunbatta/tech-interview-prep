@@ -1,0 +1,8 @@
+{
+    "number": "976",
+    "title": "Largest Perimeter Triangle",
+    "url": "https://leetcode.com/problems/largest-perimeter-triangle",
+    "difficulty": "Easy",
+    "question": "Given an array A of positive lengths, return the largest perimeter of a triangle with non-zero area, formed from 3 of these lengths.\n\nIf it is impossible to form any&#xA0;triangle of non-zero area, return 0.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: [2,1,2]\nOutput: 5\n\n\n\nExample 2:\n\nInput: [1,2,1]\nOutput: 0\n\n\n\nExample 3:\n\nInput: [3,2,3,4]\nOutput: 10\n\n\n\nExample 4:\n\nInput: [3,6,2,3]\nOutput: 8\n\n\n&#xA0;\n\nNote:\n\n\n\t3 &lt;= A.length &lt;= 10000\n\t1 &lt;= A[i] &lt;= 10^6\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int LargestPerimeter(int[] A) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "344",
+    "title": "Reverse String",
+    "url": "https://leetcode.com/problems/reverse-string",
+    "difficulty": "Easy",
+    "question": "Write a function that reverses a string. The input string is given as an array of characters char[].\n\nDo not allocate extra space for another array, you must do this by modifying the input array&#xA0;in-place with O(1) extra memory.\n\nYou may assume all the characters consist of printable ascii characters.\n\n&#xA0;\n\n\nExample 1:\n\nInput: [&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]\nOutput: [&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;]\n\n\n\nExample 2:\n\nInput: [&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;]\nOutput: [&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;]\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public void ReverseString(char[] s) {            }}"
+}

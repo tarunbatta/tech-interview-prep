@@ -1,0 +1,8 @@
+{
+    "number": "769",
+    "title": "Max Chunks To Make Sorted",
+    "url": "https://leetcode.com/problems/max-chunks-to-make-sorted",
+    "difficulty": "Medium",
+    "question": "Given an array arr that is a permutation of [0, 1, ..., arr.length - 1], we split the array into some number of &quot;chunks&quot; (partitions), and individually sort each chunk.&#xA0; After concatenating them,&#xA0;the result equals the sorted array.\n\nWhat is the most number of chunks we could have made?\n\nExample 1:\n\nInput: arr = [4,3,2,1,0]\nOutput: 1\nExplanation:\nSplitting into two or more chunks will not return the required result.\nFor example, splitting into [4, 3], [2, 1, 0] will result in [3, 4, 0, 1, 2], which isn&apos;t sorted.\n\n\nExample 2:\n\nInput: arr = [1,0,2,3,4]\nOutput: 4\nExplanation:\nWe can split into two chunks, such as [1, 0], [2, 3, 4].\nHowever, splitting into [1, 0], [2], [3], [4] is the highest number of chunks possible.\n\n\nNote:\n\n\n\tarr will have length in range [1, 10].\n\tarr[i] will be a permutation of [0, 1, ..., arr.length - 1].\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int MaxChunksToSorted(int[] arr) {            }}"
+}

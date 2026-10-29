@@ -1,0 +1,8 @@
+{
+    "number": "747",
+    "title": "Largest Number At Least Twice of Others",
+    "url": "https://leetcode.com/problems/largest-number-at-least-twice-of-others",
+    "difficulty": "Easy",
+    "question": "In a given integer array nums, there is always exactly one largest element.\n\nFind whether the largest element in the array is at least twice as much as every other number in the array.\n\nIf it is, return the index of the largest element, otherwise return -1.\n\nExample 1:\n\nInput: nums = [3, 6, 1, 0]\nOutput: 1\nExplanation: 6 is the largest integer, and for every other number in the array x,\n6 is more than twice as big as x.  The index of value 6 is 1, so we return 1.\n\n\n&#xA0;\n\nExample 2:\n\nInput: nums = [1, 2, 3, 4]\nOutput: -1\nExplanation: 4 isn&apos;t at least as big as twice the value of 3, so we return -1.\n\n\n&#xA0;\n\nNote:\n\n\n\tnums will have a length in the range [1, 50].\n\tEvery nums[i] will be an integer in the range [0, 99].\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int DominantIndex(int[] nums) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "20",
+    "title": "Valid Parentheses",
+    "url": "https://leetcode.com/problems/valid-parentheses",
+    "difficulty": "Easy",
+    "question": "Given a string containing just the characters &apos;(&apos;, &apos;)&apos;, &apos;{&apos;, &apos;}&apos;, &apos;[&apos; and &apos;]&apos;, determine if the input string is valid.\n\nAn input string is valid if:\n\n\n\tOpen brackets must be closed by the same type of brackets.\n\tOpen brackets must be closed in the correct order.\n\n\nNote that an empty string is&#xA0;also considered valid.\n\nExample 1:\n\nInput: &quot;()&quot;\nOutput: true\n\n\nExample 2:\n\nInput: &quot;()[]{}&quot;\nOutput: true\n\n\nExample 3:\n\nInput: &quot;(]&quot;\nOutput: false\n\n\nExample 4:\n\nInput: &quot;([)]&quot;\nOutput: false\n\n\nExample 5:\n\nInput: &quot;{[]}&quot;\nOutput: true\n\n",
+    "code": "undefinedpublic class Solution {    public bool IsValid(string s) {            }}"
+}

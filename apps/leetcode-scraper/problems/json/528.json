@@ -1,0 +1,8 @@
+{
+    "number": "528",
+    "title": "Random Pick with Weight",
+    "url": "https://leetcode.com/problems/random-pick-with-weight",
+    "difficulty": "Medium",
+    "question": "Given an array w of positive integers, where w[i] describes the weight of index i,&#xA0;write a function pickIndex&#xA0;which randomly&#xA0;picks an index&#xA0;in proportion&#xA0;to its weight.\n\nNote:\n\n\n\t1 &lt;= w.length &lt;= 10000\n\t1 &lt;= w[i] &lt;= 10^5\n\tpickIndex&#xA0;will be called at most 10000 times.\n\n\nExample 1:\n\nInput: \n[&quot;Solution&quot;,&quot;pickIndex&quot;]\n[[[1]],[]]\nOutput: [null,0]\n\n\n\nExample 2:\n\nInput: \n[&quot;Solution&quot;,&quot;pickIndex&quot;,&quot;pickIndex&quot;,&quot;pickIndex&quot;,&quot;pickIndex&quot;,&quot;pickIndex&quot;]\n[[[1,3]],[],[],[],[],[]]\nOutput: [null,0,1,1,1,0]\n\n\nExplanation of Input Syntax:\n\nThe input is two lists:&#xA0;the subroutines called&#xA0;and their&#xA0;arguments.&#xA0;Solution&apos;s&#xA0;constructor has one argument, the&#xA0;array w. pickIndex has no arguments.&#xA0;Arguments&#xA0;are&#xA0;always wrapped with a list, even if there aren&apos;t any.\n",
+    "code": "undefinedpublic class Solution {​    public Solution(int[] w) {            }        public int PickIndex() {            }}​/** * Your Solution object will be instantiated and called as such: * Solution obj = new Solution(w); * int param_1 = obj.PickIndex(); */"
+}

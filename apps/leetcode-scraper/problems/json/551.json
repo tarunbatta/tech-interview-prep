@@ -1,0 +1,8 @@
+{
+    "number": "551",
+    "title": "Student Attendance Record I",
+    "url": "https://leetcode.com/problems/student-attendance-record-i",
+    "difficulty": "Easy",
+    "question": "You are given a string representing an attendance record for a student. The record only contains the following three characters:\n\n\n\n&apos;A&apos; : Absent. \n&apos;L&apos; : Late.\n &apos;P&apos; : Present. \n\n\n\n\nA student could be rewarded if his attendance record doesn&apos;t contain more than one &apos;A&apos; (absent) or more than two continuous &apos;L&apos; (late).    \n\nYou need to return whether the student could be rewarded according to his attendance record.\n\nExample 1:\nInput: &quot;PPALLP&quot;\nOutput: True\n\n\n\nExample 2:\nInput: &quot;PPALLL&quot;\nOutput: False\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool CheckRecord(string s) {            }}"
+}

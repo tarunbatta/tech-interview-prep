@@ -1,0 +1,8 @@
+{
+    "number": "472",
+    "title": "Concatenated Words",
+    "url": "https://leetcode.com/problems/concatenated-words",
+    "difficulty": "Hard",
+    "question": "Given a list of words (without duplicates), please write a program that returns all concatenated words in the given list of words.\nA concatenated word is defined as a string that is comprised entirely of at least two shorter words in the given array.\n\nExample:\nInput: [&quot;cat&quot;,&quot;cats&quot;,&quot;catsdogcats&quot;,&quot;dog&quot;,&quot;dogcatsdog&quot;,&quot;hippopotamuses&quot;,&quot;rat&quot;,&quot;ratcatdogcat&quot;]\n\nOutput: [&quot;catsdogcats&quot;,&quot;dogcatsdog&quot;,&quot;ratcatdogcat&quot;]\n\nExplanation: &quot;catsdogcats&quot; can be concatenated by &quot;cats&quot;, &quot;dog&quot; and &quot;cats&quot;;  &quot;dogcatsdog&quot; can be concatenated by &quot;dog&quot;, &quot;cats&quot; and &quot;dog&quot;; &quot;ratcatdogcat&quot; can be concatenated by &quot;rat&quot;, &quot;cat&quot;, &quot;dog&quot; and &quot;cat&quot;.\n\n\n\nNote:\n\nThe number of elements of the given array will not exceed 10,000 \nThe length sum of elements in the given array will not exceed 600,000. \nAll the input string will only include lower case letters.\nThe returned elements order does not matter. \n\n",
+    "code": "undefinedpublic class Solution {    public IList<string> FindAllConcatenatedWordsInADict(string[] words) {            }}"
+}

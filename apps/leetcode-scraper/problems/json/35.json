@@ -1,0 +1,8 @@
+{
+    "number": "35",
+    "title": "Search Insert Position",
+    "url": "https://leetcode.com/problems/search-insert-position",
+    "difficulty": "Easy",
+    "question": "Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.\n\nYou may assume no duplicates in the array.\n\nExample 1:\n\nInput: [1,3,5,6], 5\nOutput: 2\n\n\nExample 2:\n\nInput: [1,3,5,6], 2\nOutput: 1\n\n\nExample 3:\n\nInput: [1,3,5,6], 7\nOutput: 4\n\n\nExample 4:\n\nInput: [1,3,5,6], 0\nOutput: 0\n\n",
+    "code": "undefinedpublic class Solution {    public int SearchInsert(int[] nums, int target) {            }}"
+}

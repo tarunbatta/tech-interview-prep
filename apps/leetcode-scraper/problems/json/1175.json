@@ -1,0 +1,8 @@
+{
+    "number": "1175",
+    "title": "Prime Arrangements",
+    "url": "https://leetcode.com/problems/prime-arrangements",
+    "difficulty": "Easy",
+    "question": "Return the number of permutations of 1 to n so that prime numbers are at prime indices (1-indexed.)\n\n(Recall that an integer&#xA0;is prime if and only if it is greater than 1, and cannot be written as a product of two positive integers&#xA0;both smaller than it.)\n\nSince the answer may be large, return the answer modulo 10^9 + 7.\n\n&#xA0;\nExample 1:\n\nInput: n = 5\nOutput: 12\nExplanation: For example [1,2,5,4,3] is a valid permutation, but [5,2,3,4,1] is not because the prime number 5 is at index 1.\n\n\nExample 2:\n\nInput: n = 100\nOutput: 682289015\n\n\n&#xA0;\nConstraints:\n\n\n\t1 &lt;= n &lt;= 100\n\n",
+    "code": "undefinedpublic class Solution {    public int NumPrimeArrangements(int n) {            }}"
+}

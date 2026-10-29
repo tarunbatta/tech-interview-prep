@@ -1,0 +1,8 @@
+{
+    "number": "611",
+    "title": "Valid Triangle Number",
+    "url": "https://leetcode.com/problems/valid-triangle-number",
+    "difficulty": "Medium",
+    "question": "Given an array consists of non-negative integers,  your task is to count the number of triplets chosen from the array that can make triangles if we take them as side lengths of a triangle.\n\nExample 1:\nInput: [2,2,3,4]\nOutput: 3\nExplanation:\nValid combinations are: \n2,3,4 (using the first 2)\n2,3,4 (using the second 2)\n2,2,3\n\n\n\nNote:\n\nThe length of the given array won&apos;t exceed 1000.\nThe integers in the given array are in the range of [0, 1000].\n\n\n",
+    "code": "undefinedpublic class Solution {    public int TriangleNumber(int[] nums) {            }}"
+}

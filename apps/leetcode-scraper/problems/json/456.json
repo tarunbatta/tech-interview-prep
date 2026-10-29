@@ -1,0 +1,8 @@
+{
+    "number": "456",
+    "title": "132 Pattern",
+    "url": "https://leetcode.com/problems/132-pattern",
+    "difficulty": "Medium",
+    "question": "\nGiven a sequence of n integers a1, a2, ..., an, a 132 pattern is a subsequence ai, aj, ak such\nthat i &lt; j &lt; k and ai &lt; ak &lt; aj. Design an algorithm that takes a list of n numbers as input and checks whether there is a 132 pattern in the list.\n\nNote: n will be less than 15,000.\n\nExample 1:\nInput: [1, 2, 3, 4]\n\nOutput: False\n\nExplanation: There is no 132 pattern in the sequence.\n\n\n\nExample 2:\nInput: [3, 1, 4, 2]\n\nOutput: True\n\nExplanation: There is a 132 pattern in the sequence: [1, 4, 2].\n\n\n\nExample 3:\nInput: [-1, 3, 2, 0]\n\nOutput: True\n\nExplanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].\n\n",
+    "code": "undefinedpublic class Solution {    public bool Find132pattern(int[] nums) {            }}"
+}

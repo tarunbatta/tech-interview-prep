@@ -1,0 +1,8 @@
+{
+    "number": "606",
+    "title": "Construct String from Binary Tree",
+    "url": "https://leetcode.com/problems/construct-string-from-binary-tree",
+    "difficulty": "Easy",
+    "question": "You need to construct a string consists of parenthesis and integers from a binary tree with the preorder traversing way.\n\nThe null node needs to be represented by empty parenthesis pair &quot;()&quot;. And you need to omit all the empty parenthesis pairs that don&apos;t affect the one-to-one mapping relationship between the string and the original binary tree.\n\nExample 1:\nInput: Binary tree: [1,2,3,4]\n       1\n     /   \\\n    2     3\n   /    \n  4     \n\nOutput: &quot;1(2(4))(3)&quot;\nExplanation: Originallay it needs to be &quot;1(2(4)())(3()())&quot;, but you need to omit all the unnecessary empty parenthesis pairs. And it will be &quot;1(2(4))(3)&quot;.\n\n\n\nExample 2:\nInput: Binary tree: [1,2,3,null,4]\n       1\n     /   \\\n    2     3\n     \\  \n      4 \n\nOutput: &quot;1(2()(4))(3)&quot;\nExplanation: Almost the same as the first example, except we can&apos;t omit the first parenthesis pair to break the one-to-one mapping relationship between the input and the output.\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public string Tree2str(TreeNode t) {            }}"
+}

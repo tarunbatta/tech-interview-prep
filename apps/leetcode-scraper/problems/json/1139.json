@@ -1,0 +1,8 @@
+{
+    "number": "1139",
+    "title": "Largest 1-Bordered Square",
+    "url": "https://leetcode.com/problems/largest-1-bordered-square",
+    "difficulty": "Medium",
+    "question": "Given a 2D grid of 0s and 1s, return the number of elements in&#xA0;the largest square&#xA0;subgrid that has all 1s on its border, or 0 if such a subgrid&#xA0;doesn&apos;t exist in the grid.\n\n&#xA0;\nExample 1:\n\nInput: grid = [[1,1,1],[1,0,1],[1,1,1]]\nOutput: 9\n\n\nExample 2:\n\nInput: grid = [[1,1,0,0]]\nOutput: 1\n\n\n&#xA0;\nConstraints:\n\n\n\t1 &lt;= grid.length &lt;= 100\n\t1 &lt;= grid[0].length &lt;= 100\n\tgrid[i][j] is 0 or 1\n",
+    "code": "undefinedpublic class Solution {    public int Largest1BorderedSquare(int[][] grid) {            }}"
+}

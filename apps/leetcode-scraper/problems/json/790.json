@@ -1,0 +1,8 @@
+{
+    "number": "790",
+    "title": "Domino and Tromino Tiling",
+    "url": "https://leetcode.com/problems/domino-and-tromino-tiling",
+    "difficulty": "Medium",
+    "question": "We have two types of tiles: a 2x1 domino shape, and an &quot;L&quot; tromino shape. These shapes may be rotated.\n\nXX  &lt;- domino\n\nXX  &lt;- &quot;L&quot; tromino\nX\n\n\nGiven N, how many ways are there to tile a 2 x N board? Return your answer modulo 10^9 + 7.\n\n(In a tiling, every square must be covered by a tile. Two tilings are different if and only if there are two 4-directionally adjacent cells on the board such that exactly one of the tilings has both squares occupied by a tile.)\n\n\nExample:\nInput: 3\nOutput: 5\nExplanation: \nThe five different ways are listed below, different letters indicates different tiles:\nXYZ XXZ XYY XXY XYY\nXYZ YYZ XZZ XYY XXY\n\nNote:\n\n\n\tN&#xA0; will be in range [1, 1000].\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int NumTilings(int N) {            }}"
+}

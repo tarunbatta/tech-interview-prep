@@ -1,0 +1,8 @@
+{
+    "number": "138",
+    "title": "Copy List with Random Pointer",
+    "url": "https://leetcode.com/problems/copy-list-with-random-pointer",
+    "difficulty": "Medium",
+    "question": "A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.\n\nReturn a deep copy of the list.\n\n&#xA0;\n\nExample 1:\n\n\n\nInput:\n{&quot;$id&quot;:&quot;1&quot;,&quot;next&quot;:{&quot;$id&quot;:&quot;2&quot;,&quot;next&quot;:null,&quot;random&quot;:{&quot;$ref&quot;:&quot;2&quot;},&quot;val&quot;:2},&quot;random&quot;:{&quot;$ref&quot;:&quot;2&quot;},&quot;val&quot;:1}\n\nExplanation:\nNode 1&apos;s value is 1, both of its next and random pointer points to Node 2.\nNode 2&apos;s value is 2, its next pointer points to null and its random pointer points to itself.\n\n\n&#xA0;\n\nNote:\n\n\n\tYou must return the copy of the given head&#xA0;as a reference to the cloned list.\n\n",
+    "code": "undefined/*// Definition for a Node.public class Node {    public int val;    public Node next;    public Node random;​    public Node(){}    public Node(int _val,Node _next,Node _random) {        val = _val;        next = _next;        random = _random;}*/public class Solution {    public Node CopyRandomList(Node head) {            }}"
+}

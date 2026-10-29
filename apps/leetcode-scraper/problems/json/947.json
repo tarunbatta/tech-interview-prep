@@ -1,0 +1,8 @@
+{
+    "number": "947",
+    "title": "Most Stones Removed with Same Row or Column",
+    "url": "https://leetcode.com/problems/most-stones-removed-with-same-row-or-column",
+    "difficulty": "Medium",
+    "question": "On a 2D plane, we place stones at some integer coordinate points.&#xA0; Each coordinate point may have at most one stone.\n\nNow, a move consists of removing a stone&#xA0;that shares a column or row with another stone on the grid.\n\nWhat is the largest possible number of moves we can make?\n\n&#xA0;\n\n\nExample 1:\n\nInput: stones = [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]\nOutput: 5\n\n\n\nExample 2:\n\nInput: stones = [[0,0],[0,2],[1,1],[2,0],[2,2]]\nOutput: 3\n\n\n\nExample 3:\n\nInput: stones = [[0,0]]\nOutput: 0\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= stones.length &lt;= 1000\n\t0 &lt;= stones[i][j] &lt; 10000\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int RemoveStones(int[][] stones) {            }}"
+}

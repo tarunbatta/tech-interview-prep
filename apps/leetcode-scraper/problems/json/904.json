@@ -1,0 +1,8 @@
+{
+    "number": "904",
+    "title": "Fruit Into Baskets",
+    "url": "https://leetcode.com/problems/fruit-into-baskets",
+    "difficulty": "Medium",
+    "question": "In a row of trees, the i-th tree&#xA0;produces&#xA0;fruit with type&#xA0;tree[i].\n\nYou start at any tree&#xA0;of your choice, then repeatedly perform the following steps:\n\n\n\tAdd one piece of fruit from this tree to your baskets.&#xA0; If you cannot, stop.\n\tMove to the next tree to the right of the current tree.&#xA0; If there is no tree to the right, stop.\n\n\nNote that you do not have any choice after the initial choice of starting tree:&#xA0;you must perform step 1, then step 2, then back to step 1, then step 2, and so on until you stop.\n\nYou have two baskets, and each basket can carry any quantity of fruit, but you want each basket to only carry one type of fruit each.\n\nWhat is the total amount of fruit you can collect with this procedure?\n\n&#xA0;\n\nExample 1:\n\nInput: [1,2,1]\nOutput: 3\nExplanation: We can collect [1,2,1].\n\n\n\nExample 2:\n\nInput: [0,1,2,2]\nOutput: 3\nExplanation: We can collect [1,2,2].\nIf we started at the first tree, we would only collect [0, 1].\n\n\n\nExample 3:\n\nInput: [1,2,3,2,2]\nOutput: 4\nExplanation: We can collect [2,3,2,2].\nIf we started at the first tree, we would only collect [1, 2].\n\n\n\nExample 4:\n\nInput: [3,3,3,1,2,1,1,2,3,3,4]\nOutput: 5\nExplanation: We can collect [1,2,1,1,2].\nIf we started at the first tree or the eighth tree, we would only collect 4 fruits.\n\n\n&#xA0;\n\n\n\n\nNote:\n\n\n\t1 &lt;= tree.length &lt;= 40000\n\t0 &lt;= tree[i] &lt; tree.length\n\n",
+    "code": "undefinedpublic class Solution {    public int TotalFruit(int[] tree) {            }}"
+}

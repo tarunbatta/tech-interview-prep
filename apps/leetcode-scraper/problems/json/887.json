@@ -1,0 +1,8 @@
+{
+    "number": "887",
+    "title": "Super Egg Drop",
+    "url": "https://leetcode.com/problems/super-egg-drop",
+    "difficulty": "Hard",
+    "question": "You are given K eggs, and you have access to a building with N floors from 1 to N.&#xA0;\n\nEach egg is identical in function, and if an egg breaks, you cannot drop it&#xA0;again.\n\nYou know that there exists a floor F with 0 &lt;= F &lt;= N such that any egg dropped at a floor higher than F will break, and any egg dropped at or below floor F will not break.\n\nEach move, you may take an egg (if you have an unbroken one) and drop it from any floor X (with&#xA0;1 &lt;= X &lt;= N).&#xA0;\n\nYour goal is to know&#xA0;with certainty&#xA0;what the value of F is.\n\nWhat is the minimum number of moves that you need to know with certainty&#xA0;what F is, regardless of the initial value of F?\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: K = 1, N = 2\nOutput: 2\nExplanation: \nDrop the egg from floor 1.  If it breaks, we know with certainty that F = 0.\nOtherwise, drop the egg from floor 2.  If it breaks, we know with certainty that F = 1.\nIf it didn&apos;t break, then we know with certainty F = 2.\nHence, we needed 2 moves in the worst case to know what F is with certainty.\n\n\n\nExample 2:\n\nInput: K = 2, N = 6\nOutput: 3\n\n\n\nExample 3:\n\nInput: K = 3, N = 14\nOutput: 4\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= K &lt;= 100\n\t1 &lt;= N &lt;= 10000\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int SuperEggDrop(int K, int N) {            }}"
+}

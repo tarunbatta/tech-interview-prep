@@ -1,0 +1,8 @@
+{
+    "number": "633",
+    "title": "Sum of Square Numbers",
+    "url": "https://leetcode.com/problems/sum-of-square-numbers",
+    "difficulty": "Easy",
+    "question": "Given a non-negative integer c, your task is to decide whether there&apos;re two integers a and b such that a2 + b2 = c.\n\nExample 1:\n\nInput: 5\nOutput: True\nExplanation: 1 * 1 + 2 * 2 = 5\n\n\n&#xA0;\n\nExample 2:\n\nInput: 3\nOutput: False\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public bool JudgeSquareSum(int c) {            }}"
+}

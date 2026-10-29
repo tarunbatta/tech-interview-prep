@@ -1,0 +1,8 @@
+{
+    "number": "372",
+    "title": "Super Pow",
+    "url": "https://leetcode.com/problems/super-pow",
+    "difficulty": "Medium",
+    "question": "Your task is to calculate ab mod 1337 where a is a positive integer and b is an extremely large positive integer given in the form of an array.\n\nExample 1:\n\n\nInput: a = 2, b = [3]\nOutput: 8\n\n\n\nExample 2:\n\nInput: a = 2, b = [1,0]\nOutput: 1024\n\n\n",
+    "code": "undefinedpublic class Solution {    public int SuperPow(int a, int[] b) {            }}"
+}

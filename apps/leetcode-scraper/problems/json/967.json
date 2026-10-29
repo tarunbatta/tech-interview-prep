@@ -1,0 +1,8 @@
+{
+    "number": "967",
+    "title": "Numbers With Same Consecutive Differences",
+    "url": "https://leetcode.com/problems/numbers-with-same-consecutive-differences",
+    "difficulty": "Medium",
+    "question": "Return all non-negative integers of length N such that the absolute difference between every two consecutive digits is K.\n\nNote that every number in the answer must not have leading zeros except for the number 0 itself. For example, 01 has one leading zero and is invalid, but 0 is valid.\n\nYou may return the answer in any order.\n\n&#xA0;\n\nExample 1:\n\nInput: N = 3, K = 7\nOutput: [181,292,707,818,929]\nExplanation: Note that 070 is not a valid number, because it has leading zeroes.\n\n\n\nExample 2:\n\nInput: N = 2, K = 1\nOutput: [10,12,21,23,32,34,43,45,54,56,65,67,76,78,87,89,98]\n\n&#xA0;\n\n\nNote:\n\n\n\t1 &lt;= N &lt;= 9\n\t0 &lt;= K &lt;= 9\n\n",
+    "code": "undefinedpublic class Solution {    public int[] NumsSameConsecDiff(int N, int K) {            }}"
+}

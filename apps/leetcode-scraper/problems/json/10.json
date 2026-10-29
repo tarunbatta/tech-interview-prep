@@ -1,0 +1,8 @@
+{
+    "number": "10",
+    "title": "Regular Expression Matching",
+    "url": "https://leetcode.com/problems/regular-expression-matching",
+    "difficulty": "Hard",
+    "question": "Given an input string (s) and a pattern (p), implement regular expression matching with support for &apos;.&apos; and &apos;*&apos;.\n\n&apos;.&apos; Matches any single character.\n&apos;*&apos; Matches zero or more of the preceding element.\n\n\nThe matching should cover the entire input string (not partial).\n\nNote:\n\n\n\ts&#xA0;could be empty and contains only lowercase letters a-z.\n\tp could be empty and contains only lowercase letters a-z, and characters like&#xA0;.&#xA0;or&#xA0;*.\n\n\nExample 1:\n\nInput:\ns = &quot;aa&quot;\np = &quot;a&quot;\nOutput: false\nExplanation: &quot;a&quot; does not match the entire string &quot;aa&quot;.\n\n\nExample 2:\n\nInput:\ns = &quot;aa&quot;\np = &quot;a*&quot;\nOutput: true\nExplanation:&#xA0;&apos;*&apos; means zero or more of the preceding&#xA0;element, &apos;a&apos;. Therefore, by repeating &apos;a&apos; once, it becomes &quot;aa&quot;.\n\n\nExample 3:\n\nInput:\ns = &quot;ab&quot;\np = &quot;.*&quot;\nOutput: true\nExplanation:&#xA0;&quot;.*&quot; means &quot;zero or more (*) of any character (.)&quot;.\n\n\nExample 4:\n\nInput:\ns = &quot;aab&quot;\np = &quot;c*a*b&quot;\nOutput: true\nExplanation:&#xA0;c can be repeated 0 times, a can be repeated 1 time. Therefore, it matches &quot;aab&quot;.\n\n\nExample 5:\n\nInput:\ns = &quot;mississippi&quot;\np = &quot;mis*is*p*.&quot;\nOutput: false\n\n",
+    "code": "undefinedpublic class Solution {    public bool IsMatch(string s, string p) {            }}"
+}

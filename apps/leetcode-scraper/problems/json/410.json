@@ -1,0 +1,8 @@
+{
+    "number": "410",
+    "title": "Split Array Largest Sum",
+    "url": "https://leetcode.com/problems/split-array-largest-sum",
+    "difficulty": "Hard",
+    "question": "Given an array which consists of non-negative integers and an integer m, you can split the array into m non-empty continuous subarrays. Write an algorithm to minimize the largest sum among these m subarrays.\n\n\nNote:\nIf n is the length of array, assume the following constraints are satisfied:\n\n1 &#x2264; n &#x2264; 1000\n1 &#x2264; m &#x2264; min(50, n)\n\n\n\nExamples: \nInput:\nnums = [7,2,5,10,8]\nm = 2\n\nOutput:\n18\n\nExplanation:\nThere are four ways to split nums into two subarrays.\nThe best way is to split it into [7,2,5] and [10,8],\nwhere the largest sum among the two subarrays is only 18.\n\n",
+    "code": "undefinedpublic class Solution {    public int SplitArray(int[] nums, int m) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "204",
+    "title": "Count Primes",
+    "url": "https://leetcode.com/problems/count-primes",
+    "difficulty": "Easy",
+    "question": "Count the number of prime numbers less than a non-negative number, n.\n\nExample:\n\nInput: 10\nOutput: 4\nExplanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.\n\n",
+    "code": "undefinedpublic class Solution {    public int CountPrimes(int n) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "396",
+    "title": "Rotate Function",
+    "url": "https://leetcode.com/problems/rotate-function",
+    "difficulty": "Medium",
+    "question": "\nGiven an array of integers A and let n to be its length.\n\n\n\nAssume Bk to be an array obtained by rotating the array A k positions clock-wise, we define a &quot;rotation function&quot; F on A as follow:\n\n\n\nF(k) = 0 * Bk[0] + 1 * Bk[1] + ... + (n-1) * Bk[n-1].\n\nCalculate the maximum value of F(0), F(1), ..., F(n-1). \n\n\nNote:\nn is guaranteed to be less than 105.\n\n\nExample:\nA = [4, 3, 2, 6]\n\nF(0) = (0 * 4) + (1 * 3) + (2 * 2) + (3 * 6) = 0 + 3 + 4 + 18 = 25\nF(1) = (0 * 6) + (1 * 4) + (2 * 3) + (3 * 2) = 0 + 4 + 6 + 6 = 16\nF(2) = (0 * 2) + (1 * 6) + (2 * 4) + (3 * 3) = 0 + 6 + 8 + 9 = 23\nF(3) = (0 * 3) + (1 * 2) + (2 * 6) + (3 * 4) = 0 + 2 + 12 + 12 = 26\n\nSo the maximum value of F(0), F(1), F(2), F(3) is F(3) = 26.\n\n",
+    "code": "undefinedpublic class Solution {    public int MaxRotateFunction(int[] A) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "1002",
+    "title": "Find Common Characters",
+    "url": "https://leetcode.com/problems/find-common-characters",
+    "difficulty": "Easy",
+    "question": "Given an array&#xA0;A of strings made only from lowercase letters, return a list of all characters that show up in all strings within the list (including duplicates).&#xA0;&#xA0;For example, if a character occurs 3 times&#xA0;in all strings but not 4 times, you need to include that character three times&#xA0;in the final answer.\n\nYou may return the answer in any order.\n\n&#xA0;\n\n\nExample 1:\n\nInput: [&quot;bella&quot;,&quot;label&quot;,&quot;roller&quot;]\nOutput: [&quot;e&quot;,&quot;l&quot;,&quot;l&quot;]\n\n\n\nExample 2:\n\nInput: [&quot;cool&quot;,&quot;lock&quot;,&quot;cook&quot;]\nOutput: [&quot;c&quot;,&quot;o&quot;]\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 100\n\t1 &lt;= A[i].length &lt;= 100\n\tA[i][j] is a lowercase letter\n\n\n",
+    "code": "undefinedpublic class Solution {    public IList<string> CommonChars(string[] A) {            }}"
+}

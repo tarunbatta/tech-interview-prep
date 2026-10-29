@@ -1,0 +1,8 @@
+{
+    "number": "101",
+    "title": "Symmetric Tree",
+    "url": "https://leetcode.com/problems/symmetric-tree",
+    "difficulty": "Easy",
+    "question": "Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).\n\nFor example, this binary tree [1,2,2,3,4,4,3] is symmetric:\n\n    1\n   / \\\n  2   2\n / \\ / \\\n3  4 4  3\n\n\n&#xA0;\n\nBut the following [1,2,2,null,3,null,3] is not:\n\n    1\n   / \\\n  2   2\n   \\   \\\n   3    3\n\n\n&#xA0;\n\nNote:\nBonus points if you could solve it both recursively and iteratively.\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public bool IsSymmetric(TreeNode root) {            }}"
+}

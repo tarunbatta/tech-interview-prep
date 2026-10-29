@@ -1,0 +1,8 @@
+{
+    "number": "566",
+    "title": "Reshape the Matrix",
+    "url": "https://leetcode.com/problems/reshape-the-matrix",
+    "difficulty": "Easy",
+    "question": "In MATLAB, there is a very useful function called &apos;reshape&apos;, which can reshape a matrix into a new one with different size but keep its original data.\n\n\n\nYou&apos;re given a matrix represented by a two-dimensional array, and two positive integers r and c representing the row number and column number of the wanted reshaped matrix, respectively.\n\n The reshaped matrix need to be filled with all the elements of the original matrix in the same row-traversing order as they were.\n\n\n\nIf the &apos;reshape&apos; operation with given parameters is possible and legal, output the new reshaped matrix; Otherwise, output the original matrix.\n\n\nExample 1:\nInput: \nnums = \n[[1,2],\n [3,4]]\nr = 1, c = 4\nOutput: \n[[1,2,3,4]]\nExplanation:The row-traversing of nums is [1,2,3,4]. The new reshaped matrix is a 1 * 4 matrix, fill it row by row by using the previous list.\n\n\n\nExample 2:\nInput: \nnums = \n[[1,2],\n [3,4]]\nr = 2, c = 4\nOutput: \n[[1,2],\n [3,4]]\nExplanation:There is no way to reshape a 2 * 2 matrix to a 2 * 4 matrix. So output the original matrix.\n\n\n\nNote:\n\nThe height and width of the given matrix is in range [1, 100].\nThe given r and c are all positive.\n\n",
+    "code": "undefinedpublic class Solution {    public int[][] MatrixReshape(int[][] nums, int r, int c) {            }}"
+}

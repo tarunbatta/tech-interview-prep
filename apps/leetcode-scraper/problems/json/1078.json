@@ -1,0 +1,8 @@
+{
+    "number": "1078",
+    "title": "Occurrences After Bigram",
+    "url": "https://leetcode.com/problems/occurrences-after-bigram",
+    "difficulty": "Easy",
+    "question": "Given words first and second, consider occurrences in some&#xA0;text of the form &quot;first second third&quot;, where second comes immediately after first, and third comes immediately after second.\n\nFor each such occurrence, add &quot;third&quot; to the answer, and return the answer.\n\n&#xA0;\n\nExample 1:\n\nInput: text = &quot;alice is a good girl she is a good student&quot;, first = &quot;a&quot;, second = &quot;good&quot;\nOutput: [&quot;girl&quot;,&quot;student&quot;]\n\n\n\nExample 2:\n\nInput: text = &quot;we will we will rock you&quot;, first = &quot;we&quot;, second = &quot;will&quot;\nOutput: [&quot;we&quot;,&quot;rock&quot;]\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= text.length &lt;= 1000\n\ttext consists of space separated words, where each word consists of lowercase English letters.\n\t1 &lt;= first.length, second.length &lt;= 10\n\tfirst and second consist of lowercase English letters.\n\n\n",
+    "code": "undefinedpublic class Solution {    public string[] FindOcurrences(string text, string first, string second) {            }}"
+}

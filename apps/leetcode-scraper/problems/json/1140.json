@@ -1,0 +1,8 @@
+{
+    "number": "1140",
+    "title": "Stone Game II",
+    "url": "https://leetcode.com/problems/stone-game-ii",
+    "difficulty": "Medium",
+    "question": "Alex&#xA0;and Lee continue their&#xA0;games with piles of stones.&#xA0; There are a number of&#xA0;piles&#xA0;arranged in a row, and each pile has a positive integer number of stones&#xA0;piles[i].&#xA0; The objective of the game is to end with the most&#xA0;stones.&#xA0;\n\nAlex and Lee take turns, with Alex starting first.&#xA0; Initially, M = 1.\n\nOn each player&apos;s turn, that player&#xA0;can take all the stones in the first X remaining piles, where 1 &lt;= X &lt;= 2M.&#xA0; Then, we set&#xA0;M = max(M, X).\n\nThe game continues until all the stones have been taken.\n\nAssuming Alex and Lee play optimally, return the maximum number of stones Alex can get.\n\n&#xA0;\nExample 1:\n\nInput: piles = [2,7,9,4,4]\nOutput: 10\nExplanation:  If Alex takes one pile at the beginning, Lee takes two piles, then Alex takes 2 piles again. Alex can get 2 + 4 + 4 = 10 piles in total. If Alex takes two piles at the beginning, then Lee can take all three piles left. In this case, Alex get 2 + 7 = 9 piles in total. So we return 10 since it&apos;s larger. \n\n\n&#xA0;\nConstraints:\n\n\n\t1 &lt;= piles.length &lt;= 100\n\t1 &lt;= piles[i]&#xA0;&lt;= 10 ^ 4\n",
+    "code": "undefinedpublic class Solution {    public int StoneGameII(int[] piles) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "717",
+    "title": "1-bit and 2-bit Characters",
+    "url": "https://leetcode.com/problems/1-bit-and-2-bit-characters",
+    "difficulty": "Easy",
+    "question": "We have two special characters. The first character can be represented by one bit 0. The second character can be represented by two bits (10 or 11).  \n\nNow given a string represented by several bits. Return whether the last character must be a one-bit character or not. The given string will always end with a zero.\n\nExample 1:\nInput: \nbits = [1, 0, 0]\nOutput: True\nExplanation: \nThe only way to decode it is two-bit character and one-bit character. So the last character is one-bit character.\n\n\n\nExample 2:\nInput: \nbits = [1, 1, 1, 0]\nOutput: False\nExplanation: \nThe only way to decode it is two-bit character and two-bit character. So the last character is NOT one-bit character.\n\n\n\nNote:\n1 &lt;= len(bits) &lt;= 1000.\nbits[i] is always 0 or 1.\n",
+    "code": "undefinedpublic class Solution {    public bool IsOneBitCharacter(int[] bits) {            }}"
+}

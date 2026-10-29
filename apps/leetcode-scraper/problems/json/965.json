@@ -1,0 +1,8 @@
+{
+    "number": "965",
+    "title": "Univalued Binary Tree",
+    "url": "https://leetcode.com/problems/univalued-binary-tree",
+    "difficulty": "Easy",
+    "question": "A binary tree is univalued if every node in the tree has the same value.\n\nReturn true&#xA0;if and only if the given tree is univalued.\n\n&#xA0;\n\nExample 1:\n\nInput: [1,1,1,1,1,null,1]\nOutput: true\n\n\n\nExample 2:\n\nInput: [2,2,2,5,2]\nOutput: false\n\n\n\n&#xA0;\n\nNote:\n\n\n\tThe number of nodes in the given tree will be in the range [1, 100].\n\tEach node&apos;s value will be an integer in the range [0, 99].\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public bool IsUnivalTree(TreeNode root) {            }}"
+}

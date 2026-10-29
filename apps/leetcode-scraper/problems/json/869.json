@@ -1,0 +1,8 @@
+{
+    "number": "869",
+    "title": "Reordered Power of 2",
+    "url": "https://leetcode.com/problems/reordered-power-of-2",
+    "difficulty": "Medium",
+    "question": "Starting with a positive integer N, we reorder the digits in any order (including the original order) such that the leading digit is not zero.\n\nReturn true&#xA0;if and only if we can do this in a way such that the resulting number is a power of 2.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: 1\nOutput: true\n\n\n\nExample 2:\n\nInput: 10\nOutput: false\n\n\n\nExample 3:\n\nInput: 16\nOutput: true\n\n\n\nExample 4:\n\nInput: 24\nOutput: false\n\n\n\nExample 5:\n\nInput: 46\nOutput: true\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= N &lt;= 10^9\n\n\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool ReorderedPowerOf2(int N) {            }}"
+}

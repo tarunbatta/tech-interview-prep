@@ -1,0 +1,8 @@
+{
+    "number": "168",
+    "title": "Excel Sheet Column Title",
+    "url": "https://leetcode.com/problems/excel-sheet-column-title",
+    "difficulty": "Easy",
+    "question": "Given a positive integer, return its corresponding column title as appear in an Excel sheet.\n\nFor example:\n\n    1 -&gt; A\n    2 -&gt; B\n    3 -&gt; C\n    ...\n    26 -&gt; Z\n    27 -&gt; AA\n    28 -&gt; AB \n    ...\n\n\nExample 1:\n\nInput: 1\nOutput: &quot;A&quot;\n\n\nExample 2:\n\nInput: 28\nOutput: &quot;AB&quot;\n\n\nExample 3:\n\nInput: 701\nOutput: &quot;ZY&quot;\n",
+    "code": "undefinedpublic class Solution {    public string ConvertToTitle(int n) {            }}"
+}

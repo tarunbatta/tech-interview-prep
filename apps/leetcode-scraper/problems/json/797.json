@@ -1,0 +1,8 @@
+{
+    "number": "797",
+    "title": "All Paths From Source to Target",
+    "url": "https://leetcode.com/problems/all-paths-from-source-to-target",
+    "difficulty": "Medium",
+    "question": "Given a directed, acyclic graph of N nodes.&#xA0; Find all possible paths from node 0 to node N-1, and return them in any order.\n\nThe graph is given as follows:&#xA0; the nodes are 0, 1, ..., graph.length - 1.&#xA0; graph[i] is a list of all nodes j for which the edge (i, j) exists.\n\nExample:\nInput: [[1,2], [3], [3], []] \nOutput: [[0,1,3],[0,2,3]] \nExplanation: The graph looks like this:\n0---&gt;1\n|    |\nv    v\n2---&gt;3\nThere are two paths: 0 -&gt; 1 -&gt; 3 and 0 -&gt; 2 -&gt; 3.\n\n\nNote:\n\n\n\tThe number of nodes in the graph will be in the range [2, 15].\n\tYou can print different paths in any order, but you should keep the order of nodes inside one path.\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<int>> AllPathsSourceTarget(int[][] graph) {            }}"
+}

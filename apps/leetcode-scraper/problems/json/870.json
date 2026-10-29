@@ -1,0 +1,8 @@
+{
+    "number": "870",
+    "title": "Advantage Shuffle",
+    "url": "https://leetcode.com/problems/advantage-shuffle",
+    "difficulty": "Medium",
+    "question": "Given two arrays A and B of equal size, the advantage of A with respect to B is the number of indices i&#xA0;for which A[i] &gt; B[i].\n\nReturn any permutation of A that maximizes its advantage with respect to B.\n\n&#xA0;\n\n\nExample 1:\n\nInput: A = [2,7,11,15], B = [1,10,4,11]\nOutput: [2,11,7,15]\n\n\n\nExample 2:\n\nInput: A = [12,24,8,32], B = [13,25,32,11]\nOutput: [24,32,8,12]\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length = B.length &lt;= 10000\n\t0 &lt;= A[i] &lt;= 10^9\n\t0 &lt;= B[i] &lt;= 10^9\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int[] AdvantageCount(int[] A, int[] B) {            }}"
+}

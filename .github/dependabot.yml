@@ -37,3 +37,21 @@ updates:
     labels:
       - "dependencies"
       - "javascript"
+
+  - package-ecosystem: "npm"
+    directory: "/apps/leetcode-scraper"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    assignees:
+      - "tarunbatta"
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "javascript"

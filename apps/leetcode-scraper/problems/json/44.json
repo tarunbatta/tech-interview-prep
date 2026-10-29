@@ -1,0 +1,8 @@
+{
+    "number": "44",
+    "title": "Wildcard Matching",
+    "url": "https://leetcode.com/problems/wildcard-matching",
+    "difficulty": "Hard",
+    "question": "Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for &apos;?&apos; and &apos;*&apos;.\n\n&apos;?&apos; Matches any single character.\n&apos;*&apos; Matches any sequence of characters (including the empty sequence).\n\n\nThe matching should cover the entire input string (not partial).\n\nNote:\n\n\n\ts&#xA0;could be empty and contains only lowercase letters a-z.\n\tp could be empty and contains only lowercase letters a-z, and characters like ?&#xA0;or&#xA0;*.\n\n\nExample 1:\n\nInput:\ns = &quot;aa&quot;\np = &quot;a&quot;\nOutput: false\nExplanation: &quot;a&quot; does not match the entire string &quot;aa&quot;.\n\n\nExample 2:\n\nInput:\ns = &quot;aa&quot;\np = &quot;*&quot;\nOutput: true\nExplanation:&#xA0;&apos;*&apos; matches any sequence.\n\n\nExample 3:\n\nInput:\ns = &quot;cb&quot;\np = &quot;?a&quot;\nOutput: false\nExplanation:&#xA0;&apos;?&apos; matches &apos;c&apos;, but the second letter is &apos;a&apos;, which does not match &apos;b&apos;.\n\n\nExample 4:\n\nInput:\ns = &quot;adceb&quot;\np = &quot;*a*b&quot;\nOutput: true\nExplanation:&#xA0;The first &apos;*&apos; matches the empty sequence, while the second &apos;*&apos; matches the substring &quot;dce&quot;.\n\n\nExample 5:\n\nInput:\ns = &quot;acdcb&quot;\np = &quot;a*c?b&quot;\nOutput: false\n\n",
+    "code": "undefinedpublic class Solution {    public bool IsMatch(string s, string p) {            }}"
+}

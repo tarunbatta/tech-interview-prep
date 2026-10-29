@@ -1,0 +1,8 @@
+{
+    "number": "74",
+    "title": "Search a 2D Matrix",
+    "url": "https://leetcode.com/problems/search-a-2d-matrix",
+    "difficulty": "Medium",
+    "question": "Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:\n\n\n\tIntegers in each row are sorted from left to right.\n\tThe first integer of each row is greater than the last integer of the previous row.\n\n\nExample 1:\n\nInput:\nmatrix = [\n  [1,   3,  5,  7],\n  [10, 11, 16, 20],\n  [23, 30, 34, 50]\n]\ntarget = 3\nOutput: true\n\n\nExample 2:\n\nInput:\nmatrix = [\n  [1,   3,  5,  7],\n  [10, 11, 16, 20],\n  [23, 30, 34, 50]\n]\ntarget = 13\nOutput: false\n",
+    "code": "undefinedpublic class Solution {    public bool SearchMatrix(int[][] matrix, int target) {            }}"
+}

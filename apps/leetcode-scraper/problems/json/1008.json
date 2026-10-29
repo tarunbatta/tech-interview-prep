@@ -1,0 +1,8 @@
+{
+    "number": "1008",
+    "title": "Construct Binary Search Tree from Preorder Traversal",
+    "url": "https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal",
+    "difficulty": "Medium",
+    "question": "Return the root node of a binary search tree that matches the given preorder traversal.\n\n(Recall that a binary search tree&#xA0;is a binary tree where for every node, any descendant of node.left has a value &lt;&#xA0;node.val, and any descendant of node.right has a value &gt;&#xA0;node.val.&#xA0; Also recall that a preorder traversal&#xA0;displays the value of the&#xA0;node first, then traverses node.left, then traverses node.right.)\n\n&#xA0;\n\nExample 1:\n\nInput: [8,5,1,7,10,12]\nOutput: [8,5,10,1,7,null,12]\n\n\n\n&#xA0;\n\nNote:&#xA0;\n\n\n\t1 &lt;= preorder.length &lt;= 100\n\tThe values of preorder are distinct.\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public TreeNode BstFromPreorder(int[] preorder) {            }}"
+}

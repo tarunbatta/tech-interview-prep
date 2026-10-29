@@ -1,0 +1,8 @@
+{
+    "number": "290",
+    "title": "Word Pattern",
+    "url": "https://leetcode.com/problems/word-pattern",
+    "difficulty": "Easy",
+    "question": "Given a pattern and a string str, find if str follows the same pattern.\n\nHere follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.\n\nExample 1:\n\nInput: pattern = &quot;abba&quot;, str = &quot;dog cat cat dog&quot;\nOutput: true\n\nExample 2:\n\nInput:pattern = &quot;abba&quot;, str = &quot;dog cat cat fish&quot;\nOutput: false\n\nExample 3:\n\nInput: pattern = &quot;aaaa&quot;, str = &quot;dog cat cat dog&quot;\nOutput: false\n\nExample 4:\n\nInput: pattern = &quot;abba&quot;, str = &quot;dog dog dog dog&quot;\nOutput: false\n\nNotes:\nYou may assume pattern contains only lowercase letters, and str contains lowercase letters that may be separated by a single space.\n",
+    "code": "undefinedpublic class Solution {    public bool WordPattern(string pattern, string str) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "922",
+    "title": "Sort Array By Parity II",
+    "url": "https://leetcode.com/problems/sort-array-by-parity-ii",
+    "difficulty": "Easy",
+    "question": "Given an array A&#xA0;of non-negative integers, half of the integers in A are odd, and half of the integers are even.\n\nSort the array so that whenever A[i] is odd, i is odd; and whenever A[i] is even, i is even.\n\nYou may return any answer array that satisfies this condition.\n\n&#xA0;\n\nExample 1:\n\nInput: [4,2,5,7]\nOutput: [4,5,2,7]\nExplanation: [4,7,2,5], [2,5,4,7], [2,7,4,5] would also have been accepted.\n\n\n&#xA0;\n\nNote:\n\n\n\t2 &lt;= A.length &lt;= 20000\n\tA.length % 2 == 0\n\t0 &lt;= A[i] &lt;= 1000\n\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int[] SortArrayByParityII(int[] A) {            }}"
+}

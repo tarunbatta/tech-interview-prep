@@ -1,0 +1,8 @@
+{
+    "number": "143",
+    "title": "Reorder List",
+    "url": "https://leetcode.com/problems/reorder-list",
+    "difficulty": "Medium",
+    "question": "Given a singly linked list L: L0&#x2192;L1&#x2192;&#x2026;&#x2192;Ln-1&#x2192;Ln,\nreorder it to: L0&#x2192;Ln&#x2192;L1&#x2192;Ln-1&#x2192;L2&#x2192;Ln-2&#x2192;&#x2026;\n\nYou may not modify the values in the list&apos;s nodes, only nodes itself may be changed.\n\nExample 1:\n\nGiven 1-&gt;2-&gt;3-&gt;4, reorder it to 1-&gt;4-&gt;2-&gt;3.\n\nExample 2:\n\nGiven 1-&gt;2-&gt;3-&gt;4-&gt;5, reorder it to 1-&gt;5-&gt;2-&gt;4-&gt;3.\n\n",
+    "code": "undefined/** * Definition for singly-linked list. * public class ListNode { *     public int val; *     public ListNode next; *     public ListNode(int x) { val = x; } * } */public class Solution {    public void ReorderList(ListNode head) {            }}"
+}

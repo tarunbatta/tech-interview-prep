@@ -1,0 +1,8 @@
+{
+    "number": "696",
+    "title": "Count Binary Substrings",
+    "url": "https://leetcode.com/problems/count-binary-substrings",
+    "difficulty": "Easy",
+    "question": "Give a string s, count the number of non-empty (contiguous) substrings that have the same number of 0&apos;s and 1&apos;s, and all the 0&apos;s and all the 1&apos;s in these substrings are grouped consecutively. \n\nSubstrings that occur multiple times are counted the number of times they occur.\n\nExample 1:\nInput: &quot;00110011&quot;\nOutput: 6\nExplanation: There are 6 substrings that have equal number of consecutive 1&apos;s and 0&apos;s: &quot;0011&quot;, &quot;01&quot;, &quot;1100&quot;, &quot;10&quot;, &quot;0011&quot;, and &quot;01&quot;.\nNotice that some of these substrings repeat and are counted the number of times they occur.\nAlso, &quot;00110011&quot; is not a valid substring because all the 0&apos;s (and 1&apos;s) are not grouped together.\n\n\n\nExample 2:\nInput: &quot;10101&quot;\nOutput: 4\nExplanation: There are 4 substrings: &quot;10&quot;, &quot;01&quot;, &quot;10&quot;, &quot;01&quot; that have equal number of consecutive 1&apos;s and 0&apos;s.\n\n\n\nNote:\ns.length will be between 1 and 50,000.\ns will only consist of &quot;0&quot; or &quot;1&quot; characters.\n",
+    "code": "undefinedpublic class Solution {    public int CountBinarySubstrings(string s) {            }}"
+}

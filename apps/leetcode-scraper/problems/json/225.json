@@ -1,0 +1,8 @@
+{
+    "number": "225",
+    "title": "Implement Stack using Queues",
+    "url": "https://leetcode.com/problems/implement-stack-using-queues",
+    "difficulty": "Easy",
+    "question": "Implement the following operations of a stack using queues.\n\n\n\tpush(x) -- Push element x onto stack.\n\tpop() -- Removes the element on top of the stack.\n\ttop() -- Get the top element.\n\tempty() -- Return whether the stack is empty.\n\n\nExample:\n\nMyStack stack = new MyStack();\n\nstack.push(1);\nstack.push(2);  \nstack.top();   // returns 2\nstack.pop();   // returns 2\nstack.empty(); // returns false\n\nNotes:\n\n\n\tYou must use only standard operations of a queue -- which means only push to back, peek/pop from front, size, and is empty operations are valid.\n\tDepending on your language, queue may not be supported natively. You may simulate a queue by using a list or deque (double-ended queue), as long as you use only standard operations of a queue.\n\tYou may assume that all operations are valid (for example, no pop or top operations will be called on an empty stack).\n\n",
+    "code": "undefinedpublic class MyStack {​    /** Initialize your data structure here. */    public MyStack() {            }        /** Push element x onto stack. */    public void Push(int x) {            }        /** Removes the element on top of the stack and returns that element. */    public int Pop() {            }        /** Get the top element. */    public int Top() {            }        /** Returns whether the stack is empty. */    public bool Empty() {            }}​/** * Your MyStack object will be instantiated and called as such: * MyStack obj = new MyStack(); * obj.Push(x); * int param_2 = obj.Pop(); * int param_3 = obj.Top(); * bool param_4 = obj.Empty(); */"
+}

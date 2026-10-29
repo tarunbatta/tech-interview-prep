@@ -1,0 +1,8 @@
+{
+    "number": "679",
+    "title": "24 Game",
+    "url": "https://leetcode.com/problems/24-game",
+    "difficulty": "Hard",
+    "question": "\nYou have 4 cards each containing a number from 1 to 9.  You need to judge whether they could operated through *, /, +, -, (, ) to get the value of 24.\n\n\nExample 1:\nInput: [4, 1, 8, 7]\nOutput: True\nExplanation: (8-4) * (7-1) = 24\n\n\n\nExample 2:\nInput: [1, 2, 1, 2]\nOutput: False\n\n\n\nNote:\n\nThe division operator / represents real division, not integer division.  For example, 4 / (1 - 2/3) = 12.\nEvery operation done is between two numbers.  In particular, we cannot use - as a unary operator.  For example, with [1, 1, 1, 1] as input, the expression -1 - 1 - 1 - 1 is not allowed.\nYou cannot concatenate numbers together.  For example, if the input is [1, 2, 1, 2], we cannot write this as 12 + 12.\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool JudgePoint24(int[] nums) {            }}"
+}

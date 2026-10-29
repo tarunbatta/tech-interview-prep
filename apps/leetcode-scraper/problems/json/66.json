@@ -1,0 +1,8 @@
+{
+    "number": "66",
+    "title": "Plus One",
+    "url": "https://leetcode.com/problems/plus-one",
+    "difficulty": "Easy",
+    "question": "Given a non-empty array of digits&#xA0;representing a non-negative integer, plus one to the integer.\n\nThe digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.\n\nYou may assume the integer does not contain any leading zero, except the number 0 itself.\n\nExample 1:\n\nInput: [1,2,3]\nOutput: [1,2,4]\nExplanation: The array represents the integer 123.\n\n\nExample 2:\n\nInput: [4,3,2,1]\nOutput: [4,3,2,2]\nExplanation: The array represents the integer 4321.\n",
+    "code": "undefinedpublic class Solution {    public int[] PlusOne(int[] digits) {            }}"
+}

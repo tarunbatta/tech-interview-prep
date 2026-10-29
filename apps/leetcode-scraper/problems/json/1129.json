@@ -1,0 +1,8 @@
+{
+    "number": "1129",
+    "title": "Shortest Path with Alternating Colors",
+    "url": "https://leetcode.com/problems/shortest-path-with-alternating-colors",
+    "difficulty": "Medium",
+    "question": "Consider a directed graph, with nodes labelled 0, 1, ..., n-1.&#xA0; In this graph, each edge is either red or blue, and there could&#xA0;be self-edges or parallel edges.\n\nEach [i, j] in red_edges denotes a red directed edge from node i to node j.&#xA0; Similarly, each [i, j] in blue_edges denotes a blue directed edge from node i to node j.\n\nReturn an array answer&#xA0;of length n,&#xA0;where each&#xA0;answer[X]&#xA0;is&#xA0;the length of the shortest path from node 0&#xA0;to node X&#xA0;such that the edge colors alternate along the path (or -1 if such a path doesn&apos;t exist).\n\n&#xA0;\nExample 1:\nInput: n = 3, red_edges = [[0,1],[1,2]], blue_edges = []\nOutput: [0,1,-1]\nExample 2:\nInput: n = 3, red_edges = [[0,1]], blue_edges = [[2,1]]\nOutput: [0,1,-1]\nExample 3:\nInput: n = 3, red_edges = [[1,0]], blue_edges = [[2,1]]\nOutput: [0,-1,-1]\nExample 4:\nInput: n = 3, red_edges = [[0,1]], blue_edges = [[1,2]]\nOutput: [0,1,2]\nExample 5:\nInput: n = 3, red_edges = [[0,1],[0,2]], blue_edges = [[1,0]]\nOutput: [0,1,1]\n\n&#xA0;\nConstraints:\n\n\n\t1 &lt;= n &lt;= 100\n\tred_edges.length &lt;= 400\n\tblue_edges.length &lt;= 400\n\tred_edges[i].length == blue_edges[i].length == 2\n\t0 &lt;= red_edges[i][j], blue_edges[i][j] &lt; n\n",
+    "code": "undefinedpublic class Solution {    public int[] ShortestAlternatingPaths(int n, int[][] red_edges, int[][] blue_edges) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "409",
+    "title": "Longest Palindrome",
+    "url": "https://leetcode.com/problems/longest-palindrome",
+    "difficulty": "Easy",
+    "question": "Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.\n\nThis is case sensitive, for example &quot;Aa&quot; is not considered a palindrome here.\n\nNote:\nAssume the length of given string will not exceed 1,010.\n\n\nExample: \nInput:\n&quot;abccccdd&quot;\n\nOutput:\n7\n\nExplanation:\nOne longest palindrome that can be built is &quot;dccaccd&quot;, whose length is 7.\n\n",
+    "code": "undefinedpublic class Solution {    public int LongestPalindrome(string s) {            }}"
+}

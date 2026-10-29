@@ -1,0 +1,8 @@
+{
+    "number": "87",
+    "title": "Scramble String",
+    "url": "https://leetcode.com/problems/scramble-string",
+    "difficulty": "Hard",
+    "question": "Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.\n\nBelow is one possible representation of s1 = &quot;great&quot;:\n\n    great\n   /    \\\n  gr    eat\n / \\    /  \\\ng   r  e   at\n           / \\\n          a   t\n\n\nTo scramble the string, we may choose any non-leaf node and swap its two children.\n\nFor example, if we choose the node &quot;gr&quot; and swap its two children, it produces a scrambled string &quot;rgeat&quot;.\n\n    rgeat\n   /    \\\n  rg    eat\n / \\    /  \\\nr   g  e   at\n           / \\\n          a   t\n\n\nWe say that &quot;rgeat&quot; is a scrambled string of &quot;great&quot;.\n\nSimilarly, if we continue to swap the children of nodes &quot;eat&quot; and &quot;at&quot;, it produces a scrambled string &quot;rgtae&quot;.\n\n    rgtae\n   /    \\\n  rg    tae\n / \\    /  \\\nr   g  ta  e\n       / \\\n      t   a\n\n\nWe say that &quot;rgtae&quot; is a scrambled string of &quot;great&quot;.\n\nGiven two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1.\n\nExample 1:\n\nInput: s1 = &quot;great&quot;, s2 = &quot;rgeat&quot;\nOutput: true\n\n\nExample 2:\n\nInput: s1 = &quot;abcde&quot;, s2 = &quot;caebd&quot;\nOutput: false\n",
+    "code": "undefinedpublic class Solution {    public bool IsScramble(string s1, string s2) {            }}"
+}

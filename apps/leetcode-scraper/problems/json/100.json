@@ -1,0 +1,8 @@
+{
+    "number": "100",
+    "title": "Same Tree",
+    "url": "https://leetcode.com/problems/same-tree",
+    "difficulty": "Easy",
+    "question": "Given two binary trees, write a function to check if they are the same or not.\n\nTwo binary trees are considered the same if they are structurally identical and the nodes have the same value.\n\nExample 1:\n\nInput:     1         1\n          / \\       / \\\n         2   3     2   3\n\n        [1,2,3],   [1,2,3]\n\nOutput: true\n\n\nExample 2:\n\nInput:     1         1\n          /           \\\n         2             2\n\n        [1,2],     [1,null,2]\n\nOutput: false\n\n\nExample 3:\n\nInput:     1         1\n          / \\       / \\\n         2   1     1   2\n\n        [1,2,1],   [1,1,2]\n\nOutput: false\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public bool IsSameTree(TreeNode p, TreeNode q) {            }}"
+}

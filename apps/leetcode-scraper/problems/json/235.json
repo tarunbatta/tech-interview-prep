@@ -1,0 +1,8 @@
+{
+    "number": "235",
+    "title": "Lowest Common Ancestor of a Binary Search Tree",
+    "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree",
+    "difficulty": "Easy",
+    "question": "Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.\n\nAccording to the definition of LCA on Wikipedia: &#x201C;The lowest common ancestor is defined between two nodes p and q&#xA0;as the lowest node in T that has both p and q&#xA0;as descendants (where we allow a node to be a descendant of itself).&#x201D;\n\nGiven binary search tree:&#xA0; root =&#xA0;[6,2,8,0,4,7,9,null,null,3,5]\n\n&#xA0;\n\nExample 1:\n\nInput: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8\nOutput: 6\nExplanation: The LCA of nodes 2 and 8 is 6.\n\n\nExample 2:\n\nInput: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4\nOutput: 2\nExplanation: The LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.\n\n\n&#xA0;\n\nNote:\n\n\n\tAll of the nodes&apos; values will be unique.\n\tp and q are different and both values will&#xA0;exist in the BST.\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public TreeNode LowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {            }}"
+}

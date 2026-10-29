@@ -1,0 +1,8 @@
+{
+    "number": "854",
+    "title": "K-Similar Strings",
+    "url": "https://leetcode.com/problems/k-similar-strings",
+    "difficulty": "Hard",
+    "question": "Strings&#xA0;A and B are K-similar (for some non-negative integer K) if we can swap the positions of two letters in A exactly K&#xA0;times so that the resulting string equals B.\n\nGiven two anagrams A and B, return the smallest K&#xA0;for which A and B are K-similar.\n\nExample 1:\n\nInput: A = &quot;ab&quot;, B = &quot;ba&quot;\nOutput: 1\n\n\n\nExample 2:\n\nInput: A = &quot;abc&quot;, B = &quot;bca&quot;\nOutput: 2\n\n\n\nExample 3:\n\nInput: A = &quot;abac&quot;, B = &quot;baca&quot;\nOutput: 2\n\n\n\nExample 4:\n\nInput: A = &quot;aabc&quot;, B = &quot;abca&quot;\nOutput: 2\n\n\n\n\nNote:\n\n\n\t1 &lt;= A.length == B.length &lt;= 20\n\tA and B contain only lowercase letters from the set {&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;, &apos;f&apos;}\n\n",
+    "code": "undefinedpublic class Solution {    public int KSimilarity(string A, string B) {            }}"
+}

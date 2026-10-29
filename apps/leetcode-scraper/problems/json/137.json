@@ -1,0 +1,8 @@
+{
+    "number": "137",
+    "title": "Single Number II",
+    "url": "https://leetcode.com/problems/single-number-ii",
+    "difficulty": "Medium",
+    "question": "Given a non-empty&#xA0;array of integers, every element appears three times except for one, which appears exactly once. Find that single one.\n\nNote:\n\nYour algorithm should have a linear runtime complexity. Could you implement it without using extra memory?\n\nExample 1:\n\nInput: [2,2,3,2]\nOutput: 3\n\n\nExample 2:\n\nInput: [0,1,0,1,0,1,99]\nOutput: 99\n",
+    "code": "undefinedpublic class Solution {    public int SingleNumber(int[] nums) {            }}"
+}

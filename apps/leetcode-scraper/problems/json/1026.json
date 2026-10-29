@@ -1,0 +1,8 @@
+{
+    "number": "1026",
+    "title": "Maximum Difference Between Node and Ancestor",
+    "url": "https://leetcode.com/problems/maximum-difference-between-node-and-ancestor",
+    "difficulty": "Medium",
+    "question": "Given the root of a binary tree, find the maximum value V for which there exists different nodes A and B where V = |A.val - B.val|&#xA0;and A is an ancestor of B.\n\n(A node A is an ancestor of B if either: any child of A is equal to B, or any child of A is an ancestor of B.)\n\n&#xA0;\n\nExample 1:\n\n\n\nInput: [8,3,10,1,6,null,14,null,null,4,7,13]\nOutput: 7\nExplanation: \nWe have various ancestor-node differences, some of which are given below :\n|8 - 3| = 5\n|3 - 7| = 4\n|8 - 1| = 7\n|10 - 13| = 3\nAmong all possible differences, the maximum value of 7 is obtained by |8 - 1| = 7.\n\n\n&#xA0;\n\nNote:\n\n\n\tThe number of nodes in the tree is between 2 and 5000.\n\tEach node will have value between 0 and 100000.\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public int MaxAncestorDiff(TreeNode root) {            }}"
+}

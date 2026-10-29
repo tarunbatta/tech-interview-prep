@@ -1,0 +1,8 @@
+{
+    "number": "78",
+    "title": "Subsets",
+    "url": "https://leetcode.com/problems/subsets",
+    "difficulty": "Medium",
+    "question": "Given a set of distinct integers, nums, return all possible subsets (the power set).\n\nNote: The solution set must not contain duplicate subsets.\n\nExample:\n\nInput: nums = [1,2,3]\nOutput:\n[\n  [3],\n&#xA0; [1],\n&#xA0; [2],\n&#xA0; [1,2,3],\n&#xA0; [1,3],\n&#xA0; [2,3],\n&#xA0; [1,2],\n&#xA0; []\n]\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<int>> Subsets(int[] nums) {            }}"
+}

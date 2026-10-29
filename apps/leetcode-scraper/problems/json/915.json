@@ -1,0 +1,8 @@
+{
+    "number": "915",
+    "title": "Partition Array into Disjoint Intervals",
+    "url": "https://leetcode.com/problems/partition-array-into-disjoint-intervals",
+    "difficulty": "Medium",
+    "question": "Given an array A, partition it&#xA0;into two (contiguous) subarrays&#xA0;left&#xA0;and right&#xA0;so that:\n\n\n\tEvery element in left&#xA0;is less than or equal to every element in right.\n\tleft and right are non-empty.\n\tleft&#xA0;has the smallest possible size.\n\n\nReturn the length of left after such a partitioning.&#xA0; It is guaranteed that such a partitioning exists.\n\n&#xA0;\n\nExample 1:\n\nInput: [5,0,3,8,6]\nOutput: 3\nExplanation: left = [5,0,3], right = [8,6]\n\n\n\nExample 2:\n\nInput: [1,1,1,0,6,12]\nOutput: 4\nExplanation: left = [1,1,1,0], right = [6,12]\n\n\n&#xA0;\n\n\nNote:\n\n\n\t2 &lt;= A.length&#xA0;&lt;= 30000\n\t0 &lt;= A[i] &lt;= 10^6\n\tIt is guaranteed there is at least one way to partition A as described.\n\n\n\n&#xA0;\n\n",
+    "code": "undefinedpublic class Solution {    public int PartitionDisjoint(int[] A) {            }}"
+}

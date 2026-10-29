@@ -1,0 +1,8 @@
+{
+    "number": "467",
+    "title": "Unique Substrings in Wraparound String",
+    "url": "https://leetcode.com/problems/unique-substrings-in-wraparound-string",
+    "difficulty": "Medium",
+    "question": "Consider the string s to be the infinite wraparound string of &quot;abcdefghijklmnopqrstuvwxyz&quot;, so s will look like this: &quot;...zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd....&quot;.\n\nNow we have another string p. Your job is to find out how many unique non-empty substrings of p are present in s. In particular, your input is the string p and you need to output the number of different non-empty substrings of p in the string s.\n\nNote: p consists of only lowercase English letters and the size of p might be over 10000.\n\nExample 1:\nInput: &quot;a&quot;\nOutput: 1\n\nExplanation: Only the substring &quot;a&quot; of string &quot;a&quot; is in the string \u0010s.\n\n\n\nExample 2:\nInput: &quot;cac&quot;\nOutput: 2\nExplanation: There are two substrings &quot;a&quot;, &quot;c&quot; of string &quot;cac&quot; in the string s.\n\n\n\nExample 3:\nInput: &quot;zab&quot;\nOutput: 6\nExplanation: There are six substrings &quot;z&quot;, &quot;a&quot;, &quot;b&quot;, &quot;za&quot;, &quot;ab&quot;, &quot;zab&quot; of string &quot;zab&quot; in the string s.\n\n",
+    "code": "undefinedpublic class Solution {    public int FindSubstringInWraproundString(string p) {            }}"
+}

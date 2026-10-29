@@ -1,0 +1,8 @@
+{
+    "number": "335",
+    "title": "Self Crossing",
+    "url": "https://leetcode.com/problems/self-crossing",
+    "difficulty": "Hard",
+    "question": "You are given an array x of n positive numbers. You start at point (0,0) and moves x[0] metres to the north, then x[1] metres to the west, x[2] metres to the south, x[3] metres to the east and so on. In other words, after each move your direction changes counter-clockwise.\n\nWrite a one-pass algorithm with O(1) extra space to determine, if your path crosses itself, or not.\n\n&#xA0;\n\nExample 1:\n\n&#x250C;&#x2500;&#x2500;&#x2500;&#x2510;\n&#x2502; &#xA0; &#x2502;\n&#x2514;&#x2500;&#x2500;&#x2500;&#x253C;&#x2500;&#x2500;&gt;\n&#xA0; &#xA0; &#x2502;\n\nInput: [2,1,1,2]\nOutput: true\n\n\nExample 2:\n\n&#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;\n&#x2502; &#xA0; &#xA0; &#xA0;&#x2502;\n&#x2502;\n&#x2502;\n&#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&gt;\n\nInput: [1,2,3,4]\nOutput: false \n\n\nExample 3:\n\n&#x250C;&#x2500;&#x2500;&#x2500;&#x2510;\n&#x2502; &#xA0; &#x2502;\n&#x2514;&#x2500;&#x2500;&#x2500;&#x253C;&gt;\n\nInput: [1,1,1,1]\nOutput: true \n\n",
+    "code": "undefinedpublic class Solution {    public bool IsSelfCrossing(int[] x) {            }}"
+}

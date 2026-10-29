@@ -1,0 +1,8 @@
+{
+    "number": "313",
+    "title": "Super Ugly Number",
+    "url": "https://leetcode.com/problems/super-ugly-number",
+    "difficulty": "Medium",
+    "question": "Write a program to find the nth super ugly number.\n\nSuper ugly numbers are positive numbers whose all prime factors are in the given prime list primes of size k.\n\nExample:\n\nInput: n = 12, primes = [2,7,13,19]\nOutput: 32 \nExplanation: [1,2,4,7,8,13,14,16,19,26,28,32] is the sequence of the first 12 \n             super ugly numbers given primes = [2,7,13,19] of size 4.\n\nNote:\n\n\n\t1 is a super ugly number for any given primes.\n\tThe given numbers in primes are in ascending order.\n\t0 &lt; k &#x2264; 100, 0 &lt; n &#x2264; 106, 0 &lt; primes[i] &lt; 1000.\n\tThe nth super ugly number is guaranteed to fit in a 32-bit signed integer.\n\n",
+    "code": "undefinedpublic class Solution {    public int NthSuperUglyNumber(int n, int[] primes) {            }}"
+}

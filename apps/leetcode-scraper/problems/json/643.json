@@ -1,0 +1,8 @@
+{
+    "number": "643",
+    "title": "Maximum Average Subarray I",
+    "url": "https://leetcode.com/problems/maximum-average-subarray-i",
+    "difficulty": "Easy",
+    "question": "Given an array consisting of n integers, find the contiguous subarray of given length k that has the maximum average value. And you need to output the maximum average value.\n\nExample 1:\n\nInput: [1,12,-5,-6,50,3], k = 4\nOutput: 12.75\nExplanation: Maximum average is (12-5-6+50)/4 = 51/4 = 12.75\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= k &lt;= n &lt;= 30,000.\n\tElements of the given array will be in the range [-10,000, 10,000].\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public double FindMaxAverage(int[] nums, int k) {            }}"
+}

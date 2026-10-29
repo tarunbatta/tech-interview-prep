@@ -1,0 +1,8 @@
+{
+    "number": "109",
+    "title": "Convert Sorted List to Binary Search Tree",
+    "url": "https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree",
+    "difficulty": "Medium",
+    "question": "Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.\n\nFor this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.\n\nExample:\n\nGiven the sorted linked list: [-10,-3,0,5,9],\n\nOne possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:\n\n      0\n     / \\\n   -3   9\n   /   /\n -10  5\n\n",
+    "code": "undefined/** * Definition for singly-linked list. * public class ListNode { *     public int val; *     public ListNode next; *     public ListNode(int x) { val = x; } * } *//** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public TreeNode SortedListToBST(ListNode head) {            }}"
+}

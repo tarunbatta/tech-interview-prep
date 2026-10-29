@@ -1,0 +1,8 @@
+{
+    "number": "17",
+    "title": "Letter Combinations of a Phone Number",
+    "url": "https://leetcode.com/problems/letter-combinations-of-a-phone-number",
+    "difficulty": "Medium",
+    "question": "Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent.\n\nA mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.\n\n\n\nExample:\n\nInput: &quot;23&quot;\nOutput: [&quot;ad&quot;, &quot;ae&quot;, &quot;af&quot;, &quot;bd&quot;, &quot;be&quot;, &quot;bf&quot;, &quot;cd&quot;, &quot;ce&quot;, &quot;cf&quot;].\n\n\nNote:\n\nAlthough the above answer is in lexicographical order, your answer could be in any order you want.\n",
+    "code": "undefinedpublic class Solution {    public IList<string> LetterCombinations(string digits) {            }}"
+}

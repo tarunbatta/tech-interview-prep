@@ -1,0 +1,8 @@
+{
+    "number": "94",
+    "title": "Binary Tree Inorder Traversal",
+    "url": "https://leetcode.com/problems/binary-tree-inorder-traversal",
+    "difficulty": "Medium",
+    "question": "Given a binary tree, return the inorder traversal of its nodes&apos; values.\n\nExample:\n\nInput: [1,null,2,3]\n   1\n    \\\n     2\n    /\n   3\n\nOutput: [1,3,2]\n\nFollow up: Recursive solution is trivial, could you do it iteratively?\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public IList<int> InorderTraversal(TreeNode root) {            }}"
+}

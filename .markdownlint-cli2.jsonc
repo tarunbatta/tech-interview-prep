@@ -4,6 +4,7 @@
   },
   "ignores": [
     "LICENSE",
-    "src/ctci/**"
+    "src/ctci/**",
+    "**/node_modules/**"
   ]
 }

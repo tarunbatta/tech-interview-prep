@@ -1,0 +1,8 @@
+{
+    "number": "1090",
+    "title": "Largest Values From Labels",
+    "url": "https://leetcode.com/problems/largest-values-from-labels",
+    "difficulty": "Medium",
+    "question": "We have a set of items: the i-th item has value values[i] and label labels[i].\n\nThen, we choose&#xA0;a subset S of these items, such that:\n\n\n\t|S| &lt;= num_wanted\n\tFor every label L, the number of items in S with&#xA0;label L is &lt;= use_limit.\n\n\nReturn the largest possible sum of the subset S.\n\n&#xA0;\n\n\nExample 1:\n\nInput: values = [5,4,3,2,1], labels = [1,1,2,2,3], num_wanted = 3, use_limit = 1\nOutput: 9\nExplanation: The subset chosen is the first, third, and fifth item.\n\n\n\nExample 2:\n\nInput: values = [5,4,3,2,1], labels = [1,3,3,3,2], num_wanted = 3, use_limit = 2\nOutput: 12\nExplanation: The subset chosen is the first, second, and third item.\n\n\n\nExample 3:\n\nInput: values = [9,8,8,7,6], labels = [0,0,0,1,1], num_wanted = 3, use_limit = 1\nOutput:&#xA0;16\nExplanation: The subset chosen is the first and fourth item.\n\n\n\nExample 4:\n\nInput: values = [9,8,8,7,6], labels = [0,0,0,1,1], num_wanted = 3, use_limit = 2\nOutput: 24\nExplanation: The subset chosen is the first, second, and fourth item.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= values.length == labels.length &lt;= 20000\n\t0 &lt;= values[i], labels[i]&#xA0;&lt;= 20000\n\t1 &lt;= num_wanted, use_limit&#xA0;&lt;= values.length\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int LargestValsFromLabels(int[] values, int[] labels, int num_wanted, int use_limit) {            }}"
+}

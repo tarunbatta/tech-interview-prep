@@ -1,0 +1,8 @@
+{
+    "number": "754",
+    "title": "Reach a Number",
+    "url": "https://leetcode.com/problems/reach-a-number",
+    "difficulty": "Easy",
+    "question": "\nYou are standing at position 0 on an infinite number line.  There is a goal at position target.\n\nOn each move, you can either go left or right.  During the n-th move (starting from 1), you take n steps.\n\nReturn the minimum number of steps required to reach the destination.\n\n\nExample 1:\nInput: target = 3\nOutput: 2\nExplanation:\nOn the first move we step from 0 to 1.\nOn the second step we step from 1 to 3.\n\n\n\nExample 2:\nInput: target = 2\nOutput: 3\nExplanation:\nOn the first move we step from 0 to 1.\nOn the second move we step  from 1 to -1.\nOn the third move we step from -1 to 2.\n\n\n\nNote:\ntarget will be a non-zero integer in the range [-10^9, 10^9].\n",
+    "code": "undefinedpublic class Solution {    public int ReachNumber(int target) {            }}"
+}

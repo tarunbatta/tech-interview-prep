@@ -1,0 +1,8 @@
+{
+    "number": "949",
+    "title": "Largest Time for Given Digits",
+    "url": "https://leetcode.com/problems/largest-time-for-given-digits",
+    "difficulty": "Easy",
+    "question": "Given an array of 4 digits, return the largest 24 hour time that can be made.\n\nThe smallest 24 hour time is 00:00, and the largest is 23:59.&#xA0; Starting from 00:00, a time is larger if more time has elapsed since midnight.\n\nReturn the answer as a string of length 5.&#xA0; If no valid time can be made, return an empty string.\n\n&#xA0;\n\n\nExample 1:\n\nInput: [1,2,3,4]\nOutput: &quot;23:41&quot;\n\n\n\nExample 2:\n\nInput: [5,5,5,5]\nOutput: &quot;&quot;\n\n\n&#xA0;\n\nNote:\n\n\n\tA.length == 4\n\t0 &lt;= A[i] &lt;= 9\n\n\n",
+    "code": "undefinedpublic class Solution {    public string LargestTimeFromDigits(int[] A) {            }}"
+}

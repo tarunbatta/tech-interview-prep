@@ -1,0 +1,8 @@
+{
+    "number": "590",
+    "title": "N-ary Tree Postorder Traversal",
+    "url": "https://leetcode.com/problems/n-ary-tree-postorder-traversal",
+    "difficulty": "Easy",
+    "question": "Given an n-ary tree, return the postorder traversal of its nodes&apos; values.\n\nFor example, given a 3-ary tree:\n\n&#xA0;\n\n\n\n&#xA0;\n\nReturn its postorder traversal as: [5,6,3,2,4,1].\n&#xA0;\n\nNote:\n\nRecursive solution is trivial, could you do it iteratively?\n",
+    "code": "undefined/*// Definition for a Node.public class Node {    public int val;    public IList<Node> children;​    public Node(){}    public Node(int _val,IList<Node> _children) {        val = _val;        children = _children;}*/public class Solution {    public IList<int> Postorder(Node root) {            }}"
+}

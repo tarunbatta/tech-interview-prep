@@ -70,7 +70,8 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
 tech-interview-prep/
 ├── apps/                          # Executable applications
 │   ├── chess-game/                # Console Chess game (.NET 10)
-│   └── expression-tree/           # Expression tree evaluator (.NET 10)
+│   ├── expression-tree/           # Expression tree evaluator (.NET 10)
+│   └── leetcode-scraper/          # LeetCode problem scraper & C# stub generator (Node.js)
 ├── src/                           # Problem solutions organized by category & language
 │   ├── algorithms/                # Sorting, searching, and general algorithms
 │   │   └── csharp/
@@ -130,6 +131,7 @@ npm run build
 # Run interactive apps
 npm run start:chess               # Run the console Chess game
 npm run start:expression-tree     # Run Expression Tree evaluator
+npm run start:leetcode-scraper    # Run the LeetCode problem scraper
 
 # Run algorithm problem runners
 npm run start:dotnet              # Run LeetCode C# entry point (alias: start:dotnet-core)
@@ -165,6 +167,7 @@ dotnet run --project src/leetcode/csharp
 
 ```bash
 node src/qotd/javascript/SuperArray.js
+node apps/leetcode-scraper/index.js
 ```
 
 ---
@@ -175,6 +178,7 @@ node src/qotd/javascript/SuperArray.js
 
 1. **[Console Chess Game](apps/chess-game/)** (`apps/chess-game`): Complete object-oriented console implementation of Chess in C# / .NET 10 featuring full board rendering, movement validation, and game loop.
 2. **[Expression Tree Evaluator](apps/expression-tree/)** (`apps/expression-tree`): Expression tree parser and evaluator (.NET 10) demonstrating binary expression tree construction, infix/postfix traversal, and evaluation.
+3. **[LeetCode Problem Scraper](apps/leetcode-scraper/)** (`apps/leetcode-scraper`): Node.js / Puppeteer scraper that extracts LeetCode problem descriptions and code templates, caches JSON metadata, and generates C# solution stubs.
 
 ### Categories & Multi-Language Structure
 

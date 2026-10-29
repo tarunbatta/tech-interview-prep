@@ -1,0 +1,8 @@
+{
+    "number": "395",
+    "title": "Longest Substring with At Least K Repeating Characters",
+    "url": "https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters",
+    "difficulty": "Medium",
+    "question": "\nFind the length of the longest substring T of a given string (consists of lowercase letters only) such that every character in T appears no less than k times.\n\n\nExample 1:\nInput:\ns = &quot;aaabb&quot;, k = 3\n\nOutput:\n3\n\nThe longest substring is &quot;aaa&quot;, as &apos;a&apos; is repeated 3 times.\n\n\n\nExample 2:\nInput:\ns = &quot;ababbc&quot;, k = 2\n\nOutput:\n5\n\nThe longest substring is &quot;ababb&quot;, as &apos;a&apos; is repeated 2 times and &apos;b&apos; is repeated 3 times.\n\n",
+    "code": "undefinedpublic class Solution {    public int LongestSubstring(string s, int k) {            }}"
+}

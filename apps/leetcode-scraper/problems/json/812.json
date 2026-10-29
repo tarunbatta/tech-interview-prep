@@ -1,0 +1,8 @@
+{
+    "number": "812",
+    "title": "Largest Triangle Area",
+    "url": "https://leetcode.com/problems/largest-triangle-area",
+    "difficulty": "Easy",
+    "question": "You have a list of points in the plane. Return the area of the largest triangle that can be formed by any 3 of the points.\n\nExample:\nInput: points = [[0,0],[0,1],[1,0],[0,2],[2,0]]\nOutput: 2\nExplanation: \nThe five points are show in the figure below. The red triangle is the largest.\n\n\n\n\nNotes: \n\n\n\t3 &lt;= points.length &lt;= 50.\n\tNo points will be duplicated.\n\t&#xA0;-50 &lt;= points[i][j] &lt;= 50.\n\tAnswers within&#xA0;10^-6&#xA0;of the true value will be accepted as correct.\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public double LargestTriangleArea(int[][] points) {            }}"
+}

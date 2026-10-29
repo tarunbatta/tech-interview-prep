@@ -1,0 +1,8 @@
+{
+    "number": "378",
+    "title": "Kth Smallest Element in a Sorted Matrix",
+    "url": "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix",
+    "difficulty": "Medium",
+    "question": "Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element in the matrix.\n\n\nNote that it is the kth smallest element in the sorted order, not the kth distinct element.\n\n\nExample:\nmatrix = [\n   [ 1,  5,  9],\n   [10, 11, 13],\n   [12, 13, 15]\n],\nk = 8,\n\nreturn 13.\n\n\n\nNote: \nYou may assume k is always valid, 1 &#x2264; k &#x2264; n2.",
+    "code": "undefinedpublic class Solution {    public int KthSmallest(int[][] matrix, int k) {            }}"
+}

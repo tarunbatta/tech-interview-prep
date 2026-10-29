@@ -1,0 +1,8 @@
+{
+    "number": "441",
+    "title": "Arranging Coins",
+    "url": "https://leetcode.com/problems/arranging-coins",
+    "difficulty": "Easy",
+    "question": "You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins.\n \nGiven n, find the total number of full staircase rows that can be formed.\n\nn is a non-negative integer and fits within the range of a 32-bit signed integer.\n\nExample 1:\nn = 5\n\nThe coins can form the following rows:\n&#xA4;\n&#xA4; &#xA4;\n&#xA4; &#xA4;\n\nBecause the 3rd row is incomplete, we return 2.\n\n\n\nExample 2:\nn = 8\n\nThe coins can form the following rows:\n&#xA4;\n&#xA4; &#xA4;\n&#xA4; &#xA4; &#xA4;\n&#xA4; &#xA4;\n\nBecause the 4th row is incomplete, we return 3.\n\n",
+    "code": "undefinedpublic class Solution {    public int ArrangeCoins(int n) {            }}"
+}

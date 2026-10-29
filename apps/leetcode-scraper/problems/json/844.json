@@ -1,0 +1,8 @@
+{
+    "number": "844",
+    "title": "Backspace String Compare",
+    "url": "https://leetcode.com/problems/backspace-string-compare",
+    "difficulty": "Easy",
+    "question": "Given two&#xA0;strings&#xA0;S&#xA0;and T,&#xA0;return if they are equal when both are typed into empty text editors. # means a backspace character.\n\n\nExample 1:\n\nInput: S = &quot;ab#c&quot;, T = &quot;ad#c&quot;\nOutput: true\nExplanation: Both S and T become &quot;ac&quot;.\n\n\n\nExample 2:\n\nInput: S = &quot;ab##&quot;, T = &quot;c#d#&quot;\nOutput: true\nExplanation: Both S and T become &quot;&quot;.\n\n\n\nExample 3:\n\nInput: S = &quot;a##c&quot;, T = &quot;#a#c&quot;\nOutput: true\nExplanation: Both S and T become &quot;c&quot;.\n\n\n\nExample 4:\n\nInput: S = &quot;a#c&quot;, T = &quot;b&quot;\nOutput: false\nExplanation: S becomes &quot;c&quot; while T becomes &quot;b&quot;.\n\n\nNote:\n\n\n\t1 &lt;= S.length &lt;= 200\n\t1 &lt;= T.length &lt;= 200\n\tS&#xA0;and T only contain&#xA0;lowercase letters and &apos;#&apos; characters.\n\n\nFollow up:\n\n\n\tCan you solve it in O(N) time and O(1) space?\n\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool BackspaceCompare(string S, string T) {            }}"
+}

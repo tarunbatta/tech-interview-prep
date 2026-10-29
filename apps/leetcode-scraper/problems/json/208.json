@@ -1,0 +1,8 @@
+{
+    "number": "208",
+    "title": "Implement Trie (Prefix Tree)",
+    "url": "https://leetcode.com/problems/implement-trie-prefix-tree",
+    "difficulty": "Medium",
+    "question": "Implement a trie with insert, search, and startsWith methods.\n\nExample:\n\nTrie trie = new Trie();\n\ntrie.insert(&quot;apple&quot;);\ntrie.search(&quot;apple&quot;);   // returns true\ntrie.search(&quot;app&quot;);     // returns false\ntrie.startsWith(&quot;app&quot;); // returns true\ntrie.insert(&quot;app&quot;);   \ntrie.search(&quot;app&quot;);     // returns true\n\n\nNote:\n\n\n\tYou may assume that all inputs are consist of lowercase letters a-z.\n\tAll inputs are guaranteed to be non-empty strings.\n\n",
+    "code": "undefinedpublic class Trie {​    /** Initialize your data structure here. */    public Trie() {            }        /** Inserts a word into the trie. */    public void Insert(string word) {            }        /** Returns if the word is in the trie. */    public bool Search(string word) {            }        /** Returns if there is any word in the trie that starts with the given prefix. */    public bool StartsWith(string prefix) {            }}​/** * Your Trie object will be instantiated and called as such: * Trie obj = new Trie(); * obj.Insert(word); * bool param_2 = obj.Search(word); * bool param_3 = obj.StartsWith(prefix); */"
+}

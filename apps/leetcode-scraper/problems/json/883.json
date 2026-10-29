@@ -1,0 +1,8 @@
+{
+    "number": "883",
+    "title": "Projection Area of 3D Shapes",
+    "url": "https://leetcode.com/problems/projection-area-of-3d-shapes",
+    "difficulty": "Easy",
+    "question": "On a&#xA0;N&#xA0;*&#xA0;N grid, we place some&#xA0;1 * 1 * 1&#xA0;cubes that are axis-aligned with the x, y, and z axes.\n\nEach value&#xA0;v = grid[i][j]&#xA0;represents a tower of&#xA0;v&#xA0;cubes placed on top of grid cell (i, j).\n\nNow we view the&#xA0;projection&#xA0;of these cubes&#xA0;onto the xy, yz, and zx planes.\n\nA projection is like a shadow, that&#xA0;maps our 3 dimensional figure to a 2 dimensional plane.&#xA0;\n\nHere, we are viewing the &quot;shadow&quot; when looking at the cubes from the top, the front, and the side.\n\nReturn the total area of all three projections.\n\n&#xA0;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExample 1:\n\nInput: [[2]]\nOutput: 5\n\n\n\nExample 2:\n\nInput: [[1,2],[3,4]]\nOutput: 17\nExplanation: \nHere are the three projections (&quot;shadows&quot;) of the shape made with each axis-aligned plane.\n\n\n\n\nExample 3:\n\nInput: [[1,0],[0,2]]\nOutput: 8\n\n\n\nExample 4:\n\nInput: [[1,1,1],[1,0,1],[1,1,1]]\nOutput: 14\n\n\n\nExample 5:\n\nInput: [[2,2,2],[2,1,2],[2,2,2]]\nOutput: 21\n\n\n&#xA0;\n\n\n\n\nNote:\n\n\n\t1 &lt;= grid.length = grid[0].length&#xA0;&lt;= 50\n\t0 &lt;= grid[i][j] &lt;= 50\n\n\n\n\n\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int ProjectionArea(int[][] grid) {            }}"
+}

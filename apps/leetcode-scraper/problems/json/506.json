@@ -1,0 +1,8 @@
+{
+    "number": "506",
+    "title": "Relative Ranks",
+    "url": "https://leetcode.com/problems/relative-ranks",
+    "difficulty": "Easy",
+    "question": "\nGiven scores of N athletes, find their relative ranks and the people with the top three highest scores, who will be awarded medals: &quot;Gold Medal&quot;, &quot;Silver Medal&quot; and &quot;Bronze Medal&quot;.\n\nExample 1:\nInput: [5, 4, 3, 2, 1]\nOutput: [&quot;Gold Medal&quot;, &quot;Silver Medal&quot;, &quot;Bronze Medal&quot;, &quot;4&quot;, &quot;5&quot;]\nExplanation: The first three athletes got the top three highest scores, so they got &quot;Gold Medal&quot;, &quot;Silver Medal&quot; and &quot;Bronze Medal&quot;. For the left two athletes, you just need to output their relative ranks according to their scores.\n\n\n\nNote:\n\nN is a positive integer and won&apos;t exceed 10,000.\nAll the scores of athletes are guaranteed to be unique.\n\n\n",
+    "code": "undefinedpublic class Solution {    public string[] FindRelativeRanks(int[] nums) {            }}"
+}

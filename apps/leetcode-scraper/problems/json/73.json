@@ -1,0 +1,8 @@
+{
+    "number": "73",
+    "title": "Set Matrix Zeroes",
+    "url": "https://leetcode.com/problems/set-matrix-zeroes",
+    "difficulty": "Medium",
+    "question": "Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in-place.\n\nExample 1:\n\nInput: \n[\n&#xA0; [1,1,1],\n&#xA0; [1,0,1],\n&#xA0; [1,1,1]\n]\nOutput: \n[\n&#xA0; [1,0,1],\n&#xA0; [0,0,0],\n&#xA0; [1,0,1]\n]\n\n\nExample 2:\n\nInput: \n[\n&#xA0; [0,1,2,0],\n&#xA0; [3,4,5,2],\n&#xA0; [1,3,1,5]\n]\nOutput: \n[\n&#xA0; [0,0,0,0],\n&#xA0; [0,4,5,0],\n&#xA0; [0,3,1,0]\n]\n\n\nFollow up:\n\n\n\tA straight forward solution using O(mn) space is probably a bad idea.\n\tA simple improvement uses O(m + n) space, but still not the best solution.\n\tCould you devise a constant space solution?\n\n",
+    "code": "undefinedpublic class Solution {    public void SetZeroes(int[][] matrix) {            }}"
+}

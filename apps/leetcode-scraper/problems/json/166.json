@@ -1,0 +1,8 @@
+{
+    "number": "166",
+    "title": "Fraction to Recurring Decimal",
+    "url": "https://leetcode.com/problems/fraction-to-recurring-decimal",
+    "difficulty": "Medium",
+    "question": "Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.\n\nIf the fractional part is repeating, enclose the repeating part in parentheses.\n\nExample 1:\n\nInput: numerator = 1, denominator = 2\nOutput: &quot;0.5&quot;\n\n\nExample 2:\n\nInput: numerator = 2, denominator = 1\nOutput: &quot;2&quot;\n\nExample 3:\n\nInput: numerator = 2, denominator = 3\nOutput: &quot;0.(6)&quot;\n\n",
+    "code": "undefinedpublic class Solution {    public string FractionToDecimal(int numerator, int denominator) {            }}"
+}

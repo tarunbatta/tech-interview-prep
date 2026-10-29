@@ -1,0 +1,8 @@
+{
+    "number": "930",
+    "title": "Binary Subarrays With Sum",
+    "url": "https://leetcode.com/problems/binary-subarrays-with-sum",
+    "difficulty": "Medium",
+    "question": "In an array A of 0s and 1s, how many non-empty subarrays have sum S?\n\n&#xA0;\n\nExample 1:\n\nInput: A = [1,0,1,0,1], S = 2\nOutput: 4\nExplanation: \nThe 4 subarrays are bolded below:\n[1,0,1,0,1]\n[1,0,1,0,1]\n[1,0,1,0,1]\n[1,0,1,0,1]\n\n\n&#xA0;\n\nNote:\n\n\n\tA.length &lt;= 30000\n\t0 &lt;= S &lt;= A.length\n\tA[i]&#xA0;is either 0&#xA0;or 1.\n",
+    "code": "undefinedpublic class Solution {    public int NumSubarraysWithSum(int[] A, int S) {            }}"
+}

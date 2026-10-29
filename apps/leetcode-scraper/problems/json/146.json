@@ -1,0 +1,8 @@
+{
+    "number": "146",
+    "title": "LRU Cache",
+    "url": "https://leetcode.com/problems/lru-cache",
+    "difficulty": "Medium",
+    "question": "Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and put.\n\nget(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.\nput(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.\n\nThe cache is initialized with a positive capacity.\n\nFollow up:\nCould you do both operations in O(1) time complexity?\n\nExample:\n\nLRUCache cache = new LRUCache( 2 /* capacity */ );\n\ncache.put(1, 1);\ncache.put(2, 2);\ncache.get(1);       // returns 1\ncache.put(3, 3);    // evicts key 2\ncache.get(2);       // returns -1 (not found)\ncache.put(4, 4);    // evicts key 1\ncache.get(1);       // returns -1 (not found)\ncache.get(3);       // returns 3\ncache.get(4);       // returns 4\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class LRUCache {​    public LRUCache(int capacity) {            }        public int Get(int key) {            }        public void Put(int key, int value) {            }}​/** * Your LRUCache object will be instantiated and called as such: * LRUCache obj = new LRUCache(capacity); * int param_1 = obj.Get(key); * obj.Put(key,value); */"
+}

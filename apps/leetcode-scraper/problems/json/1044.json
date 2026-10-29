@@ -1,0 +1,8 @@
+{
+    "number": "1044",
+    "title": "Longest Duplicate Substring",
+    "url": "https://leetcode.com/problems/longest-duplicate-substring",
+    "difficulty": "Hard",
+    "question": "Given a string S, consider all duplicated substrings: (contiguous) substrings of S that occur 2 or more times.&#xA0; (The occurrences&#xA0;may overlap.)\n\nReturn any duplicated&#xA0;substring that has the longest possible length.&#xA0; (If S does not have a duplicated substring, the answer is &quot;&quot;.)\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;banana&quot;\nOutput: &quot;ana&quot;\n\n\nExample 2:\n\nInput: &quot;abcd&quot;\nOutput: &quot;&quot;\n\n\n&#xA0;\n\nNote:\n\n\n\t2 &lt;= S.length &lt;= 10^5\n\tS consists of lowercase English letters.\n",
+    "code": "undefinedpublic class Solution {    public string LongestDupSubstring(string S) {            }}"
+}

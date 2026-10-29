@@ -1,0 +1,8 @@
+{
+    "number": "141",
+    "title": "Linked List Cycle",
+    "url": "https://leetcode.com/problems/linked-list-cycle",
+    "difficulty": "Easy",
+    "question": "Given a linked list, determine if it has a cycle in it.\n\nTo represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed)&#xA0;in the linked list where tail connects to. If pos is -1, then there is no cycle in the linked list.\n\n&#xA0;\n\n\nExample 1:\n\nInput: head = [3,2,0,-4], pos = 1\nOutput: true\nExplanation: There is a cycle in the linked list, where tail connects to the second node.\n\n\n\n\n\n\nExample 2:\n\nInput: head = [1,2], pos = 0\nOutput: true\nExplanation: There is a cycle in the linked list, where tail connects to the first node.\n\n\n\n\n\n\nExample 3:\n\nInput: head = [1], pos = -1\nOutput: false\nExplanation: There is no cycle in the linked list.\n\n\n\n\n\n&#xA0;\n\nFollow up:\n\nCan you solve it using O(1) (i.e. constant) memory?\n",
+    "code": "undefined/** * Definition for singly-linked list. * public class ListNode { *     public int val; *     public ListNode next; *     public ListNode(int x) { *         val = x; *         next = null; *     } * } */public class Solution {    public bool HasCycle(ListNode head) {            }}"
+}

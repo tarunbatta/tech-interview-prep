@@ -1,0 +1,8 @@
+{
+    "number": "808",
+    "title": "Soup Servings",
+    "url": "https://leetcode.com/problems/soup-servings",
+    "difficulty": "Medium",
+    "question": "There are two types of soup: type A and type B. Initially we have N ml of each type of soup. There are four kinds of operations:\n\n\n\tServe&#xA0;100 ml of soup A and 0 ml of soup B\n\tServe&#xA0;75 ml of soup A and 25&#xA0;ml of soup B\n\tServe 50 ml of soup A and 50 ml of soup B\n\tServe 25&#xA0;ml of soup A and 75&#xA0;ml of soup B\n\n\nWhen we serve some soup, we give it to someone and we no longer have it.&#xA0; Each turn,&#xA0;we will choose from the four operations with equal probability 0.25. If the remaining volume of soup is not enough to complete the operation, we will serve&#xA0;as much as we can.&#xA0; We stop once we no longer have some quantity of both types of soup.\n\nNote that we do not have the operation where all 100 ml&apos;s of soup B are used first.&#xA0;&#xA0;\n\nReturn the probability that soup A will be empty&#xA0;first, plus half the probability that A and B become empty at the same time.\n\n&#xA0;\n\nExample:\nInput: N = 50\nOutput: 0.625\nExplanation: \nIf we choose the first two operations, A will become empty first. For the third operation, A and B will become empty at the same time. For the fourth operation, B will become empty first. So the total probability of A becoming empty first plus half the probability that A and B become empty at the same time, is 0.25 * (1 + 1 + 0.5 + 0) = 0.625.\n\n\n\nNotes: \n\n\n\t0 &lt;= N &lt;= 10^9.&#xA0;\n\tAnswers within&#xA0;10^-6&#xA0;of the true value will be accepted as correct.\n\n",
+    "code": "undefinedpublic class Solution {    public double SoupServings(int N) {            }}"
+}

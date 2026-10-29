@@ -1,0 +1,8 @@
+{
+    "number": "1036",
+    "title": "Escape a Large Maze",
+    "url": "https://leetcode.com/problems/escape-a-large-maze",
+    "difficulty": "Hard",
+    "question": "In a 1 million by 1 million grid, the coordinates of each grid square are (x, y) with 0 &lt;= x, y &lt; 10^6.\n\nWe start at the source square and want to reach the target square.&#xA0; Each move, we can walk to a 4-directionally adjacent square in the grid that isn&apos;t in the given list of blocked squares.\n\nReturn true if and only if it is possible to reach the target square through a sequence of moves.\n\n&#xA0;\n\nExample 1:\n\nInput: blocked = [[0,1],[1,0]], source = [0,0], target = [0,2]\nOutput: false\nExplanation: \nThe target square is inaccessible starting from the source square, because we can&apos;t walk outside the grid.\n\n\nExample 2:\n\nInput: blocked = [], source = [0,0], target = [999999,999999]\nOutput: true\nExplanation: \nBecause there are no blocked cells, it&apos;s possible to reach the target square.\n\n\n&#xA0;\n\nNote:\n\n\n\t0 &lt;= blocked.length &lt;= 200\n\tblocked[i].length == 2\n\t0 &lt;= blocked[i][j] &lt; 10^6\n\tsource.length == target.length == 2\n\t0 &lt;= source[i][j], target[i][j] &lt; 10^6\n\tsource != target\n\n",
+    "code": "undefinedpublic class Solution {    public bool IsEscapePossible(int[][] blocked, int[] source, int[] target) {            }}"
+}

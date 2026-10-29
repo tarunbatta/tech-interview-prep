@@ -1,0 +1,8 @@
+{
+    "number": "1115",
+    "title": "Print FooBar Alternately",
+    "url": "https://leetcode.com/problems/print-foobar-alternately",
+    "difficulty": "Medium",
+    "question": "Suppose you are given the following code:\n\nclass FooBar {\n  public void foo() {\n&#xA0; &#xA0; for (int i = 0; i &lt; n; i++) {\n&#xA0; &#xA0; &#xA0; print(&quot;foo&quot;);\n&#xA0;   }\n  }\n\n  public void bar() {\n&#xA0; &#xA0; for (int i = 0; i &lt; n; i++) {\n&#xA0; &#xA0; &#xA0; print(&quot;bar&quot;);\n&#xA0; &#xA0; }\n  }\n}\n\n\nThe same instance of FooBar will be passed to two different threads. Thread A will call&#xA0;foo() while thread B will call&#xA0;bar().&#xA0;Modify the given program to output &quot;foobar&quot; n times.\n\n&#xA0;\n\nExample 1:\n\nInput: n = 1\nOutput: &quot;foobar&quot;\nExplanation: There are two threads being fired asynchronously. One of them calls foo(), while the other calls bar(). &quot;foobar&quot; is being output 1 time.\n\n\nExample 2:\n\nInput: n = 2\nOutput: &quot;foobarfoobar&quot;\nExplanation: &quot;foobar&quot; is being output 2 times.\n\n",
+    "code": "undefinedpublic class FooBar {    private int n;​    public FooBar(int n) {        this.n = n;    }​    public void Foo(Action printFoo) {                for (int i = 0; i < n; i++) {                        // printFoo() outputs \"foo\". Do not change or remove this line.            printFoo();        }    }​    public void Bar(Action printBar) {                for (int i = 0; i < n; i++) {                        // printBar() outputs \"bar\". Do not change or remove this line.            printBar();        }    }}"
+}

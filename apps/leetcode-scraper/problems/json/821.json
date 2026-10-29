@@ -1,0 +1,8 @@
+{
+    "number": "821",
+    "title": "Shortest Distance to a Character",
+    "url": "https://leetcode.com/problems/shortest-distance-to-a-character",
+    "difficulty": "Easy",
+    "question": "Given a string S&#xA0;and a character C, return an array of integers representing the shortest distance from the character C in the string.\n\nExample 1:\n\nInput: S = &quot;loveleetcode&quot;, C = &apos;e&apos;\nOutput: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]\n\n\n&#xA0;\n\nNote:\n\n\n\tS string length is&#xA0;in&#xA0;[1, 10000].\n\tC&#xA0;is a single character, and guaranteed to be in string S.\n\tAll letters in S and C are lowercase.\n\n",
+    "code": "undefinedpublic class Solution {    public int[] ShortestToChar(string S, char C) {            }}"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "leetcode-scraper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Puppeteer-based LeetCode problem scraper and C# solution stub generator",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node -e \"require('./index.js'); require('./config.js'); require('./helper.js'); console.log('✅ All modules can be required successfully');\"",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix"
+  },
+  "author": "Tarun Batta",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "puppeteer": "^25.1.0",
+    "sanitize-html": "^2.17.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.4.1",
+    "eslint-config-google": "^0.14.0"
+  }
+}

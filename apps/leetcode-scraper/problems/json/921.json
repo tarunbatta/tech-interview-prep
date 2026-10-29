@@ -1,0 +1,8 @@
+{
+    "number": "921",
+    "title": "Minimum Add to Make Parentheses Valid",
+    "url": "https://leetcode.com/problems/minimum-add-to-make-parentheses-valid",
+    "difficulty": "Medium",
+    "question": "Given a string&#xA0;S of &apos;(&apos; and &apos;)&apos; parentheses, we add the minimum number of parentheses ( &apos;(&apos; or &apos;)&apos;, and in any positions ) so that the resulting parentheses string is valid.\n\nFormally, a parentheses string is valid if and only if:\n\n\n\tIt is the empty string, or\n\tIt can be written as AB&#xA0;(A concatenated with B), where A and B are valid strings, or\n\tIt can be written as (A), where A is a valid string.\n\n\nGiven a parentheses string, return the minimum number of parentheses we must add to make the resulting string valid.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;())&quot;\nOutput: 1\n\n\n\nExample 2:\n\nInput: &quot;(((&quot;\nOutput: 3\n\n\n\nExample 3:\n\nInput: &quot;()&quot;\nOutput: 0\n\n\n\nExample 4:\n\nInput: &quot;()))((&quot;\nOutput: 4\n\n&#xA0;\n\n\n\n\nNote:\n\n\n\tS.length &lt;= 1000\n\tS only consists of &apos;(&apos; and &apos;)&apos; characters.\n\n\n\n\n\n&#xA0;\n\n\n",
+    "code": "undefinedpublic class Solution {    public int MinAddToMakeValid(string S) {            }}"
+}

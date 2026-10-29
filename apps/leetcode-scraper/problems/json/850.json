@@ -1,0 +1,8 @@
+{
+    "number": "850",
+    "title": "Rectangle Area II",
+    "url": "https://leetcode.com/problems/rectangle-area-ii",
+    "difficulty": "Hard",
+    "question": "We are given a list of (axis-aligned)&#xA0;rectangles.&#xA0; Each&#xA0;rectangle[i] = [x1, y1, x2, y2]&#xA0;, where (x1, y1) are the coordinates of the bottom-left corner, and (x2, y2) are the coordinates of the top-right corner of the ith rectangle.\n\nFind the total area covered by all rectangles in the plane.&#xA0; Since the answer&#xA0;may be too large, return it modulo 10^9 + 7.\n\n\n\nExample 1:\n\nInput: [[0,0,2,2],[1,0,2,3],[1,0,3,1]]\nOutput: 6\nExplanation: As illustrated in the picture.\n\n\nExample 2:\n\nInput: [[0,0,1000000000,1000000000]]\nOutput: 49\nExplanation: The answer is 10^18 modulo (10^9 + 7), which is (10^9)^2 = (-7)^2 = 49.\n\n\nNote:\n\n\n\t1 &lt;= rectangles.length &lt;= 200\n\trectanges[i].length = 4\n\t0 &lt;= rectangles[i][j] &lt;= 10^9\n\tThe total area covered by all rectangles will never exceed&#xA0;2^63 - 1&#xA0;and thus will fit in a 64-bit signed integer.\n",
+    "code": "undefinedpublic class Solution {    public int RectangleArea(int[][] rectangles) {            }}"
+}

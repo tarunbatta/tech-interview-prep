@@ -1,0 +1,8 @@
+{
+    "number": "438",
+    "title": "Find All Anagrams in a String",
+    "url": "https://leetcode.com/problems/find-all-anagrams-in-a-string",
+    "difficulty": "Medium",
+    "question": "Given a string s and a non-empty string p, find all the start indices of p&apos;s anagrams in s.\n\nStrings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.\n\nThe order of output does not matter.\n\nExample 1:\nInput:\ns: &quot;cbaebabacd&quot; p: &quot;abc&quot;\n\nOutput:\n[0, 6]\n\nExplanation:\nThe substring with start index = 0 is &quot;cba&quot;, which is an anagram of &quot;abc&quot;.\nThe substring with start index = 6 is &quot;bac&quot;, which is an anagram of &quot;abc&quot;.\n\n\n\nExample 2:\nInput:\ns: &quot;abab&quot; p: &quot;ab&quot;\n\nOutput:\n[0, 1, 2]\n\nExplanation:\nThe substring with start index = 0 is &quot;ab&quot;, which is an anagram of &quot;ab&quot;.\nThe substring with start index = 1 is &quot;ba&quot;, which is an anagram of &quot;ab&quot;.\nThe substring with start index = 2 is &quot;ab&quot;, which is an anagram of &quot;ab&quot;.\n\n",
+    "code": "undefinedpublic class Solution {    public IList<int> FindAnagrams(string s, string p) {            }}"
+}

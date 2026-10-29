@@ -1,0 +1,8 @@
+{
+    "number": "62",
+    "title": "Unique Paths",
+    "url": "https://leetcode.com/problems/unique-paths",
+    "difficulty": "Medium",
+    "question": "A robot is located at the top-left corner of a m x n grid (marked &apos;Start&apos; in the diagram below).\n\nThe robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked &apos;Finish&apos; in the diagram below).\n\nHow many possible unique paths are there?\n\n\nAbove is a 7 x 3 grid. How many possible unique paths are there?\n\nNote: m and n will be at most 100.\n\nExample 1:\n\nInput: m = 3, n = 2\nOutput: 3\nExplanation:\nFrom the top-left corner, there are a total of 3 ways to reach the bottom-right corner:\n1. Right -&gt; Right -&gt; Down\n2. Right -&gt; Down -&gt; Right\n3. Down -&gt; Right -&gt; Right\n\n\nExample 2:\n\nInput: m = 7, n = 3\nOutput: 28\n",
+    "code": "undefinedpublic class Solution {    public int UniquePaths(int m, int n) {            }}"
+}

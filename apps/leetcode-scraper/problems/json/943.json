@@ -1,0 +1,8 @@
+{
+    "number": "943",
+    "title": "Find the Shortest Superstring",
+    "url": "https://leetcode.com/problems/find-the-shortest-superstring",
+    "difficulty": "Hard",
+    "question": "Given an array A of strings, find any&#xA0;smallest string that contains each string in A as a&#xA0;substring.\n\nWe may assume that no string in A is substring of another string in A.\n\n&#xA0;\n\n\nExample 1:\n\nInput: [&quot;alex&quot;,&quot;loves&quot;,&quot;leetcode&quot;]\nOutput: &quot;alexlovesleetcode&quot;\nExplanation: All permutations of &quot;alex&quot;,&quot;loves&quot;,&quot;leetcode&quot; would also be accepted.\n\n\n\nExample 2:\n\nInput: [&quot;catg&quot;,&quot;ctaagt&quot;,&quot;gcta&quot;,&quot;ttca&quot;,&quot;atgcatc&quot;]\nOutput: &quot;gctaagttcatgcatc&quot;\n\n&#xA0;\n\n\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 12\n\t1 &lt;= A[i].length &lt;= 20\n\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public string ShortestSuperstring(string[] A) {            }}"
+}

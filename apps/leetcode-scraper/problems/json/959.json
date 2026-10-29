@@ -1,0 +1,8 @@
+{
+    "number": "959",
+    "title": "Regions Cut By Slashes",
+    "url": "https://leetcode.com/problems/regions-cut-by-slashes",
+    "difficulty": "Medium",
+    "question": "In a N x N&#xA0;grid composed of 1 x 1 squares, each 1 x 1 square consists of a /, \\, or blank space.&#xA0; These characters divide the square into contiguous regions.\n\n(Note that backslash characters are escaped, so a \\&#xA0;is represented as &quot;\\\\&quot;.)\n\nReturn the number of regions.\n\n&#xA0;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExample 1:\n\nInput:\n[\n&#xA0; &quot; /&quot;,\n&#xA0; &quot;/ &quot;\n]\nOutput: 2\nExplanation: The 2x2 grid is as follows:\n\n\n\n\nExample 2:\n\nInput:\n[\n&#xA0; &quot; /&quot;,\n&#xA0; &quot;  &quot;\n]\nOutput: 1\nExplanation: The 2x2 grid is as follows:\n\n\n\n\nExample 3:\n\nInput:\n[\n&#xA0; &quot;\\\\/&quot;,\n&#xA0; &quot;/\\\\&quot;\n]\nOutput: 4\nExplanation: (Recall that because \\ characters are escaped, &quot;\\\\/&quot; refers to \\/, and &quot;/\\\\&quot; refers to /\\.)\nThe 2x2 grid is as follows:\n\n\n\n\nExample 4:\n\nInput:\n[\n&#xA0; &quot;/\\\\&quot;,\n&#xA0; &quot;\\\\/&quot;\n]\nOutput: 5\nExplanation: (Recall that because \\ characters are escaped, &quot;/\\\\&quot; refers to /\\, and &quot;\\\\/&quot; refers to \\/.)\nThe 2x2 grid is as follows:\n\n\n\n\nExample 5:\n\nInput:\n[\n&#xA0; &quot;//&quot;,\n&#xA0; &quot;/ &quot;\n]\nOutput: 3\nExplanation: The 2x2 grid is as follows:\n\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= grid.length == grid[0].length &lt;= 30\n\tgrid[i][j] is either &apos;/&apos;, &apos;\\&apos;, or &apos; &apos;.\n\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int RegionsBySlashes(string[] grid) {            }}"
+}

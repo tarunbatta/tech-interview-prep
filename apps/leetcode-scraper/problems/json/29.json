@@ -1,0 +1,8 @@
+{
+    "number": "29",
+    "title": "Divide Two Integers",
+    "url": "https://leetcode.com/problems/divide-two-integers",
+    "difficulty": "Medium",
+    "question": "Given two integers dividend and divisor, divide two integers without using multiplication, division and mod operator.\n\nReturn the quotient after dividing dividend by divisor.\n\nThe integer division should truncate toward zero.\n\nExample 1:\n\nInput: dividend = 10, divisor = 3\nOutput: 3\n\nExample 2:\n\nInput: dividend = 7, divisor = -3\nOutput: -2\n\nNote:\n\n\n\tBoth dividend and divisor&#xA0;will be&#xA0;32-bit&#xA0;signed integers.\n\tThe divisor will never be 0.\n\tAssume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [&#x2212;231, &#xA0;231 &#x2212; 1]. For the purpose of this problem, assume that your function returns 231 &#x2212; 1 when the division result&#xA0;overflows.\n\n",
+    "code": "undefinedpublic class Solution {    public int Divide(int dividend, int divisor) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "632",
+    "title": "Smallest Range Covering Elements from K Lists",
+    "url": "https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists",
+    "difficulty": "Hard",
+    "question": "You have k lists of sorted integers in ascending order. Find the smallest range that includes at least one number from each of the k lists.\n\nWe define the range [a,b] is smaller than range [c,d] if b-a &lt; d-c or a &lt; c if b-a == d-c.\n\n&#xA0;\n\nExample 1:\n\nInput: [[4,10,15,24,26], [0,9,12,20], [5,18,22,30]]\nOutput: [20,24]\nExplanation: \nList 1: [4, 10, 15, 24,26], 24 is in range [20,24].\nList 2: [0, 9, 12, 20], 20 is in range [20,24].\nList 3: [5, 18, 22, 30], 22 is in range [20,24].\n\n\n&#xA0;\n\nNote:\n\n\n\tThe given list may contain duplicates, so ascending order means &gt;= here.\n\t1 &lt;= k &lt;= 3500\n\t-105 &lt;= value of elements &lt;= 105.\n\n",
+    "code": "undefinedpublic class Solution {    public int[] SmallestRange(IList<IList<int>> nums) {            }}"
+}

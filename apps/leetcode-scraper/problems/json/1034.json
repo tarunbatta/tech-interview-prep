@@ -1,0 +1,8 @@
+{
+    "number": "1034",
+    "title": "Coloring A Border",
+    "url": "https://leetcode.com/problems/coloring-a-border",
+    "difficulty": "Medium",
+    "question": "Given a 2-dimensional&#xA0;grid of integers, each value in the grid represents the color of the grid square at that location.\n\nTwo squares belong to the same connected component if and only if they have the same color and are next to each other in any of the 4 directions.\n\nThe&#xA0;border of a connected component is&#xA0;all the squares in the connected component that are&#xA0;either 4-directionally adjacent to&#xA0;a square not in the component, or on the boundary of the grid (the first or last row or column).\n\nGiven a square at location&#xA0;(r0, c0)&#xA0;in the grid and a color, color the&#xA0;border of the connected component of that square with the given color, and return the final grid.\n\n&#xA0;\n\nExample 1:\n\nInput: grid = [[1,1],[1,2]], r0 = 0, c0 = 0, color = 3\nOutput: [[3, 3], [3, 2]]\n\n\n\nExample 2:\n\nInput: grid = [[1,2,2],[2,3,2]], r0 = 0, c0 = 1, color = 3\nOutput: [[1, 3, 3], [2, 3, 3]]\n\n\n\nExample 3:\n\nInput: grid = [[1,1,1],[1,1,1],[1,1,1]], r0 = 1, c0 = 1, color = 2\nOutput: [[2, 2, 2], [2, 1, 2], [2, 2, 2]]\n\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= grid.length &lt;= 50\n\t1 &lt;= grid[0].length &lt;= 50\n\t1 &lt;= grid[i][j] &lt;= 1000\n\t0 &lt;= r0 &lt; grid.length\n\t0 &lt;= c0 &lt; grid[0].length\n\t1 &lt;= color &lt;= 1000\n",
+    "code": "undefinedpublic class Solution {    public int[][] ColorBorder(int[][] grid, int r0, int c0, int color) {            }}"
+}

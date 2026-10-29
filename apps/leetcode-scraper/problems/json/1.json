@@ -1,0 +1,8 @@
+{
+    "number": "1",
+    "title": "Two Sum",
+    "url": "https://leetcode.com/problems/two-sum",
+    "difficulty": "Easy",
+    "question": "Given an array of integers, return indices of the two numbers such that they add up to a specific target.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nExample:\n\nGiven nums = [2, 7, 11, 15], target = 9,\n\nBecause nums[0] + nums[1] = 2 + 7 = 9,\nreturn [0, 1].\n\n",
+    "code": "public class Solution { public int[] TwoSum(int[] nums, int target) { } }"
+}

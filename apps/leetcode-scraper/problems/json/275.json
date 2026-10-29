@@ -1,0 +1,8 @@
+{
+    "number": "275",
+    "title": "H-Index II",
+    "url": "https://leetcode.com/problems/h-index-ii",
+    "difficulty": "Medium",
+    "question": "Given an array of citations sorted&#xA0;in ascending order (each citation is a non-negative integer) of a researcher, write a function to compute the researcher&apos;s h-index.\n\nAccording to the&#xA0;definition of h-index on Wikipedia: &quot;A scientist has index&#xA0;h&#xA0;if&#xA0;h&#xA0;of his/her&#xA0;N&#xA0;papers have&#xA0;at least&#xA0;h&#xA0;citations each, and the other&#xA0;N &#x2212; h&#xA0;papers have&#xA0;no more than&#xA0;h&#xA0;citations each.&quot;\n\nExample:\n\nInput: citations = [0,1,3,5,6]\nOutput: 3 \nExplanation: [0,1,3,5,6] means the researcher has 5 papers in total and each of them had \n             received 0, 1, 3, 5, 6 citations respectively. \n&#xA0;            Since the researcher has 3 papers with at least 3 citations each and the remaining \n&#xA0;            two with no more than 3 citations each, her h-index is 3.\n\nNote:\n\nIf there are several possible values for&#xA0;h, the maximum one is taken as the h-index.\n\nFollow up:\n\n\n\tThis is a follow up problem to&#xA0;H-Index, where citations is now guaranteed to be sorted in ascending order.\n\tCould you solve it in logarithmic time complexity?\n\n",
+    "code": "undefinedpublic class Solution {    public int HIndex(int[] citations) {            }}"
+}

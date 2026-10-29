@@ -1,0 +1,8 @@
+{
+    "number": "463",
+    "title": "Island Perimeter",
+    "url": "https://leetcode.com/problems/island-perimeter",
+    "difficulty": "Easy",
+    "question": "You are given a map in form of a two-dimensional integer grid where 1 represents land and 0 represents water.\n\nGrid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water, and there is exactly one island (i.e., one or more connected land cells).\n\nThe island doesn&apos;t have &quot;lakes&quot; (water inside that isn&apos;t connected to the water around the island). One cell is a square with side length 1. The grid is rectangular, width and height don&apos;t exceed 100. Determine the perimeter of the island.\n\n&#xA0;\n\nExample:\n\nInput:\n[[0,1,0,0],\n [1,1,1,0],\n [0,1,0,0],\n [1,1,0,0]]\n\nOutput: 16\n\nExplanation: The perimeter is the 16 yellow stripes in the image below:\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int IslandPerimeter(int[][] grid) {            }}"
+}

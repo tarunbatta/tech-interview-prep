@@ -1,0 +1,8 @@
+{
+    "number": "322",
+    "title": "Coin Change",
+    "url": "https://leetcode.com/problems/coin-change",
+    "difficulty": "Medium",
+    "question": "You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.\n\nExample 1:\n\nInput: coins = [1, 2, 5], amount = 11\nOutput: 3 \nExplanation: 11 = 5 + 5 + 1\n\nExample 2:\n\nInput: coins = [2], amount = 3\nOutput: -1\n\n\nNote:\nYou may assume that you have an infinite number of each kind of coin.\n",
+    "code": "undefinedpublic class Solution {    public int CoinChange(int[] coins, int amount) {            }}"
+}

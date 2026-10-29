@@ -1,0 +1,8 @@
+{
+    "number": "122",
+    "title": "Best Time to Buy and Sell Stock II",
+    "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii",
+    "difficulty": "Easy",
+    "question": "Say you have an array for which the ith element is the price of a given stock on day i.\n\nDesign an algorithm to find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).\n\nNote: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).\n\nExample 1:\n\nInput: [7,1,5,3,6,4]\nOutput: 7\nExplanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.\n&#xA0;            Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.\n\n\nExample 2:\n\nInput: [1,2,3,4,5]\nOutput: 4\nExplanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.\n&#xA0;            Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are\n&#xA0;            engaging multiple transactions at the same time. You must sell before buying again.\n\n\nExample 3:\n\nInput: [7,6,4,3,1]\nOutput: 0\nExplanation: In this case, no transaction is done, i.e. max profit = 0.\n",
+    "code": "undefinedpublic class Solution {    public int MaxProfit(int[] prices) {            }}"
+}

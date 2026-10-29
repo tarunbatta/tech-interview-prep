@@ -1,0 +1,8 @@
+{
+    "number": "84",
+    "title": "Largest Rectangle in Histogram",
+    "url": "https://leetcode.com/problems/largest-rectangle-in-histogram",
+    "difficulty": "Hard",
+    "question": "Given n non-negative integers representing the histogram&apos;s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.\n\n&#xA0;\n\n\nAbove is a histogram where width of each bar is 1, given height = [2,1,5,6,2,3].\n\n&#xA0;\n\n\nThe largest rectangle is shown in the shaded area, which has area = 10 unit.\n\n&#xA0;\n\nExample:\n\nInput: [2,1,5,6,2,3]\nOutput: 10\n\n",
+    "code": "undefinedpublic class Solution {    public int LargestRectangleArea(int[] heights) {            }}"
+}

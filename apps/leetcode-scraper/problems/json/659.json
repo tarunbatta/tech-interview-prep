@@ -1,0 +1,8 @@
+{
+    "number": "659",
+    "title": "Split Array into Consecutive Subsequences",
+    "url": "https://leetcode.com/problems/split-array-into-consecutive-subsequences",
+    "difficulty": "Medium",
+    "question": "Given an array nums&#xA0;sorted in ascending order, return true if and only if you can split it into 1 or more subsequences such that each subsequence consists of consecutive integers&#xA0;and has length at least 3.\n\n&#xA0;\n\nExample 1:\n\nInput: [1,2,3,3,4,5]\nOutput: True\nExplanation:\nYou can split them into two consecutive subsequences : \n1, 2, 3\n3, 4, 5\n\n\n\nExample 2:\n\nInput: [1,2,3,3,4,4,5,5]\nOutput: True\nExplanation:\nYou can split them into two consecutive subsequences : \n1, 2, 3, 4, 5\n3, 4, 5\n\n\n\nExample 3:\n\nInput: [1,2,3,4,4,5]\nOutput: False\n\n\n&#xA0;\n\nConstraints:\n\n\n\t1 &lt;= nums.length &lt;= 10000\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public bool IsPossible(int[] nums) {            }}"
+}

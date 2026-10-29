@@ -1,0 +1,8 @@
+{
+    "number": "1018",
+    "title": "Binary Prefix Divisible By 5",
+    "url": "https://leetcode.com/problems/binary-prefix-divisible-by-5",
+    "difficulty": "Easy",
+    "question": "Given an array A of 0s and 1s, consider N_i: the i-th subarray from A[0] to A[i]&#xA0;interpreted&#xA0;as a binary number (from most-significant-bit to least-significant-bit.)\n\nReturn a list of booleans&#xA0;answer, where answer[i] is true&#xA0;if and only if N_i&#xA0;is divisible by 5.\n\nExample 1:\n\nInput: [0,1,1]\nOutput: [true,false,false]\nExplanation: \nThe input numbers in binary are 0, 01, 011; which are 0, 1, and 3 in base-10.  Only the first number is divisible by 5, so answer[0] is true.\n\n\nExample 2:\n\nInput: [1,1,1]\nOutput: [false,false,false]\n\n\nExample 3:\n\nInput: [0,1,1,1,1,1]\nOutput: [true,false,false,false,true,false]\n\n\nExample 4:\n\nInput: [1,1,1,0,1]\nOutput: [false,false,false,false,false]\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 30000\n\tA[i] is 0 or 1\n",
+    "code": "undefinedpublic class Solution {    public IList<bool> PrefixesDivBy5(int[] A) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "445",
+    "title": "Add Two Numbers II",
+    "url": "https://leetcode.com/problems/add-two-numbers-ii",
+    "difficulty": "Medium",
+    "question": "You are given two non-empty linked lists representing two non-negative integers. The most significant digit comes first and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.\n\nYou may assume the two numbers do not contain any leading zero, except the number 0 itself.\n\nFollow up:\nWhat if you cannot modify the input lists? In other words, reversing the lists is not allowed.\n\n\n\nExample:\nInput: (7 -&gt; 2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)\nOutput: 7 -&gt; 8 -&gt; 0 -&gt; 7\n\n",
+    "code": "undefined/** * Definition for singly-linked list. * public class ListNode { *     public int val; *     public ListNode next; *     public ListNode(int x) { val = x; } * } */public class Solution {    public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {            }}"
+}

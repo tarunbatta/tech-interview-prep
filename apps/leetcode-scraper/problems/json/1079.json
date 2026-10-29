@@ -1,0 +1,8 @@
+{
+    "number": "1079",
+    "title": "Letter Tile Possibilities",
+    "url": "https://leetcode.com/problems/letter-tile-possibilities",
+    "difficulty": "Medium",
+    "question": "You have a set of tiles, where each tile has one letter tiles[i] printed on it.&#xA0; Return the number of possible non-empty sequences of letters you can make.\n\n&#xA0;\n\nExample 1:\n\nInput: &quot;AAB&quot;\nOutput: 8\nExplanation: The possible sequences are &quot;A&quot;, &quot;B&quot;, &quot;AA&quot;, &quot;AB&quot;, &quot;BA&quot;, &quot;AAB&quot;, &quot;ABA&quot;, &quot;BAA&quot;.\n\n\n\nExample 2:\n\nInput: &quot;AAABBC&quot;\nOutput: 188\n\n\n&#xA0;\n\n\nNote:\n\n\n\t1 &lt;= tiles.length &lt;= 7\n\ttiles consists of uppercase English letters.\n",
+    "code": "undefinedpublic class Solution {    public int NumTilePossibilities(string tiles) {            }}"
+}

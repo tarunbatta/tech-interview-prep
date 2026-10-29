@@ -1,0 +1,8 @@
+{
+    "number": "762",
+    "title": "Prime Number of Set Bits in Binary Representation",
+    "url": "https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation",
+    "difficulty": "Easy",
+    "question": "\nGiven two integers L and R, find the count of numbers in the range [L, R] (inclusive) having a prime number of set bits in their binary representation.\n\n(Recall that the number of set bits an integer has is the number of 1s present when written in binary.  For example, 21 written in binary is 10101 which has 3 set bits.  Also, 1 is not a prime.)\n\n\nExample 1:Input: L = 6, R = 10\nOutput: 4\nExplanation:\n6 -&gt; 110 (2 set bits, 2 is prime)\n7 -&gt; 111 (3 set bits, 3 is prime)\n9 -&gt; 1001 (2 set bits , 2 is prime)\n10-&gt;1010 (2 set bits , 2 is prime)\n\n\nExample 2:Input: L = 10, R = 15\nOutput: 5\nExplanation:\n10 -&gt; 1010 (2 set bits, 2 is prime)\n11 -&gt; 1011 (3 set bits, 3 is prime)\n12 -&gt; 1100 (2 set bits, 2 is prime)\n13 -&gt; 1101 (3 set bits, 3 is prime)\n14 -&gt; 1110 (3 set bits, 3 is prime)\n15 -&gt; 1111 (4 set bits, 4 is not prime)\n\n\nNote:\nL, R will be integers L &lt;= R in the range [1, 10^6].\nR - L will be at most 10000.\n",
+    "code": "undefinedpublic class Solution {    public int CountPrimeSetBits(int L, int R) {            }}"
+}

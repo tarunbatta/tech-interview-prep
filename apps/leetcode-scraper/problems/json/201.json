@@ -1,0 +1,8 @@
+{
+    "number": "201",
+    "title": "Bitwise AND of Numbers Range",
+    "url": "https://leetcode.com/problems/bitwise-and-of-numbers-range",
+    "difficulty": "Medium",
+    "question": "Given a range [m, n] where 0 &lt;= m &lt;= n &lt;= 2147483647, return the bitwise AND of all numbers in this range, inclusive.\n\nExample 1:\n\nInput: [5,7]\nOutput: 4\n\n\nExample 2:\n\nInput: [0,1]\nOutput: 0",
+    "code": "undefinedpublic class Solution {    public int RangeBitwiseAnd(int m, int n) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "6",
+    "title": "ZigZag Conversion",
+    "url": "https://leetcode.com/problems/zigzag-conversion",
+    "difficulty": "Medium",
+    "question": "The string &quot;PAYPALISHIRING&quot; is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)\n\nP   A   H   N\nA P L S I I G\nY   I   R\n\n\nAnd then read line by line: &quot;PAHNAPLSIIGYIR&quot;\n\nWrite the code that will take a string and make this conversion given a number of rows:\n\nstring convert(string s, int numRows);\n\nExample 1:\n\nInput: s = &quot;PAYPALISHIRING&quot;, numRows = 3\nOutput: &quot;PAHNAPLSIIGYIR&quot;\n\n\nExample 2:\n\nInput: s = &quot;PAYPALISHIRING&quot;, numRows =&#xA0;4\nOutput:&#xA0;&quot;PINALSIGYAHRPI&quot;\nExplanation:\n\nP     I    N\nA   L S  I G\nY A   H R\nP     I\n",
+    "code": "undefinedpublic class Solution {    public string Convert(string s, int numRows) {            }}"
+}

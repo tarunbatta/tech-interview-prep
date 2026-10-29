@@ -1,0 +1,8 @@
+{
+    "number": "718",
+    "title": "Maximum Length of Repeated Subarray",
+    "url": "https://leetcode.com/problems/maximum-length-of-repeated-subarray",
+    "difficulty": "Medium",
+    "question": "Given two integer arrays A and B, return the maximum length of an subarray that appears in both arrays.\n\nExample 1:\n\nInput:\nA: [1,2,3,2,1]\nB: [3,2,1,4,7]\nOutput: 3\nExplanation: \nThe repeated subarray with maximum length is [3, 2, 1].\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= len(A), len(B) &lt;= 1000\n\t0 &lt;= A[i], B[i] &lt; 100\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int FindLength(int[] A, int[] B) {            }}"
+}

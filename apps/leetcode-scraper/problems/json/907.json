@@ -1,0 +1,8 @@
+{
+    "number": "907",
+    "title": "Sum of Subarray Minimums",
+    "url": "https://leetcode.com/problems/sum-of-subarray-minimums",
+    "difficulty": "Medium",
+    "question": "Given an array of integers A, find the sum of min(B), where B ranges over&#xA0;every (contiguous) subarray of A.\n\nSince the answer may be large, return the answer modulo 10^9 + 7.\n\n&#xA0;\n\nExample 1:\n\nInput: [3,1,2,4]\nOutput: 17\nExplanation: Subarrays are [3], [1], [2], [4], [3,1], [1,2], [2,4], [3,1,2], [1,2,4], [3,1,2,4]. \nMinimums are 3, 1, 2, 4, 1, 1, 2, 1, 1, 1.&#xA0; Sum is 17.\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 30000\n\t1 &lt;= A[i] &lt;= 30000\n\n\n\n&#xA0;\n\n",
+    "code": "undefinedpublic class Solution {    public int SumSubarrayMins(int[] A) {            }}"
+}

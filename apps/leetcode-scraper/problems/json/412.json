@@ -1,0 +1,8 @@
+{
+    "number": "412",
+    "title": "Fizz Buzz",
+    "url": "https://leetcode.com/problems/fizz-buzz",
+    "difficulty": "Easy",
+    "question": "Write a program that outputs the string representation of numbers from 1 to n.\n\nBut for multiples of three it should output &#x201C;Fizz&#x201D; instead of the number and for the multiples of five output &#x201C;Buzz&#x201D;. For numbers which are multiples of both three and five output &#x201C;FizzBuzz&#x201D;.\n\nExample:\nn = 15,\n\nReturn:\n[\n    &quot;1&quot;,\n    &quot;2&quot;,\n    &quot;Fizz&quot;,\n    &quot;4&quot;,\n    &quot;Buzz&quot;,\n    &quot;Fizz&quot;,\n    &quot;7&quot;,\n    &quot;8&quot;,\n    &quot;Fizz&quot;,\n    &quot;Buzz&quot;,\n    &quot;11&quot;,\n    &quot;Fizz&quot;,\n    &quot;13&quot;,\n    &quot;14&quot;,\n    &quot;FizzBuzz&quot;\n]\n\n",
+    "code": "undefinedpublic class Solution {    public IList<string> FizzBuzz(int n) {            }}"
+}

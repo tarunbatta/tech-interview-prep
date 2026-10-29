@@ -1,0 +1,8 @@
+{
+    "number": "761",
+    "title": "Special Binary String",
+    "url": "https://leetcode.com/problems/special-binary-string",
+    "difficulty": "Hard",
+    "question": "\nSpecial binary strings are binary strings with the following two properties:\n\nThe number of 0&apos;s is equal to the number of 1&apos;s.\nEvery prefix of the binary string has at least as many 1&apos;s as 0&apos;s.\n\nGiven a special string S, a move consists of choosing two consecutive, non-empty, special substrings of S, and swapping them.  (Two strings are consecutive if the last character of the first string is exactly one index before the first character of the second string.)\n\nAt the end of any number of moves, what is the lexicographically largest resulting string possible?\n\n\nExample 1:\nInput: S = &quot;11011000&quot;\nOutput: &quot;11100100&quot;\nExplanation:\nThe strings &quot;10&quot; [occuring at S[1]] and &quot;1100&quot; [at S[3]] are swapped.\nThis is the lexicographically largest string possible after some number of swaps.\n\n\n\nNote:\nS has length at most 50.\nS is guaranteed to be a special binary string as defined above.\n",
+    "code": "undefinedpublic class Solution {    public string MakeLargestSpecial(string S) {            }}"
+}

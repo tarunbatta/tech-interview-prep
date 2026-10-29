@@ -1,0 +1,8 @@
+{
+    "number": "995",
+    "title": "Minimum Number of K Consecutive Bit Flips",
+    "url": "https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips",
+    "difficulty": "Hard",
+    "question": "In an array A containing only 0s and 1s, a K-bit flip&#xA0;consists of choosing a (contiguous) subarray of length K and simultaneously changing every 0 in the subarray to 1, and every 1 in the subarray to 0.\n\nReturn the minimum number of K-bit flips required so that there is no 0 in the array.&#xA0; If it is not possible, return -1.\n\n&#xA0;\n\nExample 1:\n\nInput: A = [0,1,0], K = 1\nOutput: 2\nExplanation: Flip A[0], then flip A[2].\n\n\n\nExample 2:\n\nInput: A = [1,1,0], K = 2\nOutput: -1\nExplanation:&#xA0;No matter how we flip subarrays of size 2, we can&apos;t make the array become [1,1,1].\n\n\n\nExample 3:\n\nInput: A = [0,0,0,1,0,1,1,0], K = 3\nOutput: 3\nExplanation:\nFlip A[0],A[1],A[2]:&#xA0;A becomes [1,1,1,1,0,1,1,0]\nFlip A[4],A[5],A[6]:&#xA0;A becomes [1,1,1,1,1,0,0,0]\nFlip A[5],A[6],A[7]:&#xA0;A becomes [1,1,1,1,1,1,1,1]\n\n\n&#xA0;\n\n\n\nNote:\n\n\n\t1 &lt;= A.length &lt;=&#xA0;30000\n\t1 &lt;= K &lt;= A.length\n",
+    "code": "undefinedpublic class Solution {    public int MinKBitFlips(int[] A, int K) {            }}"
+}

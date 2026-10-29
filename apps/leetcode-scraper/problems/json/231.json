@@ -1,0 +1,8 @@
+{
+    "number": "231",
+    "title": "Power of Two",
+    "url": "https://leetcode.com/problems/power-of-two",
+    "difficulty": "Easy",
+    "question": "Given an integer, write a function to determine if it is a power of two.\n\nExample 1:\n\nInput: 1\nOutput: true \nExplanation: 20&#xA0;= 1\n\n\nExample 2:\n\nInput: 16\nOutput: true\nExplanation: 24&#xA0;= 16\n\nExample 3:\n\nInput: 218\nOutput: false\n",
+    "code": "undefinedpublic class Solution {    public bool IsPowerOfTwo(int n) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "303",
+    "title": "Range Sum Query - Immutable",
+    "url": "https://leetcode.com/problems/range-sum-query-immutable",
+    "difficulty": "Easy",
+    "question": "Given an integer array nums, find the sum of the elements between indices i and j (i &#x2264; j), inclusive.\n\nExample:\nGiven nums = [-2, 0, 3, -5, 2, -1]\n\nsumRange(0, 2) -&gt; 1\nsumRange(2, 5) -&gt; -1\nsumRange(0, 5) -&gt; -3\n\n\n\nNote:\n\nYou may assume that the array does not change.\nThere are many calls to sumRange function.\n\n",
+    "code": "undefinedpublic class NumArray {​    public NumArray(int[] nums) {            }        public int SumRange(int i, int j) {            }}​/** * Your NumArray object will be instantiated and called as such: * NumArray obj = new NumArray(nums); * int param_1 = obj.SumRange(i,j); */"
+}

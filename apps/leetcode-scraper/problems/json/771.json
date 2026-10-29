@@ -1,0 +1,8 @@
+{
+    "number": "771",
+    "title": "Jewels and Stones",
+    "url": "https://leetcode.com/problems/jewels-and-stones",
+    "difficulty": "Easy",
+    "question": "You&apos;re given strings J representing the types of stones that are jewels, and S representing the stones you have.&#xA0; Each character in S is a type of stone you have.&#xA0; You want to know how many of the stones you have are also jewels.\n\nThe letters in J are guaranteed distinct, and all characters in J and S are letters. Letters are case sensitive, so &quot;a&quot; is considered a different type of stone from &quot;A&quot;.\n\nExample 1:\n\nInput: J = &quot;aA&quot;, S = &quot;aAAbbbb&quot;\nOutput: 3\n\n\nExample 2:\n\nInput: J = &quot;z&quot;, S = &quot;ZZ&quot;\nOutput: 0\n\n\nNote:\n\n\n\tS and J will consist of letters and have length at most 50.\n\tThe characters in J are distinct.\n\n",
+    "code": "undefinedpublic class Solution {    public int NumJewelsInStones(string J, string S) {            }}"
+}

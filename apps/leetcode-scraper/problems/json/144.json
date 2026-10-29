@@ -1,0 +1,8 @@
+{
+    "number": "144",
+    "title": "Binary Tree Preorder Traversal",
+    "url": "https://leetcode.com/problems/binary-tree-preorder-traversal",
+    "difficulty": "Medium",
+    "question": "Given a binary tree, return the preorder traversal of its nodes&apos; values.\n\nExample:\n\nInput:&#xA0;[1,null,2,3]\n   1\n    \\\n     2\n    /\n   3\n\nOutput:&#xA0;[1,2,3]\n\n\nFollow up: Recursive solution is trivial, could you do it iteratively?\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public IList<int> PreorderTraversal(TreeNode root) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "228",
+    "title": "Summary Ranges",
+    "url": "https://leetcode.com/problems/summary-ranges",
+    "difficulty": "Medium",
+    "question": "Given a sorted integer array without duplicates, return the summary of its ranges.\n\nExample 1:\n\nInput:  [0,1,2,4,5,7]\nOutput: [&quot;0-&gt;2&quot;,&quot;4-&gt;5&quot;,&quot;7&quot;]\nExplanation: 0,1,2 form a continuous range;&#xA0;4,5 form a continuous range.\n\n\nExample 2:\n\nInput:  [0,2,3,4,6,8,9]\nOutput: [&quot;0&quot;,&quot;2-&gt;4&quot;,&quot;6&quot;,&quot;8-&gt;9&quot;]\nExplanation: 2,3,4 form a continuous range;&#xA0;8,9 form a continuous range.\n\n",
+    "code": "undefinedpublic class Solution {    public IList<string> SummaryRanges(int[] nums) {            }}"
+}

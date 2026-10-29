@@ -1,0 +1,8 @@
+{
+    "number": "3",
+    "title": "Longest Substring Without Repeating Characters",
+    "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters",
+    "difficulty": "Medium",
+    "question": "Given a string, find the length of the longest substring without repeating characters.\n\n\nExample 1:\n\nInput: &quot;abcabcbb&quot;\nOutput: 3 \nExplanation: The answer is &quot;abc&quot;, with the length of 3. \n\n\n\nExample 2:\n\nInput: &quot;bbbbb&quot;\nOutput: 1\nExplanation: The answer is &quot;b&quot;, with the length of 1.\n\n\n\nExample 3:\n\nInput: &quot;pwwkew&quot;\nOutput: 3\nExplanation: The answer is &quot;wke&quot;, with the length of 3. \n             Note that the answer must be a substring, &quot;pwke&quot; is a subsequence and not a substring.\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int LengthOfLongestSubstring(string s) {            }}"
+}

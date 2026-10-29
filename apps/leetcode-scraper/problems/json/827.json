@@ -1,0 +1,8 @@
+{
+    "number": "827",
+    "title": "Making A Large Island",
+    "url": "https://leetcode.com/problems/making-a-large-island",
+    "difficulty": "Hard",
+    "question": "In a 2D grid of 0s and 1s, we change at most one 0 to a 1.\n\nAfter, what is the size of the largest island?&#xA0;(An island is a 4-directionally connected group of 1s).\n\nExample 1:\n\nInput: [[1, 0], [0, 1]]\nOutput: 3\nExplanation: Change one 0 to 1 and connect two 1s, then we get an island with area = 3.\n\n\nExample 2:\n\nInput: [[1, 1], [1, 0]]\nOutput: 4\nExplanation: Change the 0 to 1 and make the island bigger, only one island with area = 4.\n\nExample 3:\n\nInput: [[1, 1], [1, 1]]\nOutput: 4\nExplanation: Can&apos;t change any 0 to 1, only one island with area = 4.\n\n&#xA0;\n\nNotes:\n\n\n\t1 &lt;= grid.length = grid[0].length &lt;= 50.\n\t0 &lt;= grid[i][j] &lt;= 1.\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int LargestIsland(int[][] grid) {            }}"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "563",
+    "title": "Binary Tree Tilt",
+    "url": "https://leetcode.com/problems/binary-tree-tilt",
+    "difficulty": "Easy",
+    "question": "Given a binary tree, return the tilt of the whole tree.\n\nThe tilt of a tree node is defined as the absolute difference between the sum of all left subtree node values and the sum of all right subtree node values. Null node has tilt 0.\n\nThe tilt of the whole tree is defined as the sum of all nodes&apos; tilt.\n\nExample:\nInput: \n         1\n       /   \\\n      2     3\nOutput: 1\nExplanation: \nTilt of node 2 : 0\nTilt of node 3 : 0\nTilt of node 1 : |2-3| = 1\nTilt of binary tree : 0 + 0 + 1 = 1\n\n\n\nNote:\n\nThe sum of node values in any subtree won&apos;t exceed the range of 32-bit integer. \nAll the tilt values won&apos;t exceed the range of 32-bit integer.\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public int FindTilt(TreeNode root) {            }}"
+}

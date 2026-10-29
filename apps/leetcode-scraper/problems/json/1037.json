@@ -1,0 +1,8 @@
+{
+    "number": "1037",
+    "title": "Valid Boomerang",
+    "url": "https://leetcode.com/problems/valid-boomerang",
+    "difficulty": "Easy",
+    "question": "A boomerang is a set of 3 points that are all distinct and not in a straight line.\n\nGiven a list&#xA0;of three points in the plane, return whether these points are a boomerang.\n\n&#xA0;\n\nExample 1:\n\nInput: [[1,1],[2,3],[3,2]]\nOutput: true\n\n\n\nExample 2:\n\nInput: [[1,1],[2,2],[3,3]]\nOutput: false\n\n\n&#xA0;\n\nNote:\n\n\n\tpoints.length == 3\n\tpoints[i].length == 2\n\t0 &lt;= points[i][j] &lt;= 100\n\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public bool IsBoomerang(int[][] points) {            }}"
+}

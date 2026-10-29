@@ -1,0 +1,8 @@
+{
+    "number": "899",
+    "title": "Orderly Queue",
+    "url": "https://leetcode.com/problems/orderly-queue",
+    "difficulty": "Hard",
+    "question": "A string S of lowercase letters is given.&#xA0; Then, we may make any number of moves.\n\nIn each move, we&#xA0;choose one&#xA0;of the first K letters (starting from the left), remove it,&#xA0;and place it at the end of the string.\n\nReturn the lexicographically smallest string we could have after any number of moves.\n\n&#xA0;\n\n\nExample 1:\n\nInput: S = &quot;cba&quot;, K = 1\nOutput: &quot;acb&quot;\nExplanation: \nIn the first move, we move the 1st character (&quot;c&quot;) to the end, obtaining the string &quot;bac&quot;.\nIn the second move, we move the 1st character (&quot;b&quot;) to the end, obtaining the final result &quot;acb&quot;.\n\n\n\nExample 2:\n\nInput: S = &quot;baaca&quot;, K = 3\nOutput: &quot;aaabc&quot;\nExplanation: \nIn the first move, we move the 1st character (&quot;b&quot;) to the end, obtaining the string &quot;aacab&quot;.\nIn the second move, we move the 3rd character (&quot;c&quot;) to the end, obtaining the final result &quot;aaabc&quot;.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= K &lt;= S.length&#xA0;&lt;= 1000\n\tS&#xA0;consists of lowercase letters only.\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public string OrderlyQueue(string S, int K) {            }}"
+}

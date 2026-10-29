@@ -1,0 +1,8 @@
+{
+    "number": "700",
+    "title": "Search in a Binary Search Tree",
+    "url": "https://leetcode.com/problems/search-in-a-binary-search-tree",
+    "difficulty": "Easy",
+    "question": "Given the root node of a binary search tree (BST) and a value. You need to find the node in the BST that the node&apos;s value equals the given value. Return the subtree rooted with that node. If such node doesn&apos;t exist, you should return NULL.\n\nFor example,&#xA0;\n\nGiven the tree:\n        4\n       / \\\n      2   7\n     / \\\n    1   3\n\nAnd the value to search: 2\n\n\nYou should return this subtree:\n\n      2     \n     / \\   \n    1   3\n\n\nIn the example above, if we want to search the value 5, since there is no node with value 5, we should return NULL.\n\nNote that an empty tree is represented by NULL, therefore you would see the expected output (serialized tree format) as&#xA0;[], not null.\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public TreeNode SearchBST(TreeNode root, int val) {            }}"
+}

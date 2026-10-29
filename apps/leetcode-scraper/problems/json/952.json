@@ -1,0 +1,8 @@
+{
+    "number": "952",
+    "title": "Largest Component Size by Common Factor",
+    "url": "https://leetcode.com/problems/largest-component-size-by-common-factor",
+    "difficulty": "Hard",
+    "question": "Given a non-empty&#xA0;array of unique positive integers A, consider the following graph:\n\n\n\tThere are A.length nodes, labelled A[0] to A[A.length - 1];\n\tThere is an edge between A[i] and A[j]&#xA0;if and only if&#xA0;A[i] and A[j] share a common factor greater than 1.\n\n\nReturn the size of the largest connected component in the graph.\n\n&#xA0;\n\n\n\n\n\nExample 1:\n\nInput: [4,6,15,35]\nOutput: 4\n\n\n\n\nExample 2:\n\nInput: [20,50,9,63]\nOutput: 2\n\n\n\n\nExample 3:\n\nInput: [2,3,6,7,4,12,21,39]\nOutput: 8\n\n\n\nNote:\n\n\n\t1 &lt;= A.length &lt;= 20000\n\t1 &lt;= A[i] &lt;= 100000\n\n\n\n\n",
+    "code": "undefinedpublic class Solution {    public int LargestComponentSize(int[] A) {            }}"
+}

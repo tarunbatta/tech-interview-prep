@@ -1,0 +1,8 @@
+{
+    "number": "767",
+    "title": "Reorganize String",
+    "url": "https://leetcode.com/problems/reorganize-string",
+    "difficulty": "Medium",
+    "question": "Given a string S, check if the letters can be rearranged so that two characters that are adjacent to each other are not the same.\n\nIf possible, output any possible result.&#xA0; If not possible, return the empty string.\n\nExample 1:\n\nInput: S = &quot;aab&quot;\nOutput: &quot;aba&quot;\n\n\nExample 2:\n\nInput: S = &quot;aaab&quot;\nOutput: &quot;&quot;\n\n\nNote:\n\n\n\tS will consist of lowercase letters and have length in range [1, 500].\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public string ReorganizeString(string S) {            }}"
+}

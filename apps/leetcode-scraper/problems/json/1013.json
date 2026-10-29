@@ -1,0 +1,8 @@
+{
+    "number": "1013",
+    "title": "Partition Array Into Three Parts With Equal Sum",
+    "url": "https://leetcode.com/problems/partition-array-into-three-parts-with-equal-sum",
+    "difficulty": "Easy",
+    "question": "Given an array A of integers, return true if and only if we can partition the array into three non-empty parts with equal sums.\n\nFormally, we can partition the array if we can find indexes i+1 &lt; j with (A[0] + A[1] + ... + A[i] == A[i+1] + A[i+2] + ... + A[j-1] == A[j] + A[j-1] + ... + A[A.length - 1])\n\n&#xA0;\n\nExample 1:\n\nInput: [0,2,1,-6,6,-7,9,1,2,0,1]\nOutput: true\nExplanation: 0 + 2 + 1 = -6 + 6 - 7 + 9 + 1 = 2 + 0 + 1\n\n\n\nExample 2:\n\nInput: [0,2,1,-6,6,7,9,-1,2,0,1]\nOutput: false\n\n\n\nExample 3:\n\nInput: [3,3,6,5,-2,2,5,1,-9,4]\nOutput: true\nExplanation: 3 + 3 = 6 = 5 - 2 + 2 + 5 + 1 - 9 + 4\n\n\n\n\n&#xA0;\n\nNote:\n\n\n\t3 &lt;= A.length &lt;= 50000\n\t-10000 &lt;= A[i] &lt;= 10000\n",
+    "code": "undefinedpublic class Solution {    public bool CanThreePartsEqualSum(int[] A) {            }}"
+}

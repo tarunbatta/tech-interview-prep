@@ -1,0 +1,8 @@
+{
+    "number": "18",
+    "title": "4Sum",
+    "url": "https://leetcode.com/problems/4sum",
+    "difficulty": "Medium",
+    "question": "Given an array nums of n integers and an integer target, are there elements a, b, c, and d in nums such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.\n\nNote:\n\nThe solution set must not contain duplicate quadruplets.\n\nExample:\n\nGiven array nums = [1, 0, -1, 0, -2, 2], and target = 0.\n\nA solution set is:\n[\n  [-1,  0, 0, 1],\n  [-2, -1, 1, 2],\n  [-2,  0, 0, 2]\n]\n\n",
+    "code": "undefinedpublic class Solution {    public IList<IList<int>> FourSum(int[] nums, int target) {            }}"
+}

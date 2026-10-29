@@ -1,0 +1,8 @@
+{
+    "number": "911",
+    "title": "Online Election",
+    "url": "https://leetcode.com/problems/online-election",
+    "difficulty": "Medium",
+    "question": "In an election, the i-th&#xA0;vote was cast for persons[i] at time times[i].\n\nNow, we would like to implement the following query function: TopVotedCandidate.q(int t) will return the number of the person that was leading the election at time t.&#xA0;&#xA0;\n\nVotes cast at time t will count towards our query.&#xA0; In the case of a tie, the most recent vote (among tied candidates) wins.\n\n&#xA0;\n\n\nExample 1:\n\nInput: [&quot;TopVotedCandidate&quot;,&quot;q&quot;,&quot;q&quot;,&quot;q&quot;,&quot;q&quot;,&quot;q&quot;,&quot;q&quot;], [[[0,1,1,0,0,1,0],[0,5,10,15,20,25,30]],[3],[12],[25],[15],[24],[8]]\nOutput: [null,0,1,1,0,0,1]\nExplanation: \nAt time 3, the votes are [0], and 0 is leading.\nAt time 12, the votes are [0,1,1], and 1 is leading.\nAt time 25, the votes are [0,1,1,0,0,1], and 1 is leading (as ties go to the most recent vote.)\nThis continues for 3 more queries at time 15, 24, and 8.\n\n\n&#xA0;\n\nNote:\n\n\n\t1 &lt;= persons.length = times.length &lt;= 5000\n\t0 &lt;= persons[i] &lt;= persons.length\n\ttimes&#xA0;is a strictly increasing array with all elements in [0, 10^9].\n\tTopVotedCandidate.q is called at most 10000 times per test case.\n\tTopVotedCandidate.q(int t) is always called with t &gt;= times[0].\n\n\n",
+    "code": "undefinedpublic class TopVotedCandidate {​    public TopVotedCandidate(int[] persons, int[] times) {            }        public int Q(int t) {            }}​/** * Your TopVotedCandidate object will be instantiated and called as such: * TopVotedCandidate obj = new TopVotedCandidate(persons, times); * int param_1 = obj.Q(t); */"
+}

@@ -1,0 +1,8 @@
+{
+    "number": "993",
+    "title": "Cousins in Binary Tree",
+    "url": "https://leetcode.com/problems/cousins-in-binary-tree",
+    "difficulty": "Easy",
+    "question": "In a binary tree, the root node is at depth 0, and children of each depth k node are at depth k+1.\n\nTwo nodes of a binary tree are cousins if they have the same depth, but have different parents.\n\nWe are given the root of a binary tree with unique values, and the values x&#xA0;and y&#xA0;of two different nodes in the tree.\n\nReturn&#xA0;true&#xA0;if and only if the nodes corresponding to the values x and y are cousins.\n\n&#xA0;\n\nExample 1:\n\n\nInput: root = [1,2,3,4], x = 4, y = 3\nOutput: false\n\n\n\nExample 2:\n\n\nInput: root = [1,2,3,null,4,null,5], x = 5, y = 4\nOutput: true\n\n\n\nExample 3:\n\n\n\nInput: root = [1,2,3,null,4], x = 2, y = 3\nOutput: false\n\n&#xA0;\n\n\n\nNote:\n\n\n\tThe number of nodes in the tree will be between 2 and 100.\n\tEach node has a unique integer value from 1 to 100.\n\n\n\n\n&#xA0;\n\n",
+    "code": "undefined/** * Definition for a binary tree node. * public class TreeNode { *     public int val; *     public TreeNode left; *     public TreeNode right; *     public TreeNode(int x) { val = x; } * } */public class Solution {    public bool IsCousins(TreeNode root, int x, int y) {            }}"
+}

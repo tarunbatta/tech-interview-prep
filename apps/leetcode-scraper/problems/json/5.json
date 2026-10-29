@@ -1,0 +1,8 @@
+{
+    "number": "5",
+    "title": "Longest Palindromic Substring",
+    "url": "https://leetcode.com/problems/longest-palindromic-substring",
+    "difficulty": "Medium",
+    "question": "Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.\n\nExample 1:\n\nInput: &quot;babad&quot;\nOutput: &quot;bab&quot;\nNote: &quot;aba&quot; is also a valid answer.\n\n\nExample 2:\n\nInput: &quot;cbbd&quot;\nOutput: &quot;bb&quot;\n\n",
+    "code": "undefinedpublic class Solution {    public string LongestPalindrome(string s) {            }}"
+}

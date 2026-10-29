@@ -1,0 +1,8 @@
+{
+    "number": "668",
+    "title": "Kth Smallest Number in Multiplication Table",
+    "url": "https://leetcode.com/problems/kth-smallest-number-in-multiplication-table",
+    "difficulty": "Hard",
+    "question": "\nNearly every one have used the Multiplication Table. But could you find out the k-th smallest number quickly from the multiplication table?\n\n\n\nGiven the height m and the length n of a m * n Multiplication Table, and a positive integer k, you need to return the k-th smallest number in this table.\n\n\nExample 1:\nInput: m = 3, n = 3, k = 5\nOutput: \nExplanation: \nThe Multiplication Table:\n1\t2\t3\n2\t4\t6\n3\t6\t9\n\nThe 5-th smallest number is 3 (1, 2, 2, 3, 3).\n\n\n\n\nExample 2:\nInput: m = 2, n = 3, k = 6\nOutput: \nExplanation: \nThe Multiplication Table:\n1\t2\t3\n2\t4\t6\n\nThe 6-th smallest number is 6 (1, 2, 2, 3, 4, 6).\n\n\n\n\nNote:\n\nThe m and n will be in the range [1, 30000].\nThe k will be in the range [1, m * n]\n\n",
+    "code": "undefinedpublic class Solution {    public int FindKthNumber(int m, int n, int k) {            }}"
+}

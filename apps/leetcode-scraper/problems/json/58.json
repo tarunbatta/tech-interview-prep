@@ -1,0 +1,8 @@
+{
+    "number": "58",
+    "title": "Length of Last Word",
+    "url": "https://leetcode.com/problems/length-of-last-word",
+    "difficulty": "Easy",
+    "question": "Given a string s consists of upper/lower-case alphabets and empty space characters &apos; &apos;, return the length of last word in the string.\n\nIf the last word does not exist, return 0.\n\nNote: A word is defined as a character sequence consists of non-space characters only.\n\nExample:\n\nInput: &quot;Hello World&quot;\nOutput: 5\n\n\n&#xA0;\n",
+    "code": "undefinedpublic class Solution {    public int LengthOfLastWord(string s) {            }}"
+}

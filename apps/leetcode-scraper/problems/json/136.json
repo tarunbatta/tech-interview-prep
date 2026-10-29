@@ -1,0 +1,8 @@
+{
+    "number": "136",
+    "title": "Single Number",
+    "url": "https://leetcode.com/problems/single-number",
+    "difficulty": "Easy",
+    "question": "Given a non-empty&#xA0;array of integers, every element appears twice except for one. Find that single one.\n\nNote:\n\nYour algorithm should have a linear runtime complexity. Could you implement it without using extra memory?\n\nExample 1:\n\nInput: [2,2,1]\nOutput: 1\n\n\nExample 2:\n\nInput: [4,1,2,1,2]\nOutput: 4\n\n",
+    "code": "undefinedpublic class Solution {    public int SingleNumber(int[] nums) {            }}"
+}

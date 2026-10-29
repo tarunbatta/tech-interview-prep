@@ -1,0 +1,8 @@
+{
+    "number": "139",
+    "title": "Word Break",
+    "url": "https://leetcode.com/problems/word-break",
+    "difficulty": "Medium",
+    "question": "Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words.\n\nNote:\n\n\n\tThe same word in the dictionary may be reused multiple times in the segmentation.\n\tYou may assume the dictionary does not contain duplicate words.\n\n\nExample 1:\n\nInput: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]\nOutput: true\nExplanation: Return true because &quot;leetcode&quot; can be segmented as &quot;leet code&quot;.\n\n\nExample 2:\n\nInput: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]\nOutput: true\nExplanation: Return true because &quot;applepenapple&quot; can be segmented as &quot;apple pen apple&quot;.\n&#xA0;            Note that you are allowed to reuse a dictionary word.\n\n\nExample 3:\n\nInput: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]\nOutput: false\n\n",
+    "code": "undefinedpublic class Solution {    public bool WordBreak(string s, IList<string> wordDict) {            }}"
+}

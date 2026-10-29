@@ -1,0 +1,8 @@
+{
+    "number": "1108",
+    "title": "Defanging an IP Address",
+    "url": "https://leetcode.com/problems/defanging-an-ip-address",
+    "difficulty": "Easy",
+    "question": "Given a valid (IPv4) IP address, return a defanged version of that IP address.\n\nA defanged&#xA0;IP address&#xA0;replaces every period &quot;.&quot; with &quot;[.]&quot;.\n\n&#xA0;\nExample 1:\nInput: address = &quot;1.1.1.1&quot;\nOutput: &quot;1[.]1[.]1[.]1&quot;\nExample 2:\nInput: address = &quot;255.100.50.0&quot;\nOutput: &quot;255[.]100[.]50[.]0&quot;\n\n&#xA0;\nConstraints:\n\n\n\tThe given address is a valid IPv4 address.\n",
+    "code": "undefinedpublic class Solution {    public string DefangIPaddr(string address) {            }}"
+}

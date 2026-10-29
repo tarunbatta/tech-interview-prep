@@ -1,0 +1,8 @@
+{
+    "number": "334",
+    "title": "Increasing Triplet Subsequence",
+    "url": "https://leetcode.com/problems/increasing-triplet-subsequence",
+    "difficulty": "Medium",
+    "question": "Given an unsorted array return whether an increasing subsequence of length 3 exists or not in the array.\n\nFormally the function should:\n\nReturn true if there exists i, j, k \nsuch that arr[i] &lt; arr[j] &lt; arr[k] given 0 &#x2264; i &lt; j &lt; k &#x2264; n-1 else return false.\n\nNote: Your algorithm should run in O(n) time complexity and O(1) space complexity.\n\n\nExample 1:\n\nInput: [1,2,3,4,5]\nOutput: true\n\n\n\nExample 2:\n\nInput: [5,4,3,2,1]\nOutput: false\n\n\n",
+    "code": "undefinedpublic class Solution {    public bool IncreasingTriplet(int[] nums) {            }}"
+}
