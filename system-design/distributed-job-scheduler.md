@@ -466,4 +466,3 @@ If a user cancels a job:
 ### Video References
 
 * [![Distributed Job Scheduler System Design](https://img.youtube.com/vi/7cb70da1MK8/0.jpg)](https://www.youtube.com/watch?v=7cb70da1MK8)
-

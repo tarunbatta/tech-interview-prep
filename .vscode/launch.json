@@ -2,13 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Launch: Core",
+            "name": ".NET Launch: LeetCode (Runner)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/dotnet/core/bin/Debug/net10.0/core.dll",
+            "preLaunchTask": "build-leetcode",
+            "program": "${workspaceFolder}/src/leetcode/csharp/bin/Debug/net10.0/LeetCode.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/dotnet/core",
+            "cwd": "${workspaceFolder}/src/leetcode/csharp",
             "console": "internalConsole",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart"

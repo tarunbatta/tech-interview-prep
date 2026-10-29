@@ -1,16 +1,16 @@
 # Study Topics & References
 
-Non-code notes carried over from the old `todo.md`. The coding problems from that list now live in
-[`src/dotnet/core`](../src/dotnet/core) (see [`amazon/`](../src/dotnet/core/amazon), [`concurrency/`](../src/dotnet/core/concurrency),
-[`algorithms/others/`](../src/dotnet/core/algorithms/others) and [`leetcode/`](../src/dotnet/core/leetcode)).
+Non-code notes carried over from the old `todo.md`. The coding problems from that list now live under
+[`src/`](../src) (see [`amazon/`](../src/amazon/csharp), [`concurrency/`](../src/concurrency/csharp),
+[`algorithms/others/`](../src/algorithms/csharp/others) and [`leetcode/`](../src/leetcode/csharp)).
 
 ## Concurrency & Distributed Systems
 
 Common interview discussion topics (eBay and others), cross-linked to the **[9-Chapter System Design Fundamentals Curriculum](../system-design/system-design.md#system-design-fundamentals-curriculum-9-chapters)**, **[35 System Design Case Studies](../system-design/system-design.md#interview-system-design-case-studies-35-systems)**, and C# implementations:
 
 - **Concurrency fundamentals: threads vs. processes, locks, condition variables, deadlock, starvation** — see [Chapter 5: Local Concurrency Primitives vs. Distributed Locks](../system-design/fundamentals/05-distributed-systems-and-messaging.md#local-concurrency-primitives-vs-distributed-locks) and [Chapter 4: Database Isolation Levels & Concurrency Control](../system-design/fundamentals/04-databases-sql-vs-nosql.md#database-isolation-levels--concurrency-control-ddia-deep-dive)
-- **Read-write locks** — see C# implementation [`readWriteLock.cs`](../src/dotnet/core/concurrency/readWriteLock.cs) and [Chapter 5: Local Concurrency Primitives](../system-design/fundamentals/05-distributed-systems-and-messaging.md#local-concurrency-primitives-vs-distributed-locks)
-- **Blocking concurrent queue / producer-consumer** — see C# implementation [`blockingQueue.cs`](../src/dotnet/core/concurrency/blockingQueue.cs), [Chapter 6: Backpressure](../system-design/fundamentals/06-resiliency-observability-and-metrics.md#timeouts-deadlines--backpressure), and lock-free ring buffers in [Stock Exchange Matching Engine](../system-design/stock-exchange.md)
+- **Read-write locks** — see C# implementation [`readWriteLock.cs`](../src/concurrency/csharp/readWriteLock.cs) and [Chapter 5: Local Concurrency Primitives](../system-design/fundamentals/05-distributed-systems-and-messaging.md#local-concurrency-primitives-vs-distributed-locks)
+- **Blocking concurrent queue / producer-consumer** — see C# implementation [`blockingQueue.cs`](../src/concurrency/csharp/blockingQueue.cs), [Chapter 6: Backpressure](../system-design/fundamentals/06-resiliency-observability-and-metrics.md#timeouts-deadlines--backpressure), and lock-free ring buffers in [Stock Exchange Matching Engine](../system-design/stock-exchange.md)
 - **Sliding window protocol (flow control & rate limiting)** — see [Chapter 1: TCP Flow & Congestion Control](../system-design/fundamentals/01-networking-and-api-paradigms.md#transport-layer-tcp-vs-udp-vs-quic), [Chapter 6: Sliding Window Rate Limiting](../system-design/fundamentals/06-resiliency-observability-and-metrics.md#rate-limiting-algorithms-comparison), and [Rate Limiter Design](../system-design/rate-limiter.md)
 - **Two-phase commit (2PC) and its failure modes** — see [Chapter 5: 2PC vs. Saga vs. Transactional Outbox](../system-design/fundamentals/05-distributed-systems-and-messaging.md#4-distributed-transactions-2pc-vs-saga-vs-transactional-outbox), [ATM Design](../system-design/atm.md), and [Payment System Design](../system-design/payment-system.md)
 - **Pub/sub messaging & event streams** — see [Chapter 5: Message Queues (RabbitMQ/SQS) vs. Pub/Sub Streams (Kafka)](../system-design/fundamentals/05-distributed-systems-and-messaging.md#8-asynchronous-messaging-message-queues-vs-pubsub-event-streams) and [Chapter 7: Stream Processing (Apache Flink)](../system-design/fundamentals/07-probabilistic-structures-and-stream-processing.md#3-stream-processing--event-driven-data-architectures)
@@ -32,13 +32,13 @@ Common interview discussion topics (eBay and others), cross-linked to the **[9-C
 
 | Topic | Reference | Implementation |
 | --- | --- | --- |
-| Manacher's algorithm | [Wikipedia](https://en.wikipedia.org/wiki/Longest_palindromic_substring#Manacher's_algorithm) | [5.cs](../src/dotnet/core/leetcode/0001-0100/5.cs) |
-| Miller–Rabin primality | [Wikipedia](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test) | [millerRabin.cs](../src/dotnet/core/algorithms/others/millerRabin.cs) |
-| Knapsack problem | [Wikipedia](https://en.wikipedia.org/wiki/Knapsack_problem) | [knapsack.cs](../src/dotnet/core/algorithms/others/knapsack.cs) |
-| Bin packing problem | [Wikipedia](https://en.wikipedia.org/wiki/Bin_packing_problem) | [binPacking.cs](../src/dotnet/core/algorithms/others/binPacking.cs) |
-| Edit distance | [Wikipedia](https://en.wikipedia.org/wiki/Edit_distance) | [72.cs](../src/dotnet/core/leetcode/0001-0100/72.cs) |
-| Minimum spanning tree | [Wikipedia](https://en.wikipedia.org/wiki/Minimum_spanning_tree) | [minimumSpanningTree.cs](../src/dotnet/core/algorithms/others/minimumSpanningTree.cs) |
-| Bellman–Ford | [Wikipedia](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm) | [bellmanFord.cs](../src/dotnet/core/algorithms/search/bellmanFord.cs) |
+| Manacher's algorithm | [Wikipedia](https://en.wikipedia.org/wiki/Longest_palindromic_substring#Manacher's_algorithm) | [5.cs](../src/leetcode/csharp/0001-0100/5.cs) |
+| Miller–Rabin primality | [Wikipedia](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test) | [millerRabin.cs](../src/algorithms/csharp/others/millerRabin.cs) |
+| Knapsack problem | [Wikipedia](https://en.wikipedia.org/wiki/Knapsack_problem) | [knapsack.cs](../src/algorithms/csharp/others/knapsack.cs) |
+| Bin packing problem | [Wikipedia](https://en.wikipedia.org/wiki/Bin_packing_problem) | [binPacking.cs](../src/algorithms/csharp/others/binPacking.cs) |
+| Edit distance | [Wikipedia](https://en.wikipedia.org/wiki/Edit_distance) | [72.cs](../src/leetcode/csharp/0001-0100/72.cs) |
+| Minimum spanning tree | [Wikipedia](https://en.wikipedia.org/wiki/Minimum_spanning_tree) | [minimumSpanningTree.cs](../src/algorithms/csharp/others/minimumSpanningTree.cs) |
+| Bellman–Ford | [Wikipedia](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm) | [bellmanFord.cs](../src/algorithms/csharp/search/bellmanFord.cs) |
 | Knuth's Mastermind algorithm | [Math StackExchange](http://math.stackexchange.com/questions/1192961/knuths-mastermind-algorithm) | — |
 | Benford's law | [Wikipedia](https://en.wikipedia.org/wiki/Benford%27s_law) | — |
 

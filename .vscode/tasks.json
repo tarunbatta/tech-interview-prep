@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/dotnet/core/core.csproj"
+                "${workspaceFolder}/tech-interview-prep.sln"
             ],
             "problemMatcher": "$msCompile",
             "group": {
@@ -16,12 +16,12 @@
             }
         },
         {
-            "label": "build-practice",
+            "label": "build-leetcode",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/dotnet/practice/practice.csproj"
+                "${workspaceFolder}/src/leetcode/csharp/LeetCode.csproj"
             ],
             "problemMatcher": "$msCompile"
         },

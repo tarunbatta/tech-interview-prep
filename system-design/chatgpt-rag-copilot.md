@@ -500,4 +500,3 @@ Because output token length is unknown until generation finishes:
 ### Video References
 
 * [![Retrieval-Augmented Generation & LLM System Design](https://img.youtube.com/vi/T-D1OfcDW1M/0.jpg)](https://www.youtube.com/watch?v=T-D1OfcDW1M)
-

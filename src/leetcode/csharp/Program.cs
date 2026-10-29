@@ -1,9 +1,9 @@
 /*
 From repository root:
-dotnet run --project src/dotnet/core
+dotnet run --project src/leetcode/csharp
 
-From the core directory:
-cd src/dotnet/core
+From the leetcode directory:
+cd src/leetcode/csharp
 dotnet run
 */
 

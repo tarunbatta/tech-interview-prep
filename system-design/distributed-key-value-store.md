@@ -455,4 +455,3 @@ Consistent hashing distributes *distinct keys* evenly, but if 500,000 requests/s
 
 * [Amazon Dynamo Paper (DeCandia et al., SOSP 2007)](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
 * [![Design a Distributed Key-Value Store](https://img.youtube.com/vi/rnZmdmlR-2M/0.jpg)](https://www.youtube.com/watch?v=rnZmdmlR-2M)
-

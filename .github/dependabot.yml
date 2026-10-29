@@ -21,7 +21,7 @@ updates:
 
   # Enable version updates for JavaScript
   - package-ecosystem: "npm"
-    directory: "/src/javascript"
+    directory: "/src/qotd/javascript"
     schedule:
       interval: "weekly"
       day: "monday"

@@ -4,9 +4,8 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
 
 [![Website: battatech.com](https://img.shields.io/badge/Website-battatech.com-blue.svg)](https://battatech.com)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)
-[![.NET](https://img.shields.io/badge/.NET-10.0-purple.svg)](https://dotnet.microsoft.com/)
-[![Java](https://img.shields.io/badge/Java-CTCI%206th-orange.svg)](src/java/)
-[![JavaScript](https://img.shields.io/badge/JavaScript-Node.js-yellow.svg)](src/javascript/)
+[![C#](https://img.shields.io/badge/C%23-.NET%2010.0-purple.svg)](src/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-Node.js-yellow.svg)](src/qotd/javascript/)
 [![System Design](https://img.shields.io/badge/System%20Design-35%20Case%20Studies-blue.svg)](system-design/system-design.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -19,7 +18,7 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
 - [Quick Start & Common Commands](#quick-start--common-commands)
 - [Pillar 1: Coding & Data Structures](#pillar-1-coding--data-structures)
   - [Interactive Applications](#interactive-applications)
-  - [Languages & Problem Sets](#languages--problem-sets)
+  - [Categories & Multi-Language Structure](#categories--multi-language-structure)
   - [C# Solution Snippet Template](#c-solution-snippet-template)
 - [Pillar 2: System Design & Architecture](#pillar-2-system-design--architecture)
   - [Featured Real-World Project Retrospective](#-featured-real-world-project-retrospective)
@@ -72,12 +71,30 @@ tech-interview-prep/
 ├── apps/                          # Executable applications
 │   ├── chess-game/                # Console Chess game (.NET 10)
 │   └── expression-tree/           # Expression tree evaluator (.NET 10)
-├── src/                           # Code solutions by ecosystem
-│   ├── dotnet/
-│   │   ├── core/                  # Core algorithms, data structures, LeetCode, CTCI C#
-│   │   └── practice/              # Practice questions (1–54) and QOTD problems
-│   ├── java/                      # Cracking the Coding Interview (6th ed.) Java solutions
-│   └── javascript/                # JavaScript QOTD and utility solutions
+├── src/                           # Problem solutions organized by category & language
+│   ├── algorithms/                # Sorting, searching, and general algorithms
+│   │   └── csharp/
+│   ├── amazon/                    # Amazon interview challenges
+│   │   └── csharp/
+│   ├── concurrency/               # Threading, synchronization, and concurrent queues
+│   │   └── csharp/
+│   ├── ctci/                      # Cracking the Coding Interview (Chapters 1–17)
+│   │   └── csharp/
+│   ├── dataStructure/             # Core data structures (Trie, Heap, Graph, SkipList)
+│   │   └── csharp/
+│   ├── designPattern/             # Creational, structural, and behavioral patterns
+│   │   └── csharp/
+│   ├── geeksForGeeks/             # GeeksforGeeks problems
+│   │   └── csharp/
+│   ├── hackerRank/                # HackerRank problems
+│   │   └── csharp/
+│   ├── leetcode/                  # LeetCode problems (0001-0100 through 3101-3200)
+│   │   └── csharp/
+│   ├── qotd/                      # Question of the Day challenges
+│   │   ├── csharp/
+│   │   └── javascript/
+│   └── questions/                 # Practice challenges (Questions 1–54)
+│       └── csharp/
 ├── system-design/                 # 35 Complete System Design case studies & fundamentals
 │   ├── system-design.md           # Master hub, interview framework, estimation cheat sheet
 │   ├── fundamentals/              # 9-chapter curriculum (networking, DBs, caching, AI/LLM, etc.)
@@ -94,6 +111,7 @@ tech-interview-prep/
 │   └── template/                  # System design base template (.md with Mermaid diagrams)
 ├── shared/                        # Shared assets (dictionaries, scowl word lists)
 ├── package.json                   # Monorepo tasks (builds, test runs, linting)
+├── tech-interview-prep.sln        # Root .NET solution linking all projects
 └── README.md                      # Unified guide and cheatsheet
 ```
 
@@ -106,7 +124,7 @@ All builds, executions, and scripts can be run through `npm` or the native toolc
 ### Using NPM Scripts (Recommended)
 
 ```bash
-# Build all .NET projects and apps
+# Build all .NET projects and apps via root solution
 npm run build
 
 # Run interactive apps
@@ -114,8 +132,7 @@ npm run start:chess               # Run the console Chess game
 npm run start:expression-tree     # Run Expression Tree evaluator
 
 # Run algorithm problem runners
-npm run start:dotnet-core         # Run .NET Core entry point
-npm run start:practice            # Run .NET practice suite
+npm run start:dotnet              # Run LeetCode C# entry point (alias: start:dotnet-core)
 npm run start:js                  # Run JavaScript QOTD script
 
 # System design tooling
@@ -128,25 +145,26 @@ npm run lint:md:fix               # Auto-fix markdown formatting
 
 ### Direct Toolchain Commands
 
-#### .NET 10 Projects
+#### .NET 10 Solution & Projects
 
 ```bash
-# Build all projects
-dotnet build src/dotnet/core
-dotnet build src/dotnet/practice
-dotnet build apps/chess-game
-dotnet build apps/expression-tree
+# Build entire repository (.sln links apps and all category projects)
+dotnet build
+
+# Build a single category project
+dotnet build src/leetcode/csharp
+dotnet build src/algorithms/csharp
 
 # Run applications
 dotnet run --project apps/chess-game
 dotnet run --project apps/expression-tree
-dotnet run --project src/dotnet/core
+dotnet run --project src/leetcode/csharp
 ```
 
 #### JavaScript & Node.js
 
 ```bash
-node src/javascript/qotd/SuperArray.js
+node src/qotd/javascript/SuperArray.js
 ```
 
 ---
@@ -158,18 +176,19 @@ node src/javascript/qotd/SuperArray.js
 1. **[Console Chess Game](apps/chess-game/)** (`apps/chess-game`): Complete object-oriented console implementation of Chess in C# / .NET 10 featuring full board rendering, movement validation, and game loop.
 2. **[Expression Tree Evaluator](apps/expression-tree/)** (`apps/expression-tree`): Expression tree parser and evaluator (.NET 10) demonstrating binary expression tree construction, infix/postfix traversal, and evaluation.
 
-### Languages & Problem Sets
+### Categories & Multi-Language Structure
 
-- **.NET 10 Core Solutions** ([`src/dotnet/core`](src/dotnet/core/)):
-  - Core data structure implementations (Trie, Heap, Graph, Disjoint Set, SkipList).
-  - Comprehensive LeetCode solutions categorized by topic (Arrays, Two Pointers, Trees, Dynamic Programming).
-  - Cracking the Coding Interview C# solutions.
-- **.NET 10 Practice Suite** ([`src/dotnet/practice`](src/dotnet/practice/)):
-  - 54 dedicated practice challenges and Question of the Day (QOTD) problems.
-- **Java CTCI 6th Edition** ([`src/java/`](src/java/)):
-  - Solutions and notes for Chapters 1 through 17 from Gayle Laakmann McDowell's *Cracking the Coding Interview*.
-- **JavaScript Problem Sets** ([`src/javascript/`](src/javascript/)):
-  - Data manipulation algorithms, custom collection extensions, and algorithmic scripts.
+Solutions under [`src/`](src/) are organized category-first (`src/<category>/<language>/`), allowing solutions across languages (**C#**, **JavaScript**, and future **Python**, **Go**, **Rust**, etc.) to reside side-by-side:
+
+- **LeetCode** ([`src/leetcode/`](src/leetcode/)): Comprehensive LeetCode solutions (0001–3200) in [`csharp/`](src/leetcode/csharp/).
+- **Algorithms** ([`src/algorithms/`](src/algorithms/)): Sorting, graph traversal (BFS/DFS, Dijkstra, Bellman-Ford), DP, and MST algorithms in [`csharp/`](src/algorithms/csharp/).
+- **Data Structures** ([`src/dataStructure/`](src/dataStructure/)): Core implementations (Trie, Heap, Graph, Disjoint Set, SkipList) in [`csharp/`](src/dataStructure/csharp/).
+- **Cracking the Coding Interview (CTCI)** ([`src/ctci/`](src/ctci/)): Complete Chapter 1–17 solutions in [`csharp/`](src/ctci/csharp/).
+- **Concurrency** ([`src/concurrency/`](src/concurrency/)): Thread synchronization, read-write locks, blocking queues, and thread-pool implementations in [`csharp/`](src/concurrency/csharp/).
+- **Design Patterns** ([`src/designPattern/`](src/designPattern/)): Structural, behavioral, and creational patterns in [`csharp/`](src/designPattern/csharp/).
+- **Question of the Day (QOTD)** ([`src/qotd/`](src/qotd/)): Daily algorithmic problems with solutions in [`csharp/`](src/qotd/csharp/) and [`javascript/`](src/qotd/javascript/).
+- **Practice Questions** ([`src/questions/`](src/questions/)): 54 curated programming problems in [`csharp/`](src/questions/csharp/).
+- **Company & Platform Problems**: Amazon ([`src/amazon/`](src/amazon/)), HackerRank ([`src/hackerRank/`](src/hackerRank/)), and GeeksforGeeks ([`src/geeksForGeeks/`](src/geeksForGeeks/)).
 - **Curated Problem Lists**:
   - [Curated Top 100 LeetCode](docs/top100-leetcode.md)
   - [Company Interview Questions](docs/interview-questions.md)

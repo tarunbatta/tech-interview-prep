@@ -466,4 +466,3 @@ If 500 institutional trading firms subscribe to the L3 full tick feed, sending 5
 
 * [LMAX Disruptor High-Performance Inter-Thread Messaging Paper (Martin Thompson et al.)](https://lmax-exchange.github.io/disruptor/files/Disruptor-1.0.pdf)
 * [![Design a Stock Exchange System Design](https://img.youtube.com/vi/iFA3zwZc0dc/0.jpg)](https://www.youtube.com/watch?v=iFA3zwZc0dc)
-

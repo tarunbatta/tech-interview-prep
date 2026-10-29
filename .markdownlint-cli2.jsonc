@@ -4,6 +4,6 @@
   },
   "ignores": [
     "LICENSE",
-    "src/java/ctci/**"
+    "src/ctci/**"
   ]
 }
