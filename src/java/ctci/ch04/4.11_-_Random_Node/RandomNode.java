@@ -1,29 +1,29 @@
 import java.util.*;
 
-class TreeNode {
-  int val;
-  TreeNode left, right;
-  int size = 0;
-
-  public TreeNode(int val) {
-    this.val = val;
-    size = 1;
-  }
-
-  public TreeNode getRandomNode() {
-    int leftSize = (left == null ? 0 : left.size);
-    Random random = new Random();
-    int index = random.nextInt(size);
-    if (index < leftSize)
-      return left.getRandomNode();
-    else if (index == leftSize)
-      return this;
-    else
-      return right.getRandomNode();
-  }
-}
-
 public class RandomNode {
+  public static class TreeNode {
+    int val;
+    TreeNode left, right;
+    int size = 0;
+
+    public TreeNode(int val) {
+      this.val = val;
+      size = 1;
+    }
+
+    public TreeNode getRandomNode() {
+      int leftSize = (left == null ? 0 : left.size);
+      Random random = new Random();
+      int index = random.nextInt(size);
+      if (index < leftSize)
+        return left.getRandomNode();
+      else if (index == leftSize)
+        return this;
+      else
+        return right.getRandomNode();
+    }
+  }
+
   public static void main(String[] args) {
     TreeNode a = new TreeNode(8);
     TreeNode b = new TreeNode(4);

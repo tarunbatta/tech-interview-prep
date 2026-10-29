@@ -4,17 +4,17 @@
 
 import java.util.*;
 
-class Node {
-  public Node left;
-  public Node right;
-  public int val;
-
-  public Node(int val) {
-    this.val = val;
-  }
-}
-
 public class BSTSequences {
+  public static class Node {
+    public Node left;
+    public Node right;
+    public int val;
+
+    public Node(int val) {
+      this.val = val;
+    }
+  }
+
   public static void weaveLists(LinkedList<Integer> first, LinkedList<Integer> second,
       ArrayList<LinkedList<Integer>> results, LinkedList<Integer> prefix) {
     /* One list is empty. Add resmainer to [a cloned] prefix and store result. */

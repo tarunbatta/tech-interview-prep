@@ -1,15 +1,15 @@
 import java.util.*;
 
-class TreeNode {
-  int val;
-  TreeNode left, right;
-
-  TreeNode(int val) {
-    this.val = val;
-  }
-}
-
 public class FirstCommonAncestor {
+  public static class TreeNode {
+    int val;
+    TreeNode left, right;
+
+    TreeNode(int val) {
+      this.val = val;
+    }
+  }
+
   public static TreeNode commonAncestor(TreeNode root, TreeNode p, TreeNode q) {
     if (root == null || p == null || q == null)
       return null;

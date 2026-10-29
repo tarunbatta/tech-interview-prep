@@ -1,16 +1,16 @@
 import java.util.*;
 
-class Node {
-  Node left;
-  Node right;
-  int val;
-
-  public Node(int val) {
-    this.val = val;
-  }
-}
-
 public class PathsWithSum {
+  public static class Node {
+    Node left;
+    Node right;
+    int val;
+
+    public Node(int val) {
+      this.val = val;
+    }
+  }
+
   public static int countPathsWithSum(Node root, int sum) {
     if (root == null)
       return 0;
