@@ -6,7 +6,7 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 [![C#](https://img.shields.io/badge/C%23-.NET%2010.0-purple.svg)](src/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-Node.js-yellow.svg)](src/qotd/javascript/)
-[![System Design](https://img.shields.io/badge/System%20Design-35%20Case%20Studies-blue.svg)](system-design/system-design.md)
+[![System Design](https://img.shields.io/badge/System%20Design-36%20Case%20Studies-blue.svg)](system-design/system-design.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ---
@@ -22,7 +22,7 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
   - [C# Solution Snippet Template](#c-solution-snippet-template)
 - [Pillar 2: System Design & Architecture](#pillar-2-system-design--architecture)
   - [Featured Real-World Project Retrospective](#-featured-real-world-project-retrospective)
-  - [System Design Master Guide & 35 Case Studies](#system-design-master-guide--35-case-studies)
+  - [System Design Master Guide & 36 Case Studies](#system-design-master-guide--36-case-studies)
 - [Pillar 3: Engineering Management & Behavioural](#pillar-3-engineering-management--behavioural)
   - [CAR / STAR Story Framework](#car--star-story-framework)
   - [Role Scope & Strategic Leadership Assessment](#role-scope--strategic-leadership-assessment)
@@ -55,7 +55,7 @@ A comprehensive, multi-language interview preparation monorepo covering **Data S
 ┌─────────────────────────┐                        ┌─────────────────────────┐                        ┌─────────────────────────┐
 │  Coding & Algorithms    │                        │      System Design      │                        │  Leadership & Behaviour │
 ├─────────────────────────┤                        ├─────────────────────────┤                        ├─────────────────────────┤
-│ • .NET 10 Core & LeetCode│                       │ • 35 System Deep Dives  │                        │ • CAR / STAR Framework  │
+│ • .NET 10 Core & LeetCode│                       │ • 36 System Deep Dives  │                        │ • CAR / STAR Framework  │
 │ • Java CTCI 6th Edition │                        │ • Architecture Diagrams │                        │ • Strategic Challenges  │
 │ • JavaScript Solutions  │                        │ • Estimation Numbers    │                        │ • 20 ATS Resume Models  │
 │ • Chess & Expression App│                        │ • Draw.io Tooling       │                        │ • Role Targeting Guide  │
@@ -96,7 +96,7 @@ tech-interview-prep/
 │   │   └── javascript/
 │   └── questions/                 # Practice challenges (Questions 1–54)
 │       └── csharp/
-├── system-design/                 # 35 Complete System Design case studies & fundamentals
+├── system-design/                 # 36 Complete System Design case studies & fundamentals
 │   ├── system-design.md           # Master hub, interview framework, estimation cheat sheet
 │   ├── fundamentals/              # 9-chapter curriculum (networking, DBs, caching, AI/LLM, etc.)
 │   └── [case-studies]/            # airbnb, chatgpt-rag-copilot, stock-exchange, uber, etc.
@@ -224,13 +224,13 @@ Use this VS Code snippet structure for adding new solutions:
 
 ## Pillar 2: System Design & Architecture
 
-All system design theory, core architectural building blocks, capacity estimation cheat sheets, and 35 end-to-end interview case studies are consolidated in **[`system-design/system-design.md`](system-design/system-design.md)**.
+All system design theory, core architectural building blocks, capacity estimation cheat sheets, and 36 end-to-end interview case studies are consolidated in **[`system-design/system-design.md`](system-design/system-design.md)**.
 
 ### 🌟 Featured Real-World Project Retrospective
 
 - [**DocuSign Billing & Invoicing Modernization Case Study**](system-design/project-retrospective.md) — Production architecture retrospective: Migrating legacy Quartz batch systems to an event-driven MuleSoft & Core microservices integration platform. Features before/after architecture, zero-downtime "learning mode" dual-run strategy, and quantified business impact (reduced invoice latency from 7 days to real-time, 90% reduction in reconciliation discrepancies, 80% DSO reduction).
 
-### System Design Master Guide & 35 Case Studies
+### System Design Master Guide & 36 Case Studies
 
 Explore the **[System Design Documentation Hub](system-design/system-design.md)** and its **[9-Chapter Fundamentals Curriculum](system-design/system-design.md#system-design-fundamentals-curriculum-9-chapters)**:
 
@@ -243,7 +243,7 @@ Explore the **[System Design Documentation Hub](system-design/system-design.md)*
 - **[Chapter 7: Probabilistic Data Structures, Gossip & Stream Processing](system-design/fundamentals/07-probabilistic-structures-and-stream-processing.md)** — **Bloom/Cuckoo Filters**, **Count-Min Sketch (Top-K Heavy Hitters)**, **HyperLogLog (12 KB unique counting)**, **SimHash/MinHash**, **Gossip Protocol & Merkle Trees**, **CRDTs vs. OT**, **Apache Flink Stream Windows & Watermarks**, **CQRS**, **Event Sourcing**, and **Lambda vs. Kappa Architecture**.
 - **[Chapter 8: Security, Multi-Region DR & Zero-Downtime Deployments](system-design/fundamentals/08-security-multi-region-and-deployments.md)** — **Session Cookies vs. JWTs (+ JWT Revocation)**, **OAuth 2.0 / OIDC**, **mTLS & SPIFFE**, **RBAC / ABAC / Google Zanzibar ReBAC**, **KMS Envelope Encryption (KEK + DEK)**, **RPO vs. RTO & DR Tiers**, **Cell-Based Architecture & Shuffle Sharding**, **Blue-Green / Canary / Shadow Deployments**, and **Expand-and-Contract DB Migrations**.
 - **[Chapter 9: Modern GenAI, LLM & Real-Time ML System Design](system-design/fundamentals/09-genai-llm-and-ml-system-design.md)** — **Production RAG (Semantic Chunking, Hybrid BM25 + Vector ANN, RRF, Cross-Encoder Reranking)**, **LLM Inference Optimization (Prefill vs. Decode, TTFT/ITL, KV-Cache, PagedAttention/vLLM, Continuous Batching, Speculative Decoding)**, **AI Gateway (Semantic Caching, TPM/RPM Rate Limiting, Guardrails)**, **4-Stage Recommendation Funnel**, and **Dual Feature Store**.
-- **[35 Interview System Design Case Studies](system-design/system-design.md#interview-system-design-case-studies-35-systems)** & **[Back-of-the-Envelope Calculations Cheat Sheet](system-design/system-design.md#back-of-the-envelope-calculations-cheat-sheet)**.
+- **[36 Interview System Design Case Studies](system-design/system-design.md#interview-system-design-case-studies-36-systems)** & **[Back-of-the-Envelope Calculations Cheat Sheet](system-design/system-design.md#back-of-the-envelope-calculations-cheat-sheet)**.
 
 ---
 

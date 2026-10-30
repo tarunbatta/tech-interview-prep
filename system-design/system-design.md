@@ -8,7 +8,7 @@
 - [System Design Interview 45-Minute Execution Framework](#system-design-interview-45-minute-execution-framework)
 - [End-to-End Request Lifecycle Architecture](#end-to-end-request-lifecycle-architecture)
 - [Real-World Architectural Retrospectives](#real-world-architectural-retrospectives)
-- [Interview System Design Case Studies (35 Systems)](#interview-system-design-case-studies-35-systems)
+- [Interview System Design Case Studies (36 Systems)](#interview-system-design-case-studies-36-systems)
 - [Back-of-the-Envelope Calculations Cheat Sheet](#back-of-the-envelope-calculations-cheat-sheet)
   - [Powers of Two Quick Reference](#powers-of-two-quick-reference)
   - [SQL Data Type Storage Rules](#sql-data-type-storage-rules)
@@ -111,7 +111,7 @@ flowchart LR
 
 ---
 
-## Interview System Design Case Studies (35 Systems)
+## Interview System Design Case Studies (36 Systems)
 
 | # | System | Focus Areas | Documentation |
 | :--- | :--- | :--- | :--- |
@@ -138,18 +138,19 @@ flowchart LR
 | 21 | **Parking Garage** | Concurrency control, spot allocation, ticket validation, sensors | [Parking Garage Design](parking-garage.md) |
 | 22 | **PasteBin** | Text storage, expiring keys, S3/blob integration, rate limiting | [PasteBin Design](pastebin.md) |
 | 23 | **Payment System** | Double-entry ledger, idempotency keys, claims payout saga, T+1 reconciliation | [Payment System Design](payment-system.md) |
-| 24 | **Rate Limiter** | Token bucket, sliding window counter, Redis distributed locking | [Rate Limiter Design](rate-limiter.md) |
-| 25 | **Shopify** | Multi-tenant architecture, order processing, flash-sale traffic handling | [Shopify Design](shopify.md) |
-| 26 | **Social Media** | Hybrid fanout, pre-signed media upload, social graph, timeline cache | [Social Media Design](social-media.md) |
-| 27 | **Stock Exchange** | LMAX Disruptor ring buffer, $O(1)$ in-memory order book (Price-Time FIFO), Raft sequencer, ITCH multicast | [Stock Exchange Design](stock-exchange.md) |
-| 28 | **Tag Service** | Inverted index, tag aggregation, lookup performance, caching | [Tag Service Design](tag-service.md) |
-| 29 | **TicketMaster** | Virtual queues, fair ticketing, seat reservation locking | [TicketMaster Design](ticketmaster.md) |
-| 30 | **TikTok** | Video feed recommendation pipeline, transcode pipeline, delivery | [TikTok Design](tiktok.md) |
-| 31 | **Twitter** | Distributed timeline, Redis fanout cluster, search indexing | [Twitter Design](twitter.md) |
-| 32 | **Uber** | Geospatial indexing (QuadTree/H3), driver dispatch, location updates | [Uber Design](uber.md) |
-| 33 | **Web Crawler** | Mercator frontier, multi-format doc parsing/OCR, SimHash dedupe, RAG chunking | [Web Crawler Design](webcrawler.md) |
-| 34 | **WhatsApp** | Real-time chat, WebSocket connection managers, E2E encryption | [WhatsApp Design](whatsapp.md) |
-| 35 | **YouTube** | Video upload pipeline, transcode farm, CDN distribution, views counting | [YouTube Design](youtube.md) |
+| 24 | **Pizza Super Bowl Campaign** | TV ad thundering herd, 15-min oven capacity slots, 256-way striped promo counters, SSE Pizza Tracker, H3 delivery batching | [Pizza Super Bowl Design](pizza-superbowl-campaign.md) |
+| 25 | **Rate Limiter** | Token bucket, sliding window counter, Redis distributed locking | [Rate Limiter Design](rate-limiter.md) |
+| 26 | **Shopify** | Multi-tenant architecture, order processing, flash-sale traffic handling | [Shopify Design](shopify.md) |
+| 27 | **Social Media** | Hybrid fanout, pre-signed media upload, social graph, timeline cache | [Social Media Design](social-media.md) |
+| 28 | **Stock Exchange** | LMAX Disruptor ring buffer, $O(1)$ in-memory order book (Price-Time FIFO), Raft sequencer, ITCH multicast | [Stock Exchange Design](stock-exchange.md) |
+| 29 | **Tag Service** | Inverted index, tag aggregation, lookup performance, caching | [Tag Service Design](tag-service.md) |
+| 30 | **TicketMaster** | Virtual queues, fair ticketing, seat reservation locking | [TicketMaster Design](ticketmaster.md) |
+| 31 | **TikTok** | Video feed recommendation pipeline, transcode pipeline, delivery | [TikTok Design](tiktok.md) |
+| 32 | **Twitter** | Distributed timeline, Redis fanout cluster, search indexing | [Twitter Design](twitter.md) |
+| 33 | **Uber** | Geospatial indexing (QuadTree/H3), driver dispatch, location updates | [Uber Design](uber.md) |
+| 34 | **Web Crawler** | Mercator frontier, multi-format doc parsing/OCR, SimHash dedupe, RAG chunking | [Web Crawler Design](webcrawler.md) |
+| 35 | **WhatsApp** | Real-time chat, WebSocket connection managers, E2E encryption | [WhatsApp Design](whatsapp.md) |
+| 36 | **YouTube** | Video upload pipeline, transcode farm, CDN distribution, views counting | [YouTube Design](youtube.md) |
 
 ---
 
