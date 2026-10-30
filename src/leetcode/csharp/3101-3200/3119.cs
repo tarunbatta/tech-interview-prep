@@ -48,8 +48,8 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem3119
             Console.WriteLine(MaxPotholes("xxx", 1));                   // Expected: 0 (budget <= 1 cannot fix any)
         }
 
-        // Time: O(n log n) with sorting (or O(n) with bucket sort)
-        // Space: O(n) to store segment lengths
+        // Time: O(n) using bucket / counting sort
+        // Space: O(n) for frequency count array
         public static int MaxPotholes(string road, int budget)
         {
             if (string.IsNullOrEmpty(road) || budget <= 1)
@@ -57,9 +57,9 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem3119
                 return 0;
             }
 
-
-            Dictionary<int, int> segments = new();
+            int[] count = new int[road.Length + 1];
             int currentSegmentLength = 0;
+
             foreach (var c in road)
             {
                 if (c == 'x')
@@ -68,30 +68,41 @@ namespace InterviewPreperationGuide.Core.LeetCode.problem3119
                 }
                 else if (currentSegmentLength > 0)
                 {
-                    segments[currentSegmentLength] = segments.GetValueOrDefault(currentSegmentLength, 0) + 1;
+                    count[currentSegmentLength]++;
                     currentSegmentLength = 0;
                 }
             }
 
             if (currentSegmentLength > 0)
             {
-                segments[currentSegmentLength] = segments.GetValueOrDefault(currentSegmentLength, 0) + 1;
+                count[currentSegmentLength]++;
             }
 
             int totalFixed = 0;
 
-            foreach (var (len, count) in segments.OrderByDescending(x => x.Key))
+            for (int len = road.Length; len > 0; len--)
             {
-                for (int i = 0; i < count; i++)
+                if (count[len] == 0)
                 {
-                    if (budget <= 1)
-                    {
-                        return totalFixed;
-                    }
+                    continue;
+                }
 
-                    int canFix = Math.Min(len, budget - 1);
-                    totalFixed += canFix;
-                    budget -= canFix + 1;
+                int costPerSegment = len + 1;
+                int fullSegments = Math.Min(count[len], budget / costPerSegment);
+
+                totalFixed += fullSegments * len;
+                budget -= fullSegments * costPerSegment;
+                count[len] -= fullSegments;
+
+                if (count[len] > 0 && budget > 1)
+                {
+                    totalFixed += Math.Min(len, budget - 1);
+                    break;
+                }
+
+                if (budget <= 1)
+                {
+                    break;
                 }
             }
 
