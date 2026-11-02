@@ -449,15 +449,35 @@ Deploying a flawed fraud rule or miscalibrated ML model can accidentally block $
   * **Short-Term Proxy Labels**: Train a fast-turnaround daily model on immediate signals (3DS MFA failures, card-testing velocity blocks, manual review rejections within 2 hours).
   * **Exploration Bandits ($0.5\%$ Random Allow)**: If the model blocks a transaction, we never observe whether that transaction would have resulted in a legitimate purchase or a chargeback (sample selection bias). For low-to-medium value transactions just above the block threshold, randomly allow a tiny capped fraction ($0.5\%$, protected by a strict daily dollar-loss circuit breaker) or trigger a 3DS step-up challenge to gather unbiased ground-truth labels.
 
+### 4. B2B Invoice Factoring & Working-Capital Underwriting Fraud Signals
+
+When evaluating high-value B2B instant payouts (e.g., a $\$5,000$ instant invoice factoring advance within $< 150\text{ ms}$), fraud patterns differ significantly from consumer credit-card testing:
+
+* **Double-Factored Invoice / Shipment Detection**:
+  * A fraudulent supplier may pledge the exact same invoice or shipment to two different factoring platforms—or submit it twice under affiliated shell entities.
+  * **Mitigation**: Compute a canonical shipment fingerprint (`SHA256(debtor_tax_id + ":" + normalized_order_ref + ":" + pickup_date + ":" + delivery_date)`) in Redis/PostgreSQL and cross-check UCC-1 lien filings and industry shared-ledger registries in the inline rule engine (`HARD_BLOCK` on collision).
+* **Fictitious Debtor & Collusive Shell Companies**:
+  * A bad actor registers both a fake supplier account and a fake buyer/broker entity to approve fabricated invoices and disappear with the $97\%$ advance before the 60-day collection timer expires.
+  * **Mitigation**: Graph ring detection (`Neo4j` checking shared IP subnets, device fingerprints, registered agent addresses, or Newly Registered Domains `< 90 days` on the debtor's email/website) paired with verifying established debtor repayment history.
+* **Altered Rate Confirmation / PDF Forensics**:
+  * Doctoring a $\$1,200$ rate sheet into $\$4,200$ using PDF/image editors before upload.
+  * **Mitigation**: Inspect PDF creation metadata (`Producer` / `ModifyDate` anomalies, font-table mismatches, ELA Error Level Analysis on JPEG compression blocks) and enforce historical lane/category Z-score bounds (`invoice_amount > 3.0 * historical_lane_median`).
+* **Compromised Supplier Account (Payout Bank Swap)**:
+  * Attackers hijack a legitimate supplier account, swap the external routing/account number, and immediately factor a batch of fake invoices.
+  * **Mitigation**: Any change to a beneficiary bank account or newly linked push-to-debit card triggers a mandatory 24-hour instant-payout cool-down or requires step-up biometric / out-of-band verification (`STEP_UP_CHALLENGE`).
+
 ---
 
 ## Additional Notes
 
 ### Related Case Studies in This Repository
 
+* [B2B Invoice Factoring, AI Underwriting & Credit Exposure Platform](invoice-factoring-platform.md)
+* [Commercial Card Issuing, Multi-Rail Payment Router & Webhook Gateway](card-issuing-and-payment-router.md)
 * [Payment System & Claims Payout Ledger](payment-system.md)
 * [Rate Limiter System Design](rate-limiter.md)
 
-### Video References
+### Further Reading & Video References
 
+* [SpaceComplexity: Fraud Detection System Design Interview — The 45-Minute Walkthrough](https://spacecomplexity.ai/blog/fraud-detection-system-design-interview)
 * [![Fraud Detection System Design Video](https://img.youtube.com/vi/SwN11da6fbI/0.jpg)](https://www.youtube.com/watch?v=SwN11da6fbI)

@@ -152,7 +152,18 @@ In a **Double-Entry Ledger**, every state transition appends balanced rows to `l
 
 > [!IMPORTANT]
 > **Always Store Money as Integers (Minor Units):**
-> Never use IEEE 754 floating-point types (`FLOAT`, `DOUBLE`) for currency, as binary rounding (`0.1 + 0.2 = 0.30000000000000004`) causes penny drift across millions of transactions. Store all amounts as 64-bit integers (`BIGINT`) in minor currency units (e.g., cents for USD, where $\$2,500.00 = 250000$) paired with an ISO 4217 currency code (`USD`).
+> Never use IEEE 754 floating-point types (`FLOAT`, `DOUBLE`) for currency, as binary rounding (`0.1 + 0.2 = 0.30000000000000004`) causes penny drift across millions of transactions. Store all amounts as 64-bit integers (`BIGINT`) in minor currency units (e.g., cents for USD, where $\$2,500.00 = 250000$, or micro-dollars where $10^{-6}$ precision is required for sub-cent FX/fee calculations) paired with an ISO 4217 currency code (`USD`).
+
+#### Two-Phase Wallet Holds (`PENDING` $\to$ `POSTED` vs. `ARCHIVED/REVERSED`)
+
+To guarantee that a digital wallet's **Available Balance** (what the user can spend or withdraw right now) and **Settled/Posted Balance** (money that has cleared external rails) never drift, the ledger enforces a strict two-phase posting lifecycle:
+
+* **Available Balance Invariant**:
+  $$\text{Available\_Balance} = \text{Posted\_Settled\_Balance} - \text{Pending\_Outbound\_Holds}$$
+* **Two-Phase State Transitions**:
+  1. **`PENDING` (Encumbrance / Hold)**: When a user initiates a withdrawal or card swipe, a `PENDING` journal entry immediately increments `pendingHoldMinor` and decrements `availableBalanceMinor` under a pessimistic row lock (`SELECT ... FOR UPDATE`) or optimistic version check (`WHERE version = v`).
+  2. **`POSTED` (Final Settlement)**: When the external rail confirms settlement, the `PENDING` hold is finalized into an immutable `POSTED` journal entry, moving the amount into `postedBalanceMinor` and releasing `pendingHoldMinor`.
+  3. **`ARCHIVED / REVERSED` (Expired or Failed Hold)**: If a bank transfer fails permanently or a pre-authorization hold expires unclaimed, a compensating reversal entry transitions the hold to `ARCHIVED`, restoring `availableBalanceMinor` without ever deleting historical rows.
 
 ### 2. Claims Payout Saga & Transactional Outbox Flow
 
@@ -453,16 +464,34 @@ While individual beneficiary or customer accounts experience low concurrency, pl
   * Incoming transactions hash `hash(payoutId) % 64` to pick a deterministic shard bucket, increasing write concurrency by $64\times$ with zero lock contention.
   * Total corporate account balance is computed via `SELECT SUM(posted_balance_minor) FROM ledger_accounts WHERE parent_account_id = 'acc_clearing_usd'`.
 
-### 3. Automated T+1 Reconciliation & Exception Handling
+### 3. Automated T+1 Reconciliation, Chunked Batch Ingestion & Window Boundaries
 
-External banking networks can drop webhooks or apply unexpected FX/interchange fees. Every night at 02:00 UTC:
+External banking networks can drop webhooks, apply unexpected wire/interchange fees, or split settlements across midnight cut-off boundaries. Every day after bank cut-off:
 
-1. The **Reconciliation Engine** downloads settlement files (NACHA return files, bank BAI2/CAMT.053 statements, Stripe/Adyen settlement CSVs/Parquet).
-2. Runs a distributed streaming join in ClickHouse/Spark matching `(externalBankTraceId, amountMinor, currency)` against internal `LEDGER_ENTRY` records.
-3. Classify discrepancies into three buckets:
-   * **Timing Differences (In-Flight)**: Payout initiated at 23:58 UTC settles in T+2 bank file $\rightarrow$ automatically re-checked next day.
-   * **Missing Webhook (State Drift)**: Bank settled the payout, but internal status is still `EXECUTING` $\rightarrow$ Reconciliation worker replays the settlement event to advance the ledger to `SETTLED`.
-   * **Amount / Orphan Mismatch**: Bank settled a different amount or unknown trace ID $\rightarrow$ opens a P0 Finance & Engineering incident ticket and freezes automated adjustments on that batch.
+1. **Chunked, Idempotent File Ingestion (Preventing OOM & Primary Locks)**:
+   * Multi-gigabyte bank settlement files (BAI2, ISO 20022 CAMT.053, NACHA returns, CSV/Parquet) are streamed from S3 using a **byte-offset / line-range cursor** in chunks of $5,000\text{ records}$ rather than loading the entire file into memory.
+   * Each record is hashed into a deterministic `reconciliation_match_key = SHA256(bank_id + ":" + settlement_date + ":" + external_trace_id + ":" + direction)` and matched against an **Aurora PostgreSQL Read Replica** (or ClickHouse analytical replica) using keyset pagination (`WHERE entry_id > last_cursor_id ORDER BY entry_id LIMIT 5000`), ensuring zero lock contention on the primary OLTP ledger.
+2. **Midnight Cut-Off Window Boundary State Machine**:
+   * A payout initiated at `23:59 UTC` on Tuesday is recorded in Tuesday's internal ledger but frequently appears on the bank's **Wednesday** settlement statement.
+   * Rather than immediately raising a false-positive discrepancy alert on Tuesday night, unmatched internal entries enter an **`IN_FLIGHT_WITHIN_SLA`** grace window (e.g., $T + 4\text{ hours}$ for RTP/FedNow, $T + 3\text{ business days}$ for Standard ACH).
+   * Only if a record remains unmatched past its rail-specific SLA window—or exhibits an immediate amount/direction mismatch—does it transition to **`TRUE_BREAK`**.
+3. **Automated Fee Adjustments vs. Manual Exception Queue**:
+   * **Expected Fee Variance**: If a wire settles for $\$2,492.00$ against a $\$2,500.00$ ledger entry where the $\$8.00$ difference matches the bank's contractual wire fee schedule, the reconciliation engine automatically posts an idempotent adjustment journal entry (`DEBIT Bank_Fee_Expense $8.00 / CREDIT Wire_Clearing $8.00`).
+   * **True Discrepancies (`MISSING_IN_LEDGER`, `AMOUNT_MISMATCH`, `DUPLICATE_SETTLEMENT`)**: Routed to the Finance & Accounting Exception Queue with PagerDuty alerts and automatic hold placement on affected clearing batches.
+
+### 4. Unified Idempotency & Distributed Deduplication Service
+
+When a mobile client on an unstable cellular connection taps *"Submit Payout"* three times, or an external banking partner fires the same settlement webhook four times, a unified Idempotency Layer prevents duplicate side effects:
+
+* **Deterministic Key Generation**:
+  * **Client-Initiated Mutations**: Client supplies an `Idempotency-Key: <UUIDv4/v7>` HTTP header scoped to `(tenant_id, idempotency_key)`.
+  * **Inbound Webhooks**: Gateway derives `SHA256(partner_id + ":" + external_event_id + ":" + event_type)`.
+* **Atomic State Transitions & Lease Locking**:
+  1. **`STARTED` (In-Flight Lease)**: Acquires an atomic row/key lock (`INSERT INTO idempotency_records ... ON CONFLICT DO NOTHING` or Redis `SETNX` with a 60-second lease TTL). Concurrent duplicate requests arriving while `status = STARTED` immediately receive `409 Conflict (Request In Progress)` with a `Retry-After: 2` header.
+  2. **`COMPLETED` (Cached Terminal Response)**: Inside the same ACID transaction that commits the ledger entries, the service updates the idempotency record to `COMPLETED` and stores the serialized `http_status` and `response_body`. Subsequent retries return the exact cached response in $< 2\text{ ms}$.
+  3. **`FAILED_RETRYABLE` (Transient Downstream Failure)**: If an upstream validation or transient network error occurs *before* any money moves, the record transitions to `FAILED_RETRYABLE` (or the lock is released), allowing the client to safely retry with the same key.
+* **Payload Mismatch Protection (`422 Unprocessable Entity`)**:
+  * Every idempotency record stores `request_payload_hash = SHA256(canonical_json_body)`. If a client reuses an existing `Idempotency-Key` with different parameters (e.g., changing `amountMinor` from `250000` to `500000`), the service immediately rejects the call with **`422 Unprocessable Entity (Idempotency Key Payload Mismatch)`**.
 
 ---
 
@@ -470,9 +499,15 @@ External banking networks can drop webhooks or apply unexpected FX/interchange f
 
 ### Related Case Studies in This Repository
 
+* [B2B Invoice Factoring, AI Underwriting & Credit Exposure Platform](invoice-factoring-platform.md)
+* [Commercial Card Issuing, Multi-Rail Payment Router & Webhook Gateway](card-issuing-and-payment-router.md)
 * [🌟 DocuSign Billing & Invoicing Modernization Retrospective](project-retrospective.md)
 * [ATM System Design](atm.md)
 
-### Video References
+### Further Reading & References
 
+* [Stripe Engineering: Ledger — Stripe's System for Tracking and Validating Money Movement](https://stripe.dev/blog/ledger-stripe-system-for-tracking-and-validating-money-movement)
+* [Modern Treasury Architecture Guide: How to Scale a Double-Entry Ledger Database](https://www.scribd.com/document/712795728/Modern-Treasury-How-to-Scale-a-Ledger)
+* [Stripe Guide: Payment Reconciliation 101 — Architecture & Best Practices](https://stripe.com/resources/more/payment-reconciliation-101)
+* [Digital Wallet System Design (Event Sourcing, CQRS & Double-Entry)](https://dilipkumar.medium.com/digital-wallet-system-design-63a4e18edad6)
 * [![Payment System Design Video](https://img.youtube.com/vi/olfaBgJrUBI/0.jpg)](https://www.youtube.com/watch?v=olfaBgJrUBI)
