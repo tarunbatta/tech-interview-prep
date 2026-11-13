@@ -50,5 +50,5 @@ When a vulnerability report is submitted:
 
 - **No Secrets or Credentials:** Never commit API keys, personal access tokens (PATs), passwords, private keys, or environment secrets to the repository.
 - **Confidentiality:** Do not commit proprietary, confidential, or NDA-protected interview questions or company internal material.
-- **Dependency Hygiene:** Sample applications (.NET, Node.js) are monitored via Dependabot for known dependency CVEs. Keep dependencies updated when making pull requests.
+- **Dependency Hygiene:** Keep dependencies in sample applications (.NET, Node.js) updated and free of known CVEs when making pull requests.
 - **Safe Execution:** Always review shell scripts (`scripts/`) and dependencies prior to executing them in production or sensitive local environments.
